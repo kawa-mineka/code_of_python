@@ -3,6 +3,36 @@ from const import *         #定数定義モジュールの読み込み(公式�
 class define_data:
     def __init__(self):
         None
+    def ipl_mes(self):                      #IPLで使用するテキストメッセージの定義
+        #IPLメッセージデータその1
+        self.ipl_mes1 = [
+            ["INITIAL PROGRAM LOADING",7],
+            [".",7],
+            ["..",7],
+            ["...",7],
+            ["....",7],
+            ['LOADING PROGRAM "CODE OF PYTHON"',7],
+            ["POWERD BY PYXEL",6],
+            ["POWERD BY PYGAME",5],
+            ["FILE CHECK OK",7],
+            ["BOOTING PROGRAM",7],
+            ["2021 PROJECT MINE",6],
+            ["SINCE 2020",7],
+            ["...",7],
+            ["....",7],
+            ["MAIN SYSYTEM OK",7],
+            ["SUB SYSYTEM OK",6],
+            ["L'S SYSTEM OK",5],
+            ["DISPLAY OK",5],
+            ["DIALOG SYSYTEM OK",8],
+            
+            [".",7],
+            ["..",7],
+            ["...",7],
+            ["....",7],
+            ["EXECUTE OPERETING SYSTEM",8],
+            ["GOOD LUCK!",8],
+            ]
     def default_score_board(self):          #スコアボードの初期データ 
         # [難易度ID,       順位,名前,      得点,周回数,最終到達ステージ,使用した機体]
         self.default_score_board = [
