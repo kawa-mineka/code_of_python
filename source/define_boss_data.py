@@ -18,4 +18,3 @@ class define_boss_data:
             [120,120,   -40,120,    80, -240,   240,   1.1,0.995,   BOSS_ATTACK_FRONT_5WAY_HOMING],
             [-40,120,   -40,  0,    160, 60,    240,   0.7,0.999,   BOSS_ATTACK_RIGHT_GREEN_LASER],     
             [9999],]
-        

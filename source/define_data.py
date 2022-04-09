@@ -3,6 +3,7 @@ from const import *         #定数定義モジュールの読み込み(公式�
 class define_data:
     def __init__(self):
         None
+
     def ipl_mes(self):                      #IPLで使用するテキストメッセージの定義
         #IPLメッセージデータその1
         self.ipl_mes1 = [
@@ -33,6 +34,7 @@ class define_data:
             ["EXECUTE OPERETING SYSTEM",8],
             ["GOOD LUCK!",8],
             ]
+
     def default_score_board(self):          #スコアボードの初期データ 
         # [難易度ID,       順位,名前,      得点,周回数,最終到達ステージ,使用した機体]
         self.default_score_board = [
@@ -114,6 +116,7 @@ class define_data:
         [GAME_INSAME,   10,"TAIKANOK", 645,LOOP01,STAGE_BOSS_RUSH,J_PYTHON,   MEDAL_BEFOREHAND_1SHOT_ITEM,MEDAL_NO_SLOT,              MEDAL_NO_SLOT,  MEDAL_NO_SLOT,MEDAL_NO_SLOT,MEDAL_NO_SLOT],
         [GAME_INSAME,   11,"        ",   1,LOOP01,STAGE_BOSS_RUSH,J_PYTHON,   MEDAL_NO_SLOT,              MEDAL_NO_SLOT,              MEDAL_NO_SLOT,  MEDAL_NO_SLOT,MEDAL_NO_SLOT,MEDAL_NO_SLOT]]
         ]
+
     def default_achievement_list(self):     #実績(アチーブメント)のIDナンバーとそれに対するグラフイックチップの位置や英語コメント、日本語コメントのデータリスト
         self.default_achievement_list = [
             [ACHIEVEMENT_FIRST_CAMPAIGN,        RESULTS_NOT_OBTAINED,168     ,176,IMG2,"FIRST CAMPAIGN",               "",  "戦火への誘い",                    "初めての出撃！",                           "20210828",LV01,10],
@@ -199,6 +202,7 @@ class define_data:
             
             
             ]
+
     def default_ship_list(self):            #各機体リスト(原本)
         #[[機体IDナンバー,         機体名,              機体分類,            所持フラグ,x,   y,  IMG,  初期総スロット数,総スロット数,slot*のメダルID, レベル,経験値,shot最大経験値,ミサイル最大経験値, 出撃回数,破壊回数, 撃墜点数,     飛行時間,      移動スピード,min,max,   次元シフト,サーチライト,横幅, 縦幅,    claw_max,   クロー防御,  roll,   trace, fix,    reverse,自動回復タイム,自動回復上限値,ボス内侵入,被弾後無敵時間,カプセル取得後無敵時間, カプセル引き寄せ力
         self.default_ship_list = [
@@ -219,6 +223,7 @@ class define_data:
             [MAGI_FORCE,         "MAGI FORCE"        ,SHIP_EXTRA,          FLAG_OFF, 8,   0,  IMG2, ALL_SLOT1,     ALL_SLOT1,    0,0,0,0,0,0,0,  LEVEL1,EXP0, 71,            71,             SORTIE0,BROKEN0, SHOOT_DOWN0, FLIGHT_TIME0, SPEED0, SPEED0, SPEED2, FLAG_OFF, FLAG_OFF,   SIZE_4,SIZE_4, TWO_CLAW,  FLAG_OFF,  FLAG_ON,FLAG_ON,FLAG_ON,FLAG_ON, 0,           0,           FLAG_OFF, 0,            0,                    0],
             [LOOK_AT_LOGO,       "LOOK AT LOGO"      ,SHIP_ANCENT,         FLAG_OFF, 8,   0,  IMG2, ALL_SLOT1,     ALL_SLOT1,    0,0,0,0,0,0,0,  LEVEL1,EXP0, 71,            71,             SORTIE0,BROKEN0, SHOOT_DOWN0, FLIGHT_TIME0, SPEED0, SPEED0, SPEED2, FLAG_OFF, FLAG_OFF,   SIZE_4,SIZE_4, TWO_CLAW,  FLAG_OFF,  FLAG_ON,FLAG_ON,FLAG_ON,FLAG_ON, 0,           0,           FLAG_OFF, 0,            0,                    0],
             ]
+
     def medal_graph_and_comment_list(self): #メダルのIDナンバーとそれに対するグラフイックチップの位置や英語コメント、日本語コメントのデータリスト
         self.medal_graph_and_comment_list = [
             [MEDAL_NO_SLOT              ,168         ,176,IMG2,"NO SLOT"                   ,"空スロット",                 "","",                                                                                "",""],
@@ -233,6 +238,7 @@ class define_data:
             [MEDAL_RECOVERY_OVER_TIME   ,168 + 8 * 9 ,176,IMG2,"RECOVERY OVER TIME"        ,"時間経過で回復",              "","",                                                                                "",""],
             [MEDAL_TWINKLE              ,168 + 8 *10 ,176,IMG2,"TWINKLE!!"                 ,"ぴかぴか光る！",              "","",                                                                                "",""],
             ]
+
     def font_code_table(self):              #美咲フォント(漢字)コードテーブルの定義 
         #いきなり美咲フォントコードテーブルを直接代入という破天荒なコード・・・・
         #「シールド」は「シ─ルド」と入力しないと文字化けするので注意 ー→─
@@ -322,29 +328,7 @@ class define_data:
             "髻鬆鬘鬚鬟鬢鬣鬥鬧鬨鬩鬪鬮鬯鬲魄魃魏魍魎魑魘魴鮓鮃鮑鮖鮗鮟鮠鮨鮴鯀鯊鮹鯆鯏鯑鯒鯣鯢鯤鯔鯡鰺鯲鯱鯰鰕鰔鰉鰓鰌鰆鰈鰒鰊鰄鰮鰛鰥鰤鰡鰰鱇鰲鱆鰾鱚鱠鱧鱶鱸鳧鳬鳰鴉鴈鳫鴃鴆鴪鴦鶯鴣鴟鵄鴕鴒鵁鴿鴾鵆鵈\n"
             "鵝鵞鵤鵑鵐鵙鵲鶉鶇鶫鵯鵺鶚鶤鶩鶲鷄鷁鶻鶸鶺鷆鷏鷂鷙鷓鷸鷦鷭鷯鷽鸚鸛鸞鹵鹹鹽麁麈麋麌麒麕麑麝麥麩麸麪麭靡黌黎黏黐黔黜點黝黠黥黨黯黴黶黷黹黻黼黽鼇鼈皷鼕鼡鼬鼾齊齒齔齣齟齠齡齦齧齬齪齷齲齶龕龜龠\n"
             "堯槇遙瑤凜熙\n")
-    def stage_data_list(self):              #ステージデータリストの定義
-        #各ステージで使用する設定データのリストです
-        #[
-        # ステージ名,
-        # 障害物とみなす背景画像(BG)のY座標位置(例88だとキャラチップのＹ座標が88以上のマップチップは障害物とみなされます),
-        # BG(背景スクロール)で使用するタイルマップの番号,
-        # 背景スクロールの種類,星スクロールのon/off,ラスタスクロールのon/off,
-        # BG背景(手前)を表示するかどうかのフラグ,BG背景(中央)を表示するかどうかのフラグ,BG背景(奥)を表示するかどうかのフラグ
-        # 大気圏突入時の火花を表示するかどうかのフラグ
-        # ]
-        self.stage_data_list = [
-            [STAGE_MOUNTAIN_REGION,256,IMG1,
-            SCROLL_TYPE_8FREEWAY_SCROLL_AND_RASTER ,STAR_SCROLL_ON,
-            RASTER_SCROLL_ON,
-            DISP_ON,DISP_ON,DISP_ON,
-            SPARK_ON],
-            
-            [STAGE_ADVANCE_BASE,   88 ,IMG0,
-            SCROLL_TYPE_TRIPLE_SCROLL_AND_STAR    ,STAR_SCROLL_ON,
-            RASTER_SCROLL_OFF,
-            DISP_ON,DISP_ON,DISP_ON,
-            SPARK_OFF],
-            ]
+
     def game_difficulty_list(self):         #難易度ごとの各種設定数値のリストの定義
         #フォーマット
         #[s=start b=bonusの略です
@@ -358,6 +342,7 @@ class define_data:
             [GAME_VERY_HARD,"VERY HARD" ,0,0,0,             NO_CLAW,    REPAIR_SHIELD1,           RETURN_BULLET_DELAY_AIM,    3.0,         800,          40,     26,            0,                  0,              85,       1,              8,               3,                         LOOP_FIVE_LEVEL_DOWN,     600,                       4],
             [GAME_INSAME   ,"INSAME"    ,0,0,0,             NO_CLAW,    REPAIR_SHIELD0,           RETURN_BULLET_DELAY_AIM,    4.0,         600,          60,     23,            0,                  0,              99,       1,              5,               3,                         LOOP_ALL_RESET,           500,                       3],
             ]
+
     def game_rank_data_list(self):          #ランク値による各種設定数値のリストの定義
         #フォーマット
         #敵スピード倍率は3.9までにしておいてください、追尾戦闘機のスピードが速すぎると一瞬で画面外に飛んでいくみたいで・・

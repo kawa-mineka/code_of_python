@@ -208,9 +208,9 @@ class App:
         
         define_boss_data.move_data(self)  #ボスの移動データリストの定義関数の呼び出し
         
-        define_data.stage_data_list(self)      #ステージデータリストの定数定義関数の呼び出し
-        define_data.game_difficulty_list(self) #難易度ごとの各種設定数値のリストの定義関数の呼び出し
-        define_data.game_rank_data_list(self)  #ランク値による各種設定数値のリストの定義関数の呼び出し
+        define_stage_data.stage_data_list(self) #ステージデータリストの定数定義関数の呼び出し
+        define_data.game_difficulty_list(self)  #難易度ごとの各種設定数値のリストの定義関数の呼び出し
+        define_data.game_rank_data_list(self)   #ランク値による各種設定数値のリストの定義関数の呼び出し
         
         define_ship_data.sub_weapon_level_data_list(self) #サブウェポンのレベルデータリストの定義関数の呼び出し
         define_ship_data.shot_table_list(self)            #ショットパワーアップテーブルリストの定義関数の呼び出し
