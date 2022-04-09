@@ -5,9 +5,10 @@
 ![source/gif/pyxel-210226-194506.gif](source/gif/pyxel-210226-194506.gif)
 ![source/gif/pyxel-210226-194639.gif](source/gif/pyxel-210226-194639.gif)
 
+![source/gif/pyxel-210226-194737.gif](source/gif/pyxel-210226-194737.gif)
 ![source/gif/pyxel-210226-195228.gif](source/gif/pyxel-210226-195228.gif)
-![source/gif/pyxel-210403-175232.gif](source/gif/pyxel-210403-175232.gif)
 
+![source/gif/pyxel-210403-175232.gif](source/gif/pyxel-210403-175232.gif)
 ![source/gif/pyxel-210403-175305.gif](source/gif/pyxel-210403-175305.gif)
 
 シューティングゲームっぽい？未完成ですけど・・
@@ -19,7 +20,7 @@
 
 最初に[Python3](https://www.python.org/) (バージョン3.6.8以上) をインストールします。
 
-続いて、コマンドプロンプトから、以下の`pip`コマンドでPyxelをインストールします。
+続いて、コマンドプロンプトから、以下の`pip`コマンドでPyxel(バージョン1.6.9以上) をインストールします。
 
 ```sh
 pip install -U pyxel
@@ -39,11 +40,11 @@ python code-of-python.py
 ```
              スペースキーでショットとミサイルの発射
              ゲームパッドのAボタンでショットの発射
-             Bボタンでミサイルの発射
-             Yボタンでサブウェポンの切り替え
-             SELECTボタンで自機移動スピード調整
-             LEFTボタンでクロースタイルの変更
-             RIGHTボタンでフィックスクローの間隔の調整
+                          Bボタンでミサイルの発射
+                          Yボタンでサブウェポンの切り替え
+             BACKボタンで自機のスピードの変更(3段階)
+             LEFT-SHOULDERボタンでクロースタイルの変更
+             RIGHT-SHOULDERボタンでフィックスクローの間隔の調整
 
 TABキーまたはゲームパッドのSTARTで一時停止できます
 
