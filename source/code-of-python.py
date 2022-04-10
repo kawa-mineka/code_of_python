@@ -720,22 +720,25 @@ class App:
                 #奥の雲スクロールの表示
                 if self.disp_flag_bg_back == DISP_ON:
                     # pyxel.bltm(-int(self.scroll_count  // 10 % (256*8 - 160)),-(self.vertical_scroll_count // 28) + 97,  1,    0,235,    256,7,    1)
-                    pyxel.bltm(-int(self.scroll_count  // 10 % (256*8 - 160)),-(self.vertical_scroll_count // 28) + 97,  1,    0*8,235*8,    256*8,7*8,    1)
+                    pyxel.bltm(-int(self.scroll_count  // 10 % (256*8 - 160)),-(self.vertical_scroll_count // 28) + 97,  TM1,    0*8,235*8,    256*8,7*8,    1)
                 #影が強めの奥の山を描画
                 if self.disp_flag_bg_middle == DISP_ON:
                     # pyxel.bltm(-int(self.scroll_count  // 8  % (256*8 - 160)),-(self.vertical_scroll_count // 24) + 116,  1,    0,243,    256,5,    self.bg_transparent_color)
-                    pyxel.bltm(-int(self.scroll_count  // 8  % (256*8 - 160)),-(self.vertical_scroll_count // 24) + 116,  1,    0*8,243*8,    256*8,5*8,    self.bg_transparent_color)
+                    pyxel.bltm(-int(self.scroll_count  // 8  % (256*8 - 160)),-(self.vertical_scroll_count // 24) + 116,  TM1,    0*8,243*8,    256*8,5*8,    self.bg_transparent_color)
                 #手前の小さめの山を描画
                 if self.disp_flag_bg_front == DISP_ON:
                     # pyxel.bltm(-int(self.scroll_count  // 4  % (256*8 - 160)),-(self.vertical_scroll_count // 16) + 160,  1,    0,248,    256,5,    self.bg_transparent_color)
-                    pyxel.bltm(-int(self.scroll_count  // 4  % (256*8 - 160)),-(self.vertical_scroll_count // 16) + 160,  1,    0*8,248*8,    256*8,5*8,    self.bg_transparent_color)
+                    pyxel.bltm(-int(self.scroll_count  // 4  % (256*8 - 160)),-(self.vertical_scroll_count // 16) + 160,  TM1,    0*8,248*8,    256*8,5*8,    self.bg_transparent_color)
                 
                 #湖面のラスタースクロールの表示、成層圏と大気圏の境目のラスタースクロールの表示
                 graph.draw_raster_scroll(self,1)  #ラスタースクロール描画関数呼び出し 山より手前で描画しますっ！
                 
             elif self.stage_number == STAGE_ADVANCE_BASE:
                 # pyxel.bltm(-(self.scroll_count // 8) + 250,0,0,0,240,256,120,self.bg_transparent_color)
-                pyxel.bltm(-(self.scroll_count // 8) + 250,0,0,  0*8,240*8,  256*8,120*8,self.bg_transparent_color)
+                pyxel.bltm(-(self.scroll_count // 8) + 250,0,TM0,  0*8,240*8,  256*8,120*8,self.bg_transparent_color)
+            elif self.stage_number == STAGE_VOLCANIC_BELT:
+                pyxel.bltm(-(self.scroll_count // 8) + 250,0,TM2,  0*8,240*8,  256*8,120*8,self.bg_transparent_color)
+            
             ####################背景表示
             ###################pyxel.bltm(-(pyxel.frame_count // 8),0,0,((pyxel.frame_count / 2) - 160) ,0,160,120,0)最初はこれで上手くいかなかった・・・・なぜ？
             ###################奥の背景表示
@@ -743,11 +746,14 @@ class App:
             
             if self.stage_number == STAGE_ADVANCE_BASE:
                 # pyxel.bltm(-(self.scroll_count // 4) + 400,0,0,0,224,256,120,self.bg_transparent_color)
-                pyxel.bltm(-(self.scroll_count // 4) + 400,0,0,   0*8,224*8, 256*8,120*8,self.bg_transparent_color)
+                pyxel.bltm(-(self.scroll_count // 4) + 400,0,TM0,   0*8,224*8, 256*8,120*8,self.bg_transparent_color)
             elif self.stage_number == STAGE_MOUNTAIN_REGION:
                     if self.disp_flag_bg_front == DISP_ON:
                         #pyxel.bltm(-int(self.scroll_count % (256*8 - 160)),     -self.vertical_scroll_count,  1,    0,0,    256,256,    self.bg_transparent_color)
-                        pyxel.bltm(-int(self.scroll_count % (256*8 - 160)),     -self.vertical_scroll_count,  1,    0*8,0*8,    256 * 8,256 * 8,    self.bg_transparent_color)
+                        pyxel.bltm(-int(self.scroll_count % (256*8 - 160)),     -self.vertical_scroll_count,  TM1,    0*8,0*8,    256 * 8,256 * 8,    self.bg_transparent_color)
+            elif self.stage_number == STAGE_VOLCANIC_BELT:
+                pyxel.bltm(-(self.scroll_count // 4) + 400,0,TM2,   0*8,56*8, 256*8,120*8,self.bg_transparent_color)
+            
             graph.draw_background_object(self)               #背景オブジェクトの描画関数の呼び出し
             
             graph.draw_enemy_shot(self,PRIORITY_BOSS_BACK)   #敵の弾を表示する関数を呼び出す(ボスキャラの真後ろ)---------------------------
@@ -773,13 +779,20 @@ class App:
             if self.stage_number == STAGE_ADVANCE_BASE:
                 if   self.stage_loop == 1:
                     # pyxel.bltm(-(self.scroll_count // 2) + 1024,0,  0,    0,0,    256,120,    self.bg_transparent_color) #1周目マップ
-                    pyxel.bltm(-(self.scroll_count // 2) + 1024,0,  0,    0*8,0*8,    256*8,120*8,    self.bg_transparent_color) #1周目マップ
+                    pyxel.bltm(-(self.scroll_count // 2) + 1024,0,  TM0,    0*8,0*8,    256*8,120*8,    self.bg_transparent_color) #1周目マップ
                 elif self.stage_loop == 2:
                     # pyxel.bltm(-(self.scroll_count // 2) + 1024,0,  0,    0,16,   256,120,    self.bg_transparent_color) #2周目マップ
-                    pyxel.bltm(-(self.scroll_count // 2) + 1024,0,  0,    0*8,16*8,   256*8,120*8,    self.bg_transparent_color) #2周目マップ
+                    pyxel.bltm(-(self.scroll_count // 2) + 1024,0,  TM0,    0*8,16*8,   256*8,120*8,    self.bg_transparent_color) #2周目マップ
                 elif self.stage_loop == 3:
                     # pyxel.bltm(-(self.scroll_count // 2) + 1024,0,  0,    0,32,   256,120,    self.bg_transparent_color) #3周目マップ
-                    pyxel.bltm(-(self.scroll_count // 2) + 1024,0,  0,    0*8,32*8,   256*8,120*8,    self.bg_transparent_color) #3周目マップ
+                    pyxel.bltm(-(self.scroll_count // 2) + 1024,0,  TM0,    0*8,32*8,   256*8,120*8,    self.bg_transparent_color) #3周目マップ
+            elif self.stage_number == STAGE_VOLCANIC_BELT:
+                if   self.stage_loop == 1:
+                    pyxel.bltm(-(self.scroll_count // 2) + 1024,0,  TM2,    0*8,0*8,    256*8,120*8,    self.bg_transparent_color) #1周目マップ
+                elif self.stage_loop == 2:
+                    pyxel.bltm(-(self.scroll_count // 2) + 1024,0,  TM2,    0*8,16*8,   256*8,120*8,    self.bg_transparent_color) #2周目マップ
+                elif self.stage_loop == 3:
+                    pyxel.bltm(-(self.scroll_count // 2) + 1024,0,  TM2,    0*8,32*8,   256*8,120*8,    self.bg_transparent_color) #3周目マップ
             
             graph.draw_enemy_shot(self,PRIORITY_TOP)        #敵の弾を表示する関数を呼び出す (最前面)-------------------------------------
         #自機、クロー、シールドの表示###############################################

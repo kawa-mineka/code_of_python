@@ -24,7 +24,11 @@ class define_stage_data:
                             
                             [self.event_list_stage_advance_base_l1,
                             self.event_list_stage_advance_base_l2,
-                            self.event_list_stage_advance_base_l3]
+                            self.event_list_stage_advance_base_l3],
+                            
+                            [self.event_list_stage_volcanic_belt_l1,
+                            self.event_list_stage_volcanic_belt_l1,
+                            self.event_list_stage_volcanic_belt_l1]
                             ]
 
     def stage_data_list(self):     #ステージデータリストの定義
@@ -38,17 +42,27 @@ class define_stage_data:
         # 大気圏突入時の火花を表示するかどうかのフラグ
         # ]
         self.stage_data_list = [
-            [STAGE_MOUNTAIN_REGION,256,IMG1,
+            [STAGE_MOUNTAIN_REGION,256,TM1,
             SCROLL_TYPE_8FREEWAY_SCROLL_AND_RASTER ,STAR_SCROLL_ON,
             RASTER_SCROLL_ON,
             DISP_ON,DISP_ON,DISP_ON,
             SPARK_ON],
             
-            [STAGE_ADVANCE_BASE,   88 ,IMG0,
+            [STAGE_ADVANCE_BASE,   88 ,TM0,
             SCROLL_TYPE_TRIPLE_SCROLL_AND_STAR    ,STAR_SCROLL_ON,
             RASTER_SCROLL_OFF,
             DISP_ON,DISP_ON,DISP_ON,
             SPARK_OFF],
+            
+            [STAGE_VOLCANIC_BELT,   88 ,TM2,
+            SCROLL_TYPE_TRIPLE_SCROLL_AND_STAR    ,STAR_SCROLL_OFF,
+            RASTER_SCROLL_OFF,
+            DISP_ON,DISP_ON,DISP_ON,
+            SPARK_OFF],
+            
+            
+            
+            
             ]
 
     def event_list(self):          #各ステージのイベントリストの定義
@@ -97,12 +111,11 @@ class define_stage_data:
             [   50,EVENT_WARNING,500,120,240],
             [  100,EVENT_BOSS],
             [99999999],]
-            
         self.event_list_no_enemy_mode = [
             [200000,EVENT_WARNING,500,120,240],
             [200200,EVENT_BOSS],
             [99999999],]
-            
+        
         self.event_list_stage_mountain_region_l1= [
             [ 100,EVENT_BG_SCREEN_ON_OFF,BG_BACK,DISP_OFF],
             [ 110,EVENT_ENTRY_SPARK_ON_OFF,SPARK_OFF],
@@ -238,7 +251,6 @@ class define_stage_data:
             
             
             [99999999],]
-            
         self.event_list_stage_mountain_region_l2= [
             
             [ 300,EVENT_SCROLL,SCROLL_NUM_SET,    2,0.5,        0.5,0.01],
@@ -281,7 +293,7 @@ class define_stage_data:
             
             
             [99999999],]
-            
+        
         self.event_list_stage_mountain_region_dummy= [
             [99999999],]
             
@@ -330,7 +342,6 @@ class define_stage_data:
             [7000,EVENT_WARNING,500,120,240],
             [7300,EVENT_BOSS],
             [99999999],]
-            
         self.event_list_stage_advance_base_l2= [
             [  10,EVENT_FAST_FORWARD_NUM,4,30],
             [ 200,EVENT_ENEMY,CIR_COIN    ,160, 10   ,6],
@@ -353,7 +364,6 @@ class define_stage_data:
             [6000,EVENT_WARNING,500,120,240],
             [6300,EVENT_BOSS],
             [99999999],]
-            
         self.event_list_stage_advance_base_l3= [    
             [  10,EVENT_FAST_FORWARD_NUM,4,30],
             [ 200,EVENT_ENEMY,CIR_COIN    ,160, 10   ,6],
@@ -393,6 +403,48 @@ class define_stage_data:
             [6000,EVENT_WARNING,500,120,240],
             [6300,EVENT_BOSS],
             [99999999],] 
+        
+        
+        self.event_list_stage_volcanic_belt_l1= [
+            
+            [  10,EVENT_FAST_FORWARD_NUM,4,30],
+            [ 200,EVENT_ENEMY,CIR_COIN    ,160, 10   ,6],
+            [ 500,EVENT_ENEMY,CIR_COIN    ,160, 90   ,6],
+            [ 700,EVENT_ENEMY,CIR_COIN    ,160, 20   ,6],
+            [ 900,EVENT_ENEMY,CIR_COIN    ,160, 80   ,6],
+            
+            [950,EVENT_ADD_APPEAR_ENEMY,CIR_COIN,160, 60,10],
+            
+            [1050,EVENT_ENEMY,SAISEE_RO,160, 60-24],
+            [1051,EVENT_ENEMY,SAISEE_RO,160, 60   ],
+            [1052,EVENT_ENEMY,SAISEE_RO,160, 60+24],
+            
+            [1080,EVENT_ENEMY,SAISEE_RO,160, 40-24],
+            [1081,EVENT_ENEMY,SAISEE_RO,160, 40,  ],
+            [1082,EVENT_ENEMY,SAISEE_RO,160, 40+24],
+            
+            [1095,EVENT_ENEMY,GREEN_LANCER,180,10],
+            
+            [1100,EVENT_ENEMY,CIR_COIN,    160,20    ,7],
+            [1300,EVENT_ENEMY,CIR_COIN,    160,80    ,7],
+            
+            [1400,EVENT_ENEMY,TWIN_ARROW,160, 40],
+            [1401,EVENT_ENEMY,TWIN_ARROW,160, 60],
+            [1402,EVENT_ENEMY,TWIN_ARROW,160, 80],
+            
+            [1500,EVENT_ENEMY,TWIN_ARROW,160,  20],
+            [1501,EVENT_ENEMY,TWIN_ARROW,160,  60],
+            [1502,EVENT_ENEMY,TWIN_ARROW,160, 100],
+            
+            [1600,EVENT_ENEMY,TWIN_ARROW,160, 60   ],
+            [1601,EVENT_ENEMY,TWIN_ARROW,160, 60+10],
+            [1602,EVENT_ENEMY,TWIN_ARROW,160, 60-10],
+            [1603,EVENT_ENEMY,TWIN_ARROW,160, 60+20],
+            [1604,EVENT_ENEMY,TWIN_ARROW,160, 60-20],
+            
+            [4000,EVENT_WARNING,500,120,240],
+            [4300,EVENT_BOSS],
+            [99999999],]
 
     def bg_animation_list(self):   #各ステージのＢＧ書き換えによるアニメーションの為のデータリスト群の定義
         #フォーマットの説明

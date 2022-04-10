@@ -667,7 +667,7 @@ class func:
         elif self.stage_loop == 3:
             self.bgy += 32
         
-        self.bg_chip = func.get_chrcode_tilemap(self,0,self.bgx,self.bgy)
+        self.bg_chip = func.get_chrcode_tilemap(self,self.reference_tilemap,self.bgx,self.bgy)
         #bgx,bgyの座標のキャラチップナンバーをゲット！
         
         if (self.bg_chip // 4) >= self.bg_obstacle_y: #(bg_chip // 4)でキャラチップのＹ座標になるんです
@@ -1400,11 +1400,14 @@ class func:
 
     #各ステージBGMのロード
     def load_stage_bgm(self):
-        if   self.stage_number == 1:
+        if   self.stage_number == STAGE_MOUNTAIN_REGION:
             pygame.mixer.music.load("assets/music/BGM088-100714-kongoushinkidaia-su.wav") #STAGE1 BGMファイルの読み込み
             pygame.mixer.music.set_volume(self.master_bgm_vol / 100)
-        elif self.stage_number == 2:
+        elif self.stage_number == STAGE_ADVANCE_BASE:
             pygame.mixer.music.load("assets/music/BGM056-081012-kakeroginnnogennya.wav")  #STAGE2 BGMファイルの読み込み
+            pygame.mixer.music.set_volume(self.master_bgm_vol / 100)
+        elif self.stage_number == STAGE_VOLCANIC_BELT:
+            pygame.mixer.music.load("assets/music/BGM219-181031-hankotsunoranbu.wav")     #STAGE3 BGMファイルの読み込み
             pygame.mixer.music.set_volume(self.master_bgm_vol / 100)
 
     #0~9の範囲の乱数関数
