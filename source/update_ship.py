@@ -154,10 +154,16 @@ class update_ship:
             if self.my_x >= WINDOW_W - MOVE_LIMIT:
                 self.my_x = WINDOW_W - MOVE_LIMIT - 1
         
+        
         if self.my_y < 0:
             self.my_y = 0
-        if self.my_y >= WINDOW_H - SHIP_H:
-            self.my_y = WINDOW_H - SHIP_H - 1
+        
+        if self.stage_number == STAGE_VOLCANIC_BELT:
+            if self.my_y >= WINDOW_H + self.bg_height - SHIP_H:
+                self.my_y  = WINDOW_H + self.bg_height - SHIP_H - 1
+        else:
+            if self.my_y >= WINDOW_H - SHIP_H:
+                self.my_y  = WINDOW_H - SHIP_H - 1
 
     #自機弾の移動関連###############################################################################################################
     #自機弾の更新
@@ -187,7 +193,7 @@ class update_ship:
     def clip_shot(self):
         shot_count = len(self.shots)#弾の数を数える
         for i in reversed(range (shot_count)):
-            if (-16 < self.shots[i].posx < WINDOW_W + 16 ) and (-16 <self.shots[i].posy < WINDOW_H + 16):
+            if (-16 < self.shots[i].posx < WINDOW_W + 16 ) and (-16 <self.shots[i].posy < self.bg_height + 16):
                 continue
             else:
                 del self.shots[i]
@@ -355,7 +361,7 @@ class update_ship:
     def clip_missile(self):
         missile_count = len(self.missile)#ミサイルリストの総数を数える
         for i in reversed(range (missile_count)):
-            if (-24 < self.missile[i].posx < WINDOW_W + 18 ) and (-18 <self.missile[i].posy < WINDOW_H + 18):
+            if (-24 < self.missile[i].posx < WINDOW_W + 18 ) and (-18 <self.missile[i].posy < self.bg_height + 18):
                 continue
             else:
                 del self.missile[i]
@@ -509,7 +515,7 @@ class update_ship:
             self.claw_shot[i].posy += self.claw_shot[i].vy * self.claw_shot_speed #弾のY座標をVY*claw_shot_speed分加減算して更新
             
             if self.claw_shot[i].shot_hp != 0:
-                if (-16 < self.claw_shot[i].posx < WINDOW_W + 16 ) and (-16 <self.claw_shot[i].posy < WINDOW_H + 16):
+                if (-16 < self.claw_shot[i].posx < WINDOW_W + 16 ) and (-16 <self.claw_shot[i].posy < self.bg_height + 16):
                     continue
                 else:
                     del self.claw_shot[i]#クローショットが画面外まで飛んで行ってはみ出ていたのならインスタンス破棄（クローショット消滅）

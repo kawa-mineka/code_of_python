@@ -55,84 +55,84 @@ class graph:
     def draw_my_ship(self):
         if self.invincible_counter > 0: #無敵中のカウントが0より大きい時は無敵状態なので点滅表示する
             if pyxel.frame_count % 4 == 0: #4フレーム置きに自機を表示
-                pyxel.blt(self.my_x   ,self.my_y,IMG2,8 + ((self.my_rolling_flag) * 8),0,SHIP_W,SHIP_H,0) #自機本体の表示
+                pyxel.blt(self.my_x   ,self.my_y - self.camera_offset_y,IMG2,8 + ((self.my_rolling_flag) * 8),0,SHIP_W,SHIP_H,0) #自機本体の表示
             
             self.invincible_counter -= 1 #無敵時間カウントを1減らす
-            
         else:
-            pyxel.blt(self.my_x   ,self.my_y,IMG2,8 + ((self.my_rolling_flag) * 8),0,SHIP_W,SHIP_H,0) #自機本体の表示
+            pyxel.blt(self.my_x   ,self.my_y - self.camera_offset_y,IMG2,8 + ((self.my_rolling_flag) * 8),0,SHIP_W,SHIP_H,0) #自機本体の表示
         
         if self.game_status == SCENE_STAGE_CLEAR_MY_SHIP_BOOST:
-            pyxel.blt(self.my_x -6*8,self.my_y,IMG2,    208,120 + (pyxel.frame_count // 2  % 2) * 8,    6*8,8,0) #ブーストモードイオンエンジン噴射の描画
+            pyxel.blt(self.my_x -6*8,self.my_y - self.camera_offset_y,IMG2,    208,120 + (pyxel.frame_count // 2  % 2) * 8,    6*8,8,0) #ブーストモードイオンエンジン噴射の描画
         else:
-            pyxel.blt(self.my_x   -8,self.my_y,IMG2,    176 + (pyxel.frame_count // 2  % 3) * 8,104,     8,8,0) #イオンエンジン噴射の描画
+            pyxel.blt(self.my_x   -8,self.my_y - self.camera_offset_y,IMG2,    176 + (pyxel.frame_count // 2  % 3) * 8,104,     8,8,0) #イオンエンジン噴射の描画
 
     #自機弾の表示
     def draw_my_shot(self):
         shot_count = len(self.shots)
         for i in range(shot_count):
             if   0 <= self.shot_level <= 6: #ショットがバルカンショットとレーザーの場合
-                pyxel.blt(self.shots[i].posx, self.shots[i].posy,     IMG2,    (self.shots[i].shot_type * 8),8,      8,8,    1)
+                pyxel.blt(self.shots[i].posx, self.shots[i].posy - self.camera_offset_y,     IMG2,    (self.shots[i].shot_type * 8),8,      8,8,    1)
             elif     self.shot_level == 7: #ウェーブカッターLv1の場合
-                pyxel.blt(self.shots[i].posx, self.shots[i].posy,     IMG2,    (self.shots[i].shot_type * 8),8,      8,8,    1)
-                pyxel.blt(self.shots[i].posx, self.shots[i].posy + 8,  IMG2,    (self.shots[i].shot_type * 8),8,      8,8,    1)
+                pyxel.blt(self.shots[i].posx, self.shots[i].posy - self.camera_offset_y,     IMG2,    (self.shots[i].shot_type * 8),8,      8,8,    1)
+                pyxel.blt(self.shots[i].posx, self.shots[i].posy - self.camera_offset_y+ 8,  IMG2,    (self.shots[i].shot_type * 8),8,      8,8,    1)
             elif     self.shot_level == 8: #ウェーブカッターLv2の場合
-                pyxel.blt(self.shots[i].posx, self.shots[i].posy,     IMG2,    (self.shots[i].shot_type * 8),8,      8, 8,    1)
-                pyxel.blt(self.shots[i].posx, self.shots[i].posy + 8 , IMG2,    (self.shots[i].shot_type * 8),16,     8, 8,    1)
-                pyxel.blt(self.shots[i].posx, self.shots[i].posy + 16, IMG2,    (self.shots[i].shot_type * 8),8,      8,-8,    1)
+                pyxel.blt(self.shots[i].posx, self.shots[i].posy - self.camera_offset_y,     IMG2,    (self.shots[i].shot_type * 8),8,      8, 8,    1)
+                pyxel.blt(self.shots[i].posx, self.shots[i].posy - self.camera_offset_y+ 8 , IMG2,    (self.shots[i].shot_type * 8),16,     8, 8,    1)
+                pyxel.blt(self.shots[i].posx, self.shots[i].posy - self.camera_offset_y+ 16, IMG2,    (self.shots[i].shot_type * 8),8,      8,-8,    1)
             elif 9 <= self.shot_level <= 10:#ウェーブカッターLv3とLv4の場合
-                pyxel.blt(self.shots[i].posx, self.shots[i].posy,     IMG2,    (self.shots[i].shot_type * 8),8,      8, 8,    1)
-                pyxel.blt(self.shots[i].posx, self.shots[i].posy + 8 , IMG2,    (self.shots[i].shot_type * 8),16,     8, 8,    1)
-                pyxel.blt(self.shots[i].posx, self.shots[i].posy + 16, IMG2,    (self.shots[i].shot_type * 8),16,     8,-8,    1)
-                pyxel.blt(self.shots[i].posx, self.shots[i].posy + 24, IMG2,    (self.shots[i].shot_type * 8),8,      8,-8,    1)
+                pyxel.blt(self.shots[i].posx, self.shots[i].posy - self.camera_offset_y,     IMG2,    (self.shots[i].shot_type * 8),8,      8, 8,    1)
+                pyxel.blt(self.shots[i].posx, self.shots[i].posy - self.camera_offset_y+ 8 , IMG2,    (self.shots[i].shot_type * 8),16,     8, 8,    1)
+                pyxel.blt(self.shots[i].posx, self.shots[i].posy - self.camera_offset_y+ 16, IMG2,    (self.shots[i].shot_type * 8),16,     8,-8,    1)
+                pyxel.blt(self.shots[i].posx, self.shots[i].posy - self.camera_offset_y+ 24, IMG2,    (self.shots[i].shot_type * 8),8,      8,-8,    1)
 
     #ミサイルの表示
     def draw_missile(self):
         missile_count = len(self.missile)
         for i in range(missile_count):
             if 0 <= self.missile[i].missile_type <= 3:#通常ミサイル（地を這うミサイル）の表示
-                pyxel.blt(self.missile[i].posx, self.missile[i].posy, IMG2,   (self.missile[i].missile_flag1 * 8),16,    self.missile[i].x_reverse * 8,self.missile[i].y_reverse * 8,  0)
+                pyxel.blt(self.missile[i].posx, self.missile[i].posy - self.camera_offset_y, IMG2,   (self.missile[i].missile_flag1 * 8),16,    self.missile[i].x_reverse * 8,self.missile[i].y_reverse * 8,  0)
             elif self.missile[i].missile_type == 4:#テイルショットの表示
-                pyxel.blt(self.missile[i].posx, self.missile[i].posy, IMG2,   24,16,    8,8,  1)
+                pyxel.blt(self.missile[i].posx, self.missile[i].posy - self.camera_offset_y, IMG2,   24,16,    8,8,  1)
             elif self.missile[i].missile_type == 5:#ペネトレートロケットの表示
-                pyxel.blt(self.missile[i].posx, self.missile[i].posy, IMG2,   16,16,    8,8,  1)
+                pyxel.blt(self.missile[i].posx, self.missile[i].posy - self.camera_offset_y, IMG2,   16,16,    8,8,  1)
             elif self.missile[i].missile_type == 6:#サーチレーザーの表示
                 if   self.missile[i].missile_flag1 == 0:#状態遷移が(直進中=0)なら前方直進レーザーの画像を表示する
-                    pyxel.blt(self.missile[i].posx - 8, self.missile[i].posy, IMG2,   32,16,   16,8,  13)
+                    pyxel.blt(self.missile[i].posx - 8, self.missile[i].posy - self.camera_offset_y, IMG2,   32,16,   16,8,  13)
                 elif self.missile[i].missile_flag1 == 1:#状態遷移が(屈折中=1)なら曲がっているレーザーの画像を表示
-                    pyxel.blt(self.missile[i].posx    , self.missile[i].posy, IMG2,   48,16,   8,8  * -(self.missile[i].y_reverse),  13)
+                    pyxel.blt(self.missile[i].posx    , self.missile[i].posy - self.camera_offset_y, IMG2,   48,16,   8,8  * -(self.missile[i].y_reverse),  13)
                 elif self.missile[i].missile_flag1 == 2:#状態遷移が(縦に進行中=2)なら上方向＆下方向のレーザーの画像を表示
-                    pyxel.blt(self.missile[i].posx    , self.missile[i].posy + (self.missile[i].y_reverse) * 8, IMG2,   88,8,    8,16 * -(self.missile[i].y_reverse),  13)
+                    pyxel.blt(self.missile[i].posx    , self.missile[i].posy - self.camera_offset_y+ (self.missile[i].y_reverse) * 8, IMG2,   88,8,    8,16 * -(self.missile[i].y_reverse),  13)
                 
             elif self.missile[i].missile_type == 7:#ホーミングミサイルの表示
-                pyxel.blt(self.missile[i].posx, self.missile[i].posy, IMG2,   56,16,    8,8,  13)
+                pyxel.blt(self.missile[i].posx, self.missile[i].posy - self.camera_offset_y, IMG2,   56,16,    8,8,  13)
 
     #クローの表示
     def draw_claw(self):
         claw_count = len(self.claw)
         for i in range(claw_count):
-            pyxel.blt(self.claw[i].posx, self.claw[i].posy,     IMG2,    184 + (((self.stage_count // 2.5 ) % 9) * 8),96,      8,8,    0)
-            #pyxel.blt(self.claw[i].posx, self.claw[i].posy,     IMG2,    144 + (((self.stage_count // 2.5 ) % 14) * 8),8,      8,8,    0)
+            pyxel.blt(self.claw[i].posx, self.claw[i].posy - self.camera_offset_y,     IMG2,    184 + (((self.stage_count // 2.5 ) % 9) * 8),96,      8,8,    0)
+            #pyxel.blt(self.claw[i].posx, self.claw[i].posy - self.camera_offset_y,     IMG2,    144 + (((self.stage_count // 2.5 ) % 14) * 8),8,      8,8,    0)
 
     #クローショットの表示
     def draw_claw_shot(self):
         claw_shot_count = len(self.claw_shot)
         for i in range(claw_shot_count):
-            pyxel.blt(self.claw_shot[i].posx, self.claw_shot[i].posy, IMG2,   240,0,    8,8,  1)
+            pyxel.blt(self.claw_shot[i].posx, self.claw_shot[i].posy - self.camera_offset_y, IMG2,   240,0,    8,8,  1)
 
     #l'sシールド表示
     def draw_ls_shield(self):
         if self.ls_shield_hp > 0:
-            pyxel.blt(self.my_x + 8,self.my_y - 8,IMG2,208 + (self.stage_count // 3) % 6 * 8,64,8,24,13)
+            pyxel.blt(self.my_x + 8,self.my_y - 8 - self.camera_offset_y,IMG2,208 + (self.stage_count // 3) % 6 * 8,64,8,24,13)
 
     #敵の表示
     def draw_enemy(self):
+        self.camera_offset_y = (self.bg_height - WINDOW_H) * self.my_y / (self.bg_height - SHIP_H) #SHIP_Hは自機の縦幅8ドット
         enemy_count = len(self.enemy)
         for i in range(enemy_count):
             if   self.enemy[i].enemy_type == 1:#敵タイプ１の表示   直進して斜め後退→勢いよく後退していく10機編隊
-                pyxel.blt(self.enemy[i].posx, self.enemy[i].posy,IMG2,self.anime_enemy001[pyxel.frame_count % 15],40,SIZE_8,SIZE_8,0)
+                pyxel.blt(self.enemy[i].posx, self.enemy[i].posy - self.camera_offset_y,IMG2,self.anime_enemy001[pyxel.frame_count % 15],40,SIZE_8,SIZE_8,0)
             elif self.enemy[i].enemy_type == 2:#敵タイプ２の表示   サインカーブを描く3機編隊
-                pyxel.blt(self.enemy[i].posx, self.enemy[i].posy,IMG2,self.anime_enemy002[pyxel.frame_count % 40],24,SIZE_8,SIZE_8,0)
+                pyxel.blt(self.enemy[i].posx, self.enemy[i].posy - self.camera_offset_y,IMG2,self.anime_enemy002[pyxel.frame_count % 40],24,SIZE_8,SIZE_8,0)
             elif self.enemy[i].enemy_type == 3:#敵タイプ３の表示   固定砲台（地面に張り付く単装砲タイプ）
                 self.reverse_flag = 8
                 if self.my_x > self.enemy[i].posx:
@@ -141,13 +141,13 @@ class graph:
                 #論理式(enemy[i].item != 0)はitem=0の場合falseで0 item=1または2か3の場合はtrueで1となる（つまりアイテムを持っていたらカッコ内は1となる）
                 #アイテム所持していれば1*24で24ドット横、つまり3キャラチップ横の黄色い固定砲台が表示される事となる
                 if self.my_x == self.enemy[i].posx:
-                     pyxel.blt(self.enemy[i].posx, self.enemy[i].posy,IMG2, 48 + (self.enemy[i].item != 0) * 24,32, self.reverse_flag,SIZE_8, 0)
+                     pyxel.blt(self.enemy[i].posx, self.enemy[i].posy - self.camera_offset_y,IMG2, 48 + (self.enemy[i].item != 0) * 24,32, self.reverse_flag,SIZE_8, 0)
                 elif self.my_y < self.enemy[i].posy:
-                     pyxel.blt(self.enemy[i].posx, self.enemy[i].posy,IMG2, 40 + (self.enemy[i].item != 0) * 24,32, self.reverse_flag,SIZE_8, 0)
+                     pyxel.blt(self.enemy[i].posx, self.enemy[i].posy - self.camera_offset_y,IMG2, 40 + (self.enemy[i].item != 0) * 24,32, self.reverse_flag,SIZE_8, 0)
                 elif self.enemy[i].posy < self.my_y:
-                     pyxel.blt(self.enemy[i].posx, self.enemy[i].posy,IMG2, 32 + (self.enemy[i].item != 0) * 24,32, self.reverse_flag,SIZE_8, 0)
+                     pyxel.blt(self.enemy[i].posx, self.enemy[i].posy - self.camera_offset_y,IMG2, 32 + (self.enemy[i].item != 0) * 24,32, self.reverse_flag,SIZE_8, 0)
                 else:
-                     pyxel.blt(self.enemy[i].posx, self.enemy[i].posy,IMG2, 40 + (self.enemy[i].item != 0) * 24,32, self.reverse_flag,SIZE_8, 0)
+                     pyxel.blt(self.enemy[i].posx, self.enemy[i].posy - self.camera_offset_y,IMG2, 40 + (self.enemy[i].item != 0) * 24,32, self.reverse_flag,SIZE_8, 0)
             elif self.enemy[i].enemy_type == 4:#敵タイプ４の表示   固定砲台（天井に張り付く単装砲タイプ）
                 self.reverse_flag = 8
                 if self.my_x > self.enemy[i].posx:
@@ -156,19 +156,19 @@ class graph:
                 #論理式(enemy[i].item != 0)はitem=0の場合falseで0 item=1または2か3の場合はtrueで1となる（つまりアイテムを持っていたらカッコ内は1となる）
                 #アイテム所持していれば1*24で24ドット横、つまり3キャラチップ横の黄色い固定砲台が表示される事となる
                 if self.my_x == self.enemy[i].posx:
-                     pyxel.blt(self.enemy[i].posx, self.enemy[i].posy,IMG2, 48 + (self.enemy[i].item != 0) * 24,32, self.reverse_flag,-(SIZE_8), 0)
+                     pyxel.blt(self.enemy[i].posx, self.enemy[i].posy - self.camera_offset_y,IMG2, 48 + (self.enemy[i].item != 0) * 24,32, self.reverse_flag,-(SIZE_8), 0)
                 elif self.my_y > self.enemy[i].posy:
-                     pyxel.blt(self.enemy[i].posx, self.enemy[i].posy,IMG2, 40 + (self.enemy[i].item != 0) * 24,32, self.reverse_flag,-(SIZE_8), 0)
+                     pyxel.blt(self.enemy[i].posx, self.enemy[i].posy - self.camera_offset_y,IMG2, 40 + (self.enemy[i].item != 0) * 24,32, self.reverse_flag,-(SIZE_8), 0)
                 elif self.enemy[i].posy > self.my_y:
-                     pyxel.blt(self.enemy[i].posx, self.enemy[i].posy,IMG2, 32 + (self.enemy[i].item != 0) * 24,32, self.reverse_flag,-(SIZE_8), 0)
+                     pyxel.blt(self.enemy[i].posx, self.enemy[i].posy - self.camera_offset_y,IMG2, 32 + (self.enemy[i].item != 0) * 24,32, self.reverse_flag,-(SIZE_8), 0)
                 else:
-                     pyxel.blt(self.enemy[i].posx, self.enemy[i].posy,IMG2, 40 + (self.enemy[i].item != 0) * 24,32, self.reverse_flag,-(SIZE_8), 0)
+                     pyxel.blt(self.enemy[i].posx, self.enemy[i].posy - self.camera_offset_y,IMG2, 40 + (self.enemy[i].item != 0) * 24,32, self.reverse_flag,-(SIZE_8), 0)
             elif self.enemy[i].enemy_type == 5:#敵タイプ５の表示   ぴょんぴょんはねるホッパーちゃんmk2
-                pyxel.blt(self.enemy[i].posx, self.enemy[i].posy,IMG2,self.anime_enemy005[pyxel.frame_count % 40],24,SIZE_8,SIZE_8,0)       
+                pyxel.blt(self.enemy[i].posx, self.enemy[i].posy - self.camera_offset_y,IMG2,self.anime_enemy005[pyxel.frame_count % 40],24,SIZE_8,SIZE_8,0)       
             elif self.enemy[i].enemy_type == 6:#敵タイプ６の表示   謎の回転飛翔体Ｍ５４
-                pyxel.blt(self.enemy[i].posx, self.enemy[i].posy,IMG2,24+(((self.stage_count // 30) % 2) * 8),24,SIZE_8,SIZE_8,0)
+                pyxel.blt(self.enemy[i].posx, self.enemy[i].posy - self.camera_offset_y,IMG2,24+(((self.stage_count // 30) % 2) * 8),24,SIZE_8,SIZE_8,0)
             elif self.enemy[i].enemy_type == 7:#敵タイプ７の表示   追尾戦闘機（サインカーブを描きつつ追尾してくる）
-                pyxel.blt(self.enemy[i].posx, self.enemy[i].posy,IMG2,   88,32,   SIZE_8,SIZE_8,  0)
+                pyxel.blt(self.enemy[i].posx, self.enemy[i].posy - self.camera_offset_y,IMG2,   88,32,   SIZE_8,SIZE_8,  0)
             elif self.enemy[i].enemy_type == 8:#敵タイプ８の表示   追尾戦闘機
                 if self.enemy[i].vy < 0:
                     up_down_reverse = 8
@@ -180,74 +180,75 @@ class graph:
                 else:
                     right_left_reverse = -8
                     
-                pyxel.blt(self.enemy[i].posx, self.enemy[i].posy,IMG2,   96 ,32,   right_left_reverse,up_down_reverse,  0)
+                pyxel.blt(self.enemy[i].posx, self.enemy[i].posy - self.camera_offset_y,IMG2,   96 ,32,   right_left_reverse,up_down_reverse,  0)
             elif self.enemy[i].enemy_type == 9:#敵タイプ９の表示   Ｙ軸を合わせた後突っ込んで来る敵機
-                pyxel.blt(self.enemy[i].posx, self.enemy[i].posy, IMG2,     self.anime_enemy009[pyxel.frame_count % 40],48,    SIZE_8,SIZE_8,    0)
+                pyxel.blt(self.enemy[i].posx, self.enemy[i].posy - self.camera_offset_y, IMG2,     self.anime_enemy009[pyxel.frame_count % 40],48,    SIZE_8,SIZE_8,    0)
             elif self.enemy[i].enemy_type == 10:#敵タイプ10の表示  スクランブルハッチ地面タイプ
-                pyxel.blt(self.enemy[i].posx, self.enemy[i].posy, IMG2,  112,32,  3*8,2*8,  0)
+                pyxel.blt(self.enemy[i].posx, self.enemy[i].posy - self.camera_offset_y, IMG2,  112,32,  3*8,2*8,  0)
                 if 0 <= self.enemy[i].enemy_flag1 <= 43:
-                    pyxel.blt(self.enemy[i].posx + 8, self.enemy[i].posy, IMG2,  136+(self.enemy[i].enemy_flag1 // 6) * 8,40,  SIZE_8,SIZE_8,  0)
+                    pyxel.blt(self.enemy[i].posx + 8, self.enemy[i].posy - self.camera_offset_y, IMG2,  136+(self.enemy[i].enemy_flag1 // 6) * 8,40,  SIZE_8,SIZE_8,  0)
                 if 43 <= self.enemy[i].enemy_flag1 <= 86:
-                    pyxel.blt(self.enemy[i].posx + 8, self.enemy[i].posy, IMG2,  184-(self.enemy[i].enemy_flag1 // 7) * 8,40,  SIZE_8,SIZE_8,  0)
+                    pyxel.blt(self.enemy[i].posx + 8, self.enemy[i].posy - self.camera_offset_y, IMG2,  184-(self.enemy[i].enemy_flag1 // 7) * 8,40,  SIZE_8,SIZE_8,  0)
             elif self.enemy[i].enemy_type == 11:#敵タイプ11の表示  スクランブルハッチ天井タイプ
-                pyxel.blt(self.enemy[i].posx, self.enemy[i].posy, IMG2,  112,32,  3*8,-(2*8),  0)
+                pyxel.blt(self.enemy[i].posx, self.enemy[i].posy - self.camera_offset_y, IMG2,  112,32,  3*8,-(2*8),  0)
                 if 0 <= self.enemy[i].enemy_flag1 <= 43:
-                    pyxel.blt(self.enemy[i].posx + 8, self.enemy[i].posy + 8, IMG2,  136+(self.enemy[i].enemy_flag1 // 6) * 8,40,  SIZE_8,-(SIZE_8),  0)
+                    pyxel.blt(self.enemy[i].posx + 8, self.enemy[i].posy - self.camera_offset_y+ 8, IMG2,  136+(self.enemy[i].enemy_flag1 // 6) * 8,40,  SIZE_8,-(SIZE_8),  0)
                 if 43 <= self.enemy[i].enemy_flag1 <= 86:
-                    pyxel.blt(self.enemy[i].posx + 8, self.enemy[i].posy + 8, IMG2,  184-(self.enemy[i].enemy_flag1 // 7) * 8,40,  SIZE_8,-(SIZE_8),  0)
+                    pyxel.blt(self.enemy[i].posx + 8, self.enemy[i].posy - self.camera_offset_y+ 8, IMG2,  184-(self.enemy[i].enemy_flag1 // 7) * 8,40,  SIZE_8,-(SIZE_8),  0)
             elif self.enemy[i].enemy_type == 12:#敵タイプ12の表示  レーザービームを発射した後、高速で後退する敵
-                pyxel.blt(self.enemy[i].posx, self.enemy[i].posy, IMG2,  144 + ((self.enemy[i].enemy_flag1 // 7) * 8),32,  SIZE_8,SIZE_8,  0)#数値をいじったらうまくいった　良かった・・たまたまだけど               
+                pyxel.blt(self.enemy[i].posx, self.enemy[i].posy - self.camera_offset_y, IMG2,  144 + ((self.enemy[i].enemy_flag1 // 7) * 8),32,  SIZE_8,SIZE_8,  0)#数値をいじったらうまくいった　良かった・・たまたまだけど               
             elif self.enemy[i].enemy_type == 13:#敵タイプ13の表示  3way弾を射出する硬い奴（ショットパワーアップアイテムを持っている）
-                pyxel.blt(self.enemy[i].posx, self.enemy[i].posy,IMG2, 0,24, SIZE_8,SIZE_8, 0)
+                pyxel.blt(self.enemy[i].posx, self.enemy[i].posy - self.camera_offset_y,IMG2, 0,24, SIZE_8,SIZE_8, 0)
             elif self.enemy[i].enemy_type == 14:#敵タイプ14の表示  ゆっくり直進してくる赤いアイテムキャリアー（パワーアップアイテムを持っている）
-                pyxel.blt(self.enemy[i].posx    , self.enemy[i].posy,IMG2, 104                              ,104,   SIZE_8,SIZE_8,  0) #コックピット部表示
-                pyxel.blt(self.enemy[i].posx + 8, self.enemy[i].posy,IMG2, 112 + (self.stage_count // 2  % 4) * 16,104,  SIZE_16,SIZE_8,  0) #エンジンノズル＆噴射パターン表示
+                pyxel.blt(self.enemy[i].posx    , self.enemy[i].posy - self.camera_offset_y,IMG2, 104                              ,104,   SIZE_8,SIZE_8,  0) #コックピット部表示
+                pyxel.blt(self.enemy[i].posx + 8, self.enemy[i].posy - self.camera_offset_y,IMG2, 112 + (self.stage_count // 2  % 4) * 16,104,  SIZE_16,SIZE_8,  0) #エンジンノズル＆噴射パターン表示
             elif self.enemy[i].enemy_type == 15:#敵タイプ15の表示  地面だったり天井を左右に動きながらチョット進んできて弾を撃つ移動砲台
-                pyxel.blt(self.enemy[i].posx    , self.enemy[i].posy,IMG2, 208 + self.stage_count // 3 % 6 * 8,32,   SIZE_8,SIZE_8,  0)   
+                pyxel.blt(self.enemy[i].posx    , self.enemy[i].posy - self.camera_offset_y,IMG2, 208 + self.stage_count // 3 % 6 * 8,32,   SIZE_8,SIZE_8,  0)   
             elif self.enemy[i].enemy_type == 16:#敵タイプ16の表示  2機一体で挟みこみ攻撃をしてくるクランパリオン
-                pyxel.blt(self.enemy[i].posx    , self.enemy[i].posy,IMG2,      (self.stage_count // 2) % 4   * 8, 56,    SIZE_8 ,SIZE_8, 0)
-                pyxel.blt(self.enemy[i].posx + 8, self.enemy[i].posy,IMG2, 176 + (pyxel.frame_count // 2  % 3) * 8,104,   -(SIZE_8),SIZE_8, 0) #イオンエンジン噴射の描画
+                pyxel.blt(self.enemy[i].posx    , self.enemy[i].posy - self.camera_offset_y,IMG2,      (self.stage_count // 2) % 4   * 8, 56,    SIZE_8 ,SIZE_8, 0)
+                pyxel.blt(self.enemy[i].posx + 8, self.enemy[i].posy - self.camera_offset_y,IMG2, 176 + (pyxel.frame_count // 2  % 3) * 8,104,   -(SIZE_8),SIZE_8, 0) #イオンエンジン噴射の描画
             elif self.enemy[i].enemy_type == 17:#敵タイプ17の表示  スプライン曲線で定点まで移動して離脱する敵 ロールブリッツ
-                pyxel.blt(self.enemy[i].posx    , self.enemy[i].posy,IMG2,      0, 32,    SIZE_8 ,SIZE_8, 0)
+                pyxel.blt(self.enemy[i].posx    , self.enemy[i].posy - self.camera_offset_y,IMG2,      0, 32,    SIZE_8 ,SIZE_8, 0)
             elif self.enemy[i].enemy_type == 18:#敵タイプ18の表示  チョット大き目で硬いばらまき弾の敵 ボルダー
-                pyxel.blt(self.enemy[i].posx    , self.enemy[i].posy,IMG2,      80,48,    SIZE_40 ,SIZE_24, 15)    
+                pyxel.blt(self.enemy[i].posx    , self.enemy[i].posy - self.camera_offset_y,IMG2,      80,48,    SIZE_40 ,SIZE_24, 15)    
 
     #敵の弾の表示
     def draw_enemy_shot(self,p): #pの数値と一致するプライオリティナンバーを持つ敵弾だけを描画します
+        self.camera_offset_y = (self.bg_height - WINDOW_H) * self.my_y / (self.bg_height - SHIP_H) #SHIP_Hは自機の縦幅8ドット
         enemy_shot_count = len(self.enemy_shot)
         for i in range(enemy_shot_count):
             if self.enemy_shot[i].priority == p:
                 if   self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_LASER:            #通常レーザーの表示
-                    pyxel.blt(self.enemy_shot[i].posx, self.enemy_shot[i].posy, IMG2,   152,16,    8, 8,    0)#敵レーザービームの表示
+                    pyxel.blt(self.enemy_shot[i].posx, self.enemy_shot[i].posy - self.camera_offset_y, IMG2,   152,16,    8, 8,    0)#敵レーザービームの表示
                 elif self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_GREEN_LASER:      #ボスのグリーンレーザーの表示
-                    pyxel.line(self.enemy_shot[i].posx,self.enemy_shot[i].posy,  self.enemy_shot[i].posx + 8,self.enemy_shot[i].posy  ,11) #グリーンレーザービームの表示
+                    pyxel.line(self.enemy_shot[i].posx,self.enemy_shot[i].posy - self.camera_offset_y,  self.enemy_shot[i].posx + 8,self.enemy_shot[i].posy- self.camera_offset_y  ,11) #グリーンレーザービームの表示
                     #pyxel.line(self.enemy_shot[i].posx,self.enemy_shot[i].posy+1,self.enemy_shot[i].posx + 8,self.enemy_shot[i].posy+1,3) #影部分の線を描画
                 elif self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_RED_LASER:        #ボスのレッドレーザーの表示
-                    pyxel.line(self.enemy_shot[i].posx,self.enemy_shot[i].posy,  self.enemy_shot[i].posx + 8,self.enemy_shot[i].posy  ,8)#レッドレーザービームの表示
+                    pyxel.line(self.enemy_shot[i].posx,self.enemy_shot[i].posy - self.camera_offset_y,  self.enemy_shot[i].posx + 8,self.enemy_shot[i].posy- self.camera_offset_y  ,8)#レッドレーザービームの表示
                 elif self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_HOMING_LASER:     #ホーミングレーザーの表示
-                    pyxel.blt(self.enemy_shot[i].posx, self.enemy_shot[i].posy, IMG2,   200,16,    8, 8,    0)#ホーミングレーザーの頭の表示
+                    pyxel.blt(self.enemy_shot[i].posx, self.enemy_shot[i].posy - self.camera_offset_y, IMG2,   200,16,    8, 8,    0)#ホーミングレーザーの頭の表示
                 elif self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_HOMING_LASER_TAIL:#ホーミングレーザーの尻尾の表示
-                    pyxel.blt(self.enemy_shot[i].posx, self.enemy_shot[i].posy, IMG2,   160+(self.enemy_shot[i].disappearance_count // 12) * 8,16,    8, 8,    0)#ホーミングレーザーの尻尾の表示
+                    pyxel.blt(self.enemy_shot[i].posx, self.enemy_shot[i].posy - self.camera_offset_y, IMG2,   160+(self.enemy_shot[i].disappearance_count // 12) * 8,16,    8, 8,    0)#ホーミングレーザーの尻尾の表示
                 elif self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_SEARCH_LASER:     #サーチレーザーの表示
                     if self.enemy_shot[i].search_flag == 0: #自機サーチ完了フラグがたっていない場合は横状態のグラフイックを表示する
-                        pyxel.blt(self.enemy_shot[i].posx, self.enemy_shot[i].posy, IMG2,   216,40,    8, 8,    0)#サーチレーザーの頭の表示(横)
+                        pyxel.blt(self.enemy_shot[i].posx, self.enemy_shot[i].posy - self.camera_offset_y, IMG2,   216,40,    8, 8,    0)#サーチレーザーの頭の表示(横)
                     else: ##自機サーチ完了フラグがたってたら縦状態のグラフイックを表示する
-                        pyxel.blt(self.enemy_shot[i].posx, self.enemy_shot[i].posy, IMG2,   216,48,    8, 8 * ((self.enemy_shot[i].vy < 0)-(self.enemy_shot[i].vy > 0)),    0)#サーチレーザーの頭の表示(縦),vyの符号を求めてグラフイックを反転してます(論理式を使用)                 
+                        pyxel.blt(self.enemy_shot[i].posx, self.enemy_shot[i].posy - self.camera_offset_y, IMG2,   216,48,    8, 8 * ((self.enemy_shot[i].vy < 0)-(self.enemy_shot[i].vy > 0)),    0)#サーチレーザーの頭の表示(縦),vyの符号を求めてグラフイックを反転してます(論理式を使用)                 
                 elif self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_SEARCH_LASER_TAIL:#サーチレーザーの尻尾の表示
                     if self.enemy_shot[i].search_flag == 0:
-                        pyxel.blt(self.enemy_shot[i].posx, self.enemy_shot[i].posy, IMG2,   224+8*(self.enemy_shot[i].disappearance_count < 30)+8*(self.enemy_shot[i].disappearance_count < 15),40,    8, 8,    0)#サーチレーザーの尻尾(横)の表示
+                        pyxel.blt(self.enemy_shot[i].posx, self.enemy_shot[i].posy - self.camera_offset_y, IMG2,   224+8*(self.enemy_shot[i].disappearance_count < 30)+8*(self.enemy_shot[i].disappearance_count < 15),40,    8, 8,    0)#サーチレーザーの尻尾(横)の表示
                     else:
-                        pyxel.blt(self.enemy_shot[i].posx, self.enemy_shot[i].posy, IMG2,   224+8*(self.enemy_shot[i].disappearance_count < 30)+8*(self.enemy_shot[i].disappearance_count < 15),48,    8, 8*((self.enemy_shot[i].vy < 0)-(self.enemy_shot[i].vy > 0)),    0)#サーチレーザーの尻尾(縦)の表示,vyの符号を求めてグラフイックを反転してます(論理式を使用)
+                        pyxel.blt(self.enemy_shot[i].posx, self.enemy_shot[i].posy - self.camera_offset_y, IMG2,   224+8*(self.enemy_shot[i].disappearance_count < 30)+8*(self.enemy_shot[i].disappearance_count < 15),48,    8, 8*((self.enemy_shot[i].vy < 0)-(self.enemy_shot[i].vy > 0)),    0)#サーチレーザーの尻尾(縦)の表示,vyの符号を求めてグラフイックを反転してます(論理式を使用)
                 elif self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_UP_LASER:         #アップレーザーの表示
-                    pyxel.line(self.enemy_shot[i].posx,self.enemy_shot[i].posy+4,  self.enemy_shot[i].posx + self.enemy_shot[i].width,self.enemy_shot[i].posy+4  ,11) #アップレーザーの表示
+                    pyxel.line(self.enemy_shot[i].posx,self.enemy_shot[i].posy - self.camera_offset_y+4,  self.enemy_shot[i].posx + self.enemy_shot[i].width,self.enemy_shot[i].posy- self.camera_offset_y+4  ,11) #アップレーザーの表示
                 elif self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_DOWN_LASER:       #ダウンレーザーの表示
-                    pyxel.line(self.enemy_shot[i].posx,self.enemy_shot[i].posy+4,  self.enemy_shot[i].posx + self.enemy_shot[i].width,self.enemy_shot[i].posy+4  ,9) #ダウンレーザーの表示
+                    pyxel.line(self.enemy_shot[i].posx,self.enemy_shot[i].posy - self.camera_offset_y+4,  self.enemy_shot[i].posx + self.enemy_shot[i].width,self.enemy_shot[i].posy- self.camera_offset_y+4  ,9) #ダウンレーザーの表示
                 elif self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_VECTOR_LASER:     #ベクトルレーザーの表示
-                    pyxel.line(self.enemy_shot[i].posx+4,self.enemy_shot[i].posy,  self.enemy_shot[i].posx+4,self.enemy_shot[i].posy + self.enemy_shot[i].height   ,8) #ベクトルレーザーの表示
+                    pyxel.line(self.enemy_shot[i].posx+4,self.enemy_shot[i].posy - self.camera_offset_y,  self.enemy_shot[i].posx+4,self.enemy_shot[i].posy - self.camera_offset_y+ self.enemy_shot[i].height   ,8) #ベクトルレーザーの表示
                 elif self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_GREEN_CUTTER:     #ブリザーディア」が尾翼部から射出するグリーンカッターの表示
-                    pyxel.blt(self.enemy_shot[i].posx, self.enemy_shot[i].posy, IMG2,   64,56,    SIZE_16, SIZE_16,    15)
+                    pyxel.blt(self.enemy_shot[i].posx, self.enemy_shot[i].posy - self.camera_offset_y, IMG2,   64,56,    SIZE_16, SIZE_16,    15)
                 else:                                                                   #通常弾の表示
-                    pyxel.blt(self.enemy_shot[i].posx, self.enemy_shot[i].posy, IMG2,   32 + (self.enemy_shot[i].posx // 8) % 4 * 8,0,    8, 8,    13)#敵通常弾の表示 posxを使用してアニメーションパターンのオフセット値を計算する                
+                    pyxel.blt(self.enemy_shot[i].posx, self.enemy_shot[i].posy - self.camera_offset_y, IMG2,   32 + (self.enemy_shot[i].posx // 8) % 4 * 8,0,    8, 8,    13)#敵通常弾の表示 posxを使用してアニメーションパターンのオフセット値を計算する                
 
     #ボスの表示
     def draw_boss(self):
@@ -259,15 +260,15 @@ class graph:
                     offset_x = 10 - self.boss[i].count2 // 48   #count2が少なくなるごとにoffset_xが増加することに成る
                                                                 #count2の数値は最初は480フレームで最終的に0となり,この計算式からoffset_xは480フレームの間で0から10まで変化することに成る
                 
-                pyxel.blt(self.boss[i].posx + offset_x, self.boss[i].posy + offset_x // 16,  IMG0,   64,128,8*8,5*8,    15) #ファッティバルガード前部表示
-                pyxel.blt(self.boss[i].posx - offset_x, self.boss[i].posy              ,  IMG0,    0,184,5*8,3*8,    15) #ファッティバルガード後部表示 
+                pyxel.blt(self.boss[i].posx + offset_x, self.boss[i].posy - self.camera_offset_y + offset_x // 16,  IMG0,   64,128,8*8,5*8,    15) #ファッティバルガード前部表示
+                pyxel.blt(self.boss[i].posx - offset_x, self.boss[i].posy - self.camera_offset_y                 ,  IMG0,    0,184,5*8,3*8,    15) #ファッティバルガード後部表示 
                 
                 if self.boss[i].parts1_flag == 1: #パーツフラグ1(5way砲台)が生存していたのなら描画する
-                    pyxel.blt(self.boss[i].posx - offset_x, self.boss[i].posy + 16,       IMG0,    0,176,    2*8,8,    15)
+                    pyxel.blt(self.boss[i].posx - offset_x, self.boss[i].posy - self.camera_offset_y+ 16,       IMG0,    0,176,    2*8,8,    15)
                 if self.boss[i].parts2_flag == 1: #パーツフラグ2(尾翼レーザーユニット)が生存していたのなら描画する
-                    pyxel.blt(self.boss[i].posx - offset_x, self.boss[i].posy,           IMG0,   16,176,    3*8,8,    15)
+                    pyxel.blt(self.boss[i].posx - offset_x, self.boss[i].posy - self.camera_offset_y,           IMG0,   16,176,    3*8,8,    15)
                 if self.boss[i].parts3_flag == 1: #パーツフラグ3(赤色爆雷ユニット)が生存していたのなら描画する
-                    pyxel.blt(self.boss[i].posx - offset_x + 8, self.boss[i].posy + 24,    IMG0,   40,176,    2*8,8,    15)
+                    pyxel.blt(self.boss[i].posx - offset_x + 8, self.boss[i].posy - self.camera_offset_y + 24,    IMG0,   40,176,    2*8,8,    15)
                 
             elif  self.boss[i].boss_type == BOSS_BREEZARDIA:    #ブリザーディア(山岳地帯ボス)
                 offset_x = 0 #真っ二つになる描画用のx軸オフセット値(離れた距離)をリセットする
@@ -275,19 +276,19 @@ class graph:
                     offset_x = 10 - self.boss[i].count2 // 48   #count2が少なくなるごとにoffset_xが増加することに成る
                                                                 #count2の数値は最初は480フレームで最終的に0となり,この計算式からoffset_xは480フレームの間で0から10まで変化することに成る
                 
-                pyxel.blt(self.boss[i].posx + offset_x, self.boss[i].posy + offset_x // 16,  IMG0,   40,184,self.boss[i].width,self.boss[i].height,    15) #ブリザーディア前部表示
+                pyxel.blt(self.boss[i].posx + offset_x, self.boss[i].posy - self.camera_offset_y + offset_x // 16,  IMG0,   40,184,self.boss[i].width,self.boss[i].height,    15) #ブリザーディア前部表示
                 
                 if self.boss[i].parts1_flag == 1: #パーツフラグ1(右下赤砲台)が生存していたのなら描画する
-                    pyxel.blt(self.boss[i].posx - offset_x + 10*8, self.boss[i].posy + 4*8,       IMG0,    152,216,    2*8,2*8,    15)
+                    pyxel.blt(self.boss[i].posx - offset_x + 10*8, self.boss[i].posy - self.camera_offset_y + 4*8,       IMG0,    152,216,    2*8,2*8,    15)
                 if self.boss[i].parts2_flag == 1: #パーツフラグ2(右下緑砲台)が生存していたのなら描画する
-                    pyxel.blt(self.boss[i].posx - offset_x +  8*8, self.boss[i].posy + 4*8,       IMG0,    152,200,    2*8,2*8,    15)
+                    pyxel.blt(self.boss[i].posx - offset_x +  8*8, self.boss[i].posy - self.camera_offset_y + 4*8,       IMG0,    152,200,    2*8,2*8,    15)
                 if self.boss[i].parts3_flag == 1: #パーツフラグ3(上部主砲)が生存していたのなら描画する
-                    pyxel.blt(self.boss[i].posx - offset_x +  4*8, self.boss[i].posy + self.boss[i].weapon1_cool_down_time // 100,       IMG0,     0,216,    3*8,2*8,    15)
+                    pyxel.blt(self.boss[i].posx - offset_x +  4*8, self.boss[i].posy - self.camera_offset_y + self.boss[i].weapon1_cool_down_time // 100,       IMG0,     0,216,    3*8,2*8,    15)
                 if self.boss[i].parts4_flag == 1: #パーツフラグ4(上部グリーンカッター)が生存していたのなら描画する
                     #グリーンカッター本体
-                    pyxel.blt(self.boss[i].posx - offset_x      , self.boss[i].posy     ,       IMG0,     0,232,    4*8,3*8,    15)
+                    pyxel.blt(self.boss[i].posx - offset_x      , self.boss[i].posy - self.camera_offset_y     ,       IMG0,     0,232,    4*8,3*8,    15)
                     #グリーンカッター手前にある後部ユニット部
-                    pyxel.blt(self.boss[i].posx - offset_x +  1*8, self.boss[i].posy + 1*8,       IMG0,    32,240,    2*8,2*8,    15)
+                    pyxel.blt(self.boss[i].posx - offset_x +  1*8, self.boss[i].posy - self.camera_offset_y + 1*8,       IMG0,    32,240,    2*8,2*8,    15)
                     
             #デバッグ用の当たり判定矩形の表示
             graph.draw_boss_collision_rectangle(self,i)    #ボス本体の当たり判定矩形を表示する関数の呼び出し
@@ -300,8 +301,8 @@ class graph:
                 hp = self.boss[i].main_hp / 4
                 if hp > 32:
                     hp = 31
-                x = self.boss[i].posx + self.boss[i].main_hp_bar_offset_x
-                y = self.boss[i].posy + self.boss[i].main_hp_bar_offset_y
+                x = self.boss[i].posx                        + self.boss[i].main_hp_bar_offset_x
+                y = self.boss[i].posy - self.camera_offset_y + self.boss[i].main_hp_bar_offset_y
                 func.display_boss_hp_bar(self,x,y,hp)
                 self.boss[i].display_time_main_hp_bar -= 1 #タイムカウントを１減らす
                 
@@ -309,7 +310,7 @@ class graph:
                 hp = self.boss[i].parts1_hp / 12
                 if hp > 12:
                     hp = 12
-                x,y = self.boss[i].posx + self.boss[i].parts1_hp_bar_offset_x,self.boss[i].posy + self.boss[i].parts1_hp_bar_offset_y
+                x,y = self.boss[i].posx + self.boss[i].parts1_hp_bar_offset_x,self.boss[i].posy - self.camera_offset_y + self.boss[i].parts1_hp_bar_offset_y
                 func.display_boss_hp_short_bar(self,x,y,hp)
                 self.boss[i].display_time_parts1_hp_bar -= 1 #タイムカウントを１減らす
                 
@@ -317,7 +318,7 @@ class graph:
                 hp = self.boss[i].parts2_hp / 12
                 if hp > 12:
                     hp = 12
-                x,y = self.boss[i].posx + self.boss[i].parts2_hp_bar_offset_x,self.boss[i].posy + self.boss[i].parts2_hp_bar_offset_y
+                x,y = self.boss[i].posx + self.boss[i].parts2_hp_bar_offset_x,self.boss[i].posy - self.camera_offset_y + self.boss[i].parts2_hp_bar_offset_y
                 func.display_boss_hp_short_bar(self,x,y,hp)
                 self.boss[i].display_time_parts2_hp_bar -= 1 #タイムカウントを１減らす
                 
@@ -325,7 +326,7 @@ class graph:
                 hp = self.boss[i].parts3_hp / 32
                 if hp > 8:
                     hp = 8
-                x,y = self.boss[i].posx + self.boss[i].parts3_hp_bar_offset_x,self.boss[i].posy + self.boss[i].parts3_hp_bar_offset_y
+                x,y = self.boss[i].posx + self.boss[i].parts3_hp_bar_offset_x,self.boss[i].posy - self.camera_offset_y + self.boss[i].parts3_hp_bar_offset_y
                 func.display_boss_hp_short2_bar(self,x,y,hp)
                 self.boss[i].display_time_parts3_hp_bar -= 1 #タイムカウントを１減らす         
                 
@@ -333,7 +334,7 @@ class graph:
                 hp = self.boss[i].parts4_hp / 32
                 if hp > 8:
                     hp = 8
-                x,y = self.boss[i].posx + self.boss[i].parts4_hp_bar_offset_x,self.boss[i].posy + self.boss[i].parts4_hp_bar_offset_y
+                x,y = self.boss[i].posx + self.boss[i].parts4_hp_bar_offset_x,self.boss[i].posy - self.camera_offset_y + self.boss[i].parts4_hp_bar_offset_y
                 func.display_boss_hp_short2_bar(self,x,y,hp)
                 self.boss[i].display_time_parts4_hp_bar -= 1 #タイムカウントを１減らす
                 
@@ -341,7 +342,7 @@ class graph:
                 hp = self.boss[i].parts5_hp / 32
                 if hp > 8:
                     hp = 8
-                x,y = self.boss[i].posx + self.boss[i].parts5_hp_bar_offset_x,self.boss[i].posy + self.boss[i].parts5_hp_bar_offset_y
+                x,y = self.boss[i].posx + self.boss[i].parts5_hp_bar_offset_x,self.boss[i].posy - self.camera_offset_y + self.boss[i].parts5_hp_bar_offset_y
                 func.display_boss_hp_short2_bar(self,x,y,hp)
                 self.boss[i].display_time_parts5_hp_bar -= 1 #タイムカウントを１減らす
                 
@@ -349,7 +350,7 @@ class graph:
                 hp = self.boss[i].parts6_hp / 32
                 if hp > 8:
                     hp = 8
-                x,y = self.boss[i].posx + self.boss[i].parts6_hp_bar_offset_x,self.boss[i].posy + self.boss[i].parts6_hp_bar_offset_y
+                x,y = self.boss[i].posx + self.boss[i].parts6_hp_bar_offset_x,self.boss[i].posy - self.camera_offset_y + self.boss[i].parts6_hp_bar_offset_y
                 func.display_boss_hp_short2_bar(self,x,y,hp)
                 self.boss[i].display_time_parts6_hp_bar -= 1 #タイムカウントを１減らす
                 
@@ -357,7 +358,7 @@ class graph:
                 hp = self.boss[i].parts7_hp / 32
                 if hp > 8:
                     hp = 8
-                x,y = self.boss[i].posx + self.boss[i].parts7_hp_bar_offset_x,self.boss[i].posy + self.boss[i].parts7_hp_bar_offset_y
+                x,y = self.boss[i].posx + self.boss[i].parts7_hp_bar_offset_x,self.boss[i].posy - self.camera_offset_y + self.boss[i].parts7_hp_bar_offset_y
                 func.display_boss_hp_short2_bar(self,x,y,hp)
                 self.boss[i].display_time_parts7_hp_bar -= 1 #タイムカウントを１減らす
                 
@@ -365,7 +366,7 @@ class graph:
                 hp = self.boss[i].parts8_hp / 32
                 if hp > 8:
                     hp = 8
-                x,y = self.boss[i].posx + self.boss[i].parts8_hp_bar_offset_x,self.boss[i].posy + self.boss[i].parts8_hp_bar_offset_y
+                x,y = self.boss[i].posx + self.boss[i].parts8_hp_bar_offset_x,self.boss[i].posy - self.camera_offset_y + self.boss[i].parts8_hp_bar_offset_y
                 func.display_boss_hp_short2_bar(self,x,y,hp)
                 self.boss[i].display_time_parts8_hp_bar -= 1 #タイムカウントを１減らす
                 
@@ -373,7 +374,7 @@ class graph:
                 hp = self.boss[i].parts9_hp / 32
                 if hp > 8:
                     hp = 8
-                x,y = self.boss[i].posx + self.boss[i].parts9_hp_bar_offset_x,self.boss[i].posy + self.boss[i].parts9_hp_bar_offset_y
+                x,y = self.boss[i].posx + self.boss[i].parts9_hp_bar_offset_x,self.boss[i].posy - self.camera_offset_y + self.boss[i].parts9_hp_bar_offset_y
                 func.display_boss_hp_short2_bar(self,x,y,hp)
                 self.boss[i].display_time_parts9_hp_bar -= 1 #タイムカウントを１減らす
 
@@ -383,50 +384,49 @@ class graph:
             return                             #何もしないで戻ります
             
         if self.boss[i].col_main1_w != 0: #本体当たり判定1の表示 当たり判定の横幅が0の場合はスキップして表示しない
-            pyxel.rectb(self.boss[i].posx + self.boss[i].col_main1_x,self.boss[i].posy + self.boss[i].col_main1_y,self.boss[i].col_main1_w,self.boss[i].col_main1_h,self.blinking_color[pyxel.frame_count // 8 % 10])
+            pyxel.rectb(self.boss[i].posx + self.boss[i].col_main1_x,self.boss[i].posy - self.camera_offset_y + self.boss[i].col_main1_y,self.boss[i].col_main1_w,self.boss[i].col_main1_h,self.blinking_color[pyxel.frame_count // 8 % 10])
         if self.boss[i].col_main2_w != 0: #本体当たり判定2の表示 当たり判定の横幅が0の場合はスキップして表示しない
-            pyxel.rectb(self.boss[i].posx + self.boss[i].col_main2_x,self.boss[i].posy + self.boss[i].col_main2_y,self.boss[i].col_main2_w,self.boss[i].col_main2_h,self.blinking_color[pyxel.frame_count // 8 % 10])
+            pyxel.rectb(self.boss[i].posx + self.boss[i].col_main2_x,self.boss[i].posy - self.camera_offset_y + self.boss[i].col_main2_y,self.boss[i].col_main2_w,self.boss[i].col_main2_h,self.blinking_color[pyxel.frame_count // 8 % 10])
         if self.boss[i].col_main3_w != 0: #本体当たり判定3の表示 当たり判定の横幅が0の場合はスキップして表示しない
-            pyxel.rectb(self.boss[i].posx + self.boss[i].col_main3_x,self.boss[i].posy + self.boss[i].col_main3_y,self.boss[i].col_main3_w,self.boss[i].col_main3_h,self.blinking_color[pyxel.frame_count // 8 % 10])
+            pyxel.rectb(self.boss[i].posx + self.boss[i].col_main3_x,self.boss[i].posy - self.camera_offset_y + self.boss[i].col_main3_y,self.boss[i].col_main3_w,self.boss[i].col_main3_h,self.blinking_color[pyxel.frame_count // 8 % 10])
         if self.boss[i].col_main4_w != 0: #本体当たり判定4の表示 当たり判定の横幅が0の場合はスキップして表示しない
-            pyxel.rectb(self.boss[i].posx + self.boss[i].col_main4_x,self.boss[i].posy + self.boss[i].col_main4_y,self.boss[i].col_main4_w,self.boss[i].col_main4_h,self.blinking_color[pyxel.frame_count // 8 % 10]) 
+            pyxel.rectb(self.boss[i].posx + self.boss[i].col_main4_x,self.boss[i].posy - self.camera_offset_y + self.boss[i].col_main4_y,self.boss[i].col_main4_w,self.boss[i].col_main4_h,self.blinking_color[pyxel.frame_count // 8 % 10]) 
         if self.boss[i].col_main5_w != 0: #本体当たり判定5の表示 当たり判定の横幅が0の場合はスキップして表示しない
-            pyxel.rectb(self.boss[i].posx + self.boss[i].col_main5_x,self.boss[i].posy + self.boss[i].col_main5_y,self.boss[i].col_main5_w,self.boss[i].col_main5_h,self.blinking_color[pyxel.frame_count // 8 % 10])
+            pyxel.rectb(self.boss[i].posx + self.boss[i].col_main5_x,self.boss[i].posy - self.camera_offset_y + self.boss[i].col_main5_y,self.boss[i].col_main5_w,self.boss[i].col_main5_h,self.blinking_color[pyxel.frame_count // 8 % 10])
         if self.boss[i].col_main6_w != 0: #本体当たり判定6の表示 当たり判定の横幅が0の場合はスキップして表示しない
-            pyxel.rectb(self.boss[i].posx + self.boss[i].col_main6_x,self.boss[i].posy + self.boss[i].col_main6_y,self.boss[i].col_main6_w,self.boss[i].col_main6_h,self.blinking_color[pyxel.frame_count // 8 % 10])    
+            pyxel.rectb(self.boss[i].posx + self.boss[i].col_main6_x,self.boss[i].posy - self.camera_offset_y + self.boss[i].col_main6_y,self.boss[i].col_main6_w,self.boss[i].col_main6_h,self.blinking_color[pyxel.frame_count // 8 % 10])    
         if self.boss[i].col_main7_w != 0: #本体当たり判定7の表示 当たり判定の横幅が0の場合はスキップして表示しない
-            pyxel.rectb(self.boss[i].posx + self.boss[i].col_main7_x,self.boss[i].posy + self.boss[i].col_main7_y,self.boss[i].col_main7_w,self.boss[i].col_main7_h,self.blinking_color[pyxel.frame_count // 8 % 10])
+            pyxel.rectb(self.boss[i].posx + self.boss[i].col_main7_x,self.boss[i].posy - self.camera_offset_y + self.boss[i].col_main7_y,self.boss[i].col_main7_w,self.boss[i].col_main7_h,self.blinking_color[pyxel.frame_count // 8 % 10])
         if self.boss[i].col_main8_w != 0: #本体当たり判定8の表示 当たり判定の横幅が0の場合はスキップして表示しない
-            pyxel.rectb(self.boss[i].posx + self.boss[i].col_main8_x,self.boss[i].posy + self.boss[i].col_main8_y,self.boss[i].col_main8_w,self.boss[i].col_main8_h,self.blinking_color[pyxel.frame_count // 8 % 10])    
+            pyxel.rectb(self.boss[i].posx + self.boss[i].col_main8_x,self.boss[i].posy - self.camera_offset_y + self.boss[i].col_main8_y,self.boss[i].col_main8_w,self.boss[i].col_main8_h,self.blinking_color[pyxel.frame_count // 8 % 10])    
             
         if self.boss[i].parts1_flag == 1:#パーツ1が健在なら表示する
-            pyxel.rectb(self.boss[i].posx + self.boss[i].col_parts1_x,self.boss[i].posy + self.boss[i].col_parts1_y,self.boss[i].col_parts1_w,self.boss[i].col_parts1_h,self.red_flash_color[pyxel.frame_count // 8 % 10])
+            pyxel.rectb(self.boss[i].posx + self.boss[i].col_parts1_x,self.boss[i].posy - self.camera_offset_y + self.boss[i].col_parts1_y,self.boss[i].col_parts1_w,self.boss[i].col_parts1_h,self.red_flash_color[pyxel.frame_count // 8 % 10])
         if self.boss[i].parts2_flag == 1:#パーツ2が健在なら表示する
-            pyxel.rectb(self.boss[i].posx + self.boss[i].col_parts2_x,self.boss[i].posy + self.boss[i].col_parts2_y,self.boss[i].col_parts2_w,self.boss[i].col_parts2_h,self.green_flash_color[pyxel.frame_count // 8 % 10])
+            pyxel.rectb(self.boss[i].posx + self.boss[i].col_parts2_x,self.boss[i].posy - self.camera_offset_y + self.boss[i].col_parts2_y,self.boss[i].col_parts2_w,self.boss[i].col_parts2_h,self.green_flash_color[pyxel.frame_count // 8 % 10])
         if self.boss[i].parts3_flag == 1:#パーツ3が健在なら表示する
-            pyxel.rectb(self.boss[i].posx + self.boss[i].col_parts3_x,self.boss[i].posy + self.boss[i].col_parts3_y,self.boss[i].col_parts3_w,self.boss[i].col_parts3_h,self.yellow_flash_color[pyxel.frame_count // 8 % 10])
+            pyxel.rectb(self.boss[i].posx + self.boss[i].col_parts3_x,self.boss[i].posy - self.camera_offset_y + self.boss[i].col_parts3_y,self.boss[i].col_parts3_w,self.boss[i].col_parts3_h,self.yellow_flash_color[pyxel.frame_count // 8 % 10])
         if self.boss[i].parts4_flag == 1:#パーツ4が健在なら表示する
-            pyxel.rectb(self.boss[i].posx + self.boss[i].col_parts4_x,self.boss[i].posy + self.boss[i].col_parts4_y,self.boss[i].col_parts4_w,self.boss[i].col_parts4_h,self.monochrome_flash_color[pyxel.frame_count // 8 % 15])
+            pyxel.rectb(self.boss[i].posx + self.boss[i].col_parts4_x,self.boss[i].posy - self.camera_offset_y + self.boss[i].col_parts4_y,self.boss[i].col_parts4_w,self.boss[i].col_parts4_h,self.monochrome_flash_color[pyxel.frame_count // 8 % 15])
         if self.boss[i].parts5_flag == 1:#パーツ5が健在なら表示する
-            pyxel.rectb(self.boss[i].posx + self.boss[i].col_parts5_x,self.boss[i].posy + self.boss[i].col_parts5_y,self.boss[i].col_parts5_w,self.boss[i].col_parts5_h,self.red_flash_color[pyxel.frame_count // 8 % 10])
+            pyxel.rectb(self.boss[i].posx + self.boss[i].col_parts5_x,self.boss[i].posy - self.camera_offset_y + self.boss[i].col_parts5_y,self.boss[i].col_parts5_w,self.boss[i].col_parts5_h,self.red_flash_color[pyxel.frame_count // 8 % 10])
         if self.boss[i].parts6_flag == 1:#パーツ6が健在なら表示する
-            pyxel.rectb(self.boss[i].posx + self.boss[i].col_parts6_x,self.boss[i].posy + self.boss[i].col_parts6_y,self.boss[i].col_parts6_w,self.boss[i].col_parts6_h,self.green_flash_color[pyxel.frame_count // 8 % 10])
+            pyxel.rectb(self.boss[i].posx + self.boss[i].col_parts6_x,self.boss[i].posy - self.camera_offset_y + self.boss[i].col_parts6_y,self.boss[i].col_parts6_w,self.boss[i].col_parts6_h,self.green_flash_color[pyxel.frame_count // 8 % 10])
         if self.boss[i].parts7_flag == 1:#パーツ7が健在なら表示する
-            pyxel.rectb(self.boss[i].posx + self.boss[i].col_parts7_x,self.boss[i].posy + self.boss[i].col_parts7_y,self.boss[i].col_parts7_w,self.boss[i].col_parts7_h,self.yellow_flash_color[pyxel.frame_count // 8 % 10])
+            pyxel.rectb(self.boss[i].posx + self.boss[i].col_parts7_x,self.boss[i].posy - self.camera_offset_y + self.boss[i].col_parts7_y,self.boss[i].col_parts7_w,self.boss[i].col_parts7_h,self.yellow_flash_color[pyxel.frame_count // 8 % 10])
         if self.boss[i].parts8_flag == 1:#パーツ8が健在なら表示する
-            pyxel.rectb(self.boss[i].posx + self.boss[i].col_parts8_x,self.boss[i].posy + self.boss[i].col_parts8_y,self.boss[i].col_parts8_w,self.boss[i].col_parts8_h,self.monochrome_flash_color[pyxel.frame_count // 8 % 15])
+            pyxel.rectb(self.boss[i].posx + self.boss[i].col_parts8_x,self.boss[i].posy - self.camera_offset_y + self.boss[i].col_parts8_y,self.boss[i].col_parts8_w,self.boss[i].col_parts8_h,self.monochrome_flash_color[pyxel.frame_count // 8 % 15])
         if self.boss[i].parts9_flag == 1:#パーツ9が健在なら表示する
-            pyxel.rectb(self.boss[i].posx + self.boss[i].col_parts9_x,self.boss[i].posy + self.boss[i].col_parts9_y,self.boss[i].col_parts9_w,self.boss[i].col_parts9_h,self.yellow_flash_color[pyxel.frame_count // 8 % 10])
-            
+            pyxel.rectb(self.boss[i].posx + self.boss[i].col_parts9_x,self.boss[i].posy - self.camera_offset_y + self.boss[i].col_parts9_y,self.boss[i].col_parts9_w,self.boss[i].col_parts9_h,self.yellow_flash_color[pyxel.frame_count // 8 % 10])
             
         if self.boss[i].col_damage_point1_w != 0: #ボスのダメージポイント(弱点)1の表示 当たり判定の横幅が0の場合はスキップして表示しない
-            pyxel.rectb(self.boss[i].posx + self.boss[i].col_damage_point1_x,self.boss[i].posy + self.boss[i].col_damage_point1_y,self.boss[i].col_damage_point1_w,self.boss[i].col_damage_point1_h,self.rainbow_flash_color[pyxel.frame_count // 3 % 15])
+            pyxel.rectb(self.boss[i].posx + self.boss[i].col_damage_point1_x,self.boss[i].posy - self.camera_offset_y + self.boss[i].col_damage_point1_y,self.boss[i].col_damage_point1_w,self.boss[i].col_damage_point1_h,self.rainbow_flash_color[pyxel.frame_count // 3 % 15])
         if self.boss[i].col_damage_point2_w != 0: #ボスのダメージポイント(弱点)2の表示 当たり判定の横幅が0の場合はスキップして表示しない
-            pyxel.rectb(self.boss[i].posx + self.boss[i].col_damage_point2_x,self.boss[i].posy + self.boss[i].col_damage_point2_y,self.boss[i].col_damage_point2_w,self.boss[i].col_damage_point2_h,self.rainbow_flash_color[pyxel.frame_count // 3 % 15])
+            pyxel.rectb(self.boss[i].posx + self.boss[i].col_damage_point2_x,self.boss[i].posy - self.camera_offset_y + self.boss[i].col_damage_point2_y,self.boss[i].col_damage_point2_w,self.boss[i].col_damage_point2_h,self.rainbow_flash_color[pyxel.frame_count // 3 % 15])
         if self.boss[i].col_damage_point3_w != 0: #ボスのダメージポイント(弱点)3の表示 当たり判定の横幅が0の場合はスキップして表示しない
-            pyxel.rectb(self.boss[i].posx + self.boss[i].col_damage_point3_x,self.boss[i].posy + self.boss[i].col_damage_point3_y,self.boss[i].col_damage_point3_w,self.boss[i].col_damage_point3_h,self.rainbow_flash_color[pyxel.frame_count // 3 % 15])
+            pyxel.rectb(self.boss[i].posx + self.boss[i].col_damage_point3_x,self.boss[i].posy - self.camera_offset_y + self.boss[i].col_damage_point3_y,self.boss[i].col_damage_point3_w,self.boss[i].col_damage_point3_h,self.rainbow_flash_color[pyxel.frame_count // 3 % 15])
         if self.boss[i].col_damage_point4_w != 0: #ボスのダメージポイント(弱点)4の表示 当たり判定の横幅が0の場合はスキップして表示しない
-            pyxel.rectb(self.boss[i].posx + self.boss[i].col_damage_point4_x,self.boss[i].posy + self.boss[i].col_damage_point4_y,self.boss[i].col_damage_point4_w,self.boss[i].col_damage_point4_h,self.rainbow_flash_color[pyxel.frame_count // 3 % 15])
+            pyxel.rectb(self.boss[i].posx + self.boss[i].col_damage_point4_x,self.boss[i].posy - self.camera_offset_y + self.boss[i].col_damage_point4_y,self.boss[i].col_damage_point4_w,self.boss[i].col_damage_point4_h,self.rainbow_flash_color[pyxel.frame_count // 3 % 15])
 
     #爆発パターンの表示
     def draw_explosion(self,disp_priority):
@@ -434,42 +434,42 @@ class graph:
         for i in reversed(range(explosioncount)):
             if self.explosions[i].priority == disp_priority: #指定されたプライオリティナンバーの爆発だけ表示する
                 if    self.explosions[i].explosion_type == EXPLOSION_NORMAL:#敵爆発の通常タイプの爆発パターン表示
-                    pyxel.blt(self.explosions[i].posx,self.explosions[i].posy,IMG2,136 -(self.explosions[i].explosion_count * 8)      ,0,  SIZE_8,SIZE_8,0)
+                    pyxel.blt(self.explosions[i].posx,self.explosions[i].posy - self.camera_offset_y,IMG2,136 -(self.explosions[i].explosion_count * 8)      ,0,  SIZE_8,SIZE_8,0)
                 elif  self.explosions[i].explosion_type == EXPLOSION_MIDDLE:#スクランブルハッチや重爆撃機系の敵を倒したときの中くらいの爆発パターン
-                    pyxel.blt(self.explosions[i].posx,self.explosions[i].posy,IMG2,48  -(self.explosions[i].explosion_count // 2 * 16),176,SIZE_16,SIZE_16 * self.explosions[i].y_reverse,0)
+                    pyxel.blt(self.explosions[i].posx,self.explosions[i].posy - self.camera_offset_y,IMG2,48  -(self.explosions[i].explosion_count // 2 * 16),176,SIZE_16,SIZE_16 * self.explosions[i].y_reverse,0)
                 elif  self.explosions[i].explosion_type == EXPLOSION_MY_SHIP:#自機爆発の爆発パターン表示
-                    pyxel.blt(self.explosions[i].posx,self.explosions[i].posy,IMG2,240 -(self.explosions[i].explosion_count // 8 * 16),240, SIZE_16,SIZE_8,0)
+                    pyxel.blt(self.explosions[i].posx,self.explosions[i].posy - self.camera_offset_y,IMG2,240 -(self.explosions[i].explosion_count // 8 * 16),240, SIZE_16,SIZE_8,0)
 
     #パーティクルの表示
     def draw_particle(self):
         particlecount = len(self.particle)
         for i in reversed(range(particlecount)):
             if self.particle[i].particle_type == PARTICLE_DOT: #パーティクルタイプ 1~2ドット描画タイプ
-                pyxel.pset(self.particle[i].posx,self.particle[i].posy,int(self.particle[i].color)) #正方形1ドット分のパーティクルを描画
+                pyxel.pset(self.particle[i].posx,self.particle[i].posy - self.camera_offset_y,int(self.particle[i].color)) #正方形1ドット分のパーティクルを描画
                 if self.particle[i].size > 0: #sizeが0より大きかったら横長2ドット分のパーティクルを描画する
-                    pyxel.pset(self.particle[i].posx + 1,self.particle[i].posy,int(self.particle[i].color))
+                    pyxel.pset(self.particle[i].posx + 1,self.particle[i].posy - self.camera_offset_y,int(self.particle[i].color))
                     
             elif self.particle[i].particle_type == PARTICLE_LINE or\
                 self.particle[i].particle_type == PARTICLE_FIRE_SPARK: #パーティクルタイプ ラインタイプまたは大気圏突入時の火花タイプ
-                pyxel.pset(self.particle[i].posx,self.particle[i].posy,int(self.particle[i].color)) #正方形1ドット分のパーティクルを描画
+                pyxel.pset(self.particle[i].posx,self.particle[i].posy - self.camera_offset_y,int(self.particle[i].color)) #正方形1ドット分のパーティクルを描画
                 
             elif self.particle[i].particle_type == PARTICLE_CIRCLE: #パーティクルタイプ 円形パーティクルタイプ
-                pyxel.circ(self.particle[i].posx,self.particle[i].posy,self.particle[i].size,self.particle[i].color) #半径size分の円形パーティクルを描画
+                pyxel.circ(self.particle[i].posx,self.particle[i].posy - self.camera_offset_y,self.particle[i].size,self.particle[i].color) #半径size分の円形パーティクルを描画
                 
             elif self.particle[i].particle_type == PARTICLE_MISSILE_DEBRIS: #パーティクルタイプ ミサイルの破片
-                pyxel.blt(self.particle[i].posx,self.particle[i].posy,IMG2,184 + (7 - self.particle[i].life) * 8,0, 8,8, 0) #ミサイル破片デブリをlifeの値をアニメーションパターンオフセット値としてスプライト表示する
+                pyxel.blt(self.particle[i].posx,self.particle[i].posy - self.camera_offset_y,IMG2,184 + (7 - self.particle[i].life) * 8,0, 8,8, 0) #ミサイル破片デブリをlifeの値をアニメーションパターンオフセット値としてスプライト表示する
                 
             elif self.particle[i].particle_type == PARTICLE_BOSS_DEBRIS1: #パーティクルタイプ ボスの破片その1
-                pyxel.blt(self.particle[i].posx,self.particle[i].posy,IMG2,160 + (12 - (self.particle[i].life % 12)) * 8,216, 8,8, 0) #ボス破片デブリ1をlifeの値をアニメーションパターンオフセット値としてスプライト表示する
+                pyxel.blt(self.particle[i].posx,self.particle[i].posy - self.camera_offset_y,IMG2,160 + (12 - (self.particle[i].life % 12)) * 8,216, 8,8, 0) #ボス破片デブリ1をlifeの値をアニメーションパターンオフセット値としてスプライト表示する
                 
             elif self.particle[i].particle_type == PARTICLE_BOSS_DEBRIS2: #パーティクルタイプ ボスの破片その2
-                pyxel.blt(self.particle[i].posx,self.particle[i].posy,IMG2,160 + (6 - (self.particle[i].life % 6)) * 8,208, 8,8, 0) #ボス破片デブリ2をlifeの値をアニメーションパターンオフセット値としてスプライト表示する
+                pyxel.blt(self.particle[i].posx,self.particle[i].posy - self.camera_offset_y,IMG2,160 + (6 - (self.particle[i].life % 6)) * 8,208, 8,8, 0) #ボス破片デブリ2をlifeの値をアニメーションパターンオフセット値としてスプライト表示する
                 
             elif self.particle[i].particle_type == PARTICLE_BOSS_DEBRIS3: #パーティクルタイプ ボスの破片その3
-                pyxel.blt(self.particle[i].posx,self.particle[i].posy,IMG2,160 + (12 - (self.particle[i].life % 12)) * 8,200, 8,8, 0) #ボス破片デブリ3をlifeの値をアニメーションパターンオフセット値としてスプライト表示する
+                pyxel.blt(self.particle[i].posx,self.particle[i].posy - self.camera_offset_y,IMG2,160 + (12 - (self.particle[i].life % 12)) * 8,200, 8,8, 0) #ボス破片デブリ3をlifeの値をアニメーションパターンオフセット値としてスプライト表示する
                 
             elif self.particle[i].particle_type == PARTICLE_BOSS_DEBRIS4: #パーティクルタイプ ボスの破片その4
-                pyxel.blt(self.particle[i].posx,self.particle[i].posy,IMG2,192 + (8 - (self.particle[i].life % 8)) * 8,192, 8,8, 0) #ボス破片デブリ4をlifeの値をアニメーションパターンオフセット値としてスプライト表示する
+                pyxel.blt(self.particle[i].posx,self.particle[i].posy - self.camera_offset_y,IMG2,192 + (8 - (self.particle[i].life % 8)) * 8,192, 8,8, 0) #ボス破片デブリ4をlifeの値をアニメーションパターンオフセット値としてスプライト表示する
 
     #背景オブジェクトの表示
     def draw_background_object(self):
@@ -577,34 +577,34 @@ class graph:
         obtain_item_count = len(self.obtain_item)
         for i in reversed(range(obtain_item_count)):
             if    self.obtain_item[i].item_type == ITEM_SHOT_POWER_UP:            #ショットパワーアップカプセル（赤）の表示
-                pyxel.blt(self.obtain_item[i].posx,self.obtain_item[i].posy,IMG2, pyxel.frame_count // 8  % 8 * 8     ,224,    8,8,0)
+                pyxel.blt(self.obtain_item[i].posx,self.obtain_item[i].posy - self.camera_offset_y,IMG2, pyxel.frame_count // 8  % 8 * 8     ,224,    8,8,0)
             elif  self.obtain_item[i].item_type == ITEM_MISSILE_POWER_UP:         #ミサイルパワーアップカプセル（緑）の表示
-                pyxel.blt(self.obtain_item[i].posx,self.obtain_item[i].posy,IMG2, pyxel.frame_count // 8  % 8 * 8 + 64 ,224,    8,8,0)
+                pyxel.blt(self.obtain_item[i].posx,self.obtain_item[i].posy - self.camera_offset_y,IMG2, pyxel.frame_count // 8  % 8 * 8 + 64 ,224,    8,8,0)
             elif  self.obtain_item[i].item_type == ITEM_SHIELD_POWER_UP:          #シールドパワーアップカプセル（青）の表示
-                pyxel.blt(self.obtain_item[i].posx,self.obtain_item[i].posy,IMG2, pyxel.frame_count // 8  % 8 * 8 + 128,224,    8,8,0)
+                pyxel.blt(self.obtain_item[i].posx,self.obtain_item[i].posy - self.camera_offset_y,IMG2, pyxel.frame_count // 8  % 8 * 8 + 128,224,    8,8,0)
                 
             elif  self.obtain_item[i].item_type == ITEM_CLAW_POWER_UP:            #クローパワーアップカプセル （黄）の表示
-                pyxel.blt(self.obtain_item[i].posx,self.obtain_item[i].posy,IMG2, pyxel.frame_count // 8  % 8 * 8     ,232,    8,8,0)
+                pyxel.blt(self.obtain_item[i].posx,self.obtain_item[i].posy - self.camera_offset_y,IMG2, pyxel.frame_count // 8  % 8 * 8     ,232,    8,8,0)
                 
             elif  self.obtain_item[i].item_type == ITEM_SCORE_STAR:               #スコアスター(得点アイテム)の表示
-                pyxel.blt(self.obtain_item[i].posx,self.obtain_item[i].posy,IMG2,    64,72,    8,8,0)
+                pyxel.blt(self.obtain_item[i].posx,self.obtain_item[i].posy - self.camera_offset_y,IMG2,    64,72,    8,8,0)
             elif  self.obtain_item[i].item_type == ITEM_TRIANGLE_POWER_UP:        #トライアングルアイテム(正三角形)ショット、ミサイル、シールドの表示
                 graph.draw_obtain_item_triangle_item(self,i)
                 
             elif  self.obtain_item[i].item_type == ITEM_TAIL_SHOT_POWER_UP:       #テイルショットカプセルの表示
-                pyxel.blt(self.obtain_item[i].posx,self.obtain_item[i].posy,IMG2,    64,232,    8,8,13)
+                pyxel.blt(self.obtain_item[i].posx,self.obtain_item[i].posy - self.camera_offset_y,IMG2,    64,232,    8,8,13)
                 graph.draw_obtain_item_rotation_box(self,i)
             elif  self.obtain_item[i].item_type == ITEM_PENETRATE_ROCKET_POWER_UP:#ペネトレートロケットカプセルの表示
-                pyxel.blt(self.obtain_item[i].posx,self.obtain_item[i].posy,IMG2,    72,232,    8,8,13)
+                pyxel.blt(self.obtain_item[i].posx,self.obtain_item[i].posy - self.camera_offset_y,IMG2,    72,232,    8,8,13)
                 graph.draw_obtain_item_rotation_box(self,i)
             elif  self.obtain_item[i].item_type == ITEM_SEARCH_LASER_POWER_UP:    #サーチレーザーカプセルの表示
-                pyxel.blt(self.obtain_item[i].posx,self.obtain_item[i].posy,IMG2,    80,232,    8,8,13)
+                pyxel.blt(self.obtain_item[i].posx,self.obtain_item[i].posy - self.camera_offset_y,IMG2,    80,232,    8,8,13)
                 graph.draw_obtain_item_rotation_box(self,i)
             elif  self.obtain_item[i].item_type == ITEM_HOMING_MISSILE_POWER_UP:  #ホーミングミサイルカプセルの表示
-                pyxel.blt(self.obtain_item[i].posx,self.obtain_item[i].posy,IMG2,    88,232,    8,8,13)
+                pyxel.blt(self.obtain_item[i].posx,self.obtain_item[i].posy - self.camera_offset_y,IMG2,    88,232,    8,8,13)
                 graph.draw_obtain_item_rotation_box(self,i)
             elif  self.obtain_item[i].item_type == ITEM_SHOCK_BUMPER_POWER_UP:    #ショックバンパーカプセルの表示
-                pyxel.blt(self.obtain_item[i].posx,self.obtain_item[i].posy,IMG2,    96,232,    8,8,13)
+                pyxel.blt(self.obtain_item[i].posx,self.obtain_item[i].posy - self.camera_offset_y,IMG2,    96,232,    8,8,13)
                 graph.draw_obtain_item_rotation_box(self,i)
 
     #パワーアップアイテムの回転する四角形外枠の描画表示
@@ -639,10 +639,10 @@ class graph:
         roty4 = x4 * math.sin(math.radians(self.obtain_item[i].degree)) + y4 * math.cos(math.radians(self.obtain_item[i].degree))
         
         #アイテムの座標を中心として回転四角形を描画する
-        pyxel.line(self.obtain_item[i].posx +3 + rotx1,self.obtain_item[i].posy + 3 + roty1,self.obtain_item[i].posx + 3 + rotx2,self.obtain_item[i].posy + 3 + roty2, self.blinking_color[pyxel.frame_count // 8 % 10])
-        pyxel.line(self.obtain_item[i].posx +3 + rotx2,self.obtain_item[i].posy + 3 + roty2,self.obtain_item[i].posx + 3 + rotx3,self.obtain_item[i].posy + 3 + roty3, self.blinking_color[pyxel.frame_count // 8 % 10])
-        pyxel.line(self.obtain_item[i].posx +3 + rotx3,self.obtain_item[i].posy + 3 + roty3,self.obtain_item[i].posx + 3 + rotx4,self.obtain_item[i].posy + 3 + roty4, self.blinking_color[pyxel.frame_count // 8 % 10])
-        pyxel.line(self.obtain_item[i].posx +3 + rotx4,self.obtain_item[i].posy + 3 + roty4,self.obtain_item[i].posx + 3 + rotx1,self.obtain_item[i].posy + 3 + roty1, self.blinking_color[pyxel.frame_count // 8 % 10])
+        pyxel.line(self.obtain_item[i].posx +3 + rotx1,self.obtain_item[i].posy  - self.camera_offset_y+ 3 + roty1,self.obtain_item[i].posx + 3 + rotx2,self.obtain_item[i].posy - self.camera_offset_y+ 3 + roty2, self.blinking_color[pyxel.frame_count // 8 % 10])
+        pyxel.line(self.obtain_item[i].posx +3 + rotx2,self.obtain_item[i].posy  - self.camera_offset_y+ 3 + roty2,self.obtain_item[i].posx + 3 + rotx3,self.obtain_item[i].posy - self.camera_offset_y+ 3 + roty3, self.blinking_color[pyxel.frame_count // 8 % 10])
+        pyxel.line(self.obtain_item[i].posx +3 + rotx3,self.obtain_item[i].posy  - self.camera_offset_y+ 3 + roty3,self.obtain_item[i].posx + 3 + rotx4,self.obtain_item[i].posy - self.camera_offset_y+ 3 + roty4, self.blinking_color[pyxel.frame_count // 8 % 10])
+        pyxel.line(self.obtain_item[i].posx +3 + rotx4,self.obtain_item[i].posy  - self.camera_offset_y+ 3 + roty4,self.obtain_item[i].posx + 3 + rotx1,self.obtain_item[i].posy - self.camera_offset_y+ 3 + roty1, self.blinking_color[pyxel.frame_count // 8 % 10])
 
     #トライアングルアイテム（ショット、ミサイル、シールド）の表示
     def draw_obtain_item_triangle_item(self,i): #iはobtain_itemクラスのインデックス値となります
@@ -682,31 +682,31 @@ class graph:
         if self.obtain_item[i].status == 0 or self.obtain_item[i].status == 1:#「画面スクロールに合わせて左に流れる状態」「アイテム取得時の高速回転状態」の時
             d = abs(math.sqrt((self.obtain_item[i].posx - self.my_x) * (self.obtain_item[i].posx - self.my_x) + (self.obtain_item[i].posy - self.my_y) * (self.obtain_item[i].posy - self.my_y)))#dに自機からアイテムまでの距離が入る
             if d > self.obtain_item[i].radius + self.expansion_shrink_number[self.stage_count // 3 % 37]:#離れている距離数がトライアングルアイテムの回転半径より大きい場合は三角形の外なので普通のライン描画
-                pyxel.line(self.obtain_item[i].posx + ax,self.obtain_item[i].posy + ay,self.obtain_item[i].posx + bx,self.obtain_item[i].posy + by, self.blinking_color[pyxel.frame_count // 8 % 10])
-                pyxel.line(self.obtain_item[i].posx + bx,self.obtain_item[i].posy + by,self.obtain_item[i].posx + cx,self.obtain_item[i].posy + cy, self.blinking_color[pyxel.frame_count // 8 % 10])
-                pyxel.line(self.obtain_item[i].posx + cx,self.obtain_item[i].posy + cy,self.obtain_item[i].posx + ax,self.obtain_item[i].posy + ay, self.blinking_color[pyxel.frame_count // 8 % 10])
+                pyxel.line(self.obtain_item[i].posx + ax,self.obtain_item[i].posy - self.camera_offset_y + ay,self.obtain_item[i].posx + bx,self.obtain_item[i].posy - self.camera_offset_y+ by, self.blinking_color[pyxel.frame_count // 8 % 10])
+                pyxel.line(self.obtain_item[i].posx + bx,self.obtain_item[i].posy - self.camera_offset_y + by,self.obtain_item[i].posx + cx,self.obtain_item[i].posy - self.camera_offset_y+ cy, self.blinking_color[pyxel.frame_count // 8 % 10])
+                pyxel.line(self.obtain_item[i].posx + cx,self.obtain_item[i].posy - self.camera_offset_y + cy,self.obtain_item[i].posx + ax,self.obtain_item[i].posy - self.camera_offset_y+ ay, self.blinking_color[pyxel.frame_count // 8 % 10])
                 #ショット赤玉表示 範囲外なので玉の回転アニメーションはしない
-                pyxel.blt(self.obtain_item[i].posx + ax -4,self.obtain_item[i].posy + ay -4,IMG2,  0,224,    8,8,0)
+                pyxel.blt(self.obtain_item[i].posx + ax -4,self.obtain_item[i].posy - self.camera_offset_y + ay -4,IMG2,  0,224,    8,8,0)
                 #ミサイル緑玉表示
-                pyxel.blt(self.obtain_item[i].posx + bx -4,self.obtain_item[i].posy + by -4,IMG2, 64,224,    8,8,0)
+                pyxel.blt(self.obtain_item[i].posx + bx -4,self.obtain_item[i].posy - self.camera_offset_y + by -4,IMG2, 64,224,    8,8,0)
                 #シールド青玉表示
-                pyxel.blt(self.obtain_item[i].posx + cx -4,self.obtain_item[i].posy + cy -4,IMG2,128,224,    8,8,0)
+                pyxel.blt(self.obtain_item[i].posx + cx -4,self.obtain_item[i].posy - self.camera_offset_y + cy -4,IMG2,128,224,    8,8,0)
             else:#範囲内なので塗りつぶし三角描画
-                pyxel.tri(self.obtain_item[i].posx + ax,self.obtain_item[i].posy + ay,self.obtain_item[i].posx + bx,self.obtain_item[i].posy + by,self.obtain_item[i].posx + cx,self.obtain_item[i].posy + cy,self.blinking_color[pyxel.frame_count // 8 % 10])
+                pyxel.tri(self.obtain_item[i].posx + ax,self.obtain_item[i].posy - self.camera_offset_y + ay,self.obtain_item[i].posx + bx,self.obtain_item[i].posy - self.camera_offset_y+ by,self.obtain_item[i].posx + cx,self.obtain_item[i].posy - self.camera_offset_y+ cy,self.blinking_color[pyxel.frame_count // 8 % 10])
                 
                 #ショット赤玉表示 範囲内なので玉の回転アニメーションを行う
-                pyxel.blt(self.obtain_item[i].posx + ax -4,self.obtain_item[i].posy + ay -4,IMG2, pyxel.frame_count % 8 * 8     ,224,    8,8,0)
+                pyxel.blt(self.obtain_item[i].posx + ax -4,self.obtain_item[i].posy - self.camera_offset_y + ay -4,IMG2, pyxel.frame_count % 8 * 8     ,224,    8,8,0)
                 #ミサイル緑玉表示
-                pyxel.blt(self.obtain_item[i].posx + bx -4,self.obtain_item[i].posy + by -4,IMG2, pyxel.frame_count % 8 * 8 + 64 ,224,    8,8,0)
+                pyxel.blt(self.obtain_item[i].posx + bx -4,self.obtain_item[i].posy - self.camera_offset_y + by -4,IMG2, pyxel.frame_count % 8 * 8 + 64 ,224,    8,8,0)
                 #シールド青玉表示
-                pyxel.blt(self.obtain_item[i].posx + cx -4,self.obtain_item[i].posy + cy -4,IMG2, pyxel.frame_count % 8 * 8 + 128,224,    8,8,0)
+                pyxel.blt(self.obtain_item[i].posx + cx -4,self.obtain_item[i].posy - self.camera_offset_y + cy -4,IMG2, pyxel.frame_count % 8 * 8 + 128,224,    8,8,0)
         elif self.obtain_item[i].status == 2: #「取得アニメーション中」の時
             #ショット赤消滅アニメーション
-            pyxel.blt(self.obtain_item[i].posx + ax -4,self.obtain_item[i].posy + ay -4,IMG2, 184 + self.obtain_item[i].animation_number * 8,232,    8,8,0)
+            pyxel.blt(self.obtain_item[i].posx + ax -4,self.obtain_item[i].posy - self.camera_offset_y + ay -4,IMG2, 184 + self.obtain_item[i].animation_number * 8,232,    8,8,0)
             #ミサイル緑消滅アニメーション
-            pyxel.blt(self.obtain_item[i].posx + bx -4,self.obtain_item[i].posy + by -4,IMG2, 184 + self.obtain_item[i].animation_number * 8,232,    8,8,0)
+            pyxel.blt(self.obtain_item[i].posx + bx -4,self.obtain_item[i].posy - self.camera_offset_y + by -4,IMG2, 184 + self.obtain_item[i].animation_number * 8,232,    8,8,0)
             #シールド青消滅アニメーション
-            pyxel.blt(self.obtain_item[i].posx + cx -4,self.obtain_item[i].posy + cy -4,IMG2, 184 + self.obtain_item[i].animation_number * 8,232,    8,8,0)
+            pyxel.blt(self.obtain_item[i].posx + cx -4,self.obtain_item[i].posy - self.camera_offset_y + cy -4,IMG2, 184 + self.obtain_item[i].animation_number * 8,232,    8,8,0)
 
     #サブウェポンセレクトゲージの表示（画面上部にいま所持しているサブウェポンアイコンを描画する）
     def draw_sub_weapon_select_gauge(self):

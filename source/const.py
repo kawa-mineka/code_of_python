@@ -491,6 +491,10 @@ STAGE_INTERMEDIATE_FORTRESS   =  7 #ステージ7 中間要塞          Intermed
 STAGE_ESCAPE_FORTRESS         =  8 #ステージ8 要塞脱出          Escape Fortress
 STAGE_BOSS_RUSH               =  9 #ステージ9 連続強敵襲来       Boss Rush
 
+#背景スクロールの種類
+SCROLL_TYPE_TRIPLE_SCROLL_AND_STAR     = 0 #横3重スクロール+星スクロール
+SCROLL_TYPE_8FREEWAY_SCROLL_AND_RASTER = 1 #8方向自由スクロール+ラスタースクロール
+
 #クロー関連の定数定義（主にトレースクロー）
 TRACE_CLAW_COUNT       =  4 #トレースクローの数
 TRACE_CLAW_INTERVAL    = 60 #トレースクローの間隔
@@ -1077,9 +1081,15 @@ MENU_LAYER3                  = 3 #レイヤー数3でメニュー階層は3
 #メニューで選ばれたアイテムの定数定義
 UNSELECTED                   = -1  #まだ未選択なので-1
 
-#火花エフェクトの表示の仕方(大気圏突入シーンなどのエフェクトで使用)
-SPARK_OFF = 0              #火花表示なし
-SPARK_ON  = 1              #火花表示あり
+#背景BGスクロール面を表示するかしないかの定数定義
+FRONT_BG_DISP_OFF   = 0   #BG背景(手前)表示オフ
+FRONT_BG_DISP_ON    = 1   #               オン
+
+CENTER_BG_DISP_OFF  = 0   #BG背景(中央)表示オフ
+CENTER_BG_DISP_ON   = 1   #               オン
+
+BACK_BG_DISP_OFF    = 0   #BG背景(奥)表示オフ
+BACK_BG_DISP_ON     = 1   #             オン
 
 #パワーアップアイテム類のtype定数の定義 obtain_itemクラスのitem_typeに代入されます
 ITEM_SHOT_POWER_UP     = 1      #ショットアイテム
@@ -1118,7 +1128,7 @@ EVENT_MIDDLE_BOSS   = 80 #中ボス出現
 EVENT_WARNING       = 90 #WARNING.警告表示
 EVENT_BOSS          = 100#ボスキャラ出現
 
-#イベントリスト・スクロール制御関連の定数定義
+#イベントリスト・スクロール制御関連の定数定義 EVENT_SCROLLの直後に記述されます 
 SCROLL_NUM_SET               = 0  #スクロール関連のパラメーター設定
 SCROLL_START                 = 1  #スクロール開始
 SCROLL_STOP                  = 2  #スクロールストップ
@@ -1130,31 +1140,32 @@ SCROLL_REVERSE          = 6  #逆スクロール開始
 SCROLL_UP               = 7  #上方向にスクロール開始
 SCROLL_DOWN             = 8  #下方向にスクロール開始
 
-#イベントリスト・雲のスクロール制御関連の定数定義
+#イベントリスト・雲のスクロール制御関連の定数定義 EVENT_CLOUDの直後に記述されます
 CLOUD_NUM_SET          = 0  #雲のパラメータ設定
 CLOUD_START            = 1  #雲を流すのを開始する
 CLOUD_STOP             = 2  #雲を流すのを停止する
 
-#イベントリスト BGスクロールオンオフの制御関連の定数定義
+#イベントリスト BGスクロールオンオフの制御関連の定数定義 EVENT_BG_SCREEN_ON_OFFの直後に記述されます
 BG_BACK   = 0 #BGスクリーン奥
 BG_MIDDLE = 1 #BGスクリーン真ん中
 BG_FRONT  = 2 #BGスクリーン手前
-
-#背景スクロールの種類
-SCROLL_TYPE_TRIPLE_SCROLL_AND_STAR     = 0 #横3重スクロール+星スクロール
-SCROLL_TYPE_8FREEWAY_SCROLL_AND_RASTER = 1 #8方向自由スクロール+ラスタースクロール
 
 #背景の星のスクロールの有無
 STAR_SCROLL_ON      = 1 #星スクロールあり
 STAR_SCROLL_OFF     = 0 #        なし
 
-#背景ラスタスクロールの有無
+#背景ラスタスクロールの有無 EVENT_RASTER_SCROLLの直後に記述されます
 RASTER_SCROLL_ON    = 1 #ラスタースクロールあり
 RASTER_SCROLL_OFF   = 0 #           なし
 
 #背景ラスタスクロールの種類
 RASTER_NORMAL      = 0 #奥と手前のラインごとのスクロールスピードの差で奥行き感を出すタイプ (流れるスピードはスクロールスピードに依存します)
 RASTER_WAVE        = 1 #x軸にたいして波打つラスタースクロールタイプ(x座標オフセット値を加減算して波打つ感じを表現します)
+
+#火花エフェクトの表示の仕方(大気圏突入シーンなどのエフェクトで使用) EVENT_ENTRY_SPARK_ON_OFFの直後に記述されます
+RASTER_SCROLL_ON    = 1 #ラスタースクロールあり
+SPARK_OFF = 0              #火花表示なし
+SPARK_ON  = 1              #火花表示あり
 
 #!敵キャラの名前(タイプナンバー)定数定義####################################
 CIR_COIN           =  1  #無人編隊戦闘機 サーコイン（サークルコイン）

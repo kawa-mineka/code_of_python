@@ -149,11 +149,10 @@ class App:
         
         self.default_boss_number_of_defeat = [0] * 50                               #ボス撃破数デフォルトリストを作製します
         
-        self.my_name               = copy.deepcopy(self.default_my_name)
-        self.medal_list            = copy.deepcopy(self.default_medal_list)
-        self.achievement_list      = copy.deepcopy(self.default_achievement_list)
-        self.boss_number_of_defeat = copy.deepcopy(self.default_boss_number_of_defeat)
-        self.achievement_list      = copy.deepcopy(self.default_achievement_list)
+        self.my_name               = copy.deepcopy(self.default_my_name)               #自分の名前の初期データを深い階層でコピーする
+        self.medal_list            = copy.deepcopy(self.default_medal_list)            #メダルリストの初期データを深い階層でコピーする
+        self.achievement_list      = copy.deepcopy(self.default_achievement_list)      #実績リストの初期データを深い階層でコピーする
+        self.boss_number_of_defeat = copy.deepcopy(self.default_boss_number_of_defeat) #ボスを倒した総数の初期データを深い階層でコピーする
         
         self.development_testtime            = 0  #ゲーム開発時の総テスト時間
         self.one_game_playtime_seconds       = 0  #1プレイでのゲームプレイ時間(秒単位)
@@ -177,6 +176,7 @@ class App:
         
         self.rnd_seed           = 0  #線形合同法で使用する乱数の種を初期化します(r_randintが呼ばれるごとにrnd_seedの中身が変化するので注意！)
         self.master_rnd_seed    = 0  #線形合同法で使用する乱数の種(ゲームスタート時のrnd_seedを保存してリプレイファイル再生時の最初の乱数の種として使用します初期化します
+        
         self.start_stage_number = STAGE_MOUNTAIN_REGION    #スタート時のステージ数を保存する変数をまず初期化
         self.start_stage_loop   = LOOP01                   #スタート時のループ数を保存する変数をまず初期化
         self.start_stage_age    = 0                        #スタート時の年代数を保存する変数をまず初期化
@@ -463,22 +463,22 @@ class App:
             update_collision.ship_to_obtain_item(self) #自機とパワーアップアイテム類の当たり判定（パワーアップゲットしたかな？どうかな？）
             update_collision.ship_to_boss(self)        #自機とボスとの当たり判定を行う関数を呼び出す
             #自機シールドのチェック###############################################
-            update_ship.check_shield(self)         #自機のシールドが残っているのかチェックする関数を呼び出す
+            update_ship.check_shield(self)             #自機のシールドが残っているのかチェックする関数を呼び出す
             #武器発射関連の処理###################################################
-            update_btn.shot_btn(self)              #ショット発射ボタンが押されたかどうか？を調べる関数を呼び出す
-            update_btn.missile_btn(self)           #ミサイル発射ボタンが押されたかどうか？を調べる関数を呼び出す
-            update_btn.claw_shot_btn(self)         #クローが弾を発射するボタンが押された？かどうかを調べる関数を呼び出す
-            update_btn.change_sub_weapon_btn(self) #サブウェポンの切り替えボタンが押されたか？どうかを調べる関数を呼び出す
+            update_btn.shot_btn(self)                  #ショット発射ボタンが押されたかどうか？を調べる関数を呼び出す
+            update_btn.missile_btn(self)               #ミサイル発射ボタンが押されたかどうか？を調べる関数を呼び出す
+            update_btn.claw_shot_btn(self)             #クローが弾を発射するボタンが押された？かどうかを調べる関数を呼び出す
+            update_btn.change_sub_weapon_btn(self)     #サブウェポンの切り替えボタンが押されたか？どうかを調べる関数を呼び出す
             #デバッグモードによる敵や敵弾の追加発生（ボタンを押したら敵が出てくる！？）###################################################
-            # update_debug.enemy_append(self)  #デバッグモードによる敵＆敵弾追加発生
+            update_debug.enemy_append(self)          #デバッグモードによる敵＆敵弾追加発生
             #プレイ時間の計算#####################################################
-            update_status.calc_playtime(self)        #プレイ時間を計算する関数を呼び出す
+            update_status.calc_playtime(self)          #プレイ時間を計算する関数を呼び出す
             #ハイスコアの更新チェック##############################################
-            update_score.check_hi_score(self)  #ハイスコアが更新されているか調べる関数を呼び出す
+            update_score.check_hi_score(self)          #ハイスコアが更新されているか調べる関数を呼び出す
             #タイマーフレア放出###################################################
-            update_obj.timer_flare(self)             #タイマーフレア放出の更新処理関数を呼び出す
+            update_obj.timer_flare(self)               #タイマーフレア放出の更新処理関数を呼び出す
             #大気圏突入時の火花の発生##########################################################
-            update_obj.atmospheric_entry_spark(self) #大気圏突入時の火花を発せさせる関数の呼び出し
+            update_obj.atmospheric_entry_spark(self)   #大気圏突入時の火花を発せさせる関数の呼び出し
         
         if self.game_status == SCENE_BOSS_EXPLOSION:         #「BOSS_EXPLOSION」の時は
             update_item.present_repair_item(self)            #リペアアイテムを出現させる関数の呼び出し
@@ -611,8 +611,8 @@ class App:
                     self.replay_status = REPLAY_STOP      #リプレイの記録はストップさせるようにします
                     self.replay_stage_num = 50            #念のため記録ステージ数は最高の50で丸めておきます
                 
-                if self.stage_number == STAGE_VOLCANIC_BELT:  #ステージ3 火山地帯はまだ未完成なので・・・
-                    self.stage_number = STAGE_MOUNTAIN_REGION #ステージ1 山岳地帯に戻してやります
+                if self.stage_number == STAGE_NIGHT_SKYSCRAPER: #ステージ4 夜間超高層ビル地帯はまだ未完成なので・・・
+                    self.stage_number = STAGE_MOUNTAIN_REGION   #ステージ1 山岳地帯に戻してやります
                     self.stage_loop += 1     #ループ数を1増やします
                     if self.stage_loop >= 4: #4周目以降は作っていないので\\\
                         self.stage_loop = 1  #1周目に戻ります
@@ -621,12 +621,12 @@ class App:
         
         #########ゲーム終了工程開始#################################################################
         if self.game_status == SCENE_GAME_QUIT_START:    #「GAME QUIT START」の時は
-            self.star_scroll_speed = 1                  #星のスクロールスピードを倍率1に戻す
-            self.select_cursor_flag = 0                 #セレクトカーソル移動フラグを降ろす
-            self.cursor_type = CURSOR_TYPE_NO_DISP      #セレクトカーソルの表示をoffにする
+            self.star_scroll_speed = 1                   #星のスクロールスピードを倍率1に戻す
+            self.select_cursor_flag = 0                  #セレクトカーソル移動フラグを降ろす
+            self.cursor_type = CURSOR_TYPE_NO_DISP       #セレクトカーソルの表示をoffにする
             pygame.mixer.music.fadeout(4000)
-            pyxel.playm(4)   #ゲーム終了音楽再生
-            self.game_quit_timer = 420 #終了タイマーセット(420フレーム=7秒)
+            pyxel.playm(4)                               #ゲーム終了音楽再生
+            self.game_quit_timer = 420                   #終了タイマーセット(420フレーム=7秒)
             self.game_status = SCENE_GAME_QUIT_WAIT
             
         elif self.game_status == SCENE_GAME_QUIT_WAIT:   #「GAME QUIT WAIT」の時は
@@ -787,12 +787,13 @@ class App:
                     # pyxel.bltm(-(self.scroll_count // 2) + 1024,0,  0,    0,32,   256,120,    self.bg_transparent_color) #3周目マップ
                     pyxel.bltm(-(self.scroll_count // 2) + 1024,0,  TM0,    0*8,32*8,   256*8,120*8,    self.bg_transparent_color) #3周目マップ
             elif self.stage_number == STAGE_VOLCANIC_BELT:
+                self.camera_offset_y = (self.bg_height - WINDOW_H) * self.my_y / (self.bg_height - SHIP_H) #SHIP_Hは自機の縦幅8ドット
                 if   self.stage_loop == 1:
-                    pyxel.bltm(-(self.scroll_count // 2) + 1024,0,  TM2,    0*8,0*8,    256*8,120*8,    self.bg_transparent_color) #1周目マップ
+                    pyxel.bltm(-(self.scroll_count // 2) + 1024,0,  TM2,    0*8,0*8  + self.camera_offset_y,   256*8,120*8,    self.bg_transparent_color) #1周目マップ
                 elif self.stage_loop == 2:
-                    pyxel.bltm(-(self.scroll_count // 2) + 1024,0,  TM2,    0*8,16*8,   256*8,120*8,    self.bg_transparent_color) #2周目マップ
+                    pyxel.bltm(-(self.scroll_count // 2) + 1024,0,  TM2,    0*8,32*8 + self.camera_offset_y,   256*8,120*8,    self.bg_transparent_color) #2周目マップ
                 elif self.stage_loop == 3:
-                    pyxel.bltm(-(self.scroll_count // 2) + 1024,0,  TM2,    0*8,32*8,   256*8,120*8,    self.bg_transparent_color) #3周目マップ
+                    pyxel.bltm(-(self.scroll_count // 2) + 1024,0,  TM2,    0*8,64*8 + self.camera_offset_y,   256*8,120*8,    self.bg_transparent_color) #3周目マップ
             
             graph.draw_enemy_shot(self,PRIORITY_TOP)        #敵の弾を表示する関数を呼び出す (最前面)-------------------------------------
         #自機、クロー、シールドの表示###############################################
@@ -841,14 +842,14 @@ class App:
             graph.draw_window(self,WINDOW_PRIORITY_1)      #前面から2番目ウィンドウの表示
             graph.draw_window(self,WINDOW_PRIORITY_TOP)    #最前面1番目ウィンドウの表示
             graph.draw_select_cursor(self)                 #セレクトカーソルの表示graph
-            graph.draw_warning_dialog(self)     #WARNINGダイアログの表示
-            graph.draw_stage_clear_dialog(self) #STAGE CLEARダイアログの表示
+            graph.draw_warning_dialog(self)                #WARNINGダイアログの表示
+            graph.draw_stage_clear_dialog(self)            #STAGE CLEARダイアログの表示
             
             # self.draw_dummy_put_bg_xy()  #BG Get&Put dummy test
         
         #一時停止・ポーズメッセージの表示#########################################
         if self.game_status == SCENE_PAUSE:
-            graph.draw_pause_message(self)      #一時停止・ポーズメッセージの表示
+            graph.draw_pause_message(self)            #一時停止・ポーズメッセージの表示
         
         #ゲームオーバー画像の表示##################################################
         if     self.game_status == SCENE_GAME_OVER\

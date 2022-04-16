@@ -633,8 +633,8 @@ class func:
         #bgyがMAPの外に存在するときは強制的にbgyを一番上の座標か一番下の座標にしちゃう(マイナスの値や15より大きいと（まぁ他の面のマップデータにアクセスするのでエラーにはなりませんが・・・）だとエラーになるため)
         if self.bgy < 0:
             self.bgy = 0
-        if self.bgy > 15:
-            self.bgy = 15
+        if self.bgy > 255:
+            self.bgy = 255
         
         if self.stage_loop == 2:
             self.bgy += 16
@@ -659,8 +659,8 @@ class func:
         #bgyがMAPの外に存在するときは強制的にbgyを一番上の座標か一番下の座標にしちゃう(マイナスの値や15より大きいと（まぁ他の面のマップデータにアクセスするのでエラーにはなりませんが・・・）だとエラーになるため)
         if  0 > self.bgy:
             self.bgy = 0
-        if self.bgy > 15:
-            self.bgy = 15
+        if self.bgy > 255:
+            self.bgy = 255
         
         if self.stage_loop == 2:
             self.bgy += 16
@@ -675,9 +675,10 @@ class func:
         
         return(self,x,y,bg_chip,collision_flag)
 
-    #背景マップチップを消去する(0を書き込む) x,yはキャラ単位 x=(0~255) y=(0~15)
+    #背景マップチップを消去する(NULLチップナンバーを書き込む) x,yはキャラ単位 x=(0~255) y=(0~15)
     def delete_map_chip(self,x,y):
-        func.set_chrcode_tilemap(self,self.reference_tilemap,x,y + (self.stage_loop - 1)* 16,0)#マップチップを消去する（0=何もない空白）を書き込む
+        # func.set_chrcode_tilemap(self,self.reference_tilemap,x,y + (self.stage_loop - 1)* 16,0)#マップチップを消去する（0=何もない空白）を書き込む
+        func.set_chrcode_tilemap(self,self.reference_tilemap,x,y + (self.stage_loop - 1)* 16,self.null_bg_chip_num)
 
     #背景(BGタイルマップのキャラチップ)を取得する (8方向フリースクロール専用)
     def get_bg_chip_free_scroll(self,x,y,bg_chip):
@@ -1108,7 +1109,7 @@ class func:
                 )
             self.boss.append(new_boss)      
             
-        elif     self.stage_number == STAGE_ADVANCE_BASE:
+        elif     self.stage_number == STAGE_ADVANCE_BASE or self.stage_number == STAGE_VOLCANIC_BELT:
             new_boss = Boss()
             boss_id = 0
             boss_type = BOSS_FATTY_VALGUARD
@@ -1316,7 +1317,6 @@ class func:
                 return(True)
             else:
                 return(False)
-            
 
     #スコア加算処理
     def add_score(self,point):
@@ -1382,15 +1382,17 @@ class func:
 
     #ステージデータリストから各ステージの設定データを取り出す
     def get_stage_data(self):
-        self.bg_obstacle_y                = self.stage_data_list[self.stage_number - 1][1] #BG障害物とみなすＹ座標位置をリストを参照して取得、変数に代入する
-        self.reference_tilemap            = self.stage_data_list[self.stage_number - 1][2] #BGにアクセスするときどのタイルマップを使用するかの数値をリストを参照して取得、変数に代入する
-        self.scroll_type                  = self.stage_data_list[self.stage_number - 1][3] #スクロールの種類をリストを参照して取得、変数に代入する
-        self.star_scroll_flag             = self.stage_data_list[self.stage_number - 1][4] #背景のスクロールする星々を表示するかのフラグをリストを参照して取得、変数に代入する
-        self.raster_scroll_flag           = self.stage_data_list[self.stage_number - 1][5] #背景のラスタースクロールを表示するかのフラグをリストを参照して取得、変数に代入する
-        self.disp_flag_bg_front           = self.stage_data_list[self.stage_number - 1][6] #BG背景(手前)を表示するかどうかのフラグをリストを参照して取得、変数に代入する
-        self.disp_flag_bg_middle          = self.stage_data_list[self.stage_number - 1][7] #BG背景(中間)を表示するかどうかのフラグをリストを参照して取得、変数に代入する
-        self.disp_flag_bg_back            = self.stage_data_list[self.stage_number - 1][8] #BG背景(奥)を表示するかどうかのフラグをリストを参照して取得、変数に代入する
-        self.atmospheric_entry_spark_flag = self.stage_data_list[self.stage_number - 1][9] #大気圏突入時の火花を発生させるかどうかのフラグをリストを参照して取得、変数に代入する
+        self.bg_obstacle_y                = self.stage_data_list[self.stage_number - 1][ 1] #BG障害物とみなすＹ座標位置をリストを参照して取得、変数に代入する
+        self.reference_tilemap            = self.stage_data_list[self.stage_number - 1][ 2] #BGにアクセスするときどのタイルマップを使用するかの数値をリストを参照して取得、変数に代入する
+        self.scroll_type                  = self.stage_data_list[self.stage_number - 1][ 3] #スクロールの種類をリストを参照して取得、変数に代入する
+        self.star_scroll_flag             = self.stage_data_list[self.stage_number - 1][ 4] #背景のスクロールする星々を表示するかのフラグをリストを参照して取得、変数に代入する
+        self.raster_scroll_flag           = self.stage_data_list[self.stage_number - 1][ 5] #背景のラスタースクロールを表示するかのフラグをリストを参照して取得、変数に代入する
+        self.disp_flag_bg_front           = self.stage_data_list[self.stage_number - 1][ 6] #BG背景(手前)を表示するかどうかのフラグをリストを参照して取得、変数に代入する
+        self.disp_flag_bg_middle          = self.stage_data_list[self.stage_number - 1][ 7] #BG背景(中間)を表示するかどうかのフラグをリストを参照して取得、変数に代入する
+        self.disp_flag_bg_back            = self.stage_data_list[self.stage_number - 1][ 8] #BG背景(奥)を表示するかどうかのフラグをリストを参照して取得、変数に代入する
+        self.atmospheric_entry_spark_flag = self.stage_data_list[self.stage_number - 1][ 9] #大気圏突入時の火花を発生させるかどうかのフラグをリストを参照して取得、変数に代入する
+        self.null_bg_chip_num             = self.stage_data_list[self.stage_number - 1][10] #背景マップチップを消去するときに使うチップ番号をリストを参照して取得、変数に代入する
+        self.bg_height                    = self.stage_data_list[self.stage_number - 1][11] #縦自由スクロールステージにおける背景の縦の高さ(BackGroundHeight)(自機はこのドット分だけBGマップを縦方向に自由に移動できると考えてくださいですの)をリストを参照して取得、変数に代入する
 
     #ランクダウンさせる関数
     def rank_down(self):
@@ -3677,4 +3679,5 @@ class func:
             self.point_inside_triangle_flag = 1 #三角形の内側に点があった！のでフラグをon
         else:
             self.point_inside_triangle_flag = 0 #三角形の外側だった・・・・のでフラグをoff   
+
     #自機を追尾してくる敵キャラ用のvx,vyの増分とdir（方向）を求める関数   まだ未完成

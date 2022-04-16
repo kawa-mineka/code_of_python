@@ -33,32 +33,40 @@ class define_stage_data:
 
     def stage_data_list(self):     #ステージデータリストの定義
         #各ステージで使用する設定データのリストです
-        #[
-        # ステージ名,
+        #[ステージ名,
         # 障害物とみなす背景画像(BG)のY座標位置(例88だとキャラチップのＹ座標が88以上のマップチップは障害物とみなされます),
         # BG(背景スクロール)で使用するタイルマップの番号,
-        # 背景スクロールの種類,星スクロールのon/off,ラスタスクロールのon/off,
+        #
+        # 背景スクロールの種類,星スクロールのon/off 
+        # ラスタスクロールのon/off,
         # BG背景(手前)を表示するかどうかのフラグ,BG背景(中央)を表示するかどうかのフラグ,BG背景(奥)を表示するかどうかのフラグ
         # 大気圏突入時の火花を表示するかどうかのフラグ
-        # ]
+        # 背景マップチップを消去するときに使うチップ番号(主にマップスクロールで出来を出現させた後、その敵がいたマップチップをnull(消去)するときに使われます)]
+        # 背景の縦幅(通常ステージは120で2画面分自由スクロールするステージなどは240になったりする)
         self.stage_data_list = [
             [STAGE_MOUNTAIN_REGION,256,TM1,
             SCROLL_TYPE_8FREEWAY_SCROLL_AND_RASTER ,STAR_SCROLL_ON,
             RASTER_SCROLL_ON,
-            DISP_ON,DISP_ON,DISP_ON,
-            SPARK_ON],
+            FRONT_BG_DISP_ON,CENTER_BG_DISP_ON,BACK_BG_DISP_ON,
+            SPARK_ON,
+            0,
+            WINDOW_H],
             
             [STAGE_ADVANCE_BASE,   88 ,TM0,
             SCROLL_TYPE_TRIPLE_SCROLL_AND_STAR    ,STAR_SCROLL_ON,
             RASTER_SCROLL_OFF,
-            DISP_ON,DISP_ON,DISP_ON,
-            SPARK_OFF],
+            FRONT_BG_DISP_ON,CENTER_BG_DISP_ON,BACK_BG_DISP_ON,
+            SPARK_OFF,
+            0,
+            WINDOW_H],
             
             [STAGE_VOLCANIC_BELT,   88 ,TM2,
             SCROLL_TYPE_TRIPLE_SCROLL_AND_STAR    ,STAR_SCROLL_OFF,
             RASTER_SCROLL_OFF,
-            DISP_ON,DISP_ON,DISP_ON,
-            SPARK_OFF],
+            FRONT_BG_DISP_ON,CENTER_BG_DISP_ON,BACK_BG_DISP_ON,
+            SPARK_OFF,
+            32*3,
+            WINDOW_H * 2],
             
             
             
@@ -100,7 +108,7 @@ class define_stage_data:
         #EVENT_RASTER_SCROLL        ラスタースクロールの制御
         #   RASTER_SCROLL_OFF         ラスタースクロールの表示をoffにする[表示オフにするラスタスクロールのid]
         #   RASTER_SCROLL_ON          ラスタースクロールの表示をonにする [表示オンにするラスタスクロールのid]
-        #EVENT_BG_SCREEN_ON_OFF    背景ＢＧの表示のon/off
+        #EVENT_BG_SCREEN_ON_OFF    背景BGの表示のon/off
         #   BG_BACK or BG_MIDDLE or BG_FRONT  BGの種類を選択
         #   DISP_OFF or DISP_ON            表示オフ/表示オン
         #EVENT_ENTRY_SPARK_ON_OFF  大気圏突入の火花表示のon/off
@@ -407,6 +415,7 @@ class define_stage_data:
         
         self.event_list_stage_volcanic_belt_l1= [
             
+            [   5,EVENT_CHANGE_BG_TRANSPARENT_COLOR,  15],
             [  10,EVENT_FAST_FORWARD_NUM,4,30],
             [ 200,EVENT_ENEMY,CIR_COIN    ,160, 10   ,6],
             [ 500,EVENT_ENEMY,CIR_COIN    ,160, 90   ,6],
@@ -456,12 +465,5 @@ class define_stage_data:
                             [192,192,6,8],                          
                             [144, 64,6,8],
                             ]
-    
-    
-    
-    
-    
-    
-    
-    
+
 

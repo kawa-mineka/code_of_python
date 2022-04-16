@@ -67,8 +67,8 @@ class update_title:
         #system-data.pyxresリソースファイルからこれらの設定値を読み込むようにしたのでコメントアウトしています
         # self.game_difficulty = GAME_NORMAL         #難易度                  タイトルメニューで難易度を選択して変化させるのでここで初期化します
         
-        self.stage_number = STAGE_MOUNTAIN_REGION  #最初に出撃するステージ   タイトルメニューでステージを選択して変化させるのでここで初期化します
-        self.stage_loop   = 1                      #ループ数(ステージ周回数) タイトルメニューで周回数を選択して変化させるのでここで初期化します
+        # self.stage_number = STAGE_MOUNTAIN_REGION  #最初に出撃するステージ   タイトルメニューでステージを選択して変化させるのでここで初期化します
+        # self.stage_loop   = 1                      #ループ数(ステージ周回数) タイトルメニューで周回数を選択して変化させるのでここで初期化します
         
         pygame.mixer.init(frequency = 44100)     #pygameミキサー関連の初期化
         pygame.mixer.music.set_volume(0.7)       #音量設定(0~1の範囲内)

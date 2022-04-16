@@ -160,7 +160,7 @@ class update_enemy:
             return              #何もせずに帰ります・・・・・
         
         #今表示したマップに（「敵出現」情報）のキャラチップが含まれていたら敵を発生させる
-        for i in range(WINDOW_H // 8):
+        for i in range(self.bg_height // 8):     #BGの縦キャラチップ数だけy軸下方向に調べていく 通常スクロールなら15回 縦2画面スクロールステージなら30回ループする
             func.get_bg_chip(self,WINDOW_W,i*8,0)#画面右端のマップチップのＢＧナンバーをゲットする(iの値・・・8で割ってまた8を掛けるのはスマートじゃないかも・・・)
             if self.bg_chip == (64 /8) * 32 +(48 / 8):#マップチップx48y64(A)だったら   敵3地上固定砲台を出現させる
                 item_number = 0 #アイテムナンバー初期化
@@ -806,7 +806,7 @@ class update_enemy:
         enemy_count = len(self.enemy)
         for i in reversed(range (enemy_count)):
             if -30 < self.enemy[i].posx and self.enemy[i].posx < WINDOW_W + 200:#敵のx座標は-30~160+200以内？
-                if -50 < self.enemy[i].posy and self.enemy[i].posy < WINDOW_H + 50:#敵のY座標は-50~120+50以内？
+                if -50 < self.enemy[i].posy and self.enemy[i].posy < self.bg_height + 50:#敵のY座標は-50~マップ全体の縦幅+50以内？
                     continue
                 else:
                     if self.enemy[i].formation_id != 0: #編隊機の場合は・・・・・
@@ -1119,12 +1119,12 @@ class update_enemy:
         for i in reversed(range (enemy_shot_count)):
             if self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_CIRCLE_BULLET or self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_CIRCLE_LASER:
                 #回転系の弾の座標はcx,cyを基準としてはみだし判定する(結構大きくはみ出しても消えない感じで判定します)
-                if  (-40 < self.enemy_shot[i].cx < WINDOW_W + 40 ) and ( -40 < self.enemy_shot[i].cy < WINDOW_H + 40 ):
+                if  (-40 < self.enemy_shot[i].cx < WINDOW_W + 40 ) and ( -40 < self.enemy_shot[i].cy < self.bg_height + 40 ):
                     continue
                 else:
                     del self.enemy_shot[i]
             else:#それ以外の弾の座標はposx,posyを基準としてはみだし判定する
-                if  (-8 < self.enemy_shot[i].posx < WINDOW_W + 8) and ( -8 < self.enemy_shot[i].posy < WINDOW_H + 8 ):
+                if  (-8 < self.enemy_shot[i].posx < WINDOW_W + 8) and ( -8 < self.enemy_shot[i].posy < self.bg_height + 8 ):
                     continue
                 else:
                     del self.enemy_shot[i]            
