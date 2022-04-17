@@ -336,14 +336,14 @@ class App:
                 self.replay_slot_num = 7
             
             if self.cursor_decision_item_y != UNSELECTED:#決定ボタンが押されてアイテムが決まったのなら
-                self.cursor_type = CURSOR_TYPE_NO_DISP   #セレクトカーソルの表示をoffにする
-                self.move_mode = MOVE_MANUAL             #移動モードを「手動移動」にする
-                self.replay_status = REPLAY_PLAY         #リプレイ機能の状態を「再生中」にします
-                self.replay_stage_num = 0                #リプレイデータを最初のステージから再生できるように0初期化
-                update_replay.data_file_load(self)       #リプレイデータファイルのロードを行います
-                update_replay.load_stage_data(self)      #リプレイ再生時は,ステージスタート時のパラメーターをロードする関数を呼び出します
+                self.cursor_type = CURSOR_TYPE_NO_DISP      #セレクトカーソルの表示をoffにする
+                self.move_mode = MOVE_MANUAL                #移動モードを「手動移動」にする
+                self.replay_status = REPLAY_PLAY            #リプレイ機能の状態を「再生中」にします
+                self.replay_stage_num = 0                   #リプレイデータを最初のステージから再生できるように0初期化
+                update_replay.data_file_load(self)          #リプレイデータファイルのロードを行います
+                update_replay.load_stage_data(self)         #リプレイ再生時は,ステージスタート時のパラメーターをロードする関数を呼び出します
                 self.active_window_id = WINDOW_ID_MAIN_MENU #メインメニューウィンドウIDを最前列でアクティブなものとする
-                self.game_status = SCENE_GAME_START_INIT #ゲームステータスを「SCENE_GAME_START_INIT」にしてゲームスタート時の初期化にする
+                self.game_status = SCENE_GAME_START_INIT    #ゲームステータスを「SCENE_GAME_START_INIT」にしてゲームスタート時の初期化にする
         
         ################################ ゲームスタート時の初期化 #################################################################
         if self.game_status == SCENE_GAME_START_INIT: #ゲームステータスが「GAME_START_INIT」の場合（ゲームスタート時の状態遷移）は以下を実行する
@@ -473,6 +473,8 @@ class App:
             update_debug.enemy_append(self)          #デバッグモードによる敵＆敵弾追加発生
             #プレイ時間の計算#####################################################
             update_status.calc_playtime(self)          #プレイ時間を計算する関数を呼び出す
+            #バックグラウンド(BG)を表示するときのカメラオフセット座標値を計算する#####
+            func.screen_camera_offset(self)            #カメラオフセット座標値を計算する関数を呼び出す
             #ハイスコアの更新チェック##############################################
             update_score.check_hi_score(self)          #ハイスコアが更新されているか調べる関数を呼び出す
             #タイマーフレア放出###################################################
@@ -737,7 +739,9 @@ class App:
                 # pyxel.bltm(-(self.scroll_count // 8) + 250,0,0,0,240,256,120,self.bg_transparent_color)
                 pyxel.bltm(-(self.scroll_count // 8) + 250,0,TM0,  0*8,240*8,  256*8,120*8,self.bg_transparent_color)
             elif self.stage_number == STAGE_VOLCANIC_BELT:
-                pyxel.bltm(-(self.scroll_count // 8) + 250,0,TM2,  0*8,240*8,  256*8,120*8,self.bg_transparent_color)
+                pyxel.bltm(-(self.scroll_count // 16) + 50,0                         ,TM2,  0*8,216*8   ,  256*8, 15*8,0)
+                
+                pyxel.bltm(-(self.scroll_count // 8) + 100,-self.camera_offset_y // 8,TM2,  0*8,239*8 -2,  256*8,120*8,0)
             
             ####################背景表示
             ###################pyxel.bltm(-(pyxel.frame_count // 8),0,0,((pyxel.frame_count / 2) - 160) ,0,160,120,0)最初はこれで上手くいかなかった・・・・なぜ？
@@ -752,7 +756,7 @@ class App:
                         #pyxel.bltm(-int(self.scroll_count % (256*8 - 160)),     -self.vertical_scroll_count,  1,    0,0,    256,256,    self.bg_transparent_color)
                         pyxel.bltm(-int(self.scroll_count % (256*8 - 160)),     -self.vertical_scroll_count,  TM1,    0*8,0*8,    256 * 8,256 * 8,    self.bg_transparent_color)
             elif self.stage_number == STAGE_VOLCANIC_BELT:
-                pyxel.bltm(-(self.scroll_count // 4) + 400,0,TM2,   0*8,56*8, 256*8,120*8,self.bg_transparent_color)
+                pyxel.bltm(-(self.scroll_count // 4) + 400,-self.camera_offset_y // 4,TM2,   0*8, 76*8, 256*8,120*8,    0)
             
             graph.draw_background_object(self)               #背景オブジェクトの描画関数の呼び出し
             

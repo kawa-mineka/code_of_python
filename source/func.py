@@ -1322,6 +1322,14 @@ class func:
     def add_score(self,point):
         self.score += int(point * self.score_magnification) #スコアをpoint*スコア倍率分加算する(整数値で)
 
+    #バックグラウンド(BG)を表示するときのカメラオフセット座標値を計算する
+    def screen_camera_offset(self):
+        #WINDOW_H    ゲーム画面の縦幅 (定数です)
+        #SHIP_H      自機の縦幅8ドット(定数です)
+        #bg_height   BGスクロール面の全体としての縦幅
+        #my_y        自機のy座標(BGスクロール面の一番上を0として、そこからの縦の距離)
+        self.camera_offset_y = (self.bg_height - WINDOW_H) * self.my_y / (self.bg_height - SHIP_H)
+
     #ラスタースクロール用のデータの初期化＆生成
     def create_raster_scroll_data(self):
         #1面STAGE_MOUNTAIN_REGIONのラスタースクロール用の設定値の初期化
@@ -1382,17 +1390,19 @@ class func:
 
     #ステージデータリストから各ステージの設定データを取り出す
     def get_stage_data(self):
-        self.bg_obstacle_y                = self.stage_data_list[self.stage_number - 1][ 1] #BG障害物とみなすＹ座標位置をリストを参照して取得、変数に代入する
-        self.reference_tilemap            = self.stage_data_list[self.stage_number - 1][ 2] #BGにアクセスするときどのタイルマップを使用するかの数値をリストを参照して取得、変数に代入する
-        self.scroll_type                  = self.stage_data_list[self.stage_number - 1][ 3] #スクロールの種類をリストを参照して取得、変数に代入する
-        self.star_scroll_flag             = self.stage_data_list[self.stage_number - 1][ 4] #背景のスクロールする星々を表示するかのフラグをリストを参照して取得、変数に代入する
-        self.raster_scroll_flag           = self.stage_data_list[self.stage_number - 1][ 5] #背景のラスタースクロールを表示するかのフラグをリストを参照して取得、変数に代入する
-        self.disp_flag_bg_front           = self.stage_data_list[self.stage_number - 1][ 6] #BG背景(手前)を表示するかどうかのフラグをリストを参照して取得、変数に代入する
-        self.disp_flag_bg_middle          = self.stage_data_list[self.stage_number - 1][ 7] #BG背景(中間)を表示するかどうかのフラグをリストを参照して取得、変数に代入する
-        self.disp_flag_bg_back            = self.stage_data_list[self.stage_number - 1][ 8] #BG背景(奥)を表示するかどうかのフラグをリストを参照して取得、変数に代入する
-        self.atmospheric_entry_spark_flag = self.stage_data_list[self.stage_number - 1][ 9] #大気圏突入時の火花を発生させるかどうかのフラグをリストを参照して取得、変数に代入する
-        self.null_bg_chip_num             = self.stage_data_list[self.stage_number - 1][10] #背景マップチップを消去するときに使うチップ番号をリストを参照して取得、変数に代入する
-        self.bg_height                    = self.stage_data_list[self.stage_number - 1][11] #縦自由スクロールステージにおける背景の縦の高さ(BackGroundHeight)(自機はこのドット分だけBGマップを縦方向に自由に移動できると考えてくださいですの)をリストを参照して取得、変数に代入する
+        self.start_my_x                   = self.stage_data_list[self.stage_number - 1][ 1] #ステージスタート時の自機の座標(自由に縦スクロールできるステージは背景BGマップ左上を原点としての座標位置となります)
+        self.start_my_y                   = self.stage_data_list[self.stage_number - 1][ 2]
+        self.bg_obstacle_y                = self.stage_data_list[self.stage_number - 1][ 3] #BG障害物とみなすＹ座標位置をリストを参照して取得、変数に代入する
+        self.reference_tilemap            = self.stage_data_list[self.stage_number - 1][ 4] #BGにアクセスするときどのタイルマップを使用するかの数値をリストを参照して取得、変数に代入する
+        self.scroll_type                  = self.stage_data_list[self.stage_number - 1][ 5] #スクロールの種類をリストを参照して取得、変数に代入する
+        self.star_scroll_flag             = self.stage_data_list[self.stage_number - 1][ 6] #背景のスクロールする星々を表示するかのフラグをリストを参照して取得、変数に代入する
+        self.raster_scroll_flag           = self.stage_data_list[self.stage_number - 1][ 7] #背景のラスタースクロールを表示するかのフラグをリストを参照して取得、変数に代入する
+        self.disp_flag_bg_front           = self.stage_data_list[self.stage_number - 1][ 8] #BG背景(手前)を表示するかどうかのフラグをリストを参照して取得、変数に代入する
+        self.disp_flag_bg_middle          = self.stage_data_list[self.stage_number - 1][ 9] #BG背景(中間)を表示するかどうかのフラグをリストを参照して取得、変数に代入する
+        self.disp_flag_bg_back            = self.stage_data_list[self.stage_number - 1][10] #BG背景(奥)を表示するかどうかのフラグをリストを参照して取得、変数に代入する
+        self.atmospheric_entry_spark_flag = self.stage_data_list[self.stage_number - 1][11] #大気圏突入時の火花を発生させるかどうかのフラグをリストを参照して取得、変数に代入する
+        self.null_bg_chip_num             = self.stage_data_list[self.stage_number - 1][12] #背景マップチップを消去するときに使うチップ番号をリストを参照して取得、変数に代入する
+        self.bg_height                    = self.stage_data_list[self.stage_number - 1][13] #縦自由スクロールステージにおける背景の縦の高さ(BackGroundHeight)(自機はこのドット分だけBGマップを縦方向に自由に移動できると考えてくださいですの)をリストを参照して取得、変数に代入する
 
     #ランクダウンさせる関数
     def rank_down(self):

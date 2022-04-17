@@ -159,8 +159,8 @@ class update_ship:
             self.my_y = 0
         
         if self.stage_number == STAGE_VOLCANIC_BELT:
-            if self.my_y >= WINDOW_H + self.bg_height - SHIP_H:
-                self.my_y  = WINDOW_H + self.bg_height - SHIP_H - 1
+            if self.my_y >= WINDOW_H + self.bg_height - SHIP_H * 17  -5:
+                self.my_y  = WINDOW_H + self.bg_height - SHIP_H * 17 -5 - 1
         else:
             if self.my_y >= WINDOW_H - SHIP_H:
                 self.my_y  = WINDOW_H - SHIP_H - 1

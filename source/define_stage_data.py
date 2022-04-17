@@ -34,6 +34,7 @@ class define_stage_data:
     def stage_data_list(self):     #ステージデータリストの定義
         #各ステージで使用する設定データのリストです
         #[ステージ名,
+        # ステージスタート時の自機のx座標,y座標(自由に縦スクロールできるステージの場合は背景BG左上を原点としての座標位置となります)
         # 障害物とみなす背景画像(BG)のY座標位置(例88だとキャラチップのＹ座標が88以上のマップチップは障害物とみなされます),
         # BG(背景スクロール)で使用するタイルマップの番号,
         #
@@ -44,7 +45,9 @@ class define_stage_data:
         # 背景マップチップを消去するときに使うチップ番号(主にマップスクロールで出来を出現させた後、その敵がいたマップチップをnull(消去)するときに使われます)]
         # 背景の縦幅(通常ステージは120で2画面分自由スクロールするステージなどは240になったりする)
         self.stage_data_list = [
-            [STAGE_MOUNTAIN_REGION,256,TM1,
+            [STAGE_MOUNTAIN_REGION,
+            24,50,
+            256,TM1,
             SCROLL_TYPE_8FREEWAY_SCROLL_AND_RASTER ,STAR_SCROLL_ON,
             RASTER_SCROLL_ON,
             FRONT_BG_DISP_ON,CENTER_BG_DISP_ON,BACK_BG_DISP_ON,
@@ -52,7 +55,9 @@ class define_stage_data:
             0,
             WINDOW_H],
             
-            [STAGE_ADVANCE_BASE,   88 ,TM0,
+            [STAGE_ADVANCE_BASE,
+            24,50,
+            88 ,TM0,
             SCROLL_TYPE_TRIPLE_SCROLL_AND_STAR    ,STAR_SCROLL_ON,
             RASTER_SCROLL_OFF,
             FRONT_BG_DISP_ON,CENTER_BG_DISP_ON,BACK_BG_DISP_ON,
@@ -60,13 +65,15 @@ class define_stage_data:
             0,
             WINDOW_H],
             
-            [STAGE_VOLCANIC_BELT,   88 ,TM2,
+            [STAGE_VOLCANIC_BELT,
+            24,80,
+            88 ,TM2,
             SCROLL_TYPE_TRIPLE_SCROLL_AND_STAR    ,STAR_SCROLL_OFF,
             RASTER_SCROLL_OFF,
             FRONT_BG_DISP_ON,CENTER_BG_DISP_ON,BACK_BG_DISP_ON,
             SPARK_OFF,
             32*3,
-            WINDOW_H * 2],
+            (WINDOW_H * 2) + 8 * 3],
             
             
             

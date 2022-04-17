@@ -126,7 +126,6 @@ class graph:
 
     #敵の表示
     def draw_enemy(self):
-        self.camera_offset_y = (self.bg_height - WINDOW_H) * self.my_y / (self.bg_height - SHIP_H) #SHIP_Hは自機の縦幅8ドット
         enemy_count = len(self.enemy)
         for i in range(enemy_count):
             if   self.enemy[i].enemy_type == 1:#敵タイプ１の表示   直進して斜め後退→勢いよく後退していく10機編隊
@@ -214,7 +213,6 @@ class graph:
 
     #敵の弾の表示
     def draw_enemy_shot(self,p): #pの数値と一致するプライオリティナンバーを持つ敵弾だけを描画します
-        self.camera_offset_y = (self.bg_height - WINDOW_H) * self.my_y / (self.bg_height - SHIP_H) #SHIP_Hは自機の縦幅8ドット
         enemy_shot_count = len(self.enemy_shot)
         for i in range(enemy_shot_count):
             if self.enemy_shot[i].priority == p:

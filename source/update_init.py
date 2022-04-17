@@ -128,11 +128,6 @@ class update_init:
         pygame.mixer.music.set_volume(0.7)      #音量設定(0~1の範囲内)
         func.load_stage_bgm(self)               #BGMファイルの読み込み
         pygame.mixer.music.play(-1)             #BGMループ再生
-        self.my_x = 24    #自機のx座標の初期値
-        self.my_y = 50    #自機のy座標の初期値
-        self.my_vx = 1    #自機のx方向の移動量
-        self.my_vy = 0    #自機のy方向の移動量
-        
         if self.replay_status == REPLAY_RECORD:
             update_replay.save_stage_data(self)    #リプレイ保存時は,ステージスタート時のパラメーターをセーブする関数を呼び出します(リプレイ再生で使用)
             
@@ -149,6 +144,10 @@ class update_init:
         
         #各ステージに応じた数値をリストから取得する
         func.get_stage_data(self)             #ステージデータリストからステージごとに設定された数値を取り出す関数の呼び出し
+        self.my_x,self.my_y = self.start_my_x,self.start_my_y    #自機のx座標の初期値を各ステージデータから転送する
+        self.my_vx = 1    #自機のx方向の移動量
+        self.my_vy = 0    #自機のy方向の移動量
+        
         
         self.present_repair_item_flag = 0 #ボス破壊後の爆発シーンでリペアアイテムを出すときに使用するフラグ 0=まだアイテム出してない 1=アイテム放出したよ～
         self.rank_down_count = 0          #ダメージを受けて難易度別に設定された規定値まで行ったかどうかをカウントする変数
