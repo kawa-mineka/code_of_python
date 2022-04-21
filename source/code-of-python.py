@@ -734,7 +734,6 @@ class App:
                 
                 #湖面のラスタースクロールの表示、成層圏と大気圏の境目のラスタースクロールの表示
                 graph.draw_raster_scroll(self,1)  #ラスタースクロール描画関数呼び出し 山より手前で描画しますっ！
-                
             elif self.stage_number == STAGE_ADVANCE_BASE:
                 # pyxel.bltm(-(self.scroll_count // 8) + 250,0,0,0,240,256,120,self.bg_transparent_color)
                 pyxel.bltm(-(self.scroll_count // 8) + 250,0,TM0,  0*8,240*8,  256*8,120*8,self.bg_transparent_color)
@@ -748,7 +747,7 @@ class App:
             ###################奥の背景表示
             ###################pyxel.bltm(-(pyxel.frame_count // 4) + 400,0,0,0,16,256,120,0)
             
-            if self.stage_number == STAGE_ADVANCE_BASE:
+            if   self.stage_number == STAGE_ADVANCE_BASE:
                 # pyxel.bltm(-(self.scroll_count // 4) + 400,0,0,0,224,256,120,self.bg_transparent_color)
                 pyxel.bltm(-(self.scroll_count // 4) + 400,0,TM0,   0*8,224*8, 256*8,120*8,self.bg_transparent_color)
             elif self.stage_number == STAGE_MOUNTAIN_REGION:
@@ -780,7 +779,7 @@ class App:
             #手前の背景表示
             #結局なんでこれでキチンとスクロール表示されたのか謎・・・結局はじめは-1024ドットのx座標位置からスクロール開始していくことに・・
             #pyxel.bltm(-(pyxel.frame_count // 2) + 1024,0,0,0,0,256,120,0)
-            if self.stage_number == STAGE_ADVANCE_BASE:
+            if   self.stage_number == STAGE_ADVANCE_BASE:
                 if   self.stage_loop == 1:
                     # pyxel.bltm(-(self.scroll_count // 2) + 1024,0,  0,    0,0,    256,120,    self.bg_transparent_color) #1周目マップ
                     pyxel.bltm(-(self.scroll_count // 2) + 1024,0,  TM0,    0*8,0*8,    256*8,120*8,    self.bg_transparent_color) #1周目マップ
