@@ -68,11 +68,11 @@ class define_stage_data:
             [STAGE_VOLCANIC_BELT,
             24,80,
             88 ,TM2,
-            SCROLL_TYPE_TRIPLE_SCROLL_AND_STAR    ,STAR_SCROLL_OFF,
-            RASTER_SCROLL_OFF,
+            SCROLL_TYPE_TRIPLE_SCROLL_AND_STAR    ,STAR_SCROLL_ON,
+            RASTER_SCROLL_ON,
             FRONT_BG_DISP_ON,CENTER_BG_DISP_ON,BACK_BG_DISP_ON,
             SPARK_OFF,
-            32*3,
+            32*2,
             (WINDOW_H * 2) + 8 * 3],
             
             

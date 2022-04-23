@@ -1332,22 +1332,31 @@ class func:
 
     #ラスタースクロール用のデータの初期化＆生成
     def create_raster_scroll_data(self):
-        #1面STAGE_MOUNTAIN_REGIONのラスタースクロール用の設定値の初期化
-        new_raster_scroll = Raster_scroll()
-        for i in range(24-1):
+        if self.stage_number == STAGE_MOUNTAIN_REGION:     #1面STAGE_MOUNTAIN_REGIONのラスタースクロール用の設定値の初期化
             new_raster_scroll = Raster_scroll()
-            new_raster_scroll.update(0,RASTER_NORMAL,1,RASTER_SCROLL_ON,  i,23,   0,0,    0,0,    IMG1,    96,112+i,   160,1,    -0.1 -(0.03 * i) ,15,   0,0,0)
-            self.raster_scroll.append(new_raster_scroll)  #湖面のラスタースクロール用の横ライン（縦24ライン分）を育成する
-        
-        for i in range(24-1):
+            for i in range(24-1):
+                new_raster_scroll = Raster_scroll()
+                new_raster_scroll.update(0,RASTER_NORMAL,1,RASTER_SCROLL_ON,  i,23,   0,0,    0,0,    IMG1,    96,112+i,   160,1,    -0.1 -(0.03 * i) ,15,   0,0,0)
+                self.raster_scroll.append(new_raster_scroll)  #湖面のラスタースクロール用の横ライン（縦24ライン分）を育成する
+            
+            for i in range(24-1):
+                new_raster_scroll = Raster_scroll()
+                new_raster_scroll.update(1,RASTER_NORMAL,1,RASTER_SCROLL_ON,  i,23,  0,0,  0,-80,  IMG1,   96,112+i,   160,1,    -0.05 -(0.01 * i) ,15,    0,0,0)
+                self.raster_scroll.append(new_raster_scroll)  #成層圏と大気圏の境目のラスタースクロール用の横ライン（縦24ライン分）を育成する（湖面と同じグラフイックだけど・・）
+            
+            for i in range(40-1):
+                new_raster_scroll = Raster_scroll()
+                new_raster_scroll.update(2,RASTER_WAVE,0,RASTER_SCROLL_ON,    i,39,  0,0,   0,-38,  IMG1,   144,72+i,   14*8,1,    -0.35,13,    0,0.01,(i-20)*0.4)
+                self.raster_scroll.append(new_raster_scroll)  #雲ウェーブラスタースクロール用の横ライン(縦40ライン分)を育成する
+            
+        elif self.stage_number == STAGE_VOLCANIC_BELT:      #3面STAGE_VOLCANIC_BELTのラスタースクロール用の設定値の初期化
             new_raster_scroll = Raster_scroll()
-            new_raster_scroll.update(1,RASTER_NORMAL,1,RASTER_SCROLL_ON,  i,23,  0,0,  0,-80,  IMG1,   96,112+i,   160,1,    -0.05 -(0.01 * i) ,15,    0,0,0)
-            self.raster_scroll.append(new_raster_scroll)  #成層圏と大気圏の境目のラスタースクロール用の横ライン（縦24ライン分）を育成する（湖面と同じグラフイックだけど・・）
-        
-        for i in range(40-1):
-            new_raster_scroll = Raster_scroll()
-            new_raster_scroll.update(2,RASTER_WAVE,0,RASTER_SCROLL_ON,    i,39,  0,0,   0,-38,  IMG1,   144,72+i,   14*8,1,    -0.35,13,    0,0.02,(i-20)*0.4)
-            self.raster_scroll.append(new_raster_scroll)  #雲ウェーブラスタースクロール用の横ライン(縦40ライン分)を育成する
+            for i in range(16-1):
+                new_raster_scroll = Raster_scroll()
+                new_raster_scroll.update(0,RASTER_WAVE,0,RASTER_SCROLL_ON,    i,16-1,  0,0,   0,-89,  IMG0,   192,48+i,   6*8,1,    -0.08,13,    0,0.02,i*0.4)
+                self.raster_scroll.append(new_raster_scroll)  #火山の湖面ウェーブラスタースクロール用の横ライン(縦16ライン分)を育成する
+            
+
 
     #ラスタースクロールの表示のon/off(search_id,flag)
     def disp_control_raster_scroll(self,id,flag):

@@ -738,9 +738,13 @@ class App:
                 # pyxel.bltm(-(self.scroll_count // 8) + 250,0,0,0,240,256,120,self.bg_transparent_color)
                 pyxel.bltm(-(self.scroll_count // 8) + 250,0,TM0,  0*8,240*8,  256*8,120*8,self.bg_transparent_color)
             elif self.stage_number == STAGE_VOLCANIC_BELT:
+                                #火山湖面ウェーブラスタースクロールの表示
+                graph.draw_raster_scroll(self,0)  #ラスタースクロール描画関数呼び出し背景一番奥の火山の真下で描画します
+            
                 pyxel.bltm(-(self.scroll_count // 16) + 50,0                         ,TM2,  0*8,216*8   ,  256*8, 15*8,0)
                 
                 pyxel.bltm(-(self.scroll_count // 8) + 100,-self.camera_offset_y // 8,TM2,  0*8,239*8 -2,  256*8,120*8,0)
+                
             
             ####################背景表示
             ###################pyxel.bltm(-(pyxel.frame_count // 8),0,0,((pyxel.frame_count / 2) - 160) ,0,160,120,0)最初はこれで上手くいかなかった・・・・なぜ？
@@ -755,7 +759,7 @@ class App:
                         #pyxel.bltm(-int(self.scroll_count % (256*8 - 160)),     -self.vertical_scroll_count,  1,    0,0,    256,256,    self.bg_transparent_color)
                         pyxel.bltm(-int(self.scroll_count % (256*8 - 160)),     -self.vertical_scroll_count,  TM1,    0*8,0*8,    256 * 8,256 * 8,    self.bg_transparent_color)
             elif self.stage_number == STAGE_VOLCANIC_BELT:
-                pyxel.bltm(-(self.scroll_count // 4) + 400,-self.camera_offset_y // 4,TM2,   0*8, 76*8, 256*8,120*8,    0)
+                pyxel.bltm(-(self.scroll_count // 4) + 400,-self.camera_offset_y // 4,TM2,   0*8, 76*8, 256*8,120*8,    self.bg_transparent_color)
             
             graph.draw_background_object(self)               #背景オブジェクトの描画関数の呼び出し
             
@@ -797,6 +801,7 @@ class App:
                     pyxel.bltm(-(self.scroll_count // 2) + 1024,0,  TM2,    0*8,32*8 + self.camera_offset_y,   256*8,120*8,    self.bg_transparent_color) #2周目マップ
                 elif self.stage_loop == 3:
                     pyxel.bltm(-(self.scroll_count // 2) + 1024,0,  TM2,    0*8,64*8 + self.camera_offset_y,   256*8,120*8,    self.bg_transparent_color) #3周目マップ
+                
             
             graph.draw_enemy_shot(self,PRIORITY_TOP)        #敵の弾を表示する関数を呼び出す (最前面)-------------------------------------
         #自機、クロー、シールドの表示###############################################

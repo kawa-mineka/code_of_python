@@ -1447,7 +1447,7 @@ class Raster_scroll: #背景でラスタースクロールするときに使用�
         self.scroll_id = 0       #複数のラスタースクロールを動作させる時に使用するidナンバー
         self.raster_type = 0     #ラスタースクロールの種類
         self.priority  = 0       #描画時の優先度
-        self.display = 0         #描画するかどうかの判定用 (0=描画しない 1=描画する)
+        self.display = 0         #描画するかどうかの判定用 (RASTER_SCROLL_OFF=描画しない RASTER_SCROLL_ON=描画する)
         self.scroll_line_no = 0  #ラスタースクロール時に使用するそれぞれの横ラインの割り当てられた番号(上方向から0~任意の数値)
         self.total_line_num = 0  #どこまでラスタスクロールさせるかの縦軸総ライン数 (scroll_line_noに入る最大値(任意の数値)が入る)
         self.posx = 0            #x座標
