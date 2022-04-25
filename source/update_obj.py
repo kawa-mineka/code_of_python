@@ -253,17 +253,17 @@ class update_obj:
     #BGマップチップデータ書き換えによる背景アニメーション
     def bg_rewrite_animation(self):
         #今表示したマップに書き換え対象のキャラチップが含まれていたらＢＧデータナンバーを1増やしてアニメーションさせる
-        if self.scroll_type == SCROLL_TYPE_8FREEWAY_SCROLL_AND_RASTER: #全方向フリースクロール＋ラスタースクロールの場合
+        if   self.stage_number == STAGE_MOUNTAIN_REGION:        #1面 MOUNTAIN REGION
             #最前面のＢＧ書き換えアニメーション
-            for w in range(WINDOW_W // 8):
-                for h in range(WINDOW_H // 8):
+            for w in range(WINDOW_W // 8):#横方向の調べ上げ数は 160割る8で20キャラ分調べ上げる
+                for h in range(WINDOW_H // 8):#横方向の調べ上げ数は 120割る8で15キャラ分調べ上げる
                     bg_animation_count = len(self.bg_animation_list) #bg_animation_listのなかにどれだけのリストが入っているのか数える
-                    for i in range(bg_animation_count):
+                    for i in range(bg_animation_count): #リストの総数分ループする
                         func.get_bg_chip_free_scroll(self,w * 8,h * 8    ,0)#座標(w,h)のマップチップのBGナンバーを取得する
-                        bg_ani_x =    self.bg_animation_list[i][0] #BGアニメーションを開始するチップのx座標を変数に代入
-                        bg_ani_y =    self.bg_animation_list[i][1] #                         y座標を変数に代入
-                        bg_ani_speed = self.bg_animation_list[i][2] #                        スピードを変数に代入
-                        bg_ani_num =   self.bg_animation_list[i][3] #                        パターン数を変数に代入
+                        bg_ani_x     = self.bg_animation_list[i][0] #BGアニメーションを開始するチップのx座標を変数に代入
+                        bg_ani_y     = self.bg_animation_list[i][1] #                               y座標を変数に代入
+                        bg_ani_speed = self.bg_animation_list[i][4] #                               スピードを変数に代入
+                        bg_ani_num   = self.bg_animation_list[i][5] #                               パターン数を変数に代入
                         
                         if (bg_ani_y / 8) * 32 + (bg_ani_x / 8) <= self.bg_chip <= (bg_ani_y / 8) * 32 + (bg_ani_x / 8 + bg_ani_num): #マップチップがx72y80からx128y80の間なら赤い棒のアニメーションパターンなので
                             #bg_ani_speed毎フレームに従ってbg_ani_numパターン数のアニメーションを行います
@@ -294,8 +294,108 @@ class update_obj:
                     self.bg_chip = func.get_chrcode_tilemap(self,self.reference_tilemap,self.bgx + w,self.bgy) #座標(bgx+w,bgy)のマップチップのBGナンバーを取得する
                     bg_ani_x     = self.bg_animation_list[i][0] #BGアニメーションを開始するチップのx座標を変数に代入
                     bg_ani_y     = self.bg_animation_list[i][1] #                         y座標を変数に代入
-                    bg_ani_speed = self.bg_animation_list[i][2] #                        スピードを変数に代入
-                    bg_ani_num   = self.bg_animation_list[i][3] #                        パターン数を変数に代入
+                    bg_ani_speed = self.bg_animation_list[i][4] #                        スピードを変数に代入
+                    bg_ani_num   = self.bg_animation_list[i][5] #                        パターン数を変数に代入
+                    
+                    if (bg_ani_y / 8) * 32 + (bg_ani_x / 8) <= self.bg_chip <= (bg_ani_y / 8) * 32 + (bg_ani_x / 8 + bg_ani_num): #マップチップナンバーがーアニメーションするべきチップナンバーの範囲内だったのなら
+                        #bg_ani_speed毎フレームに従ってbg_ani_numパターン数のアニメーションを行い,該当するチップナンバーを書き込みます
+                        func.set_chrcode_tilemap(self,self.reference_tilemap,self.bgx + w,self.bgy, (bg_ani_y // 8) * 32 + (bg_ani_x // 8) + pyxel.frame_count // bg_ani_speed % bg_ani_num)
+            
+        elif self.stage_number == STAGE_ADVANCE_BASE:           #2面 ADVANCE_BASE
+            #最前面のＢＧ書き換えアニメーション
+            for w in range(WINDOW_W // 8 + 1): #横方向の調べ上げ数は 160割る8で20キャラ分調べ上げる,でも微妙に画面右端で書き換えているのが表示されてしまってバレるので +1してます、ハイ！
+                for h in range(WINDOW_H // 8 * self.height_screen_num): #縦方向の調べ上げ総数は縦画面数も考慮してself.height_screen_num分掛け合わせる
+                    bg_animation_count = len(self.bg_animation_list) #bg_animation_listのなかにどれだけのリストが入っているのか数える
+                    for i in range(bg_animation_count):
+                        func.get_bg_chip(self,w * 8,h * 8    ,0)    #座標(w,h)のマップチップのBGナンバーを取得する
+                        bg_ani_x     = self.bg_animation_list[i][0] #BGアニメーションを開始するチップのx座標を変数に代入
+                        bg_ani_y     = self.bg_animation_list[i][1] #                               y座標を変数に代入
+                        bg_ani_speed = self.bg_animation_list[i][4] #                               スピードを変数に代入
+                        bg_ani_num   = self.bg_animation_list[i][5] #                               パターン数を変数に代入
+                        
+                        if (bg_ani_y / 8) * 32 + (bg_ani_x / 8) <= self.bg_chip <= (bg_ani_y / 8) * 32 + (bg_ani_x / 8 + bg_ani_num): #マップチップがアニメーションするべきチップナンバーの範囲内だったのなら
+                            #bg_ani_speed毎フレームに従ってbg_ani_numパターン数のアニメーションを行います
+                            func.write_map_chip(self,self.bgx,self.bgy,(bg_ani_y // 8) * 32 + (bg_ani_x // 8) + pyxel.frame_count // bg_ani_speed % bg_ani_num)
+            
+        elif self.stage_number == STAGE_VOLCANIC_BELT:          #3面 VOLCANIC BELT
+            #最前面のＢＧ書き換えアニメーション
+            for w in range(WINDOW_W // 8 + 1): #横方向の調べ上げ数は 160割る8で20キャラ分調べ上げる,でも微妙に画面右端で書き換えているのが表示されてしまってバレるので +1してます、ハイ！
+                for h in range(WINDOW_H // 8 * self.height_screen_num): #縦方向の調べ上げ総数は縦画面数も考慮してself.height_screen_num分掛け合わせる
+                    bg_animation_count = len(self.bg_animation_list) #bg_animation_listのなかにどれだけのリストが入っているのか数える
+                    for i in range(bg_animation_count):
+                        func.get_bg_chip(self,w * 8,h * 8    ,0)    #座標(w,h)のマップチップのBGナンバーを取得する
+                        bg_ani_x     = self.bg_animation_list[i][0] #BGアニメーションを開始するチップのx座標を変数に代入
+                        bg_ani_y     = self.bg_animation_list[i][1] #                               y座標を変数に代入
+                        bg_ani_speed = self.bg_animation_list[i][4] #                               スピードを変数に代入
+                        bg_ani_num   = self.bg_animation_list[i][5] #                               パターン数を変数に代入
+                        
+                        if (bg_ani_y / 8) * 32 + (bg_ani_x / 8) <= self.bg_chip <= (bg_ani_y / 8) * 32 + (bg_ani_x / 8 + bg_ani_num): #マップチップがアニメーションするべきチップナンバーの範囲内だったのなら
+                            #bg_ani_speed毎フレームに従ってbg_ani_numパターン数のアニメーションを行います
+                            func.write_map_chip(self,self.bgx,self.bgy,(bg_ani_y // 8) * 32 + (bg_ani_x // 8) + pyxel.frame_count // bg_ani_speed % bg_ani_num)
+            
+            #奥の火山の噴火アニメーション
+            #マップ座標のy座標225だけ火山噴火アニメーションBGがあるので
+            #目的のマップチップがあるかをサーチして書き換える
+            #奥の火山のスクロール面の表示はpyxel.bltm(-(self.scroll_count // 16) + 50,0                         ,TM2,  0*8,216*8   ,  256*8, 15*8,0)
+            #ステージ開始時のx軸スクロール座標は(self.scroll_count // 16) + 50となり、単位はドットなので
+            #(int(self.scroll_count // 16) + 50) // 8 でキャラ単位にしてやる
+            self.bgx = (int(self.scroll_count // 16) - 50) // 8 #bgxに奥の火山の噴火部表示を表示した時、BGマップの1番左端のx座標(0~255)が入る
+            self.bgy = 225 #y座標は225で固定
+            #bgx,bgyのクリッピング処理
+            #bgxがMAPの外に存在するときは強制的にbgxを0または255にしちゃう(マイナスの値や256以上だとエラーになるため)
+            if  self.bgx < 0:
+                self.bgx = 0
+            if self.bgx > 255:
+                self.bgx = 255
+            #bgyがMAPの外に存在するときは強制的にbgyを0または255にしちゃう(マイナスの値や256以上だとエラーになるため)
+            if self.bgy < 0:
+                self.bgy = 0
+            if self.bgy > 255:
+                self.bgy = 255  
+            
+            for w in range (WINDOW_W // 8 + 1):# x座表は理論的には0~20で行けるはずなんだけど20の時書き換えると微妙に画面右端で書き換えていないのかバレるので +1してます、ハイ！
+                bg_animation_count = len(self.bg_animation_list) #bg_animation_listのなかにどれだけのリストが入っているのか数える
+                for i in range(bg_animation_count):
+                    self.bg_chip = func.get_chrcode_tilemap(self,self.reference_tilemap,self.bgx + w,self.bgy) #座標(bgx+w,bgy)のマップチップのBGナンバーを取得する
+                    bg_ani_x     = self.bg_animation_list[i][0] #BGアニメーションを開始するチップのx座標を変数に代入
+                    bg_ani_y     = self.bg_animation_list[i][1] #                         y座標を変数に代入
+                    bg_ani_width = self.bg_animation_list[i][2] #                        横幅を変数に代入
+                    bg_ani_speed = self.bg_animation_list[i][4] #                        スピードを変数に代入
+                    bg_ani_num   = self.bg_animation_list[i][5] #                        パターン数を変数に代入
+                    
+                    if (bg_ani_y / 8) * 32 + (bg_ani_x / 8) <= self.bg_chip <= (bg_ani_y / 8) * 32 + (bg_ani_x / 8 + bg_ani_num): #マップチップナンバーがーアニメーションするべきチップナンバーの範囲内だったのなら
+                        #bg_ani_speed毎フレームに従ってbg_ani_numパターン数のアニメーションを行い,該当するチップナンバーを書き込みます
+                        func.set_chrcode_tilemap(self,self.reference_tilemap,self.bgx + w,self.bgy, (bg_ani_y // 8) * 32 + (bg_ani_x // 8) + pyxel.frame_count // bg_ani_speed % bg_ani_num)
+            
+            #奥の火山麓のアニメーション
+            #マップ座標のy座標227だけ火山噴火アニメーションBGがあるので
+            #目的のマップチップがあるかをサーチして書き換える
+            #奥の火山のスクロール面の表示はpyxel.bltm(-(self.scroll_count // 16) + 50,0                         ,TM2,  0*8,216*8   ,  256*8, 15*8,0)
+            #ステージ開始時のx軸スクロール座標は(self.scroll_count // 16) + 50となり、単位はドットなので
+            #(int(self.scroll_count // 16) + 50) // 8 でキャラ単位にしてやる
+            self.bgx = (int(self.scroll_count // 16) - 50) // 8 #bgxに奥の火山の噴火部表示を表示した時、BGマップの1番左端のx座標(0~255)が入る
+            self.bgy = 227 #y座標は227で固定
+            #bgx,bgyのクリッピング処理
+            #bgxがMAPの外に存在するときは強制的にbgxを0または255にしちゃう(マイナスの値や256以上だとエラーになるため)
+            if  self.bgx < 0:
+                self.bgx = 0
+            if self.bgx > 255:
+                self.bgx = 255
+            #bgyがMAPの外に存在するときは強制的にbgyを0または255にしちゃう(マイナスの値や256以上だとエラーになるため)
+            if self.bgy < 0:
+                self.bgy = 0
+            if self.bgy > 255:
+                self.bgy = 255  
+            
+            for w in range (WINDOW_W // 8 + 1):# x座表は理論的には0~20で行けるはずなんだけど20の時書き換えると微妙に画面右端で書き換えていないのかバレるので +1してます、ハイ！
+                bg_animation_count = len(self.bg_animation_list) #bg_animation_listのなかにどれだけのリストが入っているのか数える
+                for i in range(bg_animation_count):
+                    self.bg_chip = func.get_chrcode_tilemap(self,self.reference_tilemap,self.bgx + w,self.bgy) #座標(bgx+w,bgy)のマップチップのBGナンバーを取得する
+                    bg_ani_x     = self.bg_animation_list[i][0] #BGアニメーションを開始するチップのx座標を変数に代入
+                    bg_ani_y     = self.bg_animation_list[i][1] #                         y座標を変数に代入
+                    bg_ani_width = self.bg_animation_list[i][2] #                        横幅を変数に代入
+                    bg_ani_speed = self.bg_animation_list[i][4] #                        スピードを変数に代入
+                    bg_ani_num   = self.bg_animation_list[i][5] #                        パターン数を変数に代入
                     
                     if (bg_ani_y / 8) * 32 + (bg_ani_x / 8) <= self.bg_chip <= (bg_ani_y / 8) * 32 + (bg_ani_x / 8 + bg_ani_num): #マップチップナンバーがーアニメーションするべきチップナンバーの範囲内だったのなら
                         #bg_ani_speed毎フレームに従ってbg_ani_numパターン数のアニメーションを行い,該当するチップナンバーを書き込みます

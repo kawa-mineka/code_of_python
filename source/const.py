@@ -492,8 +492,9 @@ STAGE_ESCAPE_FORTRESS         =  8 #ステージ8 要塞脱出          Escape F
 STAGE_BOSS_RUSH               =  9 #ステージ9 連続強敵襲来       Boss Rush
 
 #背景スクロールの種類
-SCROLL_TYPE_TRIPLE_SCROLL_AND_STAR     = 0 #横3重スクロール+星スクロール
-SCROLL_TYPE_8FREEWAY_SCROLL_AND_RASTER = 1 #8方向自由スクロール+ラスタースクロール
+SCROLL_TYPE_TRIPLE_SCROLL_AND_STAR               = 0 #横3重スクロール+星スクロール
+SCROLL_TYPE_8WAY_SCROLL_AND_RASTER               = 1 #8方向スクロール+ラスタースクロール
+SCROLL_TYPE_HEIGHT_FREE_SCROLL_AND_TRIPLE_SCROLL = 2 #縦2画面フリースクロール+横3重スクロール+(選択性の星スクロール)
 
 #クロー関連の定数定義（主にトレースクロー）
 TRACE_CLAW_COUNT       =  4 #トレースクローの数

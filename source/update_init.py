@@ -270,7 +270,11 @@ class update_init:
                                                                 #とりあえずイベントリストはadvance_baseステージのものをコピーして使用します
                                                                 #将来的にはステージやループ回数を反映する・・・はず
         
-        self.bg_animation_list = self.bg_animation_list_mountain_region    #とりあえずBGアニメーションパターンリストはmountain_regionのものをコピーして使用します
+        
+        self.bg_animation_list = self.bg_animation_master_list[self.stage_number - 1]
+        print(self.bg_animation_list)
+        # self.bg_animation_list = self.bg_animation_list_mountain_region    #とりあえずBGアニメーションパターンリストはmountain_regionのものをコピーして使用します
+        # print(self.bg_animation_list)
         
         #自機のXY座標をトレースクローのXY座標としてコピーし、初期化を行う(とりあえず60要素埋め尽くす)(60要素=60フレーム分=1秒過去分まで記録される)
         for _i in range(TRACE_CLAW_BUFFER_SIZE):

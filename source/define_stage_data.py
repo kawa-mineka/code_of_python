@@ -44,16 +44,18 @@ class define_stage_data:
         # 大気圏突入時の火花を表示するかどうかのフラグ
         # 背景マップチップを消去するときに使うチップ番号(主にマップスクロールで出来を出現させた後、その敵がいたマップチップをnull(消去)するときに使われます)]
         # 背景の縦幅(通常ステージは120で2画面分自由スクロールするステージなどは240になったりする)
+        # 縦方向の画面数(8方向スクロールのMOUNTAIN REGIONなどは任意の数字(使用されない),ADVACE_BASEなどは縦スクロールしないので1,VOLCANIC_BELTは縦に2画面分スクロールするので2が入る)
         self.stage_data_list = [
             [STAGE_MOUNTAIN_REGION,
             24,50,
             256,TM1,
-            SCROLL_TYPE_8FREEWAY_SCROLL_AND_RASTER ,STAR_SCROLL_ON,
+            SCROLL_TYPE_8WAY_SCROLL_AND_RASTER ,STAR_SCROLL_ON,
             RASTER_SCROLL_ON,
             FRONT_BG_DISP_ON,CENTER_BG_DISP_ON,BACK_BG_DISP_ON,
             SPARK_ON,
             0,
-            WINDOW_H],
+            WINDOW_H,
+            9999,],
             
             [STAGE_ADVANCE_BASE,
             24,50,
@@ -63,7 +65,8 @@ class define_stage_data:
             FRONT_BG_DISP_ON,CENTER_BG_DISP_ON,BACK_BG_DISP_ON,
             SPARK_OFF,
             0,
-            WINDOW_H],
+            WINDOW_H,
+            1],
             
             [STAGE_VOLCANIC_BELT,
             24,80,
@@ -73,10 +76,8 @@ class define_stage_data:
             FRONT_BG_DISP_ON,CENTER_BG_DISP_ON,BACK_BG_DISP_ON,
             SPARK_OFF,
             32*2,
-            (WINDOW_H * 2) + 8 * 3],
-            
-            
-            
+            (WINDOW_H * 2) + 8 * 3,
+            2],
             
             ]
 
@@ -466,11 +467,60 @@ class define_stage_data:
         #フォーマットの説明
         #[アニメーションさせたいマップチップのx座標(0~255(8の倍数にしてね)),
         #                            y座標(0~255(8の倍数にしてね)),
+        #                            横幅(キャラ単位です 1だと8ドットとなります),
+        #                            縦幅(キャラ単位です 1だと8ドットとなります),
         #                           アニメスピード(1なら1フレーム毎 2だと2フレーム毎って感じ),
         #                           アニメ枚数(横一列に並べてください)]
-        self.bg_animation_list_mountain_region = [
-                            [192,192,6,8],                          
-                            [144, 64,6,8],
+        
+        
+        #ダミー用BGアニメーションリスト
+        self.bg_animation_list_dummy = [
+                            [248,248, 1,1, 1,1],
                             ]
+        
+        self.bg_animation_list_mountain_region = [
+                            [192,192, 1,1,     6,  8],                          
+                            [144, 64, 1,1,     6,  8],
+                            ]
+        self.bg_animation_list_advance_base = [
+                            [16,120,  1,1,     6,  4],                          
+                            ]
+        self.bg_animation_list_volcaninc_belt = [
+                            [8,0,     1,1,     6,  8],
+                            [80, 24,  1,1,     6,  8],
+                            [8,16,    1,1,     6,  8],
+                            [0,24,    3,1,     6,  10],
+                            [8,72,    1,1,     32,  7],
+                            ]
+        
+        #ゲーム全体でのBGアニメーションマスターリスト
+        #フォーマット(このリストの書き方）は
+        #self.bg_animation_master_list[
+        #ステージ1のbgアニメーションリスト(この場合だとself.bg_animation_list_mountain_regionとなる),
+        #ステージ2のbgアニメーションリスト,
+        #ステージ3のbgアニメーションリスト,
+        #ステージ4のbgアニメーションリスト,
+        #ステージ5のbgアニメーションリスト,
+        #ステージ最終面のbgアニメーションリスト,
+        #]
+        #みたいな感じで書きます
+        self.bg_animation_master_list = [
+            self.bg_animation_list_mountain_region,
+            self.bg_animation_list_advance_base,
+            self.bg_animation_list_volcaninc_belt,
+            self.bg_animation_list_dummy,
+            self.bg_animation_list_dummy,
+            self.bg_animation_list_dummy,
+            self.bg_animation_list_dummy,
+            self.bg_animation_list_dummy,
+            self.bg_animation_list_dummy,
+            self.bg_animation_list_dummy,
+            self.bg_animation_list_dummy,
+            self.bg_animation_list_dummy,
+            self.bg_animation_list_dummy,
+            self.bg_animation_list_dummy,
+            self.bg_animation_list_dummy,
+            self.bg_animation_list_dummy,
+            ]
 
 

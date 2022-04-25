@@ -637,9 +637,9 @@ class func:
             self.bgy = 255
         
         if self.stage_loop == 2:
-            self.bgy += 16
+            self.bgy += 16 * self.height_screen_num #縦1置画面分のbgy値は16なので周回数を考慮して縦画面数分掛けたものを代入する
         elif self.stage_loop == 3:
-            self.bgy += 32
+            self.bgy += 32 * self.height_screen_num #縦1置画面分のbgy値は16なので周回数を考慮して縦画面数分掛けたものを代入する
         self.bg_chip = func.get_chrcode_tilemap(self,self.reference_tilemap,self.bgx,self.bgy)
         return(self,x,y,bg_chip)
 
@@ -663,9 +663,9 @@ class func:
             self.bgy = 255
         
         if self.stage_loop == 2:
-            self.bgy += 16
+            self.bgy += 16 * self.height_screen_num #縦1置画面分のbgy値は16なので周回数を考慮して縦画面数分掛けたものを代入する
         elif self.stage_loop == 3:
-            self.bgy += 32
+            self.bgy += 32 * self.height_screen_num #縦1置画面分のbgy値は16なので周回数を考慮して縦画面数分掛けたものを代入する
         
         self.bg_chip = func.get_chrcode_tilemap(self,self.reference_tilemap,self.bgx,self.bgy)
         #bgx,bgyの座標のキャラチップナンバーをゲット！
@@ -675,10 +675,14 @@ class func:
         
         return(self,x,y,bg_chip,collision_flag)
 
+    #背景マップチップに書き込む関数x,yはキャラ単位 x=(0~255) y=(0~255) n=(0~255)マップチップナンバー
+    def write_map_chip(self,x,y,n):
+        func.set_chrcode_tilemap(self,self.reference_tilemap,x,y + ((self.stage_loop - 1)* 16 * self.height_screen_num),n)
+
     #背景マップチップを消去する(NULLチップナンバーを書き込む) x,yはキャラ単位 x=(0~255) y=(0~15)
     def delete_map_chip(self,x,y):
         # func.set_chrcode_tilemap(self,self.reference_tilemap,x,y + (self.stage_loop - 1)* 16,0)#マップチップを消去する（0=何もない空白）を書き込む
-        func.set_chrcode_tilemap(self,self.reference_tilemap,x,y + (self.stage_loop - 1)* 16,self.null_bg_chip_num)
+        func.set_chrcode_tilemap(self,self.reference_tilemap,x,y + (self.stage_loop - 1)* 16 * self.height_screen_num,self.null_bg_chip_num)
 
     #背景(BGタイルマップのキャラチップ)を取得する (8方向フリースクロール専用)
     def get_bg_chip_free_scroll(self,x,y,bg_chip):
@@ -1412,6 +1416,7 @@ class func:
         self.atmospheric_entry_spark_flag = self.stage_data_list[self.stage_number - 1][11] #大気圏突入時の火花を発生させるかどうかのフラグをリストを参照して取得、変数に代入する
         self.null_bg_chip_num             = self.stage_data_list[self.stage_number - 1][12] #背景マップチップを消去するときに使うチップ番号をリストを参照して取得、変数に代入する
         self.bg_height                    = self.stage_data_list[self.stage_number - 1][13] #縦自由スクロールステージにおける背景の縦の高さ(BackGroundHeight)(自機はこのドット分だけBGマップを縦方向に自由に移動できると考えてくださいですの)をリストを参照して取得、変数に代入する
+        self.height_screen_num            = self.stage_data_list[self.stage_number - 1][14] #縦の画面数をリストを参照して取得、変数に代入する(MOUNTAIN_REGIONみたいなフリースクロールステージなどはダミー値の9999が入る)
 
     #ランクダウンさせる関数
     def rank_down(self):
