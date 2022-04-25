@@ -740,7 +740,7 @@ class App:
             elif self.stage_number == STAGE_VOLCANIC_BELT:
                                 #火山湖面ウェーブラスタースクロールの表示
                 graph.draw_raster_scroll(self,0)  #ラスタースクロール描画関数呼び出し背景一番奥の火山の真下で描画します
-            
+                
                 pyxel.bltm(-(self.scroll_count // 16) + 50,0                         ,TM2,  0*8,216*8   ,  256*8, 15*8,0)
                 
                 pyxel.bltm(-(self.scroll_count // 8) + 100,-self.camera_offset_y // 8,TM2,  0*8,239*8 -2,  256*8,120*8,0)

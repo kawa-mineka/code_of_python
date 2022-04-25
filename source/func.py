@@ -1359,8 +1359,6 @@ class func:
                 new_raster_scroll = Raster_scroll()
                 new_raster_scroll.update(0,RASTER_WAVE,0,RASTER_SCROLL_ON,    i,16-1,  0,0,   0,-89,  IMG0,   192,48+i,   6*8,1,    -0.08,13,    0,0.02,i*0.4)
                 self.raster_scroll.append(new_raster_scroll)  #火山の湖面ウェーブラスタースクロール用の横ライン(縦16ライン分)を育成する
-            
-
 
     #ラスタースクロールの表示のon/off(search_id,flag)
     def disp_control_raster_scroll(self,id,flag):
