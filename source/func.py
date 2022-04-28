@@ -711,6 +711,20 @@ class func:
     def write_map_chip_free_scroll(self,x,y,n):
         func.set_chrcode_tilemap(self,self.reference_tilemap,x,y,n)#マップチップナンバーnを座標x,yに書き込む
 
+    #背景マップ(BG)にアクセスする時に使用するself.bgx,self.bgyを0~255の間に収めるようにクリッピング処理する(-1とか256でタイルマップにアクセスするとエラーが出るため)
+    def clip_bgx_bgy(self):
+        #bgx,bgyのクリッピング処理
+        #bgxがMAPの外に存在するときは強制的にbgxを0または255にしちゃう(マイナスの値や256以上だとエラーになるため)
+        if  self.bgx < 0:
+            self.bgx = 0
+        if self.bgx > 255:
+            self.bgx = 255
+        #bgyがMAPの外に存在するときは強制的にbgyを0または255にしちゃう(マイナスの値や256以上だとエラーになるため)
+        if self.bgy < 0:
+            self.bgy = 0
+        if self.bgy > 255:
+                self.bgy = 255  
+
     #自機ショットの経験値を調べ可能な場合レベルアップをさせる関数
     def level_up_my_shot(self):
         if self.shot_exp > SHOT_EXP_MAXIMUM:  #自機ショットの経験値は最大経験値を超えないように補正してやります
