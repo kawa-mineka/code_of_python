@@ -252,7 +252,7 @@ class define_stage_data:
             [2843,EVENT_ENEMY,TWIN_ARROW,80,  130],
             [2844,EVENT_ENEMY,TWIN_ARROW,120,  130],
             
-            [3000,EVENT_SCROLL,SCROLL_SPEED_CHANGE_VERTICAL,0,-0.004],
+            [3000,EVENT_SCROLL,SCROLL_SPEED_CHANGE_VERTICAL,0,-0.0041],
             [3100,EVENT_CLOUD,CLOUD_STOP],
             [3110,EVENT_ENTRY_SPARK_ON_OFF,SPARK_OFF],
             
