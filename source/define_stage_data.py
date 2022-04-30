@@ -44,7 +44,7 @@ class define_stage_data:
         # 大気圏突入時の火花を表示するかどうかのフラグ
         # 背景マップチップを消去するときに使うチップ番号(主にマップスクロールで出来を出現させた後、その敵がいたマップチップをnull(消去)するときに使われます)]
         # 背景の縦幅(通常ステージは120で2画面分自由スクロールするステージなどは240になったりする)
-        # 縦方向の画面数(8方向スクロールのMOUNTAIN REGIONなどは任意の数字(使用されない),ADVACE_BASEなどは縦スクロールしないので1,VOLCANIC_BELTは縦に2画面分スクロールするので2が入る)
+        # 縦方向の画面数(8方向スクロールのMOUNTAIN REGIONなどは1,ADVACE_BASEなどは縦スクロールしないので1,VOLCANIC_BELTは縦に2画面分スクロールするので2が入る)
         self.stage_data_list = [
             [STAGE_MOUNTAIN_REGION,
             24,50,
@@ -55,7 +55,7 @@ class define_stage_data:
             SPARK_ON,
             0,
             WINDOW_H,
-            9999,],
+            1,],
             
             [STAGE_ADVANCE_BASE,
             24,50,

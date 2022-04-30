@@ -991,7 +991,7 @@ class graph:
 
     #BGチップデータ書き換えアニメーション実装のために作ったダミーテスト関数 画面左から2列目の縦1列を取得し、そのＢＧデータを画面左端1列目に表示する
     def draw_dummy_put_bg_xy(self):
-        if self.scroll_type == SCROLL_TYPE_8FREEWAY_SCROLL_AND_RASTER: #全方向フリースクロール＋ラスタースクロールの場合
+        if self.scroll_type == SCROLL_TYPE_8WAY_SCROLL_AND_RASTER: #全方向フリースクロール＋ラスタースクロールの場合
             for h in range(15): #縦は15キャラ分 8ドット*15キャラ=120ドット
                 self.get_bg_chip_free_scroll(8,h * 8,0)#画面左端＋１のマップチップのBGの数値を取得する
                 bg_num = "{:>3}".format(self.bg_chip)
