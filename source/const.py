@@ -401,6 +401,12 @@ SEARCH_LASER     = 2 #サーチレーザーＩＤナンバー
 HOMING_MISSILE   = 3 #ホーミングミサイルＩＤナンバー
 SHOCK_BUMPER     = 4 #ショックバンパーＩＤナンバー
 
+#クロータイプのIDナンバー定数定義###################################################
+ROLLING_CLAW     = 0      #ローリングクロー
+TRACE_CLAW       = 1      #トレースクロー
+FIX_CLAW         = 2      #フイックスクロー
+REVERSE_CLAW     = 3      #リバースクロー
+
 #難易度リストを参照するときに使用するインデックスナンバー定数定義 game_difficulty[ここで定義した定数]
 LIST_DIFFICULTY                   = 0 #難易度(難しさ)
 LIST_DIFFICULTY_TEXT              = 1 #難易度説明テキスト
@@ -962,19 +968,19 @@ TIME_COUNTER_TYPE_NUMBER_TIMES_DESTROYED =  2  #自機が破壊された回数
 TIME_COUNTER_TYPE_TOTAL_SCORE            =  3  #累計得点数
 
 #ウィンドウクラスのリスト関連で何もない時に使用する定数定義
-NO_TITLE_TEXT  = []
-NO_ITEM_TEXT   = []
+NO_TITLE_TEXT      = []
+NO_ITEM_TEXT       = []
 NO_ITEM_KANJI_TEXT = []
-NO_EDIT_TEXT   = []
-NO_ANIMATION_TEXT = []
-NO_SCROLL_TEXT = []
-NO_SCRIPT      = []
+NO_EDIT_TEXT       = []
+NO_ANIMATION_TEXT  = []
+NO_SCROLL_TEXT     = []
+NO_SCRIPT          = []
 
-NO_SHIP_LIST    = []
-NO_SHIP_MEDAL_LIST = []
-NO_WEAPON_LIST     = []
-NO_WEAPON_GRAPH_LIST = []
-NO_SUB_WEAPON_LIST   = []
+NO_SHIP_LIST             = []
+NO_SHIP_MEDAL_LIST       = []
+NO_WEAPON_LIST           = []
+NO_WEAPON_GRAPH_LIST     = []
+NO_SUB_WEAPON_LIST       = []
 NO_SUB_WEAPON_GRAPH_LIST = []
 NO_MISSILE_LIST          = []
 NO_MISSILE_GRAPH_LIST    = []
@@ -986,7 +992,7 @@ NO_FLAG_LIST             = []
 NO_GRAPH_LIST            = []
 NO_TIME_COUNTER_LIST     = []
 
-NO_EQUIP_MEDAL_GRAPH_LIST = []
+NO_EQUIP_MEDAL_GRAPH_LIST   = []
 NO_EQUIP_MEDAL_COMMENT_LIST = []
 
 NO_COMMENT_DISP_FLAG      = []

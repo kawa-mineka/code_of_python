@@ -22,7 +22,7 @@ class update_init:
     def game_start(self):
         self.score = 0               #スコア
         self.my_shield = 5           #自機のシールド耐久値
-        self.my_speed = 1            #自機の初期スピード
+        self.my_speed = SPEED1       #自機の初期スピード
         
         self.my_x = 24    #自機のx座標の初期値
         self.my_y = 50    #自機のy座標の初期値
@@ -36,7 +36,7 @@ class update_init:
         
         self.run_away_bullet_probability = 10 #敵が過ぎ去っていくときに弾を出す確率
         
-        self.game_playing_flag = FLAG_ON     #ゲームプレイフラグを「ゲームプレイ中」にする
+        self.game_playing_flag  = FLAG_ON    #ゲームプレイフラグを「ゲームプレイ中」にする
         self.select_cursor_flag = FLAG_OFF   #セレクトカーソルの移動更新は行わないのでフラグを降ろす
         
         self.select_shot_id = 0        #現在使用しているショットのIDナンバー(ナンバーの詳細はshot_levelを参照するのです！)
@@ -47,14 +47,15 @@ class update_init:
         self.shot_speed_magnification=1     #自機ショットのスピードに掛ける倍率(vxに掛け合わせる)  
         self.shot_rapid_of_fire = 1         #自機ショットの連射数  初期値は1連射
         
-        self.missile_exp = 0               #自機ミサイルの経験値 パワーアップアイテムを取ることにより経験値が溜まりミサイルのレベルが上がっていく
-        self.missile_level = 0             #自機ミサイルのレベル  0~2 0=右下のみ  1=右下左上前方2方向  2=右下右上  左下左上4方向
-        self.missile_speed_magnification=1 #自機ミサイルのスピードに掛ける倍率(vxに掛け合わせる)
-        self.missile_rapid_of_fire = 1     #自機ミサイルの連射数  初期値は1連射
+        self.missile_exp = 0                 #自機ミサイルの経験値 パワーアップアイテムを取ることにより経験値が溜まりミサイルのレベルが上がっていく
+        self.missile_level = 0               #自機ミサイルのレベル  0~2 0=右下のみ  1=右下左上前方2方向  2=右下右上  左下左上4方向
+        self.missile_speed_magnification = 1 #自機ミサイルのスピードに掛ける倍率(vxに掛け合わせる)
+        self.missile_rapid_of_fire = 1       #自機ミサイルの連射数  初期値は1連射
         
-        self.select_sub_weapon_id = 0      #現在使用しているサブウェポンのIDナンバー -1だと何も所有していない状態
-        self.sub_weapon_list = [1,1,1,1,1] #どのサブウェポンを所持しているかのリスト(インデックスオフセット値)
-                                        #0=テイルショット 1=ペネトレートロケット 2=サーチレーザー 3=ホーミングミサイル 4=ショックバンバー
+        self.select_sub_weapon_id = TAIL_SHOT   #現在使用しているサブウェポンのIDナンバー -1だと何も所有していない状態
+        self.sub_weapon_list = [1,1,1,1,1]      #どのサブウェポンを所持しているかのリスト(インデックスオフセット値)
+                                                #0=テイルショット 1=ペネトレートロケット 2=サーチレーザー 3=ホーミングミサイル 4=ショックバンバー
+        
         self.star_scroll_speed = 1          #背景の流れる星のスクロールスピード 1=通常スピード 0.5なら半分のスピードとなります
         #self.pow_item_bounce_num = 6       #パワーアップアイテムが画面の左端で跳ね返って戻ってくる回数
                                             #初期値は6でアップグレードすると増えていくです
@@ -71,9 +72,9 @@ class update_init:
             self.rnd_seed = pyxel.frame_count % 256 #線形合同法を使った乱数関数で使用する乱数種を現在のフレーム数とします(0~255の範囲)
             self.master_rnd_seed = self.rnd_seed    #リプレイデータ記録用として元となる乱数種を保存しておきます
         
-        self.claw_type = 0              # クローのタイプ 
+        self.claw_type = ROLLING_CLAW   # クローのタイプ 
                                         # 0=ローリングクロー 1=トレースクロー 2=フィックスクロー 3=リバースクロー
-        self.claw_number = 0            # クローの装備数 0=装備無し 1=1機 2=2機 3=3機 4=4機
+        self.claw_number = NO_CLAW      # クローの装備数 0=装備無し 1=1機 2=2機 3=3機 4=4機
         self.claw_difference = 360      # クロ―同士の角度間隔 1機=360 2機=180度 3機=120度 4機=90度
         self.trace_claw_index = 0       #トレースクロー（オプション）時のトレース用配列のインデックス値
         self.trace_claw_distance = 12   #トレースクロー同士の間隔
@@ -149,14 +150,14 @@ class update_init:
         self.my_vy = 0    #自機のy方向の移動量
         
         
-        self.present_repair_item_flag = 0 #ボス破壊後の爆発シーンでリペアアイテムを出すときに使用するフラグ 0=まだアイテム出してない 1=アイテム放出したよ～
-        self.rank_down_count = 0          #ダメージを受けて難易度別に設定された規定値まで行ったかどうかをカウントする変数
-        self.bg_cls_color = 0             #BGをCLS(クリアスクリーン)するときの色の指定(通常は0=黒色です) ゲーム中のイベントで変化することもあるのでステージスタート時でも初期化する
-        self.bg_transparent_color = 0     #BGタイルマップを敷き詰めるときに指定する透明色です          ゲーム中のイベントで変化することもあるのでステージスタート時でも初期化する
+        self.present_repair_item_flag = FLAG_OFF      #ボス破壊後の爆発シーンでリペアアイテムを出すときに使用するフラグ 0=まだアイテム出してない 1=アイテム放出したよ～
+        self.rank_down_count      = 0                 #ダメージを受けて難易度別に設定された規定値まで行ったかどうかをカウントする変数
+        self.bg_cls_color         = pyxel.COLOR_BLACK #BGをCLS(クリアスクリーン)するときの色の指定(通常は0=黒色です) ゲーム中のイベントで変化することもあるのでステージスタート時でも初期化する
+        self.bg_transparent_color = pyxel.COLOR_BLACK #BGタイルマップを敷き詰めるときに指定する透明色です            ゲーム中のイベントで変化することもあるのでステージスタート時でも初期化する
         
         self.my_boost_injection_count = 0 #ステージクリア後のブースト噴射用のカウンター
         
-        self.timer_flare_flag = 0         #タイマーフレア（触れると物質の時間経過が遅くなるフレア）を放出するかどうかのフラグ
+        self.timer_flare_flag = FLAG_OFF         #タイマーフレア（触れると物質の時間経過が遅くなるフレア）を放出するかどうかのフラグ
         
         self.move_mode_auto_x,self.move_mode_auto_y = 0,0 #自動移動モードがonの時はこの座標に向かって毎フレームごと自動で移動して行きます
         self.move_mode_auto_complete                = 0   #自動移動モードで目標座標まで移動したらこのフラグを立てます
@@ -180,13 +181,13 @@ class update_init:
         
         self.stage_count = 0          #ステージ開始から経過したフレームカウント数(1フレームは60分の1秒)常に整数だよ
         
-        self.side_scroll_speed              =1  #横スクロールするスピードの現在値が入ります 1フレームで1ドットスクロール(実数ですのん)
-        self.side_scroll_speed_set_value    =1  #横スクロールスピードの設定値(変化量の分だけ1フレームごと増加減させ、この設定値までもって行く)
-        self.side_scroll_speed_variation    =0  #横スクロールスピードを変化させる時の差分(変化量)
+        self.side_scroll_speed              = 1  #横スクロールするスピードの現在値が入ります 1フレームで1ドットスクロール(実数ですのん)
+        self.side_scroll_speed_set_value    = 1  #横スクロールスピードの設定値(変化量の分だけ1フレームごと増加減させ、この設定値までもって行く)
+        self.side_scroll_speed_variation    = 0  #横スクロールスピードを変化させる時の差分(変化量)
         
-        self.vertical_scroll_speed           =0  #縦スクロールするスピードの現在値が入ります 1フレームで1ドットスクロール(実数ですのん)
-        self.vertical_scroll_speed_set_value =0  #縦スクロールスピードの設定値(変化量の分だけ1フレームごと増加減させ、この設定値までもって行く)
-        self.vertical_scroll_speed_variation =0  #縦スクロールスピードを変化させる時の差分(変化量)
+        self.vertical_scroll_speed           = 0  #縦スクロールするスピードの現在値が入ります 1フレームで1ドットスクロール(実数ですのん)
+        self.vertical_scroll_speed_set_value = 0  #縦スクロールスピードの設定値(変化量の分だけ1フレームごと増加減させ、この設定値までもって行く)
+        self.vertical_scroll_speed_variation = 0  #縦スクロールスピードを変化させる時の差分(変化量)
         
         self.display_cloud_flag    = DISP_OFF    #背景の流れる雲を表示するかどうかのフラグ(DISP_OFF=表示しない DISP_ON=表示する)
         
@@ -195,16 +196,16 @@ class update_init:
         self.cloud_how_flow        = 0    #雲の流れ方
         self.cloud_flow_speed      = 0    #雲の流れるスピード
         
-        self.warning_dialog_flag         = 0 #WARINIGダイアログを表示するかどうかのフラグ
-        self.warning_dialog_display_time = 0 #WARINIGダイアログの表示時間(フレーム単位)
-        self.warning_dialog_logo_time    = 0 #WARNINGグラフイックロゴの表示に掛ける時間(フレーム単位)
-        self.warning_dialog_text_time    = 0 #WARNINGテキスト表示に掛ける時間(フレーム単位)
+        self.warning_dialog_flag         = FLAG_OFF #WARINIGダイアログを表示するかどうかのフラグ
+        self.warning_dialog_display_time = 0        #WARINIGダイアログの表示時間(フレーム単位)
+        self.warning_dialog_logo_time    = 0        #WARNINGグラフイックロゴの表示に掛ける時間(フレーム単位)
+        self.warning_dialog_text_time    = 0        #WARNINGテキスト表示に掛ける時間(フレーム単位)
         
-        self.stage_clear_dialog_flag         = 0 #STAGE CLEARダイアログを表示するかどうかのフラグ
-        self.stage_clear_dialog_display_time = 0 #STAGE CLEARダイアログの表示時間(フレーム単位)
-        self.stage_clear_dialog_logo_time1   = 0 #STAGE CLEARグラフイックロゴの表示に掛ける時間その１(フレーム単位)
-        self.stage_clear_dialog_logo_time2   = 0 #STAGE CLEARグラフイックロゴの表示に掛ける時間その２(フレーム単位)
-        self.stage_clear_dialog_text_time    = 0 #STAGE CLEARテキスト表示に掛ける時間(フレーム単位)
+        self.stage_clear_dialog_flag         = FLAG_OFF #STAGE CLEARダイアログを表示するかどうかのフラグ
+        self.stage_clear_dialog_display_time = 0        #STAGE CLEARダイアログの表示時間(フレーム単位)
+        self.stage_clear_dialog_logo_time1   = 0        #STAGE CLEARグラフイックロゴの表示に掛ける時間その１(フレーム単位)
+        self.stage_clear_dialog_logo_time2   = 0        #STAGE CLEARグラフイックロゴの表示に掛ける時間その２(フレーム単位)
+        self.stage_clear_dialog_text_time    = 0        #STAGE CLEARテキスト表示に掛ける時間(フレーム単位)
         
         self.event_index = 0                #イベントリストのインデックス値（イベントリストが現在どの位置にあるのかを示す値です）
         self.type_check_quantity = 0        #特定のショットタイプがリストにどれだけあるのかチェックして数えた数がここに入る
@@ -213,9 +214,9 @@ class update_init:
         self.fade_in_out_counter = 0        #フェードイン＆フェードアウト用エフェクトスクリーン用のカウンタ（基本的にx軸(キャラクター単位）の値です)
                                             #0~19 で 19になった状態が一番右端を描画したという事になります
                                             #19になった時点で完了となります
-        self.fade_complete_flag = 0             #フェードイン＆フェードアウトが完了したかのフラグが入る所(0=まだ終わっていない 1=完了！)
-        self.shadow_in_out_counter = 0          #シャドウイン＆シャドウアウト用エフェクトスクリーン用のカウンタ
-        self.shadow_in_out_complete_flag = 0    #シャドウイン＆シャドウアウトが完了したかのフラグが入る所(0=まだ終わっていない 1=完了！)
+        self.fade_complete_flag          = FLAG_OFF #フェードイン＆フェードアウトが完了したかのフラグが入る所(0=まだ終わっていない 1=完了！)
+        self.shadow_in_out_counter       = 0        #シャドウイン＆シャドウアウト用エフェクトスクリーン用のカウンタ
+        self.shadow_in_out_complete_flag = FLAG_OFF #シャドウイン＆シャドウアウトが完了したかのフラグが入る所(0=まだ終わっていない 1=完了！)
         
         self.current_formation_id = 1   #現在の敵編隊のＩＤナンバー（0は単独機で編隊群は1からの数字が割り当てられます）
                                         #編隊が1編隊出現するごとにこの数字が1増えていく
@@ -224,39 +225,39 @@ class update_init:
         self.fast_forward_destruction_count = 0     #破壊するべき編隊の総数」が1以上ならば編隊を破壊すると次の編隊の出現カウントがこの数値だけ少なくなり出現が早まります
         self.add_appear_flag = FLAG_OFF             #早回しの条件をすべて満たしたときに建つフラグです、このフラグが立った時、イベントリストに「EVENT_ADD_APPEAR_ENEMY」があったらそこで敵編隊を追加発生させます
         
-        self.my_rolling_flag = 0    #0=通常の向き  1=下方向に移動中のキャラチップ使用  2=上方向に移動中のキャラチップ使用
-        self.my_moved_flag = 0      #自機が移動したかどうかのフラグ（トレースクローの時、自機のＸＹ座標を履歴リストに記録するのか？しないのか？で使う）
-                                    #0=自機は止まっているので座標履歴リストに記録はしない 
-                                    #1=自機は移動したので座標履歴リストに記録する
+        self.my_rolling_flag = 0        #0=通常の向き  1=下方向に移動中のキャラチップ使用  2=上方向に移動中のキャラチップ使用
+        self.my_moved_flag = FLAG_OFF   #自機が移動したかどうかのフラグ（トレースクローの時、自機のＸＹ座標を履歴リストに記録するのか？しないのか？で使う）
+                                        #0=自機は止まっているので座標履歴リストに記録はしない 
+                                        #1=自機は移動したので座標履歴リストに記録する
         
         self.invincible_counter = 0 #無敵時間(単位はフレーム)のカウンタ 0の時以外は無敵状態です
         self.boss_battle_time = 0   #ボスとの戦闘時間を初期化
         
-        self.enemy_bound_collision_flag = 0 #ホッパー君が地面に接触してバウンドしたかどうかのフラグ(デバッグ用に使います)
-        self.mountain_x = 0                 #8wayフリースクロール＋ラスタースクロール時の背景に表示される山のBGX座標用の変数です（デバッグ様に使用します）
-        self.cp = 0                         #外積計算用の変数(何故か判らないけど関数内で宣言せずに使うとintじゃなくてtupleになってしまうので・・・何故？)
-        self.point_inside_triangle_flag = 0 #三角形の中に点が存在するかを判別する関数用のフラグを初期化
+        self.enemy_bound_collision_flag = FLAG_OFF #ホッパー君が地面に接触してバウンドしたかどうかのフラグ(デバッグ用に使います)
+        self.mountain_x = 0                        #8wayフリースクロール＋ラスタースクロール時の背景に表示される山のBGX座標用の変数です（デバッグ様に使用します）
+        self.cp = 0                                #外積計算用の変数(何故か判らないけど関数内で宣言せずに使うとintじゃなくてtupleになってしまうので・・・何故？)
+        self.point_inside_triangle_flag = FLAG_OFF #三角形の中に点が存在するかを判別する関数用のフラグを初期化
         
         #リスト群の初期化#############################################################################
         #新しいクラスを作った時はここで必ず初期化するコードを記述する事！！！！！！
         #リストは初期化しないと使えないっポイ！？ぞ・・・っと・・・・・・
         #############################################################################################
-        self.shots = []                #自機弾のリスト
-        self.missile = []              #ミサイルのリスト
-        self.claw_shot = []            #クローの弾のリスト
-        self.enemy = []                #敵のリスト
-        self.enemy_shot = []           #敵の弾のリスト
-        self.obtain_item = []          #取得アイテム類のリスト(パワーアップカプセルなど)
-        self.stars = []                #背景の流れる星々のリスト         当たり判定はありません
-        self.explosions = []           #爆発パターン群のリスト           当たり判定はありません
-        self.particle = []             #パーティクル（火花の粒子）のリスト  当たり判定はありません
-        self.background_object = []    #背景オブジェクトのリスト         当たり判定はありません
-        self.window = []               #メッセージウィンドウのリスト       当たり判定はありません
-        self.claw_coordinates = []     #自機クロー（トレースモード）のxy座標リスト まぁオプションのxy座標が入るリストです
-        self.enemy_formation = []      #敵の編隊数のＩＤと出現時の総数と現在の生存数が入るリストです
+        self.shots                = [] #自機弾のリスト
+        self.missile              = [] #ミサイルのリスト
+        self.claw_shot            = [] #クローの弾のリスト
+        self.enemy                = [] #敵のリスト
+        self.enemy_shot           = [] #敵の弾のリスト
+        self.obtain_item          = [] #取得アイテム類のリスト(パワーアップカプセルなど)
+        self.stars                = [] #背景の流れる星々のリスト         当たり判定はありません
+        self.explosions           = [] #爆発パターン群のリスト           当たり判定はありません
+        self.particle             = [] #パーティクル（火花の粒子）のリスト  当たり判定はありません
+        self.background_object    = [] #背景オブジェクトのリスト         当たり判定はありません
+        self.window               = [] #メッセージウィンドウのリスト       当たり判定はありません
+        self.claw_coordinates     = [] #自機クロー（トレースモード）のxy座標リスト まぁオプションのxy座標が入るリストです
+        self.enemy_formation      = [] #敵の編隊数のＩＤと出現時の総数と現在の生存数が入るリストです
         self.event_append_request = [] #イベント追加リクエストが入るリストです(敵などの臨時追加発注発生）
-        self.boss = []                 #ボスのリスト
-        self.raster_scroll = []        #ラスタースクロール用のリスト
+        self.boss                 = [] #ボスのリスト
+        self.raster_scroll        = [] #ラスタースクロール用のリスト
         
         define_stage_data.event_list(self)        #各ステージのイベントリストの定義関数の呼び出し
         define_stage_data.game_event_list(self)   #ゲーム全体のイベントリストの定義関数の呼び出し

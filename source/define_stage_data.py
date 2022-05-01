@@ -1,4 +1,5 @@
-from const import *         #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
+import pyxel        #カラーコードだけ使用したいのでインポート
+from const import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
 
 class define_stage_data:
     def __init__(self):
@@ -103,7 +104,7 @@ class define_stage_data:
         #   VERTICAL_SCROLL_START   縦スクロールの開始
         #   VERTICAL_SCROLL_STOP    縦スクロールのスタート
         #EVENT_DISPLAY_STAR      背景星スクロールのon/off [0=off/1=on]
-        #EVENT_CHANGE_BG_CLS_COLOR 背景でまず最初に塗りつぶす色の指定 0~15 pyxelのカラーコード
+        #EVENT_CHANGE_BG_CLS_COLOR         背景でまず最初に塗りつぶす色の指定 0~15 pyxelのカラーコード
         #EVENT_CHANGE_BG_TRANSPARENT_COLOR 背景マップチップを敷き詰める時に使用する透明色の指定 0~15 pyxelのカラーコード
         #EVENT_CLOUD            背景の雲の制御
         #   CLOUD_NUM_SET          雲のパラメータ設定[発生させる間隔(単位はフレーム),
@@ -200,8 +201,8 @@ class define_stage_data:
             [1459,EVENT_ENEMY,SAISEE_RO,162, 90   ],
             
             [1500,EVENT_DISPLAY_STAR,           DISP_OFF],
-            [1510,EVENT_CHANGE_BG_CLS_COLOR,        12],
-            [1560,EVENT_CHANGE_BG_TRANSPARENT_COLOR,  12],
+            [1510,EVENT_CHANGE_BG_CLS_COLOR,        pyxel.COLOR_CYAN],
+            [1560,EVENT_CHANGE_BG_TRANSPARENT_COLOR,pyxel.COLOR_CYAN],
             
             [1561,EVENT_ENEMY,SAISEE_RO,170, 10   ],
             [1562,EVENT_ENEMY,SAISEE_RO,169, 20   ],
@@ -230,7 +231,7 @@ class define_stage_data:
             
             [2300,EVENT_SCROLL,SCROLL_SPEED_CHANGE,0.5,-0.01],
             
-            [2310,EVENT_RASTER_SCROLL,RASTER_SCROLL_OFF,1],
+            [2310,EVENT_RASTER_SCROLL,RASTER_SCROLL_OFF,ID01],
             
             [2340,EVENT_ENEMY,TWIN_ARROW,160,  20],
             [2341,EVENT_ENEMY,TWIN_ARROW,160,  60],
@@ -263,51 +264,6 @@ class define_stage_data:
             [3340,EVENT_BOSS],
             
             [3420,EVENT_SCROLL,SCROLL_SPEED_CHANGE,4.0,0.001],
-            
-            
-            
-            [99999999],]
-        self.event_list_stage_mountain_region_l2= [
-            
-            [ 300,EVENT_SCROLL,SCROLL_NUM_SET,    2,0.5,        0.5,0.01],
-            [ 350,EVENT_SCROLL,SCROLL_NUM_SET,  2.5,0.5,        0.5,0.01],
-            [ 400,EVENT_SCROLL,SCROLL_NUM_SET,    3,0.5,        0.5,0.01],
-            [ 450,EVENT_SCROLL,SCROLL_NUM_SET,  3.5,0.5,        0.5,0.01],
-            [ 500,EVENT_SCROLL,SCROLL_NUM_SET,    4,0.5,        0.5,0.01],
-            [ 600,EVENT_SCROLL,SCROLL_NUM_SET,    5,0.5,        0.5,0.01],
-            [ 700,EVENT_SCROLL,SCROLL_NUM_SET,    6,0.5,        0.5,0.01],
-            [ 800,EVENT_SCROLL,SCROLL_NUM_SET,    7,0.5,        0.5,0.01],
-            [ 900,EVENT_SCROLL,SCROLL_NUM_SET,    8,0.5,        0.5,0.01],
-            
-            [1000,EVENT_CLOUD,CLOUD_NUM_SET,6,1,-0.25,1],
-            
-            [1010,EVENT_CLOUD,CLOUD_START],
-            
-            [1500,EVENT_DISPLAY_STAR,           0],
-            [1510,EVENT_CHANGE_BG_CLS_COLOR,        12],
-            [1560,EVENT_CHANGE_BG_TRANSPARENT_COLOR,  12],
-            
-            
-            [1600,EVENT_CLOUD,CLOUD_NUM_SET,6,2,-0.4,1],
-            
-            [2300,EVENT_SCROLL,SCROLL_SPEED_CHANGE,0.5,-0.01],
-            
-            [2310,EVENT_RASTER_SCROLL,RASTER_SCROLL_OFF,1],
-            
-            [3000,EVENT_SCROLL,SCROLL_SPEED_CHANGE_VERTICAL,0,-0.004],
-            [3100,EVENT_CLOUD,CLOUD_STOP],
-            [3200,EVENT_SCROLL,SCROLL_SPEED_CHANGE,3.0,0.0001],
-            [4000,EVENT_SCROLL,SCROLL_SPEED_CHANGE_VERTICAL,0.05,0.01],
-            [5000,EVENT_SCROLL,SCROLL_SPEED_CHANGE_VERTICAL,-0.05,-0.01],
-            [6000,EVENT_SCROLL,SCROLL_SPEED_CHANGE_VERTICAL,0.05,0.01],
-            [7000,EVENT_SCROLL,SCROLL_SPEED_CHANGE_VERTICAL,-0.05,-0.01],
-            [8000,EVENT_SCROLL,SCROLL_SPEED_CHANGE_VERTICAL,0.05,0.01],
-            [9000,EVENT_SCROLL,SCROLL_SPEED_CHANGE_VERTICAL,-0.05,-0.01],
-            [11000,EVENT_SCROLL,SCROLL_SPEED_CHANGE_VERTICAL,0.05,0.01],
-            [14000,EVENT_SCROLL,SCROLL_SPEED_CHANGE_VERTICAL,-0.05,-0.01],
-            
-            
-            
             [99999999],]
         
         self.event_list_stage_mountain_region_dummy= [
@@ -423,7 +379,7 @@ class define_stage_data:
         
         self.event_list_stage_volcanic_belt_l1= [
             
-            [   5,EVENT_CHANGE_BG_TRANSPARENT_COLOR,  15],
+            [   5,EVENT_CHANGE_BG_TRANSPARENT_COLOR,  pyxel.COLOR_PEACH],
             [  10,EVENT_FAST_FORWARD_NUM,4,30],
             [ 200,EVENT_ENEMY,CIR_COIN    ,160, 10   ,6],
             [ 500,EVENT_ENEMY,CIR_COIN    ,160, 90   ,6],

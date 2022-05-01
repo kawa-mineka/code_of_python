@@ -369,9 +369,9 @@ class update_ship:
     #自機クローの移動関連###############################################################################################################
     #クローの更新
     def claw(self):
-        if   self.claw_type == 0:#ローリングクローの時のみ実行
+        if   self.claw_type == ROLLING_CLAW: #ローリングクローの時のみ実行
             #ひとつ前を回るクローとの回転角度の差の計算処理
-            if self.claw_number == 4:#クロー4機の時の処理
+            if self.claw_number   == 4:#クロー4機の時の処理
                 self.claw[0].angle_difference = self.claw[1].degree - self.claw[0].degree
                 self.claw[1].angle_difference = self.claw[2].degree - self.claw[1].degree
                 self.claw[2].angle_difference = self.claw[3].degree - self.claw[2].degree
@@ -431,13 +431,13 @@ class update_ship:
                     self.claw[i].posx = self.claw[i].posx + 0.2 * ((self.my_x + self.claw[i].offset_x) - self.claw[i].posx)
                     self.claw[i].posy = self.claw[i].posy + 0.2 * ((self.my_y + self.claw[i].offset_y) - self.claw[i].posy)
             
-        elif self.claw_type == 1:#トレースクローの時のみ実行
+        elif self.claw_type == TRACE_CLAW:   #トレースクローの時のみ実行
             for i in range(self.claw_number):#iの値は0からクローの数まで増えてイクです  ハイ！
                 self.claw[i].status = 1#トレースクローは出現と同時に移動開始のステータスにする
                 self.claw[i].posx = self.claw_coordinates[self.trace_claw_index + (TRACE_CLAW_BUFFER_SIZE - self.trace_claw_distance) - self.trace_claw_distance * i].posx#クローの座標をオフセット値のＸＹ座標とする
                 self.claw[i].posy = self.claw_coordinates[self.trace_claw_index + (TRACE_CLAW_BUFFER_SIZE - self.trace_claw_distance) - self.trace_claw_distance * i].posy
             
-        elif self.claw_type == 2:#フィックスクローの時のみ実行
+        elif self.claw_type == FIX_CLAW:     #フィックスクローの時のみ実行
             claw_count = len(self.claw)#クローの数を数える
             for i in range(claw_count):
                 if self.claw[i].status == 0:#ステータスが(0)の場合はフイックスクローの初期位置まで動いていく（自機の上か下）
@@ -469,7 +469,7 @@ class update_ship:
                         self.claw[i].posx = self.claw[i].posx + 0.1 * (self.my_x + self.claw[i].offset_x - self.claw[i].posx)
                         self.claw[i].posy = self.claw[i].posy + 0.1 * (self.my_y + (self.claw[i].offset_y * self.fix_claw_magnification) - self.claw[i].posy)
             
-        elif self.claw_type == 3:#リバースクローの時のみ実行
+        elif self.claw_type == REVERSE_CLAW: #リバースクローの時のみ実行
             claw_count = len(self.claw)#クローの数を数える
             for i in range(claw_count):
                 if self.claw[i].status == 0:#ステータスが(0)の場合はリバースクローの初期位置まで動いていく（自機の上か下）
@@ -524,43 +524,43 @@ class update_ship:
 
     #クローの追加
     def append_claw(self):
-        if   len(self.claw) == 0:#1機目のクローの発生
+        if   len(self.claw) == NO_CLAW:#1機目のクローの発生
             posx = self.my_x
             posy = self.my_y
             new_claw = Claw()
             self.claw_number = 1
             self.claw_difference = 360 / self.claw_number
-            new_claw.update(0,   self.claw_type,0,    posx,posy,  0,-1,   -1,-1,  -1,0,      0,0,  0,-12,  -2,-12,    -2,-12,   -12,-1,  0,0,    90,0,2,12,    self.claw_difference,0,   0,1,   0)
+            new_claw.update(ID00,   self.claw_type,0,    posx,posy,  0,-1,   -1,-1,  -1,0,      0,0,  0,-12,  -2,-12,    -2,-12,   -12,-1,  0,0,    90,0,2,12,    self.claw_difference,0,   0,1,   0)
             self.claw.append(new_claw)
             return
         
-        if len(self.claw) == 1:#2機目のクローの発生
+        if len(self.claw) == ONE_CLAW:#2機目のクローの発生
             posx = self.my_x
             posy = self.my_y
             new_claw = Claw()
             self.claw_number = 2
             self.claw_difference = 360 / self.claw_number
-            new_claw.update(1,   self.claw_type,0,    posx,posy,  0,-1,   -1,1,  0,-1,       0,0, 0,-12,    -2,12,  -2,12,   -3,-9, 0,0,       90,0,2,12,    self.claw_difference,0,   0,1,   0)
+            new_claw.update(ID01,   self.claw_type,0,    posx,posy,  0,-1,   -1,1,  0,-1,       0,0, 0,-12,    -2,12,  -2,12,   -3,-9, 0,0,       90,0,2,12,    self.claw_difference,0,   0,1,   0)
             self.claw.append(new_claw)
             return
         
-        if len(self.claw) == 2:#3機目のクローの発生
+        if len(self.claw) == TWO_CLAW:#3機目のクローの発生
             posx = self.my_x
             posy = self.my_y
             new_claw = Claw()
             self.claw_number = 3
             self.claw_difference = 360 / self.claw_number
-            new_claw.update(2,   self.claw_type,0,    posx,posy,  0,-1,   -1,-1,  0,1,       0,0,  0,-12,    -6,-24, -6,-24,  -3,8,   0,0,      90,0,2,12,    self.claw_difference,0,   0,1,    0)
+            new_claw.update(ID02,   self.claw_type,0,    posx,posy,  0,-1,   -1,-1,  0,1,       0,0,  0,-12,    -6,-24, -6,-24,  -3,8,   0,0,      90,0,2,12,    self.claw_difference,0,   0,1,    0)
             self.claw.append(new_claw)
             return
         
-        if len(self.claw) == 3:#4機目のクローの発生
+        if len(self.claw) == THREE_CLAW:#4機目のクローの発生
             posx = self.my_x
             posy = self.my_y
             new_claw = Claw()
             self.claw_number = 4
             self.claw_difference = 360 / self.claw_number
-            new_claw.update(3,   self.claw_type,0,    posx,posy,  0,-1,    -1,1,   -1,0,       0,0, 0,-12,    -6,24,  -6,24,  -12,-1,     0,0,       90,0,2,12,   self.claw_difference,0,    0,1,      0)
+            new_claw.update(ID03,   self.claw_type,0,    posx,posy,  0,-1,    -1,1,   -1,0,       0,0, 0,-12,    -6,24,  -6,24,  -12,-1,     0,0,       90,0,2,12,   self.claw_difference,0,    0,1,      0)
             self.claw.append(new_claw)
             return
 
@@ -572,12 +572,12 @@ class update_ship:
                     claw_count = len(self.claw)#クローの数を数える
                     for i in range(claw_count):
                         if self.claw[i].status != 0:#ステータスが0の時は初期回転位置や初期固定位置に移動中なので弾は発射しない
-                            new_claw_shot = Shot()
-                            if self.claw_type == 3:#クロータイプがリバースクローの時はクローショットの方向をreverse_claw_svx,reverse_claw_svyにして8方向弾にする
-                                new_claw_shot.update(0,self.claw[i].posx,self.claw[i].posy,    self.reverse_claw_svx,self.reverse_claw_svy,   8,8,   0,  1,1)
+                            new_claw_shot = Claw_shot()
+                            if self.claw_type == REVERSE_CLAW:#クロータイプがリバースクローの時はクローショットの方向をreverse_claw_svx,reverse_claw_svyにして8方向弾にする
+                                new_claw_shot.update(0,self.claw[i].posx,self.claw[i].posy,    self.reverse_claw_svx,self.reverse_claw_svy,   8,8,   0,0,  1,1)
                                 self.claw_shot.append(new_claw_shot)
                             else:#リバースクロー以外のクローは全て前方に弾を撃つ
-                                new_claw_shot.update(0,self.claw[i].posx,self.claw[i].posy,    3,0,   8,8,   0,  1,1)
+                                new_claw_shot.update(0,self.claw[i].posx,self.claw[i].posy,    3,0,   8,8,   0,0,  1,1)
                                 self.claw_shot.append(new_claw_shot)
 
 
@@ -591,8 +591,8 @@ class update_ship:
     #クロースタイルの変更
     def change_claw_style(self):
         self.claw_type += 1#クローの種類を変化させる
-        if self.claw_type > 3:#もしtype3のリバースタイプを超えてしまったら0のローリングタイプにする
-            self.claw_type = 0
+        if self.claw_type > REVERSE_CLAW: #もしtype3のリバースタイプを超えてしまったら0のローリングタイプにする
+            self.claw_type = ROLLING_CLAW
         
         claw_count = len(self.claw)
         for i in reversed(range(claw_count)):
