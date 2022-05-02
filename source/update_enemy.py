@@ -268,7 +268,13 @@ class update_enemy:
                 
             elif self.bg_chip == BG_MUU_ROBO:        #マップチップがムーロボのとき(地面を左右に動きながらチョット進んできて弾を撃つ移動砲台,何故か宇宙なのに重力の影響を受けて下に落ちたりもします)
                 new_enemy = Enemy()
-                new_enemy.update(15,ID00,ENEMY_STATUS_NORMAL,ENEMY_ATTCK_ANY,   WINDOW_W,i * 8,0,0,       0,0,0,0,0,0,0,0,       0,0,0,0,0,0,0,0,0,0,    0,0,     0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0,     SIZE_8,SIZE_8,   0.8*self.enemy_speed_mag,0,    -1,    HP01 * self.enemy_hp_mag,  70,80,    E_SIZE_NORMAL,   70,80,0,     0,0,0,0,       E_NO_POW,ID00 ,0,0,0,    0  ,0,0,0,    0,MOVING_OBJ,  PT01,PT01,PT01,  PT01,PT01,PT01)
+                new_enemy.update(MUU_ROBO,ID00,ENEMY_STATUS_NORMAL,ENEMY_ATTCK_ANY,   WINDOW_W,i * 8,0,0,       0,0,0,0,0,0,0,0,       0,0,0,0,0,0,0,0,0,0,    0,0,     0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0,     SIZE_8,SIZE_8,   0.8*self.enemy_speed_mag,0,    -1,    HP01 * self.enemy_hp_mag,  70,80,    E_SIZE_NORMAL,   70,80,0,     0,0,0,0,       E_NO_POW,ID00 ,0,0,0,    0  ,0,0,0,    0,MOVING_OBJ,  PT01,PT01,PT01,  PT01,PT01,PT01)
+                self.enemy.append(new_enemy)
+                func.delete_map_chip(self,self.bgx,i)#敵を出現させたら（「敵出現」情報）のキャラチップは不要なのでそこに（0=何もない空白）を書き込む
+                
+            elif self.bg_chip == BG_ROLL_BLITZ:      #マップチップがロールブリッツのとき(画面内のあらかじめ決められた場所へスプライン曲線で移動)
+                new_enemy = Enemy()
+                new_enemy.update(ROLL_BLITZ,ID00,ENEMY_STATUS_MOVE_COORDINATE_INIT,ENEMY_ATTCK_ANY,    WINDOW_W,i * 8,0,0,     0,0,0,0,0,0,0,0,       0,0,0,0,0,0,0,0,0,0,    0,0,     0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0,    SIZE_8,SIZE_8,   0,1,   0,    HP01,  0,0,    E_SIZE_NORMAL,   0,0,0,    0,0,0,0,      E_NO_POW,   ID00    ,0,0,0,    0  ,0,0,0,    0,AERIAL_OBJ,  PT01,PT01,PT01,  PT01,PT01,PT01)
                 self.enemy.append(new_enemy)
                 func.delete_map_chip(self,self.bgx,i)#敵を出現させたら（「敵出現」情報）のキャラチップは不要なのでそこに（0=何もない空白）を書き込む
 
@@ -726,17 +732,20 @@ class update_enemy:
                     if t >= 1: #tの値が1になった時は現在の座標が移動目的座標と同じ座標になった状況となるので・・・(行き過ぎ防止で念のため１以上で判別してます)
                         self.enemy[i].obj_time = 0    #タイムフレーム番号を0にしてリセットする
                         self.enemy[i].move_index += 1 #目的座標のリストのインデックスを1進める
+                    
                     if self.enemy_move_data17[self.enemy[i].move_index][0] == 9999:#x座標がエンドコード9999の場合は
                         self.enemy[i].move_index = 0 #リストインデックス値を0にしてリセットする
-                    enemy_type = self.enemy[i].enemy_type
-                    func.enemy_get_bezier_curve_coordinate(self,enemy_type,i) #敵をベジェ曲線で移動させるために必要な座標をリストから取得する関数の呼び出し
-                    t = self.enemy[i].obj_time / self.enemy[i].obj_totaltime #違う座標データ群を読み込んだのでt値を再計算してやる
+                        
+                        enemy_type = self.enemy[i].enemy_type
+                        func.enemy_get_bezier_curve_coordinate(self,enemy_type,i) #敵をベジェ曲線で移動させるために必要な座標をリストから取得する関数の呼び出し
+                        t = self.enemy[i].obj_time / self.enemy[i].obj_totaltime #違う座標データ群を読み込んだのでt値を再計算してやる
                     
-                    #新たに移動先を設定した時は自機狙いの弾を撃つ
-                    ex,ey = self.enemy[i].posx,self.enemy[i].posy
-                    div_type,div_count,div_num,stop_count = 0,0,0,0
-                    accel = 1.01
-                    func.enemy_aim_bullet_rank(self,ex,ey,div_type,div_count,div_num,stop_count,accel)
+                    if self.enemy[i].posx < 90: #x座標が90より小さい時は
+                        #自機狙いの弾を撃つ
+                        ex,ey = self.enemy[i].posx,self.enemy[i].posy
+                        div_type,div_count,div_num,stop_count = 0,0,0,0
+                        accel = 1
+                        func.enemy_aim_bullet_rank(self,ex,ey,div_type,div_count,div_num,stop_count,accel)
                     
                     #ベジェ曲線で移動させる方法の説明はボスキャラの所と同じなのでそれを参考にしてくださいな
                     p1x = (1-t) * self.enemy[i].ax + t * self.enemy[i].qx

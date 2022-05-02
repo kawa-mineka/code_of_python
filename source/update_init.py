@@ -36,10 +36,10 @@ class update_init:
         
         self.run_away_bullet_probability = 10 #敵が過ぎ去っていくときに弾を出す確率
         
-        self.game_playing_flag  = FLAG_ON    #ゲームプレイフラグを「ゲームプレイ中」にする
-        self.select_cursor_flag = FLAG_OFF   #セレクトカーソルの移動更新は行わないのでフラグを降ろす
+        self.game_playing_flag  = FLAG_ON   #ゲームプレイフラグを「ゲームプレイ中」にする
+        self.select_cursor_flag = FLAG_OFF  #セレクトカーソルの移動更新は行わないのでフラグを降ろす
         
-        self.select_shot_id = 0        #現在使用しているショットのIDナンバー(ナンバーの詳細はshot_levelを参照するのです！)
+        self.select_shot_id = 0             #現在使用しているショットのIDナンバー(ナンバーの詳細はshot_levelを参照するのです！)
         
         self.shot_exp = 0                   #自機ショットの経験値 パワーアップアイテムを取ることにより経験値がたまりショットのレベルが上がっていく
         self.shot_level = 0                 #自機ショットのレベル  0~3バルカンショット  4=レーザー 5=ツインレーザー 6=3WAYレーザー
@@ -110,7 +110,7 @@ class update_init:
         
         self.damaged_flag                  = FLAG_OFF       #自機がダメージを受けたかどうかのフラグをOFFにします(スコアスターの連続取得時の倍率上昇で使用するフラグです)
         self.score_star_magnification      = 1              #ゲームスタート時のスコアスター取得得点倍率は1
-
+        
         if self.start_claw == ONE_CLAW:    #ゲーム開始時クローの数が1の時は
             update_ship.append_claw(self)  #クロー追加ボーナスの数値の回数分、追加関数を呼び出す
         elif self.start_claw == TWO_CLAW:  #ゲーム開始時クローの数が2の時は
@@ -242,22 +242,24 @@ class update_init:
         #新しいクラスを作った時はここで必ず初期化するコードを記述する事！！！！！！
         #リストは初期化しないと使えないっポイ！？ぞ・・・っと・・・・・・
         #############################################################################################
-        self.shots                = [] #自機弾のリスト
-        self.missile              = [] #ミサイルのリスト
-        self.claw_shot            = [] #クローの弾のリスト
-        self.enemy                = [] #敵のリスト
-        self.enemy_shot           = [] #敵の弾のリスト
-        self.obtain_item          = [] #取得アイテム類のリスト(パワーアップカプセルなど)
-        self.stars                = [] #背景の流れる星々のリスト         当たり判定はありません
-        self.explosions           = [] #爆発パターン群のリスト           当たり判定はありません
-        self.particle             = [] #パーティクル（火花の粒子）のリスト  当たり判定はありません
-        self.background_object    = [] #背景オブジェクトのリスト         当たり判定はありません
-        self.window               = [] #メッセージウィンドウのリスト       当たり判定はありません
-        self.claw_coordinates     = [] #自機クロー（トレースモード）のxy座標リスト まぁオプションのxy座標が入るリストです
-        self.enemy_formation      = [] #敵の編隊数のＩＤと出現時の総数と現在の生存数が入るリストです
-        self.event_append_request = [] #イベント追加リクエストが入るリストです(敵などの臨時追加発注発生）
-        self.boss                 = [] #ボスのリスト
-        self.raster_scroll        = [] #ラスタースクロール用のリスト
+        self.shots                      = [] #自機弾のリスト
+        self.missile                    = [] #ミサイルのリスト
+        self.claw_shot                  = [] #クローの弾のリスト
+        self.enemy                      = [] #敵のリスト
+        self.enemy_shot                 = [] #敵の弾のリスト
+        self.obtain_item                = [] #取得アイテム類のリスト(パワーアップカプセルなど)
+        self.stars                      = [] #背景の流れる星々のリスト         当たり判定はありません
+        self.explosions                 = [] #爆発パターン群のリスト           当たり判定はありません
+        self.particle                   = [] #パーティクル（火花の粒子）のリスト  当たり判定はありません
+        self.background_object          = [] #背景オブジェクトのリスト         当たり判定はありません
+        self.window                     = [] #メッセージウィンドウのリスト       当たり判定はありません
+        self.claw_coordinates           = [] #自機クロー（トレースモード）のxy座標リスト まぁオプションのxy座標が入るリストです
+        self.enemy_formation            = [] #敵の編隊数のＩＤと出現時の総数と現在の生存数が入るリストです
+        self.event_append_request       = [] #イベント追加リクエストが入るリストです(敵などの臨時追加発注発生）
+        self.boss                       = [] #ボスのリスト
+        self.boss_bg_move_point         = [] #ボスのBGマップを移動させる時に使用する座標を記録したリスト
+        self.boss_bg_move_control_point = [] #ボスのBGマップを移動させる時に使用する座標(スプライン曲線用の制御点)を記録したリスト
+        self.raster_scroll              = [] #ラスタースクロール用のリスト
         
         define_stage_data.event_list(self)        #各ステージのイベントリストの定義関数の呼び出し
         define_stage_data.game_event_list(self)   #ゲーム全体のイベントリストの定義関数の呼び出し
@@ -284,3 +286,7 @@ class update_init:
             self.claw_coordinates.append(new_traceclaw)
         
         func.create_raster_scroll_data(self) #ラスタースクロール用のデータの初期化＆育成関数の呼び出し
+        func.search_boss_bg_move_point(self) #背景タイルマップ(BG)に埋め込まれたボス用移動座標を調べてリストに登録していく関数の呼び出し
+        
+        print(self.boss_bg_move_point)          #ボス用移動座標リストをコンソールに表示(デバッグ用)
+        print(self.boss_bg_move_control_point)  #ボス用移動制御点座標リストをコンソールに表示(デバッグ用)

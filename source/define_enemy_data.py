@@ -48,7 +48,8 @@ class define_enemy_data:
             [9999],]
         #敵17用
         self.enemy_move_data17 = [
-            [ 160, 10,    160,  120,    20,  60,    240,   1.0,1.01,   ENEMY_ATTACK_NO_FIRE],
+            [ 160, 10,    160,  120,    10,  60,    240,   1.0,1.0,   ENEMY_ATTACK_NO_FIRE],
+            [ 160, 120,   20,   40,     10,  90,    240,   1.0,1.0,   ENEMY_ATTACK_NO_FIRE],
             
             [9999],]
         

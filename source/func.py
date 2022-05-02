@@ -1,5 +1,6 @@
 import math                #三角関数などを使用したいのでインポートぉぉおお！
-from random import random  #random.random() と呼ぶと、0から1の範囲(1は含まない)のランダムな実数が返される(主にパーティクル系で使用します)
+from random import random
+from numpy import append  #random.random() と呼ぶと、0から1の範囲(1は含まない)のランダムな実数が返される(主にパーティクル系で使用します)
 
 import pyxel               #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
 import pygame.mixer        #MP3再生するためだけに使用する予定・・・予定は未定・・・そして未定は確定に！やったあぁ！ BGMだけで使用しているサブゲームエンジン
@@ -724,6 +725,43 @@ class func:
             self.bgy = 0
         if self.bgy > 255:
                 self.bgy = 255  
+
+    #背景タイルマップ(BG)に埋め込まれたボス用移動座標を調べてリストに登録していく関数
+    def search_boss_bg_move_point(self):
+        mpx,mpy     = 0,0 #サーチ用の座標を初期化
+        point_num   = 0   #移動ポイント数の初期化
+        control_num = 0   #制御点ポイント数の初期化
+        
+        if self.stage_loop == 2:
+            mpy += 16 * self.height_screen_num #縦1置画面分のbgy値は16なので周回数を考慮して縦画面数分掛けたものを代入する
+        elif self.stage_loop == 3:
+            mpy += 32 * self.height_screen_num #縦1置画面分のbgy値は16なので周回数を考慮して縦画面数分掛けたものを代入する
+        
+        for w in range(255): #x軸方向は0~255まで調べ上げていく
+            for h in range(WINDOW_H // 8 * self.height_screen_num): #y軸方向は15×縦スクロールする画面数ぶん調べ上げていく
+                chip_num = func.get_chrcode_tilemap(self,self.reference_tilemap,mpx + w,mpy + h) #BGキャラチップのナンバー取得
+                if chip_num == MOVE_POINT_BG_NUM: #もし移動点だったのなら
+                    func.delete_map_chip(self,mpx + w,mpy + h) #「移動点」マップチップを消去する
+                    
+                    #一つ右隣にあるチップナンバーが「移動点の連番」なので取得する
+                    serial_num = func.get_chrcode_tilemap(self,self.reference_tilemap,mpx + w + 1,mpy + h) #移動点の連番を取得
+                    serial_num -= ZERO_BG_CHR_NUM
+                    self.boss_bg_move_point.append([int(serial_num),w,h])
+                    point_num += 1 #移動ポイント数をインクリメント
+                    func.delete_map_chip(self,mpx + w + 1,mpy + h) #「移動点の連番」マップチップを消去する
+                    
+                elif chip_num == CONTROL_POINT_NUM: #もし制御点だったのなら
+                    func.delete_map_chip(self,mpx + w,mpy + h) #「制御点」マップチップを消去する
+                    
+                    #一つ右隣にあるチップナンバーが「制御点の連番」なので取得する
+                    serial_num = func.get_chrcode_tilemap(self,self.reference_tilemap,mpx + w + 1,mpy + h) #移動点の連番を取得
+                    serial_num -= ZERO_BG_CHR_NUM
+                    self.boss_bg_move_control_point.append([int(serial_num),w,h])
+                    control_num += 1 #制御ポイント数をインクリメント
+                    func.delete_map_chip(self,mpx + w + 1,mpy + h) #「制御点の連番」マップチップを消去する
+        
+        self.boss_bg_move_point.sort()         #「移動点の連番」を基準にソートする sort()はリスト型のメソッドだよん
+        self.boss_bg_move_control_point.sort() #「制御点の連番」を基準にソートする sort()はリスト型のメソッドだよん
 
     #自機ショットの経験値を調べ可能な場合レベルアップをさせる関数
     def level_up_my_shot(self):
