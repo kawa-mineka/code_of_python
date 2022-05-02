@@ -253,15 +253,18 @@ class update_obj:
 
     #最前面(FRONT)のBGチップナンバー書き換えによる背景アニメーション(bg_rewrite_animation関数から呼び出されます)
     def front_bg_rewrite_animation(self):
+        if pyxel.frame_count % 8 != 0: #BG書き換えは8フレームに1回
+            return
+        
         #最前面のBG書き換えアニメーション
-        for w in range(WINDOW_W // 8):#横方向の調べ上げ数は 160割る8で20キャラ分調べ上げる
-            for h in range(WINDOW_H // 8 * self.height_screen_num): #縦方向の調べ上げ総数は縦画面数も考慮してself.height_screen_num分掛け合わせたキャラ分だけ調べ上げる
+        for w in range(WINDOW_W // 8 + 1): #x座表は理論的には0~20で行けるはずなんだけど20の時書き換えると微妙に画面右端で書き換えていないのかバレるので +1してます、ハイ！
+            for h in range(WINDOW_H // 8 + 1): #縦方向の調べ上げ総数は1画面分(120 // 8 = 15キャラ)+1キャラの16キャラ分調べ上げる
                 bg_animation_count = len(self.bg_animation_list) #bg_animation_listのなかにどれだけのリストが入っているのか数える
                 for i in range(bg_animation_count): #リストの総数分ループする
                     if self.scroll_type    == SCROLL_TYPE_8WAY_SCROLL_AND_RASTER:  #8方向スクロール+ラスタースクロールの場合は
                         func.get_bg_chip_free_scroll(self,w * 8,h * 8    ,0)       #座標(w,h)のマップチップのBGナンバーを取得してself.bg_chipに代入する関数の呼び出し(8方向フリースクロール専用)
                     elif self.scroll_type  == SCROLL_TYPE_TRIPLE_SCROLL_AND_STAR:  #横3重スクロール+星スクロールの場合は
-                        func.get_bg_chip(self,w * 8,h * 8    ,0)                   #座標(w,h)のマップチップのBGナンバーを取得してself.bg_chipに代入する関数の呼び出し
+                        func.get_bg_chip(self,w * 8,h * 8 + self.camera_offset_y    ,0)  #座標(w,h + self.camera_offset_y)のマップチップのBGナンバーを取得してself.bg_chipに代入する関数の呼び出し(縦任意スクロールするステージ用にカメラy軸オフセット位置も加算したy座標にする)
                     bg_ani_x     = self.bg_animation_list[i][0] #BGアニメーションを開始するチップのx座標を変数に代入
                     bg_ani_y     = self.bg_animation_list[i][1] #                               y座標を変数に代入
                     bg_ani_speed = self.bg_animation_list[i][4] #                               スピードを変数に代入
@@ -274,8 +277,11 @@ class update_obj:
 
     #中面(MIDDLE)の1画面分だけのBGチップを調べて書き換える背景アニメーション(bg_rewrite_animation関数から呼び出されます)
     def middle_bg_rewrite_animation(self):
+        if pyxel.frame_count % 8 != 0: #BG書き換えは8フレームに1回
+            return
+        
         #中面(MIDDLE)のBG書き換えアニメーション
-        for w in range(WINDOW_W // 8):# x座表は理論的には0~20で行けるはずなんだけど20の時書き換えると微妙に画面右端で書き換えていないのかバレるので +1してます、ハイ！
+        for w in range(WINDOW_W // 8 + 1):# x座表は理論的には0~20で行けるはずなんだけど20の時書き換えると微妙に画面右端で書き換えていないのかバレるので +1してます、ハイ！
             for h in range(WINDOW_H // 8): #縦方向は1画面分だけ書き換えます
                 bg_animation_count = len(self.bg_animation_list) #bg_animation_listのなかにどれだけのリストが入っているのか数える
                 for i in range(bg_animation_count): #リストの総数分ループする

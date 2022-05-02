@@ -71,7 +71,7 @@ class define_stage_data:
             
             [STAGE_VOLCANIC_BELT,
             24,80,
-            88 ,TM2,
+            144 ,TM2,
             SCROLL_TYPE_TRIPLE_SCROLL_AND_STAR    ,STAR_SCROLL_ON,
             RASTER_SCROLL_ON,
             FRONT_BG_DISP_ON,CENTER_BG_DISP_ON,BACK_BG_DISP_ON,
@@ -442,11 +442,11 @@ class define_stage_data:
                             [16,120,  1,1,     6,  4],                          
                             ]
         self.bg_animation_list_volcaninc_belt = [
-                            [8,0,     1,1,     6,  8],
+                            [152,184, 1,1,     6,   6],
                             
-                            [48,104,  1,1,     12,  11],
-                            [48,112,  1,1,     12,  11],
-                            [48,120,  1,1,     12,  11],
+                            [48,104,  1,1,     16,  11],
+                            [48,112,  1,1,     16,  11],
+                            [48,120,  1,1,     16,  11],
                             
                             [8,72,    1,1,     32,  7],
                             [8,80,    1,1,     32,  7],
