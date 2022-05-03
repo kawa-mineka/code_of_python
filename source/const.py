@@ -1359,6 +1359,7 @@ PRIORITY_TOP           = 9  #最前面(すべてにおいて最後に描画さ�
 #ボスキャラのboss_type定数定義
 BOSS_BREEZARDIA        = 0 #MOUNTAIN_REGIONのボス「ブリザーディア」
 BOSS_FATTY_VALGUARD    = 1 #ADVANCED_BASEのボス  「ファッティバルガード」
+BOSS_MAD_CLUBUNGER     = 2 #VOLCANIC_BELTのボス  「マッドクラブンガー」
 
 
 #敵キャラが持っているアイテム類のID enemyクラスのitemに代入されます

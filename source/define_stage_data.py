@@ -417,6 +417,9 @@ class define_stage_data:
             
             [4000,EVENT_WARNING,500,120,240],
             [4300,EVENT_BOSS],
+            [4310,EVENT_SCROLL,SCROLL_SPEED_CHANGE,-4,-0.001],
+            
+            [4900,EVENT_SCROLL,SCROLL_SPEED_CHANGE,4,0.002],
             [99999999],]
 
     def bg_animation_list(self):   #各ステージのＢＧ書き換えによるアニメーションの為のデータリスト群の定義

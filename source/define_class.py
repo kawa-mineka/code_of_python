@@ -410,12 +410,12 @@ class Enemy:#敵キャラ達のクラス設定
         self.score_berserk  = score_berserk
 class Boss:#ボスキャラのクラス設定
     def __init__(self):
-        self.boss_id = 0
-        self.boss_type = 0
-        self.status = 0
+        self.boss_id = 0      #ボスのIDナンバー
+        self.boss_type = 0    #ボスの種類
+        self.status = 0       #ボスの現在のステータス(状態)
         self.parts_number = 0 #破壊可能部位の数 0なら本体のみ 1なら破壊可能部位が1箇所あり 4なら4箇所あるという事です
         self.main_hp   = 0    #本体の耐久力
-        self.parts1_hp = 0    #各部位の耐久力(1~4)
+        self.parts1_hp = 0    #各部位の耐久力(1~9)
         self.parts2_hp = 0
         self.parts3_hp = 0
         self.parts4_hp = 0
@@ -424,7 +424,7 @@ class Boss:#ボスキャラのクラス設定
         self.parts7_hp = 0
         self.parts8_hp = 0
         self.parts9_hp = 0
-        self.parts1_score = 0 #各パーツを破壊した時の得点
+        self.parts1_score = 0 #各パーツを破壊した時の得点(1~9)
         self.parts2_score = 0
         self.parts3_score = 0
         self.parts4_score = 0
@@ -433,27 +433,22 @@ class Boss:#ボスキャラのクラス設定
         self.parts7_score = 0
         self.parts8_score = 0
         self.parts9_score = 0
-        self.level = 0 #レベル
+        self.level = 0 #ボスのレベル
         self.weapon1_status,self.weapon1_interval,self.weapon1_rapid_num,self.weapon1_cool_down_time,self.weapon1_omen_count = 0,0,0,0,0 #武器1の状態,発射間隔,連射数,次に発射できるまでの時間(クールタイム),予兆エフェクトカウンター
         self.weapon2_status,self.weapon2_interval,self.weapon2_rapid_num,self.weapon2_cool_down_time,self.weapon2_omen_count = 0,0,0,0,0 #武器2の状態,発射間隔,連射数,次に発射できるまでの時間(クールタイム),予兆エフェクトカウンター
         self.weapon3_status,self.weapon3_interval,self.weapon3_rapid_num,self.weapon3_cool_down_time,self.weapon3_omen_count = 0,0,0,0,0 #武器3の状態,発射間隔,連射数,次に発射できるまでの時間(クールタイム),予兆エフェクトカウンター
         self.weapon4_status,self.weapon4_interval,self.weapon4_rapid_num,self.weapon4_cool_down_time,self.weapon4_omen_count = 0,0,0,0,0 #武器4の状態,発射間隔,連射数,次に発射できるまでの時間(クールタイム),予兆エフェクトカウンター
         self.weapon5_status,self.weapon5_interval,self.weapon5_rapid_num,self.weapon5_cool_down_time,self.weapon5_omen_count = 0,0,0,0,0 #武器5の状態,発射間隔,連射数,次に発射できるまでの時間(クールタイム),予兆エフェクトカウンター
-        self.posy = 0
-        self.offset_x = 0 #座標オフセット値
-        self.offset_y = 0
-        self.ax = 0 #移動元の座標
-        self.ay = 0
-        self.bx = 0
-        self.by = 0
-        self.cx = 0
-        self.cy = 0 
-        self.dx = 0 #移動先の座標(destination_x,y)
-        self.dy = 0
-        self.qx = 0 #2次ベジェ曲線の制御点qとして使用
-        self.qy = 0
-        self.vx = 0 #速度
-        self.vy = 0
+        self.posx,self.posy         = 0,0 #ボスの座標
+        self.bgx,self.bgy           = 0,0 #ボスの座標(BG移動時)
+        self.offset_x,self.offset_y = 0,0 #ボスの座標に対する画面オフセット値
+        self.ax,self.ay = 0,0 #移動元の座標
+        self.bx,self.by = 0,0
+        self.cx,self.cy = 0,0
+        self.dx,self.dy = 0,0 #移動先の座標(destination_x,y)
+        self.qx,self.qy = 0,0 #2次ベジェ曲線の制御点qとして使用
+        self.vx,self.vy = 0,0 #速度
+        
         self.width = 0  #画像の横の大きさ
         self.height = 0 #画像の縦の大きさ
         
@@ -567,25 +562,25 @@ class Boss:#ボスキャラのクラス設定
         self.parts8_hp_bar_offset_x,self.parts8_hp_bar_offset_y = 0,0 #パーツ8のHPバーを表示する座標のオフセット値
         self.parts9_hp_bar_offset_x,self.parts9_hp_bar_offset_y = 0,0 #パーツ9のHPバーを表示する座標のオフセット値
         
-        self.size = 0        #大きさ
-        self.priority = 0     #画像表示時の優先度
+        self.size          = 0 #大きさ
+        self.priority      = 0 #画像表示時の優先度
         self.attack_method = 0 #攻撃方法
-        self.direction = 0    #方向
-        self.acceleration = 0  #加速度
-        self.timer = 0    #時間
+        self.direction     = 0 #方向
+        self.acceleration  = 0 #加速度
+        self.timer  = 0   #時間
         self.degree = 0   #回転角度 度数法（主にこちらを使用するのです！）
         self.radian = 0   #回転角度 弧度法
-        self.speed = 0    #回転スピード(弧度法0~360度)
+        self.speed  = 0   #回転スピード(弧度法0~360度)
         self.radius = 0   #半径
-        self.flag1 = 0    #フラグ類
+        self.flag1 = 0    #フラグ類(1~4)
         self.flag2 = 0
         self.flag3 = 0
         self.flag4 = 0
-        self.count1 = 0   #カウンター類
+        self.count1 = 0   #カウンター類(1~4)
         self.count2 = 0
         self.count3 = 0
         self.count4 = 0
-        self.parts1_flag = 0 #各部位用のフラグ
+        self.parts1_flag = 0 #各部位用のフラグ(1~9)
         self.parts2_flag = 0
         self.parts3_flag = 0
         self.parts4_flag = 0
@@ -594,14 +589,14 @@ class Boss:#ボスキャラのクラス設定
         self.parts7_flag = 0
         self.parts8_flag = 0
         self.parts9_flag = 0
-        self.animation_number1 = 0 #アニメーションパターンナンバー用
+        self.animation_number1 = 0 #アニメーションパターンナンバー用(1~4)
         self.animation_number2 = 0
         self.animation_number3 = 0
         self.animation_number4 = 0
-        self.move_index = 0    #移動用のインデックス（リストの添え字に入る数値）
-        self.obj_time = 0      #2次ベジェ曲線での移動用のtime（現在のタイムフレーム番号が入る）(0~totaltimeまで変化する)ピエール・ベジェさんありがとう・・・
-        self.obj_totaltime = 0  #2次ベジェ曲線での移動用のtotaltime（移動元から移動先までに掛けるトータルフレーム数が入る60なら1秒掛けて移動元から移動先まで移動するって事,120なら2秒かかる)
-        self.invincible = 0    #無敵状態かどうかのフラグ(出現時は無敵にするとかで使うかも？)
+        self.move_index     = 0  #移動用のインデックス（リストの添え字に入る数値）
+        self.obj_time       = 0  #2次ベジェ曲線での移動用のtime（現在のタイムフレーム番号が入る）(0~totaltimeまで変化する)ピエール・ベジェさんありがとう・・・
+        self.obj_totaltime  = 0  #2次ベジェ曲線での移動用のtotaltime（移動元から移動先までに掛けるトータルフレーム数が入る60なら1秒掛けて移動元から移動先まで移動するって事,120なら2秒かかる)
+        self.invincible     = 0  #無敵状態かどうかのフラグ(出現時は無敵にするとかで使うかも？)
         self.display_time_main_hp_bar   = 0 #耐久力ゲージをどれだけの時間表示させるかのカウント 1=60ミリ秒
         self.display_time_parts1_hp_bar = 0
         self.display_time_parts2_hp_bar = 0
@@ -627,7 +622,7 @@ class Boss:#ボスキャラのクラス設定
             weapon3_status,weapon3_interval,weapon3_rapid_num,weapon3_cool_down_time,weapon3_omen_count,
             weapon4_status,weapon4_interval,weapon4_rapid_num,weapon4_cool_down_time,weapon4_omen_count,
             weapon5_status,weapon5_interval,weapon5_rapid_num,weapon5_cool_down_time,weapon5_omen_count,
-            x,y,offset_x,offset_y,ax,ay,bx,by,cx,cy,dx,dy,qx,qy,vx,vy,
+            x,y,bgx,bgy,offset_x,offset_y,ax,ay,bx,by,cx,cy,dx,dy,qx,qy,vx,vy,
             width,height,
             
             col_damage_point1_x,col_damage_point1_y,col_damage_point1_w,col_damage_point1_h,
@@ -738,6 +733,8 @@ class Boss:#ボスキャラのクラス設定
         
         self.posx = x
         self.posy = y
+        self.bgx = bgx
+        self.bgy = bgy
         self.offset_x = offset_x
         self.offset_y = offset_y
         self.ax = ax
@@ -752,7 +749,7 @@ class Boss:#ボスキャラのクラス設定
         self.qy = qy
         self.vx = vx
         self.vy = vy
-        self.width = width 
+        self.width  = width 
         self.height = height
         
         self.col_damage_point1_x = col_damage_point1_x

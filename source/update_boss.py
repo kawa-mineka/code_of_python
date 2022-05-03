@@ -364,4 +364,159 @@ class update_boss:
                             length = 2
                             speed = -2
                             func.enemy_green_laser(self,ex,ey,length,speed)
+                
+            elif self.boss[i].boss_type == BOSS_MAD_CLUBUNGER: #ボスタイプ2の更新 マッドクラブンガー ###############################
+                if   self.boss[i].status == BOSS_STATUS_MOVE_COORDINATE_INIT:  #「移動用座標初期化」ベジェ曲線で移動するための移動元、移動先、制御点をまず初めに取得する
+                    func.boss_bg_move_get_bezier_curve_coordinate(self,i) #ボスをBG背景上でベジェ曲線移動させるために必要な座標をリストから取得する関数の呼び出し
+                    self.boss[i].status = BOSS_STATUS_MOVE_BEZIER_CURVE #状態遷移を「ベジェ曲線で移動」に設定
+                    
+                elif self.boss[i].status == BOSS_STATUS_MOVE_BEZIER_CURVE:    #「ベジェ曲線で移動」
+                    t = self.boss[i].obj_time / self.boss[i].obj_totaltime
+                    if t >= 1: #tの値が1になった時は現在の座標が移動目的座標と同じ座標になった状況となるので・・・(行き過ぎ防止で念のため１以上で判別してます)
+                        print(self.boss[i].move_index)
+                        if self.boss[i].move_index >= len(self.boss_bg_move_point) - 2: #移動リストのインデックス値がリストの要素数の数と一致したら、もう通過すべき座標値がないので
+                            self.boss[i].status = BOSS_STATUS_MOVE_LEMNISCATE_CURVE #状態遷移を「レムニスケート曲線で移動」に設定
+                        else:
+                            self.boss[i].obj_time = 0    #タイムフレーム番号を0にしてリセットする                    
+                            self.boss[i].move_index += 1 #目的座標のリストのインデックスを1進める
+                            
+                            func.boss_bg_move_get_bezier_curve_coordinate(self,i) #ボスをBG背景上でベジェ曲線移動させるために必要な座標をリストから取得する関数の呼び出し
+                            t = self.boss[i].obj_time / self.boss[i].obj_totaltime #違う座標データ群を読み込んだのでt値を再計算してやる
+                    
+                    #          A(移動元)--D(移動先)
+                    #            \    点P /     
+                    #(AとQの内分点)P1\     /P2(QとDの内分点)    
+                    #              \   /
+                    #               Q(制御点)
+                    #
+                    #内分の公式からP1の座標は((1-t)ax+t*qx,(1-t)ay+t*qy)
+                    #           P2の座標は((1-t)qx+t*dx,(1-t)qy+t*dy)
+                    #したがってPの座標も内分の公式から求められる
+                    #P1の座標を(p1x,p1y),P2の座標を(p2x,p2y)とすると点Pの座標は
+                    #        ((1-t)p1x+t*p2x,(1-t)p1y+t*p2y)となり
+                    #先に求めたP1,P2を代入してやると
+                    #        ((1-t)(1-t)ax+t*qx+t*(1-t)qx+t*dx,(1-t)(1-t)ay+t*qy+t*(1-t)qy+t*dy)となる
+                    p1x = (1-t) * self.boss[i].ax + t * self.boss[i].qx
+                    p1y = (1-t) * self.boss[i].ay + t * self.boss[i].dy
+                    p2x = (1-t) * self.boss[i].qx + t * self.boss[i].dx
+                    p2y = (1-t) * self.boss[i].qy + t * self.boss[i].dy
+                    
+                    px = (1-t) * p1x + t * p2x
+                    py = (1-t) * p1y + t * p2y
+                    
+                    self.boss[i].posx = px - (self.scroll_count - 256 * 8) / 2 #BGマップに仕込まれた通過点ポイントの座標値はキャラ単位なので8倍してドット単位にする そしてスクロールさせたドット数を引いてやる
+                    self.boss[i].posy = py
+                    
+                    self.boss[i].speed = self.boss[i].speed * self.boss[i].acceleration #スピードの値に加速度を掛け合わせ加速させたり減速させたりします
+                    if self.boss[i].speed < 0.2: #スピードは0.2以下にならないように補正してやります・・(まったく動かなくなる状況にさせないため）
+                        self.boss[i].speed = 0.2
+                    self.boss[i].obj_time += self.boss[i].speed #タイムフレーム番号をスピード分加算していく
+                    
+                elif self.boss[i].status == BOSS_STATUS_MOVE_LEMNISCATE_CURVE: #前方でレムニスケート曲線を使った上下運動をさせる
+                    self.boss[i].degree += 0.009 #degree角度は0~360までの間を0.009の増分で増加させていく
+                    if self.boss[i].degree >= 360:
+                        self.boss[i].degree = 0
+                    
+                    #(x**2+y**2)**2=2a**2(x**2-y**2) (ベルヌーイのレムニスケート曲線)を使用
+                    #極座標を(r,θ）とする
+                    #
+                    #x**2 + y**2 = r**2
+                    #x = r*cos(θ)
+                    #y = r*cos(θ)より
+                    #(r**2)**2 = 2(r**2(cos(θ)**2) - r**2(sin(θ)**2)
+                    #(r**2)**2 = 2r**2(cos(θ)**2 - sin(θ)**2)
+                    #
+                    #cos(θ)**2 + sin(θ)**2 = 1 尚且つ・・・
+                    #cos(θ)**2 - sin(θ)**2 = cos(2θ) となるので・・・
+                    #
+                    #(r**2)**2 = 2r**2(cos(2θ))
+                    #r**2 = 2a2cos(2θ)
+                    #となるはず・・・・多分
+                    #
+                    #
+                    #x = sqrt(2)*cos(degree) / (sin(degree)**2+1)
+                    #y = sqrt(2)*cos(degree)*sin(degree) / (sin(degree)**2+1)
+                    #
+                    #？？？「ベルヌーイだよ、レムニスケートは別名ヤコブ・ベルヌーイのレムニスケートとも呼ばれてるよ」
+                    #
+                    #横スクロールシューティングで縦に倒した状態のレムニスケート曲線を描きたいのでx座標とy座標を入れ替えて使用します
+                    self.boss[i].posy = (math.sqrt(2)*math.cos(self.boss[i].degree) / (math.sin(self.boss[i].degree)**2+1)) * 35 + 50
+                    self.boss[i].posx = (math.sqrt(2)*math.cos(self.boss[i].degree) * math.sin(self.boss[i].degree) / (math.sin(self.boss[i].degree)**2+1)) * 30 + 80
+                    
+                elif self.boss[i].status == BOSS_STATUS_EXPLOSION_START:      #ボス撃破！爆発開始！の処理
+                    self.boss[i].attack_method = BOSS_ATTACK_NO_FIRE #ボスの攻撃方法は「ノーファイア」何も攻撃しないにする、まぁ撃破したからね
+                    
+                    self.boss[i].vx = (WINDOW_W / 2 - self.boss[i].posx ) / 480 * 1.5 #ボスが居た位置に乗じた加速度を設定する vxは画面中央を境にプラスマイナスに分かれる 480で割っているのは480フレーム掛けて画面の端まで動くためです
+                    self.boss[i].vy = (WINDOW_H - self.boss[i].posy) / 480 - 0.3     #vyは爆発した瞬間少し上に跳び上がった感じにしたいので -0.3しています
+                    self.boss[i].count1 = 240 #count1を爆裂分裂開始までのカウントとして使います
+                    self.boss[i].status = BOSS_STATUS_EXPLOSION #ボスの状態遷移ステータスを「爆発中」にする
+                    
+                elif self.boss[i].status == BOSS_STATUS_EXPLOSION:           #ボスステータスが「爆発中」の処理
+                    #爆発中サウンド再生
+                    pyxel.play(3,11)
+                    
+                    new_explosion = Explosion()
+                    new_explosion.update(EXPLOSION_NORMAL,PRIORITY_FRONT,self.boss[i].posx + self.boss[i].width / 2 + func.s_rndint(self,0,50) -25,self.boss[i].posy + self.boss[i].height / 2 + func.s_rndint(self,0,20) -15,0,0,10,RETURN_BULLET_NONE,0, 1,1)
+                    self.explosions.append(new_explosion)
+                    
+                    self.boss[i].posx += self.boss[i].vx
+                    self.boss[i].posy += self.boss[i].vy
+                    self.boss[i].vy += 0.001 #1フレームごとに下方向へ0.001加速して落ちていきます
+                    
+                    self.boss[i].count1 -= 1 #count1(爆裂分裂開始までのカウント)を１減らしていきます
+                    if self.boss[i].count1 <= 0: #爆裂分裂開始までのカウントが0になったのなら
+                        self.boss[i].status = BOSS_STATUS_BLAST_SPLIT_START #状態遷移ステータスを「爆発分離開始」にします
+                    
+                elif self.boss[i].status == BOSS_STATUS_BLAST_SPLIT_START:    #ボスステータスが「爆発分離開始」の処理
+                    self.boss[i].count2 = 480 #count2をボス破壊後に分裂するシーン全体のフレーム数を登録します
+                    
+                    #爆発分離開始のサウンド再生
+                    pyxel.playm(1)
+                    #ランダムな場所に爆発パターンを育成
+                    new_explosion = Explosion()
+                    new_explosion.update(EXPLOSION_NORMAL,PRIORITY_FRONT,self.boss[i].posx + self.boss[i].width / 2 + func.s_rndint(self,0,50) -25,self.boss[i].posy + self.boss[i].height / 2 + func.s_rndint(self,0,20) -15,0,0,10,RETURN_BULLET_NONE,0, 1,1)
+                    self.explosions.append(new_explosion)
+                    
+                    self.boss[i].status = BOSS_STATUS_BLAST_SPLIT #ボスステータスを「爆発分離」にします
+                    
+                elif self.boss[i].status == BOSS_STATUS_BLAST_SPLIT:         #ボスステータスが「爆発分離」の処理
+                    #ランダムな場所に爆発パターンを育成
+                    new_explosion = Explosion()
+                    new_explosion.update(EXPLOSION_NORMAL,PRIORITY_FRONT,self.boss[i].posx + self.boss[i].width / 2 + func.s_rndint(self,0,50) -25,self.boss[i].posy + self.boss[i].height / 2 + func.s_rndint(self,0,20) -15,0,0,10,RETURN_BULLET_NONE,0,  1,1)
+                    self.explosions.append(new_explosion)
+                    
+                    #ボスの爆発破片3を育成 ホワイト系のスパーク
+                    if self.boss[i].count2 % 3 == 0:
+                        update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS3,self.boss[i].posx + 30 + func.s_rndint(self,0,30) -15 ,self.boss[i].posy + 10,(random()- 0.5) /2,random() * 2,12,0,0)
+                    
+                    #ボスの爆発破片4を育成 橙色系の落下する火花
+                    if self.boss[i].count2 % 1 == 0:
+                        update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS4,self.boss[i].posx + 30 + func.s_rndint(self,0,40) -20 ,self.boss[i].posy + 10,(random()- 0.5) /2,random() * 2,8,0,0)
+                    
+                    self.boss[i].posx += self.boss[i].vx / 1.5
+                    self.boss[i].posy += self.boss[i].vy / 1.5
+                    self.boss[i].vy += 0.001  / 1.5#1フレームごとに下方向へ0.001加速して落ちていきます
+                    
+                    self.boss[i].count2 -= 1 #count2(ボス消滅までのカウント)を１減らしていきます
+                    if self.boss[i].count2 <= 0: #ボス消滅までのカウントが0になったのなら
+                        self.boss[i].status = BOSS_STATUS_DISAPPEARANCE #ボスステータスを「ボス消滅」にします
+                    
+                elif self.boss[i].status == BOSS_STATUS_DISAPPEARANCE:        #ボスステータスが「ボス消滅」の処理
+                    self.game_status = SCENE_STAGE_CLEAR_MOVE_MY_SHIP #ゲームステータス(状態遷移)を「ステージクリア自機自動移動」にする
+                    
+                    self.stage_clear_dialog_flag          = 1   #STAGE CLEARダイアログ表示フラグをonにする
+                    self.stage_clear_dialog_display_time  = 300 #STAGE CLEARダイアログ表示時間その1を代入(単位は1フレーム)
+                    
+                    self.stage_clear_dialog_logo_time1       = 90 #グラフイックロゴ表示にかける時間を代入その1(単位は1フレーム)
+                    self.stage_clear_dialog_logo_time2       = 90 #グラフイックロゴ表示にかける時間を代入その2(単位は1フレーム)
+                    self.stage_clear_dialog_text_time        = 180 #テキスト表示にかける時間を代入(単位は1フレーム)だんだん減っていく
+                    self.stage_clear_dialog_text_time_master = 180 #テキスト表示にかける時間を代入(単位は1フレーム)元の値が入ります
+                    
+                    self.move_mode = MOVE_AUTO                           #自機のオートムーブモードをonにして自動移動を開始する
+                    self.move_mode_auto_x,self.move_mode_auto_y = 25,40  #移動先の座標を指定 
+                    
+                    del self.boss[i]                      #ボスのインスタンスを消去する・・・さよならボス・・（けもふれ？）
+                    break                               #ループから抜け出す
+                
+                ####ここからはボスの攻撃パターンです############################################################
 
