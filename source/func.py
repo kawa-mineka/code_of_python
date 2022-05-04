@@ -569,6 +569,15 @@ class func:
                 self.enemy_shot.append(new_enemy_shot)
         return()
 
+    #敵ホーミングレーザーの発射
+    def enemy_homing_laser(self,ex,ey,performance):
+        if len(self.enemy_shot) < 800:
+            posy = 60
+            new_enemy_shot = Enemy_shot()
+            new_enemy_shot.update(ENEMY_SHOT_HOMING_LASER,ID00, ex,ey,ESHOT_COL_MIN88,ESHOT_SIZE8,ESHOT_SIZE8, 0,0,   0.5,0.5,   1,    1,1,   0,performance,0,    1,0,0,  0,0,PRIORITY_MORE_FRONT, 8,0,  0,0,0,0, 0,0, 0, 0,0, 0, 0,0, 0,0,   0,0)
+            self.enemy_shot.append(new_enemy_shot)
+        
+
     #ミサイルリスト内から同じタイプのミサイルが何発存在するのか数をカウントする関数定義
     def count_missile_type(self,missile_type1,missile_type2,missile_type3,missile_type4):
         quantity = 0
@@ -1389,7 +1398,7 @@ class func:
             
             size = 0
             priority = 0
-            attack_method = 0
+            attack_method = BOSS_ATTACK_HOMING_LASER
             direction = 0
             acceleration = 0
             timer = 0
@@ -1483,7 +1492,7 @@ class func:
                 display_time_parts7_hp_bar,display_time_parts8_hp_bar,display_time_parts9_hp_bar
                 )
             self.boss.append(new_boss)
-            
+
     #ボスをベジェ曲線で移動させるために必要な座標をリストから取得する関数
     def boss_get_bezier_curve_coordinate(self,i):                    
         self.boss[i].ax           = self.boss_move_data1[self.boss[i].move_index][0]#リストから新たな移動元座標を登録する

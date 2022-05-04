@@ -1398,7 +1398,8 @@ BOSS_ATTACK_NO_FIRE               = 0 #なにも攻撃しないよ
 BOSS_ATTACK_FRONT_5WAY            = 1 #前方に5way弾を撃ってきます
 BOSS_ATTACK_RIGHT_GREEN_LASER     = 2 #後方に細いグリーンレーザーを撃ってきます
 BOSS_ATTACK_FRONT_5WAY_AIM_BULLET = 3 #前方5way+狙い撃ち弾
-BOSS_ATTACK_FRONT_5WAY_HOMING     = 4 #前方5way+ホーミング弾
+BOSS_ATTACK_FRONT_5WAY_ARROW      = 4 #前方5way+ツインアロー
+BOSS_ATTACK_HOMING_LASER          = 5 #ホーミングレーザー
 
 BOSS_HP_BAR_DISPLAY_TIME = 32         #ボスの耐久力バーを表示する時間(弾が当たるたびにこの数値がカウンターに入る)
 

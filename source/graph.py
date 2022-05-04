@@ -289,7 +289,8 @@ class graph:
                     pyxel.blt(self.boss[i].posx - offset_x +  1*8, self.boss[i].posy - self.camera_offset_y + 1*8,       IMG0,    32,240,    2*8,2*8,    pyxel.COLOR_PEACH)
                 
             elif  self.boss[i].boss_type == BOSS_MAD_CLUBUNGER:    #マッドクラブンガー(火山地帯ボス)
-                pyxel.blt(self.boss[i].posx, self.boss[i].posy - self.camera_offset_y,  IMG0,   0,128,self.boss[i].width,self.boss[i].height,    pyxel.COLOR_PEACH) #マッドクラブンガー表示
+                pyxel.blt(self.boss[i].posx, self.boss[i].posy - self.camera_offset_y,             IMG0,   0,                               128, self.boss[i].width,self.boss[i].height, pyxel.COLOR_PEACH) #マッドクラブンガー表示
+                pyxel.blt(self.boss[i].posx+ 1*8, self.boss[i].posy - self.camera_offset_y + 3*8,  IMG0,   64 + (pyxel.frame_count // 4  % 8)*8,   88, 8,16,                                   pyxel.COLOR_PEACH) #下部ドリル回転アニメーション表示
             
             #デバッグ用の当たり判定矩形の表示
             graph.draw_boss_collision_rectangle(self,i)    #ボス本体の当たり判定矩形を表示する関数の呼び出し

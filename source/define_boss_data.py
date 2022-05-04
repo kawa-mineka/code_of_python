@@ -8,13 +8,13 @@ class define_boss_data:
         self.boss_move_data1 = [
             [-40,  0,   120,  0,    80, 240,    240,   1.1,0.995,   BOSS_ATTACK_FRONT_5WAY],
             [120,  0,   120,120,    0,   60,    240,   1.2,0.999,   BOSS_ATTACK_FRONT_5WAY_AIM_BULLET],
-            [120,120,   -40,120,    80, -240,   240,   1.1,0.995,   BOSS_ATTACK_FRONT_5WAY_HOMING],
+            [120,120,   -40,120,    80, -240,   240,   1.1,0.995,   BOSS_ATTACK_FRONT_5WAY_ARROW],
             [-40,120,   -40,  0,    160, 60,    240,   0.7,0.999,   BOSS_ATTACK_RIGHT_GREEN_LASER],     
             [9999],]
         
         self.boss_move_data2 = [
             [-40,  0,   120,  0,    80, 240,    240,   1.1,0.995,   BOSS_ATTACK_FRONT_5WAY],
             [120,  0,   120,120,    0,   60,    240,   1.2,0.999,   BOSS_ATTACK_FRONT_5WAY_AIM_BULLET],
-            [120,120,   -40,120,    80, -240,   240,   1.1,0.995,   BOSS_ATTACK_FRONT_5WAY_HOMING],
+            [120,120,   -40,120,    80, -240,   240,   1.1,0.995,   BOSS_ATTACK_FRONT_5WAY_ARROW],
             [-40,120,   -40,  0,    160, 60,    240,   0.7,0.999,   BOSS_ATTACK_RIGHT_GREEN_LASER],     
             [9999],]

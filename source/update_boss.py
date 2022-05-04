@@ -213,7 +213,7 @@ class update_boss:
                         ey = self.boss[i].posy + 18
                         func.enemy_aim_bullet(self,ex,ey,0,0,0,0,1)        #狙い撃ち弾発射
                     
-                elif self.boss[i].attack_method == BOSS_ATTACK_FRONT_5WAY_HOMING:    #下部を右から左に弧を描いて移動中
+                elif self.boss[i].attack_method == BOSS_ATTACK_FRONT_5WAY_ARROW:    #下部を右から左に弧を描いて移動中
                     if (pyxel.frame_count % 60) == 0 and self.boss[i].parts1_flag == 1: #60フレーム毎に5way砲台が健在なら
                         ex = self.boss[i].posx
                         ey = self.boss[i].posy + 18
@@ -366,9 +366,12 @@ class update_boss:
                             func.enemy_green_laser(self,ex,ey,length,speed)
                 
             elif self.boss[i].boss_type == BOSS_MAD_CLUBUNGER: #ボスタイプ2の更新 マッドクラブンガー ###############################
-                if   self.boss[i].status == BOSS_STATUS_MOVE_COORDINATE_INIT:  #「移動用座標初期化」ベジェ曲線で移動するための移動元、移動先、制御点をまず初めに取得する
-                    func.boss_bg_move_get_bezier_curve_coordinate(self,i) #ボスをBG背景上でベジェ曲線移動させるために必要な座標をリストから取得する関数の呼び出し
-                    self.boss[i].status = BOSS_STATUS_MOVE_BEZIER_CURVE #状態遷移を「ベジェ曲線で移動」に設定
+                if   self.boss[i].status == BOSS_STATUS_MOVE_COORDINATE_INIT:   #「移動用座標初期化」ベジェ曲線で移動するための移動元、移動先、制御点をまず初めに取得する
+                    if not self.boss_bg_move_point:                             #boss_bg_move_point移動リストが空だったのならば(BGマップに移動ポイントが全く存在してない状態) リストが空かどうかを調べる方法はこうするのが公式らしい・・・知らなかった
+                        self.boss[i].status = BOSS_STATUS_MOVE_LEMNISCATE_CURVE #状態遷移を「レムニスケート曲線で移動」に設定
+                    else:                                                       #移動リストに何らかの座標データがあったのなら
+                        func.boss_bg_move_get_bezier_curve_coordinate(self,i)   #ボスをBG背景上でベジェ曲線移動させるために必要な座標をリストから取得する関数の呼び出し
+                        self.boss[i].status = BOSS_STATUS_MOVE_BEZIER_CURVE     #状態遷移を「ベジェ曲線で移動」に設定
                     
                 elif self.boss[i].status == BOSS_STATUS_MOVE_BEZIER_CURVE:    #「ベジェ曲線で移動」
                     t = self.boss[i].obj_time / self.boss[i].obj_totaltime
@@ -519,4 +522,17 @@ class update_boss:
                     break                               #ループから抜け出す
                 
                 ####ここからはボスの攻撃パターンです############################################################
+                if   self.boss[i].attack_method == BOSS_ATTACK_HOMING_LASER:            #ホーミングレーザー攻撃
+                    if (pyxel.frame_count % 180)  == 0:                                 #3秒毎に
+                        ex = self.boss[i].posx
+                        ey = self.boss[i].posy + 3*8
+                        performance = 20                                                #誘導性能
+                        func.enemy_homing_laser(self,ex,ey,performance)#ホーミングレーザー発射！
+                    
+                    if (pyxel.frame_count % 100) == 0 and self.boss[i].parts2_flag == 1: #尾翼レーザー部が健在なら100フレーム毎に
+                        ex = self.boss[i].posx + 16
+                        ey = self.boss[i].posy
+                        length = 2
+                        speed =  1
+                        func.enemy_red_laser(self,ex,ey,length,speed) #レッドレーザービーム発射！
 
