@@ -255,7 +255,7 @@ PALADIN       =14 #パラディン      親衛隊騎士
 LOAD          =15 #ロード          君主
 MASTER_LOAD   =16 #マスターロード   大君主
 
-#実績(アチーブメント)のIDナンバー定数定義
+#!実績(アチーブメント)のIDナンバー定数定義
 ACHIEVEMENT_FIRST_CAMPAIGN           =  0 #初陣!  初めての出撃!
 ACHIEVEMENT_DESTROY_STAGE01_BOSS     =  1 #ステージ1のボスを撃破した!
 ACHIEVEMENT_DESTROY_STAGE02_BOSS     =  2 #ステージ2のボスを撃破した!!
@@ -699,7 +699,7 @@ MENU_CONFIG_INITIALIZE_RETURN      = 6
 
 
 
-#ウィンドウのidの定数定義 windowクラスの window[i].window_idに入ります
+#!ウィンドウのidの定数定義 windowクラスの window[i].window_idに入ります
 WINDOW_ID_NO_MENU                        =  0 #ダミー用 ノーメニュー
 WINDOW_ID_MAIN_MENU                      =  1 #タイトル画面からのメインメニュー
 WINDOW_ID_SELECT_STAGE_MENU              =  2 #ステージ選択メニュー
@@ -1356,12 +1356,6 @@ PRIORITY_FRONT         = 7  #前面
 PRIORITY_MORE_FRONT    = 8  #さらに前面
 PRIORITY_TOP           = 9  #最前面(すべてにおいて最後に描画されるため最前面となる！)
 
-#ボスキャラのboss_type定数定義
-BOSS_BREEZARDIA        = 0 #MOUNTAIN_REGIONのボス「ブリザーディア」
-BOSS_FATTY_VALGUARD    = 1 #ADVANCED_BASEのボス  「ファッティバルガード」
-BOSS_MAD_CLUBUNGER     = 2 #VOLCANIC_BELTのボス  「マッドクラブンガー」
-
-
 #敵キャラが持っているアイテム類のID enemyクラスのitemに代入されます
 E_NO_POW      = 0           #敵は何もパワーアップアイテムを持っていないです・・・涙
 E_SHOT_POW    = 1           #敵が持っているショットアイテム定数定義
@@ -1381,6 +1375,11 @@ E_PENETRATE_ROCKET_POW = 11     #敵が持っているペネトレートロケ�
 E_SEARCH_LASER_POW     = 12     #敵が持っているサーチレーザーアイテム定数定義
 E_HOMING_MISSILE_POW   = 13     #敵が持っているホーミングミサイルアイテム定数定義
 E_SHOCK_BUMPER_POW     = 14     #敵が持っているショックバンパーアイテム定数定義 
+
+#!ボスキャラのboss_type定数定義
+BOSS_BREEZARDIA        = 0 #MOUNTAIN_REGIONのボス「ブリザーディア」
+BOSS_FATTY_VALGUARD    = 1 #ADVANCED_BASEのボス  「ファッティバルガード」
+BOSS_MAD_CLUBUNGER     = 2 #VOLCANIC_BELTのボス  「マッドクラブンガー」
 
 #!bossクラスのstatusに入る定数定義   (状態遷移フラグとして使用します)
 BOSS_STATUS_MOVE_COORDINATE_INIT  =  0  #ボス用のステータス定数定義 移動用座標初期化

@@ -1011,7 +1011,7 @@ class func:
         
         pyxel.play(0,2)#変な爆発音を出すのだ～～～☆彡 チャンネル0 でサウンドナンバー2の音を鳴らす
 
-    #各面のボスをBossクラスに定義して出現させる
+    #!各面のボスをBossクラスに定義して出現させる
     def born_boss(self):
         #col_main1_x, col_main1_y, col_main1_w, col_main1_h  = 1*8,1*8,5*8,2*8
         if       self.stage_number == STAGE_MOUNTAIN_REGION:
@@ -1407,7 +1407,7 @@ class func:
             speed = 0
             radius = 0
             flag1,flag2,flag3,flag4 = 0,0,0,0
-            count1,count2,count3,count4 = 0,0,0,0
+            count1,count2,count3,count4 = 0,4,0,6
             parts1_flag,parts2_flag,parts3_flag,parts4_flag = 1,1,1,1
             parts5_flag,parts6_flag,parts7_flag,parts8_flag = 0,0,0,0
             parts9_flag = 0

@@ -20,7 +20,7 @@ class update_boss:
         None
 
     ####################################ボス関連の処理関数########################################
-    #ボスの更新
+    #!ボスの更新
     def boss(self):
         boss_count = len(self.boss)
         for i in reversed (range(boss_count)):
@@ -366,8 +366,12 @@ class update_boss:
                             func.enemy_green_laser(self,ex,ey,length,speed)
                 
             elif self.boss[i].boss_type == BOSS_MAD_CLUBUNGER: #ボスタイプ2の更新 マッドクラブンガー ###############################
+                #count1 = 現時点でのホーミングレーザーを発射した数
+                #count2 = ホーミングレーザーを発射する予定数
+                #count3 = 現時点で5way弾を発射した数
+                #count4 = 5way弾を発射する予定数
                 if   self.boss[i].status == BOSS_STATUS_MOVE_COORDINATE_INIT:   #「移動用座標初期化」ベジェ曲線で移動するための移動元、移動先、制御点をまず初めに取得する
-                    if not self.boss_bg_move_point:                             #boss_bg_move_point移動リストが空だったのならば(BGマップに移動ポイントが全く存在してない状態) リストが空かどうかを調べる方法はこうするのが公式らしい・・・知らなかった
+                    if not self.boss_bg_move_point:                             #boss_bg_move_point移動リストが空だったのならば(BGマップに移動ポイントが全く存在してない状態) 公式ではリストが空かどうかを調べる方法はこれが推奨らしい・・・知らなかったDEATH
                         self.boss[i].status = BOSS_STATUS_MOVE_LEMNISCATE_CURVE #状態遷移を「レムニスケート曲線で移動」に設定
                     else:                                                       #移動リストに何らかの座標データがあったのなら
                         func.boss_bg_move_get_bezier_curve_coordinate(self,i)   #ボスをBG背景上でベジェ曲線移動させるために必要な座標をリストから取得する関数の呼び出し
@@ -528,11 +532,23 @@ class update_boss:
                         ey = self.boss[i].posy + 3*8
                         performance = 20                                                #誘導性能
                         func.enemy_homing_laser(self,ex,ey,performance)#ホーミングレーザー発射！
+                        self.boss[i].count1 += 1 #ホーミングレーザーを発射した数をインクリメント
+                        if self.boss[i].count1 >= self.boss[i].count2:
+                            self.boss[i].count1 = 0
+                            self.boss[i].attack_method = BOSS_ATTACK_FRONT_5WAY_AIM_BULLET
+                
+                if  self.boss[i].attack_method == BOSS_ATTACK_FRONT_5WAY_AIM_BULLET:
+                    if (pyxel.frame_count % 100) == 0 : #尾翼レーザー部が健在なら100フレーム毎に
+                        ex = self.boss[i].posx + 40
+                        ey = self.boss[i].posy + 18
+                        func.enemy_forward_5way_bullet(self,ex,ey) #前方5way発射！
+                        
+                        ex = self.boss[i].posx + 40
+                        ey = self.boss[i].posy + 18
+                        func.enemy_aim_bullet(self,ex,ey,0,0,0,0,1) #狙い撃ち弾発射
+                        self.boss[i].count3 += 1 #5way+AIM弾を発射した数をインクリメント
+                        if self.boss[i].count3 >= self.boss[i].count4:
+                            self.boss[i].count3 = 0
+                            self.boss[i].attack_method = BOSS_ATTACK_HOMING_LASER
                     
-                    if (pyxel.frame_count % 100) == 0 and self.boss[i].parts2_flag == 1: #尾翼レーザー部が健在なら100フレーム毎に
-                        ex = self.boss[i].posx + 16
-                        ey = self.boss[i].posy
-                        length = 2
-                        speed =  1
-                        func.enemy_red_laser(self,ex,ey,length,speed) #レッドレーザービーム発射！
 
