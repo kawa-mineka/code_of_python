@@ -576,7 +576,28 @@ class func:
             new_enemy_shot = Enemy_shot()
             new_enemy_shot.update(ENEMY_SHOT_HOMING_LASER,ID00, ex,ey,ESHOT_COL_MIN88,ESHOT_SIZE8,ESHOT_SIZE8, 0,0,   0.5,0.5,   1,    1,1,   0,performance,0,    1,0,0,  0,0,PRIORITY_MORE_FRONT, 8,0,  0,0,0,0, 0,0, 0, 0,0, 0, 0,0, 0,0,   0,0)
             self.enemy_shot.append(new_enemy_shot)
-        
+
+    #敵アップレーザーの発射
+    def enemy_up_laser(self,ex,ey,vx,vy,expansion,width_max,height_max):
+        if len(self.enemy_shot) < 800:
+            new_enemy_shot = Enemy_shot()
+            division_type        = 0
+            division_count       = 0
+            division_count_origin = 0
+            division_num        = 0
+            new_enemy_shot.update(ENEMY_SHOT_UP_LASER,ID00, ex,ey,ESHOT_COL_BOX,ESHOT_SIZE8,ESHOT_SIZE3, 0,0, vx,vy,     1,     1,1,    1,0, 0,1,0,        0,   0,0,PRIORITY_FRONT,   0,0,0,0,0,0, division_type,division_count,  0, division_count_origin,division_num, 0, expansion,0,width_max,height_max,   0,0)
+            self.enemy_shot.append(new_enemy_shot)
+
+    #敵ダウンレーザーの発射
+    def enemy_down_laser(self,ex,ey,vx,vy,expansion,width_max,height_max):
+        if len(self.enemy_shot) < 800:
+            new_enemy_shot = Enemy_shot()
+            division_type        = 0
+            division_count       = 0
+            division_count_origin = 0
+            division_num        = 0
+            new_enemy_shot.update(ENEMY_SHOT_DOWN_LASER,ID00, ex,ey,ESHOT_COL_BOX,ESHOT_SIZE8,ESHOT_SIZE3, 0,0, vx,vy,     1,     1,1,    1,0, 0,1,0,        0,   0,0,PRIORITY_FRONT,   0,0,0,0,0,0, division_type,division_count,  0, division_count_origin,division_num, 0, expansion,0,width_max,height_max,   0,0)
+            self.enemy_shot.append(new_enemy_shot)
 
     #ミサイルリスト内から同じタイプのミサイルが何発存在するのか数をカウントする関数定義
     def count_missile_type(self,missile_type1,missile_type2,missile_type3,missile_type4):

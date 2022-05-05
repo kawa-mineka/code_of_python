@@ -1382,9 +1382,11 @@ BOSS_FATTY_VALGUARD    = 1 #ADVANCED_BASEのボス  「ファッティバルガ�
 BOSS_MAD_CLUBUNGER     = 2 #VOLCANIC_BELTのボス  「マッドクラブンガー」
 
 #!bossクラスのstatusに入る定数定義   (状態遷移フラグとして使用します)
-BOSS_STATUS_MOVE_COORDINATE_INIT  =  0  #ボス用のステータス定数定義 移動用座標初期化
+BOSS_STATUS_MOVE_COORDINATE_INIT  =  0  #ボス用のステータス定数定義 移動用座標設定初期化
 BOSS_STATUS_MOVE_BEZIER_CURVE     = 10  #ボス用のステータス定数定義 ベジェ曲線で移動
 BOSS_STATUS_MOVE_LEMNISCATE_CURVE = 11  #ボス用のステータス定数定義 レムニスケート曲線で移動
+BOSS_STATUS_MOVE_2POINT_INIT      = 12  #ボス用のステータス定数定義 移動元と移動先の2点間を移動するための座標位置設定初期化
+BOSS_STATUS_MOVE_2POINT           = 13  #ボス用のステータス定数定義 2点間の移動にする
 
 BOSS_STATUS_EXPLOSION_START    = 80  #ボス撃破！爆発開始！
 BOSS_STATUS_EXPLOSION          = 81  #ボス爆発中！

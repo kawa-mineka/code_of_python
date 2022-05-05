@@ -449,8 +449,8 @@ class Boss:#ボスキャラのクラス設定
         self.qx,self.qy = 0,0 #2次ベジェ曲線の制御点qとして使用
         self.vx,self.vy = 0,0 #速度
         
-        self.width = 0  #画像の横の大きさ
-        self.height = 0 #画像の縦の大きさ
+        self.width  = 0  #画像の横の大きさ
+        self.height = 0  #画像の縦の大きさ
         
         self.col_damage_point1_x,self.col_damage_point1_y = 0,0 #ボスの弱点位置1 始点x,y座標
         self.col_damage_point1_w,self.col_damage_point1_h = 0,0 #    弱点位置1 横の長さ,縦の長さ w=0の場合は当たり判定として使用しない

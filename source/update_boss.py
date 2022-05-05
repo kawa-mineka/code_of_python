@@ -24,12 +24,12 @@ class update_boss:
     def boss(self):
         boss_count = len(self.boss)
         for i in reversed (range(boss_count)):
-            if   self.boss[i].boss_type == BOSS_FATTY_VALGUARD: #ボスタイプ1の更新 ファッティ・バルガード ###########################
+            if   self.boss[i].boss_type == BOSS_FATTY_VALGUARD: #2面ボス  ファッティ・バルガード  ############################
                 if   self.boss[i].status == BOSS_STATUS_MOVE_COORDINATE_INIT:  #「移動用座標初期化」ベジェ曲線で移動するための移動元、移動先、制御点をまず初めに取得する
                     func.boss_get_bezier_curve_coordinate(self,i) #ボスをベジェ曲線で移動させるために必要な座標をリストから取得する関数の呼び出し
                     self.boss[i].status = BOSS_STATUS_MOVE_BEZIER_CURVE #状態遷移を「ベジェ曲線で移動」に設定
                     
-                elif self.boss[i].status == BOSS_STATUS_MOVE_BEZIER_CURVE:    #「ベジェ曲線で移動」
+                elif self.boss[i].status == BOSS_STATUS_MOVE_BEZIER_CURVE:     #「ベジェ曲線」で移動」
                     t = self.boss[i].obj_time / self.boss[i].obj_totaltime
                     if t >= 1: #tの値が1になった時は現在の座標が移動目的座標と同じ座標になった状況となるので・・・(行き過ぎ防止で念のため１以上で判別してます)
                         self.boss[i].obj_time = 0    #タイムフレーム番号を0にしてリセットする                    
@@ -68,7 +68,7 @@ class update_boss:
                         self.boss[i].speed = 0.2
                     self.boss[i].obj_time += self.boss[i].speed #タイムフレーム番号をスピード分加算していく
                     
-                elif self.boss[i].status == BOSS_STATUS_MOVE_LEMNISCATE_CURVE: #前方でレムニスケート曲線を使った上下運動をさせる
+                elif self.boss[i].status == BOSS_STATUS_MOVE_LEMNISCATE_CURVE: #前方で「レムニスケート曲線」を使った上下運動をさせる
                     self.boss[i].degree += 0.009 #degree角度は0~360までの間を0.009の増分で増加させていく
                     if self.boss[i].degree >= 360:
                         self.boss[i].degree = 0
@@ -99,7 +99,7 @@ class update_boss:
                     self.boss[i].posy = (math.sqrt(2)*math.cos(self.boss[i].degree) / (math.sin(self.boss[i].degree)**2+1)) * 35 + 50
                     self.boss[i].posx = (math.sqrt(2)*math.cos(self.boss[i].degree) * math.sin(self.boss[i].degree) / (math.sin(self.boss[i].degree)**2+1)) * 30 + 80
                     
-                elif self.boss[i].status == BOSS_STATUS_EXPLOSION_START:      #ボス撃破！爆発開始！の処理
+                elif self.boss[i].status == BOSS_STATUS_EXPLOSION_START:       #ボス撃破！爆発開始！の処理
                     self.boss[i].attack_method = BOSS_ATTACK_NO_FIRE #ボスの攻撃方法は「ノーファイア」何も攻撃しないにする、まぁ撃破したからね
                     
                     self.boss[i].vx = (WINDOW_W / 2 - self.boss[i].posx ) / 480 * 1.5 #ボスが居た位置に乗じた加速度を設定する vxは画面中央を境にプラスマイナスに分かれる 480で割っているのは480フレーム掛けて画面の端まで動くためです
@@ -107,7 +107,7 @@ class update_boss:
                     self.boss[i].count1 = 240 #count1を爆裂分裂開始までのカウントとして使います
                     self.boss[i].status = BOSS_STATUS_EXPLOSION #ボスの状態遷移ステータスを「爆発中」にする
                     
-                elif self.boss[i].status == BOSS_STATUS_EXPLOSION:           #ボスステータスが「爆発中」の処理
+                elif self.boss[i].status == BOSS_STATUS_EXPLOSION:             #ボスステータスが「爆発中」の処理
                     #爆発中サウンド再生
                     pyxel.play(3,11)
                     
@@ -123,7 +123,7 @@ class update_boss:
                     if self.boss[i].count1 <= 0: #爆裂分裂開始までのカウントが0になったのなら
                         self.boss[i].status = BOSS_STATUS_BLAST_SPLIT_START #状態遷移ステータスを「爆発分離開始」にします
                     
-                elif self.boss[i].status == BOSS_STATUS_BLAST_SPLIT_START:    #ボスステータスが「爆発分離開始」の処理
+                elif self.boss[i].status == BOSS_STATUS_BLAST_SPLIT_START:     #ボスステータスが「爆発分離開始」の処理
                     self.boss[i].count2 = 480 #count2をボス破壊後に分裂するシーン全体のフレーム数を登録します
                     
                     #爆発分離開始のサウンド再生
@@ -135,7 +135,7 @@ class update_boss:
                     
                     self.boss[i].status = BOSS_STATUS_BLAST_SPLIT #ボスステータスを「爆発分離」にします
                     
-                elif self.boss[i].status == BOSS_STATUS_BLAST_SPLIT:         #ボスステータスが「爆発分離」の処理
+                elif self.boss[i].status == BOSS_STATUS_BLAST_SPLIT:           #ボスステータスが「爆発分離」の処理
                     #ランダムな場所に爆発パターンを育成
                     new_explosion = Explosion()
                     new_explosion.update(EXPLOSION_NORMAL,PRIORITY_FRONT,self.boss[i].posx + self.boss[i].width / 2 + func.s_rndint(self,0,50) -25,self.boss[i].posy + self.boss[i].height / 2 + func.s_rndint(self,0,20) -15,0,0,10,RETURN_BULLET_NONE,0,  1,1)
@@ -157,7 +157,7 @@ class update_boss:
                     if self.boss[i].count2 <= 0: #ボス消滅までのカウントが0になったのなら
                         self.boss[i].status = BOSS_STATUS_DISAPPEARANCE #ボスステータスを「ボス消滅」にします
                     
-                elif self.boss[i].status == BOSS_STATUS_DISAPPEARANCE:        #ボスステータスが「ボス消滅」の処理
+                elif self.boss[i].status == BOSS_STATUS_DISAPPEARANCE:         #ボスステータスが「ボス消滅」の処理
                     self.game_status = SCENE_STAGE_CLEAR_MOVE_MY_SHIP #ゲームステータス(状態遷移)を「ステージクリア自機自動移動」にする
                     
                     self.stage_clear_dialog_flag          = 1   #STAGE CLEARダイアログ表示フラグをonにする
@@ -175,7 +175,7 @@ class update_boss:
                     break                               #ループから抜け出す
                 
                 ####ここからはボスの攻撃パターンです############################################################
-                if   self.boss[i].attack_method == BOSS_ATTACK_FRONT_5WAY:         #画面上部を左から右に弧を描いて移動中
+                if   self.boss[i].attack_method == BOSS_ATTACK_FRONT_5WAY:            #→ 画面上部を左から右に弧を描いて移動中
                     if (pyxel.frame_count % 60) == 0 and self.boss[i].parts1_flag == 1: #5way砲台が健在なら60フレーム毎に
                         ex = self.boss[i].posx
                         ey = self.boss[i].posy + 18
@@ -188,7 +188,7 @@ class update_boss:
                         speed =  1
                         func.enemy_red_laser(self,ex,ey,length,speed) #レッドレーザービーム発射！
                     
-                elif self.boss[i].attack_method == BOSS_ATTACK_RIGHT_GREEN_LASER:    #背後で下から上に移動中
+                elif self.boss[i].attack_method == BOSS_ATTACK_RIGHT_GREEN_LASER:     #↑ 背後で下から上に移動中
                     if (pyxel.frame_count % 30) == 0: #30フレーム毎に
                         ex = self.boss[i].posx + 48
                         ey = self.boss[i].posy + 27
@@ -203,7 +203,7 @@ class update_boss:
                         speed =  1
                         func.enemy_red_laser(self,ex,ey,length,speed) #レッドレーザービーム発射！
                     
-                elif self.boss[i].attack_method == BOSS_ATTACK_FRONT_5WAY_AIM_BULLET:#前方で上から下に移動中
+                elif self.boss[i].attack_method == BOSS_ATTACK_FRONT_5WAY_AIM_BULLET: #↓ 矢印前方で上から下に移動中
                     if (pyxel.frame_count % int(40 * self.enemy_bullet_interval / 100)) == 0: #40フレーム毎に
                         ex = self.boss[i].posx + 40
                         ey = self.boss[i].posy + 18
@@ -213,7 +213,7 @@ class update_boss:
                         ey = self.boss[i].posy + 18
                         func.enemy_aim_bullet(self,ex,ey,0,0,0,0,1)        #狙い撃ち弾発射
                     
-                elif self.boss[i].attack_method == BOSS_ATTACK_FRONT_5WAY_ARROW:    #下部を右から左に弧を描いて移動中
+                elif self.boss[i].attack_method == BOSS_ATTACK_FRONT_5WAY_ARROW:      #← 下部を右から左に弧を描いて移動中
                     if (pyxel.frame_count % 60) == 0 and self.boss[i].parts1_flag == 1: #60フレーム毎に5way砲台が健在なら
                         ex = self.boss[i].posx
                         ey = self.boss[i].posy + 18
@@ -225,7 +225,7 @@ class update_boss:
                                 new_enemy.update(TWIN_ARROW,ID00,ENEMY_STATUS_NORMAL,ENEMY_ATTCK_ANY,    self.boss[i].posx + 48,self.boss[i].posy + 8,0,0,      0,0,0,0,0,0,0,0,     0,0,0,0,0,0,0,0,0,0,   1,-1,      0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0,    SIZE_8,SIZE_8,   1,0,   0,    HP01,    0,0,   E_SIZE_NORMAL,  0,0,1,       0,0,0,0,        E_NO_POW,ID00 ,0,0,0,    0  ,0,0,0,    0,AERIAL_OBJ,  PT01,PT01,PT01,  PT01,PT01,PT01)
                                 self.enemy.append(new_enemy)#リストにアペンド追加！
                 
-            elif self.boss[i].boss_type == BOSS_BREEZARDIA:    #ボスタイプ0の更新 ブリザーディア ##################################
+            elif self.boss[i].boss_type == BOSS_BREEZARDIA:     #1面ボス  ブリザーディア         ############################
                 #flag1  = 主砲が発射中なのかのフラグ
                 #direction = 前進か更新かの方向フラグ(1=前進 0=後進)
                 #count1 = 主砲が何発撃ったのか？のカウント用
@@ -365,24 +365,24 @@ class update_boss:
                             speed = -2
                             func.enemy_green_laser(self,ex,ey,length,speed)
                 
-            elif self.boss[i].boss_type == BOSS_MAD_CLUBUNGER: #ボスタイプ2の更新 マッドクラブンガー ###############################
+            elif self.boss[i].boss_type == BOSS_MAD_CLUBUNGER:  #3面ボス  マッドクラブンガー     #############################
                 #count1 = 現時点でのホーミングレーザーを発射した数
                 #count2 = ホーミングレーザーを発射する予定数
                 #count3 = 現時点で5way弾を発射した数
                 #count4 = 5way弾を発射する予定数
-                if   self.boss[i].status == BOSS_STATUS_MOVE_COORDINATE_INIT:   #「移動用座標初期化」ベジェ曲線で移動するための移動元、移動先、制御点をまず初めに取得する
+                if   self.boss[i].status == BOSS_STATUS_MOVE_COORDINATE_INIT:  #「移動用座標初期化」ベジェ曲線で移動するための移動元、移動先、制御点をまず初めに取得する
                     if not self.boss_bg_move_point:                             #boss_bg_move_point移動リストが空だったのならば(BGマップに移動ポイントが全く存在してない状態) 公式ではリストが空かどうかを調べる方法はこれが推奨らしい・・・知らなかったDEATH
                         self.boss[i].status = BOSS_STATUS_MOVE_LEMNISCATE_CURVE #状態遷移を「レムニスケート曲線で移動」に設定
                     else:                                                       #移動リストに何らかの座標データがあったのなら
                         func.boss_bg_move_get_bezier_curve_coordinate(self,i)   #ボスをBG背景上でベジェ曲線移動させるために必要な座標をリストから取得する関数の呼び出し
                         self.boss[i].status = BOSS_STATUS_MOVE_BEZIER_CURVE     #状態遷移を「ベジェ曲線で移動」に設定
                     
-                elif self.boss[i].status == BOSS_STATUS_MOVE_BEZIER_CURVE:    #「ベジェ曲線で移動」
+                elif self.boss[i].status == BOSS_STATUS_MOVE_BEZIER_CURVE:     #「ベジェ曲線で移動」
                     t = self.boss[i].obj_time / self.boss[i].obj_totaltime
                     if t >= 1: #tの値が1になった時は現在の座標が移動目的座標と同じ座標になった状況となるので・・・(行き過ぎ防止で念のため１以上で判別してます)
                         print(self.boss[i].move_index)
                         if self.boss[i].move_index >= len(self.boss_bg_move_point) - 2: #移動リストのインデックス値がリストの要素数の数と一致したら、もう通過すべき座標値がないので
-                            self.boss[i].status = BOSS_STATUS_MOVE_LEMNISCATE_CURVE #状態遷移を「レムニスケート曲線で移動」に設定
+                            self.boss[i].status = BOSS_STATUS_MOVE_2POINT_INIT #状態遷移を「2点間移動のポイント設定初期化」に設定
                         else:
                             self.boss[i].obj_time = 0    #タイムフレーム番号を0にしてリセットする                    
                             self.boss[i].move_index += 1 #目的座標のリストのインデックスを1進める
@@ -419,6 +419,40 @@ class update_boss:
                         self.boss[i].speed = 0.2
                     self.boss[i].obj_time += self.boss[i].speed #タイムフレーム番号をスピード分加算していく
                     
+                elif self.boss[i].status == BOSS_STATUS_MOVE_2POINT_INIT:      #移動元と移動先の2点間でので移動の為の座標設定初期処理
+                    ax,ay = self.boss[i].posx,self.boss[i].posy #現在のボスが居る座標位置を移動元に設定する
+                    self.boss[i].ax,self.boss[i].ay = ax,ay
+                    
+                    #レムニスケート曲線で最初に計算して設定した座標値を移動先に設定する
+                    dy = (math.sqrt(2)*math.cos(self.boss[i].degree) / (math.sin(self.boss[i].degree)**2+1)) * 35 + 50
+                    dx = (math.sqrt(2)*math.cos(self.boss[i].degree) * math.sin(self.boss[i].degree) / (math.sin(self.boss[i].degree)**2+1)) * 30 + 80
+                    self.boss[i].dx,self.boss[i].dy = dx,dy
+                    #移動元と移動先の距離dを求める
+                    d = math.sqrt((dx-ax) * (dx-ax) + (dy - ay) * (dy - ay))
+                    #速度を求める
+                    if d == 0: #距離がゼロの時は0で割る処理になってしまいエラーになるのでvx=1 vy=0(右移動)にする
+                        vx = 1
+                        vy = 0
+                    else:
+                        vx = (dx - ax) / d
+                        vy = (dy - ay) / d
+                    
+                    self.boss[i].vx,self.boss[i].vy = vx,vy #ボスクラスのメンバ変数vx,vy(速度)に今計算してやった速度を代入する
+                    self.boss[i].status = BOSS_STATUS_MOVE_2POINT           #ボスの移動ステータスを「2点間の移動状態」にする
+                    
+                elif self.boss[i].status == BOSS_STATUS_MOVE_2POINT:           #ボスの移動ステータスが「2点間の移動状態」の処理
+                    #速度を加算した座標ax,ayを計算する
+                    ax = self.boss[i].posx +self.boss[i].vx
+                    ay = self.boss[i].posy +self.boss[i].vy
+                    #移動先の座標取得
+                    dx,dy = self.boss[i].dx,self.boss[i].dy
+                    #移動先との距離dを計算する
+                    d = math.sqrt((dx-ax) * (dx-ax) + (dy - ay) * (dy - ay))
+                    if d<=1: #移動先と現在の座標の距離が1以下なら移動完了！
+                        self.boss[i].status = BOSS_STATUS_MOVE_LEMNISCATE_CURVE #ボスの移動ステータスを「レムニスケート曲線で移動」にする
+                    
+                    self.boss[i].posx,self.boss[i].posy = ax,ay #ボスの位置座標更新！
+                    
                 elif self.boss[i].status == BOSS_STATUS_MOVE_LEMNISCATE_CURVE: #前方でレムニスケート曲線を使った上下運動をさせる
                     self.boss[i].degree += 0.009 #degree角度は0~360までの間を0.009の増分で増加させていく
                     if self.boss[i].degree >= 360:
@@ -450,7 +484,7 @@ class update_boss:
                     self.boss[i].posy = (math.sqrt(2)*math.cos(self.boss[i].degree) / (math.sin(self.boss[i].degree)**2+1)) * 35 + 50
                     self.boss[i].posx = (math.sqrt(2)*math.cos(self.boss[i].degree) * math.sin(self.boss[i].degree) / (math.sin(self.boss[i].degree)**2+1)) * 30 + 80
                     
-                elif self.boss[i].status == BOSS_STATUS_EXPLOSION_START:      #ボス撃破！爆発開始！の処理
+                elif self.boss[i].status == BOSS_STATUS_EXPLOSION_START:       #ボス撃破！爆発開始！の処理
                     self.boss[i].attack_method = BOSS_ATTACK_NO_FIRE #ボスの攻撃方法は「ノーファイア」何も攻撃しないにする、まぁ撃破したからね
                     
                     self.boss[i].vx = (WINDOW_W / 2 - self.boss[i].posx ) / 480 * 1.5 #ボスが居た位置に乗じた加速度を設定する vxは画面中央を境にプラスマイナスに分かれる 480で割っているのは480フレーム掛けて画面の端まで動くためです
@@ -458,7 +492,7 @@ class update_boss:
                     self.boss[i].count1 = 240 #count1を爆裂分裂開始までのカウントとして使います
                     self.boss[i].status = BOSS_STATUS_EXPLOSION #ボスの状態遷移ステータスを「爆発中」にする
                     
-                elif self.boss[i].status == BOSS_STATUS_EXPLOSION:           #ボスステータスが「爆発中」の処理
+                elif self.boss[i].status == BOSS_STATUS_EXPLOSION:             #ボスステータスが「爆発中」の処理
                     #爆発中サウンド再生
                     pyxel.play(3,11)
                     
@@ -474,7 +508,7 @@ class update_boss:
                     if self.boss[i].count1 <= 0: #爆裂分裂開始までのカウントが0になったのなら
                         self.boss[i].status = BOSS_STATUS_BLAST_SPLIT_START #状態遷移ステータスを「爆発分離開始」にします
                     
-                elif self.boss[i].status == BOSS_STATUS_BLAST_SPLIT_START:    #ボスステータスが「爆発分離開始」の処理
+                elif self.boss[i].status == BOSS_STATUS_BLAST_SPLIT_START:     #ボスステータスが「爆発分離開始」の処理
                     self.boss[i].count2 = 480 #count2をボス破壊後に分裂するシーン全体のフレーム数を登録します
                     
                     #爆発分離開始のサウンド再生
@@ -486,7 +520,7 @@ class update_boss:
                     
                     self.boss[i].status = BOSS_STATUS_BLAST_SPLIT #ボスステータスを「爆発分離」にします
                     
-                elif self.boss[i].status == BOSS_STATUS_BLAST_SPLIT:         #ボスステータスが「爆発分離」の処理
+                elif self.boss[i].status == BOSS_STATUS_BLAST_SPLIT:           #ボスステータスが「爆発分離」の処理
                     #ランダムな場所に爆発パターンを育成
                     new_explosion = Explosion()
                     new_explosion.update(EXPLOSION_NORMAL,PRIORITY_FRONT,self.boss[i].posx + self.boss[i].width / 2 + func.s_rndint(self,0,50) -25,self.boss[i].posy + self.boss[i].height / 2 + func.s_rndint(self,0,20) -15,0,0,10,RETURN_BULLET_NONE,0,  1,1)
@@ -508,7 +542,7 @@ class update_boss:
                     if self.boss[i].count2 <= 0: #ボス消滅までのカウントが0になったのなら
                         self.boss[i].status = BOSS_STATUS_DISAPPEARANCE #ボスステータスを「ボス消滅」にします
                     
-                elif self.boss[i].status == BOSS_STATUS_DISAPPEARANCE:        #ボスステータスが「ボス消滅」の処理
+                elif self.boss[i].status == BOSS_STATUS_DISAPPEARANCE:         #ボスステータスが「ボス消滅」の処理
                     self.game_status = SCENE_STAGE_CLEAR_MOVE_MY_SHIP #ゲームステータス(状態遷移)を「ステージクリア自機自動移動」にする
                     
                     self.stage_clear_dialog_flag          = 1   #STAGE CLEARダイアログ表示フラグをonにする
@@ -530,15 +564,22 @@ class update_boss:
                     if (pyxel.frame_count % 180)  == 0:                                 #3秒毎に
                         ex = self.boss[i].posx
                         ey = self.boss[i].posy + 3*8
-                        performance = 20                                                #誘導性能
-                        func.enemy_homing_laser(self,ex,ey,performance)#ホーミングレーザー発射！
+                        performance = 20                                                #誘導性能の数値を代入
+                        func.enemy_homing_laser(self,ex,ey,performance)                 #ホーミングレーザー発射！
+                        
+                        if self.boss[i].main_hp <= 200:                              #ボスのHPが200以下なら
+                            if self.boss[i].posy >= self.my_y:                       #ボスが自機より下にいたのなら
+                                func.enemy_up_laser(self,ex,ey,-0.3,-0.3,0.2,80,3)   #アップレーザー発射
+                            else:                                                    #ボスが自機より上の場合は
+                                func.enemy_down_laser(self,ex,ey,-0.3,0.3,0.2,80,3)  #ダウンレーザー発射
+                        
                         self.boss[i].count1 += 1 #ホーミングレーザーを発射した数をインクリメント
                         if self.boss[i].count1 >= self.boss[i].count2:
                             self.boss[i].count1 = 0
                             self.boss[i].attack_method = BOSS_ATTACK_FRONT_5WAY_AIM_BULLET
                 
                 if  self.boss[i].attack_method == BOSS_ATTACK_FRONT_5WAY_AIM_BULLET:
-                    if (pyxel.frame_count % 100) == 0 : #尾翼レーザー部が健在なら100フレーム毎に
+                    if (pyxel.frame_count % 100) == 0 :                               #100フレーム毎に
                         ex = self.boss[i].posx + 40
                         ey = self.boss[i].posy + 18
                         func.enemy_forward_5way_bullet(self,ex,ey) #前方5way発射！
