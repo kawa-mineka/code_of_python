@@ -252,23 +252,7 @@ class graph:
     def draw_boss(self):
         boss_count = len(self.boss)
         for i in range(boss_count):
-            if    self.boss[i].boss_type == BOSS_FATTY_VALGUARD:#ファッティ・バルガード(前線基地ボス)
-                offset_x = 0 #真っ二つになる描画用のx軸オフセット値(離れた距離)をリセットする
-                if self.boss[i].count2 !=0: #カウントが0だと0で割ってしまってエラーになるのでスキップする
-                    offset_x = 10 - self.boss[i].count2 // 48   #count2が少なくなるごとにoffset_xが増加することに成る
-                                                                #count2の数値は最初は480フレームで最終的に0となり,この計算式からoffset_xは480フレームの間で0から10まで変化することに成る
-                
-                pyxel.blt(self.boss[i].posx + offset_x, self.boss[i].posy - self.camera_offset_y + offset_x // 16,  IMG0,   64,128,8*8,5*8,    pyxel.COLOR_PEACH) #ファッティバルガード前部表示
-                pyxel.blt(self.boss[i].posx - offset_x, self.boss[i].posy - self.camera_offset_y                 ,  IMG0,    0,184,5*8,3*8,    pyxel.COLOR_PEACH) #ファッティバルガード後部表示 
-                
-                if self.boss[i].parts1_flag == 1: #パーツフラグ1(5way砲台)が生存していたのなら描画する
-                    pyxel.blt(self.boss[i].posx - offset_x, self.boss[i].posy - self.camera_offset_y+ 16,       IMG0,    0,176,    2*8,8,    pyxel.COLOR_PEACH)
-                if self.boss[i].parts2_flag == 1: #パーツフラグ2(尾翼レーザーユニット)が生存していたのなら描画する
-                    pyxel.blt(self.boss[i].posx - offset_x, self.boss[i].posy - self.camera_offset_y,           IMG0,   16,176,    3*8,8,    pyxel.COLOR_PEACH)
-                if self.boss[i].parts3_flag == 1: #パーツフラグ3(赤色爆雷ユニット)が生存していたのなら描画する
-                    pyxel.blt(self.boss[i].posx - offset_x + 8, self.boss[i].posy - self.camera_offset_y + 24,    IMG0,   40,176,    2*8,8,    pyxel.COLOR_PEACH)
-                
-            elif  self.boss[i].boss_type == BOSS_BREEZARDIA:    #ブリザーディア(山岳地帯ボス)
+            if   self.boss[i].boss_type == BOSS_BREEZARDIA:        #1面 ブリザーディア          (山岳地帯ボス)
                 offset_x = 0 #真っ二つになる描画用のx軸オフセット値(離れた距離)をリセットする
                 if self.boss[i].count2 !=0: #カウントが0だと0で割ってしまってエラーになるのでスキップする
                     offset_x = 10 - self.boss[i].count2 // 48   #count2が少なくなるごとにoffset_xが増加することに成る
@@ -288,9 +272,51 @@ class graph:
                     #グリーンカッター手前にある後部ユニット部
                     pyxel.blt(self.boss[i].posx - offset_x +  1*8, self.boss[i].posy - self.camera_offset_y + 1*8,       IMG0,    32,240,    2*8,2*8,    pyxel.COLOR_PEACH)
                 
-            elif  self.boss[i].boss_type == BOSS_MAD_CLUBUNGER:    #マッドクラブンガー(火山地帯ボス)
-                pyxel.blt(self.boss[i].posx, self.boss[i].posy - self.camera_offset_y,             IMG0,   0,                               128, self.boss[i].width,self.boss[i].height, pyxel.COLOR_PEACH) #マッドクラブンガー表示
-                pyxel.blt(self.boss[i].posx+ 1*8, self.boss[i].posy - self.camera_offset_y + 3*8,  IMG0,   64 + (pyxel.frame_count // 4  % 8)*8,   88, 8,16,                                   pyxel.COLOR_PEACH) #下部ドリル回転アニメーション表示
+            elif self.boss[i].boss_type == BOSS_FATTY_VALGUARD:    #2面 ファッティ・バルガード   (前線基地ボス)
+                offset_x = 0 #真っ二つになる描画用のx軸オフセット値(離れた距離)をリセットする
+                if self.boss[i].count2 !=0: #カウントが0だと0で割ってしまってエラーになるのでスキップする
+                    offset_x = 10 - self.boss[i].count2 // 48   #count2が少なくなるごとにoffset_xが増加することに成る
+                                                                #count2の数値は最初は480フレームで最終的に0となり,この計算式からoffset_xは480フレームの間で0から10まで変化することに成る
+                
+                pyxel.blt(self.boss[i].posx + offset_x, self.boss[i].posy - self.camera_offset_y + offset_x // 16,  IMG0,   64,128,8*8,5*8,    pyxel.COLOR_PEACH) #ファッティバルガード前部表示
+                pyxel.blt(self.boss[i].posx - offset_x, self.boss[i].posy - self.camera_offset_y                 ,  IMG0,    0,184,5*8,3*8,    pyxel.COLOR_PEACH) #ファッティバルガード後部表示 
+                
+                if self.boss[i].parts1_flag == 1: #パーツフラグ1(5way砲台)が生存していたのなら描画する
+                    pyxel.blt(self.boss[i].posx - offset_x, self.boss[i].posy - self.camera_offset_y+ 16,       IMG0,    0,176,    2*8,8,    pyxel.COLOR_PEACH)
+                if self.boss[i].parts2_flag == 1: #パーツフラグ2(尾翼レーザーユニット)が生存していたのなら描画する
+                    pyxel.blt(self.boss[i].posx - offset_x, self.boss[i].posy - self.camera_offset_y,           IMG0,   16,176,    3*8,8,    pyxel.COLOR_PEACH)
+                if self.boss[i].parts3_flag == 1: #パーツフラグ3(赤色爆雷ユニット)が生存していたのなら描画する
+                    pyxel.blt(self.boss[i].posx - offset_x + 8, self.boss[i].posy - self.camera_offset_y + 24,    IMG0,   40,176,    2*8,8,    pyxel.COLOR_PEACH)
+                
+            elif self.boss[i].boss_type == BOSS_MAD_CLUBUNGER:     #3面 マッドクラブンガー       (火山地帯ボス)
+                #上部ブースターユニット表示
+                pyxel.blt(self.boss[i].posx - 5, self.boss[i].posy - self.camera_offset_y + 3       + self.boss[i].tilt_now,
+                            IMG0,
+                            0,160,
+                            self.boss[i].width,2*8,
+                            pyxel.COLOR_PEACH)
+                
+                #マッドクラブンガー本体表示
+                pyxel.blt(self.boss[i].posx, self.boss[i].posy - self.camera_offset_y,
+                            IMG0,
+                            0,128,
+                            self.boss[i].width,self.boss[i].height-1*8,
+                            pyxel.COLOR_PEACH)
+                
+                #下部ブースターユニット表示
+                pyxel.blt(self.boss[i].posx - 5, self.boss[i].posy - self.camera_offset_y + 3*8 -1   - self.boss[i].tilt_now,
+                            IMG0,
+                            0,160,
+                            self.boss[i].width,2*8,
+                            pyxel.COLOR_PEACH)
+                
+                #下部ブースター回転アニメーション表示
+                pyxel.blt(self.boss[i].posx, self.boss[i].posy - self.camera_offset_y + 3*8  - self.boss[i].tilt_now,
+                            IMG0,
+                            64 + (pyxel.frame_count // 4  % 8)*8,   88,
+                            8,16,
+                            pyxel.COLOR_PEACH)
+                
             
             #デバッグ用の当たり判定矩形の表示
             graph.draw_boss_collision_rectangle(self,i)    #ボス本体の当たり判定矩形を表示する関数の呼び出し

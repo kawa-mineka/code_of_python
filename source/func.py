@@ -1060,6 +1060,11 @@ class func:
             ax,ay, bx,by, cx,cy, dx,dy, qx,qy, vx,vy = 0,0, 0,0, 0,0, 0,0, 0,0, 0,0
             width,height = 14*8,6*8
             
+            tilt_now      = 0
+            tilt_max      = 0
+            tilt_time_now = 0
+            tilt_time     = 0
+            
             col_damage_point1_x,col_damage_point1_y,col_damage_point1_w,col_damage_point1_h =  5 ,3*8,1*8,1*8
             col_damage_point2_x,col_damage_point2_y,co2_damage_point2_w,col_damage_point2_h = 7*8,2*8,1*8,1*8
             col_damage_point3_x,col_damage_point3_y,co3_damage_point3_w,col_damage_point3_h = 0,0,0,0
@@ -1143,6 +1148,9 @@ class func:
                 posx,posy,bgx,bgy,offset_x,offset_y,
                 ax,ay, bx,by, cx,cy, dx,dy, qx,qy, vx,vy,
                 width,height,
+                
+                tilt_now,tilt_max,tilt_time_now,tilt_time,
+                
                 col_damage_point1_x,col_damage_point1_y,col_damage_point1_w,col_damage_point1_h,
                 col_damage_point2_x,col_damage_point2_y,co2_damage_point2_w,col_damage_point2_h,
                 col_damage_point3_x,col_damage_point3_y,co3_damage_point3_w,col_damage_point3_h,
@@ -1220,6 +1228,11 @@ class func:
             offset_x,offset_y = 0,0
             ax,ay, bx,by, cx,cy, dx,dy, qx,qy, vx,vy = 0,0, 0,0, 0,0, 0,0, 0,0, 0,0
             width,height = 8*8,5*8
+            
+            tilt_now      = 0
+            tilt_max      = 0
+            tilt_time_now = 0
+            tilt_time     = 0
             
             col_damage_point1_x,col_damage_point1_y,col_damage_point1_w,col_damage_point1_h = 1*8,1*8,5*8,2*8
             col_damage_point2_x,col_damage_point2_y,co2_damage_point2_w,col_damage_point2_h = 6*8,2*8,1*8,1*8
@@ -1304,6 +1317,9 @@ class func:
                 posx,posy,bgx,bgy,offset_x,offset_y,
                 ax,ay, bx,by, cx,cy, dx,dy, qx,qy, vx,vy,
                 width,height,
+                
+                tilt_now,tilt_max,tilt_time_now,tilt_time,
+                
                 col_damage_point1_x,col_damage_point1_y,col_damage_point1_w,col_damage_point1_h,
                 col_damage_point2_x,col_damage_point2_y,co2_damage_point2_w,col_damage_point2_h,
                 col_damage_point3_x,col_damage_point3_y,co3_damage_point3_w,col_damage_point3_h,
@@ -1380,6 +1396,11 @@ class func:
             offset_x,offset_y = 0,0
             ax,ay, bx,by, cx,cy, dx,dy, qx,qy, vx,vy = 0,0, 0,0, 0,0, 0,0, 0,0, 0,0
             width,height = 6*8,5*8
+            
+            tilt_now      = 0
+            tilt_max      = 4  #機体が傾くドット数は4ドット
+            tilt_time_now = 0
+            tilt_time     = 20 #20フレームごとに1ドット傾いていきます
             
             col_damage_point1_x,col_damage_point1_y,col_damage_point1_w,col_damage_point1_h = 1*8,1*8,5*8,2*8
             col_damage_point2_x,col_damage_point2_y,co2_damage_point2_w,col_damage_point2_h = 6*8,2*8,1*8,1*8
@@ -1464,6 +1485,9 @@ class func:
                 posx,posy,bgx,bgy,offset_x,offset_y,
                 ax,ay, bx,by, cx,cy, dx,dy, qx,qy, vx,vy,
                 width,height,
+                
+                tilt_now,tilt_max,tilt_time_now,tilt_time,
+                
                 col_damage_point1_x,col_damage_point1_y,col_damage_point1_w,col_damage_point1_h,
                 col_damage_point2_x,col_damage_point2_y,co2_damage_point2_w,col_damage_point2_h,
                 col_damage_point3_x,col_damage_point3_y,co3_damage_point3_w,col_damage_point3_h,
@@ -1544,9 +1568,6 @@ class func:
         
         self.boss[i].speed          = 1.0   #リストから移動スピードを取得し登録する
         self.boss[i].acceleration   = 1.0 #リストから加速度を取得し登録する
-        
-        
-
 
     #ボスの耐久力バーの表示(ボスの付近にＨＰバーを描画する)
     def display_boss_hp_bar(self,x,y,hp):

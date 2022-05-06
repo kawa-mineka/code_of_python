@@ -452,6 +452,11 @@ class Boss:#ボスキャラのクラス設定
         self.width  = 0  #画像の横の大きさ
         self.height = 0  #画像の縦の大きさ
         
+        self.tilt_now      = 0 #現在の画像の傾き具合 y軸方向にどれだけ傾て(チルト)いるかの数値 0なら通常 -1なら上昇中 1なら下降中(roll とかにした方が良いかも・・・)
+        self.tilt_max      = 0 #傾きの最大値        y軸方向に最大どれだけ傾くかの最大値(値は変化しません)
+        self.tilt_time_now = 0 #現在の傾き所要時間(フレーム数)
+        self.tilt_time     = 0 #傾かせる時にかかる時間(フレーム数)(値は変化しません)
+        
         self.col_damage_point1_x,self.col_damage_point1_y = 0,0 #ボスの弱点位置1 始点x,y座標
         self.col_damage_point1_w,self.col_damage_point1_h = 0,0 #    弱点位置1 横の長さ,縦の長さ w=0の場合は当たり判定として使用しない
         
@@ -625,6 +630,8 @@ class Boss:#ボスキャラのクラス設定
             x,y,bgx,bgy,offset_x,offset_y,ax,ay,bx,by,cx,cy,dx,dy,qx,qy,vx,vy,
             width,height,
             
+            tilt_now,tilt_max,tilt_time_now,tilt_time,
+            
             col_damage_point1_x,col_damage_point1_y,col_damage_point1_w,col_damage_point1_h,
             col_damage_point2_x,col_damage_point2_y,col_damage_point2_w,col_damage_point2_h,
             col_damage_point3_x,col_damage_point3_y,col_damage_point3_w,col_damage_point3_h,
@@ -701,35 +708,35 @@ class Boss:#ボスキャラのクラス設定
         self.parts9_score = parts9_score
         self.level = level
         
-        self.weapon1_status        = weapon1_status
-        self.weapon1_interval      = weapon1_interval
-        self.weapon1_rapid_num     = weapon1_rapid_num
+        self.weapon1_status         = weapon1_status
+        self.weapon1_interval       = weapon1_interval
+        self.weapon1_rapid_num      = weapon1_rapid_num
         self.weapon1_cool_down_time = weapon1_cool_down_time
-        self.weapon1_omen_count    = weapon1_omen_count  
+        self.weapon1_omen_count     = weapon1_omen_count  
         
-        self.weapon2_status        = weapon2_status
-        self.weapon2_interval      = weapon2_interval
-        self.weapon2_rapid_num     = weapon2_rapid_num
+        self.weapon2_status         = weapon2_status
+        self.weapon2_interval       = weapon2_interval
+        self.weapon2_rapid_num      = weapon2_rapid_num
         self.weapon2_cool_down_time = weapon2_cool_down_time
-        self.weapon2_omen_count    = weapon2_omen_count  
+        self.weapon2_omen_count     = weapon2_omen_count  
         
-        self.weapon3_status        = weapon3_status
-        self.weapon3_interval      = weapon3_interval
-        self.weapon3_rapid_num     = weapon3_rapid_num
+        self.weapon3_status         = weapon3_status
+        self.weapon3_interval       = weapon3_interval
+        self.weapon3_rapid_num      = weapon3_rapid_num
         self.weapon3_cool_down_time = weapon3_cool_down_time
-        self.weapon3_omen_count    = weapon3_omen_count  
+        self.weapon3_omen_count     = weapon3_omen_count  
         
-        self.weapon4_status        = weapon4_status
-        self.weapon4_interval      = weapon4_interval
-        self.weapon4_rapid_num     = weapon4_rapid_num
+        self.weapon4_status         = weapon4_status
+        self.weapon4_interval       = weapon4_interval
+        self.weapon4_rapid_num      = weapon4_rapid_num
         self.weapon4_cool_down_time = weapon4_cool_down_time
-        self.weapon4_omen_count    = weapon4_omen_count  
+        self.weapon4_omen_count     = weapon4_omen_count  
         
-        self.weapon5_status        = weapon5_status
-        self.weapon5_interval      = weapon5_interval
-        self.weapon5_rapid_num     = weapon5_rapid_num
+        self.weapon5_status         = weapon5_status
+        self.weapon5_interval       = weapon5_interval
+        self.weapon5_rapid_num      = weapon5_rapid_num
         self.weapon5_cool_down_time = weapon5_cool_down_time
-        self.weapon5_omen_count    = weapon5_omen_count  
+        self.weapon5_omen_count     = weapon5_omen_count  
         
         self.posx = x
         self.posy = y
@@ -751,7 +758,10 @@ class Boss:#ボスキャラのクラス設定
         self.vy = vy
         self.width  = width 
         self.height = height
-        
+        self.tilt_now      = tilt_now
+        self.tilt_max      = tilt_max
+        self.tilt_time_now = tilt_time_now
+        self.tilt_time     = tilt_time
         self.col_damage_point1_x = col_damage_point1_x
         self.col_damage_point1_y = col_damage_point1_y
         self.col_damage_point1_w = col_damage_point1_w

@@ -371,7 +371,7 @@ class update_boss:
                 #count3 = 現時点で5way弾を発射した数
                 #count4 = 5way弾を発射する予定数
                 if   self.boss[i].status == BOSS_STATUS_MOVE_COORDINATE_INIT:  #「移動用座標初期化」ベジェ曲線で移動するための移動元、移動先、制御点をまず初めに取得する
-                    if not self.boss_bg_move_point:                             #boss_bg_move_point移動リストが空だったのならば(BGマップに移動ポイントが全く存在してない状態) 公式ではリストが空かどうかを調べる方法はこれが推奨らしい・・・知らなかったDEATH
+                    if not self.boss_bg_move_point or self.boss_test_mode == FLAG_ON: #boss_bg_move_point移動リストが空もしくはボステストモードだったのならば(BGマップに移動ポイントが全く存在してない状態) 公式ではリストが空かどうかを調べる方法はこれが推奨らしい・・・知らなかったDEATH
                         self.boss[i].status = BOSS_STATUS_MOVE_LEMNISCATE_CURVE #状態遷移を「レムニスケート曲線で移動」に設定
                     else:                                                       #移動リストに何らかの座標データがあったのなら
                         func.boss_bg_move_get_bezier_curve_coordinate(self,i)   #ボスをBG背景上でベジェ曲線移動させるために必要な座標をリストから取得する関数の呼び出し
@@ -454,6 +454,7 @@ class update_boss:
                     self.boss[i].posx,self.boss[i].posy = ax,ay #ボスの位置座標更新！
                     
                 elif self.boss[i].status == BOSS_STATUS_MOVE_LEMNISCATE_CURVE: #前方でレムニスケート曲線を使った上下運動をさせる
+                    old_posy = self.boss[i].posy #移動前のy座標を保存しておく
                     self.boss[i].degree += 0.009 #degree角度は0~360までの間を0.009の増分で増加させていく
                     if self.boss[i].degree >= 360:
                         self.boss[i].degree = 0
@@ -483,6 +484,17 @@ class update_boss:
                     #横スクロールシューティングで縦に倒した状態のレムニスケート曲線を描きたいのでx座標とy座標を入れ替えて使用します
                     self.boss[i].posy = (math.sqrt(2)*math.cos(self.boss[i].degree) / (math.sin(self.boss[i].degree)**2+1)) * 35 + 50
                     self.boss[i].posx = (math.sqrt(2)*math.cos(self.boss[i].degree) * math.sin(self.boss[i].degree) / (math.sin(self.boss[i].degree)**2+1)) * 30 + 80
+                    
+                    #上下(ボスさんからみたら左右)のブースターユニットの傾きの計算
+                    if int(pyxel.frame_count % self.boss[i].tilt_time - abs(self.boss[i].tilt_now)) == 0 : #現在のフレームカウントが(tilt_time - self.boss[i].tilt_now)で割り切れる数値の時に傾け動作を開始する 0で割ることに成らないよう注意せよ！
+                        if old_posy > self.boss[i].posy: #下向きか上向き移動かの判別
+                            self.boss[i].tilt_now += 1
+                            if self.boss[i].tilt_now >= self.boss[i].tilt_max:    #もし傾きドット数の最大値を超えていたのなら最大値に丸める
+                                self.boss[i].tilt_now = self.boss[i].tilt_max
+                        else:
+                            self.boss[i].tilt_now -= 1
+                            if self.boss[i].tilt_now <= -(self.boss[i].tilt_max): #もし傾きドット数の最小値を超えていたのなら最小値に丸める(self.boss[i].tilt_maxにマイナス符号をつけて最小値として扱ってます)
+                                self.boss[i].tilt_now = -(self.boss[i].tilt_max)
                     
                 elif self.boss[i].status == BOSS_STATUS_EXPLOSION_START:       #ボス撃破！爆発開始！の処理
                     self.boss[i].attack_method = BOSS_ATTACK_NO_FIRE #ボスの攻撃方法は「ノーファイア」何も攻撃しないにする、まぁ撃破したからね
@@ -591,5 +603,5 @@ class update_boss:
                         if self.boss[i].count3 >= self.boss[i].count4:
                             self.boss[i].count3 = 0
                             self.boss[i].attack_method = BOSS_ATTACK_HOMING_LASER
-                    
+
 
