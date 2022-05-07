@@ -113,6 +113,7 @@ from update_pause      import * #Appクラスのupdate関数から呼び出さ�
 from update_score      import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み スコア加算やハイスコアのチェック、登録などの更新メソッド
 from update_status     import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にステータス表示ウィンドウで使われる項目を更新するメソッドです
 
+from update_system     import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にシステムデータのセーブロードを行う関数(メソッド？）です
 from update_window     import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にウィンドウやセレクトカーソルの更新を行う関数(メソッド？）です
 from update_replay     import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み リプレイ記録再生の更新を行う関数(メソッド？）です
 from update_debug      import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み デバッグ用パラメーターの更新やキー入力による直接デバッグを行うメソッドです
@@ -163,7 +164,7 @@ class App:
         self.number_of_play                  = 0  #遊んだ回数
         self.number_of_times_destroyed       = 0  #自機が破壊された回数
         
-        func.load_system_data(self)          #システムデータをロードする関数の呼び出し
+        update_system.load_data(self)        #システムデータをロードする関数の呼び出し
         if self.fullscreen_mode == FLAG_ON:  #フルスクリーン起動モードフラグが立っていたのなら
             #pyxel.init(WINDOW_W,WINDOW_H,title="CODE OF PYTHON",fps = 60,fullscreen = True,quit_key=pyxel.KEY_NONE) #フルスクリーンでpyxelを再起動する ver1.5以降からfullscreen = Trueは使えなくなったらしいです
             pyxel.fullscreen(True)           #pyxel Ver1.5からfullscreen命令が追加されたらしい 裏技ッポイけど！？使っても良いのん？？
@@ -554,7 +555,7 @@ class App:
                 
                 if self.replay_status == REPLAY_RECORD:      #リプレイデータ記録中(ゲームプレイ)中の時は
                     func.write_ship_equip_medal_data(self)                  #機体メダルスロット装備リストに現在プレイ中のシップリストのメダル情報を書き込む関数の呼び出し
-                    func.save_system_data(self)                             #システムデータをセーブする関数の呼び出し
+                    update_system.save_data(self)                             #システムデータをセーブする関数の呼び出し
                     func.recoard_score_board(self)                          #スコアボードに点数書き込み
                     func.score_board_bubble_sort(self,self.game_difficulty) #現在選択している難易度を引数として書き込んだスコアデータをソートする関数の呼び出し
                 
@@ -575,7 +576,7 @@ class App:
                 self.active_window_id = WINDOW_ID_SELECT_FILE_SLOT  #このウィンドウIDを最前列でアクティブなものとする
                 self.game_status = SCENE_SELECT_SAVE_SLOT    #ゲームステータスを「SCENE_SELECT_SAVE_SLOT」にしてセーブスロット選択にする
                 pygame.mixer.music.fadeout(6000)              #GAME OVER BGMフェードアウト開始
-                
+
         if self.game_status == SCENE_SELECT_SAVE_SLOT:       #「SCENE_SELECT_SAVE_SLOT」の時は
             if   self.cursor_decision_item_y == 0:             #メニューでアイテムナンバー0の「1」が押されたら
                 self.replay_slot_num = 0                     #スロット番号は0   (以下はほぼ同じ処理です)
@@ -599,7 +600,7 @@ class App:
                 self.select_cursor_flag = 0                  #セレクトカーソルの移動更新は行わないのでフラグを降ろす
                 
                 func.write_ship_equip_medal_data(self)           #機体メダルスロット装備リストに現在プレイ中のシップリストのメダル情報を書き込む関数の呼び出し
-                func.save_system_data(self)                      #システムデータをセーブする関数の呼び出し
+                update_system.save_data(self)                    #システムデータをセーブする関数の呼び出し
                 func.recoard_score_board(self)                   #スコアボードに点数書き込み
                 func.score_board_bubble_sort(self,self.game_difficulty) #現在選択している難易度を引数として書き込んだスコアデータをソートする関数の呼び出し
                 
@@ -649,7 +650,7 @@ class App:
             
         elif self.game_status == SCENE_GAME_QUIT:        #「GAME QUIT」の時は
             func.write_ship_equip_medal_data(self)       #機体メダルスロット装備リストに現在プレイ中のシップリストのメダル情報を書き込む関数の呼び出し
-            func.save_system_data(self)                  #システムデータをセーブします
+            update_system.save_data(self)                #システムデータをセーブします
             pyxel.quit()                                 #ゲーム終了！！！！！！！！！！！！！！！！！！！！！！！！！！
         
         ################################ ゲーム終了工程時の処理 ###################################################################
