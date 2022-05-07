@@ -7,9 +7,10 @@
 ###########################################################
 import copy #スコアボードでデフォルトスコアボードを深い階層までのコピーを使いたいのでインポートします
 
-import pyxel        #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
-from const import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
-from func  import * #汎用性のある関数群のモジュールの読み込み
+import pyxel                #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
+from const         import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
+from func          import * #汎用性のある関数群のモジュールの読み込み
+from update_system import * #システムデータをセーブするときに使用します
 
 
 class update_title:
@@ -628,7 +629,7 @@ class update_title:
                 func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
                 
                 func.write_ship_equip_medal_data(self)                 #機体メダルスロット装備リストに現在プレイ中のシップリストのメダル情報を書き込む関数の呼び出し
-                func.save_system_data(self)                            #システムデータをセーブします
+                update_system.save_data(self)                            #システムデータをセーブします
                 pyxel.load("assets/graphic/min-sht2.pyxres") #タイトル＆ステージ1＆2のリソースファイルを読み込む
                 
                 self.cursor_pre_decision_item_y = UNSELECTED
@@ -853,7 +854,7 @@ class update_title:
                 self.active_window_id = WINDOW_ID_INITIALIZE                    #1階層前のイニシャライズウィンドウIDを最前列でアクティブなものとする
                 pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                 self.score_board = copy.deepcopy(self.default_score_board)      #現在のスコアボードをデフォルトの物からコピーして初期化する
-                func.save_system_data(self)                                         #システムデータをセーブします
+                update_system.save_data(self)                                         #システムデータをセーブします
                 pyxel.load("assets/graphic/min-sht2.pyxres")                    #タイトル＆ステージ1＆2のリソースファイルを読みます
                 
             elif self.cursor_pre_pre_pre_decision_item_y == MENU_CONFIG and self.cursor_pre_pre_decision_item_y == MENU_CONFIG_INITIALIZE and self.cursor_pre_decision_item_y == MENU_CONFIG_INITIALIZE_NAME and self.cursor_decision_item_y == 0:
@@ -901,7 +902,7 @@ class update_title:
                 self.active_window_id = WINDOW_ID_INITIALIZE                    #1階層前のイニシャライズウィンドウIDを最前列でアクティブなものとする
                 pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                 self.my_name = copy.deepcopy(self.default_my_name)              #現在のマイネームリストをデフォルトの物からディープコピーして初期化する
-                func.save_system_data(self)                                         #システムデータをセーブします
+                update_system.save_data(self)                                         #システムデータをセーブします
                 pyxel.load("assets/graphic/min-sht2.pyxres")                    #タイトル＆ステージ1＆2のリソースファイルを読みます
                 
             elif self.cursor_pre_pre_pre_decision_item_y == MENU_CONFIG and self.cursor_pre_pre_decision_item_y == MENU_CONFIG_INITIALIZE and self.cursor_pre_decision_item_y == MENU_CONFIG_INITIALIZE_ALL and self.cursor_decision_item_y == 0:
@@ -989,5 +990,5 @@ class update_title:
                 self.get_claw_num        = 0              #クロー累計取得数を初期化
                 self.get_score_star_num  = 0              #スコアスター累計取得数を初期化
                 
-                func.save_system_data(self)                                         #システムデータをセーブします
+                update_system.save_data(self)                                   #システムデータをセーブします
                 pyxel.load("assets/graphic/min-sht2.pyxres")                    #タイトル＆ステージ1＆2のリソースファイルを読みます

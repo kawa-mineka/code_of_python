@@ -9,7 +9,8 @@ import math         #三角関数などを使用したいのでインポート�
 from random import random    #random.random() と呼ぶと、0から1の範囲(1は含まない)のランダムな実数が返される(主にパーティクル系で使用します)
 import pyxel        #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
 from const import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
-from func  import * #汎用性のある関数群のモジュールの読み込み
+from func  import *
+from update_system import * #汎用性のある関数群のモジュールの読み込み
 
 class update_pause:
     def __init__(self):
@@ -96,7 +97,7 @@ class update_pause:
                     self.window[i].comment_flag = COMMENT_FLAG_OFF
                 
                 func.write_ship_equip_medal_data(self)           #機体メダルスロット装備リストに現在プレイ中のシップリストのメダル情報を書き込む関数の呼び出し
-                func.save_system_data(self)                      #システムデータをセーブします
+                update_system.save_data(self)                    #システムデータをセーブします
                 pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
                 
             elif   self.cursor_pre_decision_item_y == 3 and self.cursor_decision_item_y == 0: #「EXIT GAME」→「NO」

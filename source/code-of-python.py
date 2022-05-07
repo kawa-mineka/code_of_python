@@ -746,13 +746,21 @@ class App:
                 # pyxel.bltm(-(self.scroll_count // 8) + 250,0,0,0,240,256,120,self.bg_transparent_color)
                 pyxel.bltm(-(self.scroll_count // 8) + 250,0,TM0,  0*8,240*8,  256*8,120*8,self.bg_transparent_color)
             elif self.stage_number == STAGE_VOLCANIC_BELT:
-                                #火山湖面ウェーブラスタースクロールの表示
+                #火山湖面ウェーブラスタースクロールの表示
                 graph.draw_raster_scroll(self,0)  #ラスタースクロール描画関数呼び出し背景一番奥の火山の真下で描画します
-                
+                #火山上
                 pyxel.bltm(-(self.scroll_count // 16) + 50,0                         ,TM2,  0*8,216*8   ,  256*8, 15*8,0)
-                
+                #火山下
                 pyxel.bltm(-(self.scroll_count // 8) + 100,-self.camera_offset_y // 8,TM2,  0*8,239*8 -2,  256*8,120*8,0)
                 
+                #カメラオフセット値を計算する
+                self.camera_offset_y = (self.bg_height - WINDOW_H) * self.my_y / (self.bg_height - SHIP_H) #SHIP_Hは自機の縦幅8ドット
+                #最上部積層雲の描画
+                pyxel.bltm(-(self.scroll_count // 6),14 ,TM2,  0*8,208*8   + self.camera_offset_y // 2,  256*8, 1*8 + 11,pyxel.COLOR_BLACK)
+                pyxel.bltm(-(self.scroll_count // 4),8  ,TM2,  0*8,208*8   + self.camera_offset_y // 2,  256*8, 1*8 + 8,pyxel.COLOR_BLACK)
+                pyxel.bltm(-(self.scroll_count // 3),4  ,TM2,  0*8,208*8   + self.camera_offset_y // 2,  256*8, 1*8 + 4,pyxel.COLOR_BLACK)
+                pyxel.bltm(-(self.scroll_count // 2),2  ,TM2,  0*8,208*8   + self.camera_offset_y // 2,  256*8, 1*8 + 3,pyxel.COLOR_BLACK)
+                pyxel.bltm(-(self.scroll_count )    ,0  ,TM2,  0*8,208*8   + self.camera_offset_y // 2,  256*8, 1*8    ,pyxel.COLOR_BLACK)
             
             ####################背景表示
             ###################pyxel.bltm(-(pyxel.frame_count // 8),0,0,((pyxel.frame_count / 2) - 160) ,0,160,120,0)最初はこれで上手くいかなかった・・・・なぜ？
@@ -802,7 +810,9 @@ class App:
                     # pyxel.bltm(-(self.scroll_count // 2) + 1024,0,  0,    0,32,   256,120,    self.bg_transparent_color) #3周目マップ
                     pyxel.bltm(-(self.scroll_count // 2) + 1024,0,  TM0,    0*8,32*8,   256*8,120*8,    self.bg_transparent_color) #3周目マップ
             elif self.stage_number == STAGE_VOLCANIC_BELT:
+                #カメラオフセット値を計算する
                 self.camera_offset_y = (self.bg_height - WINDOW_H) * self.my_y / (self.bg_height - SHIP_H) #SHIP_Hは自機の縦幅8ドット
+                #当たり判定アリの実地形を描画する
                 if   self.stage_loop == 1:
                     pyxel.bltm(-(self.scroll_count // 2) + 1024,0,  TM2,    0*8,0*8  + self.camera_offset_y,   256*8,120*8,    self.bg_transparent_color) #1周目マップ
                 elif self.stage_loop == 2:
