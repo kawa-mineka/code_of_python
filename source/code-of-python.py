@@ -756,11 +756,11 @@ class App:
                 #カメラオフセット値を計算する
                 self.camera_offset_y = (self.bg_height - WINDOW_H) * self.my_y / (self.bg_height - SHIP_H) #SHIP_Hは自機の縦幅8ドット
                 #最上部積層雲の描画
-                pyxel.bltm(-(self.scroll_count // 6),14 ,TM2,  0*8,208*8   + self.camera_offset_y // 2,  256*8, 1*8 + 11,pyxel.COLOR_BLACK)
-                pyxel.bltm(-(self.scroll_count // 4),8  ,TM2,  0*8,208*8   + self.camera_offset_y // 2,  256*8, 1*8 + 8,pyxel.COLOR_BLACK)
-                pyxel.bltm(-(self.scroll_count // 3),4  ,TM2,  0*8,208*8   + self.camera_offset_y // 2,  256*8, 1*8 + 4,pyxel.COLOR_BLACK)
-                pyxel.bltm(-(self.scroll_count // 2),2  ,TM2,  0*8,208*8   + self.camera_offset_y // 2,  256*8, 1*8 + 3,pyxel.COLOR_BLACK)
-                pyxel.bltm(-(self.scroll_count )    ,0  ,TM2,  0*8,208*8   + self.camera_offset_y // 2,  256*8, 1*8    ,pyxel.COLOR_BLACK)
+                pyxel.bltm(-((self.scroll_count // 6) % 256),14 ,TM2,  0*8,208*8   + self.camera_offset_y // 5,  256*8, 1*8 + 12,pyxel.COLOR_BLACK) #上の方
+                pyxel.bltm(-((self.scroll_count // 4) % 256),8  ,TM2,  0*8,208*8   + self.camera_offset_y // 4,  256*8, 1*8 + 8 ,pyxel.COLOR_BLACK)
+                pyxel.bltm(-((self.scroll_count // 3) % 256),4  ,TM2,  0*8,208*8   + self.camera_offset_y // 3,  256*8, 1*8 + 4 ,pyxel.COLOR_BLACK)
+                pyxel.bltm(-((self.scroll_count // 2) % 256),2  ,TM2,  0*8,208*8   + self.camera_offset_y // 3,  256*8, 1*8 + 3 ,pyxel.COLOR_BLACK)
+                pyxel.bltm(-((self.scroll_count )     % 256),0  ,TM2,  0*8,208*8   + self.camera_offset_y // 2,  256*8, 1*8     ,pyxel.COLOR_BLACK) #下の方
             
             ####################背景表示
             ###################pyxel.bltm(-(pyxel.frame_count // 8),0,0,((pyxel.frame_count / 2) - 160) ,0,160,120,0)最初はこれで上手くいかなかった・・・・なぜ？
