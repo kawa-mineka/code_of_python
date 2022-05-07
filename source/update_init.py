@@ -124,7 +124,7 @@ class update_init:
     #!ステージスタート時の初期化#######################################
     def stage_start(self):
         #画像リソースファイルを読み込みます
-        pyxel.load("assets/graphic/min-sht2.pyxres")
+        pyxel.load("./assets/graphic/min-sht2.pyxres")
         pygame.mixer.init(frequency = 44100)    #pygameミキサー関連の初期化
         pygame.mixer.music.set_volume(0.7)      #音量設定(0~1の範囲内)
         func.load_stage_bgm(self)               #BGMファイルの読み込み

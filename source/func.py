@@ -11,7 +11,7 @@ class func:
 
     #漢字フォントデータの読み込み
     def load_kanji_font_data(self):
-        pyxel.load("assets/fonts/misaki_font_k8x12s_001.pyxres") #漢字フォントデータ(その1)を読み込みます
+        pyxel.load("./assets/fonts/misaki_font_k8x12s_001.pyxres") #漢字フォントデータ(その1)を読み込みます
         # self.kanji_fonts = [] #漢字フォントリストデータをまずは初期化して使えるようにします この方法だとダメだわ
         self.kanji_fonts = [[None for col in range(752)] for row in range(1128)] #横752,縦1128の空っぽの漢字フォントデータリストを作成します(Pythonクックブックで奨められている書き方ですのんって、判りにくいよなぁ・・これ)
         
@@ -28,7 +28,7 @@ class func:
                 col = pyxel.image(2).pget(x,y)
                 self.kanji_fonts[y+512][x+0] = col
         
-        pyxel.load("assets/fonts/misaki_font_k8x12s_002.pyxres") #漢字フォントデータ(その2)を読み込みます
+        pyxel.load("./assets/fonts/misaki_font_k8x12s_002.pyxres") #漢字フォントデータ(その2)を読み込みます
         for y in range(256):  #左端A列の  k8x12s_jisx0208___004a.pngを読みだしてフォントデータリストに書き込んでいきます 書き込みオフセット値は(0,768)
             for x in range(256):
                 col = pyxel.image(0).pget(x,y)
@@ -42,7 +42,7 @@ class func:
                 col = pyxel.image(2).pget(x,y)
                 self.kanji_fonts[y+256][x+256] = col
         
-        pyxel.load("assets/fonts/misaki_font_k8x12s_003.pyxres") #漢字フォントデータ(その3)を読み込みます
+        pyxel.load("./assets/fonts/misaki_font_k8x12s_003.pyxres") #漢字フォントデータ(その3)を読み込みます
         for y in range(256):  #真ん中B列のk8x12s_jisx0208___003b.pngを読みだしてフォントデータリストに書き込んでいきます 書き込みオフセット値は(256,512)
             for x in range(256):
                 col = pyxel.image(0).pget(x,y)
@@ -56,7 +56,7 @@ class func:
                 col = pyxel.image(2).pget(x,y)
                 self.kanji_fonts[y+0][x+512] = col
         
-        pyxel.load("assets/fonts/misaki_font_k8x12s_004.pyxres") #漢字フォントデータ(その4)を読み込みます
+        pyxel.load("./assets/fonts/misaki_font_k8x12s_004.pyxres") #漢字フォントデータ(その4)を読み込みます
         for y in range(256):  #真ん中B列のk8x12s_jisx0208___002c.pngを読みだしてフォントデータリストに書き込んでいきます 書き込みオフセット値は(512,256)
             for x in range(752-512):
                 col = pyxel.image(0).pget(x,y)
@@ -146,7 +146,7 @@ class func:
 
     #システムデータのロード
     def load_system_data(self):
-        pyxel.load("assets/system/system-data.pyxres") #システムデータを読み込む
+        pyxel.load("./assets/system/system-data.pyxres") #システムデータを読み込む
         
         self.game_difficulty = func.get_chrcode_tilemap(self,0,0,120) - 16 #数字の[0]はアスキーコード16番なので16引いて数値としての0にしてやります
         print(self.game_difficulty)
@@ -292,7 +292,7 @@ class func:
 
     #システムデータのセーブ
     def save_system_data(self):
-        pyxel.load("assets/system/system-data.pyxres") #システムデータにアクセスするためにローディングだけしてやります(グラフイック関連のアセットをローディングしている時がほとんどなので)
+        pyxel.load("./assets/system/system-data.pyxres") #システムデータにアクセスするためにローディングだけしてやります(グラフイック関連のアセットをローディングしている時がほとんどなので)
         #各種設定値書き込み 数字の[0]はアスキーコード16番なので16足してアスキーコードとしての0にしてやります
         func.set_chrcode_tilemap(self,0, 0,120,self.game_difficulty + 16)                 #難易度書き込み
         func.set_chrcode_tilemap(self,0, 0,121,self.stage_number + 16)                    #スタートステージ数書き込み
@@ -417,7 +417,7 @@ class func:
         test_num = test_num + 1000                             #この式と逆の方法で計算してやれば符号の付いた実数値を取り出せる
         func.write_system_data_num(self,10,162,0,10,int(test_num))    #!############################ test write マイナス符号付き実数値の数値が書き込めるかのテスト
         
-        pyxel.save("assets/system/system-data.pyxres") #システムデータを書き込み
+        pyxel.save("./assets/system/system-data.pyxres") #システムデータを書き込み
 
     #自機との距離を求める関数定義
     def to_my_ship_distance(self,x,y):
@@ -1031,512 +1031,6 @@ class func:
             
         
         pyxel.play(0,2)#変な爆発音を出すのだ～～～☆彡 チャンネル0 でサウンドナンバー2の音を鳴らす
-
-    #!各面のボスをBossクラスに定義して出現させる
-    def born_boss(self):
-        #col_main1_x, col_main1_y, col_main1_w, col_main1_h  = 1*8,1*8,5*8,2*8
-        if       self.stage_number == STAGE_MOUNTAIN_REGION:
-            new_boss = Boss()
-            boss_id = 0
-            boss_type = BOSS_BREEZARDIA
-            boss_status = BOSS_STATUS_MOVE_LEMNISCATE_CURVE
-            parts_number = 0
-            main_hp = 150
-            parts1_hp,parts2_hp,parts3_hp,parts4_hp = 50,50,50,50
-            parts5_hp,parts6_hp,parts7_hp,parts8_hp =   0,  0,  0,  0
-            parts9_hp = 0
-            parts1_score,parts2_score,parts3_score = 1,1,1
-            parts4_score,parts5_score,parts6_score = 1,1,1
-            parts7_score,parts8_score,parts9_score = 1,1,1 
-            level = LV00
-            weapon1_status,weapon1_interval,weapon1_rapid_num,weapon1_cool_down_time,weapon1_omen_count = WEAPON_READY,4,0,0,0  #上部メイン主砲
-            weapon2_status,weapon2_interval,weapon2_rapid_num,weapon2_cool_down_time,weapon2_omen_count = WEAPON_READY,30,0,0,0 #前部グリーンレーザー砲
-            weapon3_status,weapon3_interval,weapon3_rapid_num,weapon3_cool_down_time,weapon3_omen_count = WEAPON_READY,0,0,0,0
-            weapon4_status,weapon4_interval,weapon4_rapid_num,weapon4_cool_down_time,weapon4_omen_count = WEAPON_READY,0,0,0,0
-            weapon5_status,weapon5_interval,weapon5_rapid_num,weapon5_cool_down_time,weapon5_omen_count = WEAPON_READY,0,0,0,0
-            posx,posy = -64,50
-            bgx,bgy   = 0,0
-            offset_x,offset_y = 0,0
-            ax,ay, bx,by, cx,cy, dx,dy, qx,qy, vx,vy = 0,0, 0,0, 0,0, 0,0, 0,0, 0,0
-            width,height = 14*8,6*8
-            
-            tilt_now      = 0
-            tilt_max      = 0
-            tilt_time_now = 0
-            tilt_time     = 0
-            
-            col_damage_point1_x,col_damage_point1_y,col_damage_point1_w,col_damage_point1_h =  5 ,3*8,1*8,1*8
-            col_damage_point2_x,col_damage_point2_y,co2_damage_point2_w,col_damage_point2_h = 7*8,2*8,1*8,1*8
-            col_damage_point3_x,col_damage_point3_y,co3_damage_point3_w,col_damage_point3_h = 0,0,0,0
-            col_damage_point4_x,col_damage_point4_y,co4_damage_point4_w,col_damage_point4_h = 0,0,0,0
-            
-            col_main1_x, col_main1_y, col_main1_w, col_main1_h  = 1*8  ,1*8+5,    6*8-2,2*8
-            col_main2_x, col_main2_y, col_main2_w, col_main2_h  = 2*8  ,4*8  ,    6*8,2*8-2
-            col_main3_x, col_main3_y, col_main3_w, col_main3_h  = 7*8  ,3*8  ,   4*8  ,1*8 
-            col_main4_x, col_main4_y, col_main4_w, col_main4_h  =   0  ,    0,    0,    0
-            col_main5_x, col_main5_y, col_main5_w, col_main5_h  =   0  ,    0,    0,    0
-            col_main6_x, col_main6_y, col_main6_w, col_main6_h  =   0  ,    0,    0,    0
-            col_main7_x, col_main7_y, col_main7_w, col_main7_h  =   0  ,    0,    0,    0
-            col_main8_x, col_main8_y, col_main8_w, col_main8_h  =   0  ,    0,    0,    0
-            
-            col_parts1_x,col_parts1_y,col_parts1_w,col_parts1_h =10*8 ,5*8,  8,  8
-            col_parts2_x,col_parts2_y,col_parts2_w,col_parts2_h =9*8-4,5*8,  8,  8
-            col_parts3_x,col_parts3_y,col_parts3_w,col_parts3_h =5*8-3,  2,  8,  8
-            col_parts4_x,col_parts4_y,col_parts4_w,col_parts4_h =2*8  ,1*8-6,8,  8
-            col_parts5_x,col_parts5_y,col_parts5_w,col_parts5_h =    0,  0,  0,  0
-            col_parts6_x,col_parts6_y,col_parts6_w,col_parts6_h =    0,  0,  0,  0
-            col_parts7_x,col_parts7_y,col_parts7_w,col_parts7_h =    0,  0,  0,  0
-            col_parts8_x,col_parts8_y,col_parts8_w,col_parts8_h =    0,  0,  0,  0
-            col_parts9_x,col_parts9_y,col_parts9_w,col_parts9_h =    0,  0,  0,  0
-            
-            main_hp_bar_offset_x,main_hp_bar_offset_y    = 8,-3
-            
-            parts1_hp_bar_offset_x,parts1_hp_bar_offset_y = 10*8  ,5*8+10
-            parts2_hp_bar_offset_x,parts2_hp_bar_offset_y =  9*8-4,5*8+10
-            parts3_hp_bar_offset_x,parts3_hp_bar_offset_y =  5*8-3, -2
-            parts4_hp_bar_offset_x,parts4_hp_bar_offset_y =  2*8  ,  0
-            parts5_hp_bar_offset_x,parts5_hp_bar_offset_y =     0,  0
-            parts6_hp_bar_offset_x,parts6_hp_bar_offset_y =     0,  0
-            parts7_hp_bar_offset_x,parts7_hp_bar_offset_y =     0,  0
-            parts8_hp_bar_offset_x,parts8_hp_bar_offset_y =     0,  0
-            parts9_hp_bar_offset_x,parts9_hp_bar_offset_y =     0,  0
-            
-            size = 0
-            priority = 0
-            attack_method = BOSS_ATTACK_FRONT_5WAY
-            direction = 0
-            acceleration = 0
-            timer = 0
-            degree = 0
-            radian = 0
-            speed = 0
-            radius = 0
-            flag1,flag2,flag3,flag4 = 0,0,0,0
-            count1,count2,count3,count4 = 0,0,0,0
-            parts1_flag,parts2_flag,parts3_flag,parts4_flag = 1,1,1,1
-            parts5_flag,parts6_flag,parts7_flag,parts8_flag = 0,0,0,0
-            parts9_flag = 0
-            animation_number1,animation_number2,animation_number3,animation_number4 = 0,0,0,0
-            move_index = 0
-            obj_time = 0
-            obj_totaltime = 0
-            invincible = 0
-            display_time_main_hp_bar = 0
-            display_time_parts1_hp_bar,display_time_parts2_hp_bar = 0,0
-            display_time_parts3_hp_bar,display_time_parts4_hp_bar = 0,0
-            display_time_parts5_hp_bar,display_time_parts6_hp_bar = 0,0
-            display_time_parts7_hp_bar,display_time_parts8_hp_bar = 0,0
-            display_time_parts9_hp_bar = 0
-            
-            new_boss.update(boss_id,boss_type,boss_status,
-                parts_number,
-                main_hp,
-                parts1_hp,parts2_hp,parts3_hp,parts4_hp,
-                parts5_hp,parts6_hp,parts7_hp,parts8_hp,
-                parts9_hp,
-                parts1_score,parts2_score,parts3_score,
-                parts4_score,parts5_score,parts6_score,
-                parts7_score,parts8_score,parts9_score,
-                level,
-                
-                weapon1_status,weapon1_interval,weapon1_rapid_num,weapon1_cool_down_time,weapon1_omen_count,
-                weapon2_status,weapon2_interval,weapon2_rapid_num,weapon2_cool_down_time,weapon2_omen_count,
-                weapon3_status,weapon3_interval,weapon3_rapid_num,weapon3_cool_down_time,weapon3_omen_count,
-                weapon4_status,weapon4_interval,weapon4_rapid_num,weapon4_cool_down_time,weapon4_omen_count,
-                weapon5_status,weapon5_interval,weapon5_rapid_num,weapon5_cool_down_time,weapon5_omen_count,
-                
-                posx,posy,bgx,bgy,offset_x,offset_y,
-                ax,ay, bx,by, cx,cy, dx,dy, qx,qy, vx,vy,
-                width,height,
-                
-                tilt_now,tilt_max,tilt_time_now,tilt_time,
-                
-                col_damage_point1_x,col_damage_point1_y,col_damage_point1_w,col_damage_point1_h,
-                col_damage_point2_x,col_damage_point2_y,co2_damage_point2_w,col_damage_point2_h,
-                col_damage_point3_x,col_damage_point3_y,co3_damage_point3_w,col_damage_point3_h,
-                col_damage_point4_x,col_damage_point4_y,co4_damage_point4_w,col_damage_point4_h,
-                col_main1_x,  col_main1_y,  col_main1_w,  col_main1_h,
-                col_main2_x,  col_main2_y,  col_main2_w,  col_main2_h,
-                col_main3_x,  col_main3_y,  col_main3_w,  col_main3_h,
-                col_main4_x,  col_main4_y,  col_main4_w,  col_main4_h,
-                col_main5_x,  col_main5_y,  col_main5_w,  col_main5_h,
-                col_main6_x,  col_main6_y,  col_main6_w,  col_main6_h,
-                col_main7_x,  col_main7_y,  col_main7_w,  col_main7_h,
-                col_main8_x,  col_main8_y,  col_main8_w,  col_main8_h,
-                
-                col_parts1_x,col_parts1_y,col_parts1_w,col_parts1_h,
-                col_parts2_x,col_parts2_y,col_parts2_w,col_parts2_h,
-                col_parts3_x,col_parts3_y,col_parts3_w,col_parts3_h,
-                col_parts4_x,col_parts4_y,col_parts4_w,col_parts4_h,
-                col_parts5_x,col_parts5_y,col_parts5_w,col_parts5_h,
-                col_parts6_x,col_parts6_y,col_parts6_w,col_parts6_h,
-                col_parts7_x,col_parts7_y,col_parts7_w,col_parts7_h,
-                col_parts8_x,col_parts8_y,col_parts8_w,col_parts8_h,
-                col_parts9_x,col_parts9_y,col_parts9_w,col_parts9_h,
-                
-                main_hp_bar_offset_x,main_hp_bar_offset_y,
-                parts1_hp_bar_offset_x,parts1_hp_bar_offset_y,
-                parts2_hp_bar_offset_x,parts2_hp_bar_offset_y,
-                parts3_hp_bar_offset_x,parts3_hp_bar_offset_y,
-                parts4_hp_bar_offset_x,parts4_hp_bar_offset_y,
-                parts5_hp_bar_offset_x,parts5_hp_bar_offset_y,
-                parts6_hp_bar_offset_x,parts6_hp_bar_offset_y,
-                parts7_hp_bar_offset_x,parts7_hp_bar_offset_y,
-                parts8_hp_bar_offset_x,parts8_hp_bar_offset_y,
-                parts9_hp_bar_offset_x,parts9_hp_bar_offset_y,
-                
-                size,priority,attack_method,direction,acceleration,timer,degree,radian,speed,radius,
-                flag1,flag2,flag3,flag4,
-                count1,count2,count3,count4,
-                parts1_flag,parts2_flag,parts3_flag,
-                parts4_flag,parts5_flag,parts6_flag,
-                parts7_flag,parts8_flag,parts9_flag,
-                animation_number1,animation_number2,animation_number3,animation_number4,
-                move_index,
-                obj_time,obj_totaltime,
-                invincible,
-                display_time_main_hp_bar,
-                display_time_parts1_hp_bar,display_time_parts2_hp_bar,display_time_parts3_hp_bar,
-                display_time_parts4_hp_bar,display_time_parts5_hp_bar,display_time_parts6_hp_bar,
-                display_time_parts7_hp_bar,display_time_parts8_hp_bar,display_time_parts9_hp_bar
-                )
-            self.boss.append(new_boss)      
-            
-        elif     self.stage_number == STAGE_ADVANCE_BASE:
-            new_boss = Boss()
-            boss_id = 0
-            boss_type = BOSS_FATTY_VALGUARD
-            boss_status = BOSS_STATUS_MOVE_COORDINATE_INIT
-            parts_number = 0
-            main_hp = 400
-            parts1_hp,parts2_hp,parts3_hp,parts4_hp = 70,70,70,200
-            parts5_hp,parts6_hp,parts7_hp,parts8_hp =   0,  0,  0,  0
-            parts9_hp = 0
-            parts1_score,parts2_score,parts3_score = 1,1,1
-            parts4_score,parts5_score,parts6_score = 1,1,1
-            parts7_score,parts8_score,parts9_score = 1,1,1 
-            level = LV00
-            
-            weapon1_status,weapon1_interval,weapon1_rapid_num,weapon1_cool_down_time,weapon1_omen_count = WEAPON_READY,0,0,0,0
-            weapon2_status,weapon2_interval,weapon2_rapid_num,weapon2_cool_down_time,weapon2_omen_count = WEAPON_READY,0,0,0,0
-            weapon3_status,weapon3_interval,weapon3_rapid_num,weapon3_cool_down_time,weapon3_omen_count = WEAPON_READY,0,0,0,0
-            weapon4_status,weapon4_interval,weapon4_rapid_num,weapon4_cool_down_time,weapon4_omen_count = WEAPON_READY,0,0,0,0
-            weapon5_status,weapon5_interval,weapon5_rapid_num,weapon5_cool_down_time,weapon5_omen_count = WEAPON_READY,0,0,0,0
-            
-            posx,posy = -64,50
-            bgx,bgy   = 0,0
-            offset_x,offset_y = 0,0
-            ax,ay, bx,by, cx,cy, dx,dy, qx,qy, vx,vy = 0,0, 0,0, 0,0, 0,0, 0,0, 0,0
-            width,height = 8*8,5*8
-            
-            tilt_now      = 0
-            tilt_max      = 0
-            tilt_time_now = 0
-            tilt_time     = 0
-            
-            col_damage_point1_x,col_damage_point1_y,col_damage_point1_w,col_damage_point1_h = 1*8,1*8,5*8,2*8
-            col_damage_point2_x,col_damage_point2_y,co2_damage_point2_w,col_damage_point2_h = 6*8,2*8,1*8,1*8
-            col_damage_point3_x,col_damage_point3_y,co3_damage_point3_w,col_damage_point3_h = 3*8,3*8,3*8,1*8
-            col_damage_point4_x,col_damage_point4_y,co4_damage_point4_w,col_damage_point4_h = 2*8,  6,  8,  6
-            
-            col_main1_x, col_main1_y, col_main1_w, col_main1_h  = 1*8+4,1*8,5*8-4,2*8
-            col_main2_x, col_main2_y, col_main2_w, col_main2_h  = 6*8+4,2*8,1*8-4,1*8
-            col_main3_x, col_main3_y, col_main3_w, col_main3_h  = 3*8+4,3*8,3*8-4,1*8 
-            col_main4_x, col_main4_y, col_main4_w, col_main4_h  = 2*8+4,  6,  8-4,  6 
-            col_main5_x, col_main5_y, col_main5_w, col_main5_h  =   8,  8,  0,  0 
-            col_main6_x, col_main6_y, col_main6_w, col_main6_h  =   8,  8,  0,  0
-            col_main7_x, col_main7_y, col_main7_w, col_main7_h  =   8,  8,  0,  0 
-            col_main8_x, col_main8_y, col_main8_w, col_main8_h  =   8,  8,  0,  0 
-            
-            col_parts1_x,col_parts1_y,col_parts1_w,col_parts1_h =   0,2*8,2*8,  8
-            col_parts2_x,col_parts2_y,col_parts2_w,col_parts2_h = 1*8,  0,2*8,  8
-            col_parts3_x,col_parts3_y,col_parts3_w,col_parts3_h = 1*8,3*8,  8,  8
-            col_parts4_x,col_parts4_y,col_parts4_w,col_parts4_h = 6*8,3*8,  8,  8
-            col_parts5_x,col_parts5_y,col_parts5_w,col_parts5_h =   0,  0,  0,  0
-            col_parts6_x,col_parts6_y,col_parts6_w,col_parts6_h =   0,  0,  0,  0
-            col_parts7_x,col_parts7_y,col_parts7_w,col_parts7_h =   0,  0,  0,  0
-            col_parts8_x,col_parts8_y,col_parts8_w,col_parts8_h =   0,  0,  0,  0
-            col_parts9_x,col_parts9_y,col_parts9_w,col_parts9_h =   0,  0,  0,  0
-            
-            main_hp_bar_offset_x  ,main_hp_bar_offset_y   = 8,-2
-            
-            parts1_hp_bar_offset_x,parts1_hp_bar_offset_y = 0,24
-            parts2_hp_bar_offset_x,parts2_hp_bar_offset_y = 0,4
-            parts3_hp_bar_offset_x,parts3_hp_bar_offset_y = 8,32
-            parts4_hp_bar_offset_x,parts4_hp_bar_offset_y = 48+2,32
-            parts5_hp_bar_offset_x,parts5_hp_bar_offset_y = 0,0
-            parts6_hp_bar_offset_x,parts6_hp_bar_offset_y = 0,0
-            parts7_hp_bar_offset_x,parts7_hp_bar_offset_y = 0,0
-            parts8_hp_bar_offset_x,parts8_hp_bar_offset_y = 0,0
-            parts9_hp_bar_offset_x,parts9_hp_bar_offset_y = 0,0
-            
-            size = 0
-            priority = 0
-            attack_method = 0
-            direction = 0
-            acceleration = 0
-            timer = 0
-            degree = 0
-            radian = 0
-            speed = 0
-            radius = 0
-            flag1,flag2,flag3,flag4 = 0,0,0,0
-            count1,count2,count3,count4 = 0,0,0,0
-            parts1_flag,parts2_flag,parts3_flag,parts4_flag = 1,1,1,1
-            parts5_flag,parts6_flag,parts7_flag,parts8_flag = 0,0,0,0
-            parts9_flag = 0
-            animation_number1,animation_number2,animation_number3,animation_number4 = 0,0,0,0
-            move_index = 0
-            obj_time = 0
-            obj_totaltime = 0
-            invincible = 0
-            display_time_main_hp_bar = 0
-            display_time_parts1_hp_bar,display_time_parts2_hp_bar = 0,0
-            display_time_parts3_hp_bar,display_time_parts4_hp_bar = 0,0
-            display_time_parts5_hp_bar,display_time_parts6_hp_bar = 0,0
-            display_time_parts7_hp_bar,display_time_parts8_hp_bar = 0,0
-            display_time_parts9_hp_bar = 0
-            
-            new_boss.update(boss_id,boss_type,boss_status,
-                parts_number,
-                main_hp,
-                parts1_hp,parts2_hp,parts3_hp,
-                parts4_hp,parts5_hp,parts6_hp,
-                parts7_hp,parts8_hp,parts9_hp,
-                parts1_score,parts2_score,parts3_score,
-                parts4_score,parts5_score,parts6_score,
-                parts7_score,parts8_score,parts9_score,
-                level,
-                
-                weapon1_status,weapon1_interval,weapon1_rapid_num,weapon1_cool_down_time,weapon1_omen_count,
-                weapon2_status,weapon2_interval,weapon2_rapid_num,weapon2_cool_down_time,weapon2_omen_count,
-                weapon3_status,weapon3_interval,weapon3_rapid_num,weapon3_cool_down_time,weapon3_omen_count,
-                weapon4_status,weapon4_interval,weapon4_rapid_num,weapon4_cool_down_time,weapon4_omen_count,
-                weapon5_status,weapon5_interval,weapon5_rapid_num,weapon5_cool_down_time,weapon5_omen_count,
-                
-                posx,posy,bgx,bgy,offset_x,offset_y,
-                ax,ay, bx,by, cx,cy, dx,dy, qx,qy, vx,vy,
-                width,height,
-                
-                tilt_now,tilt_max,tilt_time_now,tilt_time,
-                
-                col_damage_point1_x,col_damage_point1_y,col_damage_point1_w,col_damage_point1_h,
-                col_damage_point2_x,col_damage_point2_y,co2_damage_point2_w,col_damage_point2_h,
-                col_damage_point3_x,col_damage_point3_y,co3_damage_point3_w,col_damage_point3_h,
-                col_damage_point4_x,col_damage_point4_y,co4_damage_point4_w,col_damage_point4_h,
-                col_main1_x,  col_main1_y,  col_main1_w,  col_main1_h,
-                col_main2_x,  col_main2_y,  col_main2_w,  col_main2_h,
-                col_main3_x,  col_main3_y,  col_main3_w,  col_main3_h,
-                col_main4_x,  col_main4_y,  col_main4_w,  col_main4_h,
-                col_main5_x,  col_main5_y,  col_main5_w,  col_main5_h,
-                col_main6_x,  col_main6_y,  col_main6_w,  col_main6_h,
-                col_main7_x,  col_main7_y,  col_main7_w,  col_main7_h,
-                col_main8_x,  col_main8_y,  col_main8_w,  col_main8_h,
-                col_parts1_x,col_parts1_y,col_parts1_w,col_parts1_h,
-                col_parts2_x,col_parts2_y,col_parts2_w,col_parts2_h,
-                col_parts3_x,col_parts3_y,col_parts3_w,col_parts3_h,
-                col_parts4_x,col_parts4_y,col_parts4_w,col_parts4_h,
-                col_parts5_x,col_parts5_y,col_parts5_w,col_parts5_h,
-                col_parts6_x,col_parts6_y,col_parts6_w,col_parts6_h,
-                col_parts7_x,col_parts7_y,col_parts7_w,col_parts7_h,
-                col_parts8_x,col_parts8_y,col_parts8_w,col_parts8_h,
-                col_parts9_x,col_parts9_y,col_parts9_w,col_parts9_h,
-                
-                main_hp_bar_offset_x,main_hp_bar_offset_y,
-                parts1_hp_bar_offset_x,parts1_hp_bar_offset_y,
-                parts2_hp_bar_offset_x,parts2_hp_bar_offset_y,
-                parts3_hp_bar_offset_x,parts3_hp_bar_offset_y,
-                parts4_hp_bar_offset_x,parts4_hp_bar_offset_y,
-                parts5_hp_bar_offset_x,parts5_hp_bar_offset_y,
-                parts6_hp_bar_offset_x,parts6_hp_bar_offset_y,
-                parts7_hp_bar_offset_x,parts7_hp_bar_offset_y,
-                parts8_hp_bar_offset_x,parts8_hp_bar_offset_y,
-                parts9_hp_bar_offset_x,parts9_hp_bar_offset_y,
-                
-                size,priority,attack_method,direction,acceleration,timer,degree,radian,speed,radius,
-                flag1,flag2,flag3,flag4,
-                count1,count2,count3,count4,
-                parts1_flag,parts2_flag,parts3_flag,
-                parts4_flag,parts5_flag,parts6_flag,
-                parts7_flag,parts8_flag,parts9_flag,
-                animation_number1,animation_number2,animation_number3,animation_number4,
-                move_index,
-                obj_time,obj_totaltime,
-                invincible,
-                display_time_main_hp_bar,
-                display_time_parts1_hp_bar,display_time_parts2_hp_bar,display_time_parts3_hp_bar,
-                display_time_parts4_hp_bar,display_time_parts5_hp_bar,display_time_parts6_hp_bar,
-                display_time_parts7_hp_bar,display_time_parts8_hp_bar,display_time_parts9_hp_bar
-                )
-            self.boss.append(new_boss)
-            
-        elif     self.stage_number == STAGE_VOLCANIC_BELT:
-            new_boss = Boss()
-            boss_id = 0
-            boss_type = BOSS_MAD_CLUBUNGER
-            boss_status = BOSS_STATUS_MOVE_COORDINATE_INIT
-            parts_number = 0
-            main_hp = 400
-            parts1_hp,parts2_hp,parts3_hp,parts4_hp =   0,  0,  0,  0
-            parts5_hp,parts6_hp,parts7_hp,parts8_hp =   0,  0,  0,  0
-            parts9_hp = 0
-            parts1_score,parts2_score,parts3_score = 1,1,1
-            parts4_score,parts5_score,parts6_score = 1,1,1
-            parts7_score,parts8_score,parts9_score = 1,1,1 
-            level = LV00
-            
-            weapon1_status,weapon1_interval,weapon1_rapid_num,weapon1_cool_down_time,weapon1_omen_count = WEAPON_READY,0,0,0,0
-            weapon2_status,weapon2_interval,weapon2_rapid_num,weapon2_cool_down_time,weapon2_omen_count = WEAPON_READY,0,0,0,0
-            weapon3_status,weapon3_interval,weapon3_rapid_num,weapon3_cool_down_time,weapon3_omen_count = WEAPON_READY,0,0,0,0
-            weapon4_status,weapon4_interval,weapon4_rapid_num,weapon4_cool_down_time,weapon4_omen_count = WEAPON_READY,0,0,0,0
-            weapon5_status,weapon5_interval,weapon5_rapid_num,weapon5_cool_down_time,weapon5_omen_count = WEAPON_READY,0,0,0,0
-            
-            posx,posy = -64,50
-            bgx,bgy   = 0,0
-            offset_x,offset_y = 0,0
-            ax,ay, bx,by, cx,cy, dx,dy, qx,qy, vx,vy = 0,0, 0,0, 0,0, 0,0, 0,0, 0,0
-            width,height = 6*8,5*8
-            
-            tilt_now      = 0
-            tilt_max      = 4  #機体が傾くドット数は4ドット
-            tilt_time_now = 0
-            tilt_time     = 20 #20フレームごとに1ドット傾いていきます
-            
-            col_damage_point1_x,col_damage_point1_y,col_damage_point1_w,col_damage_point1_h = 1*8,1*8,5*8,2*8
-            col_damage_point2_x,col_damage_point2_y,co2_damage_point2_w,col_damage_point2_h = 6*8,2*8,1*8,1*8
-            col_damage_point3_x,col_damage_point3_y,co3_damage_point3_w,col_damage_point3_h = 3*8,3*8,3*8,1*8
-            col_damage_point4_x,col_damage_point4_y,co4_damage_point4_w,col_damage_point4_h = 2*8,  6,  8,  6
-            
-            col_main1_x, col_main1_y, col_main1_w, col_main1_h  = 1*8+4,1*8,5*8-4,2*8
-            col_main2_x, col_main2_y, col_main2_w, col_main2_h  = 6*8+4,2*8,1*8-4,1*8
-            col_main3_x, col_main3_y, col_main3_w, col_main3_h  = 3*8+4,3*8,3*8-4,1*8 
-            col_main4_x, col_main4_y, col_main4_w, col_main4_h  = 2*8+4,  6,  8-4,  6 
-            col_main5_x, col_main5_y, col_main5_w, col_main5_h  =   8,  8,  0,  0 
-            col_main6_x, col_main6_y, col_main6_w, col_main6_h  =   8,  8,  0,  0
-            col_main7_x, col_main7_y, col_main7_w, col_main7_h  =   8,  8,  0,  0 
-            col_main8_x, col_main8_y, col_main8_w, col_main8_h  =   8,  8,  0,  0 
-            
-            col_parts1_x,col_parts1_y,col_parts1_w,col_parts1_h =   0,2*8,2*8,  8
-            col_parts2_x,col_parts2_y,col_parts2_w,col_parts2_h = 1*8,  0,2*8,  8
-            col_parts3_x,col_parts3_y,col_parts3_w,col_parts3_h = 1*8,3*8,  8,  8
-            col_parts4_x,col_parts4_y,col_parts4_w,col_parts4_h = 6*8,3*8,  8,  8
-            col_parts5_x,col_parts5_y,col_parts5_w,col_parts5_h =   0,  0,  0,  0
-            col_parts6_x,col_parts6_y,col_parts6_w,col_parts6_h =   0,  0,  0,  0
-            col_parts7_x,col_parts7_y,col_parts7_w,col_parts7_h =   0,  0,  0,  0
-            col_parts8_x,col_parts8_y,col_parts8_w,col_parts8_h =   0,  0,  0,  0
-            col_parts9_x,col_parts9_y,col_parts9_w,col_parts9_h =   0,  0,  0,  0
-            
-            main_hp_bar_offset_x  ,main_hp_bar_offset_y   = 8,-2
-            
-            parts1_hp_bar_offset_x,parts1_hp_bar_offset_y = 0,24
-            parts2_hp_bar_offset_x,parts2_hp_bar_offset_y = 0,4
-            parts3_hp_bar_offset_x,parts3_hp_bar_offset_y = 8,32
-            parts4_hp_bar_offset_x,parts4_hp_bar_offset_y = 48+2,32
-            parts5_hp_bar_offset_x,parts5_hp_bar_offset_y = 0,0
-            parts6_hp_bar_offset_x,parts6_hp_bar_offset_y = 0,0
-            parts7_hp_bar_offset_x,parts7_hp_bar_offset_y = 0,0
-            parts8_hp_bar_offset_x,parts8_hp_bar_offset_y = 0,0
-            parts9_hp_bar_offset_x,parts9_hp_bar_offset_y = 0,0
-            
-            size = 0
-            priority = 0
-            attack_method = BOSS_ATTACK_HOMING_LASER
-            direction = 0
-            acceleration = 0
-            timer = 0
-            degree = 0
-            radian = 0
-            speed = 0
-            radius = 0
-            flag1,flag2,flag3,flag4 = 0,0,0,0
-            count1,count2,count3,count4 = 0,4,0,6
-            parts1_flag,parts2_flag,parts3_flag,parts4_flag = 1,1,1,1
-            parts5_flag,parts6_flag,parts7_flag,parts8_flag = 0,0,0,0
-            parts9_flag = 0
-            animation_number1,animation_number2,animation_number3,animation_number4 = 0,0,0,0
-            move_index = 0
-            obj_time = 0
-            obj_totaltime = 0
-            invincible = 0
-            display_time_main_hp_bar = 0
-            display_time_parts1_hp_bar,display_time_parts2_hp_bar = 0,0
-            display_time_parts3_hp_bar,display_time_parts4_hp_bar = 0,0
-            display_time_parts5_hp_bar,display_time_parts6_hp_bar = 0,0
-            display_time_parts7_hp_bar,display_time_parts8_hp_bar = 0,0
-            display_time_parts9_hp_bar = 0
-            
-            new_boss.update(boss_id,boss_type,boss_status,
-                parts_number,
-                main_hp,
-                parts1_hp,parts2_hp,parts3_hp,
-                parts4_hp,parts5_hp,parts6_hp,
-                parts7_hp,parts8_hp,parts9_hp,
-                parts1_score,parts2_score,parts3_score,
-                parts4_score,parts5_score,parts6_score,
-                parts7_score,parts8_score,parts9_score,
-                level,
-                
-                weapon1_status,weapon1_interval,weapon1_rapid_num,weapon1_cool_down_time,weapon1_omen_count,
-                weapon2_status,weapon2_interval,weapon2_rapid_num,weapon2_cool_down_time,weapon2_omen_count,
-                weapon3_status,weapon3_interval,weapon3_rapid_num,weapon3_cool_down_time,weapon3_omen_count,
-                weapon4_status,weapon4_interval,weapon4_rapid_num,weapon4_cool_down_time,weapon4_omen_count,
-                weapon5_status,weapon5_interval,weapon5_rapid_num,weapon5_cool_down_time,weapon5_omen_count,
-                
-                posx,posy,bgx,bgy,offset_x,offset_y,
-                ax,ay, bx,by, cx,cy, dx,dy, qx,qy, vx,vy,
-                width,height,
-                
-                tilt_now,tilt_max,tilt_time_now,tilt_time,
-                
-                col_damage_point1_x,col_damage_point1_y,col_damage_point1_w,col_damage_point1_h,
-                col_damage_point2_x,col_damage_point2_y,co2_damage_point2_w,col_damage_point2_h,
-                col_damage_point3_x,col_damage_point3_y,co3_damage_point3_w,col_damage_point3_h,
-                col_damage_point4_x,col_damage_point4_y,co4_damage_point4_w,col_damage_point4_h,
-                col_main1_x,  col_main1_y,  col_main1_w,  col_main1_h,
-                col_main2_x,  col_main2_y,  col_main2_w,  col_main2_h,
-                col_main3_x,  col_main3_y,  col_main3_w,  col_main3_h,
-                col_main4_x,  col_main4_y,  col_main4_w,  col_main4_h,
-                col_main5_x,  col_main5_y,  col_main5_w,  col_main5_h,
-                col_main6_x,  col_main6_y,  col_main6_w,  col_main6_h,
-                col_main7_x,  col_main7_y,  col_main7_w,  col_main7_h,
-                col_main8_x,  col_main8_y,  col_main8_w,  col_main8_h,
-                col_parts1_x,col_parts1_y,col_parts1_w,col_parts1_h,
-                col_parts2_x,col_parts2_y,col_parts2_w,col_parts2_h,
-                col_parts3_x,col_parts3_y,col_parts3_w,col_parts3_h,
-                col_parts4_x,col_parts4_y,col_parts4_w,col_parts4_h,
-                col_parts5_x,col_parts5_y,col_parts5_w,col_parts5_h,
-                col_parts6_x,col_parts6_y,col_parts6_w,col_parts6_h,
-                col_parts7_x,col_parts7_y,col_parts7_w,col_parts7_h,
-                col_parts8_x,col_parts8_y,col_parts8_w,col_parts8_h,
-                col_parts9_x,col_parts9_y,col_parts9_w,col_parts9_h,
-                
-                main_hp_bar_offset_x,main_hp_bar_offset_y,
-                parts1_hp_bar_offset_x,parts1_hp_bar_offset_y,
-                parts2_hp_bar_offset_x,parts2_hp_bar_offset_y,
-                parts3_hp_bar_offset_x,parts3_hp_bar_offset_y,
-                parts4_hp_bar_offset_x,parts4_hp_bar_offset_y,
-                parts5_hp_bar_offset_x,parts5_hp_bar_offset_y,
-                parts6_hp_bar_offset_x,parts6_hp_bar_offset_y,
-                parts7_hp_bar_offset_x,parts7_hp_bar_offset_y,
-                parts8_hp_bar_offset_x,parts8_hp_bar_offset_y,
-                parts9_hp_bar_offset_x,parts9_hp_bar_offset_y,
-                
-                size,priority,attack_method,direction,acceleration,timer,degree,radian,speed,radius,
-                flag1,flag2,flag3,flag4,
-                count1,count2,count3,count4,
-                parts1_flag,parts2_flag,parts3_flag,
-                parts4_flag,parts5_flag,parts6_flag,
-                parts7_flag,parts8_flag,parts9_flag,
-                animation_number1,animation_number2,animation_number3,animation_number4,
-                move_index,
-                obj_time,obj_totaltime,
-                invincible,
-                display_time_main_hp_bar,
-                display_time_parts1_hp_bar,display_time_parts2_hp_bar,display_time_parts3_hp_bar,
-                display_time_parts4_hp_bar,display_time_parts5_hp_bar,display_time_parts6_hp_bar,
-                display_time_parts7_hp_bar,display_time_parts8_hp_bar,display_time_parts9_hp_bar
-                )
-            self.boss.append(new_boss)
 
     #ボスをベジェ曲線で移動させるために必要な座標をリストから取得する関数
     def boss_get_bezier_curve_coordinate(self,i):                    

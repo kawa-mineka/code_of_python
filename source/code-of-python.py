@@ -124,6 +124,8 @@ from update_boss       import * #Appクラスのupdate関数から呼び出さ�
 from update_collision  import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主に衝突当たり判定を行います
 from update_item       import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にパワーアップアイテム関連の更新を行います
 
+from update_event      import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にイベントリストでの敵発生やマップスクロール時に敵を出す処理を行います
+
 class App:
     ##########################################################################################################################################
     #関数を定義沢山定義するところだよ############################################################################################################
@@ -403,10 +405,11 @@ class App:
             update_btn.delete_claw_btn(self)              #クローを消滅させるキーが押されたか調べる関数の呼び出し
             update_btn.change_fix_claw_interval_btn(self) #フイックスクロー間隔変化ボタンが押されたか調べる関数を呼び出す
             update_btn.change_claw_style_btn(self)        #クロースタイル変更ボタンが押されたか調べる関数を呼び出す    
+            #イベントリスト関連の処理###############################################################################################################
+            update_event.list_execution(self)         #イベントリスト解析による敵の発生関数を呼び出す
+            update_event.map_scroll(self)             #マップスクロールによる敵の発生関数を呼び出す
+            update_event.append_request(self)         #アペンドイベントリクエストによる敵の追加発生関数を呼び出す（早回しなどの追加注文発生とかの処理）(イベント追加依頼）
             #敵関連の処理###############################################################################################################
-            update_enemy.append_event_system(self)    #イベントリストシステムによる敵の発生関数を呼び出す
-            update_enemy.append_map_scroll(self)      #マップスクロールによる敵の発生関数を呼び出す
-            update_enemy.append_event_request(self)   #アペンドイベントリクエストによる敵の追加発生関数を呼び出す（早回しなどの追加注文発生とかの処理）(イベント追加依頼）
             update_enemy.enemy(self)                  #敵の更新（移動とか）関数を呼び出す
             update_enemy.clip(self)                   #画面からはみ出た敵を消去する関数を呼び出し
             #ボス関連の処理#############################################################################################################
@@ -502,6 +505,10 @@ class App:
                     self.number_of_play += 1                      #1ゲームプレイしたので「プレイ回数」を1増やす
                     self.total_score += self.score                #累計スコアに現在のスコアを加算する
                 
+                pygame.mixer.music.load("assets/music/facton Morning Dreams 3727468_0_1.mp3") #GAME OVER BGMファイルの読み込み
+                pygame.mixer.music.set_volume(self.master_bgm_vol / 100)                      #ボリューム値設定
+                pygame.mixer.music.play(-1)                                                   #GAME OVER BGMをループ再生
+                
                 self.game_status = SCENE_GAME_OVER_FADE_OUT   #「ゲームオーバーフェードアウト開始」にする
         
         if self.game_status == SCENE_GAME_OVER_FADE_OUT:     #「GAME_OVER_FADE_OUT」の時は
@@ -567,7 +574,8 @@ class App:
                 self.cursor_menu_layer = 0                          #メニューの階層は最初は0にします
                 self.active_window_id = WINDOW_ID_SELECT_FILE_SLOT  #このウィンドウIDを最前列でアクティブなものとする
                 self.game_status = SCENE_SELECT_SAVE_SLOT    #ゲームステータスを「SCENE_SELECT_SAVE_SLOT」にしてセーブスロット選択にする
-            
+                pygame.mixer.music.fadeout(6000)              #GAME OVER BGMフェードアウト開始
+                
         if self.game_status == SCENE_SELECT_SAVE_SLOT:       #「SCENE_SELECT_SAVE_SLOT」の時は
             if   self.cursor_decision_item_y == 0:             #メニューでアイテムナンバー0の「1」が押されたら
                 self.replay_slot_num = 0                     #スロット番号は0   (以下はほぼ同じ処理です)
