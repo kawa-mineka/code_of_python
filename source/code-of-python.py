@@ -99,7 +99,7 @@ from define_ship_data  import * #各種機体(シップ)データ関連の登録
 from define_enemy_data import * #敵のデータ関連の登録モジュールの読み込み
 from define_boss_data  import * #ボスのデータ関連の登録モジュールの読み込み
 from define_stage_data import * #各ステージのイベントリスト登録モジュールの読み込み
-
+from define_sound      import * #音声ファイルのリスト登録&ローディング
 from func              import * #汎用性のある関数群のモジュールの読み込み
 
 from graph             import * #Appクラスのdraw関数から呼び出される関数群のモジュールの読み込み 基本的に画像表示だけを行う関数(メソッド)群です
@@ -259,6 +259,9 @@ class App:
         
         func.read_ship_equip_medal_data(self)  #プレイ中の自機リスト群にメダルスロット装備関連のデータを読み込んで行く関数の呼び出し
         func.medal_effect_plus_medallion(self) #装備されたメダルを調べ、メダルスロットを増やすメダルがはめ込まれていたらスロット数を増やす関数の呼び出し
+        
+        define_sound.load_bgm(self)                 #BGMファイルの読み込み
+        # self.game_over_bgm = pygame.mixer.Sound("assets/music/facton-Morning-Dreams-3727468_0_1.ogg") #GAME OVER BGMファイルの読み込み
         
         #毎フレームごとにupdateとdrawを呼び出す
         #近年のゲームエンジンはみんなこんな感じらしい？？？unityやUEもこんな感じなのかな？？使ったことないけど
@@ -506,9 +509,9 @@ class App:
                     self.number_of_play += 1                      #1ゲームプレイしたので「プレイ回数」を1増やす
                     self.total_score += self.score                #累計スコアに現在のスコアを加算する
                 
-                pygame.mixer.music.load("assets/music/facton Morning Dreams 3727468_0_1.mp3") #GAME OVER BGMファイルの読み込み
-                pygame.mixer.music.set_volume(self.master_bgm_vol / 100)                      #ボリューム値設定
-                pygame.mixer.music.play(-1)                                                   #GAME OVER BGMをループ再生
+                # pygame.mixer.music.load("assets/music/facton Morning Dreams 3727468_0_1.mp3") #GAME OVER BGMファイルの読み込み
+                # pygame.mixer.music.set_volume(self.master_bgm_vol / 100)                      #ボリューム値設定
+                # pygame.mixer.music.play(-1)                                                   #GAME OVER BGMをループ再生
                 
                 self.game_status = SCENE_GAME_OVER_FADE_OUT   #「ゲームオーバーフェードアウト開始」にする
         
@@ -520,6 +523,10 @@ class App:
         
         if self.game_status == SCENE_GAME_OVER_SHADOW_IN:    #「GAME_OVER_SHADOW_IN」の時は
             if self.shadow_in_out_complete_flag == FLAG_ON:  #シャドウイン完了のフラグが建ったのなら
+                
+                self.game_over_bgm.set_volume(self.master_bgm_vol / 100)      #ボリューム値設定
+                self.game_over_bgm.play()                                     #ゲームオーバーBGM再生開始
+                
                 self.game_status = SCENE_GAME_OVER_STOP      #「GAME_OVER_STOP」状態にする
         
         if self.game_status == SCENE_GAME_OVER_STOP:         #「GAME_OVER_STOP」の時は
@@ -559,6 +566,7 @@ class App:
                     func.recoard_score_board(self)                          #スコアボードに点数書き込み
                     func.score_board_bubble_sort(self,self.game_difficulty) #現在選択している難易度を引数として書き込んだスコアデータをソートする関数の呼び出し
                 
+                self.game_over_bgm.fadeout(600)                     #GAME OVER BGMフェードアウト開始
                 self.game_status = SCENE_TITLE_INIT            #ゲームステータスを「SCENE_TITLE_INIT」にしてタイトルの初期化工程にする
                 
             elif self.cursor_decision_item_y == 1:             #メニューでアイテムナンバー1の「SAVE & RETURN」が押されたら
@@ -575,7 +583,8 @@ class App:
                 self.cursor_menu_layer = 0                          #メニューの階層は最初は0にします
                 self.active_window_id = WINDOW_ID_SELECT_FILE_SLOT  #このウィンドウIDを最前列でアクティブなものとする
                 self.game_status = SCENE_SELECT_SAVE_SLOT    #ゲームステータスを「SCENE_SELECT_SAVE_SLOT」にしてセーブスロット選択にする
-                pygame.mixer.music.fadeout(6000)              #GAME OVER BGMフェードアウト開始
+                
+                self.game_over_bgm.fadeout(600)                     #GAME OVER BGMフェードアウト開始
 
         if self.game_status == SCENE_SELECT_SAVE_SLOT:       #「SCENE_SELECT_SAVE_SLOT」の時は
             if   self.cursor_decision_item_y == 0:             #メニューでアイテムナンバー0の「1」が押されたら

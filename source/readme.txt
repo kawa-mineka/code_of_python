@@ -10,10 +10,13 @@ define_class.py         各クラスのメンバ変数とか宣言してます�
 define_data.py          色んなデータのリスト登録です
 define_enemy_data.py    敵データ関連のリスト登録
 define_ship_data.py     自機関連のデータリスト登録
+define_sound            BGMファイルを事前に読み込み、リストに登録する処理
 define_stage_data.py    各ステージのイベントデータとか、ゲーム全体のステージ配列などのリスト登録です
 
 func.py                 ある程度の汎用性のある関数群です update_* の各メソッドから呼ばれる場合が多いですねぇ
 graph.py                drawクラスから呼ばれるメソッドが詰まっております 座標が入ったメンバ変数の数値を読んでそれに従ってグラフイックを表示するだけの処理です
+
+readme.txt              このファイルだよ～☆彡
 
 update_boss.py          ボス関連の更新処理
 update_btn.py           入力関連の更新処理(キーパッドが押されたとかボタンが押されたとか～そんなの)
