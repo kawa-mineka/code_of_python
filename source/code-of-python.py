@@ -261,7 +261,6 @@ class App:
         func.medal_effect_plus_medallion(self) #装備されたメダルを調べ、メダルスロットを増やすメダルがはめ込まれていたらスロット数を増やす関数の呼び出し
         
         define_sound.load_bgm(self)                 #BGMファイルの読み込み
-        # self.game_over_bgm = pygame.mixer.Sound("assets/music/facton-Morning-Dreams-3727468_0_1.ogg") #GAME OVER BGMファイルの読み込み
         
         #毎フレームごとにupdateとdrawを呼び出す
         #近年のゲームエンジンはみんなこんな感じらしい？？？unityやUEもこんな感じなのかな？？使ったことないけど
@@ -566,7 +565,7 @@ class App:
                     func.recoard_score_board(self)                          #スコアボードに点数書き込み
                     func.score_board_bubble_sort(self,self.game_difficulty) #現在選択している難易度を引数として書き込んだスコアデータをソートする関数の呼び出し
                 
-                self.game_over_bgm.fadeout(600)                     #GAME OVER BGMフェードアウト開始
+                self.game_over_bgm.fadeout(1200)                     #GAME OVER BGMフェードアウト開始
                 self.game_status = SCENE_TITLE_INIT            #ゲームステータスを「SCENE_TITLE_INIT」にしてタイトルの初期化工程にする
                 
             elif self.cursor_decision_item_y == 1:             #メニューでアイテムナンバー1の「SAVE & RETURN」が押されたら
@@ -584,8 +583,8 @@ class App:
                 self.active_window_id = WINDOW_ID_SELECT_FILE_SLOT  #このウィンドウIDを最前列でアクティブなものとする
                 self.game_status = SCENE_SELECT_SAVE_SLOT    #ゲームステータスを「SCENE_SELECT_SAVE_SLOT」にしてセーブスロット選択にする
                 
-                self.game_over_bgm.fadeout(600)                     #GAME OVER BGMフェードアウト開始
-
+                self.game_over_bgm.fadeout(3000)                    #GAME OVER BGMフェードアウト開始
+        
         if self.game_status == SCENE_SELECT_SAVE_SLOT:       #「SCENE_SELECT_SAVE_SLOT」の時は
             if   self.cursor_decision_item_y == 0:             #メニューでアイテムナンバー0の「1」が押されたら
                 self.replay_slot_num = 0                     #スロット番号は0   (以下はほぼ同じ処理です)

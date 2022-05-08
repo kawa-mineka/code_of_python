@@ -22,7 +22,7 @@ class update_boss:
     #!各面のボスをBossクラスに定義して出現させる
     def born_boss(self):
         #col_main1_x, col_main1_y, col_main1_w, col_main1_h  = 1*8,1*8,5*8,2*8
-        if       self.stage_number == STAGE_MOUNTAIN_REGION:
+        if       self.stage_number == STAGE_MOUNTAIN_REGION:   #1面ボス ブリザーディア
             new_boss = Boss()
             boss_id = 0
             boss_type = BOSS_BREEZARDIA
@@ -108,6 +108,10 @@ class update_boss:
             obj_time = 0
             obj_totaltime = 0
             invincible = 0
+            anime_speed_now  = 0
+            anime_speed_min  = 0
+            anime_speed_max  = 0
+            anime_speed_init = 0
             display_time_main_hp_bar = 0
             display_time_parts1_hp_bar,display_time_parts2_hp_bar = 0,0
             display_time_parts3_hp_bar,display_time_parts4_hp_bar = 0,0
@@ -182,6 +186,10 @@ class update_boss:
                 move_index,
                 obj_time,obj_totaltime,
                 invincible,
+                anime_speed_now,
+                anime_speed_min,
+                anime_speed_max,
+                anime_speed_init,
                 display_time_main_hp_bar,
                 display_time_parts1_hp_bar,display_time_parts2_hp_bar,display_time_parts3_hp_bar,
                 display_time_parts4_hp_bar,display_time_parts5_hp_bar,display_time_parts6_hp_bar,
@@ -189,7 +197,7 @@ class update_boss:
                 )
             self.boss.append(new_boss)      
             
-        elif     self.stage_number == STAGE_ADVANCE_BASE:
+        elif     self.stage_number == STAGE_ADVANCE_BASE:      #2面ボス ファッティバルガード
             new_boss = Boss()
             boss_id = 0
             boss_type = BOSS_FATTY_VALGUARD
@@ -277,6 +285,10 @@ class update_boss:
             obj_time = 0
             obj_totaltime = 0
             invincible = 0
+            anime_speed_now  = 0
+            anime_speed_min  = 0
+            anime_speed_max  = 0
+            anime_speed_init = 0
             display_time_main_hp_bar = 0
             display_time_parts1_hp_bar,display_time_parts2_hp_bar = 0,0
             display_time_parts3_hp_bar,display_time_parts4_hp_bar = 0,0
@@ -350,6 +362,10 @@ class update_boss:
                 move_index,
                 obj_time,obj_totaltime,
                 invincible,
+                anime_speed_now,
+                anime_speed_min,
+                anime_speed_max,
+                anime_speed_init,
                 display_time_main_hp_bar,
                 display_time_parts1_hp_bar,display_time_parts2_hp_bar,display_time_parts3_hp_bar,
                 display_time_parts4_hp_bar,display_time_parts5_hp_bar,display_time_parts6_hp_bar,
@@ -357,7 +373,7 @@ class update_boss:
                 )
             self.boss.append(new_boss)
             
-        elif     self.stage_number == STAGE_VOLCANIC_BELT:
+        elif     self.stage_number == STAGE_VOLCANIC_BELT:     #3面ボス マッドクラブンガー
             new_boss = Boss()
             boss_id = 0
             boss_type = BOSS_MAD_CLUBUNGER
@@ -445,6 +461,10 @@ class update_boss:
             obj_time = 0
             obj_totaltime = 0
             invincible = 0
+            anime_speed_now  = 0
+            anime_speed_min  = 0
+            anime_speed_max  = 6000
+            anime_speed_init = 0
             display_time_main_hp_bar = 0
             display_time_parts1_hp_bar,display_time_parts2_hp_bar = 0,0
             display_time_parts3_hp_bar,display_time_parts4_hp_bar = 0,0
@@ -518,6 +538,10 @@ class update_boss:
                 move_index,
                 obj_time,obj_totaltime,
                 invincible,
+                anime_speed_now,
+                anime_speed_min,
+                anime_speed_max,
+                anime_speed_init,
                 display_time_main_hp_bar,
                 display_time_parts1_hp_bar,display_time_parts2_hp_bar,display_time_parts3_hp_bar,
                 display_time_parts4_hp_bar,display_time_parts5_hp_bar,display_time_parts6_hp_bar,
@@ -1021,6 +1045,10 @@ class update_boss:
                     self.boss[i].posx += self.boss[i].vx
                     self.boss[i].posy += self.boss[i].vy
                     self.boss[i].vy += 0.001 #1フレームごとに下方向へ0.001加速して落ちていきます
+                    
+                    self.boss[i].anime_speed_now += 1 #ブースターエンジン回転用のアニメスピードを遅くしていくためのカウンターをインクリメント
+                    if self.boss[i].anime_speed_now >= self.boss[i].anime_speed_max: #最大値を超えないように補正する
+                        self.boss[i].anime_speed_now = self.boss[i].anime_speed_max
                     
                     self.boss[i].count1 -= 1 #count1(爆裂分裂開始までのカウント)を１減らしていきます
                     if self.boss[i].count1 <= 0: #爆裂分裂開始までのカウントが0になったのなら

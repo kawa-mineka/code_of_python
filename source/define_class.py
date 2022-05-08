@@ -602,6 +602,10 @@ class Boss:#ボスキャラのクラス設定
         self.obj_time       = 0  #2次ベジェ曲線での移動用のtime（現在のタイムフレーム番号が入る）(0~totaltimeまで変化する)ピエール・ベジェさんありがとう・・・
         self.obj_totaltime  = 0  #2次ベジェ曲線での移動用のtotaltime（移動元から移動先までに掛けるトータルフレーム数が入る60なら1秒掛けて移動元から移動先まで移動するって事,120なら2秒かかる)
         self.invincible     = 0  #無敵状態かどうかのフラグ(出現時は無敵にするとかで使うかも？)
+        self.anime_speed_now  = 0 #現在のアニメーションスピード値(このメンバ変数が変化していきます)
+        self.anime_speed_min  = 0 #現在のアニメーションスピードの最低値(これより小さくなったらダメだよ)判定値として使用します
+        self.anime_speed_max  = 0 #現在のアニメーションスピードの最大値(超えたらダメだよ)判定値として使用します
+        self.anime_speed_init = 0 #アニメーションスピードの初期値
         self.display_time_main_hp_bar   = 0 #耐久力ゲージをどれだけの時間表示させるかのカウント 1=60ミリ秒
         self.display_time_parts1_hp_bar = 0
         self.display_time_parts2_hp_bar = 0
@@ -678,6 +682,7 @@ class Boss:#ボスキャラのクラス設定
             move_index,
             obj_time,obj_totaltime,
             invincible,
+            anime_speed_now,anime_speed_min,anime_speed_max,anime_speed_init,
             display_time_main_hp_bar,
             display_time_parts1_hp_bar,display_time_parts2_hp_bar,display_time_parts3_hp_bar,
             display_time_parts4_hp_bar,display_time_parts5_hp_bar,display_time_parts6_hp_bar,
@@ -932,6 +937,12 @@ class Boss:#ボスキャラのクラス設定
         self.obj_time = obj_time
         self.obj_totaltime = obj_totaltime
         self.invincible = invincible
+        
+        self.anime_speed_now  = anime_speed_now
+        self.anime_speed_min  = anime_speed_min
+        self.anime_speed_max  = anime_speed_max
+        self.anime_speed_init = anime_speed_init
+        
         self.display_time_main_hp_bar = display_time_main_hp_bar
         self.display_time_parts1_hp_bar = display_time_parts1_hp_bar
         self.display_time_parts2_hp_bar = display_time_parts2_hp_bar

@@ -313,7 +313,7 @@ class graph:
                 #下部ブースター回転アニメーション表示
                 pyxel.blt(self.boss[i].posx, self.boss[i].posy - self.camera_offset_y + 3*8  - self.boss[i].tilt_now,
                             IMG0,
-                            64 + (pyxel.frame_count // 4  % 8)*8,   88,
+                            64 + (pyxel.frame_count // int(4 + (self.boss[i].anime_speed_now))  % 8) * 8,   88,
                             8,16,
                             pyxel.COLOR_PEACH)
                 
