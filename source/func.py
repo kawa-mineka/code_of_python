@@ -1,3 +1,4 @@
+import os
 import math                #三角関数などを使用したいのでインポートぉぉおお！
 from random import random  #random.random() と呼ぶと、0から1の範囲(1は含まない)のランダムな実数が返される(主にパーティクル系で使用します)
 import pyxel               #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
@@ -11,7 +12,8 @@ class func:
 
     #漢字フォントデータの読み込み
     def load_kanji_font_data(self):
-        pyxel.load("./assets/fonts/misaki_font_k8x12s_001.pyxres") #漢字フォントデータ(その1)を読み込みます
+        pyxel.load(os.path.abspath("./assets/fonts/misaki_font_k8x12s_001.pyxres")) #漢字フォントデータ(その1)を読み込みます
+        # pyxel.load("./assets/fonts/misaki_font_k8x12s_001.pyxres") #漢字フォントデータ(その1)を読み込みます
         # self.kanji_fonts = [] #漢字フォントリストデータをまずは初期化して使えるようにします この方法だとダメだわ
         self.kanji_fonts = [[None for col in range(752)] for row in range(1128)] #横752,縦1128の空っぽの漢字フォントデータリストを作成します(Pythonクックブックで奨められている書き方ですのんって、判りにくいよなぁ・・これ)
         
@@ -28,7 +30,8 @@ class func:
                 col = pyxel.image(2).pget(x,y)
                 self.kanji_fonts[y+512][x+0] = col
         
-        pyxel.load("./assets/fonts/misaki_font_k8x12s_002.pyxres") #漢字フォントデータ(その2)を読み込みます
+        pyxel.load(os.path.abspath("./assets/fonts/misaki_font_k8x12s_002.pyxres")) #漢字フォントデータ(その2)を読み込みます
+        # pyxel.load("./assets/fonts/misaki_font_k8x12s_002.pyxres") #漢字フォントデータ(その2)を読み込みます
         for y in range(256):  #左端A列の  k8x12s_jisx0208___004a.pngを読みだしてフォントデータリストに書き込んでいきます 書き込みオフセット値は(0,768)
             for x in range(256):
                 col = pyxel.image(0).pget(x,y)
@@ -42,7 +45,8 @@ class func:
                 col = pyxel.image(2).pget(x,y)
                 self.kanji_fonts[y+256][x+256] = col
         
-        pyxel.load("./assets/fonts/misaki_font_k8x12s_003.pyxres") #漢字フォントデータ(その3)を読み込みます
+        pyxel.load(os.path.abspath("./assets/fonts/misaki_font_k8x12s_003.pyxres")) #漢字フォントデータ(その3)を読み込みます
+        # pyxel.load("./assets/fonts/misaki_font_k8x12s_003.pyxres") #漢字フォントデータ(その3)を読み込みます
         for y in range(256):  #真ん中B列のk8x12s_jisx0208___003b.pngを読みだしてフォントデータリストに書き込んでいきます 書き込みオフセット値は(256,512)
             for x in range(256):
                 col = pyxel.image(0).pget(x,y)
@@ -56,7 +60,8 @@ class func:
                 col = pyxel.image(2).pget(x,y)
                 self.kanji_fonts[y+0][x+512] = col
         
-        pyxel.load("./assets/fonts/misaki_font_k8x12s_004.pyxres") #漢字フォントデータ(その4)を読み込みます
+        pyxel.load(os.path.abspath("./assets/fonts/misaki_font_k8x12s_004.pyxres")) #漢字フォントデータ(その4)を読み込みます
+        # pyxel.load("./assets/fonts/misaki_font_k8x12s_004.pyxres") #漢字フォントデータ(その4)を読み込みます
         for y in range(256):  #真ん中B列のk8x12s_jisx0208___002c.pngを読みだしてフォントデータリストに書き込んでいきます 書き込みオフセット値は(512,256)
             for x in range(752-512):
                 col = pyxel.image(0).pget(x,y)

@@ -46,7 +46,8 @@ class update_system:
 
     #システムデータのロード
     def load_data(self):
-        pyxel.load("./assets/system/system-data.pyxres") #システムデータを読み込む
+        pyxel.load(os.path.abspath("./assets/system/system-data.pyxres")) #システムデータを読み込む
+        # pyxel.load("./assets/system/system-data.pyxres") #システムデータを読み込む
         
         self.game_difficulty = func.get_chrcode_tilemap(self,0,0,120) - 16 #数字の[0]はアスキーコード16番なので16引いて数値としての0にしてやります
         print(self.game_difficulty)
@@ -192,7 +193,8 @@ class update_system:
 
     #システムデータのセーブ
     def save_data(self):
-        pyxel.load("./assets/system/system-data.pyxres") #システムデータにアクセスするためにローディングだけしてやります(グラフイック関連のアセットをローディングしている時がほとんどなので)
+        pyxel.load(os.path.abspath("./assets/system/system-data.pyxres")) #システムデータにアクセスするためにローディングだけしてやります(グラフイック関連のアセットをローディングしている時がほとんどなので)
+        # pyxel.load("./assets/system/system-data.pyxres") #システムデータにアクセスするためにローディングだけしてやります(グラフイック関連のアセットをローディングしている時がほとんどなので)
         #各種設定値書き込み 数字の[0]はアスキーコード16番なので16足してアスキーコードとしての0にしてやります
         func.set_chrcode_tilemap(self,0, 0,120,self.game_difficulty + 16)                 #難易度書き込み
         func.set_chrcode_tilemap(self,0, 0,121,self.stage_number + 16)                    #スタートステージ数書き込み
@@ -317,5 +319,6 @@ class update_system:
         test_num = test_num + 1000                             #この式と逆の方法で計算してやれば符号の付いた実数値を取り出せる
         update_system.write_data_num(self,10,162,0,10,int(test_num))    #!############################ test write マイナス符号付き実数値の数値が書き込めるかのテスト
         
-        pyxel.save("./assets/system/system-data.pyxres") #システムデータを書き込み
+        pyxel.save(os.path.abspath("./assets/system/system-data.pyxres")) #システムデータを書き込み
+        # pyxel.save("./assets/system/system-data.pyxres") #システムデータを書き込み
 

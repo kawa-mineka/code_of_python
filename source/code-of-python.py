@@ -79,7 +79,12 @@
 #todo902 リプレイファイルを再生後、再生時に装備していたメダルがそのまま自機に装着されたままだった模様・・ダメじゃないの‥
 
 #実装完了済み！
+import os
+import sys
 
+abs_path = os.path.abspath(__file__)
+print ("execute file")
+print(abs_path)
 
 
 
@@ -133,6 +138,17 @@ class App:
     #なんかpythonではこのあたり（Appクラスの __init__関数定義が終わったあたり）で定義しないとエラーが出るらしい
     #確かに関数定義をしないで関数呼び出したらエラーになるよなぁ・・・最初は関数定義はどこでも定義できると思って最後の方で定義してエラー出て悩んでたよ
     def __init__(self):
+        if getattr(sys, 'frozen', False):
+            program_directory = os.path.dirname(os.path.abspath(sys.argv[0]))
+        else:
+            program_directory = os.path.dirname(os.path.abspath(__file__))
+        
+        print(" ")
+        print("program directory")
+        print(program_directory)
+        print(" ")
+        
+        
         pygame.mixer.init()  #pygameミキサー関連の初期化 pyxel.initよりも先にpygameをinitしないと上手く動かないみたい・・・
         pyxel.init(WINDOW_W,WINDOW_H,title="CODE OF PYTHON",fps = 60,quit_key=pyxel.KEY_NONE) #ゲームウィンドウのタイトルバーの表示とfpsの設定(60fpsにした),キーボード入力による強制終了は無しとする pyxel.init(caption=)がpyxel.init(title=)に変更されたっぽい？？？
         self.ship_equip_slot_list = [[0] * 6 for i in range(LOOK_AT_LOGO)]  #(横6,縦LOOK_AT_LOGO(15))までint(0)が入ったリストを作製し初期化します

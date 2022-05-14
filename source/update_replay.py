@@ -18,7 +18,8 @@ class update_replay:
         self.replay_data          = [[] for i in range(50)] #リプレイデータが入るリスト(50ステージ分)を初期化
         self.replay_control_data_size = []                  #ステージ毎のコントロールデータのサイズが入るリストを初期化
         slot_num = "slot_" + str(self.replay_slot_num)      #これからアクセスするスロットナンバーを取得
-        pyxel.load("./assets/replay/" + slot_num + "/replay_status.pyxres") #リプレイステータスファイルにアクセスするためにローディングだけしてやります(グラフイック関連のアセットをローディングしている時がほとんどなので)
+        pyxel.load(os.path.abspath("./assets/replay/" + slot_num + "/replay_status.pyxres")) #リプレイステータスファイルにアクセスするためにローディングだけしてやります(グラフイック関連のアセットをローディングしている時がほとんどなので)
+        # pyxel.load("./assets/replay/" + slot_num + "/replay_status.pyxres") #リプレイステータスファイルにアクセスするためにローディングだけしてやります(グラフイック関連のアセットをローディングしている時がほとんどなので)
         
         #各種設定値読み込み 数字の[0]はアスキーコード16番なので16引いて文字から数字としての0にしてやります
         self.master_rnd_seed  = func.get_chrcode_tilemap(self,0,  0,0)       #乱数の種(ゲームスタート時)を読み込み(そのまま取得します)
@@ -84,7 +85,8 @@ class update_replay:
         for st in range(self.replay_stage_num + 1): #st(ステージ指定用に作った変数は0始まりなので注意)
             file_number = "{:>03}".format(st + 1)
             file_name = "./assets/replay/" + slot_num + "/" + file_number + ".pyxres"
-            pyxel.load(file_name) #リプレイパッド入力データファイルにアクセスするためにローディングだけしてやります(グラフイック関連のアセットをローディングしている時がほとんどなので)
+            pyxel.load(os.path.abspath(file_name)) #リプレイパッド入力データファイルにアクセスするためにローディングだけしてやります(グラフイック関連のアセットをローディングしている時がほとんどなので)
+            # pyxel.load(file_name) #リプレイパッド入力データファイルにアクセスするためにローディングだけしてやります(グラフイック関連のアセットをローディングしている時がほとんどなので)
             replay_control_data_count = self.replay_control_data_size[st] #stステージ目のreplay_dataのリスト長(要素数)を代入
             
             for i in range (replay_control_data_count):
@@ -103,7 +105,8 @@ class update_replay:
         for st in range(self.replay_stage_num + 1): #st(ステージ指定用に作った変数は0始まりなので注意)
             file_number = "{:>03}".format(st + 1)
             file_name = "./assets/replay/" + slot_num + "/" + file_number + ".pyxres"
-            pyxel.load(file_name) #リプレイパッド入力データファイルにアクセスするためにローディングだけしてやります(グラフイック関連のアセットをローディングしている時がほとんどなので)
+            pyxel.load(os.path.abspath(file_name)) #リプレイパッド入力データファイルにアクセスするためにローディングだけしてやります(グラフイック関連のアセットをローディングしている時がほとんどなので)
+            # pyxel.load(file_name) #リプレイパッド入力データファイルにアクセスするためにローディングだけしてやります(グラフイック関連のアセットをローディングしている時がほとんどなので)
             replay_control_data_count = len(self.replay_data[st])        #stステージ目のreplay_dataのリスト長(要素数)を代入
             self.replay_control_data_size.append(replay_control_data_count) #ステージ毎のコントロールデータのサイズをリストに追加していきます
             for z in range(8): #データクリア処理-------------------------------------
@@ -123,10 +126,12 @@ class update_replay:
                 z = int(i // 65536)                #z座標(この場合はタイルマップナンバーになります)は65536で割った数(切り捨て)
                 func.set_chrcode_tilemap(self,z,x,y,num) #numをタイルマップ(z),座標(x,y)に書き込む
             
-            pyxel.save(file_name) #リプレイパッド入力データファイルをセーブ！
+            pyxel.save(os.path.abspath(file_name)) #リプレイパッド入力データファイルをセーブ！
+            # pyxel.save(file_name) #リプレイパッド入力データファイルをセーブ！
         
         #リプレイファイル本体のデータをセーブする---------------------------------------------------------------------------------------
-        pyxel.load("./assets/replay/" + slot_num + "/replay_status.pyxres") #リプレイステータスファイルにアクセスするためにローディングだけしてやります(グラフイック関連のアセットをローディングしている時がほとんどなので)
+        pyxel.load(os.path.abspath("./assets/replay/" + slot_num + "/replay_status.pyxres")) #リプレイステータスファイルにアクセスするためにローディングだけしてやります(グラフイック関連のアセットをローディングしている時がほとんどなので)
+        # pyxel.load("./assets/replay/" + slot_num + "/replay_status.pyxres") #リプレイステータスファイルにアクセスするためにローディングだけしてやります(グラフイック関連のアセットをローディングしている時がほとんどなので)
         #各種設定値書き込み 数字の[0]はアスキーコード16番なので16足してアスキーコードとしての0にしてやります
         func.set_chrcode_tilemap(self,0, 0,0,self.master_rnd_seed)          #乱数の種(ゲームスタート時)を書き込み(数文字には変換しない)
         func.set_chrcode_tilemap(self,0, 0,1,self.game_difficulty + 16)     #難易度書き込み
@@ -185,7 +190,8 @@ class update_replay:
             update_system.write_data_num(self,176 -1 +3,10+i,0,  3,int(self.replay_mode_stage_data[i][ST_SCORE_STAR_MAG]))  #座標(176,10+i)から3ケタのスコアスター得点倍率を書き込み
             
             update_system.write_data_num(self,128 -1 +8,10+i,0,  8,int(self.replay_control_data_size[i])) #座標(128,10+i)に8ケタのコントロールパッド入力データが記録されたファイルのデータサイズを書き込みます
-        pyxel.save("./assets/replay/" + slot_num + "/replay_status.pyxres") #リプレイステータスファイルをセーブ！
+        pyxel.save(os.path.abspath("./assets/replay/" + slot_num + "/replay_status.pyxres")) #リプレイステータスファイルをセーブ！
+        # pyxel.save("./assets/replay/" + slot_num + "/replay_status.pyxres") #リプレイステータスファイルをセーブ！
 
     #リプレイデータの記録   自動移動モードの時とステージクリアのブーストの時とリプレイ再生中の時はリプレイデータを記録しません
     def record_data(self):
