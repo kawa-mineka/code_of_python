@@ -82,9 +82,9 @@
 import os
 import sys
 
-abs_path = os.path.abspath(__file__)
+abs_path = os.path.abspath(__file__) #絶対パスを取得
 print ("execute file")
-print(abs_path)
+print(abs_path) #このプログラム自体がどのフォルダーで起動してるのかコンソールに表示
 
 
 
@@ -138,10 +138,16 @@ class App:
     #なんかpythonではこのあたり（Appクラスの __init__関数定義が終わったあたり）で定義しないとエラーが出るらしい
     #確かに関数定義をしないで関数呼び出したらエラーになるよなぁ・・・最初は関数定義はどこでも定義できると思って最後の方で定義してエラー出て悩んでたよ
     def __init__(self):
-        if getattr(sys, 'frozen', False):
-            program_directory = os.path.dirname(os.path.abspath(sys.argv[0]))
+        if getattr(sys, 'frozen', False): #Pyinstallerでビルドしたかしていないかを判定しています hasattr(sys, "frozen")でも確認可能なようです(exeになっているときはTrue)
+            program_directory = os.path.dirname(os.path.abspath(sys.executable))#Pyinstallerでビルドした時(実行ファイルかどうか)に実行されます
+                                                                                #sys.executableがビルドしたEXEのパスを返します
+                                                                                #osモジュールでディレクトリのパスに変換。
+            print(" ")
+            print("USE build  .EXE file")
         else:
-            program_directory = os.path.dirname(os.path.abspath(__file__))
+            program_directory = os.path.dirname(os.path.abspath(__file__))       #Pyinstallerでビルドしていない時に実行されます。
+            print(" ")
+            print("USE normal .py file")
         
         print(" ")
         print("program directory")
