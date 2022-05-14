@@ -92,6 +92,7 @@ class update_boss:
             priority = 0
             attack_method = BOSS_ATTACK_FRONT_5WAY
             direction = 0
+            reverse = 1
             acceleration = 0
             timer = 0
             degree = 0
@@ -176,7 +177,7 @@ class update_boss:
                 parts8_hp_bar_offset_x,parts8_hp_bar_offset_y,
                 parts9_hp_bar_offset_x,parts9_hp_bar_offset_y,
                 
-                size,priority,attack_method,direction,acceleration,timer,degree,radian,speed,radius,
+                size,priority,attack_method,direction,reverse,acceleration,timer,degree,radian,speed,radius,
                 flag1,flag2,flag3,flag4,
                 count1,count2,count3,count4,
                 parts1_flag,parts2_flag,parts3_flag,
@@ -269,6 +270,7 @@ class update_boss:
             priority = 0
             attack_method = 0
             direction = 0
+            reverse = 1
             acceleration = 0
             timer = 0
             degree = 0
@@ -352,7 +354,7 @@ class update_boss:
                 parts8_hp_bar_offset_x,parts8_hp_bar_offset_y,
                 parts9_hp_bar_offset_x,parts9_hp_bar_offset_y,
                 
-                size,priority,attack_method,direction,acceleration,timer,degree,radian,speed,radius,
+                size,priority,attack_method,direction,reverse,acceleration,timer,degree,radian,speed,radius,
                 flag1,flag2,flag3,flag4,
                 count1,count2,count3,count4,
                 parts1_flag,parts2_flag,parts3_flag,
@@ -445,6 +447,7 @@ class update_boss:
             priority = 0
             attack_method = BOSS_ATTACK_HOMING_LASER
             direction = 0
+            reverse = -1
             acceleration = 0
             timer = 0
             degree = 0
@@ -528,7 +531,7 @@ class update_boss:
                 parts8_hp_bar_offset_x,parts8_hp_bar_offset_y,
                 parts9_hp_bar_offset_x,parts9_hp_bar_offset_y,
                 
-                size,priority,attack_method,direction,acceleration,timer,degree,radian,speed,radius,
+                size,priority,attack_method,direction,reverse,acceleration,timer,degree,radian,speed,radius,
                 flag1,flag2,flag3,flag4,
                 count1,count2,count3,count4,
                 parts1_flag,parts2_flag,parts3_flag,

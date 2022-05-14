@@ -1,4 +1,7 @@
 # code-of-python
+
+[ [Engligh](README.md) | [日本語](README.ja.md) ]
+
 ![source/gif/pyxel-210222-065611.gif](source/gif/pyxel-210222-065611.gif)
 ![source/gif/pyxel-210222-065611.gif](source/gif/pyxel-210222-065917.gif)
 
@@ -11,44 +14,44 @@
 ![source/gif/pyxel-210403-175232.gif](source/gif/pyxel-210403-175232.gif)
 ![source/gif/pyxel-210403-175305.gif](source/gif/pyxel-210403-175305.gif)
 
-シューティングゲームっぽい？未完成ですけど・・
+Shooting game-like? It's not finished, but...
 
-## インストール方法
+## How to Install
 ## Windows
 
 
 
-最初に[Python3](https://www.python.org/) (バージョン3.6.8以上) をインストールします。
+First install [Python3](https://www.python.org/) (version 3.6.8 or higher).
 
-続いて、コマンドプロンプトから、以下の`pip`コマンドでPyxel(バージョン1.6.9以上) をインストールします。
+Then, install Pyxel (version 1.6.9 or higher) from the command prompt with the following `pip` command.
 
 ```sh
 pip install -U pyxel
 ```
 
-さらに続いてBGM再生用に使用している pygameをコマンドプロンプトから以下の`pip`コマンドでインストールします。
+Further on, install pygame, which is used for background music playback, from the command prompt with the following `pip` command.
 
 ```sh
 pip install pygame 
 ```
-sourceフォルダ以降にあるファイルをフォルダ構成そのままにダウンロードします
+Download the files in the source folder and after without changing the folder structure.
 
-コマンドプロンプトから以下の様に入力して実行します
+From a command prompt, type and execute the following
 
 ```sh
 python code-of-python.py
 ```
-             スペースキーでショットとミサイルの発射
-             ゲームパッドのAボタンでショットの発射
-                          Bボタンでミサイルの発射
-                          Yボタンでサブウェポンの切り替え
-             BACKボタンで自機のスピードの変更(3段階)
-             LEFT-SHOULDERボタンでクロースタイルの変更
-             RIGHT-SHOULDERボタンでフィックスクローの間隔の調整
+             Spacebar to fire shots and missiles
+             Gamepad A button to fire a shot
+                          Press B to launch missiles.
+                          Y button to switch subweapons
+             BACK button to change the speed of your plane (3 levels)
+             LEFT-SHOULDER button to change the close style
+             Adjustment of fixclaw spacing with RIGHT-SHOULDER button
 
-TABキーまたはゲームパッドのSTARTで一時停止できます
+You can pause the game by pressing the TAB key or START on the gamepad.
 
-BGMに[PANICPUMPKIN](http://pansound.com/panicpumpkin/)さんの楽曲を使用させてもらっています
+I am using music by [PANICPUMPKIN](http://pansound.com/panicpumpkin/) for background music.
 
 
 

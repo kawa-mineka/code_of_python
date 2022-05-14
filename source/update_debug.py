@@ -37,7 +37,7 @@ class update_debug:
     def enemy_append(self):
         #敵タイプ1サーコインの発生  直進して斜め後退→勢いよく後退していく10機編隊      KEY 4 +++++++
         if (pyxel.frame_count % 8) == 0:
-            if pyxel.btn(pyxel.KEY_4) or pyxel.btn(pyxel.GAMEPAD1_BUTTON_LEFTSHOULDER) or pyxel.btn(pyxel.GAMEPAD2_BUTTON_LEFTSHOULDER):
+            if pyxel.btn(pyxel.KEY_4) or pyxel.btn(pyxel.GAMEPAD1_BUTTON_LEFTSTICK) or pyxel.btn(pyxel.GAMEPAD2_BUTTON_LEFTSTICK):
                 if len(self.enemy) < 400:
                     
                     self.posy = func.s_rndint(self,0,WINDOW_H - 8)

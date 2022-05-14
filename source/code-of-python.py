@@ -625,7 +625,7 @@ class App:
             if self.fade_complete_flag == FLAG_ON:           #フェードアウト完了のフラグが建ったのなら
                 self.stage_number += 1    #ステージ数を1増やす
                 self.replay_stage_num += 1#リプレイ再生記録用のステージ数も1増やします
-                if self.replay_stage_num > 50:            #リプレイ記録用のファイルは50ステージ分しか今の所用意していないので
+                if self.replay_stage_num > 50:            #リプレイ記録用のファイルは50ステージ分cdしか今の所用意していないので
                     self.replay_status = REPLAY_STOP      #リプレイの記録はストップさせるようにします
                     self.replay_stage_num = 50            #念のため記録ステージ数は最高の50で丸めておきます
                 

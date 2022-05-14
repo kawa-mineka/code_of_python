@@ -571,6 +571,7 @@ class Boss:#ボスキャラのクラス設定
         self.priority      = 0 #画像表示時の優先度
         self.attack_method = 0 #攻撃方法
         self.direction     = 0 #方向
+        self.reverse       = 1 #反転フラグ  1=通常表示 -1=反転表示
         self.acceleration  = 0 #加速度
         self.timer  = 0   #時間
         self.degree = 0   #回転角度 度数法（主にこちらを使用するのです！）
@@ -672,7 +673,7 @@ class Boss:#ボスキャラのクラス設定
             parts8_hp_bar_offset_x,parts8_hp_bar_offset_y,
             parts9_hp_bar_offset_x,parts9_hp_bar_offset_y,
             
-            size,priority,attack_method,direction,acceleration,timer,degree,radian,speed,radius,
+            size,priority,attack_method,direction,reverse,acceleration,timer,degree,radian,speed,radius,
             flag1,flag2,flag3,flag4,
             count1,count2,count3,count4,
             parts1_flag,parts2_flag,parts3_flag,
@@ -906,6 +907,7 @@ class Boss:#ボスキャラのクラス設定
         self.priority = priority
         self.attack_method = attack_method
         self.direction = direction
+        self.reverse = reverse
         self.acceleration = acceleration
         self.timer = timer
         self.degree = degree

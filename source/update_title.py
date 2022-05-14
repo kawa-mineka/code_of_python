@@ -18,7 +18,7 @@ class update_title:
 
     #タイトル表示に必要な変数を設定＆初期化する##############
     def title_init(self):
-        pyxel.load("assets/graphic/min-sht2.pyxres") #タイトル＆ステージ1＆2のリソースファイルを読み込む
+        pyxel.load("./assets/graphic/min-sht2.pyxres") #タイトル＆ステージ1＆2のリソースファイルを読み込む
         #タイトル関連の変数を初期化
         
         self.display_title_time = 204               #タイトルを表示する時間
@@ -629,7 +629,7 @@ class update_title:
                 
                 func.write_ship_equip_medal_data(self)                 #機体メダルスロット装備リストに現在プレイ中のシップリストのメダル情報を書き込む関数の呼び出し
                 update_system.save_data(self)                            #システムデータをセーブします
-                pyxel.load("assets/graphic/min-sht2.pyxres") #タイトル＆ステージ1＆2のリソースファイルを読み込む
+                pyxel.load("./assets/graphic/min-sht2.pyxres") #タイトル＆ステージ1＆2のリソースファイルを読み込む
                 
                 self.cursor_pre_decision_item_y = UNSELECTED
                 pyxel.play(0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
@@ -854,7 +854,7 @@ class update_title:
                 pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                 self.score_board = copy.deepcopy(self.default_score_board)      #現在のスコアボードをデフォルトの物からコピーして初期化する
                 update_system.save_data(self)                                         #システムデータをセーブします
-                pyxel.load("assets/graphic/min-sht2.pyxres")                    #タイトル＆ステージ1＆2のリソースファイルを読みます
+                pyxel.load("./assets/graphic/min-sht2.pyxres")                    #タイトル＆ステージ1＆2のリソースファイルを読みます
                 
             elif self.cursor_pre_pre_pre_decision_item_y == MENU_CONFIG and self.cursor_pre_pre_decision_item_y == MENU_CONFIG_INITIALIZE and self.cursor_pre_decision_item_y == MENU_CONFIG_INITIALIZE_NAME and self.cursor_decision_item_y == 0:
                 #CONFIG→INITIALIZE→NAME→NO
@@ -902,7 +902,7 @@ class update_title:
                 pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                 self.my_name = copy.deepcopy(self.default_my_name)              #現在のマイネームリストをデフォルトの物からディープコピーして初期化する
                 update_system.save_data(self)                                         #システムデータをセーブします
-                pyxel.load("assets/graphic/min-sht2.pyxres")                    #タイトル＆ステージ1＆2のリソースファイルを読みます
+                pyxel.load("./assets/graphic/min-sht2.pyxres")                    #タイトル＆ステージ1＆2のリソースファイルを読みます
                 
             elif self.cursor_pre_pre_pre_decision_item_y == MENU_CONFIG and self.cursor_pre_pre_decision_item_y == MENU_CONFIG_INITIALIZE and self.cursor_pre_decision_item_y == MENU_CONFIG_INITIALIZE_ALL and self.cursor_decision_item_y == 0:
                 #CONFIG→INITIALIZE→ALL→NO
@@ -990,4 +990,4 @@ class update_title:
                 self.get_score_star_num  = 0              #スコアスター累計取得数を初期化
                 
                 update_system.save_data(self)                                   #システムデータをセーブします
-                pyxel.load("assets/graphic/min-sht2.pyxres")                    #タイトル＆ステージ1＆2のリソースファイルを読みます
+                pyxel.load("./assets/graphic/min-sht2.pyxres")                    #タイトル＆ステージ1＆2のリソースファイルを読みます

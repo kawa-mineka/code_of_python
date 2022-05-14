@@ -289,34 +289,36 @@ class graph:
                     pyxel.blt(self.boss[i].posx - offset_x + 8, self.boss[i].posy - self.camera_offset_y + 24,    IMG0,   40,176,    2*8,8,    pyxel.COLOR_PEACH)
                 
             elif self.boss[i].boss_type == BOSS_MAD_CLUBUNGER:     #3面 マッドクラブンガー       (火山地帯ボス)
+                #x軸方向の中心地を求める
+                # x_center = 
                 #上部ブースターユニット表示
-                pyxel.blt(self.boss[i].posx - 5, self.boss[i].posy - self.camera_offset_y + 3       + self.boss[i].tilt_now,
+                pyxel.blt(self.boss[i].posx - 5 * self.boss[i].reverse, self.boss[i].posy - self.camera_offset_y + 3       + self.boss[i].tilt_now,
                             IMG0,
                             0,160,
-                            self.boss[i].width,2*8,
+                            self.boss[i].width * self.boss[i].reverse,2*8,
                             pyxel.COLOR_PEACH)
                 
                 #マッドクラブンガー本体表示
                 pyxel.blt(self.boss[i].posx, self.boss[i].posy - self.camera_offset_y,
                             IMG0,
                             0,128,
-                            self.boss[i].width,self.boss[i].height-1*8,
+                            self.boss[i].width * self.boss[i].reverse,self.boss[i].height-1*8,
                             pyxel.COLOR_PEACH)
                 
                 #下部ブースターユニット表示
-                pyxel.blt(self.boss[i].posx - 5, self.boss[i].posy - self.camera_offset_y + 3*8 -1   - self.boss[i].tilt_now,
+                pyxel.blt(self.boss[i].posx - 5 * self.boss[i].reverse, self.boss[i].posy - self.camera_offset_y + 3*8 -1   - self.boss[i].tilt_now,
                             IMG0,
                             0,160,
-                            self.boss[i].width,2*8,
+                            self.boss[i].width * self.boss[i].reverse,2*8,
                             pyxel.COLOR_PEACH)
                 
                 #下部ブースター回転アニメーション表示
                 pyxel.blt(self.boss[i].posx, self.boss[i].posy - self.camera_offset_y + 3*8  - self.boss[i].tilt_now,
                             IMG0,
                             64 + (pyxel.frame_count // int(4 + (self.boss[i].anime_speed_now))  % 8) * 8,   88,
-                            8,16,
+                            8 * self.boss[i].reverse,16,
                             pyxel.COLOR_PEACH)
-                
+            
             
             #デバッグ用の当たり判定矩形の表示
             graph.draw_boss_collision_rectangle(self,i)    #ボス本体の当たり判定矩形を表示する関数の呼び出し
@@ -705,7 +707,7 @@ class graph:
             
             cx = self.obtain_item[i].radius *  math.cos(math.radians(self.obtain_item[i].degree + 240))
             cy = self.obtain_item[i].radius * -math.sin(math.radians(self.obtain_item[i].degree + 240))
-            
+        
         #self.point_in_triangle(self.my_x,self.my_y,ax,ay,bx,by,cx,cy) 外積を使った三角形の内外判定は上手くいかなかったのでボツに。。。。
         if self.obtain_item[i].status == 0 or self.obtain_item[i].status == 1:#「画面スクロールに合わせて左に流れる状態」「アイテム取得時の高速回転状態」の時
             d = abs(math.sqrt((self.obtain_item[i].posx - self.my_x) * (self.obtain_item[i].posx - self.my_x) + (self.obtain_item[i].posy - self.my_y) * (self.obtain_item[i].posy - self.my_y)))#dに自機からアイテムまでの距離が入る
