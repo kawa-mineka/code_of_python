@@ -83,7 +83,7 @@ import os
 import sys
 
 abs_path = os.path.abspath(__file__) #絶対パスを取得
-print ("execute file")
+print ("現在の実行ファイル")
 print(abs_path) #このプログラム自体がどのフォルダーで起動してるのかコンソールに表示
 
 
@@ -139,21 +139,41 @@ class App:
     #確かに関数定義をしないで関数呼び出したらエラーになるよなぁ・・・最初は関数定義はどこでも定義できると思って最後の方で定義してエラー出て悩んでたよ
     def __init__(self):
         if getattr(sys, 'frozen', False): #Pyinstallerでビルドしたかしていないかを判定しています hasattr(sys, "frozen")でも確認可能なようです(exeになっているときはTrue)
-            program_directory = os.path.dirname(os.path.abspath(sys.executable))#Pyinstallerでビルドした時(実行ファイルかどうか)に実行されます
+            self.program_directory = os.path.dirname(os.path.abspath(sys.executable))#Pyinstallerでビルドした時(実行ファイルかどうか)に実行されます
                                                                                 #sys.executableがビルドしたEXEのパスを返します
                                                                                 #osモジュールでディレクトリのパスに変換。
             print(" ")
             print("USE build  .EXE file")
+            self.exe_mode = FLAG_ON  #pyinstallerでexe化したファイルを実行しているフラグを立てる
         else:
-            program_directory = os.path.dirname(os.path.abspath(__file__))       #Pyinstallerでビルドしていない時に実行されます。
+            self.program_directory = os.path.dirname(os.path.abspath(__file__))       #Pyinstallerでビルドしていない時に実行されます。
             print(" ")
             print("USE normal .py file")
+            self.exe_mode = FLAG_OFF  #pyinstallerでexe化したファイルを実行しているフラグは立てない pyファイルで実行中
         
         print(" ")
-        print("program directory")
-        print(program_directory)
+        print("現在実行中のフォルダー")
+        print(self.program_directory)
         print(" ")
         
+        self.user_profile = os.path.join(os.path.expanduser("~"))
+        print(" ")
+        print("ユーザープロファイル")
+        print(self.user_profile)
+        print(" ")
+        
+        print("AppData/Local/code_of_python exist?")
+        print(self.user_profile + "/AppData/Local/code_of_python")
+        print(os.path.exists(self.user_profile + "/AppData/Local/code_of_python"))
+        print(" ")
+        
+        if os.path.exists(self.user_profile + "/AppData/Local/code_of_python") == False: #もしAppData/Local/code_of_pythonフォルダーが存在しないのなら
+            os.makedirs(self.user_profile + "/AppData/Local/code_of_python/system")      #systemフォルダーを作製する
+            os.makedirs(self.user_profile + "/AppData/Local/code_of_python/replay")      #replayフォルダーを作製する
+            print("AppData/Local/code_of_pythonフォルダーを作製しました")
+            print(" ")
+            
+        update_system.check_exist_sysytem_file(self) #ユーザープロファイルのcode-of-pythonフォルダにシステムファイルがあるかどうか調べなかったらデフォルトのシステムデータをコピーする
         
         pygame.mixer.init()  #pygameミキサー関連の初期化 pyxel.initよりも先にpygameをinitしないと上手く動かないみたい・・・
         pyxel.init(WINDOW_W,WINDOW_H,title="CODE OF PYTHON",fps = 60,quit_key=pyxel.KEY_NONE) #ゲームウィンドウのタイトルバーの表示とfpsの設定(60fpsにした),キーボード入力による強制終了は無しとする pyxel.init(caption=)がpyxel.init(title=)に変更されたっぽい？？？

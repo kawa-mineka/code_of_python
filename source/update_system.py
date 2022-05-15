@@ -7,6 +7,7 @@
 #                         #
 # 2022 05/07からファイル分割してモジュールとして運用開始      #
 ###########################################################
+import shutil #高水準のファイル操作を行いたいのでインポート
 
 from const import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
 from func  import * #汎用性のある関数群のモジュールの読み込み
@@ -14,6 +15,23 @@ from func  import * #汎用性のある関数群のモジュールの読み込�
 class update_system:
     def __init__(self):
         None
+
+    #ユーザープロファイルのcode-of-pythonフォルダにシステムファイルがあるかどうか調べなかったらデフォルトのシステムデータをコピーする
+    def check_exist_sysytem_file(self):
+        if os.path.isfile(self.user_profile + "/AppData/Local/code_of_python/system/system-data.pyxres") == False: #システムファイルが存在しないのなら
+            if self.exe_mode == FLAG_OFF: #pyファイルで実行時
+                source_folder = self.program_directory + "/assets/system/master-system-data.pyxres"
+            else:                         #exeファイルで実行時
+                source_folder = os.path.dirname(os.path.abspath(__file__)) + "/assets/system/master-system-data.pyxres"
+                
+            print("ユーザープロファイルにシステムファイルが存在しないので初期システムデータをコピーします")
+            print("コピー元")
+            print(source_folder)
+            print("コピー先")
+            print(self.user_profile + "/AppData/Local/code_of_python/system/system-data.pyxres")
+            
+            shutil.copyfile(source_folder,self.user_profile + "/AppData/Local/code_of_python/system/system-data.pyxres")
+            print("システムファイルをコピーしました")
 
     #システムデータからの数値読み込み
     def read_data_num(self,x,y,tm,digit):      #x,yは1の位の座標です,tmはtilemapの数値,digitは桁数です
@@ -46,7 +64,8 @@ class update_system:
 
     #システムデータのロード
     def load_data(self):
-        pyxel.load(os.path.abspath("./assets/system/system-data.pyxres")) #システムデータを読み込む
+        pyxel.load(self.user_profile + "/AppData/Local/code_of_python/system/system-data.pyxres") #システムデータを読み込む
+        # pyxel.load(os.path.abspath("./assets/system/system-data.pyxres")) #システムデータを読み込む
         # pyxel.load("./assets/system/system-data.pyxres") #システムデータを読み込む
         
         self.game_difficulty = func.get_chrcode_tilemap(self,0,0,120) - 16 #数字の[0]はアスキーコード16番なので16引いて数値としての0にしてやります
@@ -193,7 +212,8 @@ class update_system:
 
     #システムデータのセーブ
     def save_data(self):
-        pyxel.load(os.path.abspath("./assets/system/system-data.pyxres")) #システムデータにアクセスするためにローディングだけしてやります(グラフイック関連のアセットをローディングしている時がほとんどなので)
+        pyxel.load(self.user_profile + "/AppData/Local/code_of_python/system/system-data.pyxres") #システムデータにアクセスするためにローディングだけしてやります(グラフイック関連のアセットをローディングしている時がほとんどなので)
+        # pyxel.load(os.path.abspath("./assets/system/system-data.pyxres")) #システムデータにアクセスするためにローディングだけしてやります(グラフイック関連のアセットをローディングしている時がほとんどなので)
         # pyxel.load("./assets/system/system-data.pyxres") #システムデータにアクセスするためにローディングだけしてやります(グラフイック関連のアセットをローディングしている時がほとんどなので)
         #各種設定値書き込み 数字の[0]はアスキーコード16番なので16足してアスキーコードとしての0にしてやります
         func.set_chrcode_tilemap(self,0, 0,120,self.game_difficulty + 16)                 #難易度書き込み
@@ -319,6 +339,7 @@ class update_system:
         test_num = test_num + 1000                             #この式と逆の方法で計算してやれば符号の付いた実数値を取り出せる
         update_system.write_data_num(self,10,162,0,10,int(test_num))    #!############################ test write マイナス符号付き実数値の数値が書き込めるかのテスト
         
-        pyxel.save(os.path.abspath("./assets/system/system-data.pyxres")) #システムデータを書き込み
+        pyxel.save(self.user_profile + "/AppData/Local/code_of_python/system/system-data.pyxres") #システムデータを書き込み
+        # pyxel.save(os.path.abspath("./assets/system/system-data.pyxres")) #システムデータを書き込み
         # pyxel.save("./assets/system/system-data.pyxres") #システムデータを書き込み
 
