@@ -92,7 +92,7 @@ class update_boss:
             priority = 0
             attack_method = BOSS_ATTACK_FRONT_5WAY
             direction = 0
-            reverse = 1
+            reverse = BOSS_GRP_NORMAL
             acceleration = 0
             timer = 0
             degree = 0
@@ -270,7 +270,7 @@ class update_boss:
             priority = 0
             attack_method = 0
             direction = 0
-            reverse = 1
+            reverse = BOSS_GRP_NORMAL
             acceleration = 0
             timer = 0
             degree = 0
@@ -447,7 +447,8 @@ class update_boss:
             priority = 0
             attack_method = BOSS_ATTACK_HOMING_LASER
             direction = 0
-            reverse = -1
+            # reverse = BOSS_GRP_REVERSE
+            reverse = BOSS_GRP_NORMAL
             acceleration = 0
             timer = 0
             degree = 0

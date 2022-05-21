@@ -1394,6 +1394,10 @@ BOSS_STATUS_BLAST_SPLIT_START  = 82  #ボス爆破分裂開始
 BOSS_STATUS_BLAST_SPLIT        = 83  #ボス爆破分裂中
 BOSS_STATUS_DISAPPEARANCE      = 89  #ボス消滅・・・・・
 
+#bossクラスのreverseに入る定数定義(グラフイックの左右反転表示で使用します)
+BOSS_GRP_NORMAL                =  1  #通常表示
+BOSS_GRP_REVERSE               = -1  #反転表示
+
 #bossクラスのattack_methodに入る定数定義 (ボスの攻撃方法)
 BOSS_ATTACK_NO_FIRE               = 0 #なにも攻撃しないよ
 BOSS_ATTACK_FRONT_5WAY            = 1 #前方に5way弾を撃ってきます

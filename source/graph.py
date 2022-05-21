@@ -289,10 +289,18 @@ class graph:
                     pyxel.blt(self.boss[i].posx - offset_x + 8, self.boss[i].posy - self.camera_offset_y + 24,    IMG0,   40,176,    2*8,8,    pyxel.COLOR_PEACH)
                 
             elif self.boss[i].boss_type == BOSS_MAD_CLUBUNGER:     #3面 マッドクラブンガー       (火山地帯ボス)
-                #x軸方向の中心地を求める
-                # x_center = 
+                #ボスグラフイックの横方向の中心値を求める
+                x_center =  self.boss[i].posx + (self.boss[i].width // 2)
+                
+                #左右反転時は表示する左右の方向的に1キャラ分のズレが出るので反転時は-1キャラ分のオフセット値を設定する
+                #pyxel.ble関数は基本的に左から右へと描画するので反転時に右から左に描画してほしいんだけどそれは無理なので-1キャラ分(8ドット)のズレを含んで反転時でも左から右へ描画出来るよう補正値を入れてやるんドエス！
+                if self.boss[i].reverse == BOSS_GRP_REVERSE: #左右反転時は表示する左右の方向的に1キャラ分のズレが出るので反転時は-1キャラ分のオフセット値を設定する
+                    reverse_offset = - 8
+                else:
+                    reverse_offset = 0
+                    
                 #上部ブースターユニット表示
-                pyxel.blt(self.boss[i].posx - 5 * self.boss[i].reverse, self.boss[i].posy - self.camera_offset_y + 3       + self.boss[i].tilt_now,
+                pyxel.blt(self.boss[i].posx - 8 * 1 * self.boss[i].reverse, self.boss[i].posy - self.camera_offset_y + 3       + self.boss[i].tilt_now,
                             IMG0,
                             0,160,
                             self.boss[i].width * self.boss[i].reverse,2*8,
@@ -306,14 +314,14 @@ class graph:
                             pyxel.COLOR_PEACH)
                 
                 #下部ブースターユニット表示
-                pyxel.blt(self.boss[i].posx - 5 * self.boss[i].reverse, self.boss[i].posy - self.camera_offset_y + 3*8 -1   - self.boss[i].tilt_now,
+                pyxel.blt(self.boss[i].posx - 8 * 1 * self.boss[i].reverse, self.boss[i].posy - self.camera_offset_y + 3*8 -1   - self.boss[i].tilt_now,
                             IMG0,
                             0,160,
                             self.boss[i].width * self.boss[i].reverse,2*8,
                             pyxel.COLOR_PEACH)
                 
                 #下部ブースター回転アニメーション表示
-                pyxel.blt(self.boss[i].posx, self.boss[i].posy - self.camera_offset_y + 3*8  - self.boss[i].tilt_now,
+                pyxel.blt(x_center - (self.boss[i].reverse  * 3 * 8) + reverse_offset, self.boss[i].posy - self.camera_offset_y + 3 * 8  - self.boss[i].tilt_now,
                             IMG0,
                             64 + (pyxel.frame_count // int(4 + (self.boss[i].anime_speed_now))  % 8) * 8,   88,
                             8 * self.boss[i].reverse,16,
