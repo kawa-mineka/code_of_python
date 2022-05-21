@@ -1,0 +1,104 @@
+I wish we could make games too. ～～～～～～! I can't but 2020 06/28
+I saw Nekobi's Revolgear!!! and impulsively started making a game! The main character is so cute!!! 2020 06/28
+I just realized... maybe we live in an era where you don't need a programmer to make games? Now? 2020 06/28
+Bourbon's "Fruit Reward" jelly is so delicious that my body can't go back to other jelly anymore 2020 07/01
+Creating a Graphic of my aircraft and conventional missiles 2020 07/09
+First successful display of a character using the pyxel.blt command! My ship is displayed! Taking the first steps in programming 2020 07/12
+python Switching from MS Gothic to Myrica because the IDLE editor font is hard to read 2020 07/12
+I buy an introductory book, but don't read it. 2020 07/13
+I succeeded in moving my machine (but it only moves forward automatically) 2020 07/17
+I can move my plane up, down, left, and right with the keyboard (but if it goes out of the screen, it doesn't come back) 2020 07/18
+It takes me an hour to realize that I typed pyxel,text(5, 4, s, 1) when I should have written pyxel.text(5, 4, s, 1) 2020 07/19
+Able to move my ship only within the screen, implemented a score display, and for some reason added a time bonus of 1 point for every 1 second (mysterious spec) 2020 07/19
+Adjust the speed of movement to 3 different levels! Awesome 2020 07/19
+Successfully launched missiles! But the movement of my plane is faster than the missile! 2020 07/19
+Implemented description of background stars streaming out into space 2020 07/19
+The program list is 183 lines long. I have a feeling it will be a big one. 2020 07/19
+Switch code editor to Visual Studio Code 2020 07/21
+Implement background scrolling -> rattling scrolling and buggy appearance 2020 07/21
+Improvements made to make the scrolling smoother 2020 07/21
+pyxel.bltm(-(pyxel.frame_count // 2),0,0,0,0,160,120,0) succeeded in making the background scroll with only one line 2020 07/21
+Implemented enemies that only move straight ahead (Graphic is a green lancer) 2020 07/25
+Implement circoins, but only moving 2020 07/26
+Implemented a 3-way shot, where the circoin's movement is to turn a bit before taking off 2020 07/26
+Started implementing a sine curve enemy without understanding trigonometric functions 2020 07/26
+Finally understand trigonometric functions and (maybe) succeed in implementing a sine-curve enemy psichero and celebrate 2020 07/26
+Finally implement self shots, enemy hit detection and explosions 2020 07/27
+Implemented 8-directional bullets for enemies → for some reason, they seem to move very slowly 2020 08/02
+Aimed bullets are implemented → Enemy bullets are still extremely slow 2020 08/02
+When enemy bullets disappeared from the screen, the coordinate data of the bullets should be deleted from the list and looped back to the processing of the next bullet, but it suddenly broke and went to the processing of the next movement of the ship and the background scrolling. 08/02
+I fully understood the difference between continue and break in a for loop! (maybe) 2020 08/02
+Suffering from an error when deling a list element in a for statement loop because the number of elements in the list is off 2020 08/08
+Knowing that accessing from the back of the list in a for loop and then deleting from the back of the list with a del instruction will not cause an index error because the index of the element in the direction the for loop is going won't be out of sync! 2020 08/08
+for i in reversed(range(len(v))): del v[i] Know the reversed instruction! Awesome! 2020 08/08
+Implemented a hit detection between ship and enemy, and between ship and enemy bullets, but only displays game over if the shield becomes 0 2020 08/08
+Implemented background hit detection for ship and bullets, but still no game over 2020 08/09
+Implementation of shot sound and explosion sound.
+Implementation of fixed turret hoda 2020 08/10
+Implementing the Hopper-chan that flips and bounces...but it has a bug where it floats upward and disappears instead of bouncing. 2020 08/11
+Successfully taught Hopper-chan to move based on Mario's movements.
+Hopper-chan almost throws up a spoon at the current situation of falling into a wall → Checks the ground in various directions to make it look like that 2020 08/13
+Mysterious rotating flying object M54 implemented 2020 08/13
+Completely understands the outer product and inner product of vectors (probably), and the Twin Arrow tracking fighter is born (it took a lot of effort) 2020 08/15
+Scramble hatch implementation is completed... but not by Baku, which keeps ejecting Rolleboards endlessly... 2020 08/16
+Successfully implemented the scramble hatch after realizing that it is difficult to tamper with the branching of if statements if they are managed by state transitions 2020 08/17
+Completed implementation of enemy ray blaster that emits laser beams 2020 08/17
+Scramble hatch is still behaving strangely, but we have fixed the bug 2020 08/21
+For some reason, the multi-missile missiles in the upper right direction do not hit the fixed-ceiling turret Houda. 2020 08/23
+Recording video and analyzing the movement of missiles with filmora → 1 dot of the missile was stuck in the background of the obstacle → Adjusted the hit judgment as a desperate measure 2020 08/23
+Implementation of laser on own ship 2020 08/23
+Implemented a shower laser on my plane (actually, I just adopted it because it became interesting when I added strange values to the parameters) 2020 08/24
+Delete program file by mistake ・・・・orz 2020 08/29
+Only the program file from a week ago remains... I decide to work on the doropbox folder from now on... 2020 08/29
+Wave cutter is implemented and all main weapons are finally completed 2020 08/30
+The world changes when I learn about zenkaku, a Visual Studio Code extension that visualizes full-width spaces 2020 08/30
+ZENKAKU SPACE, SISUBESHI!!!! Jihi hanai! and become Ninja Slayer 2020 08/30
+Creating a Graphic of the Claw 2020 08/31
+Struggled to implement rolling claw (claw) 2020 09/06
+Claw (hard work) with process to make rolling claw rotate at equal intervals when added 2020 09/13
+I added self.claw[i].degree = self.claw[i].degree % 360#Angle is the remainder divided by 360 (0~359) and it worked... I'm impressed... It took 15 days... 2020 09/13
+Struggled to implement trace claw (claw) 2020 09/14
+Somehow I got the movement of the twinbee option... 2020 09/14
+I recorded the coordinate history only when my machine moved and it works, but it seems everyone is making the same mistake... 2020 09/14
+Finally finished implementing trace claw (clawed) 2020 09/17
+Completed implementation of quick claw 2020 09/19
+Adjustment of quick claw spacing 2020 09/20
+Reverse claw implementation complete 2020 09/26
+Suffering from a bug that causes freezing when changing claw styles ・・・・ 2020 09/26 2020 09/26
+Adjusted the movement speed from 1 to 0.5 when changing styles, so that it can be placed within the coordinate determination, and the freezing bug has been removed... 2020 09/27
+Code list exceeds 2000 lines 2020 09/27
+L's shield is implemented 2020 09/27
+Started to implement the search laser subweapon 2020 10/11
+Add a mid-split to the graphique of the search laser to make it look curved 2020 10/12
+Started implementing homing shot 2020 10/12
+Changed guidance performance of homing shot to aim at enemies in multiple directions 2020 10/17
+Failed Azur Lane clear file get mission because the android os on my phone is too old and the Cocoichi app doesn't work 2020 10/17
+Adjusted game over dialog display and shadow out scene after being hit by bullets 2020 10/22
+Build particle class and start testing particle production 2020 10/23
+Added particle emission when the ship's shot hits an obstacle → notorious that the color is red and it looks like bloodshed 2020 10/25
+Particles are now emitted when the explosion pattern is developed, and the color of the particles when hitting obstacles is changed to a safe one. 2020 10/26
+Implemented a menu window -> a bug occurs where the window pops up infinitely, like in the early days of Blacula. 2020 10/26
+Added left-align, center-align, and right-align options for menu window text display 2020 10/31
+Pause and restart menus are implemented 2020 11/01
+Adopt a policy with the catchphrase "Listen to the voice of Ada, the mother of beginnings" 2020 11/01
+Forget about creating a sub-weapon bumber system 2020 11/01
+Start thinking about game titles 2020 11/01
+When a python, a cobra, a viper, and an anaconda cross paths, the story begins ・・・・ 2020 11/01
+One snake is enough, one BIGPYTHON is enough! 2020 11/01
+Asklepios? Kerkeion? 2020 11/01
+KONAMI snakes are nowhere to be found... 2020 11/01
+VIPER and ・・・・SNAKE... 2020 11/01
+But ... they live on in our hearts 2020 11/01
+I have a sweet idea to implement one stage from the beginning to the destruction of the boss by the end of this month... 2020 11/01
+I don't know anything about background music... 2020 11/02
+I upgraded to Pyxel 1.4.3 and now it doesn't crash at all because of sound ～～～～* 2020 11/02
+Pyxel 1.4.3 version up to 1.4.3 and now it doesn't crash at all. 2020 11/02
+Power-up items implemented 2020 11/07
+How can I get a power up item when all the formation is defeated? It is easy to give out items when certain enemies are defeated... 2020 11/07
+Enemies with power-up items and those without power-up items were the same color, but only those with power-up items are yellow 2020 11/08
+Adjusted the number of power-up item bounces 2020 11/09
+Struggled with sound effects when getting power-up items → Took about 2 days to get something satisfactory (I'm not good with sound...) 2020 11/09
+I made it so that a power-up item appears when the enemy formation (circoins) is annihilated... 2020 11/12
+Changed the power-up item to oscillate up and down gradually & decrease the momentum of bouncing. 2020 11/13
+If we continue like this, the next 2 weeks will come after 2 weeks...
+
