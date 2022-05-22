@@ -840,7 +840,7 @@ class App:
             graph.draw_enemy_shot(self,PRIORITY_FRONT)       #敵の弾を表示する関数を呼び出す (前面)---------------------------------------
             graph.draw_enemy_shot(self,PRIORITY_MORE_FRONT)  #敵の弾を表示する関数を呼び出す (敵弾の中でもさらに前面)-----------------------
             
-            graph.draw_particle(self)     #パーティクルを表示する関数の呼び出し
+            graph.draw_particle(self,PRIORITY_FRONT)         #パーティクルを表示する関数の呼び出し(前面)
             
             graph.draw_my_shot(self)      #自機弾の表示
             graph.draw_missile(self)      #ミサイルの表示
@@ -890,6 +890,7 @@ class App:
         if self.game_playing_flag == FLAG_ON:              #「ゲームプレイ中」の時は爆発パターン表示
             graph.draw_explosion(self,PRIORITY_FRONT)      #爆発パターン(前面)の表示
             graph.draw_explosion(self,PRIORITY_MORE_FRONT) #爆発パターン(さらに前面)の表示
+            graph.draw_particle(self,PRIORITY_MORE_FRONT)  #パーティクルを表示する関数の呼び出し(パーティクルの中でも更に前面)
         
         #フェードアウトスクリーンの表示###############################################
         if    self.game_status == SCENE_GAME_OVER_FADE_OUT\

@@ -677,11 +677,11 @@ class update_boss:
                     
                     #ボスの爆発破片3を育成 ホワイト系のスパーク
                     if self.boss[i].count2 % 3 == 0:
-                        update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS3,self.boss[i].posx + 30 + func.s_rndint(self,0,30) -15 ,self.boss[i].posy + 10,(random()- 0.5) /2,random() * 2,12,0,0)
+                        update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS3,PRIORITY_FRONT,self.boss[i].posx + 30 + func.s_rndint(self,0,30) -15 ,self.boss[i].posy + 10,(random()- 0.5) /2,random() * 2,12,0,0)
                     
                     #ボスの爆発破片4を育成 橙色系の落下する火花
                     if self.boss[i].count2 % 1 == 0:
-                        update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS4,self.boss[i].posx + 30 + func.s_rndint(self,0,40) -20 ,self.boss[i].posy + 10,(random()- 0.5) /2,random() * 2,8,0,0)
+                        update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS4,PRIORITY_FRONT,self.boss[i].posx + 30 + func.s_rndint(self,0,40) -20 ,self.boss[i].posy + 10,(random()- 0.5) /2,random() * 2,8,0,0)
                     
                     self.boss[i].posx += self.boss[i].vx / 1.5
                     self.boss[i].posy += self.boss[i].vy / 1.5
@@ -828,11 +828,11 @@ class update_boss:
                     
                     #ボスの爆発破片3を育成 ホワイト系のスパーク
                     if self.boss[i].count2 % 3 == 0:
-                        update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS3,self.boss[i].posx + 30 + func.s_rndint(self,0,30) -15 ,self.boss[i].posy + 10,(random()- 0.5) /2,random() * 2,12,0,0)
+                        update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS3,PRIORITY_FRONT,self.boss[i].posx + 30 + func.s_rndint(self,0,30) -15 ,self.boss[i].posy + 10,(random()- 0.5) /2,random() * 2,12,0,0)
                     
                     #ボスの爆発破片4を育成 橙色系の落下する火花
                     if self.boss[i].count2 % 1 == 0:
-                        update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS4,self.boss[i].posx + 30 + func.s_rndint(self,0,40) -20 ,self.boss[i].posy + 10,(random()- 0.5) /2,random() * 2,8,0,0)
+                        update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS4,PRIORITY_FRONT,self.boss[i].posx + 30 + func.s_rndint(self,0,40) -20 ,self.boss[i].posy + 10,(random()- 0.5) /2,random() * 2,8,0,0)
                     
                     self.boss[i].posx += self.boss[i].vx / 1.5
                     self.boss[i].posy += self.boss[i].vy / 1.5
@@ -1078,11 +1078,11 @@ class update_boss:
                     
                     #ボスの爆発破片3を育成 ホワイト系のスパーク
                     if self.boss[i].count2 % 3 == 0:
-                        update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS3,self.boss[i].posx + 30 + func.s_rndint(self,0,30) -15 ,self.boss[i].posy + 10,(random()- 0.5) /2,random() * 2,12,0,0)
+                        update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS3,PRIORITY_FRONT,self.boss[i].posx + 30 + func.s_rndint(self,0,30) -15 ,self.boss[i].posy + 10,(random()- 0.5) /2,random() * 2,12,0,0)
                     
                     #ボスの爆発破片4を育成 橙色系の落下する火花
                     if self.boss[i].count2 % 1 == 0:
-                        update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS4,self.boss[i].posx + 30 + func.s_rndint(self,0,40) -20 ,self.boss[i].posy + 10,(random()- 0.5) /2,random() * 2,8,0,0)
+                        update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS4,PRIORITY_FRONT,self.boss[i].posx + 30 + func.s_rndint(self,0,40) -20 ,self.boss[i].posy + 10,(random()- 0.5) /2,random() * 2,8,0,0)
                     
                     self.boss[i].posx += self.boss[i].vx / 1.5
                     self.boss[i].posy += self.boss[i].vy / 1.5

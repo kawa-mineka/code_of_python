@@ -1070,6 +1070,7 @@ class Explosion:#爆発のクラス設定
 class Particle:#パーティクル（粒子）クラスの設定
     def __init__(self):
         self.particle_type = 0 #パーティクルの種類
+        self.priority = 0      #描画優先度
         self.posx = 0 #x座標
         self.posy = 0 #y座標
         self.size = 0 #大きさ
@@ -1078,8 +1079,9 @@ class Particle:#パーティクル（粒子）クラスの設定
         self.life = 0 #パーティクルの生存期間
         self.wait = 0 #ウェイト(どれだけその場所に停止し続けるのかのウェイトカウンター)
         self.color = 0 #パーティクルの色
-    def update(self,particle_type,x,y,size,vx,vy,life,wait,color):
+    def update(self,particle_type,priority,x,y,size,vx,vy,life,wait,color):
         self.particle_type = particle_type
+        self.priority = priority
         self.posx = x
         self.posy = y
         self.size = size

@@ -686,9 +686,9 @@ class func:
         if len(self.particle) < 1000: #パーティクル総数が1000以下なら発生させる
             for _number in range(10):
                 new_particle = Particle()
-                new_particle.update(PARTICLE_DOT,hit_x+4,hit_y+4,func.s_rndint(self,0,1),random() * 2 - 0.5 + hit_vx / 2,random() * 2 - 1 +hit_vy / 2,func.s_rndint(self,5,20),0,func.s_rndint(self,1,14))
+                new_particle.update(PARTICLE_DOT,PRIORITY_FRONT,hit_x+4,hit_y+4,func.s_rndint(self,0,1),random() * 2 - 0.5 + hit_vx / 2,random() * 2 - 1 +hit_vy / 2,func.s_rndint(self,5,20),0,func.s_rndint(self,1,14))
                 self.particle.append(new_particle)
-                #update_obj.append_particle(self,PARTICLE_DOT,hit_x,hit_y,hit_vx / 2,hit_vy / 2, 0,0,0)
+                #update_obj.append_particle(self,PARTICLE_DOT,PRIORITY_FRONT,hit_x,hit_y,hit_vx / 2,hit_vy / 2, 0,0,0)
         
         #オマケで背景の星も追加するぞ～～☆彡
         if len(self.stars) < 600:

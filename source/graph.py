@@ -478,39 +478,40 @@ class graph:
                 elif  self.explosions[i].explosion_type == EXPLOSION_MY_SHIP:#自機爆発の爆発パターン表示
                     pyxel.blt(self.explosions[i].posx,self.explosions[i].posy - self.camera_offset_y,IMG2,240 -(self.explosions[i].explosion_count // 8 * 16),240, SIZE_16,SIZE_8,pyxel.COLOR_BLACK)
                 elif  self.explosions[i].explosion_type == EXPLOSION_BOSS_PARTS_SMOKE: #ボスのパーツが爆発した後に跳んでいく煙のパターン表示
-                    pyxel.blt(self.explosions[i].posx,self.explosions[i].posy - self.camera_offset_y,IMG2,88 -(self.explosions[i].explosion_count // 4 * 8)       ,168,  SIZE_8,SIZE_8,pyxel.COLOR_BLACK)
+                    pyxel.blt(self.explosions[i].posx,self.explosions[i].posy - self.camera_offset_y,IMG2,120 -(self.explosions[i].explosion_count // 4 * 8)       ,168,  SIZE_8,SIZE_8,pyxel.COLOR_BLACK)
                     
 
     #パーティクルの表示
-    def draw_particle(self):
+    def draw_particle(self,disp_priority):
         particlecount = len(self.particle)
         for i in reversed(range(particlecount)):
-            if self.particle[i].particle_type == PARTICLE_DOT: #パーティクルタイプ 1~2ドット描画タイプ
-                pyxel.pset(self.particle[i].posx,self.particle[i].posy - self.camera_offset_y,int(self.particle[i].color)) #正方形1ドット分のパーティクルを描画
-                if self.particle[i].size > 0: #sizeが0より大きかったら横長2ドット分のパーティクルを描画する
-                    pyxel.pset(self.particle[i].posx + 1,self.particle[i].posy - self.camera_offset_y,int(self.particle[i].color))
+            if self.particle[i].priority == disp_priority: #指定されたプライオリティナンバーのパーティクルだけ表示する
+                if self.particle[i].particle_type == PARTICLE_DOT: #パーティクルタイプ 1~2ドット描画タイプ
+                    pyxel.pset(self.particle[i].posx,self.particle[i].posy - self.camera_offset_y,int(self.particle[i].color)) #正方形1ドット分のパーティクルを描画
+                    if self.particle[i].size > 0: #sizeが0より大きかったら横長2ドット分のパーティクルを描画する
+                        pyxel.pset(self.particle[i].posx + 1,self.particle[i].posy - self.camera_offset_y,int(self.particle[i].color))
+                        
+                elif self.particle[i].particle_type == PARTICLE_LINE or\
+                    self.particle[i].particle_type == PARTICLE_FIRE_SPARK: #パーティクルタイプ ラインタイプまたは大気圏突入時の火花タイプ
+                    pyxel.pset(self.particle[i].posx,self.particle[i].posy - self.camera_offset_y,int(self.particle[i].color)) #正方形1ドット分のパーティクルを描画
                     
-            elif self.particle[i].particle_type == PARTICLE_LINE or\
-                self.particle[i].particle_type == PARTICLE_FIRE_SPARK: #パーティクルタイプ ラインタイプまたは大気圏突入時の火花タイプ
-                pyxel.pset(self.particle[i].posx,self.particle[i].posy - self.camera_offset_y,int(self.particle[i].color)) #正方形1ドット分のパーティクルを描画
-                
-            elif self.particle[i].particle_type == PARTICLE_CIRCLE: #パーティクルタイプ 円形パーティクルタイプ
-                pyxel.circ(self.particle[i].posx,self.particle[i].posy - self.camera_offset_y,self.particle[i].size,self.particle[i].color) #半径size分の円形パーティクルを描画
-                
-            elif self.particle[i].particle_type == PARTICLE_MISSILE_DEBRIS: #パーティクルタイプ ミサイルの破片
-                pyxel.blt(self.particle[i].posx,self.particle[i].posy - self.camera_offset_y,IMG2,184 + (7 - self.particle[i].life) * 8,0, 8,8, pyxel.COLOR_BLACK) #ミサイル破片デブリをlifeの値をアニメーションパターンオフセット値としてスプライト表示する
-                
-            elif self.particle[i].particle_type == PARTICLE_BOSS_DEBRIS1: #パーティクルタイプ ボスの破片その1
-                pyxel.blt(self.particle[i].posx,self.particle[i].posy - self.camera_offset_y,IMG2,160 + (12 - (self.particle[i].life % 12)) * 8,216, 8,8, pyxel.COLOR_BLACK) #ボス破片デブリ1をlifeの値をアニメーションパターンオフセット値としてスプライト表示する
-                
-            elif self.particle[i].particle_type == PARTICLE_BOSS_DEBRIS2: #パーティクルタイプ ボスの破片その2
-                pyxel.blt(self.particle[i].posx,self.particle[i].posy - self.camera_offset_y,IMG2,160 + (6 - (self.particle[i].life % 6)) * 8,208, 8,8, pyxel.COLOR_BLACK) #ボス破片デブリ2をlifeの値をアニメーションパターンオフセット値としてスプライト表示する
-                
-            elif self.particle[i].particle_type == PARTICLE_BOSS_DEBRIS3: #パーティクルタイプ ボスの破片その3
-                pyxel.blt(self.particle[i].posx,self.particle[i].posy - self.camera_offset_y,IMG2,160 + (12 - (self.particle[i].life % 12)) * 8,200, 8,8, pyxel.COLOR_BLACK) #ボス破片デブリ3をlifeの値をアニメーションパターンオフセット値としてスプライト表示する
-                
-            elif self.particle[i].particle_type == PARTICLE_BOSS_DEBRIS4: #パーティクルタイプ ボスの破片その4
-                pyxel.blt(self.particle[i].posx,self.particle[i].posy - self.camera_offset_y,IMG2,192 + (8 - (self.particle[i].life % 8)) * 8,192, 8,8, pyxel.COLOR_BLACK) #ボス破片デブリ4をlifeの値をアニメーションパターンオフセット値としてスプライト表示する
+                elif self.particle[i].particle_type == PARTICLE_CIRCLE: #パーティクルタイプ 円形パーティクルタイプ
+                    pyxel.circ(self.particle[i].posx,self.particle[i].posy - self.camera_offset_y,self.particle[i].size,self.particle[i].color) #半径size分の円形パーティクルを描画
+                    
+                elif self.particle[i].particle_type == PARTICLE_MISSILE_DEBRIS: #パーティクルタイプ ミサイルの破片
+                    pyxel.blt(self.particle[i].posx,self.particle[i].posy - self.camera_offset_y,IMG2,184 + (7 - self.particle[i].life) * 8,0, 8,8, pyxel.COLOR_BLACK) #ミサイル破片デブリをlifeの値をアニメーションパターンオフセット値としてスプライト表示する
+                    
+                elif self.particle[i].particle_type == PARTICLE_BOSS_DEBRIS1: #パーティクルタイプ ボスの破片その1
+                    pyxel.blt(self.particle[i].posx,self.particle[i].posy - self.camera_offset_y,IMG2,160 + (12 - (self.particle[i].life % 12)) * 8,216, 8,8, pyxel.COLOR_BLACK) #ボス破片デブリ1をlifeの値をアニメーションパターンオフセット値としてスプライト表示する
+                    
+                elif self.particle[i].particle_type == PARTICLE_BOSS_DEBRIS2: #パーティクルタイプ ボスの破片その2
+                    pyxel.blt(self.particle[i].posx,self.particle[i].posy - self.camera_offset_y,IMG2,160 + (6 - (self.particle[i].life % 6)) * 8,208, 8,8, pyxel.COLOR_BLACK) #ボス破片デブリ2をlifeの値をアニメーションパターンオフセット値としてスプライト表示する
+                    
+                elif self.particle[i].particle_type == PARTICLE_BOSS_DEBRIS3: #パーティクルタイプ ボスの破片その3
+                    pyxel.blt(self.particle[i].posx,self.particle[i].posy - self.camera_offset_y,IMG2,160 + (12 - (self.particle[i].life % 12)) * 8,200, 8,8, pyxel.COLOR_BLACK) #ボス破片デブリ3をlifeの値をアニメーションパターンオフセット値としてスプライト表示する
+                    
+                elif self.particle[i].particle_type == PARTICLE_BOSS_DEBRIS4: #パーティクルタイプ ボスの破片その4
+                    pyxel.blt(self.particle[i].posx,self.particle[i].posy - self.camera_offset_y,IMG2,192 + (8 - (self.particle[i].life % 8)) * 8,192, 8,8, pyxel.COLOR_BLACK) #ボス破片デブリ4をlifeの値をアニメーションパターンオフセット値としてスプライト表示する
 
     #背景オブジェクトの表示
     def draw_background_object(self):

@@ -314,12 +314,12 @@ class update_debug:
                 dx,dy = -0.3 - random() * 2,-0.3 - random()
                 life = 1000
                 color = 0
-                update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,x,y,  dx,dy,life,0,color)
-                # update_obj.append_particle(self,PARTICLE_LINE,x,y,  0,0,0,0,0)
+                update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,PRIORITY_MORE_FRONT,x,y,  dx,dy,life,0,color)
+                # update_obj.append_particle(self,PARTICLE_LINE,PRIORITY_FRONT,x,y,  0,0,0,0,0)
                 
                 particle_number = func.s_rndint(self,0,10) + 50
                 for number in range(particle_number):
-                    update_obj.append_particle(self,PARTICLE_DOT,x,y,-0.5,-0.5, 0,0,0)
+                    update_obj.append_particle(self,PARTICLE_DOT,PRIORITY_FRONT,x,y,-0.5,-0.5, 0,0,0)
         
         #背景オブジェクト雲１を発生させる                        KEY E
         if(pyxel.frame_count % 6) == 0:

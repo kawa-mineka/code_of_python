@@ -220,7 +220,7 @@ class update_ship:
                 if self.missile[i].missile_hp == 0:
                     del self.missile[i]#ミサイルのＨＰが0だったらインスタンスを破棄する(ミサイル消滅)
                 elif self.collision_flag == 1:
-                    update_obj.append_particle(self,PARTICLE_MISSILE_DEBRIS,self.missile[i].posx + (self.missile[i].missile_type // 2) * 2 - 8,self.missile[i].posy,0,0, 7,0,0)
+                    update_obj.append_particle(self,PARTICLE_MISSILE_DEBRIS,PRIORITY_FRONT,self.missile[i].posx + (self.missile[i].missile_type // 2) * 2 - 8,self.missile[i].posy,0,0, 7,0,0)
                     #(self.missile[i].missile_type // 2) * 2 - 8の計算結果は
                     #ミサイルタイプが0右下ミサイルの場合は 0 // 2 * 2 - 8で -8
                     #ミサイルタイプが1右上ミサイルの場合は 1 // 2 * 2 - 8で -8

@@ -238,7 +238,7 @@ class update_collision:
                         func.enemy_destruction(self,e) #敵破壊処理関数呼び出し！
                         #パーティクル生成
                         for _number in range(5):
-                            update_obj.append_particle(self,PARTICLE_DOT,self.enemy[e].posx + 4,self.enemy[e].posy + 4,self.shots[h].vx / 2,self.shots[h].vy / 2, 0,0,0)
+                            update_obj.append_particle(self,PARTICLE_DOT,PRIORITY_FRONT,self.enemy[e].posx + 4,self.enemy[e].posy + 4,self.shots[h].vx / 2,self.shots[h].vy / 2, 0,0,0)
                         
                         #スコア加算
                         if   self.enemy[e].status == ENEMY_STATUS_NORMAL:   #ステータスが「通常」ならscore_normalをpointとしてスコアを加算する
@@ -273,7 +273,7 @@ class update_collision:
                         and self.boss[e].posy - self.shots[h].height  + self.boss[e].col_main1_y <= self.shots[h].posy + 4 <= self.boss[e].posy + self.boss[e].col_main1_y + self.boss[e].col_main1_h\
                         and self.boss[e].col_main1_w != 0:
                         
-                        update_obj.append_particle(self,PARTICLE_LINE,self.shots[h].posx,self.shots[h].posy,0,0, 0,0,0)#自機弾の位置に消滅エフェクト育成
+                        update_obj.append_particle(self,PARTICLE_LINE,PRIORITY_FRONT,self.shots[h].posx,self.shots[h].posy,0,0, 0,0,0)#自機弾の位置に消滅エフェクト育成
                         self.shots[h].shot_hp = 0#自機弾のＨＰをゼロにして自機弾移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     #ボス本体の当たり判定2(弾を消滅させる)との判定
@@ -281,7 +281,7 @@ class update_collision:
                         and self.boss[e].posy - self.shots[h].height  + self.boss[e].col_main2_y <= self.shots[h].posy + 4 <= self.boss[e].posy + self.boss[e].col_main2_y + self.boss[e].col_main2_h\
                         and self.boss[e].col_main2_w != 0:
                         
-                        update_obj.append_particle(self,PARTICLE_LINE,self.shots[h].posx,self.shots[h].posy,0,0, 0,0,0)#自機弾の位置に消滅エフェクト育成
+                        update_obj.append_particle(self,PARTICLE_LINE,PRIORITY_FRONT,self.shots[h].posx,self.shots[h].posy,0,0, 0,0,0)#自機弾の位置に消滅エフェクト育成
                         self.shots[h].shot_hp = 0#自機弾のＨＰをゼロにして自機弾移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     #ボス本体の当たり判定3(弾を消滅させる)との判定
@@ -289,7 +289,7 @@ class update_collision:
                         and self.boss[e].posy - self.shots[h].height  + self.boss[e].col_main3_y <= self.shots[h].posy + 4 <= self.boss[e].posy + self.boss[e].col_main3_y + self.boss[e].col_main3_h\
                         and self.boss[e].col_main3_w != 0:
                         
-                        update_obj.append_particle(self,PARTICLE_LINE,self.shots[h].posx,self.shots[h].posy,0,0, 0,0,0)#自機弾の位置に消滅エフェクト育成
+                        update_obj.append_particle(self,PARTICLE_LINE,PRIORITY_FRONT,self.shots[h].posx,self.shots[h].posy,0,0, 0,0,0)#自機弾の位置に消滅エフェクト育成
                         self.shots[h].shot_hp = 0#自機弾のＨＰをゼロにして自機弾移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     #ボス本体の当たり判定4(弾を消滅させる)との判定
@@ -297,7 +297,7 @@ class update_collision:
                         and self.boss[e].posy - self.shots[h].height  + self.boss[e].col_main4_y <= self.shots[h].posy + 4 <= self.boss[e].posy + self.boss[e].col_main4_y + self.boss[e].col_main4_h\
                         and self.boss[e].col_main4_w != 0:
                         
-                        update_obj.append_particle(self,PARTICLE_LINE,self.shots[h].posx,self.shots[h].posy,0,0, 0,0,0)#自機弾の位置に消滅エフェクト育成
+                        update_obj.append_particle(self,PARTICLE_LINE,PRIORITY_FRONT,self.shots[h].posx,self.shots[h].posy,0,0, 0,0,0)#自機弾の位置に消滅エフェクト育成
                         self.shots[h].shot_hp = 0#自機弾のＨＰをゼロにして自機弾移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     #ボス本体の当たり判定5(弾を消滅させる)との判定
@@ -305,7 +305,7 @@ class update_collision:
                         and self.boss[e].posy - self.shots[h].height  + self.boss[e].col_main5_y <= self.shots[h].posy + 4 <= self.boss[e].posy + self.boss[e].col_main5_y + self.boss[e].col_main5_h\
                         and self.boss[e].col_main5_w != 0:
                         
-                        update_obj.append_particle(self,PARTICLE_LINE,self.shots[h].posx,self.shots[h].posy,0,0, 0,0,0)#自機弾の位置に消滅エフェクト育成
+                        update_obj.append_particle(self,PARTICLE_LINE,PRIORITY_FRONT,self.shots[h].posx,self.shots[h].posy,0,0, 0,0,0)#自機弾の位置に消滅エフェクト育成
                         self.shots[h].shot_hp = 0#自機弾のＨＰをゼロにして自機弾移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     #ボス本体の当たり判定6(弾を消滅させる)との判定
@@ -313,7 +313,7 @@ class update_collision:
                         and self.boss[e].posy - self.shots[h].height  + self.boss[e].col_main6_y <= self.shots[h].posy + 4 <= self.boss[e].posy + self.boss[e].col_main6_y + self.boss[e].col_main6_h\
                         and self.boss[e].col_main6_w != 0:
                         
-                        update_obj.append_particle(self,PARTICLE_LINE,self.shots[h].posx,self.shots[h].posy,0,0, 0,0,0)#自機弾の位置に消滅エフェクト育成
+                        update_obj.append_particle(self,PARTICLE_LINE,PRIORITY_FRONT,self.shots[h].posx,self.shots[h].posy,0,0, 0,0,0)#自機弾の位置に消滅エフェクト育成
                         self.shots[h].shot_hp = 0#自機弾のＨＰをゼロにして自機弾移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     #ボス本体の当たり判定7(弾を消滅させる)との判定
@@ -321,7 +321,7 @@ class update_collision:
                         and self.boss[e].posy - self.shots[h].height  + self.boss[e].col_main7_y <= self.shots[h].posy + 4 <= self.boss[e].posy + self.boss[e].col_main7_y + self.boss[e].col_main7_h\
                         and self.boss[e].col_main7_w != 0:
                         
-                        update_obj.append_particle(self,PARTICLE_LINE,self.shots[h].posx,self.shots[h].posy,0,0, 0,0,0)#自機弾の位置に消滅エフェクト育成
+                        update_obj.append_particle(self,PARTICLE_LINE,PRIORITY_FRONT,self.shots[h].posx,self.shots[h].posy,0,0, 0,0,0)#自機弾の位置に消滅エフェクト育成
                         self.shots[h].shot_hp = 0#自機弾のＨＰをゼロにして自機弾移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     #ボス本体の当たり判定8(弾を消滅させる)との判定
@@ -329,7 +329,7 @@ class update_collision:
                         and self.boss[e].posy - self.shots[h].height  + self.boss[e].col_main8_y <= self.shots[h].posy + 4 <= self.boss[e].posy + self.boss[e].col_main8_y + self.boss[e].col_main8_h\
                         and self.boss[e].col_main8_w != 0:
                         
-                        update_obj.append_particle(self,PARTICLE_LINE,self.shots[h].posx,self.shots[h].posy,0,0, 0,0,0)#自機弾の位置に消滅エフェクト育成
+                        update_obj.append_particle(self,PARTICLE_LINE,PRIORITY_FRONT,self.shots[h].posx,self.shots[h].posy,0,0, 0,0,0)#自機弾の位置に消滅エフェクト育成
                         self.shots[h].shot_hp = 0#自機弾のＨＰをゼロにして自機弾移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     
@@ -347,7 +347,8 @@ class update_collision:
                             vx,vy = -0.3 - random() * 2,-0.3 - random()
                             life = 1000
                             col = 0
-                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,x,y,  vx,vy,life,0,col)
+                            # update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,PRIORITY_FRONT,x,y,  vx,vy,life,0,col)
+                            update_obj.append_boss_parts_debris(self,3,PARTICLE_BOSS_DEBRIS1,x,y,life)
                         
                         self.boss[e].display_time_parts1_hp_bar = BOSS_HP_BAR_DISPLAY_TIME #パーツ1耐久力バーを表示するカウントタイマーを初期値の定数に戻す
                         hit_x,hit_y   = self.shots[h].posx,self.shots[h].posy
@@ -368,7 +369,8 @@ class update_collision:
                             vx,vy = -0.3 - random() * 2,-0.3 - random()
                             life = 1000
                             col = 0
-                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,x,y,  vx,vy,life,0,col)
+                            # update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,PRIORITY_FRONT,x,y,  vx,vy,life,0,col)
+                            update_obj.append_boss_parts_debris(self,3,PARTICLE_BOSS_DEBRIS1,x,y,life)
                         
                         self.boss[e].display_time_parts2_hp_bar = BOSS_HP_BAR_DISPLAY_TIME #パーツ2耐久力バーを表示するカウントタイマーを初期値の定数に戻す
                         hit_x,hit_y   = self.shots[h].posx,self.shots[h].posy
@@ -386,10 +388,8 @@ class update_collision:
                             self.boss[e].parts3_flag = 0 #パーツ3の生存フラグを0にして破壊したことにする
                             #ボスのパーツを破壊した後にボスの破片１デブリを育成する
                             x,y = self.boss[e].posx + self.boss[e].col_parts3_x,self.boss[e].posy + self.boss[e].col_parts3_y
-                            vx,vy = -0.3 - random() * 2,-0.3 - random()
                             life = 1000
-                            col = 0
-                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,x,y,  vx,vy,life,0,col)
+                            update_obj.append_boss_parts_debris(self,3,PARTICLE_BOSS_DEBRIS1,x,y,life)
                         
                         self.boss[e].display_time_parts3_hp_bar = BOSS_HP_BAR_DISPLAY_TIME #パーツ3耐久力バーを表示するカウントタイマーを初期値の定数に戻す
                         hit_x,hit_y   = self.shots[h].posx,self.shots[h].posy
@@ -410,7 +410,8 @@ class update_collision:
                             vx,vy = -0.3 - random() * 2,-0.3 - random()
                             life = 1000
                             col = 0
-                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,x,y,  vx,vy,life,0,col)
+                            # update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,PRIORITY_FRONT,x,y,  vx,vy,life,0,col)
+                            update_obj.append_boss_parts_debris(self,3,PARTICLE_BOSS_DEBRIS1,x,y,life)
                         
                         self.boss[e].display_time_parts4_hp_bar = BOSS_HP_BAR_DISPLAY_TIME #パーツ4耐久力バーを表示するカウントタイマーを初期値の定数に戻す
                         hit_x,hit_y   = self.shots[h].posx,self.shots[h].posy
@@ -475,7 +476,7 @@ class update_collision:
             for i in reversed(range(shot_count)):
                 func.check_bg_collision(self,self.shots[i].posx,self.shots[i].posy + 4,0,0)
                 if self.collision_flag == 1:
-                    update_obj.append_particle(self,PARTICLE_LINE,self.shots[i].posx,self.shots[i].posy,0,0, 0,0,0)
+                    update_obj.append_particle(self,PARTICLE_LINE,PRIORITY_FRONT,self.shots[i].posx,self.shots[i].posy,0,0, 0,0,0)
                     del self.shots[i]    
 
     #################################自機ミサイルとの当たり判定###############################################################
@@ -493,7 +494,7 @@ class update_collision:
                         func.enemy_destruction(self,e) #敵破壊処理関数呼び出し！
                         #パーティクル生成
                         for _number in range(5):
-                            update_obj.append_particle(self,PARTICLE_DOT,self.enemy[e].posx + 4,self.enemy[e].posy + 4,self.missile[h].vx / 2,self.missile[h].vy / 2,   0,0,0)    
+                            update_obj.append_particle(self,PARTICLE_DOT,PRIORITY_FRONT,self.enemy[e].posx + 4,self.enemy[e].posy + 4,self.missile[h].vx / 2,self.missile[h].vy / 2,   0,0,0)    
                         
                         del self.enemy[e]#敵リストから破壊した敵をＤＥＬ消去破壊！
                         self.score += 1#スコア加算（あとあといろんなスコアシステム実装する予定だよ）
@@ -513,7 +514,7 @@ class update_collision:
                         and self.boss[e].posy - self.missile[h].height  + self.boss[e].col_main1_y <= self.missile[h].posy + 4 <= self.boss[e].posy + self.boss[e].col_main1_y + self.boss[e].col_main1_h\
                         and self.boss[e].col_main1_w != 0:
                         
-                        update_obj.append_particle(self,PARTICLE_LINE,self.missile[h].posx,self.missile[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
+                        update_obj.append_particle(self,PARTICLE_LINE,PRIORITY_FRONT,self.missile[h].posx,self.missile[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
                         self.missile[h].missile_hp = 0#ミサイルのＨＰをゼロしてミサイル移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     #ボス本体の当たり判定2(ミサイルを消滅させる)との判定
@@ -521,7 +522,7 @@ class update_collision:
                         and self.boss[e].posy - self.missile[h].height  + self.boss[e].col_main2_y <= self.missile[h].posy + 4 <= self.boss[e].posy + self.boss[e].col_main2_y + self.boss[e].col_main2_h\
                         and self.boss[e].col_main2_w != 0:
                         
-                        update_obj.append_particle(self,PARTICLE_LINE,self.missile[h].posx,self.missile[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
+                        update_obj.append_particle(self,PARTICLE_LINE,PRIORITY_FRONT,self.missile[h].posx,self.missile[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
                         self.missile[h].missile_hp = 0#ミサイルのＨＰをゼロしてミサイル移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     #ボス本体の当たり判定3(ミサイルを消滅させる)との判定
@@ -529,7 +530,7 @@ class update_collision:
                         and self.boss[e].posy - self.missile[h].height  + self.boss[e].col_main3_y <= self.missile[h].posy + 4 <= self.boss[e].posy + self.boss[e].col_main3_y + self.boss[e].col_main3_h\
                         and self.boss[e].col_main3_w != 0:
                         
-                        update_obj.append_particle(self,PARTICLE_LINE,self.missile[h].posx,self.missile[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
+                        update_obj.append_particle(self,PARTICLE_LINE,PRIORITY_FRONT,self.missile[h].posx,self.missile[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
                         self.missile[h].missile_hp = 0#ミサイルのＨＰをゼロしてミサイル移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     #ボス本体の当たり判定4(ミサイルを消滅させる)との判定
@@ -537,7 +538,7 @@ class update_collision:
                         and self.boss[e].posy - self.missile[h].height  + self.boss[e].col_main4_y <= self.missile[h].posy + 4 <= self.boss[e].posy + self.boss[e].col_main4_y + self.boss[e].col_main4_h\
                         and self.boss[e].col_main4_w != 0:
                         
-                        update_obj.append_particle(self,PARTICLE_LINE,self.missile[h].posx,self.missile[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
+                        update_obj.append_particle(self,PARTICLE_LINE,PRIORITY_FRONT,self.missile[h].posx,self.missile[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
                         self.missile[h].missile_hp = 0#ミサイルのＨＰをゼロしてミサイル移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     #ボス本体の当たり判定5(ミサイルを消滅させる)との判定
@@ -545,7 +546,7 @@ class update_collision:
                         and self.boss[e].posy - self.missile[h].height  + self.boss[e].col_main5_y <= self.missile[h].posy + 4 <= self.boss[e].posy + self.boss[e].col_main5_y + self.boss[e].col_main5_h\
                         and self.boss[e].col_main5_w != 0:
                         
-                        update_obj.append_particle(self,PARTICLE_LINE,self.missile[h].posx,self.missile[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
+                        update_obj.append_particle(self,PARTICLE_LINE,PRIORITY_FRONT,self.missile[h].posx,self.missile[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
                         self.missile[h].missile_hp = 0#ミサイルのＨＰをゼロしてミサイル移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     #ボス本体の当たり判定6(ミサイルを消滅させる)との判定
@@ -553,7 +554,7 @@ class update_collision:
                         and self.boss[e].posy - self.missile[h].height  + self.boss[e].col_main6_y <= self.missile[h].posy + 4 <= self.boss[e].posy + self.boss[e].col_main6_y + self.boss[e].col_main6_h\
                         and self.boss[e].col_main6_w != 0:
                         
-                        update_obj.append_particle(self,PARTICLE_LINE,self.missile[h].posx,self.missile[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
+                        update_obj.append_particle(self,PARTICLE_LINE,PRIORITY_FRONT,self.missile[h].posx,self.missile[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
                         self.missile[h].missile_hp = 0#ミサイルのＨＰをゼロしてミサイル移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     #ボス本体の当たり判定7(ミサイルを消滅させる)との判定
@@ -561,7 +562,7 @@ class update_collision:
                         and self.boss[e].posy - self.missile[h].height  + self.boss[e].col_main7_y <= self.missile[h].posy + 4 <= self.boss[e].posy + self.boss[e].col_main7_y + self.boss[e].col_main7_h\
                         and self.boss[e].col_main7_w != 0:
                         
-                        update_obj.append_particle(self,PARTICLE_LINE,self.missile[h].posx,self.missile[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
+                        update_obj.append_particle(self,PARTICLE_LINE,PRIORITY_FRONT,self.missile[h].posx,self.missile[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
                         self.missile[h].missile_hp = 0#ミサイルのＨＰをゼロしてミサイル移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     #ボス本体の当たり判定8(ミサイルを消滅させる)との判定
@@ -569,7 +570,7 @@ class update_collision:
                         and self.boss[e].posy - self.missile[h].height  + self.boss[e].col_main8_y <= self.missile[h].posy + 4 <= self.boss[e].posy + self.boss[e].col_main8_y + self.boss[e].col_main8_h\
                         and self.boss[e].col_main8_w != 0:
                         
-                        update_obj.append_particle(self,PARTICLE_LINE,self.missile[h].posx,self.missile[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
+                        update_obj.append_particle(self,PARTICLE_LINE,PRIORITY_FRONT,self.missile[h].posx,self.missile[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
                         self.missile[h].missile_hp = 0#ミサイルのＨＰをゼロしてミサイル移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     
@@ -587,7 +588,7 @@ class update_collision:
                             vx,vy = -0.3 - random() * 2,-0.3 - random()
                             life = 1000
                             col = 0
-                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,x,y,  vx,vy,life,0,col)
+                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,PRIORITY_MORE_FRONT,x,y,  vx,vy,life,0,col)
                         
                         self.boss[e].display_time_parts1_hp_bar = BOSS_HP_BAR_DISPLAY_TIME #パーツ1耐久力バーを表示するカウントタイマーを初期値の定数に戻す
                         hit_x,hit_y = self.missile[h].posx,self.missile[h].posy
@@ -608,7 +609,7 @@ class update_collision:
                             vx,vy = -0.3 - random() * 2,-0.3 - random()
                             life = 1000
                             col = 0
-                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,x,y,  vx,vy,life,0,col)
+                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,PRIORITY_MORE_FRONT,x,y,  vx,vy,life,0,col)
                         
                         self.boss[e].display_time_parts2_hp_bar = BOSS_HP_BAR_DISPLAY_TIME #パーツ2耐久力バーを表示するカウントタイマーを初期値の定数に戻す
                         hit_x,hit_y = self.missile[h].posx,self.missile[h].posy
@@ -629,7 +630,7 @@ class update_collision:
                             vx,vy = -0.3 - random() * 2,-0.3 - random()
                             life = 1000
                             col = 0
-                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,x,y,  vx,vy,life,0,col)
+                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,PRIORITY_MORE_FRONT,x,y,  vx,vy,life,0,col)
                         
                         self.boss[e].display_time_parts3_hp_bar = BOSS_HP_BAR_DISPLAY_TIME #パーツ3耐久力バーを表示するカウントタイマーを初期値の定数に戻す
                         hit_x,hit_y = self.missile[h].posx,self.missile[h].posy
@@ -650,7 +651,7 @@ class update_collision:
                             vx,vy = -0.3 - random() * 2,-0.3 - random()
                             life = 1000
                             col = 0
-                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,x,y,  vx,vy,life,0,col)
+                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,PRIORITY_MORE_FRONT,x,y,  vx,vy,life,0,col)
                         
                         self.boss[e].display_time_parts4_hp_bar = BOSS_HP_BAR_DISPLAY_TIME #パーツ4耐久力バーを表示するカウントタイマーを初期値の定数に戻す
                         hit_x,hit_y = self.missile[h].posx,self.missile[h].posy
@@ -723,7 +724,7 @@ class update_collision:
                         func.enemy_destruction(self,e) #敵破壊処理関数呼び出し！
                         #パーティクル生成
                         for _number in range(5):
-                            update_obj.append_particle(self,PARTICLE_DOT,self.enemy[e].posx + 4,self.enemy[e].posy + 4,self.claw_shot[h].vx / 2,self.claw_shot[h].vy / 2,    0,0,0)
+                            update_obj.append_particle(self,PARTICLE_DOT,PRIORITY_FRONT,self.enemy[e].posx + 4,self.enemy[e].posy + 4,self.claw_shot[h].vx / 2,self.claw_shot[h].vy / 2,    0,0,0)
                         
                         del self.enemy[e]#敵リストから破壊した敵をＤＥＬ消去破壊！
                         self.score += 1#スコア加算（あとあといろんなスコアシステム実装する予定だよ）
@@ -743,7 +744,7 @@ class update_collision:
                         and self.boss[e].posy - self.claw_shot[h].height  + self.boss[e].col_main1_y <= self.claw_shot[h].posy + 4 <= self.boss[e].posy + self.boss[e].col_main1_y + self.boss[e].col_main1_h\
                         and self.boss[e].col_main1_w != 0:
                         
-                        update_obj.append_particle(self,PARTICLE_LINE,self.claw_shot[h].posx,self.claw_shot[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
+                        update_obj.append_particle(self,PARTICLE_LINE,PRIORITY_FRONT,self.claw_shot[h].posx,self.claw_shot[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
                         self.claw_shot[h].shot_hp = 0#クローショットのＨＰをゼロにして移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     #ボス本体の当たり判定2(クローショットを消滅させる)との判定
@@ -751,7 +752,7 @@ class update_collision:
                         and self.boss[e].posy - self.claw_shot[h].height  + self.boss[e].col_main2_y <= self.claw_shot[h].posy + 4 <= self.boss[e].posy + self.boss[e].col_main2_y + self.boss[e].col_main2_h\
                         and self.boss[e].col_main2_w != 0:
                         
-                        update_obj.append_particle(self,PARTICLE_LINE,self.claw_shot[h].posx,self.claw_shot[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
+                        update_obj.append_particle(self,PARTICLE_LINE,PRIORITY_FRONT,self.claw_shot[h].posx,self.claw_shot[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
                         self.claw_shot[h].shot_hp = 0#クローショットのＨＰをゼロにして移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     #ボス本体の当たり判定3(クローショットを消滅させる)との判定
@@ -759,7 +760,7 @@ class update_collision:
                         and self.boss[e].posy - self.claw_shot[h].height  + self.boss[e].col_main3_y <= self.claw_shot[h].posy + 4 <= self.boss[e].posy + self.boss[e].col_main3_y + self.boss[e].col_main3_h\
                         and self.boss[e].col_main3_w != 0:
                         
-                        update_obj.append_particle(self,PARTICLE_LINE,self.claw_shot[h].posx,self.claw_shot[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
+                        update_obj.append_particle(self,PARTICLE_LINE,PRIORITY_FRONT,self.claw_shot[h].posx,self.claw_shot[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
                         self.claw_shot[h].shot_hp = 0#クローショットのＨＰをゼロにして移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     #ボス本体の当たり判定4(クローショットを消滅させる)との判定
@@ -767,7 +768,7 @@ class update_collision:
                         and self.boss[e].posy - self.claw_shot[h].height  + self.boss[e].col_main4_y <= self.claw_shot[h].posy + 4 <= self.boss[e].posy + self.boss[e].col_main4_y + self.boss[e].col_main4_h\
                         and self.boss[e].col_main4_w != 0:
                         
-                        update_obj.append_particle(self,PARTICLE_LINE,self.claw_shot[h].posx,self.claw_shot[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
+                        update_obj.append_particle(self,PARTICLE_LINE,PRIORITY_FRONT,self.claw_shot[h].posx,self.claw_shot[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
                         self.claw_shot[h].shot_hp = 0#クローショットのＨＰをゼロにして移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     #ボス本体の当たり判定5(クローショットを消滅させる)との判定
@@ -775,7 +776,7 @@ class update_collision:
                         and self.boss[e].posy - self.claw_shot[h].height  + self.boss[e].col_main5_y <= self.claw_shot[h].posy + 4 <= self.boss[e].posy + self.boss[e].col_main5_y + self.boss[e].col_main5_h\
                         and self.boss[e].col_main5_w != 0:
                         
-                        update_obj.append_particle(self,PARTICLE_LINE,self.claw_shot[h].posx,self.claw_shot[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
+                        update_obj.append_particle(self,PARTICLE_LINE,PRIORITY_FRONT,self.claw_shot[h].posx,self.claw_shot[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
                         self.claw_shot[h].shot_hp = 0#クローショットのＨＰをゼロにして移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     #ボス本体の当たり判定6(クローショットを消滅させる)との判定
@@ -783,7 +784,7 @@ class update_collision:
                         and self.boss[e].posy - self.claw_shot[h].height  + self.boss[e].col_main6_y <= self.claw_shot[h].posy + 4 <= self.boss[e].posy + self.boss[e].col_main6_y + self.boss[e].col_main6_h\
                         and self.boss[e].col_main6_w != 0:
                         
-                        update_obj.append_particle(self,PARTICLE_LINE,self.claw_shot[h].posx,self.claw_shot[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
+                        update_obj.append_particle(self,PARTICLE_LINE,PRIORITY_FRONT,self.claw_shot[h].posx,self.claw_shot[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
                         self.claw_shot[h].shot_hp = 0#クローショットのＨＰをゼロにして移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     #ボス本体の当たり判定7(クローショットを消滅させる)との判定
@@ -791,7 +792,7 @@ class update_collision:
                         and self.boss[e].posy - self.claw_shot[h].height  + self.boss[e].col_main7_y <= self.claw_shot[h].posy + 4 <= self.boss[e].posy + self.boss[e].col_main7_y + self.boss[e].col_main7_h\
                         and self.boss[e].col_main7_w != 0:
                         
-                        update_obj.append_particle(self,PARTICLE_LINE,self.claw_shot[h].posx,self.claw_shot[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
+                        update_obj.append_particle(self,PARTICLE_LINE,PRIORITY_FRONT,self.claw_shot[h].posx,self.claw_shot[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
                         self.claw_shot[h].shot_hp = 0#クローショットのＨＰをゼロにして移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     #ボス本体の当たり判定8(クローショットを消滅させる)との判定
@@ -799,7 +800,7 @@ class update_collision:
                         and self.boss[e].posy - self.claw_shot[h].height  + self.boss[e].col_main8_y <= self.claw_shot[h].posy + 4 <= self.boss[e].posy + self.boss[e].col_main8_y + self.boss[e].col_main8_h\
                         and self.boss[e].col_main8_w != 0:
                         
-                        update_obj.append_particle(self,PARTICLE_LINE,self.claw_shot[h].posx,self.claw_shot[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
+                        update_obj.append_particle(self,PARTICLE_LINE,PRIORITY_FRONT,self.claw_shot[h].posx,self.claw_shot[h].posy,0,0, 0,0,0)#ミサイルの位置に消滅エフェクト育成
                         self.claw_shot[h].shot_hp = 0#クローショットのＨＰをゼロにして移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     
@@ -817,7 +818,7 @@ class update_collision:
                             vx,vy = -0.3 - random() * 2,-0.3 - random()
                             life = 1000
                             col = 0
-                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,x,y,  vx,vy,life,0,col)
+                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,PRIORITY_MORE_FRONT,x,y,  vx,vy,life,0,col)
                         
                         self.boss[e].display_time_parts1_hp_bar = BOSS_HP_BAR_DISPLAY_TIME #パーツ1耐久力バーを表示するカウントタイマーを初期値の定数に戻す
                         hit_x,hit_y = self.claw_shot[h].posx,self.claw_shot[h].posy
@@ -838,7 +839,7 @@ class update_collision:
                             vx,vy = -0.3 - random() * 2,-0.3 - random()
                             life = 1000
                             col = 0
-                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,x,y,  vx,vy,life,0,col)
+                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,PRIORITY_MORE_FRONT,x,y,  vx,vy,life,0,col)
                         
                         self.boss[e].display_time_parts2_hp_bar = BOSS_HP_BAR_DISPLAY_TIME #パーツ2耐久力バーを表示するカウントタイマーを初期値の定数に戻す
                         hit_x,hit_y = self.claw_shot[h].posx,self.claw_shot[h].posy
@@ -859,7 +860,7 @@ class update_collision:
                             vx,vy = -0.3 - random() * 2,-0.3 - random()
                             life = 1000
                             col = 0
-                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,x,y,  vx,vy,life,0,col)
+                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,PRIORITY_MORE_FRONT,x,y,  vx,vy,life,0,col)
                         
                         self.boss[e].display_time_parts3_hp_bar = BOSS_HP_BAR_DISPLAY_TIME #パーツ3耐久力バーを表示するカウントタイマーを初期値の定数に戻す
                         hit_x,hit_y = self.claw_shot[h].posx,self.claw_shot[h].posy
@@ -880,7 +881,7 @@ class update_collision:
                             vx,vy = -0.3 - random() * 2,-0.3 - random()
                             life = 1000
                             col = 0
-                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,x,y,  vx,vy,life,0,col)
+                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,PRIORITY_MORE_FRONT,x,y,  vx,vy,life,0,col)
                         
                         self.boss[e].display_time_parts4_hp_bar = BOSS_HP_BAR_DISPLAY_TIME #パーツ4耐久力バーを表示するカウントタイマーを初期値の定数に戻す
                         hit_x,hit_y = self.claw_shot[h].posx,self.claw_shot[h].posy
@@ -977,6 +978,6 @@ class update_collision:
                     and -4 <= self.obtain_item[h].posy - self.enemy_shot[e].posy <= 4:
                     #敵弾消滅時のパーティクル生成
                     for _number in range(5):
-                        update_obj.append_particle(self,PARTICLE_DOT,self.enemy_shot[e].posx + 4,self.enemy_shot[e].posy + 4,self.obtain_item[h].vx / 2,self.obtain_item[h].vy / 2,   0,0,0)
+                        update_obj.append_particle(self,PARTICLE_DOT,PRIORITY_FRONT,self.enemy_shot[e].posx + 4,self.enemy_shot[e].posy + 4,self.obtain_item[h].vx / 2,self.obtain_item[h].vy / 2,   0,0,0)
                     
                     del self.enemy_shot[e] #敵弾をリストから消去
