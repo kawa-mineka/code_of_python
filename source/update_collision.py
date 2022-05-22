@@ -342,6 +342,12 @@ class update_collision:
                         self.boss[e].parts1_hp -= self.shots[h].shot_power #パーツ1の耐久力をShot_powerの分だけ減らす
                         if self.boss[e].parts1_hp <= 0: #パーツ1の耐久力が0以下になったのなら
                             self.boss[e].parts1_flag = 0 #パーツ1の生存フラグを0にして破壊したことにする
+                            #ボスのパーツを破壊した後にボスの破片１デブリを育成する
+                            x,y = self.boss[e].posx + self.boss[e].col_parts1_x,self.boss[e].posy + self.boss[e].col_parts1_y
+                            vx,vy = -0.3 - random() * 2,-0.3 - random()
+                            life = 1000
+                            col = 0
+                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,x,y,  vx,vy,life,0,col)
                         
                         self.boss[e].display_time_parts1_hp_bar = BOSS_HP_BAR_DISPLAY_TIME #パーツ1耐久力バーを表示するカウントタイマーを初期値の定数に戻す
                         hit_x,hit_y   = self.shots[h].posx,self.shots[h].posy
@@ -357,6 +363,12 @@ class update_collision:
                         self.boss[e].parts2_hp -= self.shots[h].shot_power #パーツ2の耐久力をShot_powerの分だけ減らす
                         if self.boss[e].parts2_hp <= 0: #パーツ2の耐久力が0以下になったのなら
                             self.boss[e].parts2_flag = 0 #パーツ2の生存フラグを0にして破壊したことにする
+                            #ボスのパーツを破壊した後にボスの破片１デブリを育成する
+                            x,y = self.boss[e].posx + self.boss[e].col_parts2_x,self.boss[e].posy + self.boss[e].col_parts2_y
+                            vx,vy = -0.3 - random() * 2,-0.3 - random()
+                            life = 1000
+                            col = 0
+                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,x,y,  vx,vy,life,0,col)
                         
                         self.boss[e].display_time_parts2_hp_bar = BOSS_HP_BAR_DISPLAY_TIME #パーツ2耐久力バーを表示するカウントタイマーを初期値の定数に戻す
                         hit_x,hit_y   = self.shots[h].posx,self.shots[h].posy
@@ -372,6 +384,12 @@ class update_collision:
                         self.boss[e].parts3_hp -= self.shots[h].shot_power #パーツ3の耐久力をShot_powerの分だけ減らす
                         if self.boss[e].parts3_hp <= 0: #パーツ3の耐久力が0以下になったのなら
                             self.boss[e].parts3_flag = 0 #パーツ3の生存フラグを0にして破壊したことにする
+                            #ボスのパーツを破壊した後にボスの破片１デブリを育成する
+                            x,y = self.boss[e].posx + self.boss[e].col_parts3_x,self.boss[e].posy + self.boss[e].col_parts3_y
+                            vx,vy = -0.3 - random() * 2,-0.3 - random()
+                            life = 1000
+                            col = 0
+                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,x,y,  vx,vy,life,0,col)
                         
                         self.boss[e].display_time_parts3_hp_bar = BOSS_HP_BAR_DISPLAY_TIME #パーツ3耐久力バーを表示するカウントタイマーを初期値の定数に戻す
                         hit_x,hit_y   = self.shots[h].posx,self.shots[h].posy
@@ -387,6 +405,12 @@ class update_collision:
                         self.boss[e].parts4_hp -= self.shots[h].shot_power #パーツ4の耐久力をShot_powerの分だけ減らす
                         if self.boss[e].parts4_hp <= 0: #パーツ4の耐久力が0以下になったのなら
                             self.boss[e].parts4_flag = 0 #パーツ4の生存フラグを0にして破壊したことにする
+                            #ボスのパーツを破壊した後にボスの破片１デブリを育成する
+                            x,y = self.boss[e].posx + self.boss[e].col_parts4_x,self.boss[e].posy + self.boss[e].col_parts4_y
+                            vx,vy = -0.3 - random() * 2,-0.3 - random()
+                            life = 1000
+                            col = 0
+                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,x,y,  vx,vy,life,0,col)
                         
                         self.boss[e].display_time_parts4_hp_bar = BOSS_HP_BAR_DISPLAY_TIME #パーツ4耐久力バーを表示するカウントタイマーを初期値の定数に戻す
                         hit_x,hit_y   = self.shots[h].posx,self.shots[h].posy
@@ -558,6 +582,12 @@ class update_collision:
                         self.boss[e].parts1_hp -= self.missile[h].missile_power #パーツ1の耐久力をmissile_powerの分だけ減らす
                         if self.boss[e].parts1_hp <= 0: #パーツ1の耐久力が0以下になったのなら
                             self.boss[e].parts1_flag = 0 #パーツ1の生存フラグを0にして破壊したことにする
+                            #ボスのパーツを破壊した後にボスの破片１デブリを育成する
+                            x,y = self.boss[e].posx + self.boss[e].col_parts1_x,self.boss[e].posy + self.boss[e].col_parts1_y
+                            vx,vy = -0.3 - random() * 2,-0.3 - random()
+                            life = 1000
+                            col = 0
+                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,x,y,  vx,vy,life,0,col)
                         
                         self.boss[e].display_time_parts1_hp_bar = BOSS_HP_BAR_DISPLAY_TIME #パーツ1耐久力バーを表示するカウントタイマーを初期値の定数に戻す
                         hit_x,hit_y = self.missile[h].posx,self.missile[h].posy
@@ -573,6 +603,12 @@ class update_collision:
                         self.boss[e].parts2_hp -= self.missile[h].missile_power #パーツ2の耐久力をmissile_powerの分だけ減らす
                         if self.boss[e].parts2_hp <= 0: #パーツ2の耐久力が0以下になったのなら
                             self.boss[e].parts2_flag = 0 #パーツ2の生存フラグを0にして破壊したことにする
+                            #ボスのパーツを破壊した後にボスの破片１デブリを育成する
+                            x,y = self.boss[e].posx + self.boss[e].col_parts2_x,self.boss[e].posy + self.boss[e].col_parts2_y
+                            vx,vy = -0.3 - random() * 2,-0.3 - random()
+                            life = 1000
+                            col = 0
+                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,x,y,  vx,vy,life,0,col)
                         
                         self.boss[e].display_time_parts2_hp_bar = BOSS_HP_BAR_DISPLAY_TIME #パーツ2耐久力バーを表示するカウントタイマーを初期値の定数に戻す
                         hit_x,hit_y = self.missile[h].posx,self.missile[h].posy
@@ -588,6 +624,12 @@ class update_collision:
                         self.boss[e].parts3_hp -= self.missile[h].missile_power #パーツ3の耐久力をmissile_powerの分だけ減らす
                         if self.boss[e].parts3_hp <= 0: #パーツ3の耐久力が0以下になったのなら
                             self.boss[e].parts3_flag = 0 #パーツ3の生存フラグを0にして破壊したことにする
+                            #ボスのパーツを破壊した後にボスの破片１デブリを育成する
+                            x,y = self.boss[e].posx + self.boss[e].col_parts3_x,self.boss[e].posy + self.boss[e].col_parts3_y
+                            vx,vy = -0.3 - random() * 2,-0.3 - random()
+                            life = 1000
+                            col = 0
+                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,x,y,  vx,vy,life,0,col)
                         
                         self.boss[e].display_time_parts3_hp_bar = BOSS_HP_BAR_DISPLAY_TIME #パーツ3耐久力バーを表示するカウントタイマーを初期値の定数に戻す
                         hit_x,hit_y = self.missile[h].posx,self.missile[h].posy
@@ -603,6 +645,12 @@ class update_collision:
                         self.boss[e].parts4_hp -= self.missile[h].missile_power #パーツ4の耐久力をmissile_powerの分だけ減らす
                         if self.boss[e].parts4_hp <= 0: #パーツ4の耐久力が0以下になったのなら
                             self.boss[e].parts4_flag = 0 #パーツ4の生存フラグを0にして破壊したことにする
+                            #ボスのパーツを破壊した後にボスの破片１デブリを育成する
+                            x,y = self.boss[e].posx + self.boss[e].col_parts4_x,self.boss[e].posy + self.boss[e].col_parts4_y
+                            vx,vy = -0.3 - random() * 2,-0.3 - random()
+                            life = 1000
+                            col = 0
+                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,x,y,  vx,vy,life,0,col)
                         
                         self.boss[e].display_time_parts4_hp_bar = BOSS_HP_BAR_DISPLAY_TIME #パーツ4耐久力バーを表示するカウントタイマーを初期値の定数に戻す
                         hit_x,hit_y = self.missile[h].posx,self.missile[h].posy
@@ -764,6 +812,12 @@ class update_collision:
                         self.boss[e].parts1_hp -= self.claw_shot[h].shot_power #パーツ1の耐久力をshot_powerの分だけ減らす
                         if self.boss[e].parts1_hp <= 0: #パーツ1の耐久力が0以下になったのなら
                             self.boss[e].parts1_flag = 0 #パーツ1の生存フラグを0にして破壊したことにする
+                            #ボスのパーツを破壊した後にボスの破片１デブリを育成する
+                            x,y = self.boss[e].posx + self.boss[e].col_parts1_x,self.boss[e].posy + self.boss[e].col_parts1_y
+                            vx,vy = -0.3 - random() * 2,-0.3 - random()
+                            life = 1000
+                            col = 0
+                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,x,y,  vx,vy,life,0,col)
                         
                         self.boss[e].display_time_parts1_hp_bar = BOSS_HP_BAR_DISPLAY_TIME #パーツ1耐久力バーを表示するカウントタイマーを初期値の定数に戻す
                         hit_x,hit_y = self.claw_shot[h].posx,self.claw_shot[h].posy
@@ -779,6 +833,12 @@ class update_collision:
                         self.boss[e].parts2_hp -= self.claw_shot[h].shot_power #パーツ2の耐久力をshot_powerの分だけ減らす
                         if self.boss[e].parts2_hp <= 0: #パーツ2の耐久力が0以下になったのなら
                             self.boss[e].parts2_flag = 0 #パーツ2の生存フラグを0にして破壊したことにする
+                            #ボスのパーツを破壊した後にボスの破片１デブリを育成する
+                            x,y = self.boss[e].posx + self.boss[e].col_parts2_x,self.boss[e].posy + self.boss[e].col_parts2_y
+                            vx,vy = -0.3 - random() * 2,-0.3 - random()
+                            life = 1000
+                            col = 0
+                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,x,y,  vx,vy,life,0,col)
                         
                         self.boss[e].display_time_parts2_hp_bar = BOSS_HP_BAR_DISPLAY_TIME #パーツ2耐久力バーを表示するカウントタイマーを初期値の定数に戻す
                         hit_x,hit_y = self.claw_shot[h].posx,self.claw_shot[h].posy
@@ -794,6 +854,12 @@ class update_collision:
                         self.boss[e].parts3_hp -= self.claw_shot[h].shot_power #パーツ3の耐久力をshot_powerの分だけ減らす
                         if self.boss[e].parts3_hp <= 0: #パーツ3の耐久力が0以下になったのなら
                             self.boss[e].parts3_flag = 0 #パーツ3の生存フラグを0にして破壊したことにする
+                            #ボスのパーツを破壊した後にボスの破片１デブリを育成する
+                            x,y = self.boss[e].posx + self.boss[e].col_parts3_x,self.boss[e].posy + self.boss[e].col_parts3_y
+                            vx,vy = -0.3 - random() * 2,-0.3 - random()
+                            life = 1000
+                            col = 0
+                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,x,y,  vx,vy,life,0,col)
                         
                         self.boss[e].display_time_parts3_hp_bar = BOSS_HP_BAR_DISPLAY_TIME #パーツ3耐久力バーを表示するカウントタイマーを初期値の定数に戻す
                         hit_x,hit_y = self.claw_shot[h].posx,self.claw_shot[h].posy
@@ -809,6 +875,12 @@ class update_collision:
                         self.boss[e].parts4_hp -= self.claw_shot[h].shot_power #パーツ4の耐久力をshot_powerの分だけ減らす
                         if self.boss[e].parts4_hp <= 0: #パーツ4の耐久力が0以下になったのなら
                             self.boss[e].parts4_flag = 0 #パーツ4の生存フラグを0にして破壊したことにする
+                            #ボスのパーツを破壊した後にボスの破片１デブリを育成する
+                            x,y = self.boss[e].posx + self.boss[e].col_parts4_x,self.boss[e].posy + self.boss[e].col_parts4_y
+                            vx,vy = -0.3 - random() * 2,-0.3 - random()
+                            life = 1000
+                            col = 0
+                            update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,x,y,  vx,vy,life,0,col)
                         
                         self.boss[e].display_time_parts4_hp_bar = BOSS_HP_BAR_DISPLAY_TIME #パーツ4耐久力バーを表示するカウントタイマーを初期値の定数に戻す
                         hit_x,hit_y = self.claw_shot[h].posx,self.claw_shot[h].posy

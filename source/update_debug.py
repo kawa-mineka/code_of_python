@@ -21,10 +21,10 @@ class update_debug:
     def __init__(self):
         None
 
-    #デバッグモードの更新（キーボードによる表示タイプや表示非表示の切り替え） KEY CTRL
+    #デバッグモードの更新（キーボードによる表示タイプや表示非表示の切り替え）           KEY CTRL
     def debug_status(self):
         if pyxel.btnp(pyxel.KEY_CTRL):
-            if self.debug_menu_status == 0:
+            if   self.debug_menu_status == 0:
                 self.debug_menu_status = 1
             elif self.debug_menu_status == 1:
                 self.debug_menu_status = 2
@@ -49,7 +49,7 @@ class update_debug:
                     #編隊なので編隊のＩＤナンバーと編隊の総数、現在の編隊生存数をEnemy_formationリストに登録します
                     func.record_enemy_formation(self,10)
         
-        #敵タイプ2サイシーロの発生  サインカーブを描く3機編隊                     KEY 5 ++++++
+        #敵タイプ2サイシーロの発生  サインカーブを描く3機編隊                        KEY 5 ++++++
         if (pyxel.frame_count % 8) == 0:
             if pyxel.btn(pyxel.KEY_5):
                 if len(self.enemy) < 400:
@@ -59,7 +59,7 @@ class update_debug:
                         new_enemy.update(SAISEE_RO,ID00,ENEMY_STATUS_NORMAL,ENEMY_ATTCK_ANY,   WINDOW_W + 10,((self.posy)-36) + (number * 12),0,0,    0,0,0,0,0,0,0,0,    0,0,0,0,0,0,0,0,0,0,   0,0,       0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0,    SIZE_8,SIZE_8,   1,0,   0,  HP01,   0,0,  E_SIZE_NORMAL,0.5,0.05,0,    0,0,0,0,   E_NO_POW,ID00 ,0,0,0    ,0  ,0,0,0,    0,AERIAL_OBJ,  PT01,PT01,PT01,  PT01,PT01,PT01)
                         self.enemy.append(new_enemy)        
         
-        #敵タイプ6の発生（謎の飛翔体Ｍ54）                                   KEY 6 ++++++
+        #敵タイプ6の発生（謎の飛翔体Ｍ54）                                         KEY 6 ++++++
         if (pyxel.frame_count % 3) == 0:
             if pyxel.btn(pyxel.KEY_6):
                 if len(self.enemy) < 400:
@@ -68,7 +68,7 @@ class update_debug:
                     new_enemy.update(6,ID00,ENEMY_STATUS_NORMAL,ENEMY_ATTCK_ANY,   WINDOW_W,self.posy,0,0,    0,0,0,0,0,0,0,0,    0,0,0,0,0,0,0,0,0,0, 0,0,      0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0,    SIZE_8,SIZE_8,   1,0,   0,  HP01,   0,0,  E_SIZE_NORMAL,   0.5,0.05,0,    0,0,0,0,    E_NO_POW,ID00 ,0,0,0,    0  ,0,0,0,    0,AERIAL_OBJ,  PT01,PT01,PT01,  PT01,PT01,PT01)
                     self.enemy.append(new_enemy)        
         
-        #敵タイプ8ツインアローの発生 追尾戦闘機                               KEY Z ++++++
+        #敵タイプ8ツインアローの発生 追尾戦闘機                                     KEY Z ++++++
         if (pyxel.frame_count % 3) == 0:
             if pyxel.btn(pyxel.KEY_Z):
                 if len(self.enemy) < 400:
@@ -77,7 +77,7 @@ class update_debug:
                     new_enemy.update(TWIN_ARROW,ID00,ENEMY_STATUS_NORMAL,ENEMY_ATTCK_ANY,   WINDOW_W,self.posy,0,0,     0,0,0,0,0,0,0,0,     0,0,0,0,0,0,0,0,0,0, 0,0,       0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0,    SIZE_8,SIZE_8,   1.5,0,  0,    HP01,    0,0,   E_SIZE_NORMAL,  0,  0, 1.3,    0,0,0,0,    E_NO_POW,ID00 ,0,0,0,    0  ,0,0,0,    0,AERIAL_OBJ,  PT01,PT01,PT01,  PT01,PT01,PT01)
                     self.enemy.append(new_enemy)
         
-        #敵タイプ9の発生 縦軸合わせ突進タイプ                                KEY X ++++++
+        #敵タイプ9の発生 縦軸合わせ突進タイプ                                       KEY X ++++++
         if (pyxel.frame_count % 16) == 0:
             if pyxel.btn(pyxel.KEY_X):
                 if len(self.enemy) < 400:
@@ -85,7 +85,7 @@ class update_debug:
                     new_enemy.update(9,ID00,ENEMY_STATUS_NORMAL,ENEMY_ATTCK_ANY,    80,40,0,0,     0,0,0,0,0,0,0,0,     0,0,0,0,0,0,0,0,0,0,  0,0,       0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0,    SIZE_8,SIZE_8,   0.5,0,   0,    HP01,    0,0,   E_SIZE_NORMAL,  0,  0, 0,    0,0,0,0,    E_NO_POW,ID00 ,0,0,0,    0  ,0,0,0,    0,AERIAL_OBJ,  PT01,PT01,PT01,  PT01,PT01,PT01)
                     self.enemy.append(new_enemy)
         
-        #敵タイプ10の発生 地面のスクランブルハッチ                             KEY C +++++
+        #敵タイプ10の発生 地面のスクランブルハッチ                                   KEY C +++++
         if (pyxel.frame_count % 64) == 0:
             if pyxel.btn(pyxel.KEY_C):
                 if len(self.enemy) < 400:
@@ -103,7 +103,7 @@ class update_debug:
                     new_enemy.update(RAY_BLASTER,ID00,ENEMY_STATUS_NORMAL,ENEMY_ATTCK_ANY,   WINDOW_W + 8,func.s_rndint(self,0,WINDOW_H),0,0,    0,0,0,0,0,0,0,0,    0,0,0,0,0,0,0,0,0,0,   -2,(func.s_rndint(self,0,1)-0.5),       0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0,    SIZE_8,SIZE_8,   0.98,0,    0,    HP01,  0,0,    E_SIZE_NORMAL,   80 + func.s_rndint(self,0,40),0,0,     0,0,0,0,      E_NO_POW,ID00 ,0,0,0,    0  ,0,0,0,    0,AERIAL_OBJ,  PT01,PT01,PT01,  PT01,PT01,PT01)
                     self.enemy.append(new_enemy)
         
-        #敵タイプ16の発生 2機一体で挟みこみ攻撃をしてくるクランパリオン             KEY T ++++++++
+        #敵タイプ16の発生 2機一体で挟みこみ攻撃をしてくるクランパリオン                KEY T ++++++++
         if (pyxel.frame_count % 24) == 0:
             if pyxel.btn(pyxel.KEY_T):
                 if len(self.enemy) < 400:
@@ -131,7 +131,7 @@ class update_debug:
                     new_enemy.update(ROLL_BLITZ,ID00,ENEMY_STATUS_MOVE_COORDINATE_INIT,ENEMY_ATTCK_ANY,    0,0,0,16,    0,0,0,0,0,0,0,0,        0,0,0,0,0,0,0,0,0,0,  0,0,       0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0,    SIZE_8,SIZE_8,   0,0.95,   0,    HP01,  0,0,    E_SIZE_NORMAL,   0,0,0,    0,0,0,0,    E_NO_POW,   ID00    ,0,0,0,    0  ,0,0,0,    0,AERIAL_OBJ,  PT01,PT01,PT01,  PT01,PT01,PT01)
                     self.enemy.append(new_enemy)
         
-        #敵タイプ18の発生 ボルダー 硬めの弾バラマキ重爆撃機                      KEY R ++++++++
+        #敵タイプ18の発生 ボルダー 硬めの弾バラマキ重爆撃機                          KEY R ++++++++
         if (pyxel.frame_count % 24) == 0:
             if pyxel.btn(pyxel.KEY_R):
                 if len(self.enemy) < 400:
@@ -139,7 +139,7 @@ class update_debug:
                     new_enemy.update(VOLDAR,ID00,ENEMY_STATUS_NORMAL,ENEMY_ATTCK_ANY,   170,10,0,0,       0,0,0,0,0,0,0,0,        0,0,0,0,0,0,0,0,0,0,  0,0,      0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0,    SIZE_40,SIZE_24,   -0.07,1,   0,    HP30,  0,0,    E_SIZE_HI_MIDDLE53,   0,0,0,    0,0,0,0,    E_NO_POW,   ID00    ,1,0.007,0.6,    0  ,0,0,0,    0,AERIAL_OBJ,  PT01,PT01,PT01,  PT01,PT01,PT01)
                     self.enemy.append(new_enemy)
         
-        #敵弾1(前方加速弾&落下弾&サインコサイン弾&グリーンカッター)の発生           KEY A ----------------
+        #敵弾1(前方加速弾&落下弾&サインコサイン弾&グリーンカッター)の発生  KEY A ----------------
         if(pyxel.frame_count % 3) == 0:
             if pyxel.btn(pyxel.KEY_A):
                 if len(self.enemy_shot) < 800:
@@ -166,7 +166,7 @@ class update_debug:
                     new_enemy_shot.update(ENEMY_SHOT_GREEN_CUTTER,ID00,140,60,ESHOT_COL_BOX,ESHOT_SIZE8,ESHOT_SIZE12,    0,0,  -0.3,0,      1.01,    1,1,    0,0,  0,0,0,            0,   0,0,PRIORITY_FRONT,   0,0, 0,0,0,0, 0,0, 0, 0,0, 0, 0,0, 0,0,   0,0)
                     self.enemy_shot.append(new_enemy_shot)
         
-        #敵弾2(自機狙い6way弾)の発生                         KEY B ----------------
+        #敵弾2(自機狙い6way弾)の発生                                   KEY B ----------------
         if(pyxel.frame_count % 3) == 0:
             if pyxel.btn(pyxel.KEY_B):
                 if len(self.enemy_shot) < 800:
@@ -180,7 +180,7 @@ class update_debug:
                     stop_count = 0
                     func.enemy_aim_bullet_nway(self,ex,ey,theta,n,division_type,division_count,division_num,stop_count)    
         
-        #敵弾3(前方レーザービーム)の発生                       KEY S ----------------
+        #敵弾3(前方レーザービーム)の発生                               KEY S ----------------
         if(pyxel.frame_count % 1) == 0:
             if pyxel.btn(pyxel.KEY_S):
                 if len(self.enemy_shot) < 800:
@@ -190,7 +190,7 @@ class update_debug:
                         new_enemy_shot.update(ENEMY_SHOT_LASER,ID00, WINDOW_W,posy,ESHOT_COL_MIN88,ESHOT_SIZE8,ESHOT_SIZE8, 0,0,  -2,0,   1,  1,1,   0,0,0,    1,0,0,  0,number * 2,PRIORITY_FRONT,  0,0,  0,0,0,0, 0,0, 0, 0,0, 0, 0,0, 0,0,   0,0)
                         self.enemy_shot.append(new_enemy_shot)
         
-        #敵弾4(ホーミングレーザー)の発生                       KEY F -----------------
+        #敵弾4(ホーミングレーザー)の発生                                KEY F -----------------
         if(pyxel.frame_count % 100) == 0:
             if pyxel.btn(pyxel.KEY_F):
                 if len(self.enemy_shot) < 800:
@@ -199,7 +199,7 @@ class update_debug:
                     new_enemy_shot.update(ENEMY_SHOT_HOMING_LASER,ID00, WINDOW_W,posy,ESHOT_COL_MIN88,ESHOT_SIZE8,ESHOT_SIZE8, 0,0,   0.5,0.5,   1,    1,1,   0,20,0,    1,0,0,  0,0,PRIORITY_MORE_FRONT, 8,0,  0,0,0,0, 0,0, 0, 0,0, 0, 0,0, 0,0,   0,0)
                     self.enemy_shot.append(new_enemy_shot)
         
-        #敵弾5(サーチレーザー)の発生                          KEY G ------------------
+        #敵弾5(サーチレーザー)の発生                                    KEY G ------------------
         if(pyxel.frame_count % 100) == 0:
             if pyxel.btn(pyxel.KEY_G):
                 if len(self.enemy_shot) < 800:
@@ -307,14 +307,19 @@ class update_debug:
         #パーティクルを発生させる                              KEY P
         if(pyxel.frame_count % 1) == 0:
             if pyxel.btn(pyxel.KEY_P):
-                x = func.s_rndint(self,0,160)
-                y = func.s_rndint(self,0,120)
+                # x = func.s_rndint(self,0,160)
+                # y = func.s_rndint(self,0,120)
                 
-                update_obj.append_particle(self,PARTICLE_LINE,x,y,  0,0,0,0,0)
+                x,y = 80,60
+                dx,dy = -0.3 - random() * 2,-0.3 - random()
+                life = 1000
+                color = 0
+                update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,x,y,  dx,dy,life,0,color)
+                # update_obj.append_particle(self,PARTICLE_LINE,x,y,  0,0,0,0,0)
                 
-                #particle_number = func.s_rndint(self,0,10) + 50
-                #for number in range(particle_number):
-                #    update_obj.append_particle(self,PARTICLE_DOT,x,y,-0.5,-0.5, 0,0,0)
+                particle_number = func.s_rndint(self,0,10) + 50
+                for number in range(particle_number):
+                    update_obj.append_particle(self,PARTICLE_DOT,x,y,-0.5,-0.5, 0,0,0)
         
         #背景オブジェクト雲１を発生させる                        KEY E
         if(pyxel.frame_count % 6) == 0:
@@ -328,7 +333,7 @@ class update_debug:
         
         #パワーアップアイテム類を発生させる                       KEY U I O
         if(pyxel.frame_count % 8) == 0:
-            if pyxel.btn(pyxel.KEY_U): #ショットアイテム
+            if   pyxel.btn(pyxel.KEY_U): #ショットアイテム
                 y = func.s_rndint(self,0,120)
                 new_obtain_item = Obtain_item()
                 new_obtain_item.update(ITEM_SHOT_POWER_UP,WINDOW_W-20,y, 0.5,0,   SIZE_8,SIZE_8,   1,   0.9,  0.3,   0,0,  0.05,0,0,0,0,   1,0,0,  0,0,0, self.pow_item_bounce_num,0)

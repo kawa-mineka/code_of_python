@@ -9,22 +9,22 @@ MAIN_MENU_X = 44 #メインメニューのx座標
 MAIN_MENU_Y = 15 #メインメニューのy座標
 
 #アイテムのマップチップナンバーアドレス(場所)定義
-SHOT_POW_BG_NUM    = (0 / 8) * 32 + ( 8 / 8) #マップチップ x8y0 ショットアイテム 公式は(y/8)*32 + (x/8)となります
-MISSILE_POW_BG_NUM = (0 / 8) * 32 + (16 / 8) #マップチップx16y0 ミサイルアイテム
-SHIELD_POW_BG_NUM  = (0 / 8) * 32 + (24 / 8) #マップチップx24y0 シールドアイテム
-CLAW_POW_BG_NUM    = (0 / 8) * 32 + (32 / 8) #マップチップx32y0 クローアイテム
+SHOT_POW_BG_NUM         = (0 / 8) * 32 + ( 8 / 8)  #マップチップ x8y0 ショットアイテム 公式は(y/8)*32 + (x/8)となります
+MISSILE_POW_BG_NUM      = (0 / 8) * 32 + (16 / 8)  #マップチップx16y0 ミサイルアイテム
+SHIELD_POW_BG_NUM       = (0 / 8) * 32 + (24 / 8)  #マップチップx24y0 シールドアイテム
+CLAW_POW_BG_NUM         = (0 / 8) * 32 + (32 / 8)  #マップチップx32y0 クローアイテム
 
-TAIL_SHOT_BG_NUM        = (0 / 8) * 32 + (48 / 8) #マップチップx48y0 テイルショットアイテム
-PENETRATE_ROCKET_BG_NUM = (0 / 8) * 32 + (56 / 8) #マップチップx56y0 ペネトレートロケットアイテム
-SEARCH_LASER_BG_NUM     = (0 / 8) * 32 + (64 / 8) #マップチップx64y0 サーチレーザーアイテム
-HOMING_MISSILE_BG_NUM   = (0 / 8) * 32 + (72 / 8) #マップチップx72y0 ホーミングミサイルアイテム
-SHOCK_BUMPER_BG_NUM     = (0 / 8) * 32 + (80 / 8) #マップチップx80y0 ショックバンパーアイテム
-TRIANGLE_POW_BG_NUM     = (0 / 8) * 32 + (88 / 8) #マップチップx88y0 トライアングルアイテム
+TAIL_SHOT_BG_NUM        = (0 / 8) * 32 + (48 / 8)  #マップチップx48y0 テイルショットアイテム
+PENETRATE_ROCKET_BG_NUM = (0 / 8) * 32 + (56 / 8)  #マップチップx56y0 ペネトレートロケットアイテム
+SEARCH_LASER_BG_NUM     = (0 / 8) * 32 + (64 / 8)  #マップチップx64y0 サーチレーザーアイテム
+HOMING_MISSILE_BG_NUM   = (0 / 8) * 32 + (72 / 8)  #マップチップx72y0 ホーミングミサイルアイテム
+SHOCK_BUMPER_BG_NUM     = (0 / 8) * 32 + (80 / 8)  #マップチップx80y0 ショックバンパーアイテム
+TRIANGLE_POW_BG_NUM     = (0 / 8) * 32 + (88 / 8)  #マップチップx88y0 トライアングルアイテム
 
 #ボス移動ポイント指定用マップチップナンバーアドレス(場所)定義
-MOVE_POINT_BG_NUM  = (0 / 8) * 32 + (112 / 8) #移動点(ムーブポイント)   公式は(y/8)*32 + (x/8)となります
-CONTROL_POINT_NUM  = (0 / 8) * 32 + (120 / 8) #制御点(コントロールポイント)
-ZERO_BG_CHR_NUM    = (8 / 8) * 32 + (0 / 8)   #BGチップの「0」が描かれたタイルチップナンバー
+MOVE_POINT_BG_NUM       = (0 / 8) * 32 + (112 / 8) #移動点(ムーブポイント)   公式は(y/8)*32 + (x/8)となります
+CONTROL_POINT_NUM       = (0 / 8) * 32 + (120 / 8) #制御点(コントロールポイント)
+ZERO_BG_CHR_NUM         = (8 / 8) * 32 +   (0 / 8) #BGチップの「0」が描かれたタイルチップナンバー
 
 ALL_STAGE_NUMBER = 10 #全ステージ数(撃ち返し弾を出すとき ループ数×ALL_STAGE_NUMBER+ステージ数を計算して撃ち返すのか撃ち返さないのか判断します)
 
@@ -642,9 +642,10 @@ BG_OBJ_CLOUD19,BG_OBJ_CLOUD20,BG_OBJ_CLOUD21                                 = 1
 BG_OBJ_CLOUD22                                                               = 21              #雲特大22
 
 #爆発パターンの種類
-EXPLOSION_NORMAL =   0  #標準サイズ(8x8サイズ)の敵を倒したときの爆発パターン
-EXPLOSION_MIDDLE =   1  #スクランブルハッチや重爆撃機系の敵を倒したときの中くらいの爆発パターン 
-EXPLOSION_MY_SHIP = 10  #自機の爆発パターン
+EXPLOSION_NORMAL           =  0 #標準サイズ(8x8サイズ)の敵を倒したときの爆発パターン
+EXPLOSION_MIDDLE           =  1 #スクランブルハッチや重爆撃機系の敵を倒したときの中くらいの爆発パターン
+EXPLOSION_BOSS_PARTS_SMOKE =  2 #ボスのパーツが爆発した後に跳んでいく煙のパターン
+EXPLOSION_MY_SHIP          = 10 #自機の爆発パターン
 
 #メインメニューで使用する定数定義(0階層目)
 MENU_GAME_START       =  0 #ゲームスタート！
@@ -1069,7 +1070,7 @@ COMMENT_FLAG_OFF            = 0 #表示しない
 COMMENT_FLAG_ON             = 1 #表示する
 
 #セレクトカーソルの動き方
-CURSOR_MOVE_UD               =  0 #セレクトカーソルの動きは上下のみです UD=Up Down
+CURSOR_MOVE_UD               =  0 #セレクトカーソルの動きは上下のみです 「UD」はUpDownの頭文字です
 CURSOR_MOVE_UD_SLIDER        =  1 #セレクトカーソルは上下に動かすことができ、左右の入力でスライダーを動かせます
 CURSOR_MOVE_UD_SLIDER_BUTTON =  2 #セレクトカーソルは上下に動かすことができ、左右の入力でスライダーを動かせます ON/OFF切り替えの項目ではボタンを押すことでも切り替えができます
 CURSOR_MOVE_LR               =  3 #セレクトカーソルの動きは左右のみです LR=Left Right
@@ -1164,11 +1165,11 @@ BG_FRONT  = 2 #BGスクリーン手前
 
 #背景の星のスクロールの有無
 STAR_SCROLL_ON      = 1 #星スクロールあり
-STAR_SCROLL_OFF     = 0 #        なし
+STAR_SCROLL_OFF     = 0 #           なし
 
 #背景ラスタスクロールの有無 EVENT_RASTER_SCROLLの直後に記述されます
 RASTER_SCROLL_ON    = 1 #ラスタースクロールあり
-RASTER_SCROLL_OFF   = 0 #           なし
+RASTER_SCROLL_OFF   = 0 #                なし
 
 #背景ラスタスクロールの種類
 RASTER_NORMAL      = 0 #奥と手前のラインごとのスクロールスピードの差で奥行き感を出すタイプ (流れるスピードはスクロールスピードに依存します)

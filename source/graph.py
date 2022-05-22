@@ -477,6 +477,9 @@ class graph:
                     pyxel.blt(self.explosions[i].posx,self.explosions[i].posy - self.camera_offset_y,IMG2,48  -(self.explosions[i].explosion_count // 2 * 16),176,SIZE_16,SIZE_16 * self.explosions[i].y_reverse,pyxel.COLOR_BLACK)
                 elif  self.explosions[i].explosion_type == EXPLOSION_MY_SHIP:#自機爆発の爆発パターン表示
                     pyxel.blt(self.explosions[i].posx,self.explosions[i].posy - self.camera_offset_y,IMG2,240 -(self.explosions[i].explosion_count // 8 * 16),240, SIZE_16,SIZE_8,pyxel.COLOR_BLACK)
+                elif  self.explosions[i].explosion_type == EXPLOSION_BOSS_PARTS_SMOKE: #ボスのパーツが爆発した後に跳んでいく煙のパターン表示
+                    pyxel.blt(self.explosions[i].posx,self.explosions[i].posy - self.camera_offset_y,IMG2,88 -(self.explosions[i].explosion_count // 4 * 8)       ,168,  SIZE_8,SIZE_8,pyxel.COLOR_BLACK)
+                    
 
     #パーティクルの表示
     def draw_particle(self):

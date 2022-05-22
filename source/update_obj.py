@@ -5,13 +5,13 @@
 #  主に背景オブジェクトの更新を行う関数(メソッド？）ですよ～♪  #
 # 2022 04/03からファイル分割してモジュールとして運用開始      #
 ###########################################################
-import math         #三角関数などを使用したいのでインポートぉぉおお！
-from random import random
-from cv2 import dft    #random.random() と呼ぶと、0から1の範囲(1は含まない)のランダムな実数が返される(主にパーティクル系で使用します)
-import pyxel        #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
-from const import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
-from func  import * #汎用性のある関数群のモジュールの読み込み
+import math               #三角関数などを使用したいのでインポートぉぉおお！
+from random import random #random.random() と呼ぶと、0から1の範囲(1は含まない)のランダムな実数が返される(主にパーティクル系で使用します)
+import pyxel              #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
+from const import *       #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
+from define_class import * #クラス宣言モジュールの読み込み やっぱりimport *は不味いのかなぁ・・・よくわかんない
 
+from func  import *       #汎用性のある関数群のモジュールの読み込み
 class update_obj:
     def __init__(self):
         None
@@ -95,7 +95,13 @@ class update_obj:
                 self.particle[i].wait -= 1
             
             if  self.particle[i].particle_type == PARTICLE_BOSS_DEBRIS1:#ボスの破片の時は
-                self.particle[i].vy += 0.009 #y軸下方向に徐々に加速して落ちていくようにする
+                self.particle[i].vy += 0.01 #y軸下方向に徐々に加速して落ちていくようにする
+                #現在のボスの破片が存在する座標に新たに煙を育成する
+                if(pyxel.frame_count % 6) == 0:
+                    new_explosion = Explosion()
+                    new_explosion.update(EXPLOSION_BOSS_PARTS_SMOKE,PRIORITY_FRONT,self.particle[i].posx,self.particle[i].posy,0,0,48,RETURN_BULLET_NONE,0,  1,1)
+                    self.explosions.append(new_explosion)
+                
             elif self.particle[i].particle_type == PARTICLE_LINE: #パーティクルタイプ ラインタイプ
                 if   self.particle[i].life < 6:  #lifeが減るごとにcolorを6→12→5→1と変化させる
                     self.particle[i].color = 12
