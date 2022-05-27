@@ -175,6 +175,22 @@ class App:
             
         update_system.check_exist_sysytem_file(self) #ユーザープロファイルのcode-of-pythonフォルダにシステムファイルがあるかどうか調べなかったらデフォルトのシステムデータをコピーする
         
+        print(" ")
+        print("PYXEL VERSION " + pyxel.PYXEL_VERSION)
+        print("PYXEL WORKING DIR " + pyxel.PYXEL_WORKING_DIR)
+        
+        print("APP FILE EXTENSION " + pyxel.APP_FILE_EXTENSION)
+        print("APP STARTUP SCRIPT FILE " + pyxel.APP_STARTUP_SCRIPT_FILE)
+        print("RESOURCE_FILE_EXTENSION " + pyxel.RESOURCE_FILE_EXTENSION)
+        print("RESOURCE_ARCHIVE_DIRNAME " + pyxel.RESOURCE_ARCHIVE_DIRNAME)
+        print(" ")
+        print("NUM_COLORS "     + str(pyxel.NUM_COLORS))
+        print("NUM_IMAGES "     + str(pyxel.NUM_IMAGES))
+        print("IMAGE_SIZE "     + str(pyxel.IMAGE_SIZE))
+        print("NUM_TILEMAPS "   + str(pyxel.NUM_TILEMAPS))
+        print("TILEMAP_SIZE "   + str(pyxel.TILEMAP_SIZE))
+        print("TILE_SIZE "      + str(pyxel.TILE_SIZE))
+        
         pygame.mixer.init()  #pygameミキサー関連の初期化 pyxel.initよりも先にpygameをinitしないと上手く動かないみたい・・・
         pyxel.init(WINDOW_W,WINDOW_H,title="CODE OF PYTHON",fps = 60,quit_key=pyxel.KEY_NONE) #ゲームウィンドウのタイトルバーの表示とfpsの設定(60fpsにした),キーボード入力による強制終了は無しとする pyxel.init(caption=)がpyxel.init(title=)に変更されたっぽい？？？
         self.ship_equip_slot_list = [[0] * 6 for i in range(LOOK_AT_LOGO)]  #(横6,縦LOOK_AT_LOGO(15))までint(0)が入ったリストを作製し初期化します

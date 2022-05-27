@@ -100,5 +100,168 @@ Adjusted the number of power-up item bounces 2020 11/09
 Struggled with sound effects when getting power-up items → Took about 2 days to get something satisfactory (I'm not good with sound...) 2020 11/09
 I made it so that a power-up item appears when the enemy formation (circoins) is annihilated... 2020 11/12
 Changed the power-up item to oscillate up and down gradually & decrease the momentum of bouncing. 2020 11/13
-If we continue like this, the next 2 weeks will come after 2 weeks...
+If we continue like this, the next 2 weeks will come after 2 weeks... 2020 11/13
+Power-up items are very hard to get, so we've made it so that if they are close enough, they will be attracted to your ship. 2020 11/14
+All processes related to power-up items are implemented (probably) 2020 11/15
+Code list exceeds 4000 lines 2020 11/15
+Painter Mineka died on the beach! 2020 11/16
+I'm going to plan a scenario with "self" as my organization and "NullPointer" as the antagonist 2020 11/16
+If there is a force called "void", then there will also be an organization called "NullPointer".
+Implementing a square shape that goes around the subweapon power-up, but suffering from a bug where it goes flying off in the opposite direction 2020 11/17
+I notice a bug that x,y=0,0 in the upper left corner of the screen is the center of rotation → Fix and complete 2020 11/17
+I'm still wondering why python needs to add "self" when all it does is call a function.
+I don't know what I don't know, so I stop thinking about it 2020 11/19
+Cabinet decides to make "GAMBA.Ruby" an idle aircraft 2020 11/19
+2020 11/19 Lost in fantasy that the last battle will be a fierce battle between Python 4.0 (4th.force) and LastRust 2020 11/19
+Start implementation of triangle items 2020 11/19
+Struggling with the implementation of the decision of whether or not my plane is located inside a triangle 2020 11/19
+Inner product between 3 points? Hmm? Calculate the distance of each vertex of the triangle from the ship (by Pythagorean definition)? I don't understand 2020 11/21
+Is the outer product of vectors really only for 3 dimensions? I'm even more confused 2020 11/21
+I'm having trouble with a mysterious bug where I'm calling a function with an int and for some reason it returns a tuple return value, I don't know why, so I created an external variable and assigned the variable to it so that it returns without a return value 2020 11/22
+Does the type change on a whim? python 2020 11/22
+Triangle item is a compromise to determine the distance from the center... 2020 11/22
+Start implementation of fast turn system 2020 11/23
+Implementation of fast turn system completed 2020 11/29
+Added background scrolling speed adjustment, allowing for acceleration and deceleration 2020 11/29
+Scrolling stops after slowing down, but for some reason, it does not stop and starts scrolling backwards. 2020 11/29
+Assign the target 0 to the scroll speed value, add -0.01 to the current scroll speed, and when it reaches zero, it will stop.
+When I tried to use my credit card at the store, I couldn't use it → I checked the expiration date and found that it expired last month → I remember receiving the credit card in the mail → I remember folding the old credit card, cutting it up and throwing it away → but I have the expired card... orz 2020 12/03
+Implementation of the WARNING dialog 2020 12/05
+Implementation of WARNING warning sound 2020 12/06
+2020 12/06 Create Boss class for future use of existing Enemy class for boss character 2020 12/06
+Decide the specification to specify the coordinates smoothly using spline curve from the coordinates between the three points where the boss is going to move 2020 12/06
+Troubled with Bezier Curves and Spline Curves → U~~~ (while fainting with eyes wide open) 2020 12/06
+When my machine is "Classical FORTRAN 1954", BGM is beep sound, "FIRST_BASIC P60" is PSG, "FIRST_BASIC 88SR" is OPN, "FIRST_BASIC FA" is OPNA, and "FIRST_BASIC" is OPN.
+When the boss character takes damage during the battle and changes from 88SR to FA just before the destruction of the main machine, the song changes to OPNA in the middle of the battle.
+Implement Bernoulli's Remniscate Curve for boss characters 2020 12/13
+I'm not sure if it's a "Bernoulli" or a "Lemni". Bernoulli's Lemniscate is also called Jacob Bernoulli's Lemniscate.
+Implemented moving bosses on Bezier curve 2020 12/20
+Additional Fatty Burgard attack patterns implemented 2020 12/21
+Implementation of explosion patterns when bosses are destroyed begun 2020 12/21
+Bosses should separate and sink downward 2020 12/22
+Boss explosion patterns made so that boss debris dedicated to the boss is scattered 2020 12/23
+Boss durability display bar implemented 2020 12/27
+Implement rectangle display function for boss hit detection 2020 12/27
+Bosses can have multiple parts destroyed 2020 12/28
+Bosses should have multiple hit detection rectangles for complex shapes 2020 12/28
+WANING warning sound is too fukkin' thin, so it was changed. 2020 12/29
+Implemented a scene from clearing a stage to moving on to the next stage (stage clear dialog, acceleration of the ship & flying away to the right sequence) 2020 12/30
+Fixed a bug that score and shield energy are returned to initial value when moving to the next stage. 2020 12/31
+Fixed a bug in which the player mistakenly bought Donbei soba (buckwheat noodles) at a convenience store. Fixed a bug that there was no soba noodles to eat. 2020 12/31
+IPL and title-in implemented, title menu selection is not yet available 2021 01/03
+MOUNTAIN_REGION atmospheric entry scroll implemented 2021 01/04
+MOUNTAIN_REGION Background Cloud Graphics Creation 2021 01/10
+Adjustment of acceleration/deceleration scroll speed of atmospheric entry scene in MOUNTAIN_REGION 2021 01/10
+Setting a new record for the number of atmospheric entries in a single day, exceeding 52! 2021 01/17
+Wondering what a cactus over 100 meters high would look like 2021 01/17
+Added a mountain range to the background of MOUNTAIN_REGION 2021 01/17
+Add raster scroll on lake surface 2021 01/17
+Fletcher's plush toys are not sold anywhere 2021 01/19
+Rewrote BG data and added animation of waterfall in the background -> so buggy that the cassette is half-plugged and half-activated... 2021 01/25
+When looping the map and resetting the x-coordinate from 255 to 0, the counts seem to be out of sync. 2021 01/26
+Waterfall animation completed 2021 01/27
+covid-19 infected over 100 million people worldwide ・・・・orz 2021 01/27
+Implementation of raster scroll of clouds behind MOUNTAIN_REGION mountain range 2021 01/31
+Implementation of timer flare effect on own plane 2021 02/06
+MOUNTAIN_REGION Implementation of cloud rear raster scroll + front cloud scroll 2021 02/06 Implementation completed
+2021 01/27 Implementation of animation by rewriting BG map chip data 2021 02/08 Implementation complete 2021 02/08 Small waterfall animation of scrolling mid-plane mountain range also implemented
+MOUNTAIN_REGION Heating effects and sparks on the friction surface between the aircraft and itself when entering the atmosphere 2021 02/08 Almost completed
+Image banks 0~2 are now divided into odd BG, 1 into even BG, and 2 into objects, instead of having background objects, BG patterns, and fonts scattered in various places.
+Implemented stage & loop number selection in menu 2021 02/14 Implementation completed
+MOUNTAIN_REGION: Bug fix in which the stars in space and the stratosphere raster scroll are not displayed when restarting (maybe the variables are not initialized?). Initialized bg_cls_color and bg_transparent_color not only in __init__ but also in stage_start_init.
+The boss's damage detection is divided into "weak points" and "areas that only damage the player's ship" (until now, shots that hit "areas that only damage the player's ship" also inflicted damage). 2021 02/14 Implementation completed
+Implementation of a function to eject n-way bullets to aim and shoot 2021 02/20 Implementation completed
+Implementation of enemy guided projectiles 2021 02/21 Implementation complete
+Implementation of enemy homing laser 2021 02/21 Implementation complete
+Enemy Sine & Cosine Bullets 2021 02/22 Implementation Completed
+Enemy search lasers 2021 02/27 Implementation complete
+Enemy Rotating Bullets 2021 02/28 Implementation complete 2021 03/07 Enable to change the radius of rotation
+2021 02/28 Implementation of enemy accelerating and decelerating bullets completed 2021 02/28 
+Implementation of enemy falling bullets 2021 02/28 Implementation completed
+2021 02/28 Implementation of enemy splitting projectiles 2021 02/28 Implementation completed 2021 03/06 Enabled multiple splitting
+2021 03/08 Implementation of enemy up-lasers completed 2021 03/08 Implementation completed → Bug in which the judging of hits with background obstacles is done only in the leftmost 8x8 dots.
+Enemy down-laser implementation 2021 03/08 Implementation Completed → Bug in which the judging of hits with background obstacles is only done in the leftmost 8x8 dots.
+Enemy vector laser implementation 2021 03/10 Completed → Laser length is based on the center of the laser instead of the top of the laser.
+Implementation of an enemy that pinches from above and below when the x-axis is aligned with the ship (Clamparion) 2021 03/14 Completed → Vertical ion engine drawing animation should be performed even when pinched from above and below.
+Implementation of an enemy that moves to a predetermined location on the screen using a spline curve, and when it reaches that location, it aims and fires a bullet and leaves the screen at high speed (Roll Blitz) 2021 03/14 Implementation completed
+Implementation of difficulty level selection menu 2021 03/28 Implementation completed
+Implementation of an enemy like a heavy bomber that aims at your ship and fires scattered bombs from a slightly larger, more durable, and wider range 2021 03/20 Implementation complete
+Explosion patterns are now only exploding on the spot, so for ground objects, the explosion patterns should move according to the scroll speed 2021 03/20 Implementation completed
+2021 04/04 Completed Implementation of the rank system: The rank system was implemented so that the ranks would increase according to the survival time.
+Added a little invincibility time just after taking an item 2021 04/04/04
+Added a power-up item to block enemy bullets and eliminate them only on EASY and VERY_EASY 2021 04/04/04
+Implemented return fire (make explosion pattern create bullets) 2021 04/04/04
+Implemented save load of system data and configuration data using save and load commands for pyxeres file of pyxel 2021 04/11 Recorded difficulty level, number of stages started, and number of loops.
+The total game play time can be automatically recorded in system-data.pyxres, so that the next time the game is started up, the play time will still be recorded. 2021 04/11
+added delay type of return fire, and added acceleration element 2021 04/15
+Revised folder structure to put py files in source folder and asset files in asset folder and after. 2021 04/16
+Further reorganized folders and created system, graphic, sound, and music folders and placed resource files in each folder. 2021 04/17
+Missile and claw shot have a hit point against the boss character and can hit the boss. 2021 04/18
+The system-data can record the total test-play time and started to work from 2021 04/18
+Implementation of functions to write and read values directly into the system file system-data.pyxres 2021 04/19
+Introduced a level system for tail shots, with changes in attack power, number of shots, speed, and direction. 2021 04/21
+Introduced pygame and implemented the title and BGM for the first and second game. 2021 04/21
+With pyxel and pygame installed, I successfully created an exe file using pyxelpackager! At first I clicked on the file in the dist folder, ran it, and said, "It doesn't work! I was worried that it wouldn't work, but then I thought about it and realized that I had to move the file to the same folder as the pygame program or else I would get an error because I couldn't find the assets folder... I was worried for about 6 hours.
+Implement Japanese text display function using Misaki font → Finish creating code conversion table and font image files 2021 04/25 → Start implementing display function
+Implementation of Japanese text display function using Misaki font→I would like to say that implementation is complete, but it seems that half-width characters and certain characters are garbled... orz 2021 04/25
+Implementation of the change of item attraction range and the change of item bounce frequency depending on the difficulty level 2021 04/27
+Implementation of random number function by linear congruence method 2021 05/01
+Create our own random number function to generate random numbers that return a fixed number on replay. I don't know...) → Implement s_rndint function to replace randint function in the standard library 2021 05/01
+Toggle display of debug status items 2021 05/01
+Fixed all indentation with 5 spaces to standard python 4 spaces 2021 05/03
+Replay data playback implementation is going to hell... Replay playback is all out of sync! 2021 05/04
+Consideration of dividing the replay data by stage (reserve enough space for 50 stages) 2021 05/04
+Split replay data for each stage and record equipment status at the beginning of each stage. 2021 05/06
+No luck. All the GWs that don't work are going to be destroyed by the implementation of replay playback. 2021 05/06
+If the replay file is successfully replayed to the end, I'll get a trophy (achievement unlocked)! or something like that. 2021 05/06
+Replay file save-loading is implemented. 10 slots are secured and 7 slots can be saved at first. 2021 05/08
+I think Nakau's kakiage-don is delicious 2021 05/09
 
+First of all, only the score display function of the score ranking display process was implemented 2021 05/09
+It's quite a hassle......processing related to score display....... 2021 05/09
+2021 05/09 Implemented the score ranking display from the main menu, and the page roll-up display with left and right input for each difficulty level.
+I'm in a very umapiyo mood 2021 05/10
+I'm stuck with a homebrew function for quick sorting scores... Should I create a new list and go with the built-in sort() function... hmmm... 2021 05/11
+Implemented a simple bubble sort for sorting scores instead of quick sort after all... It's only 11 elements, so it's okay, even if it's slow 2021 05/13
+Completed implementation of score ranking display 2021 05/14
+The text display in the window class used to be done by creating a variable for each line and assigning it to each variable, but this could not be processed in a loop no matter how the for statement was used, so the text was expanded and displayed in a list. (I know, it's like "start from the beginning! I was able to reduce the number of lines by about 250, and it looks much better.
+When a window goes out of the screen, it is clipped and erased. 2021 05/23
+What the heck is a hoge? I was thinking about this all day today. 2021 05/23
+I didn't understand it after all, so tomorrow I'll be thinking about "what the heck is fuga? I have a feeling this will probably be a car... 2021 05/23
+Finally changed the file name of the main program to "code-of-python"! 2021 05/29
+I squashed a bug that was causing an out-of-index error when I erased a window in the middle of a window that was trying to get the index value of the foremost window based on the ID of the active window, but the index value was out of sync! (It took me 2 weeks to reproduce this bug by messing up the pad...) If you think about it, when you kill an enemy, you get an error like "DEL and index does not exist! I made the same mistake... History repeats itself... 2021 05/29
+Name Entry (Maybe it's not necessary? I'm wondering how to display the difficulty level... 2021 05/29
+In the DEFFICULTY selection menu, the window now jumps away in various directions after selection. 2021 06/07
+In the CONFIG screen, a new item for switching between full-screen and windowed startup is implemented -> I want to switch between full-screen and windowed display on the fly if possible (is it possible?), though it can only be switched by restarting the system. 2021 06/07
+It is now possible to turn on/off the boss mode, hitbox display, and debug status display on the CONFIG screen. 2021 06/07
+When exiting from the CONFIG screen, the system data is saved and the resources of the title screen are reloaded so that the system data can be reflected immediately. 2021 06/07
+The closing process of each window is implemented. 2021 06/11
+When adjusting a value with the left/right keys in the CONFIGir menu window, left/right arrows are displayed to indicate whether the current value is the maximum value or the minimum value? It is now possible to know whether the current value is the maximum, minimum, or middle value. 2021 06/13
+The volume of the main BGM can be changed in CONFIG (I'm not sure about the SE one, so I'm not going to do it! I don't understand pyxel sound!) 2021 06/19
+Graphic data related display in the window view, and animation is now possible. 2021 06/20
+I think the phenomenon that the power capsule doesn't come out when an enemy is defeated sometimes is related to the hit detection between the claw shot and the enemy. → I think the indentation is wrong in the loop part of the claw shot and enemy hit judgment function, so the instruction that should be processed was not processed.
+It seems that sometimes the power capsule does not appear when an enemy is defeated? Maybe it doesn't appear when you defeat an enemy (only formation group?) with a subweapon? I'm not getting a power capsule when I kill an enemy (only formation group?) with a subweapon? Maybe? → I think it's not the subweapon, but the claw shot and the enemy's hit detection function that's causing it! Really? ! 2021 06/20
+Sound effects (SE) when moving the cursor in the window menu or pressing buttons are implemented. 2021 06/20
+A year has passed since I started making a shooting game with an idea... I've only made 2 levels... No good!
+Display of medal list and detailed comment of each medal (Slot attachment is not implemented yet) 2021 07/04
+Added Japanese language display in the medal list description (also implemented recording in system data). 2021 07/05
+Added the ability to jump over obstacles when moving the cursor in the medal list. 2021 07/09
+In the medal list, the ok button for 3 characters horizontally is implemented and the rectangle type cursor is enlarged to fit the size of the button. 2021 07/11
+The size of the code list of the main program exceeded 1MB and I can't push to github anymore... What should I do...? 2021 07/11
+I'm thinking of splitting my program, but I don't know how to do it in python...! 2021 07/11
+I want to separate constant definitions and class declarations from the main program list... 2021 07/11
+I don't understand modules, libraries, frameworks, imports, etc...! 2021 07/11
+Oh well... Let's go with one file as it is... 2021 07/11
+Added an exit item from the main menu, so that the game can be exited, and the game exit by pressing the ESC key has been eliminated. 2021 07/11
+Added a pause menu item, allowing users to return to the title from pause and exit the game. 2021 07/17
+The game exit process is divided into "Exit from Title" and "Exit from Pause", and the title logo is not displayed when exiting from pause (the background is darkened and stars are played → the stars gradually slow down and stop) 2021 07/18
+The medal equipment window is implemented (not yet implemented for medals with more slots...) 2021 08/05 → Medals with more slots are also supported. 2021 08/09
+The medal equipment window is now automatically left-justified when an empty slot is found. 2021 08/06
+Added information on medals obtained and medals equipped on each aircraft to save and load system data. 2021 08/07
+Implemented the effect of medals that can obtain shot items in advance (the process of changing shot items into scoring items is not yet implemented) 2021 08/08 → Completed the implementation of the score star 2021 08/09
+Scorestar instead of shot items when equipping medals that allow you to get shot items in advance 2021 08/08
+Score star can be increased from 1x to 2x to 3x to 4x to 5x by taking score star without damage in a row (up to 5x for now) 2021 08/08
+Implementation of L's Shield equipment medal (durability display is not yet available...) 2021 08/08/08
+Implementation of STATUS menu: displaying cumulative game play time, number of times played, cumulative total score, and load-save from system data 2021 08/11
+Implemented the selection of aircraft from the aircraft selection window as a provisional feature. Well, there is still only one aircraft, JUSTICE PYTHON. ・・・・・ 2021 08/11
+2021 08/11 Implemented to display the number of cleared stages, the number of loops, and the medal equipment at the time of clearing on the scoreboard (not yet save-loadable as system data...) 2021 08/12

@@ -580,7 +580,6 @@ class update_ship:
                                 new_claw_shot.update(0,self.claw[i].posx,self.claw[i].posy,    3,0,   8,8,   0,0,  1,1)
                                 self.claw_shot.append(new_claw_shot)
 
-
     #フイックスクローの間隔を変化させる
     def change_fix_claw_interval(self):
         if (pyxel.frame_count % 8) == 0:
@@ -597,7 +596,6 @@ class update_ship:
         claw_count = len(self.claw)
         for i in reversed(range(claw_count)):
             self.claw[i].status = 0#全てのクローのステータスを0=回転開始や固定開始の初期位置まで動いていくにする
-
 
     #自機のスピードチェンジ!!!!
     def change_ship_speed(self):

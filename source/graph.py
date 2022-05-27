@@ -479,7 +479,6 @@ class graph:
                     pyxel.blt(self.explosions[i].posx,self.explosions[i].posy - self.camera_offset_y,IMG2,240 -(self.explosions[i].explosion_count // 8 * 16),240, SIZE_16,SIZE_8,pyxel.COLOR_BLACK)
                 elif  self.explosions[i].explosion_type == EXPLOSION_BOSS_PARTS_SMOKE: #ボスのパーツが爆発した後に跳んでいく煙のパターン表示
                     pyxel.blt(self.explosions[i].posx,self.explosions[i].posy - self.camera_offset_y,IMG2,120 -(self.explosions[i].explosion_count // 4 * 8)       ,168,  SIZE_8,SIZE_8,pyxel.COLOR_BLACK)
-                    
 
     #パーティクルの表示
     def draw_particle(self,disp_priority):
@@ -493,6 +492,7 @@ class graph:
                         
                 elif self.particle[i].particle_type == PARTICLE_LINE or\
                     self.particle[i].particle_type == PARTICLE_FIRE_SPARK: #パーティクルタイプ ラインタイプまたは大気圏突入時の火花タイプ
+                    
                     pyxel.pset(self.particle[i].posx,self.particle[i].posy - self.camera_offset_y,int(self.particle[i].color)) #正方形1ドット分のパーティクルを描画
                     
                 elif self.particle[i].particle_type == PARTICLE_CIRCLE: #パーティクルタイプ 円形パーティクルタイプ
@@ -512,6 +512,9 @@ class graph:
                     
                 elif self.particle[i].particle_type == PARTICLE_BOSS_DEBRIS4: #パーティクルタイプ ボスの破片その4
                     pyxel.blt(self.particle[i].posx,self.particle[i].posy - self.camera_offset_y,IMG2,192 + (8 - (self.particle[i].life % 8)) * 8,192, 8,8, pyxel.COLOR_BLACK) #ボス破片デブリ4をlifeの値をアニメーションパターンオフセット値としてスプライト表示する
+                    
+                elif self.particle[i].particle_type == PARTICLE_BOSS_DEBRIS_FREE_IMAGE: #パーティクルタイプ 自由な画像を定義できるタイプ
+                    pyxel.blt(self.particle[i].posx,self.particle[i].posy - self.camera_offset_y,self.particle[i].imgb,self.particle[i].u,self.particle[i].v, self.particle[i].width,self.particle[i].height,self.particle[i].color)
 
     #背景オブジェクトの表示
     def draw_background_object(self):

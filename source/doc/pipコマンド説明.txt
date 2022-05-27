@@ -1,0 +1,38 @@
+pipとは、Pythonのパッケージを管理するためのシステムです
+PyPI(Python Package Index)(パイソンパッケージインデックス)と呼ばれる、サードパーティライブラリを管理しているサイトから
+外部ライブラリをダウンロードしてインストールを実行、外部ライブラリのバージョン管理、削除、等々、面倒な作業を全てやってくれるのです！すごい！
+
+######インストール済みのライブラリの確認
+pip list
+最新版のみ表示
+pip list --outdated
+
+######ライブラリのインストール
+pip install
+
+#######ライブラリのアンインストール
+pip uninstall
+
+#######ライブラリのアップグレード
+--upgrade または -U を付けてインストールを実行する
+pip install --upgrade
+pip install -U
+
+#######pip自体のアップグレード
+You are using pip version 8.1.1, however version 9.0.1 is available.
+You should consider upgrading via the 'python -m pip install --upgrade pip' command.
+感じの表示が出たら
+pip install --upgrade pip
+または
+pip install -U pip
+でpip自体をアップグレードします
+
+#########バージョンを指定してインストール
+pip install パッケージ名==バージョン
+(例 pip install numpy==1.14.1)
+
+#########パッケージのダウングレード
+pip install パッケージ名==バージョン
+(バージョンを指定してインストールと同じ)
+
+

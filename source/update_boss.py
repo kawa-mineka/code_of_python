@@ -46,7 +46,7 @@ class update_boss:
             offset_x,offset_y = 0,0
             ax,ay, bx,by, cx,cy, dx,dy, qx,qy, vx,vy = 0,0, 0,0, 0,0, 0,0, 0,0, 0,0
             width,height = 14*8,6*8
-            
+            transparent_color = pyxel.COLOR_PEACH
             tilt_now      = 0
             tilt_max      = 0
             tilt_time_now = 0
@@ -120,6 +120,60 @@ class update_boss:
             display_time_parts7_hp_bar,display_time_parts8_hp_bar = 0,0
             display_time_parts9_hp_bar = 0
             
+            grp_parts1_width,grp_parts1_height = 9,9
+            grp_parts1_imgb = 0
+            grp_parts1_u,grp_parts1_v = 152,223
+            grp_parts1_offset_x,grp_parts1_offset_y = 0,0
+            grp_parts1_count,grp_parts1_animation = 0,0
+            
+            grp_parts2_width,grp_parts2_height = 0,0
+            grp_parts2_imgb = 0
+            grp_parts2_u,grp_parts2_v = 0,0
+            grp_parts2_offset_x,grp_parts2_offset_y = 0,0
+            grp_parts2_count,grp_parts2_animation = 0,0
+            
+            grp_parts3_width,grp_parts3_height = 0,0
+            grp_parts3_imgb = 0
+            grp_parts3_u,grp_parts3_v = 0,0
+            grp_parts3_offset_x,grp_parts3_offset_y = 0,0
+            grp_parts3_count,grp_parts3_animation = 0,0
+            
+            grp_parts4_width,grp_parts4_height = 0,0
+            grp_parts4_imgb = 0
+            grp_parts4_u,grp_parts4_v = 0,0
+            grp_parts4_offset_x,grp_parts4_offset_y = 0,0
+            grp_parts4_count,grp_parts4_animation = 0,0
+            
+            grp_parts5_width,grp_parts5_height = 0,0
+            grp_parts5_imgb = 0
+            grp_parts5_u,grp_parts5_v = 0,0
+            grp_parts5_offset_x,grp_parts5_offset_y = 0,0
+            grp_parts5_count,grp_parts5_animation = 0,0
+            
+            grp_parts6_width,grp_parts6_height = 0,0
+            grp_parts6_imgb = 0
+            grp_parts6_u,grp_parts6_v = 0,0
+            grp_parts6_offset_x,grp_parts6_offset_y = 0,0
+            grp_parts6_count,grp_parts6_animation = 0,0
+            
+            grp_parts7_width,grp_parts7_height = 0,0
+            grp_parts7_imgb = 0
+            grp_parts7_u,grp_parts7_v = 0,0
+            grp_parts7_offset_x,grp_parts7_offset_y = 0,0
+            grp_parts7_count,grp_parts7_animation = 0,0
+            
+            grp_parts8_width,grp_parts8_height = 0,0
+            grp_parts8_imgb = 0
+            grp_parts8_u,grp_parts8_v = 0,0
+            grp_parts8_offset_x,grp_parts8_offset_y = 0,0
+            grp_parts8_count,grp_parts8_animation = 0,0
+            
+            grp_parts9_width,grp_parts9_height = 0,0
+            grp_parts9_imgb = 0
+            grp_parts9_u,grp_parts9_v = 0,0
+            grp_parts9_offset_x,grp_parts9_offset_y = 0,0
+            grp_parts9_count,grp_parts9_animation = 0,0
+            
             new_boss.update(boss_id,boss_type,boss_status,
                 parts_number,
                 main_hp,
@@ -140,6 +194,7 @@ class update_boss:
                 posx,posy,bgx,bgy,offset_x,offset_y,
                 ax,ay, bx,by, cx,cy, dx,dy, qx,qy, vx,vy,
                 width,height,
+                transparent_color,
                 
                 tilt_now,tilt_max,tilt_time_now,tilt_time,
                 
@@ -191,10 +246,67 @@ class update_boss:
                 anime_speed_min,
                 anime_speed_max,
                 anime_speed_init,
+                
                 display_time_main_hp_bar,
+                
                 display_time_parts1_hp_bar,display_time_parts2_hp_bar,display_time_parts3_hp_bar,
                 display_time_parts4_hp_bar,display_time_parts5_hp_bar,display_time_parts6_hp_bar,
-                display_time_parts7_hp_bar,display_time_parts8_hp_bar,display_time_parts9_hp_bar
+                display_time_parts7_hp_bar,display_time_parts8_hp_bar,display_time_parts9_hp_bar,
+                
+                grp_parts1_width,grp_parts1_height,
+                grp_parts1_imgb,
+                grp_parts1_u,grp_parts1_v,
+                grp_parts1_offset_x,grp_parts1_offset_y,
+                grp_parts1_count,grp_parts1_animation,
+                
+                grp_parts2_width,grp_parts2_height,
+                grp_parts2_imgb,
+                grp_parts2_u,grp_parts2_v,
+                grp_parts2_offset_x,grp_parts2_offset_y,
+                grp_parts2_count,grp_parts2_animation,
+                
+                grp_parts3_width,grp_parts3_height,
+                grp_parts3_imgb,
+                grp_parts3_u,grp_parts3_v,
+                grp_parts3_offset_x,grp_parts3_offset_y,
+                grp_parts3_count,grp_parts3_animation,
+                
+                grp_parts4_width,grp_parts4_height,
+                grp_parts4_imgb,
+                grp_parts4_u,grp_parts4_v,
+                grp_parts4_offset_x,grp_parts4_offset_y,
+                grp_parts4_count,grp_parts4_animation,
+                
+                grp_parts5_width,grp_parts5_height,
+                grp_parts5_imgb,
+                grp_parts5_u,grp_parts5_v,
+                grp_parts5_offset_x,grp_parts5_offset_y,
+                grp_parts5_count,grp_parts5_animation,
+                
+                grp_parts6_width,grp_parts6_height,
+                grp_parts6_imgb,
+                grp_parts6_u,grp_parts6_v,
+                grp_parts6_offset_x,grp_parts6_offset_y,
+                grp_parts6_count,grp_parts6_animation,
+                
+                grp_parts7_width,grp_parts7_height,
+                grp_parts7_imgb,
+                grp_parts7_u,grp_parts7_v,
+                grp_parts7_offset_x,grp_parts7_offset_y,
+                grp_parts7_count,grp_parts7_animation,
+                
+                grp_parts8_width,grp_parts8_height,
+                grp_parts8_imgb,
+                grp_parts8_u,grp_parts8_v,
+                grp_parts8_offset_x,grp_parts8_offset_y,
+                grp_parts8_count,grp_parts8_animation,
+                
+                grp_parts9_width,grp_parts9_height,
+                grp_parts9_imgb,
+                grp_parts9_u,grp_parts9_v,
+                grp_parts9_offset_x,grp_parts9_offset_y,
+                grp_parts9_count,grp_parts9_animation
+                
                 )
             self.boss.append(new_boss)      
             
@@ -224,6 +336,7 @@ class update_boss:
             offset_x,offset_y = 0,0
             ax,ay, bx,by, cx,cy, dx,dy, qx,qy, vx,vy = 0,0, 0,0, 0,0, 0,0, 0,0, 0,0
             width,height = 8*8,5*8
+            transparent_color = pyxel.COLOR_PEACH
             
             tilt_now      = 0
             tilt_max      = 0
@@ -298,6 +411,60 @@ class update_boss:
             display_time_parts7_hp_bar,display_time_parts8_hp_bar = 0,0
             display_time_parts9_hp_bar = 0
             
+            grp_parts1_width,grp_parts1_height = 0,0
+            grp_parts1_imgb = 0
+            grp_parts1_u,grp_parts1_v = 0,0
+            grp_parts1_offset_x,grp_parts1_offset_y = 0,0
+            grp_parts1_count,grp_parts1_animation = 0,0
+            
+            grp_parts2_width,grp_parts2_height = 0,0
+            grp_parts2_imgb = 0
+            grp_parts2_u,grp_parts2_v = 0,0
+            grp_parts2_offset_x,grp_parts2_offset_y = 0,0
+            grp_parts2_count,grp_parts2_animation = 0,0
+            
+            grp_parts3_width,grp_parts3_height = 0,0
+            grp_parts3_imgb = 0
+            grp_parts3_u,grp_parts3_v = 0,0
+            grp_parts3_offset_x,grp_parts3_offset_y = 0,0
+            grp_parts3_count,grp_parts3_animation = 0,0
+            
+            grp_parts4_width,grp_parts4_height = 0,0
+            grp_parts4_imgb = 0
+            grp_parts4_u,grp_parts4_v = 0,0
+            grp_parts4_offset_x,grp_parts4_offset_y = 0,0
+            grp_parts4_count,grp_parts4_animation = 0,0
+            
+            grp_parts5_width,grp_parts5_height = 0,0
+            grp_parts5_imgb = 0
+            grp_parts5_u,grp_parts5_v = 0,0
+            grp_parts5_offset_x,grp_parts5_offset_y = 0,0
+            grp_parts5_count,grp_parts5_animation = 0,0
+            
+            grp_parts6_width,grp_parts6_height = 0,0
+            grp_parts6_imgb = 0
+            grp_parts6_u,grp_parts6_v = 0,0
+            grp_parts6_offset_x,grp_parts6_offset_y = 0,0
+            grp_parts6_count,grp_parts6_animation = 0,0
+            
+            grp_parts7_width,grp_parts7_height = 0,0
+            grp_parts7_imgb = 0
+            grp_parts7_u,grp_parts7_v = 0,0
+            grp_parts7_offset_x,grp_parts7_offset_y = 0,0
+            grp_parts7_count,grp_parts7_animation = 0,0
+            
+            grp_parts8_width,grp_parts8_height = 0,0
+            grp_parts8_imgb = 0
+            grp_parts8_u,grp_parts8_v = 0,0
+            grp_parts8_offset_x,grp_parts8_offset_y = 0,0
+            grp_parts8_count,grp_parts8_animation = 0,0
+            
+            grp_parts9_width,grp_parts9_height = 0,0
+            grp_parts9_imgb = 0
+            grp_parts9_u,grp_parts9_v = 0,0
+            grp_parts9_offset_x,grp_parts9_offset_y = 0,0
+            grp_parts9_count,grp_parts9_animation = 0,0
+            
             new_boss.update(boss_id,boss_type,boss_status,
                 parts_number,
                 main_hp,
@@ -318,6 +485,7 @@ class update_boss:
                 posx,posy,bgx,bgy,offset_x,offset_y,
                 ax,ay, bx,by, cx,cy, dx,dy, qx,qy, vx,vy,
                 width,height,
+                transparent_color,
                 
                 tilt_now,tilt_max,tilt_time_now,tilt_time,
                 
@@ -371,7 +539,62 @@ class update_boss:
                 display_time_main_hp_bar,
                 display_time_parts1_hp_bar,display_time_parts2_hp_bar,display_time_parts3_hp_bar,
                 display_time_parts4_hp_bar,display_time_parts5_hp_bar,display_time_parts6_hp_bar,
-                display_time_parts7_hp_bar,display_time_parts8_hp_bar,display_time_parts9_hp_bar
+                display_time_parts7_hp_bar,display_time_parts8_hp_bar,display_time_parts9_hp_bar,
+                
+                grp_parts1_width,grp_parts1_height,
+                grp_parts1_imgb,
+                grp_parts1_u,grp_parts1_v,
+                grp_parts1_offset_x,grp_parts1_offset_y,
+                grp_parts1_count,grp_parts1_animation,
+                
+                grp_parts2_width,grp_parts2_height,
+                grp_parts2_imgb,
+                grp_parts2_u,grp_parts2_v,
+                grp_parts2_offset_x,grp_parts2_offset_y,
+                grp_parts2_count,grp_parts2_animation,
+                
+                grp_parts3_width,grp_parts3_height,
+                grp_parts3_imgb,
+                grp_parts3_u,grp_parts3_v,
+                grp_parts3_offset_x,grp_parts3_offset_y,
+                grp_parts3_count,grp_parts3_animation,
+                
+                grp_parts4_width,grp_parts4_height,
+                grp_parts4_imgb,
+                grp_parts4_u,grp_parts4_v,
+                grp_parts4_offset_x,grp_parts4_offset_y,
+                grp_parts4_count,grp_parts4_animation,
+                
+                grp_parts5_width,grp_parts5_height,
+                grp_parts5_imgb,
+                grp_parts5_u,grp_parts5_v,
+                grp_parts5_offset_x,grp_parts5_offset_y,
+                grp_parts5_count,grp_parts5_animation,
+                
+                grp_parts6_width,grp_parts6_height,
+                grp_parts6_imgb,
+                grp_parts6_u,grp_parts6_v,
+                grp_parts6_offset_x,grp_parts6_offset_y,
+                grp_parts6_count,grp_parts6_animation,
+                
+                grp_parts7_width,grp_parts7_height,
+                grp_parts7_imgb,
+                grp_parts7_u,grp_parts7_v,
+                grp_parts7_offset_x,grp_parts7_offset_y,
+                grp_parts7_count,grp_parts7_animation,
+                
+                grp_parts8_width,grp_parts8_height,
+                grp_parts8_imgb,
+                grp_parts8_u,grp_parts8_v,
+                grp_parts8_offset_x,grp_parts8_offset_y,
+                grp_parts8_count,grp_parts8_animation,
+                
+                grp_parts9_width,grp_parts9_height,
+                grp_parts9_imgb,
+                grp_parts9_u,grp_parts9_v,
+                grp_parts9_offset_x,grp_parts9_offset_y,
+                grp_parts9_count,grp_parts9_animation
+                
                 )
             self.boss.append(new_boss)
             
@@ -401,6 +624,7 @@ class update_boss:
             offset_x,offset_y = 0,0
             ax,ay, bx,by, cx,cy, dx,dy, qx,qy, vx,vy = 0,0, 0,0, 0,0, 0,0, 0,0, 0,0
             width,height = 6*8,5*8
+            transparent_color = pyxel.COLOR_PEACH
             
             tilt_now      = 0
             tilt_max      = 4  #機体が傾くドット数は4ドット
@@ -476,6 +700,60 @@ class update_boss:
             display_time_parts7_hp_bar,display_time_parts8_hp_bar = 0,0
             display_time_parts9_hp_bar = 0
             
+            grp_parts1_width,grp_parts1_height = 0,0
+            grp_parts1_imgb = 0
+            grp_parts1_u,grp_parts1_v = 0,0
+            grp_parts1_offset_x,grp_parts1_offset_y = 0,0
+            grp_parts1_count,grp_parts1_animation = 0,0
+            
+            grp_parts2_width,grp_parts2_height = 0,0
+            grp_parts2_imgb = 0
+            grp_parts2_u,grp_parts2_v = 0,0
+            grp_parts2_offset_x,grp_parts2_offset_y = 0,0
+            grp_parts2_count,grp_parts2_animation = 0,0
+            
+            grp_parts3_width,grp_parts3_height = 0,0
+            grp_parts3_imgb = 0
+            grp_parts3_u,grp_parts3_v = 0,0
+            grp_parts3_offset_x,grp_parts3_offset_y = 0,0
+            grp_parts3_count,grp_parts3_animation = 0,0
+            
+            grp_parts4_width,grp_parts4_height = 0,0
+            grp_parts4_imgb = 0
+            grp_parts4_u,grp_parts4_v = 0,0
+            grp_parts4_offset_x,grp_parts4_offset_y = 0,0
+            grp_parts4_count,grp_parts4_animation = 0,0
+            
+            grp_parts5_width,grp_parts5_height = 0,0
+            grp_parts5_imgb = 0
+            grp_parts5_u,grp_parts5_v = 0,0
+            grp_parts5_offset_x,grp_parts5_offset_y = 0,0
+            grp_parts5_count,grp_parts5_animation = 0,0
+            
+            grp_parts6_width,grp_parts6_height = 0,0
+            grp_parts6_imgb = 0
+            grp_parts6_u,grp_parts6_v = 0,0
+            grp_parts6_offset_x,grp_parts6_offset_y = 0,0
+            grp_parts6_count,grp_parts6_animation = 0,0
+            
+            grp_parts7_width,grp_parts7_height = 0,0
+            grp_parts7_imgb = 0
+            grp_parts7_u,grp_parts7_v = 0,0
+            grp_parts7_offset_x,grp_parts7_offset_y = 0,0
+            grp_parts7_count,grp_parts7_animation = 0,0
+            
+            grp_parts8_width,grp_parts8_height = 0,0
+            grp_parts8_imgb = 0
+            grp_parts8_u,grp_parts8_v = 0,0
+            grp_parts8_offset_x,grp_parts8_offset_y = 0,0
+            grp_parts8_count,grp_parts8_animation = 0,0
+            
+            grp_parts9_width,grp_parts9_height = 0,0
+            grp_parts9_imgb = 0
+            grp_parts9_u,grp_parts9_v = 0,0
+            grp_parts9_offset_x,grp_parts9_offset_y = 0,0
+            grp_parts9_count,grp_parts9_animation = 0,0
+            
             new_boss.update(boss_id,boss_type,boss_status,
                 parts_number,
                 main_hp,
@@ -496,6 +774,7 @@ class update_boss:
                 posx,posy,bgx,bgy,offset_x,offset_y,
                 ax,ay, bx,by, cx,cy, dx,dy, qx,qy, vx,vy,
                 width,height,
+                transparent_color,
                 
                 tilt_now,tilt_max,tilt_time_now,tilt_time,
                 
@@ -549,7 +828,62 @@ class update_boss:
                 display_time_main_hp_bar,
                 display_time_parts1_hp_bar,display_time_parts2_hp_bar,display_time_parts3_hp_bar,
                 display_time_parts4_hp_bar,display_time_parts5_hp_bar,display_time_parts6_hp_bar,
-                display_time_parts7_hp_bar,display_time_parts8_hp_bar,display_time_parts9_hp_bar
+                display_time_parts7_hp_bar,display_time_parts8_hp_bar,display_time_parts9_hp_bar,
+                
+                grp_parts1_width,grp_parts1_height,
+                grp_parts1_imgb,
+                grp_parts1_u,grp_parts1_v,
+                grp_parts1_offset_x,grp_parts1_offset_y,
+                grp_parts1_count,grp_parts1_animation,
+                
+                grp_parts2_width,grp_parts2_height,
+                grp_parts2_imgb,
+                grp_parts2_u,grp_parts2_v,
+                grp_parts2_offset_x,grp_parts2_offset_y,
+                grp_parts2_count,grp_parts2_animation,
+                
+                grp_parts3_width,grp_parts3_height,
+                grp_parts3_imgb,
+                grp_parts3_u,grp_parts3_v,
+                grp_parts3_offset_x,grp_parts3_offset_y,
+                grp_parts3_count,grp_parts3_animation,
+                
+                grp_parts4_width,grp_parts4_height,
+                grp_parts4_imgb,
+                grp_parts4_u,grp_parts4_v,
+                grp_parts4_offset_x,grp_parts4_offset_y,
+                grp_parts4_count,grp_parts4_animation,
+                
+                grp_parts5_width,grp_parts5_height,
+                grp_parts5_imgb,
+                grp_parts5_u,grp_parts5_v,
+                grp_parts5_offset_x,grp_parts5_offset_y,
+                grp_parts5_count,grp_parts5_animation,
+                
+                grp_parts6_width,grp_parts6_height,
+                grp_parts6_imgb,
+                grp_parts6_u,grp_parts6_v,
+                grp_parts6_offset_x,grp_parts6_offset_y,
+                grp_parts6_count,grp_parts6_animation,
+                
+                grp_parts7_width,grp_parts7_height,
+                grp_parts7_imgb,
+                grp_parts7_u,grp_parts7_v,
+                grp_parts7_offset_x,grp_parts7_offset_y,
+                grp_parts7_count,grp_parts7_animation,
+                
+                grp_parts8_width,grp_parts8_height,
+                grp_parts8_imgb,
+                grp_parts8_u,grp_parts8_v,
+                grp_parts8_offset_x,grp_parts8_offset_y,
+                grp_parts8_count,grp_parts8_animation,
+                
+                grp_parts9_width,grp_parts9_height,
+                grp_parts9_imgb,
+                grp_parts9_u,grp_parts9_v,
+                grp_parts9_offset_x,grp_parts9_offset_y,
+                grp_parts9_count,grp_parts9_animation
+                
                 )
             self.boss.append(new_boss)
 

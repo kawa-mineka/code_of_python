@@ -451,6 +451,7 @@ class Boss:#ボスキャラのクラス設定
         
         self.width  = 0  #画像の横の大きさ
         self.height = 0  #画像の縦の大きさ
+        self.transparent_color = 0 #透明色
         
         self.tilt_now      = 0 #現在の画像の傾き具合 y軸方向にどれだけ傾て(チルト)いるかの数値 0なら通常 -1なら上昇中 1なら下降中(roll とかにした方が良いかも・・・)
         self.tilt_max      = 0 #傾きの最大値        y軸方向に最大どれだけ傾くかの最大値(値は変化しません)
@@ -607,7 +608,7 @@ class Boss:#ボスキャラのクラス設定
         self.anime_speed_min  = 0 #現在のアニメーションスピードの最低値(これより小さくなったらダメだよ)判定値として使用します
         self.anime_speed_max  = 0 #現在のアニメーションスピードの最大値(超えたらダメだよ)判定値として使用します
         self.anime_speed_init = 0 #アニメーションスピードの初期値
-        self.display_time_main_hp_bar   = 0 #耐久力ゲージをどれだけの時間表示させるかのカウント 1=60ミリ秒
+        self.display_time_main_hp_bar   = 0 #耐久力ゲージをどれだけの時間表示させるかのカウント 1=60分の1ミリ秒
         self.display_time_parts1_hp_bar = 0
         self.display_time_parts2_hp_bar = 0
         self.display_time_parts3_hp_bar = 0
@@ -617,6 +618,97 @@ class Boss:#ボスキャラのクラス設定
         self.display_time_parts7_hp_bar = 0
         self.display_time_parts8_hp_bar = 0
         self.display_time_parts9_hp_bar = 0
+        #パーツ(部位)1のグラフイックの指定値
+        self.grp_parts1_width     = 0 #横幅
+        self.grp_parts1_height    = 0 #縦幅
+        self.grp_parts1_imgb      = 0 #画像が収納されているイメージバンク数
+        self.grp_parts1_u         = 0 #画像の位置u
+        self.grp_parts1_v         = 0 #         v
+        self.grp_parts1_offset_x  = 0 #パーツx軸方向のオフセット値(爆発の煙を育成するときの中心値の指定とかで使うかも？)
+        self.grp_parts1_offset_y  = 0 #パーツy軸方向のオフセット値(爆発の煙を育成するときの中心値の指定とかで使うかも？)
+        self.grp_parts1_count     = 0 #カウント用
+        self.grp_parts1_animation = 0 #アニメーション用
+        #パーツ(部位)2のグラフイックの指定値
+        self.grp_parts2_width     = 0 #横幅
+        self.grp_parts2_height    = 0 #縦幅
+        self.grp_parts2_imgb      = 0 #画像が収納されているイメージバンク数
+        self.grp_parts2_u         = 0 #画像の位置u
+        self.grp_parts2_v         = 0 #         v
+        self.grp_parts2_offset_x  = 0 #パーツx軸方向のオフセット値(爆発の煙を育成するときの中心値の指定とかで使うかも？)
+        self.grp_parts2_offset_y  = 0 #パーツy軸方向のオフセット値(爆発の煙を育成するときの中心値の指定とかで使うかも？)
+        self.grp_parts2_count     = 0 #カウント用
+        self.grp_parts2_animation = 0 #アニメーション用
+        #パーツ(部位)3のグラフイックの指定値
+        self.grp_parts3_width     = 0 #横幅
+        self.grp_parts3_height    = 0 #縦幅
+        self.grp_parts3_imgb      = 0 #画像が収納されているイメージバンク数
+        self.grp_parts3_u         = 0 #画像の位置u
+        self.grp_parts3_v         = 0 #         v
+        self.grp_parts3_offset_x  = 0 #パーツx軸方向のオフセット値(爆発の煙を育成するときの中心値の指定とかで使うかも？)
+        self.grp_parts3_offset_y  = 0 #パーツy軸方向のオフセット値(爆発の煙を育成するときの中心値の指定とかで使うかも？)
+        self.grp_parts3_count     = 0 #カウント用
+        self.grp_parts3_animation = 0 #アニメーション用
+        #パーツ(部位)4のグラフイックの指定値
+        self.grp_parts4_width     = 0 #横幅
+        self.grp_parts4_height    = 0 #縦幅
+        self.grp_parts4_imgb      = 0 #画像が収納されているイメージバンク数
+        self.grp_parts4_u         = 0 #画像の位置u
+        self.grp_parts4_v         = 0 #         v
+        self.grp_parts4_offset_x  = 0 #パーツx軸方向のオフセット値(爆発の煙を育成するときの中心値の指定とかで使うかも？)
+        self.grp_parts4_offset_y  = 0 #パーツy軸方向のオフセット値(爆発の煙を育成するときの中心値の指定とかで使うかも？)
+        self.grp_parts4_count     = 0 #カウント用
+        self.grp_parts4_animation = 0 #アニメーション用
+        #パーツ(部位)5のグラフイックの指定値
+        self.grp_parts5_width     = 0 #横幅
+        self.grp_parts5_height    = 0 #縦幅
+        self.grp_parts5_imgb      = 0 #画像が収納されているイメージバンク数
+        self.grp_parts5_u         = 0 #画像の位置u
+        self.grp_parts5_v         = 0 #         v
+        self.grp_parts5_offset_x  = 0 #パーツx軸方向のオフセット値(爆発の煙を育成するときの中心値の指定とかで使うかも？)
+        self.grp_parts5_offset_y  = 0 #パーツy軸方向のオフセット値(爆発の煙を育成するときの中心値の指定とかで使うかも？)
+        self.grp_parts5_count     = 0 #カウント用
+        self.grp_parts5_animation = 0 #アニメーション用
+        #パーツ(部位)6のグラフイックの指定値
+        self.grp_parts6_width     = 0 #横幅
+        self.grp_parts6_height    = 0 #縦幅
+        self.grp_parts6_imgb      = 0 #画像が収納されているイメージバンク数
+        self.grp_parts6_u         = 0 #画像の位置u
+        self.grp_parts6_v         = 0 #         v
+        self.grp_parts6_offset_x  = 0 #パーツx軸方向のオフセット値(爆発の煙を育成するときの中心値の指定とかで使うかも？)
+        self.grp_parts6_offset_y  = 0 #パーツy軸方向のオフセット値(爆発の煙を育成するときの中心値の指定とかで使うかも？)
+        self.grp_parts6_count     = 0 #カウント用
+        self.grp_parts6_animation = 0 #アニメーション用
+        #パーツ(部位)7のグラフイックの指定値
+        self.grp_parts7_width     = 0 #横幅
+        self.grp_parts7_height    = 0 #縦幅
+        self.grp_parts7_imgb      = 0 #画像が収納されているイメージバンク数
+        self.grp_parts7_u         = 0 #画像の位置u
+        self.grp_parts7_v         = 0 #         v
+        self.grp_parts7_offset_x  = 0 #パーツx軸方向のオフセット値(爆発の煙を育成するときの中心値の指定とかで使うかも？)
+        self.grp_parts7_offset_y  = 0 #パーツy軸方向のオフセット値(爆発の煙を育成するときの中心値の指定とかで使うかも？)
+        self.grp_parts7_count     = 0 #カウント用
+        self.grp_parts7_animation = 0 #アニメーション用
+        #パーツ(部位)8のグラフイックの指定値
+        self.grp_parts8_width     = 0 #横幅
+        self.grp_parts8_height    = 0 #縦幅
+        self.grp_parts8_imgb      = 0 #画像が収納されているイメージバンク数
+        self.grp_parts8_u         = 0 #画像の位置u
+        self.grp_parts8_v         = 0 #         v
+        self.grp_parts8_offset_x  = 0 #パーツx軸方向のオフセット値(爆発の煙を育成するときの中心値の指定とかで使うかも？)
+        self.grp_parts8_offset_y  = 0 #パーツy軸方向のオフセット値(爆発の煙を育成するときの中心値の指定とかで使うかも？)
+        self.grp_parts8_count     = 0 #カウント用
+        self.grp_parts8_animation = 0 #アニメーション用
+        #パーツ(部位)9のグラフイックの指定値
+        self.grp_parts9_width     = 0 #横幅
+        self.grp_parts9_height    = 0 #縦幅
+        self.grp_parts9_imgb      = 0 #画像が収納されているイメージバンク数
+        self.grp_parts9_u         = 0 #画像の位置u
+        self.grp_parts9_v         = 0 #         v
+        self.grp_parts9_offset_x  = 0 #パーツx軸方向のオフセット値(爆発の煙を育成するときの中心値の指定とかで使うかも？)
+        self.grp_parts9_offset_y  = 0 #パーツy軸方向のオフセット値(爆発の煙を育成するときの中心値の指定とかで使うかも？)
+        self.grp_parts9_count     = 0 #カウント用
+        self.grp_parts9_animation = 0 #アニメーション用
+
     def update(self,boss_id,boss_type,status,parts_number,
             main_hp,
             parts1_hp,parts2_hp,parts3_hp,
@@ -634,7 +726,7 @@ class Boss:#ボスキャラのクラス設定
             weapon5_status,weapon5_interval,weapon5_rapid_num,weapon5_cool_down_time,weapon5_omen_count,
             x,y,bgx,bgy,offset_x,offset_y,ax,ay,bx,by,cx,cy,dx,dy,qx,qy,vx,vy,
             width,height,
-            
+            transparent_color,
             tilt_now,tilt_max,tilt_time_now,tilt_time,
             
             col_damage_point1_x,col_damage_point1_y,col_damage_point1_w,col_damage_point1_h,
@@ -688,6 +780,61 @@ class Boss:#ボスキャラのクラス設定
             display_time_parts1_hp_bar,display_time_parts2_hp_bar,display_time_parts3_hp_bar,
             display_time_parts4_hp_bar,display_time_parts5_hp_bar,display_time_parts6_hp_bar,
             display_time_parts7_hp_bar,display_time_parts8_hp_bar,display_time_parts9_hp_bar,
+            
+            grp_parts1_width,grp_parts1_height,
+            grp_parts1_imgb,
+            grp_parts1_u,grp_parts1_v,
+            grp_parts1_offset_x,grp_parts1_offset_y,
+            grp_parts1_count,grp_parts1_animation,
+            
+            grp_parts2_width,grp_parts2_height,
+            grp_parts2_imgb,
+            grp_parts2_u,grp_parts2_v,
+            grp_parts2_offset_x,grp_parts2_offset_y,
+            grp_parts2_count,grp_parts2_animation,
+            
+            grp_parts3_width,grp_parts3_height,
+            grp_parts3_imgb,
+            grp_parts3_u,grp_parts3_v,
+            grp_parts3_offset_x,grp_parts3_offset_y,
+            grp_parts3_count,grp_parts3_animation,
+            
+            grp_parts4_width,grp_parts4_height,
+            grp_parts4_imgb,
+            grp_parts4_u,grp_parts4_v,
+            grp_parts4_offset_x,grp_parts4_offset_y,
+            grp_parts4_count,grp_parts4_animation,
+            
+            grp_parts5_width,grp_parts5_height,
+            grp_parts5_imgb,
+            grp_parts5_u,grp_parts5_v,
+            grp_parts5_offset_x,grp_parts5_offset_y,
+            grp_parts5_count,grp_parts5_animation,
+            
+            grp_parts6_width,grp_parts6_height,
+            grp_parts6_imgb,
+            grp_parts6_u,grp_parts6_v,
+            grp_parts6_offset_x,grp_parts6_offset_y,
+            grp_parts6_count,grp_parts6_animation,
+            
+            grp_parts7_width,grp_parts7_height,
+            grp_parts7_imgb,
+            grp_parts7_u,grp_parts7_v,
+            grp_parts7_offset_x,grp_parts7_offset_y,
+            grp_parts7_count,grp_parts7_animation,
+            
+            grp_parts8_width,grp_parts8_height,
+            grp_parts8_imgb,
+            grp_parts8_u,grp_parts8_v,
+            grp_parts8_offset_x,grp_parts8_offset_y,
+            grp_parts8_count,grp_parts8_animation,
+            
+            grp_parts9_width,grp_parts9_height,
+            grp_parts9_imgb,
+            grp_parts9_u,grp_parts9_v,
+            grp_parts9_offset_x,grp_parts9_offset_y,
+            grp_parts9_count,grp_parts9_animation
+            
             ):
         self.boss_id = boss_id
         self.boss_type = boss_type
@@ -764,6 +911,7 @@ class Boss:#ボスキャラのクラス設定
         self.vy = vy
         self.width  = width 
         self.height = height
+        self.transparent_color = transparent_color
         self.tilt_now      = tilt_now
         self.tilt_max      = tilt_max
         self.tilt_time_now = tilt_time_now
@@ -954,7 +1102,98 @@ class Boss:#ボスキャラのクラス設定
         self.display_time_parts6_hp_bar = display_time_parts6_hp_bar
         self.display_time_parts7_hp_bar = display_time_parts7_hp_bar
         self.display_time_parts8_hp_bar = display_time_parts8_hp_bar
-        self.display_time_parts9_hp_bar = display_time_parts9_hp_bar     
+        self.display_time_parts9_hp_bar = display_time_parts9_hp_bar
+        
+        self.grp_parts1_width     = grp_parts1_width
+        self.grp_parts1_height    = grp_parts1_height
+        self.grp_parts1_imgb      = grp_parts1_imgb
+        self.grp_parts1_u         = grp_parts1_u
+        self.grp_parts1_v         = grp_parts1_v
+        self.grp_parts1_offset_x  = grp_parts1_offset_x
+        self.grp_parts1_offset_y  = grp_parts1_offset_y
+        self.grp_parts1_count     = grp_parts1_count
+        self.grp_parts1_animation = grp_parts1_animation
+        
+        self.grp_parts2_width     = grp_parts2_width
+        self.grp_parts2_height    = grp_parts2_height
+        self.grp_parts2_imgb      = grp_parts2_imgb
+        self.grp_parts2_u         = grp_parts2_u
+        self.grp_parts2_v         = grp_parts2_v
+        self.grp_parts2_offset_x  = grp_parts2_offset_x
+        self.grp_parts2_offset_y  = grp_parts2_offset_y
+        self.grp_parts2_count     = grp_parts2_count
+        self.grp_parts2_animation = grp_parts2_animation
+        
+        self.grp_parts3_width     = grp_parts3_width
+        self.grp_parts3_height    = grp_parts3_height
+        self.grp_parts3_imgb      = grp_parts3_imgb
+        self.grp_parts3_u         = grp_parts3_u
+        self.grp_parts3_v         = grp_parts3_v
+        self.grp_parts3_offset_x  = grp_parts3_offset_x
+        self.grp_parts3_offset_y  = grp_parts3_offset_y
+        self.grp_parts3_count     = grp_parts3_count
+        self.grp_parts3_animation = grp_parts3_animation
+        
+        self.grp_parts4_width     = grp_parts4_width
+        self.grp_parts4_height    = grp_parts4_height
+        self.grp_parts4_imgb      = grp_parts4_imgb
+        self.grp_parts4_u         = grp_parts4_u
+        self.grp_parts4_v         = grp_parts4_v
+        self.grp_parts4_offset_x  = grp_parts4_offset_x
+        self.grp_parts4_offset_y  = grp_parts4_offset_y
+        self.grp_parts4_count     = grp_parts4_count
+        self.grp_parts4_animation = grp_parts4_animation
+        
+        self.grp_parts5_width     = grp_parts5_width
+        self.grp_parts5_height    = grp_parts5_height
+        self.grp_parts5_imgb      = grp_parts5_imgb
+        self.grp_parts5_u         = grp_parts5_u
+        self.grp_parts5_v         = grp_parts5_v
+        self.grp_parts5_offset_x  = grp_parts5_offset_x
+        self.grp_parts5_offset_y  = grp_parts5_offset_y
+        self.grp_parts5_count     = grp_parts5_count
+        self.grp_parts5_animation = grp_parts5_animation
+        
+        self.grp_parts6_width     = grp_parts6_width
+        self.grp_parts6_height    = grp_parts6_height
+        self.grp_parts6_imgb      = grp_parts6_imgb
+        self.grp_parts6_u         = grp_parts6_u
+        self.grp_parts6_v         = grp_parts6_v
+        self.grp_parts6_offset_x  = grp_parts6_offset_x
+        self.grp_parts6_offset_y  = grp_parts6_offset_y
+        self.grp_parts6_count     = grp_parts6_count
+        self.grp_parts6_animation = grp_parts6_animation
+        
+        self.grp_parts7_width     = grp_parts7_width
+        self.grp_parts7_height    = grp_parts7_height
+        self.grp_parts7_imgb      = grp_parts7_imgb
+        self.grp_parts7_u         = grp_parts7_u
+        self.grp_parts7_v         = grp_parts7_v
+        self.grp_parts7_offset_x  = grp_parts7_offset_x
+        self.grp_parts7_offset_y  = grp_parts7_offset_y
+        self.grp_parts7_count     = grp_parts7_count
+        self.grp_parts7_animation = grp_parts7_animation
+        
+        self.grp_parts8_width     = grp_parts8_width
+        self.grp_parts8_height    = grp_parts8_height
+        self.grp_parts8_imgb      = grp_parts8_imgb
+        self.grp_parts8_u         = grp_parts8_u
+        self.grp_parts8_v         = grp_parts8_v
+        self.grp_parts8_offset_x  = grp_parts8_offset_x
+        self.grp_parts8_offset_y  = grp_parts8_offset_y
+        self.grp_parts8_count     = grp_parts8_count
+        self.grp_parts8_animation = grp_parts8_animation
+        
+        self.grp_parts9_width     = grp_parts9_width
+        self.grp_parts9_height    = grp_parts9_height
+        self.grp_parts9_imgb      = grp_parts9_imgb
+        self.grp_parts9_u         = grp_parts9_u
+        self.grp_parts9_v         = grp_parts9_v
+        self.grp_parts9_offset_x  = grp_parts9_offset_x
+        self.grp_parts9_offset_y  = grp_parts9_offset_y
+        self.grp_parts9_count     = grp_parts9_count
+        self.grp_parts9_animation = grp_parts9_animation
+        
 class Enemy_shot:#敵弾のクラス設定
     def __init__(self):
         self.enemy_shot_type = 0 #敵弾の種類
@@ -1078,8 +1317,17 @@ class Particle:#パーティクル（粒子）クラスの設定
         self.vy = 0
         self.life = 0 #パーティクルの生存期間
         self.wait = 0 #ウェイト(どれだけその場所に停止し続けるのかのウェイトカウンター)
-        self.color = 0 #パーティクルの色
-    def update(self,particle_type,priority,x,y,size,vx,vy,life,wait,color):
+        self.color = 0 #パーティクルの色、自由に画像定義できるタイプの場合は透明色を示します
+        self.width,self.height = 0,0 #自由に画像定義できるタイプの場合の時に使用する横幅と縦幅の指定用
+        self.imgb = 0                #自由に画像定義できるタイプの場合の時に使用するイメージバンクの指定用
+        self.u,self.v       = 0,0    #自由に画像定義できるタイプの場合の時に使用する画像の置かれている位置(u,v)の指定用
+        self.count1         = 0      #汎用カウント用1
+        self.count2         = 0      #汎用カウント用2
+        self.animation1     = 0      #アニメーションとかで使用するときの汎用カウント用1
+        self.animation2     = 0      #アニメーションとかで使用するときの汎用カウント用2
+        self.offset_x       = 0      #グラフイックの中心を求める時に使用するx軸オフセット値
+        self.offset_y       = 0      #グラフイックの中心を求める時に使用するy軸オフセット値
+    def update(self,particle_type,priority,x,y,size,vx,vy,life,wait,color,width,height,imgb,u,v,count1,count2,animation1,animation2,offset_x,offset_y):
         self.particle_type = particle_type
         self.priority = priority
         self.posx = x
@@ -1090,6 +1338,12 @@ class Particle:#パーティクル（粒子）クラスの設定
         self.life = life
         self.wait = wait
         self.color = color
+        self.width,self.height = width,height
+        self.imgb = imgb
+        self.u,self.v = u,v
+        self.count1,self.count2 = count1,count2
+        self.animation1,self.animation2 = animation1,animation2
+        self.offset_x,self.offset_y = offset_x,offset_y
 class Background_object:#背景の物体(背景オブジェクト）クラスの設定 (雲や鳥や泡や木葉や背景を移動する艦隊とか当たり判定の無い大き目の物体)
     def __init__(self):
         self.background_object_type = 0 #背景オブジェクトの種類

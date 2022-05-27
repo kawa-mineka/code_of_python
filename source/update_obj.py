@@ -40,49 +40,58 @@ class update_obj:
         if len(self.particle) < 1000: #パーティクルの総数が1000以下なら追加発生させる
             if particle_type == PARTICLE_DOT or particle_type == PARTICLE_CIRCLE: #ドットパーティクル 円形パーティクルの追加
                 new_particle = Particle()
-                new_particle.update(particle_type,priority, x+4,y+4,    func.s_rndint(self,0,1),    random() * 2 - 0.5 + dx,    random() * 2 - 1 + dy,   func.s_rndint(self,5,20), 0,  func.s_rndint(self,1,14))
+                new_particle.update(particle_type,priority, x+4,y+4,    func.s_rndint(self,0,1),    random() * 2 - 0.5 + dx,    random() * 2 - 1 + dy,   func.s_rndint(self,5,20), 0,  func.s_rndint(self,1,14),  0,0,0,0,0,0,0,0,0, 0,0)
                 self.particle.append(new_particle)
                 
             elif particle_type == PARTICLE_LINE: #ラインパーティクル（線状の尾を引くようなパーティクルです）
                 for i in range(10):
                     new_particle = Particle()
-                    new_particle.update(particle_type,priority, x-2,y+4,    1,    -0.8-random(), random()-0.2,    10,   i, 6)
+                    new_particle.update(particle_type,priority, x-2,y+4,    1,    -0.8-random(), random()-0.2,    10,   i, 6,  0,0,0,0,0,0,0,0,0, 0,0)
                     self.particle.append(new_particle)
                     
                     #ボスにダメージを与えたとき
                     #new_particle = Particle()
-                    #new_particle.update(particle_type,priority, x-4,y+4,    1,    -0.8-random(), random()-0.2,    30,   i, 8)
+                    #new_particle.update(particle_type,priority, x-4,y+4,    1,    -0.8-random(), random()-0.2,    30,   i, 8,   0,0,0,0,0,0,0,0,0, 0,0)
                     #self.particle.append(new_particle)
                 
             elif particle_type == PARTICLE_MISSILE_DEBRIS: #ミサイルの破片の追加
                 new_particle = Particle()
-                new_particle.update(particle_type,priority, x,y,    0,    0,0,   7,   0,0)
+                new_particle.update(particle_type,priority, x,y,    0,    0,0,   7,   0,0,   0,0,0,0,0,0,0,0,0, 0,0)
                 self.particle.append(new_particle)
                 
             elif particle_type == PARTICLE_BOSS_DEBRIS1: #ボスの破片1の追加
                 new_particle = Particle()
-                new_particle.update(particle_type,priority, x,y,    0,    dx,dy,   life,   0,0)
+                new_particle.update(particle_type,priority, x,y,    0,    dx,dy,   life,   0,0,    0,0,0,0,0,0,0,0,0, 0,0)
                 self.particle.append(new_particle)
             elif particle_type == PARTICLE_BOSS_DEBRIS2: #ボスの破片2の追加
                 new_particle = Particle()
-                new_particle.update(particle_type,priority, x,y,    0,    dx,dy,   life,   0,0)
+                new_particle.update(particle_type,priority, x,y,    0,    dx,dy,   life,   0,0, 0,0,0,0,0,0,0,0,0, 0,0)
                 self.particle.append(new_particle)
             elif particle_type == PARTICLE_BOSS_DEBRIS3: #ボスの破片3の追加
                 new_particle = Particle()
-                new_particle.update(particle_type,priority, x,y,    0,    dx,dy,   life,   0,0)
+                new_particle.update(particle_type,priority, x,y,    0,    dx,dy,   life,   0,0,  0,0,0,0,0,0,0,0,0, 0,0)
                 self.particle.append(new_particle)
             elif particle_type == PARTICLE_BOSS_DEBRIS4: #ボスの破片4の追加
                 new_particle = Particle()
-                new_particle.update(particle_type,priority, x,y,    0,    dx,dy,   life,   0,0)
+                new_particle.update(particle_type,priority, x,y,    0,    dx,dy,   life,   0,0,  0,0,0,0,0,0,0,0,0, 0,0)
                 self.particle.append(new_particle)
             elif particle_type == PARTICLE_BOSS_DEBRIS5: #ボスの破片5の追加
                 new_particle = Particle()
-                new_particle.update(particle_type,priority, x,y,    0,    dx,dy,   life,   0,0)
+                new_particle.update(particle_type,priority, x,y,    0,    dx,dy,   life,   0,0,  0,0,0,0,0,0,0,0,0, 0,0)
                 self.particle.append(new_particle)
             elif particle_type == PARTICLE_BOSS_DEBRIS6: #ボスの破片6の追加
                 new_particle = Particle()
-                new_particle.update(particle_type,priority, x,y,    0,    dx,dy,   life,   0,0)
+                new_particle.update(particle_type,priority, x,y,    0,    dx,dy,   life,   0,0,   0,0,0,0,0,0,0,0,0, 0,0)
                 self.particle.append(new_particle)
+
+    #パーティクルの追加(自由な画像を定義できるタイプ)(発生＆育成)PARTICLE_BOSS_DEBRIS_FREE_IMAGE専用
+    def append_free_image_particle(self,priority,x,y,dx,dy,life,wait,width,height,imgb,u,v,offset_x,offset_y,count,animation,transparent_color):
+        if len(self.particle) < 1000: #パーティクルの総数が1000以下なら追加発生させる
+            new_particle = Particle()
+            new_particle.update(PARTICLE_BOSS_DEBRIS_FREE_IMAGE,priority, x,y,    0,    dx,dy,   life,   0,transparent_color,width,height,imgb,u,v,count,count,animation,animation,offset_x,offset_y)
+            self.particle.append(new_particle)
+        
+
 
     #パーティクルの更新
     def particle(self):
@@ -94,7 +103,9 @@ class update_obj:
             else: #ウェイトカウンターがまだ残っていたのなら１減らし、移動（更新）はしないでその場に留まらせておく
                 self.particle[i].wait -= 1
             
-            if  self.particle[i].particle_type == PARTICLE_BOSS_DEBRIS1:#ボスの破片1の時は
+            if  self.particle[i].particle_type == PARTICLE_BOSS_DEBRIS1\
+                or self.particle[i].particle_type == PARTICLE_BOSS_DEBRIS_FREE_IMAGE: #パーティクルがボスデブリ１、自由な画像タイプの場合は
+                
                 self.particle[i].vy += 0.01 #y軸下方向に徐々に加速して落ちていくようにする
                 #現在のボスの破片が存在する座標に新たに煙を育成する
                 if(pyxel.frame_count % 8) == 0:
@@ -131,9 +142,15 @@ class update_obj:
     #ボスのパーツ破壊後の破片の育成
     def append_boss_parts_debris(self,num,type,x,y,life):
         for i in range(num):
-            vx = -0.2 - random()
-            vy = -0.2 - random() // 2
-            update_obj.append_particle(self,type,PRIORITY_MORE_FRONT,x,y,  vx,vy,life,0,0)
+            dx = -0.2 - random()
+            dy = -0.2 - random() // 2
+            update_obj.append_particle(self,type,PRIORITY_MORE_FRONT,x,y,  dx,dy,life,0,0)
+
+    #ボスのパーツ破壊後の吹っ飛んで行くパーツの育成
+    def append_blow_away_boss_parts(self,x,y,life,width,height,imgb,u,v,offset_x,offset_y,count,animation,transparent_color):
+        dx = -random() - 0.05
+        dy = -0.1 - random()
+        update_obj.append_free_image_particle(self,PRIORITY_MORE_FRONT,x,y,dx,dy,life,0,width,height,imgb,u,v,offset_x,offset_y,count,animation,transparent_color)
 
     #背景オブジェクトの更新
     def background_object(self):
@@ -177,7 +194,7 @@ class update_obj:
             
         for i in range(30):
             new_particle = Particle()
-            new_particle.update(PARTICLE_LINE,PRIORITY_FRONT, self.my_x+3,self.my_y+3,    1,    -random()-0.5, random()-0.5,    80,   i*6, 6)
+            new_particle.update(PARTICLE_LINE,PRIORITY_FRONT, self.my_x+3,self.my_y+3,    1,    -random()-0.5, random()-0.5,    80,   i*6, 6,    0,0,0,0,0,0,0,0,0, 0,0)
             self.particle.append(new_particle)
 
     #大気圏突入時の火花の更新
@@ -187,8 +204,8 @@ class update_obj:
             
         for _i in range(10):
             new_particle = Particle()
-            # new_particle.update(PARTICLE_DOT,PRIORITY_FRONT, self.my_x+1,self.my_y+5,    1,    -random() * self.side_scroll_speed * 4, (random() - 0.97) * self.vertical_scroll_speed * 8,    30,   _i // 2, 10)
-            new_particle.update(PARTICLE_FIRE_SPARK,PRIORITY_FRONT, self.my_x+3,self.my_y+4,    1,    -random() * self.side_scroll_speed, -(random()+0.5)  * self.vertical_scroll_speed * 2,    2.5 * self.side_scroll_speed,   1, 10)
+            # new_particle.update(PARTICLE_DOT,PRIORITY_FRONT, self.my_x+1,self.my_y+5,    1,    -random() * self.side_scroll_speed * 4, (random() - 0.97) * self.vertical_scroll_speed * 8,    30,   _i // 2, 10,    0,0,0,0,0,0,0,0,0, 0,0)
+            new_particle.update(PARTICLE_FIRE_SPARK,PRIORITY_FRONT, self.my_x+3,self.my_y+4,    1,    -random() * self.side_scroll_speed, -(random()+0.5)  * self.vertical_scroll_speed * 2,    2.5 * self.side_scroll_speed,   1, 10,   0,0,0,0,0,0,0,0,0, 0,0)
             
             self.particle.append(new_particle)
 
