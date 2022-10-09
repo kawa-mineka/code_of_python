@@ -376,12 +376,24 @@ class update_collision:
                         self.boss[e].parts2_hp -= self.shots[h].shot_power #パーツ2の耐久力をShot_powerの分だけ減らす
                         if self.boss[e].parts2_hp <= 0: #パーツ2の耐久力が0以下になったのなら
                             self.boss[e].parts2_flag = 0 #パーツ2の生存フラグを0にして破壊したことにする
+                            #吹っ飛んでいくボスパーツ2を育成する
+                            x,y = self.boss[e].posx + self.boss[e].col_parts2_x,self.boss[e].posy + self.boss[e].col_parts2_y
+                            life   = 1000
+                            width     = self.boss[e].grp_parts2_width      #横幅
+                            height    = self.boss[e].grp_parts2_height     #縦幅
+                            imgb      = self.boss[e].grp_parts2_imgb       #画像が収納されているイメージバンク数
+                            u         = self.boss[e].grp_parts2_u          #画像の位置u
+                            v         = self.boss[e].grp_parts2_v          #         v
+                            offset_x  = self.boss[e].grp_parts2_offset_x   #パーツx軸方向のオフセット値(爆発の煙を育成するときの中心値の指定とかで使うかも？)
+                            offset_y  = self.boss[e].grp_parts2_offset_y   #パーツy軸方向のオフセット値(爆発の煙を育成するときの中心値の指定とかで使うかも？)
+                            count     = self.boss[e].grp_parts2_count      #カウント用
+                            animation = self.boss[e].grp_parts2_animation  #アニメーション関連の値を指定
+                            transparent_color = self.boss[e].transparent_color #透明色指定
+                            update_obj.append_blow_away_boss_parts(self,x,y,life,width,height,imgb,u,v,offset_x,offset_y,count,animation,transparent_color)
+                            
                             #ボスのパーツを破壊した後にボスの破片１デブリを育成する
                             x,y = self.boss[e].posx + self.boss[e].col_parts2_x,self.boss[e].posy + self.boss[e].col_parts2_y
-                            vx,vy = -0.3 - random() * 2,-0.3 - random()
                             life = 1000
-                            col = 0
-                            # update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,PRIORITY_FRONT,x,y,  vx,vy,life,0,col)
                             update_obj.append_boss_parts_debris(self,3,PARTICLE_BOSS_DEBRIS1,x,y,life)
                         
                         self.boss[e].display_time_parts2_hp_bar = BOSS_HP_BAR_DISPLAY_TIME #パーツ2耐久力バーを表示するカウントタイマーを初期値の定数に戻す
@@ -398,10 +410,26 @@ class update_collision:
                         self.boss[e].parts3_hp -= self.shots[h].shot_power #パーツ3の耐久力をShot_powerの分だけ減らす
                         if self.boss[e].parts3_hp <= 0: #パーツ3の耐久力が0以下になったのなら
                             self.boss[e].parts3_flag = 0 #パーツ3の生存フラグを0にして破壊したことにする
+                            #吹っ飛んでいくボスパーツ3を育成する
+                            x,y = self.boss[e].posx + self.boss[e].col_parts3_x,self.boss[e].posy + self.boss[e].col_parts3_y
+                            life   = 1000
+                            width     = self.boss[e].grp_parts3_width      #横幅
+                            height    = self.boss[e].grp_parts3_height     #縦幅
+                            imgb      = self.boss[e].grp_parts3_imgb       #画像が収納されているイメージバンク数
+                            u         = self.boss[e].grp_parts3_u          #画像の位置u
+                            v         = self.boss[e].grp_parts3_v          #         v
+                            offset_x  = self.boss[e].grp_parts3_offset_x   #パーツx軸方向のオフセット値(爆発の煙を育成するときの中心値の指定とかで使うかも？)
+                            offset_y  = self.boss[e].grp_parts3_offset_y   #パーツy軸方向のオフセット値(爆発の煙を育成するときの中心値の指定とかで使うかも？)
+                            count     = self.boss[e].grp_parts3_count      #カウント用
+                            animation = self.boss[e].grp_parts3_animation  #アニメーション関連の値を指定
+                            transparent_color = self.boss[e].transparent_color #透明色指定
+                            update_obj.append_blow_away_boss_parts(self,x,y,life,width,height,imgb,u,v,offset_x,offset_y,count,animation,transparent_color)
+                            
+                            
                             #ボスのパーツを破壊した後にボスの破片１デブリを育成する
                             x,y = self.boss[e].posx + self.boss[e].col_parts3_x,self.boss[e].posy + self.boss[e].col_parts3_y
                             life = 1000
-                            update_obj.append_boss_parts_debris(self,3,PARTICLE_BOSS_DEBRIS1,x,y,life)
+                            update_obj.append_boss_parts_debris(self,2,PARTICLE_BOSS_DEBRIS1,x,y,life)
                         
                         self.boss[e].display_time_parts3_hp_bar = BOSS_HP_BAR_DISPLAY_TIME #パーツ3耐久力バーを表示するカウントタイマーを初期値の定数に戻す
                         hit_x,hit_y   = self.shots[h].posx,self.shots[h].posy
@@ -417,12 +445,24 @@ class update_collision:
                         self.boss[e].parts4_hp -= self.shots[h].shot_power #パーツ4の耐久力をShot_powerの分だけ減らす
                         if self.boss[e].parts4_hp <= 0: #パーツ4の耐久力が0以下になったのなら
                             self.boss[e].parts4_flag = 0 #パーツ4の生存フラグを0にして破壊したことにする
+                            #吹っ飛んでいくボスパーツ4を育成する
+                            x,y = self.boss[e].posx + self.boss[e].col_parts4_x,self.boss[e].posy + self.boss[e].col_parts4_y
+                            life   = 1000
+                            width     = self.boss[e].grp_parts4_width      #横幅
+                            height    = self.boss[e].grp_parts4_height     #縦幅
+                            imgb      = self.boss[e].grp_parts4_imgb       #画像が収納されているイメージバンク数
+                            u         = self.boss[e].grp_parts4_u          #画像の位置u
+                            v         = self.boss[e].grp_parts4_v          #         v
+                            offset_x  = self.boss[e].grp_parts4_offset_x   #パーツx軸方向のオフセット値(爆発の煙を育成するときの中心値の指定とかで使うかも？)
+                            offset_y  = self.boss[e].grp_parts4_offset_y   #パーツy軸方向のオフセット値(爆発の煙を育成するときの中心値の指定とかで使うかも？)
+                            count     = self.boss[e].grp_parts4_count      #カウント用
+                            animation = self.boss[e].grp_parts4_animation  #アニメーション関連の値を指定
+                            transparent_color = self.boss[e].transparent_color #透明色指定
+                            update_obj.append_blow_away_boss_parts(self,x,y,life,width,height,imgb,u,v,offset_x,offset_y,count,animation,transparent_color)
+                            
                             #ボスのパーツを破壊した後にボスの破片１デブリを育成する
                             x,y = self.boss[e].posx + self.boss[e].col_parts4_x,self.boss[e].posy + self.boss[e].col_parts4_y
-                            vx,vy = -0.3 - random() * 2,-0.3 - random()
                             life = 1000
-                            col = 0
-                            # update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,PRIORITY_FRONT,x,y,  vx,vy,life,0,col)
                             update_obj.append_boss_parts_debris(self,3,PARTICLE_BOSS_DEBRIS1,x,y,life)
                         
                         self.boss[e].display_time_parts4_hp_bar = BOSS_HP_BAR_DISPLAY_TIME #パーツ4耐久力バーを表示するカウントタイマーを初期値の定数に戻す

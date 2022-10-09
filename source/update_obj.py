@@ -90,8 +90,6 @@ class update_obj:
             new_particle = Particle()
             new_particle.update(PARTICLE_BOSS_DEBRIS_FREE_IMAGE,priority, x,y,    0,    dx,dy,   life,   0,transparent_color,width,height,imgb,u,v,count,count,animation,animation,offset_x,offset_y)
             self.particle.append(new_particle)
-        
-
 
     #パーティクルの更新
     def particle(self):

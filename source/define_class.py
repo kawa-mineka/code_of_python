@@ -1193,7 +1193,6 @@ class Boss:#ボスキャラのクラス設定
         self.grp_parts9_offset_y  = grp_parts9_offset_y
         self.grp_parts9_count     = grp_parts9_count
         self.grp_parts9_animation = grp_parts9_animation
-        
 class Enemy_shot:#敵弾のクラス設定
     def __init__(self):
         self.enemy_shot_type = 0 #敵弾の種類

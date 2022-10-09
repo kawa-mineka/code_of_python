@@ -28,7 +28,7 @@ class update_boss:
             boss_type = BOSS_BREEZARDIA
             boss_status = BOSS_STATUS_MOVE_LEMNISCATE_CURVE
             parts_number = 0
-            main_hp = 150
+            main_hp = 300
             parts1_hp,parts2_hp,parts3_hp,parts4_hp = 50,50,50,50
             parts5_hp,parts6_hp,parts7_hp,parts8_hp =   0,  0,  0,  0
             parts9_hp = 0
@@ -126,15 +126,15 @@ class update_boss:
             grp_parts1_offset_x,grp_parts1_offset_y = 0,0
             grp_parts1_count,grp_parts1_animation = 0,0
             
-            grp_parts2_width,grp_parts2_height = 0,0
+            grp_parts2_width,grp_parts2_height = 9,7
             grp_parts2_imgb = 0
-            grp_parts2_u,grp_parts2_v = 0,0
+            grp_parts2_u,grp_parts2_v = 157,208
             grp_parts2_offset_x,grp_parts2_offset_y = 0,0
             grp_parts2_count,grp_parts2_animation = 0,0
             
-            grp_parts3_width,grp_parts3_height = 0,0
+            grp_parts3_width,grp_parts3_height = 21,12
             grp_parts3_imgb = 0
-            grp_parts3_u,grp_parts3_v = 0,0
+            grp_parts3_u,grp_parts3_v = 0,216
             grp_parts3_offset_x,grp_parts3_offset_y = 0,0
             grp_parts3_count,grp_parts3_animation = 0,0
             
