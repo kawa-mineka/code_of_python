@@ -1050,6 +1050,25 @@ class func:
         self.ctrl_type         = self.master_flag_list[LIST_WINDOW_FLAG_CTRL_TYPE]               #パッドコントロールパターン値をリストから参照してリストア
         self.language          = self.master_flag_list[LIST_WINDOW_FLAG_LANGUAGE]                #選択言語をリストから参照してリストア
 
+    #リプレイモードの為に今現在のステータスを退避しておく(リプレイ再生の直前に呼び出されます)(テンポラリ臨時変数に保存しておく)
+    def backup_status_data_for_replay_mode(self):
+        self.temp_my_ship_id       = self.my_ship_id         #自機の種類を退避保存
+        self.temp_stage_number     = self.stage_number       #ステージナンバー退避保存
+        self.temp_stage_loop       = self.stage_loop         #ループ数退避保存
+        self.temp_boss_test_mode   = self.boss_test_mode     #ボステストモード退避保存
+        self.temp_game_difficulty  = self.game_difficulty    #ゲーム難易度退避保存
+        #あとは今現在の自機の種類と装備メダルを保存しなくては・・・
+
+    #リプレイ再生後記録しておいたステータスを復帰させる(リプレイ再生が終わったら呼び出されます)(テンポラリ臨時変数から引き出す)
+    def restore_status_data_for_replay_mode(self):
+        self.my_ship_id       = self.temp_my_ship_id         #自機の種類リストア
+        self.stage_number     = self.temp_stage_number       #ステージナンバーリストア
+        self.stage_loop       = self.temp_stage_loop         #ループ数リストア
+        self.boss_test_mode   = self.temp_boss_test_mode     #ボステストモードリストア
+        self.game_difficulty  = self.temp_game_difficulty    #ゲーム難易度リストア
+        #あと今現在の自機の種類と装備メダルをリストアしなくては・・・
+
+
     #各種ウィンドウの育成             id=windowクラスの window_idに入っている数値 ox,oy=ウィンドウ作成座標のオフセット値
     def create_window(self,id,ox,oy):
         func.create_master_flag_list(self) #まず先にフラグ＆データ関連のマスターリスト作成関数を呼び出す

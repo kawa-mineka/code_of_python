@@ -571,17 +571,17 @@ class graph:
                 pyxel.blt(self.background_object[i].posx   +1,self.background_object[i].posy +3*8,  IMG1,  49,232,    16,16,   pyxel.COLOR_NAVY) #雲大20のおにぎりの左足（？）部分を描画
                 pyxel.blt(self.background_object[i].posx +5*8,self.background_object[i].posy +5*8,  IMG1,  88,248,    16, 8,   pyxel.COLOR_NAVY) #雲大20の右下の離れ小島部分を描画  
             elif self.background_object[i].background_object_type == BG_OBJ_CLOUD21: #雲大21(みぎでっかち雲)
-                pyxel.blt(self.background_object[i].posx +5*8,self.background_object[i].posy    ,  IMG1, 136,216,    32,40,    pyxel.COLOR_NAVY) #雲大21の右頭本体部分描画
-                pyxel.blt(self.background_object[i].posx    ,self.background_object[i].posy +1*8,  IMG1,  96,224,    48,18,    pyxel.COLOR_NAVY) #雲大21の中央本体部分描画
-                pyxel.blt(self.background_object[i].posx +9*8,self.background_object[i].posy +2*8,  IMG1, 160,232,    16,24,   pyxel.COLOR_NAVY) #雲大21の右先端描画
-                pyxel.blt(self.background_object[i].posx +3*8,self.background_object[i].posy +3*8,  IMG1, 112,240,    64,16,   pyxel.COLOR_NAVY) #雲大21の下部右描画
-                pyxel.blt(self.background_object[i].posx    ,self.background_object[i].posy +2*8,  IMG1,  96,232,    24,16,    pyxel.COLOR_NAVY) #雲大21の左のしっぽ描画
+                pyxel.blt(self.background_object[i].posx +5*8,self.background_object[i].posy     ,  IMG1, 136,216,    32,40,    pyxel.COLOR_NAVY) #雲大21の右頭本体部分描画
+                pyxel.blt(self.background_object[i].posx     ,self.background_object[i].posy +1*8,  IMG1,  96,224,    48,18,    pyxel.COLOR_NAVY) #雲大21の中央本体部分描画
+                pyxel.blt(self.background_object[i].posx +9*8,self.background_object[i].posy +2*8,  IMG1, 160,232,    16,24,    pyxel.COLOR_NAVY) #雲大21の右先端描画
+                pyxel.blt(self.background_object[i].posx +3*8,self.background_object[i].posy +3*8,  IMG1, 112,240,    64,16,    pyxel.COLOR_NAVY) #雲大21の下部右描画
+                pyxel.blt(self.background_object[i].posx     ,self.background_object[i].posy +2*8,  IMG1,  96,232,    24,16,    pyxel.COLOR_NAVY) #雲大21の左のしっぽ描画
 
     #ラスタースクロールの表示
     def draw_raster_scroll(self,disp_priority):
-        if self.raster_scroll_flag == 0: #ラスタスクロール更新＆表示のフラグがたっていなかったらそのまま何もしないで戻る
+        if self.raster_scroll_flag == FLAG_OFF: #ラスタスクロール更新＆表示のフラグがたっていなかったらそのまま何もしないで戻る
             return
-            
+        
         raster_scroll_count = len(self.raster_scroll)
         for i in range(raster_scroll_count):#ラスタースクロールのリストの要素数を数えてその数の分だけループ処理する
             if self.raster_scroll[i].display == 1 and self.raster_scroll[i].priority == disp_priority: #dispiay == 1(on) & priority == 引数のdisp_priorityの時だけ描画する
@@ -590,14 +590,12 @@ class graph:
                 self.raster_scroll[i].posu,self.raster_scroll[i].posv,
                 self.raster_scroll[i].width,self.raster_scroll[i].height,
                 self.raster_scroll[i].transparent_color)
-                
                 #右横に更に同じラインを描画する
                 pyxel.blt(self.raster_scroll[i].posx + self.raster_scroll[i].offset_x + self.raster_scroll[i].width,self.raster_scroll[i].posy,
                 self.raster_scroll[i].img_bank,
                 self.raster_scroll[i].posu,self.raster_scroll[i].posv,
                 self.raster_scroll[i].width,self.raster_scroll[i].height,
                 self.raster_scroll[i].transparent_color)
-                
                 #更にその右横に同じラインを描画
                 pyxel.blt(self.raster_scroll[i].posx + self.raster_scroll[i].offset_x + self.raster_scroll[i].width * 2,self.raster_scroll[i].posy,
                 self.raster_scroll[i].img_bank,

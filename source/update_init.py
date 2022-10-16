@@ -266,7 +266,7 @@ class update_init:
         define_stage_data.game_event_list(self)   #ゲーム全体のイベントリストの定義関数の呼び出し
         define_stage_data.bg_animation_list(self) #各ステージのBG書き換えによるアニメーションの為のデータリスト定義関数の呼び出し
         
-        if self.boss_test_mode == 1:
+        if self.boss_test_mode == MENU_BOSS_MODE_ON:
             self.event_list = self.event_list_boss_test_mode #ボステストモードが1の時はボスだけが出現するイベントリストを登録します
         else:
             self.event_list = self.game_event_list[self.stage_number - 1][self.stage_loop - 1] 

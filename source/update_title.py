@@ -365,7 +365,7 @@ class update_title:
                 
             elif self.cursor_pre_decision_item_y == MENU_BOSS_MODE and self.cursor_decision_item_y == MENU_BOSS_MODE_OFF:
                 #「BOSS MODE」→「OFF」
-                self.boss_test_mode = 0        #ボステストモードをoff
+                self.boss_test_mode = MENU_BOSS_MODE_OFF        #ボステストモードをoff
                 func.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
                 func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
                 i = func.search_window_id(self,WINDOW_ID_BOSS_MODE_MENU)
@@ -380,7 +380,7 @@ class update_title:
                 self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
             elif self.cursor_pre_decision_item_y == MENU_BOSS_MODE and self.cursor_decision_item_y == MENU_BOSS_MODE_ON:
                 #「BOSS MODE」→「ON」
-                self.boss_test_mode = 1                              #ボステストモードをon
+                self.boss_test_mode = MENU_BOSS_MODE_ON  #ボステストモードをon
                 func.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
                 func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
                 i = func.search_window_id(self,WINDOW_ID_BOSS_MODE_MENU)

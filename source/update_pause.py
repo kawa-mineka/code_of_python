@@ -96,6 +96,9 @@ class update_pause:
                     self.window[i].window_status = WINDOW_CLOSE
                     self.window[i].comment_flag = COMMENT_FLAG_OFF
                 
+                if self.replay_status == REPLAY_PLAY: #リプレイ再生中からのタイトルリターンの場合は
+                    func.restore_status_data_for_replay_mode(self) #リプレイ再生後記録しておいたステータスを復帰させる
+                
                 func.write_ship_equip_medal_data(self)           #機体メダルスロット装備リストに現在プレイ中のシップリストのメダル情報を書き込む関数の呼び出し
                 update_system.save_data(self)                    #システムデータをセーブします
                 pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす

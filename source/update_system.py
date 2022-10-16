@@ -16,7 +16,7 @@ class update_system:
     def __init__(self):
         None
 
-    #ユーザープロファイルのcode-of-pythonフォルダにシステムファイルがあるかどうか調べなかったらデフォルトのシステムデータをコピーする
+    #ユーザープロファイルのcode-of-pythonフォルダにシステムファイルがあるかどうか調べ、なかったらデフォルトのシステムデータをコピーする
     def check_exist_sysytem_file(self):
         if os.path.isfile(self.user_profile + "/AppData/Local/code_of_python/system/system-data.pyxres") == False: #システムファイルが存在しないのなら
             if self.exe_mode == FLAG_OFF: #pyファイルで実行時

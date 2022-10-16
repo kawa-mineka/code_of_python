@@ -380,32 +380,17 @@ class App:
             update_window.clip_window(self)             #画面外にはみ出たウィンドウを消去する関数の呼び出し
             update_window.active_window(self)           #現在アクティブ(最前面)になっているウィンドウのインデックス値(i)を求める関数の呼び出し
             update_window.select_cursor(self)           #セレクトカーソルでメニューを選択する関数を呼び出す
-            if   self.cursor_decision_item_y == 0:      #メニューでアイテムナンバー0の「1」が押されたら
-                self.replay_slot_num = 0              #スロット番号は0   (以下はほぼ同じ処理です)
-            elif self.cursor_decision_item_y == 1:
-                self.replay_slot_num = 1
-            elif self.cursor_decision_item_y == 2:
-                self.replay_slot_num = 2
-            elif self.cursor_decision_item_y == 3:
-                self.replay_slot_num = 3
-            elif self.cursor_decision_item_y == 4:
-                self.replay_slot_num = 4
-            elif self.cursor_decision_item_y == 5:
-                self.replay_slot_num = 5
-            elif self.cursor_decision_item_y == 6:
-                self.replay_slot_num = 6
-            elif self.cursor_decision_item_y == 7:
-                self.replay_slot_num = 7
-            
             if self.cursor_decision_item_y != UNSELECTED:#決定ボタンが押されてアイテムが決まったのなら
-                self.cursor_type = CURSOR_TYPE_NO_DISP      #セレクトカーソルの表示をoffにする
-                self.move_mode = MOVE_MANUAL                #移動モードを「手動移動」にする
-                self.replay_status = REPLAY_PLAY            #リプレイ機能の状態を「再生中」にします
-                self.replay_stage_num = 0                   #リプレイデータを最初のステージから再生できるように0初期化
-                update_replay.data_file_load(self)          #リプレイデータファイルのロードを行います
-                update_replay.load_stage_data(self)         #リプレイ再生時は,ステージスタート時のパラメーターをロードする関数を呼び出します
-                self.active_window_id = WINDOW_ID_MAIN_MENU #メインメニューウィンドウIDを最前列でアクティブなものとする
-                self.game_status = SCENE_GAME_START_INIT    #ゲームステータスを「SCENE_GAME_START_INIT」にしてゲームスタート時の初期化にする
+                self.replay_slot_num = self.cursor_decision_item_y #リプレイ番号は決定ボタンを押した時点での決定アイテムのy座標数とする
+                self.cursor_type = CURSOR_TYPE_NO_DISP        #セレクトカーソルの表示をoffにする
+                self.move_mode = MOVE_MANUAL                  #移動モードを「手動移動」にする
+                self.replay_status = REPLAY_PLAY              #リプレイ機能の状態を「再生中」にします
+                self.replay_stage_num = 0                     #リプレイデータを最初のステージから再生できるように0初期化
+                func.backup_status_data_for_replay_mode(self) #リプレイ再生前に現在のステータスを一時保存する関数の呼び出し
+                update_replay.data_file_load(self)            #リプレイデータファイルのロードを行います
+                update_replay.load_stage_data(self)           #リプレイ再生時は,ステージスタート時のパラメーターをロードする関数を呼び出します
+                self.active_window_id = WINDOW_ID_MAIN_MENU   #メインメニューウィンドウIDを最前列でアクティブなものとする
+                self.game_status = SCENE_GAME_START_INIT      #ゲームステータスを「SCENE_GAME_START_INIT」にしてゲームスタート時の初期化にする
         
         ################################ ゲームスタート時の初期化 #################################################################
         if self.game_status == SCENE_GAME_START_INIT: #ゲームステータスが「GAME_START_INIT」の場合（ゲームスタート時の状態遷移）は以下を実行する
@@ -485,7 +470,7 @@ class App:
             #ランクアップ処理#############################################################################################################
             update_status.rank_up_look_at_playtime(self)   #時間経過によるランクアップ関数を呼び出します
             #スクロール関連の処理#########################################################################################################
-            if self.boss_test_mode == 0:                                 #ボス戦テストモードオフの時だけ
+            if self.boss_test_mode == MENU_BOSS_MODE_OFF:                #ボス戦テストモードオフの時だけ
                 self.scroll_count += self.side_scroll_speed              #スクロールカウント数をスクロールスピード分(通常は1)増加させていく
                 self.vertical_scroll_count += self.vertical_scroll_speed #縦スクロールカウント数を縦スクロールスピード分(大抵のステージは縦スクロールしないので0)増加させていく
             
@@ -601,6 +586,7 @@ class App:
                 self.game_status = SCENE_RETURN_TITLE             #ゲームステータスを「RETURN_TITLE」にする
             elif self.replay_status == REPLAY_PLAY: #リプレイ再生中の時のリターンタイトルウィンドウ表示(SAVE&RETURN項目は表示しない)  
                 func.create_window(self,WINDOW_ID_GAME_OVER_RETURN_NO_SAVE,43,68)     #RETRN?ウィンドウの作成
+                func.restore_status_data_for_replay_mode(self)             #リプレイ再生が終了したので記録しておいたステータスを復帰させる
                 self.cursor_type = CURSOR_TYPE_NORMAL                      #選択カーソル表示をonにする
                 self.select_cursor_flag = FLAG_ON                          #セレクトカーソルの移動更新フラグをオン
                 self.cursor_move_direction = CURSOR_MOVE_UD                #カーソルは上下移動のみ
@@ -613,13 +599,13 @@ class App:
                 self.game_status = SCENE_RETURN_TITLE                      #ゲームステータスを「RETURN_TITLE」にする
         
         if self.game_status == SCENE_RETURN_TITLE:           #「RETURN_TITLE」の時は        
-            if   self.cursor_decision_item_y == 0:             #メニューでアイテムナンバー0の「RETURN」が押されたら
-                self.game_playing_flag = 0                     #ゲームプレイ中のフラグを降ろす
-                self.select_cursor_flag = 0                    #セレクトカーソルの移動更新は行わないのでフラグを降ろす
+            if   self.cursor_decision_item_y == 0:           #メニューでアイテムナンバー0の「RETURN」が押されたら
+                self.game_playing_flag = FLAG_OFF            #ゲームプレイ中のフラグを降ろす
+                self.select_cursor_flag = FLAG_OFF           #セレクトカーソルの移動更新は行わないのでフラグを降ろす
                 
                 if self.replay_status == REPLAY_RECORD:      #リプレイデータ記録中(ゲームプレイ)中の時は
                     func.write_ship_equip_medal_data(self)                  #機体メダルスロット装備リストに現在プレイ中のシップリストのメダル情報を書き込む関数の呼び出し
-                    update_system.save_data(self)                             #システムデータをセーブする関数の呼び出し
+                    update_system.save_data(self)                           #システムデータをセーブする関数の呼び出し
                     func.recoard_score_board(self)                          #スコアボードに点数書き込み
                     func.score_board_bubble_sort(self,self.game_difficulty) #現在選択している難易度を引数として書き込んだスコアデータをソートする関数の呼び出し
                 
@@ -643,27 +629,11 @@ class App:
                 
                 self.game_over_bgm.fadeout(3000)                    #GAME OVER BGMフェードアウト開始
         
-        if self.game_status == SCENE_SELECT_SAVE_SLOT:       #「SCENE_SELECT_SAVE_SLOT」の時は
-            if   self.cursor_decision_item_y == 0:             #メニューでアイテムナンバー0の「1」が押されたら
-                self.replay_slot_num = 0                     #スロット番号は0   (以下はほぼ同じ処理です)
-            elif self.cursor_decision_item_y == 1:
-                self.replay_slot_num = 1
-            elif self.cursor_decision_item_y == 2:
-                self.replay_slot_num = 2
-            elif self.cursor_decision_item_y == 3:
-                self.replay_slot_num = 3
-            elif self.cursor_decision_item_y == 4:
-                self.replay_slot_num = 4
-            elif self.cursor_decision_item_y == 5:
-                self.replay_slot_num = 5
-            elif self.cursor_decision_item_y == 6:
-                self.replay_slot_num = 6
-            elif self.cursor_decision_item_y == 7:
-                self.replay_slot_num = 7
-            
-            if self.cursor_decision_item_y != UNSELECTED:    #決定ボタンが押されてアイテムが決まったのなら
-                self.game_playing_flag = 0                   #ゲームプレイ中のフラグを降ろす
-                self.select_cursor_flag = 0                  #セレクトカーソルの移動更新は行わないのでフラグを降ろす
+        if self.game_status == SCENE_SELECT_SAVE_SLOT:       #「SCENE_SELECT_SAVE_SLOT」の時
+            if self.cursor_decision_item_y != UNSELECTED:          #決定ボタンが押されたら
+                self.replay_slot_num = self.cursor_decision_item_y #スロット番号は決定ボタンを押した時点でのアイテムy座標値とする
+                self.game_playing_flag = FLAG_OFF                  #ゲームプレイ中のフラグを降ろす
+                self.select_cursor_flag = FLAG_OFF                 #セレクトカーソルの移動更新は行わないのでフラグを降ろす
                 
                 func.write_ship_equip_medal_data(self)           #機体メダルスロット装備リストに現在プレイ中のシップリストのメダル情報を書き込む関数の呼び出し
                 update_system.save_data(self)                    #システムデータをセーブする関数の呼び出し
@@ -698,7 +668,7 @@ class App:
         #########ゲーム終了工程開始#################################################################
         if self.game_status == SCENE_GAME_QUIT_START:    #「GAME QUIT START」の時は
             self.star_scroll_speed = 1                   #星のスクロールスピードを倍率1に戻す
-            self.select_cursor_flag = 0                  #セレクトカーソル移動フラグを降ろす
+            self.select_cursor_flag = FLAG_OFF           #セレクトカーソル移動フラグを降ろす
             self.cursor_type = CURSOR_TYPE_NO_DISP       #セレクトカーソルの表示をoffにする
             pygame.mixer.music.fadeout(4000)
             pyxel.playm(4)                               #ゲーム終了音楽再生
@@ -791,7 +761,7 @@ class App:
             #一番奥の背景の表示
             if   self.stage_number == STAGE_MOUNTAIN_REGION:
                 #雲ウェーブラスタースクロールの表示
-                graph.draw_raster_scroll(self,0)  #ラスタースクロール描画関数呼び出し 山より奥で描画します
+                graph.draw_raster_scroll(self,PRIORITY_SEND_TO_BACK)  #ラスタースクロール描画関数呼び出し 山より奥で描画します
                 
                 #奥の雲スクロールの表示
                 if self.disp_flag_bg_back == DISP_ON:
@@ -807,13 +777,13 @@ class App:
                     pyxel.bltm(-int(self.scroll_count  // 4  % (256*8 - 160)),-(self.vertical_scroll_count // 16) + 160,  TM1,    0*8,248*8,    256*8,5*8,    self.bg_transparent_color)
                 
                 #湖面のラスタースクロールの表示、成層圏と大気圏の境目のラスタースクロールの表示
-                graph.draw_raster_scroll(self,1)  #ラスタースクロール描画関数呼び出し 山より手前で描画しますっ！
+                graph.draw_raster_scroll(self,PRIORITY_BACK)  #ラスタースクロール描画関数呼び出し 山より手前で描画しますっ！
             elif self.stage_number == STAGE_ADVANCE_BASE:
                 # pyxel.bltm(-(self.scroll_count // 8) + 250,0,0,0,240,256,120,self.bg_transparent_color)
                 pyxel.bltm(-(self.scroll_count // 8) + 250,0,TM0,  0*8,240*8,  256*8,120*8,self.bg_transparent_color)
             elif self.stage_number == STAGE_VOLCANIC_BELT:
                 #火山湖面ウェーブラスタースクロールの表示
-                graph.draw_raster_scroll(self,0)  #ラスタースクロール描画関数呼び出し背景一番奥の火山の真下で描画します
+                graph.draw_raster_scroll(self,PRIORITY_SEND_TO_BACK)  #ラスタースクロール描画関数呼び出し背景一番奥の火山の真下で描画します
                 #火山上
                 pyxel.bltm(-(self.scroll_count // 16) + 50,0                         ,TM2,  0*8,216*8   ,  256*8, 15*8,0)
                 #火山下
