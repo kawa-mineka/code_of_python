@@ -20,7 +20,7 @@ class update_system:
     def check_exist_sysytem_file(self):
         if os.path.isfile(self.user_profile + "/AppData/Local/code_of_python/system/system-data.pyxres") == False: #システムファイルが存在しないのなら
             if self.exe_mode == FLAG_OFF: #pyファイルで実行時
-                source_folder = self.program_directory + "/assets/system/master-system-data.pyxres"
+                source_folder = self.program_directory                     + "/assets/system/master-system-data.pyxres"
             else:                         #exeファイルで実行時
                 source_folder = os.path.dirname(os.path.abspath(__file__)) + "/assets/system/master-system-data.pyxres"
                 

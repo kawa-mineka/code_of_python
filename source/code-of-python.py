@@ -76,7 +76,6 @@
 #todo807 1面クリア時の背景スクロールに問題あるのかわかんないけどボスを倒したあと自機が右へ自動で飛んでいく処理でpyxel error: access to outside tilemap in 'GetValue'が出てクラッシュするバグがある・・・全然わからない・・原因が・・・orz
 #todo900 BGMの作成(無理そう.........)
 #todo901 SE(効果音)のボリューム調整をCONFIGウィンドウで調整できるようにする BGMのほうはpygameで再生しているので簡単にできたけどSEはpyxelで鳴らしているのですが。。どうやってボリューム調整したらいいのかわかんない・・・
-#todo902 リプレイファイルを再生後、再生時に装備していたメダルがそのまま自機に装着されたままだった模様・・ダメじゃないの‥
 
 #実装完了済み！
 import os
@@ -194,6 +193,8 @@ class App:
         pygame.mixer.init()  #pygameミキサー関連の初期化 pyxel.initよりも先にpygameをinitしないと上手く動かないみたい・・・
         pyxel.init(WINDOW_W,WINDOW_H,title="CODE OF PYTHON",fps = 60,quit_key=pyxel.KEY_NONE) #ゲームウィンドウのタイトルバーの表示とfpsの設定(60fpsにした),キーボード入力による強制終了は無しとする pyxel.init(caption=)がpyxel.init(title=)に変更されたっぽい？？？
         self.ship_equip_slot_list = [[0] * 6 for i in range(LOOK_AT_LOGO)]  #(横6,縦LOOK_AT_LOGO(15))までint(0)が入ったリストを作製し初期化します
+        
+        self.temp_my_ship_medal = [0] * 6 #(横6個分 int(0)が入ったメダルID一時退避保存用リストを初期化作製する(リプレイ再生前と後で一時退避的に使われます)
         
         define_data.default_score_board(self) #スコアボードの初期データ(デフォルトデータ)を登録する関数の呼び出し        
         

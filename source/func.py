@@ -1057,7 +1057,10 @@ class func:
         self.temp_stage_loop       = self.stage_loop         #ループ数退避保存
         self.temp_boss_test_mode   = self.boss_test_mode     #ボステストモード退避保存
         self.temp_game_difficulty  = self.game_difficulty    #ゲーム難易度退避保存
-        #あとは今現在の自機の種類と装備メダルを保存しなくては・・・
+        #今現在の自機の装備メダルを退避保存する
+        for i in range(6):#iは0から6(SLOT6)まで変化する
+            medal_id = self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT0 + i]
+            self.temp_my_ship_medal[i] = medal_id
 
     #リプレイ再生後記録しておいたステータスを復帰させる(リプレイ再生が終わったら呼び出されます)(テンポラリ臨時変数から引き出す)
     def restore_status_data_for_replay_mode(self):
@@ -1067,7 +1070,10 @@ class func:
         self.boss_test_mode   = self.temp_boss_test_mode     #ボステストモードリストア
         self.game_difficulty  = self.temp_game_difficulty    #ゲーム難易度リストア
         #あと今現在の自機の種類と装備メダルをリストアしなくては・・・
-
+        #自機の装備メダルをリストアする
+        for i in range(6):#iは0から6(SLOT6)まで変化する
+            medal_id = self.temp_my_ship_medal[i]
+            self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT0 + i] = medal_id
 
     #各種ウィンドウの育成             id=windowクラスの window_idに入っている数値 ox,oy=ウィンドウ作成座標のオフセット値
     def create_window(self,id,ox,oy):
