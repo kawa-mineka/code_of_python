@@ -492,15 +492,16 @@ LOOP_MAIN_WEAPON_MISSILE_TYPE_RESET = 90   #メインウェポンとミサイル
 LOOP_ALL_RESET                 = 100  #メインウェポンもミサイルもゲーム開始時と同じ初期状態に戻ります
 
 #!ステージの名称関連の定数定義################################################################
-STAGE_MOUNTAIN_REGION         =  1 #ステージ1 山岳地帯          Mountain Region
-STAGE_ADVANCE_BASE            =  2 #ステージ2 前線基地          Advance Base
-STAGE_VOLCANIC_BELT           =  3 #ステージ3 火山地帯          Volcanic Belt
-STAGE_NIGHT_SKYSCRAPER        =  4 #ステージ4 夜間超高層ビル地帯 Night Skyscraper
-STAGE_AMPHIBIOUS_ASSAULT_SHIP =  5 #ステージ5 強襲揚陸艦襲撃     Amphibious Assault Ship
-STAGE_DEEP_SEA_TRENCH         =  6 #ステージ6 深海海溝          Deep Sea Trench
-STAGE_INTERMEDIATE_FORTRESS   =  7 #ステージ7 中間要塞          Intermediate Fortress
-STAGE_ESCAPE_FORTRESS         =  8 #ステージ8 要塞脱出          Escape Fortress
-STAGE_BOSS_RUSH               =  9 #ステージ9 連続強敵襲来       Boss Rush
+STAGE_MOUNTAIN_REGION         =  1 #ステージ1  山岳地帯          Mountain Region
+STAGE_ADVANCE_BASE            =  2 #ステージ2  前線基地          Advance Base
+STAGE_VOLCANIC_BELT           =  3 #ステージ3  火山地帯          Volcanic Belt
+STAGE_NIGHT_SKYSCRAPER        =  4 #ステージ4  夜間超高層ビル地帯 Night Skyscraper
+STAGE_AMPHIBIOUS_ASSAULT_SHIP =  5 #ステージ5  強襲揚陸艦襲撃     Amphibious Assault Ship
+STAGE_DEEP_SEA_TRENCH         =  6 #ステージ6  深海海溝          Deep Sea Trench
+STAGE_INTERMEDIATE_FORTRESS   =  7 #ステージ7  中間要塞          Intermediate Fortress
+STAGE_ESCAPE_FORTRESS         =  8 #ステージ8  要塞脱出          Escape Fortress
+STAGE_BOSS_RUSH               =  9 #ステージ9  連続強敵襲来       Boss Rush
+STAGE_CHANCE_MEETING          = 10 #ステージ10 邂逅              Chance Meeting
 
 #背景スクロールの種類
 SCROLL_TYPE_TRIPLE_SCROLL_AND_STAR               = 0 #横3重スクロール+星スクロール

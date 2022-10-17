@@ -224,6 +224,20 @@ class define_data:
             [LOOK_AT_LOGO,       "LOOK AT LOGO"      ,SHIP_ANCENT,         FLAG_OFF, 8,   0,  IMG2, ALL_SLOT1,     ALL_SLOT1,    0,0,0,0,0,0,0,  LEVEL1,EXP0, 71,            71,             SORTIE0,BROKEN0, SHOOT_DOWN0, FLIGHT_TIME0, SPEED0, SPEED0, SPEED2, FLAG_OFF, FLAG_OFF,   SIZE_4,SIZE_4, TWO_CLAW,  FLAG_OFF,  FLAG_ON,FLAG_ON,FLAG_ON,FLAG_ON, 0,           0,           FLAG_OFF, 0,            0,                    0],
             ]
 
+    def stage_asset_list(self):             #ステージごとのアセットファイル名(pyxresファイル)が登録されたリストを作成する
+        self.stage_asset_list = [
+            [STAGE_MOUNTAIN_REGION,         "min-sht2.pyxres"],
+            [STAGE_ADVANCE_BASE,            "min-sht2.pyxres"],
+            [STAGE_VOLCANIC_BELT,           "min-sht2.pyxres"],
+            [STAGE_NIGHT_SKYSCRAPER,        "min-sht2.pyxres"],
+            [STAGE_AMPHIBIOUS_ASSAULT_SHIP, "min-sht2.pyxres"],
+            [STAGE_DEEP_SEA_TRENCH,         "min-sht2.pyxres"],
+            [STAGE_INTERMEDIATE_FORTRESS,   "min-sht2.pyxres"],
+            [STAGE_ESCAPE_FORTRESS,         "min-sht2.pyxres"],
+            [STAGE_BOSS_RUSH,               "min-sht2.pyxres"],
+            [STAGE_CHANCE_MEETING,          "min-sht2.pyxres"],
+            ]
+
     def medal_graph_and_comment_list(self): #メダルのIDナンバーとそれに対するグラフイックチップの位置や英語コメント、日本語コメントのデータリスト
         self.medal_graph_and_comment_list = [
             [MEDAL_NO_SLOT              ,168         ,176,IMG2,"NO SLOT"                   ,"空スロット",                 "","",                                                                                "",""],

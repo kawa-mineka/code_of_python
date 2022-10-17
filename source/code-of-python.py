@@ -244,8 +244,9 @@ class App:
         
         self.replay_slot_num    = 0  #リプレイファイルをセーブしたりロードするスロットナンバーが入ります(0~9)
         
-        define_data.default_ship_list(self)                #各機体リスト(初期状態)の定義関数の呼び出し
-        define_data.medal_graph_and_comment_list(self)     #メダルのIDナンバーとそれに対するグラフイックチップの位置や英語コメントなどの定義関数の呼び出し
+        define_data.stage_asset_list(self)             #ステージごとのアセットファイル名(pyxresファイル)が登録されたリストを作成する関数の呼び出し
+        define_data.default_ship_list(self)            #各機体リスト(初期状態)の定義関数の呼び出し
+        define_data.medal_graph_and_comment_list(self) #メダルのIDナンバーとそれに対するグラフイックチップの位置や英語コメントなどの定義関数の呼び出し
         
         #ゲーム中で絶対に変化することのないリスト群はここで作成します#######################################
         define_data.flash_color_list(self)      #点滅用カラーリスト群の定義 サブウェポンセレクターカーソルなどで使用する点滅用カラーリスト群(pyxelのカラーナンバーだよ)

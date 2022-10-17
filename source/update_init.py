@@ -121,10 +121,18 @@ class update_init:
             update_ship.append_claw(self)
             update_ship.append_claw(self)
 
+
+    #!ステージスタート時にグラフイック系のアセットを読み込む##############
+    def stage_start_load_asset(self,st_num): #st_num = ステージ数
+        #ステージ数から判断して、租のステージに対応した画像リソースファイルを読み込みます
+        filename = self.stage_asset_list[st_num][1]
+        pyxel.load(os.path.abspath("./assets/graphic/" + filename))
+
     #!ステージスタート時の初期化#######################################
     def stage_start(self):
         #画像リソースファイルを読み込みます
-        pyxel.load(os.path.abspath("./assets/graphic/min-sht2.pyxres"))
+        update_init.stage_start_load_asset(self,self.stage_number - 1)
+        # pyxel.load(os.path.abspath("./assets/graphic/min-sht2.pyxres"))
         # pyxel.load("./assets/graphic/min-sht2.pyxres")
         pygame.mixer.init(frequency = 44100)    #pygameミキサー関連の初期化
         pygame.mixer.music.set_volume(0.7)      #音量設定(0~1の範囲内)

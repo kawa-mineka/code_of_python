@@ -966,7 +966,7 @@ class update_title:
                 self.stage_number    = STAGE_MOUNTAIN_REGION
                 self.stage_loop      = LOOP01
                 self.start_stage_age = 0
-                self.debug_menu_status = FLAG_OFF
+                self.debug_menu_status = 0
                 self.boss_collision_rect_display_flag = FLAG_OFF
                 self.bg_collision_Judgment_flag       = FLAG_ON
                 self.boss_test_mode  = FLAG_OFF
