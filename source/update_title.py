@@ -11,6 +11,8 @@ import pyxel                #グラフイックキャラやバックグラウン
 from const         import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
 from func          import * #汎用性のある関数群のモジュールの読み込み
 from update_system import * #システムデータをセーブするときに使用します
+from update_window import * #各種ウィンドウ作成時に使用するのでインポート
+from update_se     import * #SEのVOLリスト原本を取得しバックアップするために必要なのでインポート
 
 class update_title:
     def __init__(self):
@@ -21,6 +23,14 @@ class update_title:
         pyxel.load(os.path.abspath("./assets/graphic/min-sht2.pyxres")) #タイトル＆ステージ1＆2のリソースファイルを読み込む
         # pyxel.load("./assets/graphic/min-sht2.pyxres") #タイトル＆ステージ1＆2のリソースファイルを読み込む
         #タイトル関連の変数を初期化
+        
+        # dat = pyxel.sound(5).volumes #ボリューム調整用にテスト表示
+        # print("LEN" + str(len(dat)))
+        # for i in range(len(dat)):
+        #     print(str(dat[i]))
+        
+        update_se.backup_se_vol_list(self)            #各効果音のVOLのリストを原本として保存しておくメソッドの呼び出し
+        update_se.create_adjustable_se_vol_list(self) #マスターSEボリュームリストを参考にボリューム調整を施したリストを作り上げるメソッドの呼び出し
         
         self.display_title_time = 204               #タイトルを表示する時間
         self.title_oscillation_count = 200          #タイトルグラフイックの振れ幅カウンター
@@ -106,7 +116,7 @@ class update_title:
         
         #全てのカウンター類が0になったらゲームメニューウィンドウを育成する
         if self.title_oscillation_count == 0 and self.title_slash_in_count == 0 and self.display_title_time == 0:
-            func.create_window(self,WINDOW_ID_MAIN_MENU,0,0)         #メニューウィンドウを作製
+            update_window.create(self,WINDOW_ID_MAIN_MENU,0,0)         #メニューウィンドウを作製
             #選択カーソル表示をon,カーソルは上下移動のみ,いま指示しているアイテムナンバーは0,まだボタンも押されておらず未決定状態なのでdecision_item_yは-1
             #選択できる項目数は13項目なので 13-1=12を代入,メニューの階層は最初は0にします,カーソル移動ステップはx4,y7
             func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,MAIN_MENU_X+5,MAIN_MENU_Y+10,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,13-1,0,MENU_LAYER0)
@@ -127,11 +137,11 @@ class update_title:
                 
             elif self.cursor_decision_item_y == MENU_SELECT_STAGE:      #SELECT STAGEが押されて
                 if func.search_window_id(self,WINDOW_ID_SELECT_STAGE_MENU) == -1: #SELECT_STAGE_MENUウィンドウが存在しないのなら・・
-                    func.move_left_main_menu_window(self) #メインメニューウィンドウを左にずらす関数の呼び出し
+                    update_window.move_left_main_menu_window(self) #メインメニューウィンドウを左にずらす関数の呼び出し
                     
                     self.cursor_pre_decision_item_y = self.cursor_decision_item_y #現時点で選択されたアイテム「SELECT STAGE」を前のレイヤー選択アイテムとしてコピーする
                     func.push_cursor_data(self,WINDOW_ID_MAIN_MENU)       #メインメニューのカーソルデータをPUSH
-                    func.create_window(self,WINDOW_ID_SELECT_STAGE_MENU,90,60)  #ステージセレクトウィンドウの作製
+                    update_window.create(self,WINDOW_ID_SELECT_STAGE_MENU,90,60)  #ステージセレクトウィンドウの作製
                     #選択カーソル表示をon,カーソルは上下移動のみ,,カーソル移動ステップはx4,y7,いま指示しているアイテムナンバーは0の「1」
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は3項目なので 3-1=2を代入,メニューの階層が増えたのでMENU_LAYER0からMENU_LAYER1にします
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,92,71,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,3-1,0,MENU_LAYER1)
@@ -140,10 +150,10 @@ class update_title:
                 
             elif self.cursor_decision_item_y == MENU_SELECT_LOOP:       #SELECT LOOPが押されて
                 if func.search_window_id(self,WINDOW_ID_SELECT_LOOP_MENU) == -1: #SELECT_LOOP_MENUウィンドウが存在しないのなら・・
-                    func.move_left_main_menu_window(self) #メインメニューウィンドウを左にずらす関数の呼び出し
+                    update_window.move_left_main_menu_window(self) #メインメニューウィンドウを左にずらす関数の呼び出し
                     self.cursor_pre_decision_item_y = self.cursor_decision_item_y #現時点で選択されたアイテム「SELECT LOOP」を前のレイヤー選択アイテムとしてコピーする
                     func.push_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPUSH
-                    func.create_window(self,WINDOW_ID_SELECT_LOOP_MENU,112,66)      #ループセレクトウィンドウの作成
+                    update_window.create(self,WINDOW_ID_SELECT_LOOP_MENU,112,66)      #ループセレクトウィンドウの作成
                     #選択カーソル表示をon,カーソルは上下移動のみ,,カーソル移動ステップはx4,y7,いま指示しているアイテムナンバーは0の「1」
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は3項目なので 3-1=2を代入,メニューの階層が増えたのでMENU_LAYER0からMENU_LAYER1にします
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,90+24,72+5,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,3-1,0,MENU_LAYER1)
@@ -152,10 +162,10 @@ class update_title:
                 
             elif self.cursor_decision_item_y == MENU_BOSS_MODE:         #BOSS MODEが押されて
                 if func.search_window_id(self,WINDOW_ID_BOSS_MODE_MENU) == -1: #BOSS MODEウィンドウが存在しないのなら・・
-                    func.move_left_main_menu_window(self) #メインメニューウィンドウを左にずらす関数の呼び出し
+                    update_window.move_left_main_menu_window(self) #メインメニューウィンドウを左にずらす関数の呼び出し
                     self.cursor_pre_decision_item_y = self.cursor_decision_item_y #現時点で選択されたアイテム「BOSS MODE」を前のレイヤー選択アイテムとしてコピーする
                     func.push_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPUSH
-                    func.create_window(self,WINDOW_ID_BOSS_MODE_MENU,99,59)        #ボスモードon/offウィンドウの作製
+                    update_window.create(self,WINDOW_ID_BOSS_MODE_MENU,99,59)        #ボスモードon/offウィンドウの作製
                     #選択カーソル表示をon,カーソルは上下移動のみ,,カーソル移動ステップはx4,y7,いま指示しているアイテムナンバーは0の「ON」
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は2項目なので 2-1=1を代入,メニューの階層が増えたのでMENU_LAYER0からMENU_LAYER1にします
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,96+5,69+self.boss_test_mode * STEP7,STEP4,STEP7,0,0,0,self.boss_test_mode,UNSELECTED,UNSELECTED,0,2-1,0,MENU_LAYER1)
@@ -164,10 +174,10 @@ class update_title:
                 
             elif self.cursor_decision_item_y == MENU_HITBOX:            #HITBOXが押されて....
                 if func.search_window_id(self,WINDOW_ID_HITBOX_MENU) == -1: #HITBOXウィンドウが存在しないのなら・・
-                    func.move_left_main_menu_window(self) #メインメニューウィンドウを左にずらす関数の呼び出し
+                    update_window.move_left_main_menu_window(self) #メインメニューウィンドウを左にずらす関数の呼び出し
                     self.cursor_pre_decision_item_y = self.cursor_decision_item_y #現時点で選択されたアイテム「HITBOX」を前のレイヤー選択アイテムとしてコピーする
                     func.push_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPUSH
-                    func.create_window(self,WINDOW_ID_HITBOX_MENU,99,59)           #ヒットボックスon/offウィンドウの作製
+                    update_window.create(self,WINDOW_ID_HITBOX_MENU,99,59)           #ヒットボックスon/offウィンドウの作製
                     #選択カーソル表示をon,カーソルは上下移動のみ,,カーソル移動ステップはx4,y7,いま指示しているアイテムナンバーは0の「OFF」
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は2項目なので 2-1=1を代入,メニューの階層が増えたのでMENU_LAYER0からMENU_LAYER1にします
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,96+5,69+self.boss_collision_rect_display_flag * STEP7,STEP4,STEP7,0,0,0,self.boss_collision_rect_display_flag,UNSELECTED,UNSELECTED,0,2-1,0,MENU_LAYER1)
@@ -176,10 +186,10 @@ class update_title:
                 
             elif self.cursor_decision_item_y == MENU_DIFFICULTY:        #DIFFICULTYが押されて
                 if func.search_window_id(self,WINDOW_ID_SELECT_DIFFICULTY) == -1: #SELECT_DIFFICULTYウィンドウが存在しないのなら・・
-                    func.move_left_main_menu_window(self) #メインメニューウィンドウを左にずらす関数の呼び出し
+                    update_window.move_left_main_menu_window(self) #メインメニューウィンドウを左にずらす関数の呼び出し
                     self.cursor_pre_decision_item_y = self.cursor_decision_item_y #現時点で選択されたアイテム「DIFFICULTY」を前のレイヤー選択アイテムとしてコピーする
                     func.push_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPUSH
-                    func.create_window(self,WINDOW_ID_SELECT_DIFFICULTY,93,52)     #「SELECT DIFFICULTY」ウィンドウの作製
+                    update_window.create(self,WINDOW_ID_SELECT_DIFFICULTY,93,52)     #「SELECT DIFFICULTY」ウィンドウの作製
                     #選択カーソル表示をon,カーソルは上下移動のみ,,カーソル移動ステップはx4,y7,いま指示しているアイテムナンバーは2の「NORMAL」
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は6項目なので 6-1=5を代入,メニューの階層が増えたのでMENU_LAYER0からMENU_LAYER1にします
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,96,63 + self.game_difficulty * STEP7,STEP4,STEP7,0,0,0,self.game_difficulty,UNSELECTED,UNSELECTED,0,6-1,0,MENU_LAYER1)
@@ -190,7 +200,7 @@ class update_title:
                 if func.search_window_id(self,WINDOW_ID_SELECT_SHIP) == -1: #SELECT_SHIPウィンドウが存在しないのなら・・
                     self.cursor_pre_decision_item_y = self.cursor_decision_item_y #現時点で選択されたアイテム「SELECT SHIP」を前のレイヤー選択アイテムとしてコピーする
                     func.push_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPUSH
-                    func.create_window(self,WINDOW_ID_SELECT_SHIP,0,0)     #「SELECT SHIP」ウィンドウの作製
+                    update_window.create(self,WINDOW_ID_SELECT_SHIP,0,0)     #「SELECT SHIP」ウィンドウの作製
                     #選択カーソル表示をon,カーソルは上下移動のみ,,カーソル移動ステップはx4,y7,いま指示しているアイテムナンバーは0の「JUSTICE PYTHON」
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は6項目なので 13-1=12を代入,メニューの階層が増えたのでMENU_LAYER0からMENU_LAYER1にします
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,7,10,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,13-1,0,MENU_LAYER1)
@@ -201,7 +211,7 @@ class update_title:
                 if func.search_window_id(self,WINDOW_ID_SCORE_BOARD) == -1: #SCORE_BOARDウィンドウが存在しないのなら・・
                     self.cursor_pre_decision_item_y = self.cursor_decision_item_y #現時点で選択されたアイテム「SCORE BOARD」を前のレイヤー選択アイテムとしてコピーする
                     func.push_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPUSH
-                    func.window_score_board(self,GAME_NORMAL)                #スコアボードウィンドウを育成=============
+                    update_window.create_score_board(self,GAME_NORMAL)                #スコアボードウィンドウを育成=============
                     #選択カーソル表示をoff,カーソルは表示せずLRキーもしくはLショルダーRショルダーで左右に頁をめくる動作,カーソル移動ステップはx4,y7,いま指示しているアイテムナンバーは0の「1」
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は1項目なので 1-1=0を代入,いま指し示しているページナンバー 0=very easy,#最大ページ数 難易度は0~5の範囲 なのでMAX5,メニューの階層が増えたのでMENU_LAYER0からMENU_LAYER1にします
                     func.set_cursor_data(self,CURSOR_TYPE_NO_DISP,CURSOR_MOVE_SHOW_PAGE,92,71,STEP4,STEP7,0,5,0,0,UNSELECTED,UNSELECTED,0,0,0,MENU_LAYER1)
@@ -210,11 +220,11 @@ class update_title:
                 
             elif self.cursor_decision_item_y == MENU_NAME_ENTRY:        #NAME ENTRYが押されて...
                 if func.search_window_id(self,WINDOW_ID_INPUT_YOUR_NAME) == -1: #INPUT_YOUR_NAMEウィンドウが存在しないのなら・・
-                    func.move_left_main_menu_window(self) #メインメニューウィンドウを左にずらす関数の呼び出し
+                    update_window.move_left_main_menu_window(self) #メインメニューウィンドウを左にずらす関数の呼び出し
                     self.cursor_pre_decision_item_x = self.cursor_decision_item_x #現時点で選択されたアイテム「NAME ENTRY」を前のレイヤー選択アイテムとしてコピーする
                     self.cursor_pre_decision_item_y = self.cursor_decision_item_y #現時点で選択されたアイテム「NAME ENTRY」を前のレイヤー選択アイテムとしてコピーする
                     func.push_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPUSH
-                    func.create_window(self,WINDOW_ID_INPUT_YOUR_NAME,80,52)       #「ENTER YOUR NAME」ウィンドウの作製
+                    update_window.create(self,WINDOW_ID_INPUT_YOUR_NAME,80,52)       #「ENTER YOUR NAME」ウィンドウの作製
                     #選択カーソルのタイプはアンダーバーの点滅にします,カーソルは左右でスライダー入力,カーソル移動ステップはx4,y7,いま指示しているアイテムナンバーx軸は0,y軸は0(縦には動かないので常に0となります)
                     #まだボタンも押されておらず未決定状態なのでdecision_item_x,decision_item_yはUNSELECTED,最大項目数x軸方向は(8文字+OKボタンなので)合計9項目 9-1=8を代入,最大項目数y軸方向は0,メニューの階層が増えたのでMENU_LAYER0からMENU_LAYER1にします
                     func.set_cursor_data(self,CURSOR_TYPE_UNDER_BAR,CURSOR_MOVE_LR_SLIDER,100,66,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,9-1,0,0,MENU_LAYER1)
@@ -225,7 +235,7 @@ class update_title:
                 if func.search_window_id(self,WINDOW_ID_CONFIG) == -1: #SELECT_CONFIGウィンドウが存在しないのなら・・
                     self.cursor_pre_decision_item_y = self.cursor_decision_item_y #現時点で選択されたアイテム「CONFIG」を前のレイヤー選択アイテムとしてコピーする
                     func.push_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPUSH
-                    func.create_window(self,WINDOW_ID_CONFIG,4,4)                #「CONFIG」ウィンドウの作製
+                    update_window.create(self,WINDOW_ID_CONFIG,4,4)                #「CONFIG」ウィンドウの作製
                     #選択カーソル表示をon,カーソルは上下移動+左右によるパラメーターの変更,カーソル移動ステップはx4,y9,いま指示しているアイテムナンバーは0の
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は12項目なので12-1=11を代入,メニューの階層が増えたのでMENU_LAYER0からMENU_LAYER1にします
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD_SLIDER,10,16,STEP4,STEP8,0,0,0,0,UNSELECTED,UNSELECTED,0,12-1,0,MENU_LAYER1)
@@ -234,7 +244,7 @@ class update_title:
                 
             elif self.cursor_decision_item_y == MENU_REPLAY:            #REPLAYが押されたら
                 self.game_status = SCENE_SELECT_LOAD_SLOT           #ゲームステータスを「SCENE_SELECT_LOAD_SLOT」にしてロードデータスロットの選択に移る
-                func.window_replay_data_slot_select(self)               #リプレイデータファイルスロット選択ウィンドウの表示
+                update_window.create_replay_data_slot_select(self)               #リプレイデータファイルスロット選択ウィンドウの表示
                 #選択カーソル表示をonにする,カーソルは上下移動のみ,カーソル移動ステップはx4,y7,いま指示しているアイテムナンバーは0の「1」
                 #まだボタンも押されておらず未決定状態なのでdecision_item_yは-1最大項目数は「1」「2」「3」「4」「5」「6」「7」の7項目なので 7-1=6を代入,メニューの階層が増えたので,MENU_LAYER0からMENU_LAYER1にします
                 func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,67,55,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,6,0,MENU_LAYER1)
@@ -243,12 +253,12 @@ class update_title:
                 
             elif self.cursor_decision_item_y == MENU_MEDAL:             #MEDALが押されて
                 if func.search_window_id(self,WINDOW_ID_MEDAL_LIST) == -1 and func.search_window_id(self,WINDOW_ID_EQUIPMENT) == -1: #MEDAL_LISTウィンドウとEQUIPMENTウィンドウが同時に存在しないのなら・・
-                    func.move_left_main_menu_window(self) #メインメニューウィンドウを左にずらす関数の呼び出し
+                    update_window.move_left_main_menu_window(self) #メインメニューウィンドウを左にずらす関数の呼び出し
                     self.cursor_pre_decision_item_y = self.cursor_decision_item_y #現時点で選択されたアイテム「MEDAL_LIST」を前のレイヤー選択アイテムとしてコピーする
                     func.push_cursor_data(self,WINDOW_ID_MAIN_MENU)   #メインメニューのカーソルデータをPUSH
                     
-                    func.create_window(self,WINDOW_ID_MEDAL_LIST,17,48) #「MEDAL_LIST」ウィンドウの作製
-                    func.create_window(self,WINDOW_ID_EQUIPMENT,17,17)  #「EQUIPMENT」 ウィンドウの作製
+                    update_window.create(self,WINDOW_ID_MEDAL_LIST,17,48) #「MEDAL_LIST」ウィンドウの作製
+                    update_window.create(self,WINDOW_ID_EQUIPMENT,17,17)  #「EQUIPMENT」 ウィンドウの作製
                     #カーソルは点滅囲み矩形タイプ,カーソルは4方向,カーソル移動ステップはx10y10,いま指し示しているitem_x,item_yは(0,2)
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,x最大項目数は9項目なので9-1=8を代入,y最大項目数は5項目なので5-1=4を代入,メニューの階層が増えたのでMENU_LAYER0からMENU_LAYER1にします
                     func.set_cursor_data(self,CURSOR_TYPE_BOX_FLASH,CURSOR_MOVE_4WAY,46,60,STEP10,STEP10,0,0,0,2,UNSELECTED,UNSELECTED,9-1,5-1,0,MENU_LAYER1)
@@ -261,7 +271,7 @@ class update_title:
                 if func.search_window_id(self,WINDOW_ID_STATUS) == -1: #STATUSウィンドウが存在しないのなら・・
                     self.cursor_pre_decision_item_y = self.cursor_decision_item_y #現時点で選択されたアイテム「STATUS」を前のレイヤー選択アイテムとしてコピーする
                     func.push_cursor_data(self,WINDOW_ID_MAIN_MENU)         #メインメニューのカーソルデータをPUSH
-                    func.create_window(self,WINDOW_ID_STATUS,4,0)           #STATUSウィンドウの作製
+                    update_window.create(self,WINDOW_ID_STATUS,4,0)           #STATUSウィンドウの作製
                     #選択カーソル表示をon,カーソルは上下移動のみ,,カーソル移動ステップはx4,y7,いま指示しているアイテムナンバーは0
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は11項目なので 13-1=12を代入,メニューの階層が増えたのでMENU_LAYER0からMENU_LAYER1にします
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,9,10,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,13-1,0,MENU_LAYER1)
@@ -272,7 +282,7 @@ class update_title:
                 if func.search_window_id(self,WINDOW_ID_EXIT) == -1: #ゲーム終了(退出)ウィンドウが存在しないのなら・・
                     self.cursor_pre_decision_item_y = self.cursor_decision_item_y #現時点で選択されたアイテム「EXIT」を前のレイヤー選択アイテムとしてコピーする
                     func.push_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPUSH
-                    func.create_window(self,WINDOW_ID_EXIT,50,59)                  #ゲーム終了(退出)ウィンドウの作製
+                    update_window.create(self,WINDOW_ID_EXIT,50,59)                  #ゲーム終了(退出)ウィンドウの作製
                     #選択カーソル表示をon,カーソルは上下移動のみ,,カーソル移動ステップはx4,y7,いま指示しているアイテムナンバーは0の「NO」
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は2項目なので 2-1=1を代入,メニューの階層が増えたのでMENU_LAYER0からMENU_LAYER1にします
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,66,69,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,2-1,0,MENU_LAYER1)
@@ -283,7 +293,7 @@ class update_title:
             if   self.cursor_pre_decision_item_y == MENU_SELECT_STAGE and self.cursor_decision_item_y == MENU_SELECT_STAGE_1:
                 #「SELECT STAGE」→「1」
                 self.stage_number   = 1                          #ステージナンバー1
-                func.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
                 
                 i = func.search_window_id(self,WINDOW_ID_SELECT_STAGE_MENU)
                 self.window[i].vx = 0.6            #WINDOW_ID_SELECT_STAGE_MENUウィンドウを右にフッ飛ばしていく
@@ -298,7 +308,7 @@ class update_title:
             elif self.cursor_pre_decision_item_y == MENU_SELECT_STAGE and self.cursor_decision_item_y == MENU_SELECT_STAGE_2:
                 #「SELECT STAGE」→「2」
                 self.stage_number   = 2                         #ステージナンバー2
-                func.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
                 
                 i = func.search_window_id(self,WINDOW_ID_SELECT_STAGE_MENU)
                 self.window[i].vx = 0.3            #WINDOW_ID_SELECT_STAGE_MENUウィンドウを右にフッ飛ばしていく
@@ -313,7 +323,7 @@ class update_title:
             elif self.cursor_pre_decision_item_y == MENU_SELECT_STAGE and self.cursor_decision_item_y == MENU_SELECT_STAGE_3:
                 #「SELECT STAGE」→「3」
                 self.stage_number   = 3                        #ステージナンバー3
-                func.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
                 
                 i = func.search_window_id(self,WINDOW_ID_SELECT_STAGE_MENU)
                 self.window[i].vx = 0.3            #WINDOW_ID_SELECT_STAGE_MENUウィンドウを右にフッ飛ばしていく
@@ -329,7 +339,7 @@ class update_title:
             elif self.cursor_pre_decision_item_y == MENU_SELECT_LOOP and self.cursor_decision_item_y == MENU_SELECT_LOOP_1:
                 #「SELECT LOOP NUMBER」→「1」
                 self.stage_loop = 1                           #ループ数に1週目を代入
-                func.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
                 i = func.search_window_id(self,WINDOW_ID_SELECT_LOOP_MENU)
                 self.window[i].vx = 0.3            #WINDOW_ID_SELECT_LOOP_MENUウィンドウを右にフッ飛ばしていく
                 self.window[i].vx_accel = 1.2
@@ -341,7 +351,7 @@ class update_title:
             elif self.cursor_pre_decision_item_y == MENU_SELECT_LOOP and self.cursor_decision_item_y == MENU_SELECT_LOOP_2:
                 #「SELECT LOOP NUMBER」→「2」
                 self.stage_loop = 2                           #ループ数に2週目を代入
-                func.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
                 i = func.search_window_id(self,WINDOW_ID_SELECT_LOOP_MENU)
                 self.window[i].vx = 0.3            #WINDOW_ID_SELECT_LOOP_MENUウィンドウを右にフッ飛ばしていく
                 self.window[i].vx_accel = 1.2
@@ -353,7 +363,7 @@ class update_title:
             elif self.cursor_pre_decision_item_y == MENU_SELECT_LOOP and self.cursor_decision_item_y == MENU_SELECT_LOOP_3:
                 #「SELECT LOOP NUMBER」→「3」
                 self.stage_loop = 3                          #ループ数に3週目を代入
-                func.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
                 i = func.search_window_id(self,WINDOW_ID_SELECT_LOOP_MENU)
                 self.window[i].vx = 0.3            #WINDOW_ID_SELECT_LOOP_MENUウィンドウを右にフッ飛ばしていく
                 self.window[i].vx_accel = 1.2
@@ -366,7 +376,7 @@ class update_title:
             elif self.cursor_pre_decision_item_y == MENU_BOSS_MODE and self.cursor_decision_item_y == MENU_BOSS_MODE_OFF:
                 #「BOSS MODE」→「OFF」
                 self.boss_test_mode = MENU_BOSS_MODE_OFF        #ボステストモードをoff
-                func.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
                 func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
                 i = func.search_window_id(self,WINDOW_ID_BOSS_MODE_MENU)
                 self.window[i].vx = 0.3            #WINDOW_ID_BOSS_MODE_MENUウィンドウを右にフッ飛ばしていく
@@ -381,7 +391,7 @@ class update_title:
             elif self.cursor_pre_decision_item_y == MENU_BOSS_MODE and self.cursor_decision_item_y == MENU_BOSS_MODE_ON:
                 #「BOSS MODE」→「ON」
                 self.boss_test_mode = MENU_BOSS_MODE_ON  #ボステストモードをon
-                func.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
                 func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
                 i = func.search_window_id(self,WINDOW_ID_BOSS_MODE_MENU)
                 self.window[i].vx = 0.3            #WINDOW_ID_BOSS_MODE_MENUウィンドウを右下にフッ飛ばしていく
@@ -399,7 +409,7 @@ class update_title:
             elif self.cursor_pre_decision_item_y == MENU_HITBOX and self.cursor_decision_item_y == MENU_HITBOX_OFF:
                 #「HITBOX」→「OFF」
                 self.boss_collision_rect_display_flag = 0            #ボス当たり判定表示をoff
-                func.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
                 func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
                 i = func.search_window_id(self,WINDOW_ID_HITBOX_MENU)
                 self.window[i].vx = 0.3            #WINDOW_ID_HITBOX_MENUウィンドウを右にフッ飛ばしていく
@@ -414,7 +424,7 @@ class update_title:
             elif self.cursor_pre_decision_item_y == MENU_HITBOX and self.cursor_decision_item_y == MENU_HITBOX_ON:
                 #「HITBOX」→「ON」
                 self.boss_collision_rect_display_flag = 1            #ボス当たり判定表示をON
-                func.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
                 func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
                 i = func.search_window_id(self,WINDOW_ID_HITBOX_MENU)
                 self.window[i].vx = 0.3            #WINDOW_ID_HITBOX_MENUウィンドウを右下にフッ飛ばしていく
@@ -432,7 +442,7 @@ class update_title:
             elif self.cursor_pre_decision_item_y == MENU_DIFFICULTY and self.cursor_decision_item_y == GAME_VERY_EASY:
                 #「DIFFICULTY」→「VERY_EASY」
                 self.game_difficulty = GAME_VERY_EASY
-                func.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
                 func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
                 i = func.search_window_id(self,WINDOW_ID_SELECT_DIFFICULTY)
                 self.window[i].vx = 0.3            #WINDOW_ID_SELECT_DIFFICULTYウィンドウを右にフッ飛ばしていく
@@ -449,7 +459,7 @@ class update_title:
             elif self.cursor_pre_decision_item_y == MENU_DIFFICULTY and self.cursor_decision_item_y == GAME_EASY:
                 #「DIFFICULTY」→「EASY」
                 self.game_difficulty = GAME_EASY
-                func.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
                 func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
                 i = func.search_window_id(self,WINDOW_ID_SELECT_DIFFICULTY)
                 self.window[i].vx = 0.3            #WINDOW_ID_SELECT_DIFFICULTYウィンドウを右にフッ飛ばしていく
@@ -466,7 +476,7 @@ class update_title:
             elif self.cursor_pre_decision_item_y == MENU_DIFFICULTY and self.cursor_decision_item_y == GAME_NORMAL:
                 #「DIFFICULTY」→「NORMAL」
                 self.game_difficulty = GAME_NORMAL
-                func.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
                 func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
                 i = func.search_window_id(self,WINDOW_ID_SELECT_DIFFICULTY)
                 self.window[i].vx = 0.3            #WINDOW_ID_SELECT_DIFFICULTYウィンドウを右にフッ飛ばしていく
@@ -481,7 +491,7 @@ class update_title:
             elif self.cursor_pre_decision_item_y == MENU_DIFFICULTY and self.cursor_decision_item_y == GAME_HARD:
                 #「DIFFICULTY」→「HARD」
                 self.game_difficulty = GAME_HARD
-                func.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
                 func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
                 i = func.search_window_id(self,WINDOW_ID_SELECT_DIFFICULTY)
                 self.window[i].vx = 0.3            #WINDOW_ID_SELECT_DIFFICULTYウィンドウを右にフッ飛ばしていく
@@ -498,7 +508,7 @@ class update_title:
             elif self.cursor_pre_decision_item_y == MENU_DIFFICULTY and self.cursor_decision_item_y == GAME_VERY_HARD:
                 #「DIFFICULTY」→「VERY_HARD」
                 self.game_difficulty = GAME_VERY_HARD
-                func.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
                 func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
                 i = func.search_window_id(self,WINDOW_ID_SELECT_DIFFICULTY)
                 self.window[i].vx = 0.3            #WINDOW_ID_SELECT_DIFFICULTYウィンドウを右にフッ飛ばしていく
@@ -515,7 +525,7 @@ class update_title:
             elif self.cursor_pre_decision_item_y == MENU_DIFFICULTY and self.cursor_decision_item_y == GAME_INSAME:
                 #「DIFFICULTY」→「INSAME」
                 self.game_difficulty = GAME_INSAME
-                func.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
                 func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
                 i = func.search_window_id(self,WINDOW_ID_SELECT_DIFFICULTY)
                 self.window[i].vx = 0.3            #WINDOW_ID_SELECT_DIFFICULTYウィンドウを右にフッ飛ばしていく
@@ -536,7 +546,7 @@ class update_title:
                 else:
                     func.all_move_window(self,WINDOW_ID_SCORE_BOARD,-0.3,0, 1.2,0) #すべてのSCORE_BOARDウィンドウを左方向にフッ飛ばしていく
                 
-                func.window_score_board(self,GAME_VERY_EASY)                           #スコアボードウィンドウ育成
+                update_window.create_score_board(self,GAME_VERY_EASY)                           #スコアボードウィンドウ育成
                 self.cursor_pre_page = self.cursor_page              #前回のページ数を保存
             elif self.cursor_pre_decision_item_y == MENU_SCORE_BOARD and self.cursor_page == GAME_EASY      and self.cursor_pre_page != self.cursor_page: #前に表示していたページ数と現在のページ数に変化があった時だけ
                 if self.cursor_move_data == PAD_RIGHT:
@@ -544,7 +554,7 @@ class update_title:
                 else:
                     func.all_move_window(self,WINDOW_ID_SCORE_BOARD,-0.3,0, 1.2,0) #すべてのSCORE_BOARDウィンドウを左方向にフッ飛ばしていく
                 
-                func.window_score_board(self,GAME_EASY)                           #スコアボードウィンドウ育成
+                update_window.create_score_board(self,GAME_EASY)                           #スコアボードウィンドウ育成
                 self.cursor_pre_page = self.cursor_page              #前回のページ数を保存
             elif self.cursor_pre_decision_item_y == MENU_SCORE_BOARD and self.cursor_page == GAME_NORMAL    and self.cursor_pre_page != self.cursor_page: #前に表示していたページ数と現在のページ数に変化があった時だけ
                 if self.cursor_move_data == PAD_RIGHT:
@@ -552,7 +562,7 @@ class update_title:
                 else:
                     func.all_move_window(self,WINDOW_ID_SCORE_BOARD,-0.3,0, 1.2,0) #すべてのSCORE_BOARDウィンドウを左方向にフッ飛ばしていく
                 
-                func.window_score_board(self,GAME_NORMAL)                           #スコアボードウィンドウ育成
+                update_window.create_score_board(self,GAME_NORMAL)                           #スコアボードウィンドウ育成
                 self.cursor_pre_page = self.cursor_page              #前回のページ数を保存
             elif self.cursor_pre_decision_item_y == MENU_SCORE_BOARD and self.cursor_page == GAME_HARD      and self.cursor_pre_page != self.cursor_page: #前に表示していたページ数と現在のページ数に変化があった時だけ
                 if self.cursor_move_data == PAD_RIGHT:
@@ -560,7 +570,7 @@ class update_title:
                 else:
                     func.all_move_window(self,WINDOW_ID_SCORE_BOARD,-0.3,0, 1.2,0) #すべてのSCORE_BOARDウィンドウを左方向にフッ飛ばしていく
                 
-                func.window_score_board(self,GAME_HARD)                           #スコアボードウィンドウ育成
+                update_window.create_score_board(self,GAME_HARD)                           #スコアボードウィンドウ育成
                 self.cursor_pre_page = self.cursor_page              #前回のページ数を保存
             elif self.cursor_pre_decision_item_y == MENU_SCORE_BOARD and self.cursor_page == GAME_VERY_HARD and self.cursor_pre_page != self.cursor_page: #前に表示していたページ数と現在のページ数に変化があった時だけ
                 if self.cursor_move_data == PAD_RIGHT:
@@ -568,7 +578,7 @@ class update_title:
                 else:
                     func.all_move_window(self,WINDOW_ID_SCORE_BOARD,-0.3,0, 1.2,0) #すべてのSCORE_BOARDウィンドウを左方向にフッ飛ばしていく
                 
-                func.window_score_board(self,GAME_VERY_HARD)                           #スコアボードウィンドウ育成
+                update_window.create_score_board(self,GAME_VERY_HARD)                           #スコアボードウィンドウ育成
                 self.cursor_pre_page = self.cursor_page              #前回のページ数を保存
             elif self.cursor_pre_decision_item_y == MENU_SCORE_BOARD and self.cursor_page == GAME_INSAME    and self.cursor_pre_page != self.cursor_page: #前に表示していたページ数と現在のページ数に変化があった時だけ
                 if self.cursor_move_data == PAD_RIGHT:
@@ -576,7 +586,7 @@ class update_title:
                 else:
                     func.all_move_window(self,WINDOW_ID_SCORE_BOARD,-0.3,0, 1.2,0) #すべてのSCORE_BOARDウィンドウを左方向にフッ飛ばしていく
                 
-                func.window_score_board(self,GAME_INSAME)                           #スコアボードウィンドウ育成
+                update_window.create_score_board(self,GAME_INSAME)                           #スコアボードウィンドウ育成
                 self.cursor_pre_page = self.cursor_page              #前回のページ数を保存
             elif self.cursor_pre_decision_item_y == MENU_SCORE_BOARD and self.cursor_decision_item_y != -1: #何かしらのアイテムの所でボタンが押されたのなら
                 #SCORE BOARDはキー入力のタイミングで同じウィンドウIDを持つウィンドウが複数存在してしまう可能性があるので
@@ -588,7 +598,7 @@ class update_title:
                 self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
                 
             elif self.cursor_pre_decision_item_y == MENU_NAME_ENTRY and self.cursor_decision_item_x == MENU_NAME_ENTRY_OK:
-                func.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
                 #「ENTER YOUR NAME」→「OK」ボタンを押した
                 text = self.window[self.active_window_index].edit_text[LIST_WINDOW_TEXT]
                 self.my_name = text[:8] #文字列textの先頭から8文字までをmy_nameとします
@@ -611,7 +621,7 @@ class update_title:
                     self.cursor_pre_decision_item_y     = self.cursor_decision_item_y     #今選択されたアイテム「INITIALIZE」を前のレイヤー選択アイテムとして保存する
                     func.push_cursor_data(self,WINDOW_ID_CONFIG)           #「CONFIG」ウィンドウのカーソルデータをPUSH
                     ox,oy = (WINDOW_W - 48) // 2,(WINDOW_H - 58) // 2 #「INITIALIZE」ウィンドウの座標指定
-                    func.create_window(self,WINDOW_ID_INITIALIZE,ox,oy)    #「INITIALIZE」ウィンドウの作製
+                    update_window.create(self,WINDOW_ID_INITIALIZE,ox,oy)    #「INITIALIZE」ウィンドウの作製
                     #選択カーソル表示をon,カーソルは上下移動のみ,,カーソル移動ステップはx4,y7,いま指示しているアイテムナンバーは2の「NORMAL」
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は7項目なので 7-1=6を代入,メニューの階層が増えたのでMENU_LAYER1からMENU_LAYER2にします
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,ox + 3,oy + 11,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,7-1,0,MENU_LAYER2)
@@ -638,7 +648,7 @@ class update_title:
                 self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
                 
             elif self.cursor_pre_decision_item_y == MENU_MEDAL and self.cursor_decision_item_y == 4 and 6 <= self.cursor_decision_item_x <= 8: #OKボタンが押されたときの処理
-                func.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
                 func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
                 i = func.search_window_id(self,WINDOW_ID_MEDAL_LIST)
                 self.window[i].vx = 0.3            #MEDAL_LISTウィンドウを右にフッ飛ばしていく
@@ -772,8 +782,8 @@ class update_title:
                     self.cursor_pre_pre_decision_item_y = self.cursor_pre_decision_item_y #1回前に選択されたアイテムを2回前に選択されたアイテムにコピー
                     self.cursor_pre_decision_item_y = self.cursor_decision_item_y #現時点で選択されたアイテム「INITIALIZE_SCORE」を前のレイヤー選択アイテムとしてコピーする
                     func.push_cursor_data(self,WINDOW_ID_MAIN_MENU)           #メインメニューのカーソルデータをPUSH
-                    func.create_window(self,WINDOW_ID_SELECT_YES_NO,34,25)    #「SELECT_YES_NO」 ウィンドウの作製
-                    func.create_window(self,WINDOW_ID_PRINT_INIT_SCORE,20,10) #「PRINT_INIT_SCORE」ウィンドウの作製
+                    update_window.create(self,WINDOW_ID_SELECT_YES_NO,34,25)    #「SELECT_YES_NO」 ウィンドウの作製
+                    update_window.create(self,WINDOW_ID_PRINT_INIT_SCORE,20,10) #「PRINT_INIT_SCORE」ウィンドウの作製
                     #カーソルは点滅囲み矩形タイプ,カーソルは4方向,カーソル移動ステップはx4y7,いま指し示しているitem_x,item_yは(0,0)
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,x最大項目数は1項目なので1-1=0を代入,y最大項目数は2項目なので2-1=1を代入,メニューの階層が増えたのでMENU_LAYER2からMENU_LAYER3にします
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,38,35,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,2-1,0,MENU_LAYER3)
@@ -786,8 +796,8 @@ class update_title:
                     self.cursor_pre_pre_decision_item_y = self.cursor_pre_decision_item_y #1回前に選択されたアイテムを2回前に選択されたアイテムにコピー
                     self.cursor_pre_decision_item_y = self.cursor_decision_item_y #現時点で選択されたアイテム「INITIALIZE_NAME」を前のレイヤー選択アイテムとしてコピーする
                     func.push_cursor_data(self,WINDOW_ID_MAIN_MENU)           #メインメニューのカーソルデータをPUSH
-                    func.create_window(self,WINDOW_ID_SELECT_YES_NO,34,25)    #「SELECT_YES_NO」 ウィンドウの作製
-                    func.create_window(self,WINDOW_ID_PRINT_INIT_NAME,20,10) #「PRINT_INIT_NAME」ウィンドウの作製
+                    update_window.create(self,WINDOW_ID_SELECT_YES_NO,34,25)    #「SELECT_YES_NO」 ウィンドウの作製
+                    update_window.create(self,WINDOW_ID_PRINT_INIT_NAME,20,10) #「PRINT_INIT_NAME」ウィンドウの作製
                     #カーソルは点滅囲み矩形タイプ,カーソルは4方向,カーソル移動ステップはx4y7,いま指し示しているitem_x,item_yは(0,0)
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,x最大項目数は1項目なので1-1=0を代入,y最大項目数は2項目なので2-1=1を代入,メニューの階層が増えたのでMENU_LAYER2からMENU_LAYER3にします
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,38,35,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,2-1,0,MENU_LAYER3)
@@ -800,8 +810,8 @@ class update_title:
                     self.cursor_pre_pre_decision_item_y = self.cursor_pre_decision_item_y #1回前に選択されたアイテムを2回前に選択されたアイテムにコピー
                     self.cursor_pre_decision_item_y = self.cursor_decision_item_y #現時点で選択されたアイテム「INITIALIZE_NAME」を前のレイヤー選択アイテムとしてコピーする
                     func.push_cursor_data(self,WINDOW_ID_MAIN_MENU)           #メインメニューのカーソルデータをPUSH
-                    func.create_window(self,WINDOW_ID_SELECT_YES_NO,34,25)    #「SELECT_YES_NO」 ウィンドウの作製
-                    func.create_window(self,WINDOW_ID_PRINT_INIT_ALL,20,10) #「PRINT_INIT_ALL」ウィンドウの作製
+                    update_window.create(self,WINDOW_ID_SELECT_YES_NO,34,25)    #「SELECT_YES_NO」 ウィンドウの作製
+                    update_window.create(self,WINDOW_ID_PRINT_INIT_ALL,20,10) #「PRINT_INIT_ALL」ウィンドウの作製
                     #カーソルは点滅囲み矩形タイプ,カーソルは4方向,カーソル移動ステップはx4y7,いま指し示しているitem_x,item_yは(0,0)
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,x最大項目数は1項目なので1-1=0を代入,y最大項目数は2項目なので2-1=1を代入,メニューの階層が増えたのでMENU_LAYER2からMENU_LAYER3にします
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,38,35,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,2-1,0,MENU_LAYER3)
@@ -976,7 +986,7 @@ class update_title:
                 
                 self.ctrl_type = 1
                 self.master_bgm_vol = 50
-                self.master_se_vol  = 50
+                self.master_se_vol  = 7
                 
                 self.number_of_play = 0                   #遊んだ回数初期化
                 self.number_of_times_destroyed       = 0  #自機が破壊された回数初期化
@@ -985,10 +995,10 @@ class update_title:
                 self.total_game_playtime_seconds = 0      #初めてこのゲームをプレイしてからの合計プレイ時間(単位は秒となります)初期化
                 self.number_of_times_destroyed   = 0      #自機が破壊された回数初期化
                 self.max_score_star_magnification = 1     #スコアスター連続取得倍率初期化
-                self.get_shot_pow_num     = 0              #ショットカプセル累計取得数を初期化
-                self.get_missile_pow_num  = 0              #ミサイルカプセル累計取得数を初期化
-                self.get_shield_pow_num   = 0              #シールドカプセル累計取得数を初期化
-                self.get_triangle_pow_num = 0              #トライアングルアイテム累計取得数を初期化
+                self.get_shot_pow_num     = 0             #ショットカプセル累計取得数を初期化
+                self.get_missile_pow_num  = 0             #ミサイルカプセル累計取得数を初期化
+                self.get_shield_pow_num   = 0             #シールドカプセル累計取得数を初期化
+                self.get_triangle_pow_num = 0             #トライアングルアイテム累計取得数を初期化
                 self.fast_forward_num    = 0              #累計早回し発生数を初期化
                 self.get_claw_num        = 0              #クロー累計取得数を初期化
                 self.get_score_star_num  = 0              #スコアスター累計取得数を初期化

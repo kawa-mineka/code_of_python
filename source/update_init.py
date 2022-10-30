@@ -121,10 +121,9 @@ class update_init:
             update_ship.append_claw(self)
             update_ship.append_claw(self)
 
-
     #!ステージスタート時にグラフイック系のアセットを読み込む##############
     def stage_start_load_asset(self,st_num): #st_num = ステージ数
-        #ステージ数から判断して、租のステージに対応した画像リソースファイルを読み込みます
+        #ステージ数から判断してそのステージに対応した画像リソースファイルを読み込みます
         filename = self.stage_asset_list[st_num][1]
         pyxel.load(os.path.abspath("./assets/graphic/" + filename))
 

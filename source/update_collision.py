@@ -259,7 +259,7 @@ class update_collision:
                         del self.enemy[e] #敵リストから破壊した敵をdel消去破壊するっ！
                         
                     self.shots[h].shot_hp = 0#自機弾のＨＰをゼロにして自機弾移動時にチェックしリストから消去させるため
-                    pyxel.play(0,2)#変な爆発音を出すのだ～～～☆彡
+                    update_se.se(self,0,SE_EXPLOSION,self.master_se_vol)#変な爆発音を出すのだ～～～☆彡
 
     #自機弾とボスとの当たり判定
     def my_shot_to_boss(self):
@@ -366,6 +366,7 @@ class update_collision:
                         hit_x,hit_y   = self.shots[h].posx,self.shots[h].posy
                         hit_vx,hit_vy = self.shots[h].vx,self.shots[h].vx
                         func.boss_processing_after_hitting(self,e,hit_x,hit_y,hit_vx,hit_vy) #ボスにショットを当てた後の処理の関数を呼び出す！
+                        update_se.se(self,0,SE_EXPLOSION,self.master_se_vol)#変な爆発音を出すのだ～～～☆彡
                         self.shots[h].shot_hp = 0#自機弾のＨＰをゼロにして自機弾移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する   
                     #パーツ2との当たり判定
@@ -400,6 +401,7 @@ class update_collision:
                         hit_x,hit_y   = self.shots[h].posx,self.shots[h].posy
                         hit_vx,hit_vy = self.shots[h].vx,self.shots[h].vx
                         func.boss_processing_after_hitting(self,e,hit_x,hit_y,hit_vx,hit_vy) #ボスにショットを当てた後の処理の関数を呼び出す！
+                        update_se.se(self,0,SE_EXPLOSION,self.master_se_vol)#変な爆発音を出すのだ～～～☆彡
                         self.shots[h].shot_hp = 0#自機弾のＨＰをゼロにして自機弾移動時にチェックしリストから消去させる 
                         continue #これ以下の処理はせず次のループへと移行する                    
                     #パーツ3との当たり判定
@@ -435,6 +437,7 @@ class update_collision:
                         hit_x,hit_y   = self.shots[h].posx,self.shots[h].posy
                         hit_vx,hit_vy = self.shots[h].vx,self.shots[h].vx
                         func.boss_processing_after_hitting(self,e,hit_x,hit_y,hit_vx,hit_vy) #ボスにショットを当てた後の処理の関数を呼び出す！
+                        update_se.se(self,0,SE_EXPLOSION,self.master_se_vol)#変な爆発音を出すのだ～～～☆彡
                         self.shots[h].shot_hp = 0#自機弾のＨＰをゼロにして自機弾移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する                  
                     #パーツ4との当たり判定
@@ -469,6 +472,7 @@ class update_collision:
                         hit_x,hit_y   = self.shots[h].posx,self.shots[h].posy
                         hit_vx,hit_vy = self.shots[h].vx,self.shots[h].vx
                         func.boss_processing_after_hitting(self,e,hit_x,hit_y,hit_vx,hit_vy) #ボスにショットを当てた後の処理の関数を呼び出す！
+                        update_se.se(self,0,SE_EXPLOSION,self.master_se_vol)#変な爆発音を出すのだ～～～☆彡
                         self.shots[h].shot_hp = 0#自機弾のＨＰをゼロにして自機弾移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する                  
                     
@@ -482,6 +486,7 @@ class update_collision:
                         hit_x,hit_y   = self.shots[h].posx,self.shots[h].posy
                         hit_vx,hit_vy = self.shots[h].vx,self.shots[h].vx
                         func.boss_processing_after_hitting(self,e,hit_x,hit_y,hit_vx,hit_vy) #ボスにショットを当てた後の処理の関数を呼び出す！
+                        update_se.se(self,0,SE_EXPLOSION,self.master_se_vol)#変な爆発音を出すのだ～～～☆彡
                         self.shots[h].shot_hp = 0#自機弾のＨＰをゼロにして自機弾移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     #ダメージポイント2との判定
@@ -494,6 +499,7 @@ class update_collision:
                         hit_x,hit_y   = self.shots[h].posx,self.shots[h].posy
                         hit_vx,hit_vy = self.shots[h].vx,self.shots[h].vx
                         func.boss_processing_after_hitting(self,e,hit_x,hit_y,hit_vx,hit_vy) #ボスにショットを当てた後の処理の関数を呼び出す！
+                        update_se.se(self,0,SE_EXPLOSION,self.master_se_vol)#変な爆発音を出すのだ～～～☆彡
                         self.shots[h].shot_hp = 0#自機弾のＨＰをゼロにして自機弾移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     #ダメージポイント3との判定
@@ -506,6 +512,7 @@ class update_collision:
                         hit_x,hit_y   = self.shots[h].posx,self.shots[h].posy
                         hit_vx,hit_vy = self.shots[h].vx,self.shots[h].vx
                         func.boss_processing_after_hitting(self,e,hit_x,hit_y,hit_vx,hit_vy) #ボスにショットを当てた後の処理の関数を呼び出す！
+                        update_se.se(self,0,SE_EXPLOSION,self.master_se_vol)#変な爆発音を出すのだ～～～☆彡
                         self.shots[h].shot_hp = 0#自機弾のＨＰをゼロにして自機弾移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     #ダメージポイント4との判定
@@ -518,6 +525,7 @@ class update_collision:
                         hit_x,hit_y   = self.shots[h].posx,self.shots[h].posy
                         hit_vx,hit_vy = self.shots[h].vx,self.shots[h].vx
                         func.boss_processing_after_hitting(self,e,hit_x,hit_y,hit_vx,hit_vy) #ボスにショットを当てた後の処理の関数を呼び出す！
+                        update_se.se(self,0,SE_EXPLOSION,self.master_se_vol)#変な爆発音を出すのだ～～～☆彡
                         self.shots[h].shot_hp = 0#自機弾のＨＰをゼロにして自機弾移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する    
 
@@ -552,7 +560,7 @@ class update_collision:
                         self.score += 1#スコア加算（あとあといろんなスコアシステム実装する予定だよ）
                     
                     self.missile[h].missile_hp = 0#ミサイルのＨＰをゼロにしてミサイル移動時にチェックしリストから消去させるため
-                    pyxel.play(0,2)#ミサイルが敵を破壊した音！
+                    update_se.se(self,0,SE_EXPLOSION,self.master_se_vol)#ミサイルが敵を破壊した音！
 
     #自機ミサイルとボスとの当たり判定
     def missile_to_boss(self):
@@ -646,6 +654,7 @@ class update_collision:
                         hit_x,hit_y = self.missile[h].posx,self.missile[h].posy
                         hit_vx,hit_vy = self.missile[h].vx,self.missile[h].vy
                         func.boss_processing_after_hitting(self,e,hit_x,hit_y,hit_vx,hit_vy) #ボスにミサイルを当てた後の処理の関数を呼び出す！
+                        update_se.se(self,0,SE_EXPLOSION,self.master_se_vol)#変な爆発音を出すのだ～～～☆彡
                         self.missile[h].missile_hp = 0#ミサイルのＨＰをゼロしてミサイル移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する   
                     #パーツ2との当たり判定
@@ -667,6 +676,7 @@ class update_collision:
                         hit_x,hit_y = self.missile[h].posx,self.missile[h].posy
                         hit_vx,hit_vy = self.missile[h].vx,self.missile[h].vy
                         func.boss_processing_after_hitting(self,e,hit_x,hit_y,hit_vx,hit_vy) #ボスにミサイルを当てた後の処理の関数を呼び出す！
+                        update_se.se(self,0,SE_EXPLOSION,self.master_se_vol)#変な爆発音を出すのだ～～～☆彡
                         self.missile[h].missile_hp = 0#ミサイルのＨＰをゼロしてミサイル移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する                    
                     #パーツ3との当たり判定
@@ -688,6 +698,7 @@ class update_collision:
                         hit_x,hit_y = self.missile[h].posx,self.missile[h].posy
                         hit_vx,hit_vy = self.missile[h].vx,self.missile[h].vy
                         func.boss_processing_after_hitting(self,e,hit_x,hit_y,hit_vx,hit_vy) #ボスにミサイルを当てた後の処理の関数を呼び出す！
+                        update_se.se(self,0,SE_EXPLOSION,self.master_se_vol)#変な爆発音を出すのだ～～～☆彡
                         self.missile[h].missile_hp = 0#ミサイルのＨＰをゼロしてミサイル移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する                  
                     #パーツ4との当たり判定
@@ -709,6 +720,7 @@ class update_collision:
                         hit_x,hit_y = self.missile[h].posx,self.missile[h].posy
                         hit_vx,hit_vy = self.missile[h].vx,self.missile[h].vy
                         func.boss_processing_after_hitting(self,e,hit_x,hit_y,hit_vx,hit_vy) #ボスにミサイルを当てた後の処理の関数を呼び出す！
+                        update_se.se(self,0,SE_EXPLOSION,self.master_se_vol)#変な爆発音を出すのだ～～～☆彡
                         self.missile[h].missile_hp = 0#ミサイルのＨＰをゼロしてミサイル移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する                  
                     
@@ -722,6 +734,7 @@ class update_collision:
                         hit_x,hit_y = self.missile[h].posx,self.missile[h].posy
                         hit_vx,hit_vy = self.missile[h].vx,self.missile[h].vy
                         func.boss_processing_after_hitting(self,e,hit_x,hit_y,hit_vx,hit_vy) #ボスにミサイルを当てた後の処理の関数を呼び出す！
+                        update_se.se(self,0,SE_EXPLOSION,self.master_se_vol)#変な爆発音を出すのだ～～～☆彡
                         self.missile[h].missile_hp = 0#ミサイルのＨＰをゼロしてミサイル移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     #ダメージポイント2との判定
@@ -734,6 +747,7 @@ class update_collision:
                         hit_x,hit_y = self.missile[h].posx,self.missile[h].posy
                         hit_vx,hit_vy = self.missile[h].vx,self.missile[h].vy
                         func.boss_processing_after_hitting(self,e,hit_x,hit_y,hit_vx,hit_vy) #ボスにミサイルを当てた後の処理の関数を呼び出す！
+                        update_se.se(self,0,SE_EXPLOSION,self.master_se_vol)#変な爆発音を出すのだ～～～☆彡
                         self.missile[h].missile_hp = 0#ミサイルのＨＰをゼロしてミサイル移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     #ダメージポイント3との判定
@@ -746,6 +760,7 @@ class update_collision:
                         hit_x,hit_y = self.missile[h].posx,self.missile[h].posy
                         hit_vx,hit_vy = self.missile[h].vx,self.missile[h].vy
                         func.boss_processing_after_hitting(self,e,hit_x,hit_y,hit_vx,hit_vy) #ボスにミサイルを当てた後の処理の関数を呼び出す！
+                        update_se.se(self,0,SE_EXPLOSION,self.master_se_vol)#変な爆発音を出すのだ～～～☆彡
                         self.missile[h].missile_hp = 0#ミサイルのＨＰをゼロしてミサイル移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     #ダメージポイント4との判定
@@ -758,6 +773,7 @@ class update_collision:
                         hit_x,hit_y = self.missile[h].posx,self.missile[h].posy
                         hit_vx,hit_vy = self.missile[h].vx,self.missile[h].vy
                         func.boss_processing_after_hitting(self,e,hit_x,hit_y,hit_vx,hit_vy) #ボスにミサイルを当てた後の処理の関数を呼び出す！ 
+                        update_se.se(self,0,SE_EXPLOSION,self.master_se_vol)#変な爆発音を出すのだ～～～☆彡
                         self.missile[h].missile_hp = 0#ミサイルのＨＰをゼロしてミサイル移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する    
 
@@ -782,7 +798,7 @@ class update_collision:
                         self.score += 1#スコア加算（あとあといろんなスコアシステム実装する予定だよ）
                     
                     self.claw_shot[h].shot_hp = 0#クローショットのＨＰをゼロにしてクローショット移動時にチェックしリストから消去させるため
-                    pyxel.play(0,2)#クローショットが敵を破壊した音！
+                    update_se.se(self,0,SE_EXPLOSION,self.master_se_vol)#クローショットが敵を破壊した音！
 
     #クローショットとボスとの当たり判定
     def claw_shot_to_boss(self):
@@ -876,6 +892,7 @@ class update_collision:
                         hit_x,hit_y = self.claw_shot[h].posx,self.claw_shot[h].posy
                         hit_vx,hit_vy = self.claw_shot[h].vx,self.claw_shot[h].vy
                         func.boss_processing_after_hitting(self,e,hit_x,hit_y,hit_vx,hit_vy) #ボスにクローショットを当てた後の処理の関数を呼び出す！
+                        update_se.se(self,0,SE_EXPLOSION,self.master_se_vol)#変な爆発音を出すのだ～～～☆彡
                         self.claw_shot[h].shot_hp = 0#クローショットのＨＰをゼロにして移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する   
                     #パーツ2との当たり判定
@@ -897,6 +914,7 @@ class update_collision:
                         hit_x,hit_y = self.claw_shot[h].posx,self.claw_shot[h].posy
                         hit_vx,hit_vy = self.claw_shot[h].vx,self.claw_shot[h].vy
                         func.boss_processing_after_hitting(self,e,hit_x,hit_y,hit_vx,hit_vy) #ボスにクローショットを当てた後の処理の関数を呼び出す！
+                        update_se.se(self,0,SE_EXPLOSION,self.master_se_vol)#変な爆発音を出すのだ～～～☆彡
                         self.claw_shot[h].shot_hp = 0#クローショットのＨＰをゼロにして移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する                    
                     #パーツ3との当たり判定
@@ -918,6 +936,7 @@ class update_collision:
                         hit_x,hit_y = self.claw_shot[h].posx,self.claw_shot[h].posy
                         hit_vx,hit_vy = self.claw_shot[h].vx,self.claw_shot[h].vy
                         func.boss_processing_after_hitting(self,e,hit_x,hit_y,hit_vx,hit_vy) #ボスにクローショットを当てた後の処理の関数を呼び出す！
+                        update_se.se(self,0,SE_EXPLOSION,self.master_se_vol)#変な爆発音を出すのだ～～～☆彡
                         self.claw_shot[h].shot_hp = 0#クローショットのＨＰをゼロにして移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する                  
                     #パーツ4との当たり判定
@@ -939,6 +958,7 @@ class update_collision:
                         hit_x,hit_y = self.claw_shot[h].posx,self.claw_shot[h].posy
                         hit_vx,hit_vy = self.claw_shot[h].vx,self.claw_shot[h].vy
                         func.boss_processing_after_hitting(self,e,hit_x,hit_y,hit_vx,hit_vy) #ボスにクローショットを当てた後の処理の関数を呼び出す！
+                        update_se.se(self,0,SE_EXPLOSION,self.master_se_vol)#変な爆発音を出すのだ～～～☆彡
                         self.claw_shot[h].shot_hp = 0#クローショットのＨＰをゼロにして移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する                  
                     
@@ -952,6 +972,7 @@ class update_collision:
                         hit_x,hit_y = self.claw_shot[h].posx,self.claw_shot[h].posy
                         hit_vx,hit_vy = self.claw_shot[h].vx,self.claw_shot[h].vy
                         func.boss_processing_after_hitting(self,e,hit_x,hit_y,hit_vx,hit_vy) #ボスにクローショットを当てた後の処理の関数を呼び出す！
+                        update_se.se(self,0,SE_EXPLOSION,self.master_se_vol)#変な爆発音を出すのだ～～～☆彡
                         self.claw_shot[h].shot_hp = 0#クローショットのＨＰをゼロにして移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     #ダメージポイント2との判定
@@ -964,6 +985,7 @@ class update_collision:
                         hit_x,hit_y = self.claw_shot[h].posx,self.claw_shot[h].posy
                         hit_vx,hit_vy = self.claw_shot[h].vx,self.claw_shot[h].vy
                         func.boss_processing_after_hitting(self,e,hit_x,hit_y,hit_vx,hit_vy) #ボスにクローショットを当てた後の処理の関数を呼び出す！
+                        update_se.se(self,0,SE_EXPLOSION,self.master_se_vol)#変な爆発音を出すのだ～～～☆彡
                         self.claw_shot[h].shot_hp = 0#クローショットのＨＰをゼロにして移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     #ダメージポイント3との判定
@@ -976,6 +998,7 @@ class update_collision:
                         hit_x,hit_y = self.claw_shot[h].posx,self.claw_shot[h].posy
                         hit_vx,hit_vy = self.claw_shot[h].vx,self.claw_shot[h].vy
                         func.boss_processing_after_hitting(self,e,hit_x,hit_y,hit_vx,hit_vy) #ボスにクローショットを当てた後の処理の関数を呼び出す！
+                        update_se.se(self,0,SE_EXPLOSION,self.master_se_vol)#変な爆発音を出すのだ～～～☆彡
                         self.claw_shot[h].shot_hp = 0#クローショットのＨＰをゼロにして移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する
                     #ダメージポイント4との判定
@@ -988,6 +1011,7 @@ class update_collision:
                         hit_x,hit_y = self.claw_shot[h].posx,self.claw_shot[h].posy
                         hit_vx,hit_vy = self.claw_shot[h].vx,self.claw_shot[h].vy
                         func.boss_processing_after_hitting(self,e,hit_x,hit_y,hit_vx,hit_vy) #ボスにクローショットを当てた後の処理の関数を呼び出す！ 
+                        update_se.se(self,0,SE_EXPLOSION,self.master_se_vol)#変な爆発音を出すのだ～～～☆彡
                         self.claw_shot[h].shot_hp = 0#クローショットのＨＰをゼロにして移動時にチェックしリストから消去させる
                         continue #これ以下の処理はせず次のループへと移行する    
 
@@ -1014,7 +1038,6 @@ class update_collision:
                 
             if self.collision_flag == 1: #衝突フラグが立っていたらを敵弾を消滅させる
                 del self.enemy_shot[i]        
-
 
     ################################パワーアップアイテムと敵弾との当たり判定##################################################
     #パワーアップアイテム類と敵弾の当たり判定(難易度によってパワーアップアイテムは敵弾を消す効果あり)

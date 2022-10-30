@@ -14,8 +14,9 @@ import pyxel        #グラフイックキャラやバックグラウンドグ�
 from const import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
 from func  import * #汎用性のある関数群のモジュールの読み込み
 
-from update_obj  import * #背景オブジェクト更新関数モジュール読み込み(パーティクルで使用)
-from update_ship import * #自機関連更新関数モジュール読み込み
+from update_obj    import *   #背景オブジェクト更新関数モジュール読み込み(パーティクルで使用)
+from update_ship   import *   #自機関連更新関数モジュール読み込み
+from update_window import *   #ポーズウィンドウ作成時に使用するのでインポート
 
 class update_btn:
     #スペースキーかゲームパッドAが押されたかどうか？もしくはリプレイモードでショット発射したのか調べる     KEY SPACE GAMEPAD A
@@ -124,7 +125,7 @@ class update_btn:
                 self.record_games_status = self.game_status #ステータスを一時記憶しておく
                 self.game_status = SCENE_PAUSE            #ステータスを「PAUSE」にする
                 if func.search_window_id(self,WINDOW_ID_PAUSE_MENU) == -1: #ポーズメニューウィンドウが存在しないのなら・・
-                    func.create_window(self,WINDOW_ID_PAUSE_MENU,30,70)          #ポーズメニューウィンドウウィンドウの作製
+                    update_window.create(self,WINDOW_ID_PAUSE_MENU,30,70)          #ポーズメニューウィンドウウィンドウの作製
                     #選択カーソル表示をon,カーソルは上下移動のみ,,カーソル移動ステップはx4,y7,いま指示しているアイテムナンバーは0の「BACK TO GAMES」
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は3項目なので 4-1=3を代入,メニューの階層は一番低いMENU_LAYER0にします
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,46,73,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,4-1,0,MENU_LAYER0)

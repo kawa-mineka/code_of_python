@@ -11,6 +11,7 @@ import pyxel        #グラフイックキャラやバックグラウンドグ�
 from const import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
 from func  import *
 from update_system import * #汎用性のある関数群のモジュールの読み込み
+from update_window import * #ポーズウィンドウ作成時に使用するのでインポート
 
 class update_pause:
     def __init__(self):
@@ -36,10 +37,10 @@ class update_pause:
                 
             elif self.cursor_decision_item_y == 1:    #選択したアイテムが「RETURN TITLE」ならば
                 if func.search_window_id(self,WINDOW_ID_RETURN_TITLE) == -1: #リターンタイトルウィンドウが存在しないのなら・・
-                    func.move_down_pause_menu(self) #ポーズメニューウィンドウを下にずらす関数の呼び出し
+                    update_window.move_down_pause_menu(self) #ポーズメニューウィンドウを下にずらす関数の呼び出し
                     self.cursor_pre_decision_item_y = self.cursor_decision_item_y #現時点で選択されたアイテム「RETURN TITLE」を前のレイヤー選択アイテムとしてコピーする
                     func.push_cursor_data(self,WINDOW_ID_PAUSE_MENU)         #ポーズメニューのカーソルデータをPUSH
-                    func.create_window(self,WINDOW_ID_RETURN_TITLE,50,69)                  #リターンタイトルウィンドウの作製
+                    update_window.create(self,WINDOW_ID_RETURN_TITLE,50,69)                  #リターンタイトルウィンドウの作製
                     #選択カーソル表示をon,カーソルは上下移動のみ,,カーソル移動ステップはx4,y7,いま指示しているアイテムナンバーは0の「NO」
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は2項目なので 2-1=1を代入,メニューの階層が増えたのでMENU_LAYER0からMENU_LAYER1にします
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,66,69+10,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,2-1,0,MENU_LAYER1)
@@ -48,10 +49,10 @@ class update_pause:
                 
             elif self.cursor_decision_item_y == 3:    #選択したアイテムが「EXIT GAME」ならば
                 if func.search_window_id(self,WINDOW_ID_EXIT) == -1: #ゲーム終了(退出)ウィンドウが存在しないのなら・・
-                    func.move_down_pause_menu(self) #ポーズメニューウィンドウを下にずらす関数の呼び出し
+                    update_window.move_down_pause_menu(self) #ポーズメニューウィンドウを下にずらす関数の呼び出し
                     self.cursor_pre_decision_item_y = self.cursor_decision_item_y #現時点で選択されたアイテム「EXIT GAME」を前のレイヤー選択アイテムとしてコピーする
                     func.push_cursor_data(self,WINDOW_ID_PAUSE_MENU)         #ポーズメニューのカーソルデータをPUSH
-                    func.create_window(self,WINDOW_ID_EXIT,50,69)                  #ゲーム終了(退出)ウィンドウの作製
+                    update_window.create(self,WINDOW_ID_EXIT,50,69)                  #ゲーム終了(退出)ウィンドウの作製
                     #選択カーソル表示をon,カーソルは上下移動のみ,,カーソル移動ステップはx4,y7,いま指示しているアイテムナンバーは0の「NO」
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は2項目なので 2-1=1を代入,メニューの階層が増えたのでMENU_LAYER0からMENU_LAYER1にします
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,66,69+10,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,2-1,0,MENU_LAYER1)
@@ -60,7 +61,7 @@ class update_pause:
             
         elif self.cursor_menu_layer == MENU_LAYER1: #メニューが1階層目の選択分岐
             if     self.cursor_pre_decision_item_y == 1 and self.cursor_decision_item_y == 0: #「RETURN TITLE」→「NO」
-                func.move_up_pause_menu(self) #ポーズメニューウィンドウを右にずらす関数の呼び出し
+                update_window.move_up_pause_menu(self) #ポーズメニューウィンドウを上にずらす関数の呼び出し
                 i = func.search_window_id(self,WINDOW_ID_RETURN_TITLE)
                 self.window[i].vy = -0.3            #WINDOW_ID_RETURN_TITLEウィンドウを右上にフッ飛ばしていく
                 self.window[i].vy_accel = 1.2
@@ -104,7 +105,7 @@ class update_pause:
                 pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
                 
             elif   self.cursor_pre_decision_item_y == 3 and self.cursor_decision_item_y == 0: #「EXIT GAME」→「NO」
-                func.move_up_pause_menu(self) #ポーズメニューウィンドウを右にずらす関数の呼び出し
+                update_window.move_up_pause_menu(self) #ポーズメニューウィンドウを上にずらす関数の呼び出し
                 i = func.search_window_id(self,WINDOW_ID_EXIT)
                 self.window[i].vy = -0.3            #WINDOW_ID_EXITウィンドウを右上にフッ飛ばしていく
                 self.window[i].vy_accel = 1.2

@@ -122,6 +122,7 @@ from update_window     import * #Appクラスのupdate関数から呼び出さ�
 from update_replay     import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み リプレイ記録再生の更新を行う関数(メソッド？）です
 from update_debug      import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み デバッグ用パラメーターの更新やキー入力による直接デバッグを行うメソッドです
 from update_btn        import * #Appクラスのupdate関数から呼び出されるモジュール 主にショット＆ミサイル関連のボタンが押されたかを調べるメソッドです
+from update_btn_assign import * #Appクラスのupdate関数から呼び出されるモジュール パッドのボタンの機能変更（ボタンアサインコンフィグ)メソッドです
 
 from update_ship       import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主に自機関連のメソッドです
 from update_enemy      import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主に敵の更新や敵弾の更新を行います
@@ -229,8 +230,8 @@ class App:
             pyxel.fullscreen(True)           #pyxel Ver1.5からfullscreen命令が追加されたらしい 裏技ッポイけど！？使っても良いのん？？
         pyxel.mouse(False)                   #マウスカーソルを非表示にする
         
-        self.bg_cls_color = 0          #BGをCLS(クリアスクリーン)するときの色の指定(通常は0=黒色です)
-        self.bg_transparent_color = 0  #BGタイルマップを敷き詰めるときに指定する透明色です
+        self.bg_cls_color         = pyxel.COLOR_BLACK  #BGをCLS(クリアスクリーン)するときの色の指定(通常は0=pyxel.COLOR_BLACK=黒色です)
+        self.bg_transparent_color = pyxel.COLOR_BLACK  #BGタイルマップを敷き詰めるときに指定する透明色です
         
         self.game_quit_timer    = 0  #ゲーム終了時に使用する終了カウントタイマーです(終了工程開始時に数値設定し1フレームごと減算し0になったらゲーム終了！)
         self.game_quit_from_playing = 0 #タイトルからの終了工程なのか？それともゲーム中からの終了工程なのかどうかのフラグ 0=タイトルから 1=ゲーム中から
@@ -278,12 +279,14 @@ class App:
         #上の方法で空リストを作成すると1つのリストに数値を入れると他の全てのリストに数値が代入されちゃう・・・・・なんでや！
         #なんか上の方法だと要素のリストがすべて同じオブジェクトになるらしい・・・聞いてないよそんなの・・・
         #内包表記って言うのを使えば良いらしい！？
-        self.replay_data          = [[] for i in range(50)] #これでいいのかな？？？
+        self.replay_data          = [[] for i in range(50)] #これでいいのかな？？？うまくいったぜ！
         self.replay_stage_my_data = [[] for i in range(50)] #リプレイ録画時、ステージスタート時に記録される自機関連のデータが入るリスト横無限大,縦50ステージ分
         
         self.replay_mode_stage_data        =[[0] * 80 for i in range(50)] #リプレイモードでの毎ステージスタート時の自機データ収納リストを初期化します                 (横30,縦50ステージ分の空リスト)
         self.replay_mode_stage_data_backup =[[0] * 80 for i in range(50)] #リプレイモードでの毎ステージスタート時の自機データ収納リスト(バックアップ用)を初期化します  (横30,縦50ステージ分の空リスト)
         self.temp_graph_list = []               #スコアデータウィンドウを育成するときに使用する一時的なメダルリストグラフイック座標値などが入ったリスト群を初期化宣言
+        self.master_se_vol_list = [[] for i in range(62)] #SE用のマスターボリュームリストを保存しておくためのリストです
+        self.adjustable_se_vol_list =[[] for i in range(62)]
         self.replay_control_data_size = []      #リプレイファイルのステージ毎のコントロールデータのファイルサイズリストです
         self.master_flag_list = [[] for i in range(128)] #ウィンドウ表示時に使用するフラグ＆データ関連の元リストを初期化
         self.replay_stage_num = 0               #リプレイ再生、録画時のステージ数を0で初期化します(1ステージ目=0→2ステージ目=1→3ステージ目=2って感じ)
@@ -365,14 +368,14 @@ class App:
         
         ################################ タイトルでメニュー選択中 ###################################################################
         if self.game_status == SCENE_TITLE_MENU_SELECT:
-            update_title.title_menu_select(self)     #タイトルでのメニュー選択処理をする関数の呼び出し
-            update_obj.append_star(self)             #背景の星の追加＆発生育成関数呼び出し
-            update_obj.star(self)                    #背景の星の更新（移動）関数呼び出し
-            update_window.window(self)               #ウィンドウの更新（ウィンドウの開き閉じ画面外に消え去っていくとか）関数を呼び出し
-            update_window.clip_window(self)          #画面外にはみ出たウィンドウを消去する関数の呼び出し
-            update_window.active_window(self)        #現在アクティブ(最前面)になっているウィンドウのインデックス値(i)を求める関数の呼び出し
-            update_window.select_cursor(self)        #セレクトカーソルでメニューを選択する関数を呼び出す
-            func.judge_medal_acquisition(self)       #メダルの取得判定を行う関数を呼び出す
+            update_title.title_menu_select(self)        #タイトルでのメニュー選択処理をする関数の呼び出し
+            update_obj.append_star(self)                #背景の星の追加＆発生育成関数呼び出し
+            update_obj.star(self)                       #背景の星の更新（移動）関数呼び出し
+            update_window.window(self)                  #ウィンドウの更新（ウィンドウの開き閉じ画面外に消え去っていくとか）関数を呼び出し
+            update_window.clip_window(self)             #画面外にはみ出たウィンドウを消去する関数の呼び出し
+            update_window.active_window(self)           #現在アクティブ(最前面)になっているウィンドウのインデックス値(i)を求める関数の呼び出し
+            update_window.select_cursor(self)           #セレクトカーソルでメニューを選択する関数を呼び出す
+            update_window.judge_medal_acquisition(self) #メダルの取得判定を行う関数を呼び出す
         
         ############################### ロード用リプレイデータスロットの選択中 #######################################################
         if self.game_status == SCENE_SELECT_LOAD_SLOT:#「SCENE_SELECT_LOAD_SLOT」の時は
@@ -500,8 +503,8 @@ class App:
             update_status.rnd0_9(self)                    #乱数ルーレット( 0~9)の更新
             update_status.rnd0_99(self)                   #乱数ルーレット(0~99)の更新
             #実績(アチーブメント)の取得判定###############################################################################################
-            if self.replay_status == REPLAY_RECORD: #リプレイデータを保存している時(ゲームプレイ中)だけは実績取得の判定を行う(リプレイ再生時に実績取得すると不味いからね～～♪)
-                func.judge_achievement_acquisition(self)    #実績(アチーブメント)を取得したかどうかを調べる関数の呼び出し
+            if self.replay_status == REPLAY_RECORD:               #リプレイデータを保存している時(ゲームプレイ中)だけは実績取得の判定を行う(リプレイ再生時に実績取得すると不味いからね～～♪)
+                update_window.judge_achievement_acquisition(self) #実績(アチーブメント)を取得したかどうかを調べる関数の呼び出し
         
         if     self.game_status == SCENE_PLAY\
             or self.game_status == SCENE_BOSS_APPEAR\
@@ -575,7 +578,7 @@ class App:
         
         if self.game_status == SCENE_GAME_OVER_STOP:         #「GAME_OVER_STOP」の時は
             if self.replay_status == REPLAY_RECORD: #リプレイ録画中の時のリターンタイトルウィンドウ表示
-                func.create_window(self,WINDOW_ID_GAME_OVER_RETURN,43,68)    #RETRN? SAVE&RETURNウィンドウの作成
+                update_window.create(self,WINDOW_ID_GAME_OVER_RETURN,43,68)    #RETRN? SAVE&RETURNウィンドウの作成
                 self.cursor_type = CURSOR_TYPE_NORMAL             #選択カーソル表示をonにする
                 self.select_cursor_flag = FLAG_ON                 #セレクトカーソルの移動更新フラグをオン
                 self.cursor_move_direction = CURSOR_MOVE_UD       #カーソルは上下移動のみ
@@ -587,7 +590,7 @@ class App:
                 self.active_window_id = WINDOW_ID_GAME_OVER_RETURN#このウィンドウIDを最前列でアクティブなものとする
                 self.game_status = SCENE_RETURN_TITLE             #ゲームステータスを「RETURN_TITLE」にする
             elif self.replay_status == REPLAY_PLAY: #リプレイ再生中の時のリターンタイトルウィンドウ表示(SAVE&RETURN項目は表示しない)  
-                func.create_window(self,WINDOW_ID_GAME_OVER_RETURN_NO_SAVE,43,68)     #RETRN?ウィンドウの作成
+                update_window.create(self,WINDOW_ID_GAME_OVER_RETURN_NO_SAVE,43,68)     #RETRN?ウィンドウの作成
                 func.restore_status_data_for_replay_mode(self)             #リプレイ再生が終了したので記録しておいたステータスを復帰させる
                 self.cursor_type = CURSOR_TYPE_NORMAL                      #選択カーソル表示をonにする
                 self.select_cursor_flag = FLAG_ON                          #セレクトカーソルの移動更新フラグをオン
@@ -615,7 +618,7 @@ class App:
                 self.game_status = SCENE_TITLE_INIT            #ゲームステータスを「SCENE_TITLE_INIT」にしてタイトルの初期化工程にする
                 
             elif self.cursor_decision_item_y == 1:             #メニューでアイテムナンバー1の「SAVE & RETURN」が押されたら
-                func.window_replay_data_slot_select(self)           #リプレイデータファイルスロット選択ウィンドウの表示
+                update_window.create_replay_data_slot_select(self)           #リプレイデータファイルスロット選択ウィンドウの表示
                 self.cursor_type = CURSOR_TYPE_NORMAL               #選択カーソル表示をonにする
                 self.cursor_move_direction = CURSOR_MOVE_UD         #カーソルは上下移動のみ
                 self.cursor_x = 67                                  #セレクトカーソルの座標を設定します

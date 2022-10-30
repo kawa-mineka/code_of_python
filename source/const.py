@@ -816,6 +816,10 @@ WINDOW_BUTTON_SIZE_1X1    = 0      #1x1キャラ分(8x8ドット)
 WINDOW_BUTTON_SIZE_1TEXT  = 1      #半角文字サイズ4*6ドット
 WINDOW_BUTTON_SIZE_1X2    = 2      #1x2キャラ分(8x16ドット)
 
+#ウィンドウのメニューでその項目を変化させる時クリック音を出すか出さないかのフラグ
+CLICK_SOUND_OFF = 0 #クリック音を出さない
+CLICK_SOUND_ON  = 1 #出す
+
 #メッセージ,ボタンの表示の仕方 windowクラスのwindow[i].title_text[LIST_WINDOW_TEXT_ALIGN],またはwindow[i].item_text[j][LIST_WINDOW_TEXT_ALIGN]に入ります
 BUTTON_DISP_OFF    =  0 #0=表示しない
 DISP_OFF           =  0 #0=表示しない
@@ -847,58 +851,59 @@ SIZE5_BUTTON_5     = 19 #横5x縦1キャラサイズのボタンの右端       
 #        またはwindow[i].item_kanji_text[j][ここで定義した定数]
 #        またはwindow[i].scroll_text[ここで定義した定数]に入ります
 LIST_WINDOW_TEXT                    =  0 #ウィンドウテキスト
-LIST_WINDOW_TEXT_ALIGN              =  1 #ウィンドウテキストの揃え方(アライメント)(整列の仕方)
-LIST_WINDOW_TEXT_OX                 =  2 #ウィンドウテキスト表示x軸のオフセット値
-LIST_WINDOW_TEXT_OY                 =  3 #ウィンドウテキスト表示y軸のオフセット値
-LIST_WINDOW_TEXT_COLOR              =  4 #ウィンドウテキストの表示色
+LIST_WINDOW_TEXT_CLICK_SE_FLAG      =  1 #カーソル移動音を出すかどうかのフラグ
+LIST_WINDOW_TEXT_ALIGN              =  2 #ウィンドウテキストの揃え方(アライメント)(整列の仕方)
+LIST_WINDOW_TEXT_OX                 =  3 #ウィンドウテキスト表示x軸のオフセット値
+LIST_WINDOW_TEXT_OY                 =  4 #ウィンドウテキスト表示y軸のオフセット値
+LIST_WINDOW_TEXT_COLOR              =  5 #ウィンドウテキストの表示色
 
-LIST_WINDOW_TEXT_FLASH              =  5 #ウィンドウテキストの点滅のしかた
-LIST_WINDOW_TEXT_TYPE               =  6 #ウィンドウテキストのタイプ
-LIST_WINDOW_TEXT_STATUS             =  7 #ウィンドウテキストのステータス(状態)
-LIST_WINDOW_TEXT_LENGTH             =  8 #ウィンドウテキストの長さ
-LIST_WINDOW_TEXT_LINEFEED_WIDTH     =  9 #ウィンドウテキストの折り返し改行幅
+LIST_WINDOW_TEXT_FLASH              =  6 #ウィンドウテキストの点滅のしかた
+LIST_WINDOW_TEXT_TYPE               =  7 #ウィンドウテキストのタイプ
+LIST_WINDOW_TEXT_STATUS             =  8 #ウィンドウテキストのステータス(状態)
+LIST_WINDOW_TEXT_LENGTH             =  9 #ウィンドウテキストの長さ
+LIST_WINDOW_TEXT_LINEFEED_WIDTH     = 10 #ウィンドウテキストの折り返し改行幅
 
-LIST_WINDOW_TEXT_LINEFEED_HEIGHT    = 10 #ウィンドウテキストの折り返し改行幅(縦書きモードの時)
-LIST_WINDOW_TEXT_DISP_TYPE          = 11 #ウィンドウテキストの文字の表示のしかた
-LIST_WINDOW_TEXT_DISP_SPEED         = 12 #ウィンドウテキストの文字の表示スピード(一文字ずつ表示する場合のみ)
-LIST_WINDOW_TEXT_SCROLL_SPEED       = 13 #ウィンドウテキストの上下スクロールスピード値
-LIST_WINDOW_TEXT_SLIDE_IN_WAY       = 14 #ウィンドウテキストがスライドインしてくる方向
+LIST_WINDOW_TEXT_LINEFEED_HEIGHT    = 11 #ウィンドウテキストの折り返し改行幅(縦書きモードの時)
+LIST_WINDOW_TEXT_DISP_TYPE          = 12 #ウィンドウテキストの文字の表示のしかた
+LIST_WINDOW_TEXT_DISP_SPEED         = 13 #ウィンドウテキストの文字の表示スピード(一文字ずつ表示する場合のみ)
+LIST_WINDOW_TEXT_SCROLL_SPEED       = 14 #ウィンドウテキストの上下スクロールスピード値
+LIST_WINDOW_TEXT_SLIDE_IN_WAY       = 15 #ウィンドウテキストがスライドインしてくる方向
 
-LIST_WINDOW_TEXT_SLIDE_OUT_WAY      = 15 #ウィンドウテキストをスライドアウトさせる方向
-LIST_WINDOW_TEXT_SLIDE_NOW_SPEED    = 16 #ウィンドウテキストをスライドインアウトさせる時の現在のスピード値
-LIST_WINDOW_TEXT_SLIDE_START_SPEED  = 17 #ウィンドウテキストをスライドインアウトさせる時の初期スピード値
-LIST_WINDOW_TEXT_SLIDE_END_SPEED    = 18 #ウィンドウテキストをスライドインアウトさせる時の最後のスピード値(目標となるスピード値ですの)
-LIST_WINDOW_TEXT_SLIDE_MAG_SPEED    = 19 #ウィンドウテキストをスライドインアウトさせる時のスピード値に掛ける加速度
+LIST_WINDOW_TEXT_SLIDE_OUT_WAY      = 16 #ウィンドウテキストをスライドアウトさせる方向
+LIST_WINDOW_TEXT_SLIDE_NOW_SPEED    = 17 #ウィンドウテキストをスライドインアウトさせる時の現在のスピード値
+LIST_WINDOW_TEXT_SLIDE_START_SPEED  = 18 #ウィンドウテキストをスライドインアウトさせる時の初期スピード値
+LIST_WINDOW_TEXT_SLIDE_END_SPEED    = 19 #ウィンドウテキストをスライドインアウトさせる時の最後のスピード値(目標となるスピード値ですの)
+LIST_WINDOW_TEXT_SLIDE_MAG_SPEED    = 20 #ウィンドウテキストをスライドインアウトさせる時のスピード値に掛ける加速度
 
-LIST_WINDOW_TEXT_OPE_OBJ            = 20 #ウィンドウテキストで編集対象となるオブジェクトを指示します(windowクラスのflag_list[i][対象オブジェクト]の対象オブジェクトとなります)
-LIST_WINDOW_TEXT_OPE_OBJ_TYPE       = 21 #ウィンドウテキストで編集対象となるオブジェクトの種類分類
-LIST_WINDOW_TEXT_OPE_OBJ_TEXT       = 22 #ウィンドウテキストで編集対象となるオブジェクトのタイトルテキスト「ON」とか「OFF」とか
-LIST_WINDOW_TEXT_OPE_OBJ_TEXT_ALIGN = 23 #ウィンドウテキストで編集対象となるオブジェクトのタイトルテキストの揃え方(アライメント)(整列の仕方)アラ～イイアラ～～イイ
-LIST_WINDOW_TEXT_OPE_OBJ_COMPARE    = 24 #対象オブジェクトと比較するパラメータ数値(この数値とOPE_OBJの数値を比較してTrueかFalseか判定します)
+LIST_WINDOW_TEXT_OPE_OBJ            = 21 #ウィンドウテキストで編集対象となるオブジェクトを指示します(windowクラスのflag_list[i][対象オブジェクト]の対象オブジェクトとなります)
+LIST_WINDOW_TEXT_OPE_OBJ_TYPE       = 22 #ウィンドウテキストで編集対象となるオブジェクトの種類分類
+LIST_WINDOW_TEXT_OPE_OBJ_TEXT       = 23 #ウィンドウテキストで編集対象となるオブジェクトのタイトルテキスト「ON」とか「OFF」とか
+LIST_WINDOW_TEXT_OPE_OBJ_TEXT_ALIGN = 24 #ウィンドウテキストで編集対象となるオブジェクトのタイトルテキストの揃え方(アライメント)(整列の仕方)アラ～イイアラ～～イイ
+LIST_WINDOW_TEXT_OPE_OBJ_COMPARE    = 25 #対象オブジェクトと比較するパラメータ数値(この数値とOPE_OBJの数値を比較してTrueかFalseか判定します)
 
-LIST_WINDOW_TEXT_OPE_OBJ_TEXT_OX    = 25 #ウィンドウテキストで編集対象となるオブジェクトのタイトルテキスト x軸のオフセット値
-LIST_WINDOW_TEXT_OPE_OBJ_TEXT_OY    = 26 #ウィンドウテキストで編集対象となるオブジェクトのタイトルテキスト y軸のオフセット値
-LIST_WINDOW_TEXT_OPE_OBJ_OFF_COLOR  = 27 #対象オブジェクトがFalse(OFF)になった時の文字色
-LIST_WINDOW_TEXT_OPE_OBJ_ON_COLOR   = 28 #対象オブジェクトがTrue(ON)になった時の文字色
-LIST_WINDOW_TEXT_OPE_OBJ_MIN_NUM    = 29 #ウィンドウテキストで編集対象となるオブジェクトの最小値(数値の場合)
+LIST_WINDOW_TEXT_OPE_OBJ_TEXT_OX    = 26 #ウィンドウテキストで編集対象となるオブジェクトのタイトルテキスト x軸のオフセット値
+LIST_WINDOW_TEXT_OPE_OBJ_TEXT_OY    = 27 #ウィンドウテキストで編集対象となるオブジェクトのタイトルテキスト y軸のオフセット値
+LIST_WINDOW_TEXT_OPE_OBJ_OFF_COLOR  = 28 #対象オブジェクトがFalse(OFF)になった時の文字色
+LIST_WINDOW_TEXT_OPE_OBJ_ON_COLOR   = 29 #対象オブジェクトがTrue(ON)になった時の文字色
+LIST_WINDOW_TEXT_OPE_OBJ_MIN_NUM    = 30 #ウィンドウテキストで編集対象となるオブジェクトの最小値(数値の場合)
 
-LIST_WINDOW_TEXT_OPE_OBJ_MAX_NUM        = 30 #ウィンドウテキストで編集対象となるオブジェクトの最大値(数値の場合)
-LIST_WINDOW_TEXT_OPE_OBJ_SWITCH_TEXT    = 31 #ウィンドウテキストで編集対象となるオブジェクトテキスト(切り替え表示タイプ「VERYEASY」「EASY」「NORMAL」「HARD」とか表示テキストがボタンまたは左右カーソルセレクトで切り替わる
-LIST_WINDOW_TEXT_OPE_OBJ_MARKER_TYPE    = 32 #ウィンドウテキストで編集対象となるオブジェクトが増減できる数値とかの場合増加減出来るかどうかの矢印マーカーの種別（矢印マーカを表示するしないの判断はLIST_WINDOW_TEXT_OPE_OBJ_TYPEをみて行う,LIST_WINDOW_TEXT_OPE_OBJ_MARKER_TYPEは複数の表示パターンを持てるようにするためのリザーブ）
+LIST_WINDOW_TEXT_OPE_OBJ_MAX_NUM        = 31 #ウィンドウテキストで編集対象となるオブジェクトの最大値(数値の場合)
+LIST_WINDOW_TEXT_OPE_OBJ_SWITCH_TEXT    = 32 #ウィンドウテキストで編集対象となるオブジェクトテキスト(切り替え表示タイプ「VERYEASY」「EASY」「NORMAL」「HARD」とか表示テキストがボタンまたは左右カーソルセレクトで切り替わる
+LIST_WINDOW_TEXT_OPE_OBJ_MARKER_TYPE    = 33 #ウィンドウテキストで編集対象となるオブジェクトが増減できる数値とかの場合増加減出来るかどうかの矢印マーカーの種別（矢印マーカを表示するしないの判断はLIST_WINDOW_TEXT_OPE_OBJ_TYPEをみて行う,LIST_WINDOW_TEXT_OPE_OBJ_MARKER_TYPEは複数の表示パターンを持てるようにするためのリザーブ）
 
-LIST_WINDOW_TEXT_OPE_OBJ_UP_MARKER_FLAG    = 33 #増減表示（上矢印）を表示するかのフラグ
-LIST_WINDOW_TEXT_OPE_OBJ_DOWN_MARKER_FLAG  = 34 #増減表示（下矢印）を表示するかのフラグ
-LIST_WINDOW_TEXT_OPE_OBJ_RIGHT_MARKER_FLAG = 35 #増減表示（右矢印）を表示するかのフラグ
-LIST_WINDOW_TEXT_OPE_OBJ_LEFT_MARKER_FLAG  = 36 #増減表示（左矢印）を表示するかのフラグ
+LIST_WINDOW_TEXT_OPE_OBJ_UP_MARKER_FLAG    = 34 #増減表示（上矢印）を表示するかのフラグ
+LIST_WINDOW_TEXT_OPE_OBJ_DOWN_MARKER_FLAG  = 35 #増減表示（下矢印）を表示するかのフラグ
+LIST_WINDOW_TEXT_OPE_OBJ_RIGHT_MARKER_FLAG = 36 #増減表示（右矢印）を表示するかのフラグ
+LIST_WINDOW_TEXT_OPE_OBJ_LEFT_MARKER_FLAG  = 37 #増減表示（左矢印）を表示するかのフラグ
 
-LIST_WINDOW_TEXT_OPE_OBJ_UP_MARKER_X    = 37 #対象が数値とかで増加減出来るかどうかの、上矢印の座標(x,y)
-LIST_WINDOW_TEXT_OPE_OBJ_UP_MARKER_Y    = 38
-LIST_WINDOW_TEXT_OPE_OBJ_DOWN_MARKER_X  = 39 #対象が数値とかで増加減出来るかどうかの、下矢印の座標(x,y)
-LIST_WINDOW_TEXT_OPE_OBJ_DOWN_MARKER_Y  = 40
-LIST_WINDOW_TEXT_OPE_OBJ_RIGHT_MARKER_X = 41 #対象が数値とかで増加減出来るかどうかの、右矢印の座標(x,y)
-LIST_WINDOW_TEXT_OPE_OBJ_RIGHT_MARKER_Y = 42
-LIST_WINDOW_TEXT_OPE_OBJ_LEFT_MARKER_X  = 43 #対象が数値とかで増加減出来るかどうかの、左矢印の座標(x,y)
-LIST_WINDOW_TEXT_OPE_OBJ_LEFT_MARKER_Y  = 44
+LIST_WINDOW_TEXT_OPE_OBJ_UP_MARKER_X    = 38 #対象が数値とかで増加減出来るかどうかの、上矢印の座標(x,y)
+LIST_WINDOW_TEXT_OPE_OBJ_UP_MARKER_Y    = 39
+LIST_WINDOW_TEXT_OPE_OBJ_DOWN_MARKER_X  = 40 #対象が数値とかで増加減出来るかどうかの、下矢印の座標(x,y)
+LIST_WINDOW_TEXT_OPE_OBJ_DOWN_MARKER_Y  = 41
+LIST_WINDOW_TEXT_OPE_OBJ_RIGHT_MARKER_X = 42 #対象が数値とかで増加減出来るかどうかの、右矢印の座標(x,y)
+LIST_WINDOW_TEXT_OPE_OBJ_RIGHT_MARKER_Y = 43
+LIST_WINDOW_TEXT_OPE_OBJ_LEFT_MARKER_X  = 44 #対象が数値とかで増加減出来るかどうかの、左矢印の座標(x,y)
+LIST_WINDOW_TEXT_OPE_OBJ_LEFT_MARKER_Y  = 45
 
 #ウィンドウフラグリストの２次元配列のインデックスナンバーとして使用する定数定義 windowクラスのwindow[i].flag_list[ここで定義した定数]に入ります
 LIST_WINDOW_FLAG_DEBUG_MODE        =  0 #デバッグモードのon/offフラグ
@@ -1421,3 +1426,10 @@ BOSS_HP_BAR_DISPLAY_TIME = 32         #ボスの耐久力バーを表示する�
 WEAPON_READY          = 0    #何もしていない準備万端な状態
 WEAPON_ROCK_ON        = 1    #目標を定めた状態（予兆エフェクトを表示)
 WEAPON_FIRE           = 2    #武器発射中
+
+#!SEの定数定義 ########################################################
+SE_VULCAN_SHOT =   1
+SE_MISSILE     =   1
+SE_EXPLOSION   =   2
+SE_LASER       =   4
+SE_WAVE_CUTTER =   5
