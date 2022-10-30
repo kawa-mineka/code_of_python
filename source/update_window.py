@@ -2036,6 +2036,9 @@ class update_window:
                         text = self.window[self.active_window_index].edit_text[LIST_WINDOW_TEXT]
                         character = ord(text[self.cursor_item_x]) #カーソルの位置の文字を取得しアスキーコードを取得する
                         character += 1 #文字のアスキーコードを1増やす（今カーソルのあるアルファベットのアスキーコードを１増やす AはBに BはCに CはDに DはEになる)
+                        if character == 96+1: #入力できる文字(アスキーコード)は32~96の間のみとする
+                            character = 32
+                        
                         left_text  = text[:self.cursor_item_x] #先頭からカーソルまでの文字列を切り出す(カーソルの左方向の文字列の切り出し)
                         right_text = text[self.cursor_item_x+1:] #カーソル位置から文字列の最後まで切り出す(カーソルの右方向の文字列の切り出し)
                         new_text = left_text + chr(character) + right_text #新しい文字列を作り出す(pythonの文字列はimmutable(変更不能)らしいので新しい文字列変数を作ってそれを代入するしかない？？のかな？よくわかんない)
@@ -2100,7 +2103,10 @@ class update_window:
                     if self.window[self.active_window_index].edit_text[LIST_WINDOW_TEXT] != "": #テキストリストに何かしらの文字列が入っている時のみ処理をする
                         text = self.window[self.active_window_index].edit_text[LIST_WINDOW_TEXT]
                         character = ord(text[self.cursor_item_x]) #カーソルの位置の文字を取得しアスキーコードを取得する
-                        character -= 1 #文字のアスキーコードを1減らす（今カーソルのあるアルファベットのアスキーコードを１増やす AはBに BはCに CはDに DはEになる)
+                        character -= 1 #文字のアスキーコードを1減らす（今カーソルのあるアルファベットのアスキーコードを1減らす BはAに CはBに DはCに EはDになる)
+                        if character == 32-1: #入力できる文字(アスキーコード)は32~96の間のみとする
+                            character = 96
+                        
                         left_text  = text[:self.cursor_item_x] #先頭からカーソルまでの文字列を切り出す(カーソルの左方向の文字列の切り出し)
                         right_text = text[self.cursor_item_x+1:] #カーソル位置から文字列の最後まで切り出す(カーソルの右方向の文字列の切り出し)
                         new_text = left_text + chr(character) + right_text #新しい文字列を作り出す(pythonの文字列はimmutable(いみゅーたぶる変更不能)らしいので新しい文字列変数を作ってそれを代入するしかない？？のかな？よくわかんない)
