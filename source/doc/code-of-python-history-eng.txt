@@ -264,4 +264,67 @@ Score star can be increased from 1x to 2x to 3x to 4x to 5x by taking score star
 Implementation of L's Shield equipment medal (durability display is not yet available...) 2021 08/08/08
 Implementation of STATUS menu: displaying cumulative game play time, number of times played, cumulative total score, and load-save from system data 2021 08/11
 Implemented the selection of aircraft from the aircraft selection window as a provisional feature. Well, there is still only one aircraft, JUSTICE PYTHON. ・・・・・ 2021 08/11
-2021 08/11 Implemented to display the number of cleared stages, the number of loops, and the medal equipment at the time of clearing on the scoreboard (not yet save-loadable as system data...) 2021 08/12
+Implemented to display the number of cleared stages, the number of loops, and the medal equipment at the time of clearing on the scoreboard (not yet save-loadable as system data...) 2021 08/12
+I split constant definitions and class declarations as separate modules, from const import* and from define_class import*, but wildcards in import* are not recommended. And today I had a colonoscopy.... .orz
+The scoreboard data is now loaded as system data before the game starts, and saved automatically each time. 2021 08/13
+added saving the names for ranking scores as system data 2021 08/13
+Import copy is introduced to copy the default list without changing the reference source. copy.deepcopy() can be used (It is hard to understand how the ID of the reference source is only copied...) 2021 08/14
+Initialize score data by CONFIG→INITIALIZE→SCORE 2021 08/15
+Initialize my name by CONFIG→INITIALIZE→NAME 2021 08/15
+Bon vacation is about to end with almost nothing done: ・・・・・ 2021 08/15 AM 3:00
+I didn't get anything done! 2021 08/15 AM 3:08
+CONFIG→INITIALIZE→ALL to initialize all system data (development testtime continues to be recorded as an exception) 2021 08/15
+Implemented medals that can be obtained by total score and total game play time 2021 08/15
+Implemented a dialog window for obtaining medals that appears in the title menu, with wait_count in the window class data so that multiple dialogs are displayed in sequence 2021 08/15
+I've made it so that you can get a medal when the number of consecutive score star chains you get exceeds a certain value. ・・・・ sometimes the max_score_star_chain record works and sometimes it doesn't. Is there something wrong with the formula? Or? I don't know... 2021 08/15
+When you get a score star, if you look at score_star_magnification (magnification) and you meet the conditions to get a medal, you can create a flag called medal_get_flag and set it up and process it in the main menu...? 2021 08/15
+I don't know, I don't know what I don't know... 2021 08/15
+Fixed a bug in the calculation of the multiplier for consecutive score stars.
+Fixed a bug that total play time and total score are added when replaying replays.
+Fixed a bug that total play time and total score are added when replaying replays, maybe it worked 2021 08/27
+Karen is so cute, the earth is in trouble 2021 08/27
+Achievement dialog is now implemented.
+For some reason I started playing Cookie Clicker again... Oh the beginning of my life of baking cookies ・・・・ 2021 09/03
+Fixed a bug that the effect of the pre-shot medal equipped on the medal during replay is that the medal gets the pre-shot item, but instead of getting the score star, it gets the shot item instead, which greatly increases the power of the medal (I think it's working...) 2021 09/05
+I changed my job to a painter, got into the steam version of Cookie Clicker, and got into Hololive, so I've been slacking on game creation... 2022 02/26
+I noticed that pyxel has been updated to version 1.6.9, and the specification seems to have changed a lot, so I decided to modify the program list... 2022 02/26
+It looks like pyxel.init(caption=) has been changed to pyxel.init(title=)? 2022 02/26
+pyxel.tilemap(0).get(0,120) seems to have to be changed to pyxel.tilemap(0).get(0,120)? 2022 02/26
+I got it to work with version 1.6.9...but...the explosion sound when enemies are destroyed sounds a little different.
+Moved the list definitions that never change in the game, such as enemy appearance data, into the define_data.py file and created a class define_data, which can be imported as a separate file module. 2022 04/02
+
+The White-Tailed Hymn is good....... 2022 04/02
+Tinnitus in right ear is so bad that I can't hear anything... 2022 04/02
+I can't adjust the stereo or anything.... .orz 2022 04/02
+I can't commit to github anymore... I don't know what's going on... 2022 04/02
+I prefer Kit Kat to GitHub ・・・・ 2022 04/02
+Started to manage program list by splitting files code-of-python.py const.py define_class.py define_data.py define_ship_data.py define_stage_data.py func.py graph.py Split into 2022 04/04
+All methods called from draw are now placed in the graph class 2022 04/04
+The methods called from update are large, so we can use update_my update_enemy update_boss or something like that. Or should I go with something like update_object for the background object... hmmm... 2022 04/04
+I made all the methods called from update into a separate file in a separate class and imported them. I can't understand the 15,000+ lines at a glance.
+Started work on 3-sided VOLCANIC_BELT volcanic zone 2022 04/10
+Implemented free scrolling of 3-sided VOLCANIC_BELT in 2 vertical screens, but the up/down visibility is poor and it is easy to hit obstacles, so I want to add some assortment to the up/down scrolling... but I don't know how to do it. 2022 04/16
+Implemented multiple scrolling of VOLCANIC_BELT, although the background is still strange. 2022 04/17
+Implemented raster scrolling on the lake surface of VOLCANIC_BELT! Yay! 2022 04/23
+I committed to github and pushed the project, but I got an error. fatal: Exiting because of an unresolved conflict. 2022 04/23
+I think I managed to pull master -> (2) check status with git status -> (3) check this red area -> (4) add the red file and commit -> (5) check status with git status? 2022 04/23
+I guess I should check it with git status - I see. 2022 04/23
+2022 04/23 I implemented volcano eruption and lava flow animation, but it's not so good... 2022 04/25
+Added animations to the induction lights of the gate bridge. 2022 04/28
+After updating pyxel to 1.6.9, MOUNTAIN_REGION's descent to the ground causes a final 1-dot gap in the downward scroll →Event list [3000,EVENT_SCROLL,SCROLL_SPEED_CHANGE_VERTICAL,0,-0. 004] with [3000,EVENT_SCROLL,SCROLL_SPEED_CHANGE_VERTICAL,0,-0.0041] ok 2022 04/30
+I discovered that clawshot had been creating and updating instances in the shot class all this time... I modified it to create instances in the claw_shot class, and it seems to have been working like this all this time... Surprise! I was surprised to find that the shot class and the claw_shot class were almost the same in terms of member variables. 2022 05/01
+I changed the color from 0-15 to use the standard pyxel constant definitions. (pyxel.COLOR_BLACK or some such constant definition) 2022 05/01
+I created a .gitignore file and wrote __pycache__ to prevent pyc files from being uploaded! Finally. 2022 05/01
+Tentatively started to make the map for the second round of the third side. 2022 05/01
+Color codes were specified directly by numbers, but now they are defined by constants in the pyxel standard. 2022 05/01
+However! I typed pyxel.COLOR_GLAY and was troubled for about an hour, "Why is there an error? I was wondering for about an hour. The correct answer is pyxel.COLOR_GRAY, lol. 2022 05/01
+Sen no nai wifu ga mune wo sasu! Aitai kara~~~ I think of you~~~ wooooooooooooooooooooooooooooooooooooooooooooooooooo! 2022 05/01
+The background BG rewrite animation was changed to rewrite only the BG on the screen judging from the camera position even in a stage with two vertical scrolling screens. 2022 05/01
+Added a new enemy character "Roll Blitz", but it doesn't disappear when it appears on the screen, it moves to the far right. (A mess...) 2022 05/02
+Implemented only the movement of the boss in the volcano area on the 3rd page, put the movement points on the map and moved it while considering the control points... 2022 05/03
+Implemented the attack of the boss on the 3rd plane. The homing laser looks like a human soul and spirit after all...scary! Evil spirit extinguished! 2022 05/03
+The name of the boss on the 3rd page was decided to be "Mud Crab". Like? 2022 05/03
+I added a tilt variable to Mudcrabunger to make it seem to tilt when rolling, and shifted the booster's drawing position when it draws. 2022 05/04
+Added up-down laser to Mudcrabunger. 2022 05/05
+Separated functions to access system data into update_system class and managed them as separate files. 2022 05/07
+I started to manage program files separately, but it was hard to understand what kind of files they are. So I created a readme.txt file in the source folder with the details of program files. 2022 05/05

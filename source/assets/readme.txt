@@ -8,3 +8,14 @@ sound   サウンドエフェクト関連効果音が置かれています(現�
 system  システムデータが置かれてます
 
 readme.txt    この説明文テキストファイル自身です
+
+
+
+Here are the details of the asset folder
+
+fonts       contains png data of Misaki fonts used for Japanese display and their converted pyxres files.
+graphic     Contains the image resources (pyxres files) used in the game.
+music       BGM played by the pygame mixer
+replay      Contains replay data recorded
+sound       Contains sound effects related to sound effects (currently unused).
+system      System data is stored.
