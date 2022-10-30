@@ -875,8 +875,8 @@ class update_ship:
         if self.my_shield < 0:
             self.my_shield = 0 #シールドパワーがマイナスまで行ってしまったら0に修正する
         
-        pyxel.play(0,15)                                #自機ダメージ音再生
-        self.invincible_counter += self.invincible_time #ダメージ後の無敵時間を加算する
+        update_se.se(self,0,SE_SHIP_DAMAGE,self.master_se_vol) #自機ダメージ音再生
+        self.invincible_counter += self.invincible_time        #ダメージ後の無敵時間を加算する
         
         self.rank_down_count += 1 #ランクダウン用カウンタを１増やす
         if self.rank_down_count == self.rank_down_need_damage: #カウンタがランクダウンに必要であるダメージ分まで増えたのなら
@@ -893,4 +893,4 @@ class update_ship:
             self.explosions.append(new_explosion)
             
             #爆発音再生
-            pyxel.play(2,3)
+            update_se.se(self,2,SE_SHIP_BROKEN,self.master_se_vol)

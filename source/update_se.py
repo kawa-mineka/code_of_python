@@ -58,25 +58,9 @@ class update_se:
 
     #サウンドエフェクト(SE)を再生する
     def se(self,ch,num,vol): #ch=再生チャンネル,num=SEナンバー,vol=ボリューム値
-        if self.master_se_vol == 0: #SEボリューム値が0ならば効果音を鳴らさずそのままリターンする
-            return
+        # if self.master_se_vol == 0: #SEボリューム値が0ならば効果音を鳴らさずそのままリターンする
+        #     return
         
-        if   vol == 1:
-            pyxel.sound(num).set_volumes("1")
-        elif vol == 2:
-            pyxel.sound(num).set_volumes("2")
-        elif vol == 3:
-            pyxel.sound(num).set_volumes("3")
-        elif vol == 4:
-            pyxel.sound(num).set_volumes("4")
-        elif vol == 5:
-            pyxel.sound(num).set_volumes("5")
-        elif vol == 6:
-            pyxel.sound(num).set_volumes("6")
-        elif vol == 7:
-            pyxel.sound(num).set_volumes("7")
-        else:
-            pyxel.sound(num).set_volumes("5")
-        
-        pyxel.play(ch,num) #チャンネルchでサウンドナンバーnumを鳴らす
-
+        vol_str = self.adjustable_se_vol_list[num][vol] #VOL指定用の文字列群を取得する
+        pyxel.sound(num).set_volumes(vol_str)           #文字列でボリューム指定する
+        pyxel.play(ch,num)                              #チャンネルchでサウンドナンバーnumを鳴らす

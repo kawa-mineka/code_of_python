@@ -1428,8 +1428,13 @@ WEAPON_ROCK_ON        = 1    #目標を定めた状態（予兆エフェクト�
 WEAPON_FIRE           = 2    #武器発射中
 
 #!SEの定数定義 ########################################################
-SE_VULCAN_SHOT =   1
-SE_MISSILE     =   1
-SE_EXPLOSION   =   2
-SE_LASER       =   4
-SE_WAVE_CUTTER =   5
+SE_POWUP_GET      =  0
+SE_VULCAN_SHOT    =  1
+SE_MISSILE        =  1
+SE_EXPLOSION      =  2
+SE_SHIP_BROKEN    =  3
+SE_LASER          =  4
+SE_WAVE_CUTTER    =  5
+SE_BOSS_EXPLOSION = 11
+SE_SHIP_DAMAGE    = 15
+

@@ -14,6 +14,7 @@ from const import * #定数定義モジュールの読み込み(公式ではワ�
 from func  import * #汎用性のある関数群のモジュールの読み込み
 
 from update_obj import * #背景オブジェクト更新関数モジュール読み込み(パーティクルで使用)
+from update_se  import * #ボスが爆発中のSEを鳴らすためにインポート
 
 class update_boss:
     def __init__(self):
@@ -977,7 +978,7 @@ class update_boss:
                     
                 elif self.boss[i].status == BOSS_STATUS_EXPLOSION:             #ボスステータスが「爆発中」の処理
                     #爆発中サウンド再生
-                    pyxel.play(3,11)
+                    update_se.se(self,3,SE_BOSS_EXPLOSION,self.master_se_vol)
                     
                     new_explosion = Explosion()
                     new_explosion.update(EXPLOSION_NORMAL,PRIORITY_FRONT,self.boss[i].posx + self.boss[i].width / 2 + func.s_rndint(self,0,50) -25,self.boss[i].posy + self.boss[i].height / 2 + func.s_rndint(self,0,20) -15,0,0,10,RETURN_BULLET_NONE,0, 1,1)
@@ -1128,7 +1129,7 @@ class update_boss:
                     
                 elif self.boss[i].status == BOSS_STATUS_EXPLOSION:           #ボスステータスが「爆発中」の処理
                     #爆発中サウンド再生
-                    pyxel.play(3,11)
+                    update_se.se(self,3,SE_BOSS_EXPLOSION,self.master_se_vol)
                     
                     new_explosion = Explosion()
                     new_explosion.update(EXPLOSION_NORMAL,PRIORITY_FRONT,self.boss[i].posx + self.boss[i].width / 2 + func.s_rndint(self,0,50) -25,self.boss[i].posy + self.boss[i].height / 2 + func.s_rndint(self,0,20) -15,0,0,10,RETURN_BULLET_NONE,0,  1,1)
@@ -1374,7 +1375,7 @@ class update_boss:
                     
                 elif self.boss[i].status == BOSS_STATUS_EXPLOSION:             #ボスステータスが「爆発中」の処理
                     #爆発中サウンド再生
-                    pyxel.play(3,11)
+                    update_se.se(self,3,SE_BOSS_EXPLOSION,self.master_se_vol)
                     
                     new_explosion = Explosion()
                     new_explosion.update(EXPLOSION_NORMAL,PRIORITY_FRONT,self.boss[i].posx + self.boss[i].width / 2 + func.s_rndint(self,0,50) -25,self.boss[i].posy + self.boss[i].height / 2 + func.s_rndint(self,0,20) -15,0,0,10,RETURN_BULLET_NONE,0, 1,1)

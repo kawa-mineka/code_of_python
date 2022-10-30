@@ -143,7 +143,7 @@ class update_collision:
                         self.get_missile_pow_num += self.obtain_item[i].missile #ミサイルカプセル累計取得数をミサイルパワーの増加量の分だけ増やす
                         self.get_shield_pow_num  += self.obtain_item[i].shield  #シールドカプセル累計取得数をシールドパワーの増加量の分だけ増やす
                     
-                    pyxel.play(0,0)            #パワーアップアイテムゲットの音を鳴らすのだ
+                    update_se.se(self,0,SE_POWUP_GET,self.master_se_vol) #パワーアップアイテムゲットの音を鳴らすのだ
                     func.level_up_my_shot(self)     #自機ショットの経験値を調べ可能な場合レベルアップをさせる関数を呼び出す
                     func.level_up_my_missile(self)   #自機ミサイルの経験値を調べ可能な場合レベルアップをさせる関数を呼び出す
                     
@@ -157,12 +157,12 @@ class update_collision:
                     if self.replay_status != REPLAY_PLAY: #リプレイ再生している時はカプセル累計取得加算処理を行わない
                         self.get_claw_num += 1     #クローの累計取得数を1増やす
                     
-                    pyxel.play(0,0)               #パワーアップアイテムゲットの音を鳴らすのだ
+                    update_se.se(self,0,SE_POWUP_GET,self.master_se_vol) #パワーアップアイテムゲットの音を鳴らすのだ
                     del self.obtain_item[i]       #クローアイテムのインスタンスを破棄する(アイテム消滅)
                     update_ship.append_claw(self) #クローの発生関数の呼び出し
                     
                 elif self.obtain_item[i].item_type == ITEM_TAIL_SHOT_POWER_UP:        #テイルショットパワーアップの処理
-                    pyxel.play(0,0)            #パワーアップアイテムゲットの音を鳴らすのだ
+                    update_se.se(self,0,SE_POWUP_GET,self.master_se_vol) #パワーアップアイテムゲットの音を鳴らすのだ
                     del self.obtain_item[i]     #インスタンスを破棄する(アイテム消滅)
                     if self.sub_weapon_list[TAIL_SHOT] < SUB_WEAPON_LEVEL_MAXIMUM:#テイルショットのレベルがサブウェポンのレベル最大値を超えていないのならば
                         self.sub_weapon_list[TAIL_SHOT] += 1  #サブウェポンリスト内のテイルショットの所持数を１増やす
@@ -170,7 +170,7 @@ class update_collision:
                         self.select_sub_weapon_id = TAIL_SHOT #強制的にテイルショットを選択させる
                     
                 elif self.obtain_item[i].item_type == ITEM_PENETRATE_ROCKET_POWER_UP: #ペネトレートロケットパワーアップの処理
-                    pyxel.play(0,0)            #パワーアップアイテムゲットの音を鳴らすのだ
+                    update_se.se(self,0,SE_POWUP_GET,self.master_se_vol) #パワーアップアイテムゲットの音を鳴らすのだ
                     del self.obtain_item[i]     #インスタンスを破棄する(アイテム消滅)
                     if self.sub_weapon_list[PENETRATE_ROCKET] < SUB_WEAPON_LEVEL_MAXIMUM:#ペネトレートロケットのレベルがサブウェポンのレベル最大値を超えていないのならば
                         self.sub_weapon_list[PENETRATE_ROCKET] += 1  #サブウェポンリスト内のペネトレートロケットの所持数を１増やす
@@ -178,7 +178,7 @@ class update_collision:
                         self.select_sub_weapon_id = PENETRATE_ROCKET #強制的にペネトレートロケットを選択させる
                     
                 elif self.obtain_item[i].item_type == ITEM_SEARCH_LASER_POWER_UP:     #サーチレーザーパワーアップの処理
-                    pyxel.play(0,0)            #パワーアップアイテムゲットの音を鳴らすのだ
+                    update_se.se(self,0,SE_POWUP_GET,self.master_se_vol) #パワーアップアイテムゲットの音を鳴らすのだ
                     del self.obtain_item[i]     #インスタンスを破棄する(アイテム消滅)
                     if self.sub_weapon_list[SEARCH_LASER] < SUB_WEAPON_LEVEL_MAXIMUM:#ーチレーザーのレベルがサブウェポンのレベル最大値を超えていないのならば
                         self.sub_weapon_list[SEARCH_LASER] += 1  #サブウェポンリスト内のサーチレーザーの所持数を１増やす
@@ -186,7 +186,7 @@ class update_collision:
                         self.select_sub_weapon_id = SEARCH_LASER #強制的にサーチレーザーを選択させる
                     
                 elif self.obtain_item[i].item_type == ITEM_HOMING_MISSILE_POWER_UP:   #ホーミングミサイルパワーアップの処理
-                    pyxel.play(0,0)            #パワーアップアイテムゲットの音を鳴らすのだ
+                    update_se.se(self,0,SE_POWUP_GET,self.master_se_vol) #パワーアップアイテムゲットの音を鳴らすのだ
                     del self.obtain_item[i]     #インスタンスを破棄する(アイテム消滅)
                     if self.sub_weapon_list[HOMING_MISSILE] < SUB_WEAPON_LEVEL_MAXIMUM:#ホーミングミサイルのレベルがサブウェポンのレベル最大値を超えていないのならば
                         self.sub_weapon_list[HOMING_MISSILE] += 1  #サブウェポンリスト内のホーミングミサイルの所持数を１増やす
@@ -194,7 +194,7 @@ class update_collision:
                         self.select_sub_weapon_id = HOMING_MISSILE #強制的にホーミングミサイルを選択させる
                     
                 elif self.obtain_item[i].item_type == ITEM_SHOCK_BUMPER_POWER_UP:     #ショックバンバーパワーアップの処理
-                    pyxel.play(0,0)            #パワーアップアイテムゲットの音を鳴らすのだ
+                    update_se.se(self,0,SE_POWUP_GET,self.master_se_vol) #パワーアップアイテムゲットの音を鳴らすのだ
                     del self.obtain_item[i]     #インスタンスを破棄する(アイテム消滅)
                     
                     if self.sub_weapon_list[SHOCK_BUMPER] < SUB_WEAPON_LEVEL_MAXIMUM:#ショックバンバーのレベルがサブウェポンのレベル最大値を超えていないのならば
@@ -207,7 +207,7 @@ class update_collision:
                             self.max_score_star_magnification = self.score_star_magnification  #最大倍率を更新する
                     
                     func.add_score(self,20 * self.score_star_magnification)    #スコアスター得点上昇！
-                    pyxel.play(0,0)             #パワーアップアイテムゲットの音を鳴らすのだ
+                    update_se.se(self,0,SE_POWUP_GET,self.master_se_vol) #パワーアップアイテムゲットの音を鳴らすのだ
                     print(" ")
                     print("MAG")
                     print(self.score_star_magnification)
