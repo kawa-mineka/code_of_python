@@ -67,6 +67,20 @@ class update_window:
                 self.window[i].vy *= self.window[i].vy_accel
                 self.window[i].posx += self.window[i].vx #ウィンドウ位置の更新
                 self.window[i].posy += self.window[i].vy
+                
+                #ウィンドウの下地が透明または半透明の時は「背景の星を再描画するエリアの範囲」の更新を行う
+                if self.window[i].window_bg == WINDOW_BG_TRANSLUCENT or self.window[i].window_bg == WINDOW_BG_LOW_TRANSLUCENT:
+                    if func.search_window_id_star_redraw(self,self.window[i].window_id) == -1: #背景の星を再描画するエリアの範囲リストに現在のウィンドウIDが存在しないのなら新規作成する
+                        new_star_redraw = Redraw_star_area()
+                        new_star_redraw.update(self.window[i].window_id,self.window[i].posx,self.window[i].posy,self.window[i].width,self.window[i].height,self.window[i].window_priority)
+                        self.redraw_star_area.append(new_star_redraw) #「背景の星を再描画するエリアの範囲」を育成する
+                        print("star_redraw_window_num = " + str(len(self.redraw_star_area)))
+                    
+                    j = func.search_window_id_star_redraw(self,self.window[i].window_id) #jにwindow_idに対応したredraw_star_areaのインデックス値が入る
+                    if j != -1: #存在する時だけ更新する
+                        self.redraw_star_area[j].posx, self.redraw_star_area[j].posy   = self.window[i].posx, self.window[i].posy
+                        self.redraw_star_area[j].width,self.redraw_star_area[j].height = self.window[i].width-30,self.window[i].height
+                
             else:
                 self.window[i].wait_count -= 1  #カウンターをデクリメント
 
@@ -464,7 +478,7 @@ class update_window:
             WINDOW_ID_SUB_SWITCH_TEXT_MENU,\
             WINDOW_TYPE_NORMAL,\
             WINDOW_FRAME_NORMAL,\
-            WINDOW_BG_BLUE_BACK,\
+            WINDOW_BG_TRANSLUCENT,\
             WINDOW_PRIORITY_NORMAL,\
             DIR_RIGHT_DOWN,\
             DIR_LEFT_UP,\
@@ -1968,12 +1982,30 @@ class update_window:
             
             #矩形A(ゲーム画面)と矩形B(ウィンドウ)の衝突判定を行う関数の呼び出し
             if func.collision_rect_rect(self,rect_ax,rect_ay,rect_aw,rect_ah,rect_bx,rect_by,rect_bw,rect_bh) == False:
+                #同じウィンドウIDがredraw_star_areaリストの中に存在するのならそのインスタンスも消去して「星を再描画するエリア情報」も消去する
+                j = func.search_window_id_star_redraw(self,self.window[i].window_id) #jにwin_idに対応したredraw_star_areaのインデックス値が入る
+                if j != -1: # 存在するのならば・・・
+                    del self.redraw_star_area[j] #「星を再描画するエリア情報」redraw_star_areaインスタンスも破棄する
+                    print("star_redraw_window_num = " + str(len(self.redraw_star_area)))
+                
                 del self.window[i] #ウィンドウが画面外に存在するとき(2つの矩形が衝突していないとき)はインスタンスを破棄する(ウィンドウ消滅)
 
     #現在どのウィンドウがもつインデックス値が最前面にあるのか調べあげ,アクティブウィンドウインデックス値に登録し更新する
     def active_window(self):
         i = func.search_window_id(self,self.active_window_id) #アクティブなウィンドウIDを元にインデックス値を求める関数の呼び出し
         self.active_window_index = i           #アクティブになっているウィンドウのインデックスナンバー(i)を代入
+
+    #ウィンドウIDを元にそのウィンドウの描画優先度を最前面にする
+    def change_window_priority_top(self,id): #idはウィンドウidとなります そのidのウィンドウが存在しない場合は何もしない
+        i = func.search_window_id(self,id) #iにウィンドウIDを元にしたインデックス値が入る 存在しなかったら-1が帰ってくる
+        if i != -1: #そのウィンドウが存在したのならば
+            self.window[i].window_priority = WINDOW_PRIORITY_TOP #描画優先度を一番前の最前面にする
+
+    #ウィンドウIDを元にそのウィンドウの描画優先度を普通にする
+    def change_window_priority_normal(self,id): #idはウィンドウidとなります そのidのウィンドウが存在しない場合は何もしない
+        i = func.search_window_id(self,id) #iにウィンドウIDを元にしたインデックス値が入る 存在しなかったら-1が帰ってくる
+        if i != -1: #そのウィンドウが存在したのならば
+            self.window[i].window_priority = WINDOW_PRIORITY_NORMAL #描画優先度を普通(通常)にする
 
     #セレクトカーソルの更新
     def select_cursor(self):

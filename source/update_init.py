@@ -86,6 +86,8 @@ class update_init:
         self.ls_shield_hp = 0           #L'sシールドの耐久力 0=シールド装備していない 1以上はシールド耐久値を示す
         
         self.claw = []                  #クローのリスト初期化 クローのリストはステージスタート時に初期化してしまうと次のステージに進んだときクローが消滅してしまうのでgame_start_initで初期化します
+        self.redraw_star_area = []      #ゲームスタート時には背景の星を再描画するべきウィンドウは存在してはいけないのでリストを初期化します
+        print("star_redraw_window_num = " + str(len(self.redraw_star_area)))
         
         #難易度に応じた数値をリストから取得する
         func.get_difficulty_data(self) #難易度データリストから数値を取り出す関数の呼び出し

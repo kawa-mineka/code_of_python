@@ -51,6 +51,31 @@ class graph:
             pyxel.pset(self.stars[i].posx, self.stars[i].posy,int(self.stars[i].posx  // 4 % 15)) 
             #pyxel.pset(self.stars[i].posx, self.stars[i].posy,int(self.s_rndint(0,7))) 
 
+    #背景の星の再描画表示(透明または半透明ウィンドウ表示時にその範囲が消去されたのちその範囲に存在する星を描画する)
+    def redraw_star(self):
+        stars_count = len(self.stars)
+        for i in range(stars_count):
+            st_x,st_y = self.stars[i].posx,self.stars[i].posy #星の座標を取り出す
+            area_count = len(self.redraw_star_area) #再描画リストに登録されたエリア数を取得
+            for j in range(area_count): #星の座標が再描画範囲内ならば・・・
+                if  self.redraw_star_area[j].posx <= st_x <= self.redraw_star_area[j].posx + self.redraw_star_area[j].width and\
+                    self.redraw_star_area[j].posy <= st_y <= self.redraw_star_area[j].posy + self.redraw_star_area[j].height:
+                    
+                    pyxel.pset(st_x,st_y,int(self.stars[i].posx  // 4 % 15)) #星を再描画する
+
+    #背景の星を最前面のウィンドウ部分に再描画表示(透明または半透明ウィンドウ表示時にその範囲が消去されたのちその範囲に存在する星を描画する)
+    def redraw_star_priority_top(self):
+        stars_count = len(self.stars)
+        for i in range(stars_count):
+            st_x,st_y = self.stars[i].posx,self.stars[i].posy #星の座標を取り出す
+            area_count = len(self.redraw_star_area) #再描画リストに登録されたエリア数を取得
+            for j in range(area_count): #星の座標が再描画範囲内&描画優先度最前面ならば・・・
+                if      self.redraw_star_area[j].posx <= st_x <= self.redraw_star_area[j].posx + self.redraw_star_area[j].width\
+                    and self.redraw_star_area[j].posy <= st_y <= self.redraw_star_area[j].posy + self.redraw_star_area[j].height\
+                    and self.redraw_star_area[j].priority == WINDOW_PRIORITY_TOP:
+                    
+                    pyxel.pset(st_x,st_y,int(self.stars[i].posx  // 4 % 15)) #星を再描画する
+
     #自機表示
     def draw_my_ship(self):
         if self.invincible_counter > 0: #無敵中のカウントが0より大きい時は無敵状態なので点滅表示する
@@ -1141,10 +1166,16 @@ class graph:
         pyxel.text(0, 58, "    a much more distant object.", pyxel.COLOR_WHITE)         #時空干渉システムはやはりはるか遠くの天体に作用するのに時間が掛るようだ
 
     #ウィンドウの表示
-    def draw_window(self,priority): #priorityの数値と一致するプライオリティナンバーを持つウィンドウだけを描画します
+    def draw_window(self,priority,draw_num): #priorityの数値と一致するプライオリティナンバーを持つウィンドウだけを描画します
         window_count = len(self.window)
         for i in range(window_count):
-            if self.window[i].window_priority == priority:
+            #priorityの数値と一致する、尚且つ下地が有色(透明でない)ウィンドウだけを描画します
+            #下地が透明、または半透明のウィンドウは真っ黒な四角で塗りつぶし→背景の星をその範囲だけ再描画→透明、半透明のウィンドウだけで描画するメソッドを呼び出して描画する
+            if self.window[i].window_priority != priority:#window_priorityの数値と引数のpriorityが一致しなかったら何もしないで次のウィンドウ描画に移る
+                continue
+            
+            #下地が有色のウィンドウを描画します
+            if self.window[i].window_bg == WINDOW_BG_BLUE_BACK or (self.window[i].window_bg != WINDOW_BG_BLUE_BACK and draw_num == ORDINARY_SUPERPOSITION):
                 #ウィンドウ下地描画###############################################################
                 for h in range(self.window[i].height // 8 + 1):
                     for w in range((self.window[i].width // 8 + 1)) :
@@ -1152,7 +1183,7 @@ class graph:
                             IMG2,
                             96 + self.window[i].window_bg * 32,88,
                             SIZE_8,SIZE_8, pyxel.COLOR_GRAY)
-            
+                
                 #ウィンドウ外枠フレーム描画###############################################################
                 if self.window[i].window_frame == WINDOW_FRAME_NORMAL: #ウィンドウフレーム表示有の場合は外枠を表示する
                     #ウィンドウ横パーツ描画#############################################################
@@ -1418,6 +1449,10 @@ class graph:
                         elif self.window[i].time_counter_list[j][LIST_WINDOW_TIME_COUNTER_TYPE] == TIME_COUNTER_TYPE_TOTAL_SCORE:         #累計スコアの表示
                             str_total_score = "{:>16}".format(int(self.total_score))
                             func.drop_shadow_text(self,self.window[i].posx + ox * open_rate_x,self.window[i].posy + oy * open_rate_y,str_total_score,col)
+                
+            #下地が透明または半透明の場合＆「黒矩形塗りつぶし」した後表示の場合は黒く塗りつぶされたウィンドウを描く
+            elif self.window[i].window_bg != WINDOW_BG_BLUE_BACK and draw_num == BLACK_RECTANGLE_FILL:
+                pyxel.rect(self.window[i].posx,self.window[i].posy,self.window[i].width,self.window[i].height,pyxel.COLOR_BLACK)
 
     #セレクトカーソルの表示
     def draw_select_cursor(self):

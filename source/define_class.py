@@ -1,4 +1,4 @@
-class Shot:#自機弾のクラス設定
+class Shot:                   #自機弾のクラス設定
     def __init__(self):
         self.shot_type = 0
         self.posx = 0
@@ -21,7 +21,7 @@ class Shot:#自機弾のクラス設定
         self.offset_y = offset_y
         self.shot_power = shot_power
         self.shot_hp = shot_hp
-class Missile:#自機ミサイルのクラス設定
+class Missile:                #自機ミサイルのクラス設定
     def __init__(self):
         self.missile_type = 0 #0=右下ミサイル 1=右上ミサイル 2=左下ミサイル 3=左上ミサイル 4=テイルショット 5=ぺネトレートロケット 6=サーチレーザー 7=ホーミングミサイル
         self.posx = 0
@@ -58,7 +58,7 @@ class Missile:#自機ミサイルのクラス設定
         self.ty = ty
         self.theta = theta
         self.speed = speed
-class Claw:#クローのクラス設定
+class Claw:                   #クローのクラス設定
     def __init__(self):
         self.number = 0 #クローのIDナンバー 0~3まで
         self.claw_type = 0 #0=ローリングタイプ 1=トレースタイプ 2=フックスタイプ 3=リバースタイプ
@@ -127,14 +127,14 @@ class Claw:#クローのクラス設定
         self.shot_type = shot_type
         self.shot_power = shot_power
         self.animation_number = animation_number
-class Trace_coordinates:#トレースクロー（オプション）座標のクラス設定
+class Trace_coordinates:      #トレースクロー(オプション)座標のクラス設定
     def __init__(self):
         self.posx = 0 #自機のx座標をオプションのx座標としてコピーして使用する
         self.posy = 0 #自機のy座標をオプションのy座標としてコピーして使用する
     def update(self, ox, oy):
         self.posx = ox
         self.posy = oy
-class Claw_shot:#クローショット（クローの弾）のクラス設定
+class Claw_shot:              #クローショット(クローの弾)のクラス設定
     def __init__(self):
         self.shot_type = 0
         self.posx = 0
@@ -159,7 +159,7 @@ class Claw_shot:#クローショット（クローの弾）のクラス設定
         self.offset_y = offset_y
         self.shot_power = shot_power
         self.shot_hp = shot_hp
-class Star:#背景の流れる星のクラス設定
+class Star:                   #背景の流れる星のクラス設定
     def __init__(self):
         self.posx = 0
         self.posy = 0
@@ -168,7 +168,7 @@ class Star:#背景の流れる星のクラス設定
         self.posx = x
         self.posy = y
         self.speed = speed
-class Enemy:#敵キャラ達のクラス設定
+class Enemy:                  #敵キャラ達のクラス設定
     def __init__(self):
         self.enemy_type = 0    #敵のタイプ
         self.enemy_id = 0     #敵のIDナンバー
@@ -408,7 +408,7 @@ class Enemy:#敵キャラ達のクラス設定
         self.score_awaiting = score_awaiting
         self.score_defense  = score_defense
         self.score_berserk  = score_berserk
-class Boss:#ボスキャラのクラス設定
+class Boss:                   #ボスキャラのクラス設定
     def __init__(self):
         self.boss_id = 0      #ボスのIDナンバー
         self.boss_type = 0    #ボスの種類
@@ -1193,7 +1193,7 @@ class Boss:#ボスキャラのクラス設定
         self.grp_parts9_offset_y  = grp_parts9_offset_y
         self.grp_parts9_count     = grp_parts9_count
         self.grp_parts9_animation = grp_parts9_animation
-class Enemy_shot:#敵弾のクラス設定
+class Enemy_shot:             #敵弾のクラス設定
     def __init__(self):
         self.enemy_shot_type = 0 #敵弾の種類
         self.enemy_shot_id   = 0 #敵弾に振られたIDナンバー
@@ -1280,7 +1280,7 @@ class Enemy_shot:#敵弾のクラス設定
         self.height_max = height_max
         self.color = color
         self.anime = anime
-class Explosion:#爆発のクラス設定
+class Explosion:              #爆発のクラス設定
     def __init__(self):
         self.explosion_type = 0 #爆発の種類
         self.priority = 0      #描画優先度
@@ -1305,7 +1305,7 @@ class Explosion:#爆発のクラス設定
         self.return_buller_count = return_buller_count
         self.x_reverse = x_reverse
         self.y_reverse = y_reverse
-class Particle:#パーティクル（粒子）クラスの設定
+class Particle:               #パーティクル（粒子）クラスの設定
     def __init__(self):
         self.particle_type = 0 #パーティクルの種類
         self.priority = 0      #描画優先度
@@ -1343,7 +1343,7 @@ class Particle:#パーティクル（粒子）クラスの設定
         self.count1,self.count2 = count1,count2
         self.animation1,self.animation2 = animation1,animation2
         self.offset_x,self.offset_y = offset_x,offset_y
-class Background_object:#背景の物体(背景オブジェクト）クラスの設定 (雲や鳥や泡や木葉や背景を移動する艦隊とか当たり判定の無い大き目の物体)
+class Background_object:      #背景の物体(背景オブジェクト）クラスの設定 (雲や鳥や泡や木葉や背景を移動する艦隊とか当たり判定の無い大き目の物体)
     def __init__(self):
         self.background_object_type = 0 #背景オブジェクトの種類
         self.posx,self.posy = 0,0 #x,y座標
@@ -1391,7 +1391,7 @@ class Background_object:#背景の物体(背景オブジェクト）クラスの
         self.flag1,self.flag2,self.flag3    = flag1,flag2,flag3
         self.count1,self.count2,self.count3 = count1,count2,count3
         self.animation_number1,self.animation_number2,self.animation_number3 = animation_number1,animation_number2,animation_number3
-class Window: #メッセージ表示ウィンドウのクラスの設定
+class Window:                 #メッセージ表示ウィンドウのクラスの設定
     def __init__(self):
         self.window_id = 0          #それぞれのウィンドウに与えられるIDです
         self.window_id_sub = 0      #ウィンドウIDに対しての補助的なIDです(はい」「いいえ」などの2択メニューとかで使用)
@@ -1600,7 +1600,22 @@ class Window: #メッセージ表示ウィンドウのクラスの設定
         self.comment_list_eng  = comment_list_eng
         self.comment_list_jpn  = comment_list_jpn
         self.item_id           = item_id
-class Cursor: #メッセージ表示ウィンドウで使用するカーソルのデータ群のクラス設定
+class Redraw_star_area: #背景の星を再描画する範囲指定のクラス設定
+    def __init__(self):             #コンストラクタ
+        self.window_id = 0          #再描画するウィンドウのID
+        self.posx   = 0             #背景の星を再描画する領域 始点のx座標
+        self.posy   = 0             #                       始点のy座標
+        self.width  = 0             #                       横幅
+        self.height = 0             #                       縦幅
+        self.priority = 0           #                       描画優先度
+    def update(self,window_id,x,y,width,height,priority):
+        self.window_id = window_id
+        self.posx = x
+        self.posy = y
+        self.width = width
+        self.height = height
+        self.priority = priority
+class Cursor:                 #メッセージ表示ウィンドウで使用するカーソルのデータ群のクラス設定
     def __init__(self): #コンストラクタ
         self.window_id = 0         #このウィンドウIDがアクティブになったらこのカーソルデータを使用してカーソルを表示開始します
         self.cursor_type = 0       #セレクトカーソルの種類
@@ -1637,7 +1652,7 @@ class Cursor: #メッセージ表示ウィンドウで使用するカーソル�
         self.color = color
         self.menu_layer = menu_layer
         self.move_direction = move_direction
-class Obtain_item:#手に入れるアイテム類（パワーアップ勲章とかコインアイテムとか）のクラス設定
+class Obtain_item:            #手に入れるアイテム類(パワーアップ勲章とかコインアイテムとか)のクラス設定
     def __init__(self):
         self.item_type = 0                  #アイテムのタイプ 1=ショットパワーアップ 2=ミサイルパワーアップ 3=シールドパワーアップ
                                             #これ以外はパワーアップアイテム類のtype定数の定義を参照してください
@@ -1691,7 +1706,7 @@ class Obtain_item:#手に入れるアイテム類（パワーアップ勲章と�
         self.flag3 = flag3
         self.bounce = bounce
         self.status = status
-class Enemy_formation: #敵の編隊数のリストのクラス設定
+class Enemy_formation:        #敵の編隊数のリストのクラス設定
     def __init__(self):
         self.formation_id = 0            #それぞれの編隊に与えられたidナンバー(1~?)(0は単独機で使用してるので編隊では未使用です) 
         self.formation_number = 0         #何機編隊なのか編隊の総数が入ります
@@ -1702,7 +1717,7 @@ class Enemy_formation: #敵の編隊数のリストのクラス設定
         self.formation_number           = formation_number
         self.on_screen_formation_number = on_screen_formation_number
         self.shoot_down_number          = shoot_down_number
-class Event_append_request: #早回しなどの敵の追加や乱入中ボス,臨時のスクロールスピードや方向の調整などの追加リクエストが入るリストのクラス設定です
+class Event_append_request:   #早回しなどの敵の追加や乱入中ボス,臨時のスクロールスピードや方向の調整などの追加リクエストが入るリストのクラス設定です
     def __init__(self):
         self.timer = 0      #イベントが開始されるカウントタイマー
         self.event_type = 0 #イベントのタイプ
@@ -1717,7 +1732,7 @@ class Event_append_request: #早回しなどの敵の追加や乱入中ボス,�
         self.posx = x
         self.posy = y
         self.number = number
-class Raster_scroll: #背景でラスタースクロールするときに使用する横ラインのデータ設定値のクラス
+class Raster_scroll:          #背景でラスタースクロールするときに使用する横ラインのデータ設定値のクラス
     def __init__(self):
         self.scroll_id = 0       #複数のラスタースクロールを動作させる時に使用するidナンバー
         self.raster_type = 0     #ラスタースクロールの種類

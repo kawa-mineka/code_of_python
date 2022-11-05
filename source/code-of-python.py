@@ -246,25 +246,27 @@ class App:
         self.replay_slot_num    = 0  #リプレイファイルをセーブしたりロードするスロットナンバーが入ります(0~9)
         
         define_data.stage_asset_list(self)             #ステージごとのアセットファイル名(pyxresファイル)が登録されたリストを作成する関数の呼び出し
-        define_data.default_ship_list(self)            #各機体リスト(初期状態)の定義関数の呼び出し
         define_data.medal_graph_and_comment_list(self) #メダルのIDナンバーとそれに対するグラフイックチップの位置や英語コメントなどの定義関数の呼び出し
         
         #ゲーム中で絶対に変化することのないリスト群はここで作成します#######################################
+        define_data.ipl_mes(self)               #IPLメッセージテキストの定義関数の呼び出し
         define_data.flash_color_list(self)      #点滅用カラーリスト群の定義 サブウェポンセレクターカーソルなどで使用する点滅用カラーリスト群(pyxelのカラーナンバーだよ)
         define_data.expansion_shrink(self)      #サブウェポンアイテムの外を回っている四角形描画用のデータリスト定義関数の呼び出し
         define_data.font_code_table(self)       #美咲フォントコードテーブルの定義関数の呼び出し
-        define_enemy_data.anime_ptn(self)       #敵キャラのアニメパターンのキャラチップ番号の定義関数の呼び出し
-        define_enemy_data.move_data(self)       #敵の移動データリストの定義関数の呼び出し
-        define_boss_data.move_data(self)        #ボスの移動データリストの定義関数の呼び出し
-        define_stage_data.stage_data_list(self) #ステージデータリストの定数定義関数の呼び出し
         define_data.game_difficulty_list(self)  #難易度ごとの各種設定数値のリストの定義関数の呼び出し
         define_data.game_rank_data_list(self)   #ランク値による各種設定数値のリストの定義関数の呼び出し
         
+        define_enemy_data.anime_ptn(self)       #敵キャラのアニメパターンのキャラチップ番号の定義関数の呼び出し
+        define_enemy_data.move_data(self)       #敵の移動データリストの定義関数の呼び出し
+        
+        define_boss_data.move_data(self)        #ボスの移動データリストの定義関数の呼び出し
+        
+        define_stage_data.stage_data_list(self) #ステージデータリストの定数定義関数の呼び出し
+        
+        define_ship_data.default_ship_list(self)          #各機体リスト(初期状態)の定義関数の呼び出し
         define_ship_data.sub_weapon_level_data_list(self) #サブウェポンのレベルデータリストの定義関数の呼び出し
         define_ship_data.shot_table_list(self)            #ショットパワーアップテーブルリストの定義関数の呼び出し
         define_ship_data.missile_table_list(self)         #ミサイルパワーアップテーブルリストの定義関数の呼び出し
-        
-        define_data.ipl_mes(self)                         #IPLメッセージテキストの定義関数の呼び出し
         
         self.game_status = SCENE_IPL                #ゲームステータスを「IPL表示」にする
         #self.game_status = SCENE_GAME_START_INIT   #ゲームの状況ステータスを表してます（ゲームそのもの自体の状態遷移フラグとして使用します）
@@ -734,18 +736,28 @@ class App:
         if self.game_status == SCENE_IPL:
             graph.draw_ipl(self)                    #IPLメッセージを表示する関数の呼び出し
         
-        if  self.game_status == SCENE_TITLE or self.game_status == SCENE_TITLE_MENU_SELECT or self.game_status == SCENE_SELECT_LOAD_SLOT\
-            or self.game_status == SCENE_GAME_QUIT_START or self.game_status ==SCENE_GAME_QUIT_WAIT\
+        if     self.game_status == SCENE_TITLE\
+            or self.game_status == SCENE_TITLE_MENU_SELECT\
+            or self.game_status == SCENE_SELECT_LOAD_SLOT\
+            or self.game_status == SCENE_GAME_QUIT_START\
+            or self.game_status == SCENE_GAME_QUIT_WAIT\
             or self.game_status == SCENE_GAME_QUIT:
             
-            graph.draw_star(self)                   #背景の星を表示する関数の呼び出し
+            graph.draw_star(self)                          #背景の星を表示する関数の呼び出し
             
             #ゲームプレイ中からの終了工程の場合はタイトルロゴを表示しない
             if  self.game_quit_from_playing == FLAG_OFF:
-                graph.draw_title(self)                      #タイトルロゴの表示関数の呼び出し
+                graph.draw_title(self)                     #タイトルロゴの表示関数の呼び出し
             
-            graph.draw_window(self,WINDOW_PRIORITY_NORMAL)        #ウィンドウの表示関数の呼び出し
-            graph.draw_select_cursor(self)                       #セレクトカーソルの表示関数の呼び出し
+            graph.draw_window(self,WINDOW_PRIORITY_NORMAL,BLACK_RECTANGLE_FILL)  #透明のウィンドウの場合は黒矩形塗りつぶししたあと表示
+            graph.redraw_star(self)                                              #透明または半透明のウィンドウが存在する範囲内だけ星を再描画する
+            graph.draw_window(self,WINDOW_PRIORITY_NORMAL,ORDINARY_SUPERPOSITION)#そのまま普通に重ね合わせてウィンドウを表示
+            
+            graph.draw_window(self,WINDOW_PRIORITY_TOP,   BLACK_RECTANGLE_FILL)  #最前面ウィンドウの黒抜き部分を表示する
+            graph.redraw_star_priority_top(self)                                 #最前面のウィンドウ背後の部分に星を描画する
+            graph.draw_window(self,WINDOW_PRIORITY_TOP,   ORDINARY_SUPERPOSITION)#最前面ウィンドウをそのまま重ね合わせて表示する
+            
+            graph.draw_select_cursor(self)                             #セレクトカーソルの表示関数の呼び出し
         
         if self.game_playing_flag == FLAG_ON and self.star_scroll_flag == FLAG_ON:#ゲームプレイ中フラグon,星スクロールフラグonの時は背景の星を表示する
             graph.draw_star(self)                  #背景の星を表示する関数の呼び出し 
@@ -902,13 +914,25 @@ class App:
             graph.draw_sub_weapon_select_gauge(self)       #サブウェポン一覧表示graph
             graph.draw_status(self)                        #スコアやスピード、自機耐久力などの表示関数の呼び出し （通常ステータス表示）
             graph.draw_debug_status(self)                  #デバッグ用ステータスの表示関数の呼び出し          （デバック用ステータス表示）
-            graph.draw_window(self,WINDOW_PRIORITY_NORMAL) #ウィンドウの表示
-            graph.draw_window(self,WINDOW_PRIORITY_5)      #前面から6番目のウィンドウの表示
-            graph.draw_window(self,WINDOW_PRIORITY_4)      #前面から5番目ウィンドウの表示
-            graph.draw_window(self,WINDOW_PRIORITY_3)      #前面から4番目ウィンドウの表示
-            graph.draw_window(self,WINDOW_PRIORITY_2)      #前面から3番目ウィンドウの表示
-            graph.draw_window(self,WINDOW_PRIORITY_1)      #前面から2番目ウィンドウの表示
-            graph.draw_window(self,WINDOW_PRIORITY_TOP)    #最前面1番目ウィンドウの表示
+            #1回目のウィンドウ表示
+            graph.draw_window(self,WINDOW_PRIORITY_NORMAL,FIRST_DRAW) #ウィンドウの表示
+            graph.draw_window(self,WINDOW_PRIORITY_5,FIRST_DRAW)      #前面から6番目のウィンドウの表示
+            graph.draw_window(self,WINDOW_PRIORITY_4,FIRST_DRAW)      #前面から5番目ウィンドウの表示
+            graph.draw_window(self,WINDOW_PRIORITY_3,FIRST_DRAW)      #前面から4番目ウィンドウの表示
+            graph.draw_window(self,WINDOW_PRIORITY_2,FIRST_DRAW)      #前面から3番目ウィンドウの表示
+            graph.draw_window(self,WINDOW_PRIORITY_1,FIRST_DRAW)      #前面から2番目ウィンドウの表示
+            graph.draw_window(self,WINDOW_PRIORITY_TOP,FIRST_DRAW)    #最前面1番目ウィンドウの表示
+            
+            graph.redraw_star(self)                                   #透明または半透明のウィンドウが存在する範囲内だけ星を再描画する
+            #2回目のウィンドウ表示
+            graph.draw_window(self,WINDOW_PRIORITY_NORMAL,SECOND_DRAW)#ウィンドウの表示
+            graph.draw_window(self,WINDOW_PRIORITY_5,SECOND_DRAW)     #前面から6番目のウィンドウの表示
+            graph.draw_window(self,WINDOW_PRIORITY_4,SECOND_DRAW)     #前面から5番目ウィンドウの表示
+            graph.draw_window(self,WINDOW_PRIORITY_3,SECOND_DRAW)     #前面から4番目ウィンドウの表示
+            graph.draw_window(self,WINDOW_PRIORITY_2,SECOND_DRAW)     #前面から3番目ウィンドウの表示
+            graph.draw_window(self,WINDOW_PRIORITY_1,SECOND_DRAW)     #前面から2番目ウィンドウの表示
+            graph.draw_window(self,WINDOW_PRIORITY_TOP,SECOND_DRAW)   #最前面1番目ウィンドウの表示
+            
             graph.draw_select_cursor(self)                 #セレクトカーソルの表示graph
             graph.draw_warning_dialog(self)                #WARNINGダイアログの表示
             graph.draw_stage_clear_dialog(self)            #STAGE CLEARダイアログの表示

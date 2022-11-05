@@ -1249,7 +1249,7 @@ class update_boss:
                 elif self.boss[i].status == BOSS_STATUS_MOVE_BEZIER_CURVE:     #「ベジェ曲線で移動」
                     t = self.boss[i].obj_time / self.boss[i].obj_totaltime
                     if t >= 1: #tの値が1になった時は現在の座標が移動目的座標と同じ座標になった状況となるので・・・(行き過ぎ防止で念のため１以上で判別してます)
-                        print(self.boss[i].move_index)
+                        # print(self.boss[i].move_index) #デバッグに用ボスが定点を通る時の座標のインデックスナンバーを表示する
                         if self.boss[i].move_index >= len(self.boss_bg_move_point) - 2: #移動リストのインデックス値がリストの要素数の数と一致したら、もう通過すべき座標値がないので
                             self.boss[i].status = BOSS_STATUS_MOVE_2POINT_INIT #状態遷移を「2点間移動のポイント設定初期化」に設定
                         else:

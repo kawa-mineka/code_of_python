@@ -16,25 +16,25 @@ class update_se:
         for i in range(62): #sndは(0~62)まであるので iを0~62まで増加させていく
             vol_list = ""   #ボリュームリストを初期化する
             vol_len = len(pyxel.sound(i).volumes) #vol_lenにsnd(i)のVOL値が記録された全体の個数が入る
-            print("SOUND " + str(i))
+            # print("SOUND " + str(i))
             for j in range(vol_len): #vol_lenの数だけ繰り返す
                 num = pyxel.sound(i).volumes[j] #VOLの数値を取り出す(型は整数で収まっている)
-                print(num,end = '') #改行無しで数値を表示
+                # print(num,end = '') #改行無しで数値を表示
                 vol_list += str(num)#ボリュームリストに文字列化したボリューム値を右端に追加していく
             
-            print(" ")
-            print("vol_list = " + vol_list)
-            print(" ")
+            # print(" ")
+            # print("vol_list = " + vol_list)
+            # print(" ")
             
             self.master_se_vol_list[i] = vol_list
         
-        print(" ")
-        print("master se vol list")
-        print(self.master_se_vol_list)
+        # print(" ")
+        # print("master se vol list")
+        # print(self.master_se_vol_list)
 
     #マスターSEボリュームリストを参考にボリューム調整を施したリストを作り上げる
     def create_adjustable_se_vol_list(self):
-        print(self.adjustable_se_vol_list)
+        # print(self.adjustable_se_vol_list)
         for i in range(62): #sndは(0~62)まであるので iを0~62まで増加させていく
             tmp_vol_list = "" #編集用一時ボリュームリストを作製宣言
             tmp_vol_list = self.master_se_vol_list[i] #マスターボリュームリストを一時編集用ボリュームリストにコピー
@@ -53,8 +53,8 @@ class update_se:
                     
                     self.adjustable_se_vol_list[i].append(new_vol_list)
         
-        print("adjustable se vol list")
-        print(self.adjustable_se_vol_list)
+        # print("adjustable se vol list")
+        # print(self.adjustable_se_vol_list)
 
     #サウンドエフェクト(SE)を再生する
     def se(self,ch,num,vol): #ch=再生チャンネル,num=SEナンバー,vol=ボリューム値

@@ -772,6 +772,10 @@ WINDOW_BG_TRANSLUCENT     = 0 #半透明
 WINDOW_BG_BLUE_BACK       = 1 #青地
 WINDOW_BG_LOW_TRANSLUCENT = 2 #ちょっと半透明
 
+#ウィンドウ表示時に予め「黒矩形塗りつぶし」した後、表示するか、そのまま普通に重ね合わせて表示するか？どうか？
+ORDINARY_SUPERPOSITION = 0 #そのまま普通に重ね合わせて表示
+BLACK_RECTANGLE_FILL   = 1 #「黒矩形塗りつぶし」した後、表示する
+
 #ウィンドウの表示プライオリティ(優先度)
 WINDOW_PRIORITY_TOP    = 0 #一番前の最前面
 WINDOW_PRIORITY_1      = 1 #2番目
@@ -1084,12 +1088,12 @@ COMMENT_FLAG_ON             = 1 #表示する
 
 #セレクトカーソルの動き方
 CURSOR_MOVE_UD               =  0 #セレクトカーソルの動きは上下のみです 「UD」はUpDownの頭文字です
-CURSOR_MOVE_UD_SLIDER        =  1 #セレクトカーソルは上下に動かすことができ、左右の入力でスライダーを動かせます
+CURSOR_MOVE_UD_SLIDER        =  1 #セレクトカーソルは上下に動かすことができ、左右の入力でスライダーを動かせます(CONFIGで使用してます)
 CURSOR_MOVE_UD_SLIDER_BUTTON =  2 #セレクトカーソルは上下に動かすことができ、左右の入力でスライダーを動かせます ON/OFF切り替えの項目ではボタンを押すことでも切り替えができます
 CURSOR_MOVE_LR               =  3 #セレクトカーソルの動きは左右のみです LR=Left Right
-CURSOR_MOVE_LR_SLIDER        =  4 #セレクトカーソルは左右に動かすことができ、上下の入力でスライダーを動かせます
+CURSOR_MOVE_LR_SLIDER        =  4 #セレクトカーソルは左右に動かすことができ、上下の入力でスライダーを動かせます(NAME ENTRYで使用してます)
 CURSOR_MOVE_LR_SLIDER_BUTTON =  5 #セレクトカーソルは左右に動かすことができ、上下の入力でスライダーを動かせます ON/OFF切り替えの項目ではボタンを押すことでも切り替えができます
-CURSOR_MOVE_4WAY             =  6 #上下左右4方向に動かせます
+CURSOR_MOVE_4WAY             =  6 #上下左右4方向に動かせます(MEDALで使用してます)
 CURSOR_MOVE_4WAY_BUTTON      =  7 #上下左右4方向に動かせます(ボタンを押すと現在のカーソル位置のアイテムがアクティブとなります)
 CURSOR_MOVE_8WAY             =  8 #斜め移動も含んだ8方向に動かせます
 CURSOR_MOVE_8WAY_BUTTON      =  9 #斜め移動も含んだ8方向に動かせます(ボタンを押すと現在のカーソル位置のアイテムがアクティブとなります)

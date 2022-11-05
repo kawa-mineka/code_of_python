@@ -1101,6 +1101,20 @@ class func:
                 self.window[i].vx,self.window[i].vy             = vx,vy
                 self.window[i].vx_accel,self.window[i].vy_accel = vx_accel,vy_accel
 
+    #背景のスター再描画範囲リストにウィンドウIDが存在するか検索する(与えられたウィンドウIDを元にしてスターリドローエリア群を検索しインデックスナンバーを取得する)
+    def search_window_id_star_redraw(self,id): #id=windowクラスの window_idに入っている数値 発見できなかった時は-1を返します
+        area_count = len(self.redraw_star_area)
+        num = -1
+        if self.redraw_star_area == []: #まだリストに何も登録されていなくて空リストだったら直ぐにリターンする
+            return num
+        
+        for i in reversed(range(area_count)):
+            if self.redraw_star_area[i].window_id == id:
+                num = i
+                break
+        
+        return num
+
     #メダルリストウィンドウで「存在するアイテム」を調べ上げコメント表示フラグテーブルを作製する関数
     def make_medal_list_window_comment_disp_flag_table(self):
         i = func.search_window_id(self,WINDOW_ID_MEDAL_LIST) #メダルリストウィンドウをIDを元にインデックス番号を調べる

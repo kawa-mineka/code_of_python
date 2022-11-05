@@ -43,6 +43,7 @@ class update_title:
         self.stars = []                        #タイトル表示時も背景の星を流したいのでリストをここで初期化してやります
         self.star_scroll_speed = 1             #背景の流れる星のスクロールスピード 1=通常スピード 0.5なら半分のスピードとなります
         self.window = []                       #タイトル表示時もメッセージウィンドウを使いたいのでリストをここで初期化してあげます
+        self.redraw_star_area = []             #タイトル表示時も半透明ウィンドウ表示でのスターリドロー処理も行いたいのでここで初期化してあげます
         self.cursor = []                       #タイトル表示時もウィンドウカーソルを使いたいのでリストをここで初期化してあげます
         
         #リプレイ記録用に使用する横無限大,縦50ステージ分の空っぽのリプレイデータリストを作成します
@@ -205,6 +206,8 @@ class update_title:
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は6項目なので 13-1=12を代入,メニューの階層が増えたのでMENU_LAYER0からMENU_LAYER1にします
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,7,10,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,13-1,0,MENU_LAYER1)
                     self.active_window_id = WINDOW_ID_SELECT_SHIP #このウィンドウIDを最前列でアクティブなものとする
+                    #!check##############################################################################################
+                    update_window.change_window_priority_top(self,WINDOW_ID_SELECT_SHIP) #ウィンドウ「SELECT SHIP」のプライオリティを最前面にする
                     pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
                 
             elif self.cursor_decision_item_y == MENU_SCORE_BOARD:       #SCORE BOARDが押されて...
@@ -240,6 +243,7 @@ class update_title:
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は12項目なので12-1=11を代入,メニューの階層が増えたのでMENU_LAYER0からMENU_LAYER1にします
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD_SLIDER,10,16,STEP4,STEP8,0,0,0,0,UNSELECTED,UNSELECTED,0,12-1,0,MENU_LAYER1)
                     self.active_window_id = WINDOW_ID_CONFIG #このウィンドウIDを最前列でアクティブなものとする
+                    update_window.change_window_priority_top(self,WINDOW_ID_CONFIG) #ウィンドウ「CONFIG」のプライオリティを最前面にする
                     pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
                 
             elif self.cursor_decision_item_y == MENU_REPLAY:            #REPLAYが押されたら
@@ -290,312 +294,318 @@ class update_title:
                     pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
             
         elif self.cursor_menu_layer == MENU_LAYER1: #メニューが1階層目の選択分岐
-            if   self.cursor_pre_decision_item_y == MENU_SELECT_STAGE and self.cursor_decision_item_y == MENU_SELECT_STAGE_1:
-                #「SELECT STAGE」→「1」
-                self.stage_number   = 1                          #ステージナンバー1
-                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+            if  self.cursor_pre_decision_item_y  == MENU_SELECT_STAGE:
+                if   self.cursor_decision_item_y == MENU_SELECT_STAGE_1:
+                    #「SELECT STAGE」→「1」
+                    self.stage_number   = 1                          #ステージナンバー1
+                    update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                    
+                    i = func.search_window_id(self,WINDOW_ID_SELECT_STAGE_MENU)
+                    self.window[i].vx = 0.6            #WINDOW_ID_SELECT_STAGE_MENUウィンドウを右にフッ飛ばしていく
+                    self.window[i].vx_accel = 1.1
+                    self.window[i].vy = 0.1 * self.stage_number
+                    self.window[i].vy_accel = 1.1
+                    self.window[i].window_status = WINDOW_CLOSE
+                    self.window[i].comment_flag = COMMENT_FLAG_OFF
+                    func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
+                    self.cursor_pre_decision_item_y = UNSELECTED
+                    self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
+                elif self.cursor_decision_item_y == MENU_SELECT_STAGE_2:
+                    #「SELECT STAGE」→「2」
+                    self.stage_number   = 2                         #ステージナンバー2
+                    update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                    
+                    i = func.search_window_id(self,WINDOW_ID_SELECT_STAGE_MENU)
+                    self.window[i].vx = 0.3            #WINDOW_ID_SELECT_STAGE_MENUウィンドウを右にフッ飛ばしていく
+                    self.window[i].vx_accel = 1.1
+                    self.window[i].vy = 0.1 * self.stage_number
+                    self.window[i].vy_accel = 1.1
+                    self.window[i].window_status = WINDOW_CLOSE
+                    self.window[i].comment_flag = COMMENT_FLAG_OFF
+                    func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
+                    self.cursor_pre_decision_item_y = UNSELECTED
+                    self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
+                elif self.cursor_decision_item_y == MENU_SELECT_STAGE_3:
+                    #「SELECT STAGE」→「3」
+                    self.stage_number   = 3                        #ステージナンバー3
+                    update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                    
+                    i = func.search_window_id(self,WINDOW_ID_SELECT_STAGE_MENU)
+                    self.window[i].vx = 0.3            #WINDOW_ID_SELECT_STAGE_MENUウィンドウを右にフッ飛ばしていく
+                    self.window[i].vx_accel = 1.1
+                    self.window[i].vy = 0.1 * self.stage_number
+                    self.window[i].vy_accel = 1.1
+                    self.window[i].window_status = WINDOW_CLOSE
+                    self.window[i].comment_flag = COMMENT_FLAG_OFF
+                    func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
+                    self.cursor_pre_decision_item_y = UNSELECTED
+                    self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
                 
-                i = func.search_window_id(self,WINDOW_ID_SELECT_STAGE_MENU)
-                self.window[i].vx = 0.6            #WINDOW_ID_SELECT_STAGE_MENUウィンドウを右にフッ飛ばしていく
-                self.window[i].vx_accel = 1.1
-                self.window[i].vy = 0.1 * self.stage_number
-                self.window[i].vy_accel = 1.1
-                self.window[i].window_status = WINDOW_CLOSE
-                self.window[i].comment_flag = COMMENT_FLAG_OFF
-                func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
-                self.cursor_pre_decision_item_y = UNSELECTED
-                self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
-            elif self.cursor_pre_decision_item_y == MENU_SELECT_STAGE and self.cursor_decision_item_y == MENU_SELECT_STAGE_2:
-                #「SELECT STAGE」→「2」
-                self.stage_number   = 2                         #ステージナンバー2
-                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+            elif self.cursor_pre_decision_item_y == MENU_SELECT_LOOP:
+                if   self.cursor_decision_item_y == MENU_SELECT_LOOP_1:
+                    #「SELECT LOOP NUMBER」→「1」
+                    self.stage_loop = 1                           #ループ数に1週目を代入
+                    update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                    i = func.search_window_id(self,WINDOW_ID_SELECT_LOOP_MENU)
+                    self.window[i].vx = 0.3            #WINDOW_ID_SELECT_LOOP_MENUウィンドウを右にフッ飛ばしていく
+                    self.window[i].vx_accel = 1.2
+                    self.window[i].window_status = WINDOW_CLOSE
+                    self.window[i].comment_flag = COMMENT_FLAG_OFF
+                    func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
+                    self.cursor_pre_decision_item_y = UNSELECTED
+                    self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
+                elif self.cursor_decision_item_y == MENU_SELECT_LOOP_2:
+                    #「SELECT LOOP NUMBER」→「2」
+                    self.stage_loop = 2                           #ループ数に2週目を代入
+                    update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                    i = func.search_window_id(self,WINDOW_ID_SELECT_LOOP_MENU)
+                    self.window[i].vx = 0.3            #WINDOW_ID_SELECT_LOOP_MENUウィンドウを右にフッ飛ばしていく
+                    self.window[i].vx_accel = 1.2
+                    self.window[i].window_status = WINDOW_CLOSE
+                    self.window[i].comment_flag = COMMENT_FLAG_OFF
+                    func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
+                    self.cursor_pre_decision_item_y = UNSELECTED
+                    self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
+                elif self.cursor_decision_item_y == MENU_SELECT_LOOP_3:
+                    #「SELECT LOOP NUMBER」→「3」
+                    self.stage_loop = 3                          #ループ数に3週目を代入
+                    update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                    i = func.search_window_id(self,WINDOW_ID_SELECT_LOOP_MENU)
+                    self.window[i].vx = 0.3            #WINDOW_ID_SELECT_LOOP_MENUウィンドウを右にフッ飛ばしていく
+                    self.window[i].vx_accel = 1.2
+                    self.window[i].window_status = WINDOW_CLOSE
+                    self.window[i].comment_flag = COMMENT_FLAG_OFF
+                    func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
+                    self.cursor_pre_decision_item_y = UNSELECTED
+                    self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
                 
-                i = func.search_window_id(self,WINDOW_ID_SELECT_STAGE_MENU)
-                self.window[i].vx = 0.3            #WINDOW_ID_SELECT_STAGE_MENUウィンドウを右にフッ飛ばしていく
-                self.window[i].vx_accel = 1.1
-                self.window[i].vy = 0.1 * self.stage_number
-                self.window[i].vy_accel = 1.1
-                self.window[i].window_status = WINDOW_CLOSE
-                self.window[i].comment_flag = COMMENT_FLAG_OFF
-                func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
-                self.cursor_pre_decision_item_y = UNSELECTED
-                self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
-            elif self.cursor_pre_decision_item_y == MENU_SELECT_STAGE and self.cursor_decision_item_y == MENU_SELECT_STAGE_3:
-                #「SELECT STAGE」→「3」
-                self.stage_number   = 3                        #ステージナンバー3
-                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+            elif self.cursor_pre_decision_item_y == MENU_BOSS_MODE:
+                if   self.cursor_decision_item_y == MENU_BOSS_MODE_OFF:
+                    #「BOSS MODE」→「OFF」
+                    self.boss_test_mode = MENU_BOSS_MODE_OFF        #ボステストモードをoff
+                    update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                    func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
+                    i = func.search_window_id(self,WINDOW_ID_BOSS_MODE_MENU)
+                    self.window[i].vx = 0.3            #WINDOW_ID_BOSS_MODE_MENUウィンドウを右にフッ飛ばしていく
+                    self.window[i].vx_accel = 1.2
+                    self.window[i].window_status = WINDOW_CLOSE
+                    self.window[i].comment_flag = COMMENT_FLAG_OFF
+                    self.window[i].flag_list = self.master_flag_list #ボステストフラグを更新→マスターフラグデータリスト更新→ウィンドウのフラグリストに書き込んで更新します
+                    func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
+                    self.cursor_pre_decision_item_y = UNSELECTED
+                    pyxel.play(0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
+                    self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
+                elif self.cursor_decision_item_y == MENU_BOSS_MODE_ON:
+                    #「BOSS MODE」→「ON」
+                    self.boss_test_mode = MENU_BOSS_MODE_ON  #ボステストモードをon
+                    update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                    func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
+                    i = func.search_window_id(self,WINDOW_ID_BOSS_MODE_MENU)
+                    self.window[i].vx = 0.3            #WINDOW_ID_BOSS_MODE_MENUウィンドウを右下にフッ飛ばしていく
+                    self.window[i].vx_accel = 1.2
+                    self.window[i].vy = 0.2
+                    self.window[i].vy_accel = 1.2
+                    self.window[i].window_status = WINDOW_CLOSE
+                    self.window[i].comment_flag = COMMENT_FLAG_OFF
+                    self.window[i].flag_list = self.master_flag_list #ボステストフラグを更新→マスターフラグデータリスト更新→ウィンドウのフラグリストに書き込んで更新します
+                    func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
+                    self.cursor_pre_decision_item_y = UNSELECTED
+                    pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                    self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
                 
-                i = func.search_window_id(self,WINDOW_ID_SELECT_STAGE_MENU)
-                self.window[i].vx = 0.3            #WINDOW_ID_SELECT_STAGE_MENUウィンドウを右にフッ飛ばしていく
-                self.window[i].vx_accel = 1.1
-                self.window[i].vy = 0.1 * self.stage_number
-                self.window[i].vy_accel = 1.1
-                self.window[i].window_status = WINDOW_CLOSE
-                self.window[i].comment_flag = COMMENT_FLAG_OFF
-                func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
-                self.cursor_pre_decision_item_y = UNSELECTED
-                self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
+            elif self.cursor_pre_decision_item_y == MENU_HITBOX:
+                if   self.cursor_decision_item_y == MENU_HITBOX_OFF:
+                    #「HITBOX」→「OFF」
+                    self.boss_collision_rect_display_flag = 0            #ボス当たり判定表示をoff
+                    update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                    func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
+                    i = func.search_window_id(self,WINDOW_ID_HITBOX_MENU)
+                    self.window[i].vx = 0.3            #WINDOW_ID_HITBOX_MENUウィンドウを右にフッ飛ばしていく
+                    self.window[i].vx_accel = 1.2
+                    self.window[i].window_status = WINDOW_CLOSE
+                    self.window[i].comment_flag = COMMENT_FLAG_OFF
+                    self.window[i].flag_list = self.master_flag_list #ボステストフラグを更新→マスターフラグデータリスト更新→ウィンドウのフラグリストに書き込んで更新します
+                    func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
+                    self.cursor_pre_decision_item_y = UNSELECTED
+                    pyxel.play(0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
+                    self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
+                elif self.cursor_decision_item_y == MENU_HITBOX_ON:
+                    #「HITBOX」→「ON」
+                    self.boss_collision_rect_display_flag = 1            #ボス当たり判定表示をON
+                    update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                    func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
+                    i = func.search_window_id(self,WINDOW_ID_HITBOX_MENU)
+                    self.window[i].vx = 0.3            #WINDOW_ID_HITBOX_MENUウィンドウを右下にフッ飛ばしていく
+                    self.window[i].vx_accel = 1.2
+                    self.window[i].vy = 0.2
+                    self.window[i].vy_accel = 1.2
+                    self.window[i].window_status = WINDOW_CLOSE
+                    self.window[i].comment_flag = COMMENT_FLAG_OFF
+                    self.window[i].flag_list = self.master_flag_list   #ボステストフラグを更新→マスターフラグデータリスト更新→ウィンドウのフラグリストに書き込んで更新します
+                    func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
+                    self.cursor_pre_decision_item_y = UNSELECTED
+                    pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                    self.active_window_id = WINDOW_ID_MAIN_MENU                     #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
                 
-            elif self.cursor_pre_decision_item_y == MENU_SELECT_LOOP and self.cursor_decision_item_y == MENU_SELECT_LOOP_1:
-                #「SELECT LOOP NUMBER」→「1」
-                self.stage_loop = 1                           #ループ数に1週目を代入
-                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
-                i = func.search_window_id(self,WINDOW_ID_SELECT_LOOP_MENU)
-                self.window[i].vx = 0.3            #WINDOW_ID_SELECT_LOOP_MENUウィンドウを右にフッ飛ばしていく
-                self.window[i].vx_accel = 1.2
-                self.window[i].window_status = WINDOW_CLOSE
-                self.window[i].comment_flag = COMMENT_FLAG_OFF
-                func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
-                self.cursor_pre_decision_item_y = UNSELECTED
-                self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
-            elif self.cursor_pre_decision_item_y == MENU_SELECT_LOOP and self.cursor_decision_item_y == MENU_SELECT_LOOP_2:
-                #「SELECT LOOP NUMBER」→「2」
-                self.stage_loop = 2                           #ループ数に2週目を代入
-                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
-                i = func.search_window_id(self,WINDOW_ID_SELECT_LOOP_MENU)
-                self.window[i].vx = 0.3            #WINDOW_ID_SELECT_LOOP_MENUウィンドウを右にフッ飛ばしていく
-                self.window[i].vx_accel = 1.2
-                self.window[i].window_status = WINDOW_CLOSE
-                self.window[i].comment_flag = COMMENT_FLAG_OFF
-                func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
-                self.cursor_pre_decision_item_y = UNSELECTED
-                self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
-            elif self.cursor_pre_decision_item_y == MENU_SELECT_LOOP and self.cursor_decision_item_y == MENU_SELECT_LOOP_3:
-                #「SELECT LOOP NUMBER」→「3」
-                self.stage_loop = 3                          #ループ数に3週目を代入
-                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
-                i = func.search_window_id(self,WINDOW_ID_SELECT_LOOP_MENU)
-                self.window[i].vx = 0.3            #WINDOW_ID_SELECT_LOOP_MENUウィンドウを右にフッ飛ばしていく
-                self.window[i].vx_accel = 1.2
-                self.window[i].window_status = WINDOW_CLOSE
-                self.window[i].comment_flag = COMMENT_FLAG_OFF
-                func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
-                self.cursor_pre_decision_item_y = UNSELECTED
-                self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
+            elif self.cursor_pre_decision_item_y == MENU_DIFFICULTY:
+                if   self.cursor_decision_item_y == GAME_VERY_EASY:
+                    #「DIFFICULTY」→「VERY_EASY」
+                    self.game_difficulty = GAME_VERY_EASY
+                    update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                    func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
+                    i = func.search_window_id(self,WINDOW_ID_SELECT_DIFFICULTY)
+                    self.window[i].vx = 0.3            #WINDOW_ID_SELECT_DIFFICULTYウィンドウを右にフッ飛ばしていく
+                    self.window[i].vx_accel = 1.2
+                    self.window[i].vy = -0.1
+                    self.window[i].vy_accel = 1.2
+                    self.window[i].window_status = WINDOW_CLOSE
+                    self.window[i].comment_flag = COMMENT_FLAG_OFF
+                    self.window[i].flag_list = self.master_flag_list #ボステストフラグを更新→マスターフラグデータリスト更新→ウィンドウのフラグリストに書き込んで更新します
+                    func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
+                    self.cursor_pre_decision_item_y = UNSELECTED
+                    pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                    self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
+                elif self.cursor_decision_item_y == GAME_EASY:
+                    #「DIFFICULTY」→「EASY」
+                    self.game_difficulty = GAME_EASY
+                    update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                    func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
+                    i = func.search_window_id(self,WINDOW_ID_SELECT_DIFFICULTY)
+                    self.window[i].vx = 0.3            #WINDOW_ID_SELECT_DIFFICULTYウィンドウを右にフッ飛ばしていく
+                    self.window[i].vx_accel = 1.2
+                    self.window[i].vy = -0.05
+                    self.window[i].vy_accel = 1.2
+                    self.window[i].window_status = WINDOW_CLOSE
+                    self.window[i].comment_flag = COMMENT_FLAG_OFF
+                    self.window[i].flag_list = self.master_flag_list #ボステストフラグを更新→マスターフラグデータリスト更新→ウィンドウのフラグリストに書き込んで更新します
+                    func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
+                    self.cursor_pre_decision_item_y = UNSELECTED
+                    pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                    self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
+                elif self.cursor_decision_item_y == GAME_NORMAL:
+                    #「DIFFICULTY」→「NORMAL」
+                    self.game_difficulty = GAME_NORMAL
+                    update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                    func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
+                    i = func.search_window_id(self,WINDOW_ID_SELECT_DIFFICULTY)
+                    self.window[i].vx = 0.3            #WINDOW_ID_SELECT_DIFFICULTYウィンドウを右にフッ飛ばしていく
+                    self.window[i].vx_accel = 1.2
+                    self.window[i].window_status = WINDOW_CLOSE
+                    self.window[i].comment_flag = COMMENT_FLAG_OFF
+                    self.window[i].flag_list = self.master_flag_list #ボステストフラグを更新→マスターフラグデータリスト更新→ウィンドウのフラグリストに書き込んで更新します
+                    func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
+                    self.cursor_pre_decision_item_y = UNSELECTED
+                    pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                    self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
+                elif self.cursor_decision_item_y == GAME_HARD:
+                    #「DIFFICULTY」→「HARD」
+                    self.game_difficulty = GAME_HARD
+                    update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                    func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
+                    i = func.search_window_id(self,WINDOW_ID_SELECT_DIFFICULTY)
+                    self.window[i].vx = 0.3            #WINDOW_ID_SELECT_DIFFICULTYウィンドウを右にフッ飛ばしていく
+                    self.window[i].vx_accel = 1.2
+                    self.window[i].vy = 0.1
+                    self.window[i].vy_accel = 1.2
+                    self.window[i].window_status = WINDOW_CLOSE
+                    self.window[i].comment_flag = COMMENT_FLAG_OFF
+                    self.window[i].flag_list = self.master_flag_list #ボステストフラグを更新→マスターフラグデータリスト更新→ウィンドウのフラグリストに書き込んで更新します
+                    func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
+                    self.cursor_pre_decision_item_y = UNSELECTED
+                    pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                    self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
+                elif self.cursor_decision_item_y == GAME_VERY_HARD:
+                    #「DIFFICULTY」→「VERY_HARD」
+                    self.game_difficulty = GAME_VERY_HARD
+                    update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                    func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
+                    i = func.search_window_id(self,WINDOW_ID_SELECT_DIFFICULTY)
+                    self.window[i].vx = 0.3            #WINDOW_ID_SELECT_DIFFICULTYウィンドウを右にフッ飛ばしていく
+                    self.window[i].vx_accel = 1.2
+                    self.window[i].vy = 0.2
+                    self.window[i].vy_accel = 1.2
+                    self.window[i].window_status = WINDOW_CLOSE
+                    self.window[i].comment_flag = COMMENT_FLAG_OFF
+                    self.window[i].flag_list = self.master_flag_list #ボステストフラグを更新→マスターフラグデータリスト更新→ウィンドウのフラグリストに書き込んで更新します
+                    func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
+                    self.cursor_pre_decision_item_y = UNSELECTED
+                    pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                    self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
+                elif self.cursor_decision_item_y == GAME_INSAME:
+                    #「DIFFICULTY」→「INSAME」
+                    self.game_difficulty = GAME_INSAME
+                    update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                    func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
+                    i = func.search_window_id(self,WINDOW_ID_SELECT_DIFFICULTY)
+                    self.window[i].vx = 0.3            #WINDOW_ID_SELECT_DIFFICULTYウィンドウを右にフッ飛ばしていく
+                    self.window[i].vx_accel = 1.2
+                    self.window[i].vy = 0.3
+                    self.window[i].vy_accel = 1.2
+                    self.window[i].window_status = WINDOW_CLOSE
+                    self.window[i].comment_flag = COMMENT_FLAG_OFF
+                    self.window[i].flag_list = self.master_flag_list #ボステストフラグを更新→マスターフラグデータリスト更新→ウィンドウのフラグリストに書き込んで更新します
+                    func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
+                    self.cursor_pre_decision_item_y = UNSELECTED
+                    pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                    self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
                 
-            elif self.cursor_pre_decision_item_y == MENU_BOSS_MODE and self.cursor_decision_item_y == MENU_BOSS_MODE_OFF:
-                #「BOSS MODE」→「OFF」
-                self.boss_test_mode = MENU_BOSS_MODE_OFF        #ボステストモードをoff
-                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
-                func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
-                i = func.search_window_id(self,WINDOW_ID_BOSS_MODE_MENU)
-                self.window[i].vx = 0.3            #WINDOW_ID_BOSS_MODE_MENUウィンドウを右にフッ飛ばしていく
-                self.window[i].vx_accel = 1.2
-                self.window[i].window_status = WINDOW_CLOSE
-                self.window[i].comment_flag = COMMENT_FLAG_OFF
-                self.window[i].flag_list = self.master_flag_list #ボステストフラグを更新→マスターフラグデータリスト更新→ウィンドウのフラグリストに書き込んで更新します
-                func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
-                self.cursor_pre_decision_item_y = UNSELECTED
-                pyxel.play(0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
-                self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
-            elif self.cursor_pre_decision_item_y == MENU_BOSS_MODE and self.cursor_decision_item_y == MENU_BOSS_MODE_ON:
-                #「BOSS MODE」→「ON」
-                self.boss_test_mode = MENU_BOSS_MODE_ON  #ボステストモードをon
-                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
-                func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
-                i = func.search_window_id(self,WINDOW_ID_BOSS_MODE_MENU)
-                self.window[i].vx = 0.3            #WINDOW_ID_BOSS_MODE_MENUウィンドウを右下にフッ飛ばしていく
-                self.window[i].vx_accel = 1.2
-                self.window[i].vy = 0.2
-                self.window[i].vy_accel = 1.2
-                self.window[i].window_status = WINDOW_CLOSE
-                self.window[i].comment_flag = COMMENT_FLAG_OFF
-                self.window[i].flag_list = self.master_flag_list #ボステストフラグを更新→マスターフラグデータリスト更新→ウィンドウのフラグリストに書き込んで更新します
-                func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
-                self.cursor_pre_decision_item_y = UNSELECTED
-                pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
-                self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
-                
-            elif self.cursor_pre_decision_item_y == MENU_HITBOX and self.cursor_decision_item_y == MENU_HITBOX_OFF:
-                #「HITBOX」→「OFF」
-                self.boss_collision_rect_display_flag = 0            #ボス当たり判定表示をoff
-                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
-                func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
-                i = func.search_window_id(self,WINDOW_ID_HITBOX_MENU)
-                self.window[i].vx = 0.3            #WINDOW_ID_HITBOX_MENUウィンドウを右にフッ飛ばしていく
-                self.window[i].vx_accel = 1.2
-                self.window[i].window_status = WINDOW_CLOSE
-                self.window[i].comment_flag = COMMENT_FLAG_OFF
-                self.window[i].flag_list = self.master_flag_list #ボステストフラグを更新→マスターフラグデータリスト更新→ウィンドウのフラグリストに書き込んで更新します
-                func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
-                self.cursor_pre_decision_item_y = UNSELECTED
-                pyxel.play(0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
-                self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
-            elif self.cursor_pre_decision_item_y == MENU_HITBOX and self.cursor_decision_item_y == MENU_HITBOX_ON:
-                #「HITBOX」→「ON」
-                self.boss_collision_rect_display_flag = 1            #ボス当たり判定表示をON
-                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
-                func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
-                i = func.search_window_id(self,WINDOW_ID_HITBOX_MENU)
-                self.window[i].vx = 0.3            #WINDOW_ID_HITBOX_MENUウィンドウを右下にフッ飛ばしていく
-                self.window[i].vx_accel = 1.2
-                self.window[i].vy = 0.2
-                self.window[i].vy_accel = 1.2
-                self.window[i].window_status = WINDOW_CLOSE
-                self.window[i].comment_flag = COMMENT_FLAG_OFF
-                self.window[i].flag_list = self.master_flag_list   #ボステストフラグを更新→マスターフラグデータリスト更新→ウィンドウのフラグリストに書き込んで更新します
-                func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
-                self.cursor_pre_decision_item_y = UNSELECTED
-                pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
-                self.active_window_id = WINDOW_ID_MAIN_MENU                     #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
-                
-            elif self.cursor_pre_decision_item_y == MENU_DIFFICULTY and self.cursor_decision_item_y == GAME_VERY_EASY:
-                #「DIFFICULTY」→「VERY_EASY」
-                self.game_difficulty = GAME_VERY_EASY
-                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
-                func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
-                i = func.search_window_id(self,WINDOW_ID_SELECT_DIFFICULTY)
-                self.window[i].vx = 0.3            #WINDOW_ID_SELECT_DIFFICULTYウィンドウを右にフッ飛ばしていく
-                self.window[i].vx_accel = 1.2
-                self.window[i].vy = -0.1
-                self.window[i].vy_accel = 1.2
-                self.window[i].window_status = WINDOW_CLOSE
-                self.window[i].comment_flag = COMMENT_FLAG_OFF
-                self.window[i].flag_list = self.master_flag_list #ボステストフラグを更新→マスターフラグデータリスト更新→ウィンドウのフラグリストに書き込んで更新します
-                func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
-                self.cursor_pre_decision_item_y = UNSELECTED
-                pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
-                self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
-            elif self.cursor_pre_decision_item_y == MENU_DIFFICULTY and self.cursor_decision_item_y == GAME_EASY:
-                #「DIFFICULTY」→「EASY」
-                self.game_difficulty = GAME_EASY
-                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
-                func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
-                i = func.search_window_id(self,WINDOW_ID_SELECT_DIFFICULTY)
-                self.window[i].vx = 0.3            #WINDOW_ID_SELECT_DIFFICULTYウィンドウを右にフッ飛ばしていく
-                self.window[i].vx_accel = 1.2
-                self.window[i].vy = -0.05
-                self.window[i].vy_accel = 1.2
-                self.window[i].window_status = WINDOW_CLOSE
-                self.window[i].comment_flag = COMMENT_FLAG_OFF
-                self.window[i].flag_list = self.master_flag_list #ボステストフラグを更新→マスターフラグデータリスト更新→ウィンドウのフラグリストに書き込んで更新します
-                func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
-                self.cursor_pre_decision_item_y = UNSELECTED
-                pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
-                self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
-            elif self.cursor_pre_decision_item_y == MENU_DIFFICULTY and self.cursor_decision_item_y == GAME_NORMAL:
-                #「DIFFICULTY」→「NORMAL」
-                self.game_difficulty = GAME_NORMAL
-                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
-                func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
-                i = func.search_window_id(self,WINDOW_ID_SELECT_DIFFICULTY)
-                self.window[i].vx = 0.3            #WINDOW_ID_SELECT_DIFFICULTYウィンドウを右にフッ飛ばしていく
-                self.window[i].vx_accel = 1.2
-                self.window[i].window_status = WINDOW_CLOSE
-                self.window[i].comment_flag = COMMENT_FLAG_OFF
-                self.window[i].flag_list = self.master_flag_list #ボステストフラグを更新→マスターフラグデータリスト更新→ウィンドウのフラグリストに書き込んで更新します
-                func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
-                self.cursor_pre_decision_item_y = UNSELECTED
-                pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
-                self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
-            elif self.cursor_pre_decision_item_y == MENU_DIFFICULTY and self.cursor_decision_item_y == GAME_HARD:
-                #「DIFFICULTY」→「HARD」
-                self.game_difficulty = GAME_HARD
-                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
-                func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
-                i = func.search_window_id(self,WINDOW_ID_SELECT_DIFFICULTY)
-                self.window[i].vx = 0.3            #WINDOW_ID_SELECT_DIFFICULTYウィンドウを右にフッ飛ばしていく
-                self.window[i].vx_accel = 1.2
-                self.window[i].vy = 0.1
-                self.window[i].vy_accel = 1.2
-                self.window[i].window_status = WINDOW_CLOSE
-                self.window[i].comment_flag = COMMENT_FLAG_OFF
-                self.window[i].flag_list = self.master_flag_list #ボステストフラグを更新→マスターフラグデータリスト更新→ウィンドウのフラグリストに書き込んで更新します
-                func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
-                self.cursor_pre_decision_item_y = UNSELECTED
-                pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
-                self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
-            elif self.cursor_pre_decision_item_y == MENU_DIFFICULTY and self.cursor_decision_item_y == GAME_VERY_HARD:
-                #「DIFFICULTY」→「VERY_HARD」
-                self.game_difficulty = GAME_VERY_HARD
-                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
-                func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
-                i = func.search_window_id(self,WINDOW_ID_SELECT_DIFFICULTY)
-                self.window[i].vx = 0.3            #WINDOW_ID_SELECT_DIFFICULTYウィンドウを右にフッ飛ばしていく
-                self.window[i].vx_accel = 1.2
-                self.window[i].vy = 0.2
-                self.window[i].vy_accel = 1.2
-                self.window[i].window_status = WINDOW_CLOSE
-                self.window[i].comment_flag = COMMENT_FLAG_OFF
-                self.window[i].flag_list = self.master_flag_list #ボステストフラグを更新→マスターフラグデータリスト更新→ウィンドウのフラグリストに書き込んで更新します
-                func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
-                self.cursor_pre_decision_item_y = UNSELECTED
-                pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
-                self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
-            elif self.cursor_pre_decision_item_y == MENU_DIFFICULTY and self.cursor_decision_item_y == GAME_INSAME:
-                #「DIFFICULTY」→「INSAME」
-                self.game_difficulty = GAME_INSAME
-                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
-                func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
-                i = func.search_window_id(self,WINDOW_ID_SELECT_DIFFICULTY)
-                self.window[i].vx = 0.3            #WINDOW_ID_SELECT_DIFFICULTYウィンドウを右にフッ飛ばしていく
-                self.window[i].vx_accel = 1.2
-                self.window[i].vy = 0.3
-                self.window[i].vy_accel = 1.2
-                self.window[i].window_status = WINDOW_CLOSE
-                self.window[i].comment_flag = COMMENT_FLAG_OFF
-                self.window[i].flag_list = self.master_flag_list #ボステストフラグを更新→マスターフラグデータリスト更新→ウィンドウのフラグリストに書き込んで更新します
-                func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
-                self.cursor_pre_decision_item_y = UNSELECTED
-                pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
-                self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
-                
-            elif self.cursor_pre_decision_item_y == MENU_SCORE_BOARD and self.cursor_page == GAME_VERY_EASY and self.cursor_pre_page != self.cursor_page: #前に表示していたページ数と現在のページ数に変化があった時だけ
-                if self.cursor_move_data == PAD_RIGHT:
-                    func.all_move_window(self,WINDOW_ID_SCORE_BOARD, 0.3,0, 1.2,0) #すべてのSCORE_BOARDウィンドウを右方向にフッ飛ばしていく
-                else:
-                    func.all_move_window(self,WINDOW_ID_SCORE_BOARD,-0.3,0, 1.2,0) #すべてのSCORE_BOARDウィンドウを左方向にフッ飛ばしていく
-                
-                update_window.create_score_board(self,GAME_VERY_EASY)                           #スコアボードウィンドウ育成
-                self.cursor_pre_page = self.cursor_page              #前回のページ数を保存
-            elif self.cursor_pre_decision_item_y == MENU_SCORE_BOARD and self.cursor_page == GAME_EASY      and self.cursor_pre_page != self.cursor_page: #前に表示していたページ数と現在のページ数に変化があった時だけ
-                if self.cursor_move_data == PAD_RIGHT:
-                    func.all_move_window(self,WINDOW_ID_SCORE_BOARD, 0.3,0, 1.2,0) #すべてのSCORE_BOARDウィンドウを右方向にフッ飛ばしていく
-                else:
-                    func.all_move_window(self,WINDOW_ID_SCORE_BOARD,-0.3,0, 1.2,0) #すべてのSCORE_BOARDウィンドウを左方向にフッ飛ばしていく
-                
-                update_window.create_score_board(self,GAME_EASY)                           #スコアボードウィンドウ育成
-                self.cursor_pre_page = self.cursor_page              #前回のページ数を保存
-            elif self.cursor_pre_decision_item_y == MENU_SCORE_BOARD and self.cursor_page == GAME_NORMAL    and self.cursor_pre_page != self.cursor_page: #前に表示していたページ数と現在のページ数に変化があった時だけ
-                if self.cursor_move_data == PAD_RIGHT:
-                    func.all_move_window(self,WINDOW_ID_SCORE_BOARD, 0.3,0, 1.2,0) #すべてのSCORE_BOARDウィンドウを右方向にフッ飛ばしていく
-                else:
-                    func.all_move_window(self,WINDOW_ID_SCORE_BOARD,-0.3,0, 1.2,0) #すべてのSCORE_BOARDウィンドウを左方向にフッ飛ばしていく
-                
-                update_window.create_score_board(self,GAME_NORMAL)                           #スコアボードウィンドウ育成
-                self.cursor_pre_page = self.cursor_page              #前回のページ数を保存
-            elif self.cursor_pre_decision_item_y == MENU_SCORE_BOARD and self.cursor_page == GAME_HARD      and self.cursor_pre_page != self.cursor_page: #前に表示していたページ数と現在のページ数に変化があった時だけ
-                if self.cursor_move_data == PAD_RIGHT:
-                    func.all_move_window(self,WINDOW_ID_SCORE_BOARD, 0.3,0, 1.2,0) #すべてのSCORE_BOARDウィンドウを右方向にフッ飛ばしていく
-                else:
-                    func.all_move_window(self,WINDOW_ID_SCORE_BOARD,-0.3,0, 1.2,0) #すべてのSCORE_BOARDウィンドウを左方向にフッ飛ばしていく
-                
-                update_window.create_score_board(self,GAME_HARD)                           #スコアボードウィンドウ育成
-                self.cursor_pre_page = self.cursor_page              #前回のページ数を保存
-            elif self.cursor_pre_decision_item_y == MENU_SCORE_BOARD and self.cursor_page == GAME_VERY_HARD and self.cursor_pre_page != self.cursor_page: #前に表示していたページ数と現在のページ数に変化があった時だけ
-                if self.cursor_move_data == PAD_RIGHT:
-                    func.all_move_window(self,WINDOW_ID_SCORE_BOARD, 0.3,0, 1.2,0) #すべてのSCORE_BOARDウィンドウを右方向にフッ飛ばしていく
-                else:
-                    func.all_move_window(self,WINDOW_ID_SCORE_BOARD,-0.3,0, 1.2,0) #すべてのSCORE_BOARDウィンドウを左方向にフッ飛ばしていく
-                
-                update_window.create_score_board(self,GAME_VERY_HARD)                           #スコアボードウィンドウ育成
-                self.cursor_pre_page = self.cursor_page              #前回のページ数を保存
-            elif self.cursor_pre_decision_item_y == MENU_SCORE_BOARD and self.cursor_page == GAME_INSAME    and self.cursor_pre_page != self.cursor_page: #前に表示していたページ数と現在のページ数に変化があった時だけ
-                if self.cursor_move_data == PAD_RIGHT:
-                    func.all_move_window(self,WINDOW_ID_SCORE_BOARD, 0.3,0, 1.2,0) #すべてのSCORE_BOARDウィンドウを右方向にフッ飛ばしていく
-                else:
-                    func.all_move_window(self,WINDOW_ID_SCORE_BOARD,-0.3,0, 1.2,0) #すべてのSCORE_BOARDウィンドウを左方向にフッ飛ばしていく
-                
-                update_window.create_score_board(self,GAME_INSAME)                           #スコアボードウィンドウ育成
-                self.cursor_pre_page = self.cursor_page              #前回のページ数を保存
-            elif self.cursor_pre_decision_item_y == MENU_SCORE_BOARD and self.cursor_decision_item_y != -1: #何かしらのアイテムの所でボタンが押されたのなら
-                #SCORE BOARDはキー入力のタイミングで同じウィンドウIDを持つウィンドウが複数存在してしまう可能性があるので
-                #ウィンドウIDナンバーを元にすべての同一IDウィンドウを調べ上げ画面外にフッ飛ばすようにする
-                func.all_move_window(self,WINDOW_ID_SCORE_BOARD,0,0.3,0,1.2) #すべてのSCORE_BOARDウィンドウを下方向にフッ飛ばしていく
-                func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)               #メインメニューのカーソルデータをPOP
-                self.cursor_pre_decision_item_y = UNSELECTED                    #前回選択したアイテムも未決定に
-                pyxel.play(0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
-                self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
+            elif self.cursor_pre_decision_item_y == MENU_SCORE_BOARD:
+                if   self.cursor_page == GAME_VERY_EASY and self.cursor_pre_page != self.cursor_page: #前に表示していたページ数と現在のページ数に変化があった時だけ
+                    if self.cursor_move_data == PAD_RIGHT:
+                        func.all_move_window(self,WINDOW_ID_SCORE_BOARD, 0.3,0, 1.2,0) #すべてのSCORE_BOARDウィンドウを右方向にフッ飛ばしていく
+                    else:
+                        func.all_move_window(self,WINDOW_ID_SCORE_BOARD,-0.3,0, 1.2,0) #すべてのSCORE_BOARDウィンドウを左方向にフッ飛ばしていく
+                    
+                    update_window.create_score_board(self,GAME_VERY_EASY)                           #スコアボードウィンドウ育成
+                    self.cursor_pre_page = self.cursor_page              #前回のページ数を保存
+                elif self.cursor_page == GAME_EASY      and self.cursor_pre_page != self.cursor_page: #前に表示していたページ数と現在のページ数に変化があった時だけ
+                    if self.cursor_move_data == PAD_RIGHT:
+                        func.all_move_window(self,WINDOW_ID_SCORE_BOARD, 0.3,0, 1.2,0) #すべてのSCORE_BOARDウィンドウを右方向にフッ飛ばしていく
+                    else:
+                        func.all_move_window(self,WINDOW_ID_SCORE_BOARD,-0.3,0, 1.2,0) #すべてのSCORE_BOARDウィンドウを左方向にフッ飛ばしていく
+                    
+                    update_window.create_score_board(self,GAME_EASY)                           #スコアボードウィンドウ育成
+                    self.cursor_pre_page = self.cursor_page              #前回のページ数を保存
+                elif self.cursor_page == GAME_NORMAL    and self.cursor_pre_page != self.cursor_page: #前に表示していたページ数と現在のページ数に変化があった時だけ
+                    if self.cursor_move_data == PAD_RIGHT:
+                        func.all_move_window(self,WINDOW_ID_SCORE_BOARD, 0.3,0, 1.2,0) #すべてのSCORE_BOARDウィンドウを右方向にフッ飛ばしていく
+                    else:
+                        func.all_move_window(self,WINDOW_ID_SCORE_BOARD,-0.3,0, 1.2,0) #すべてのSCORE_BOARDウィンドウを左方向にフッ飛ばしていく
+                    
+                    update_window.create_score_board(self,GAME_NORMAL)                           #スコアボードウィンドウ育成
+                    self.cursor_pre_page = self.cursor_page              #前回のページ数を保存
+                elif self.cursor_page == GAME_HARD      and self.cursor_pre_page != self.cursor_page: #前に表示していたページ数と現在のページ数に変化があった時だけ
+                    if self.cursor_move_data == PAD_RIGHT:
+                        func.all_move_window(self,WINDOW_ID_SCORE_BOARD, 0.3,0, 1.2,0) #すべてのSCORE_BOARDウィンドウを右方向にフッ飛ばしていく
+                    else:
+                        func.all_move_window(self,WINDOW_ID_SCORE_BOARD,-0.3,0, 1.2,0) #すべてのSCORE_BOARDウィンドウを左方向にフッ飛ばしていく
+                    
+                    update_window.create_score_board(self,GAME_HARD)                           #スコアボードウィンドウ育成
+                    self.cursor_pre_page = self.cursor_page              #前回のページ数を保存
+                elif self.cursor_page == GAME_VERY_HARD and self.cursor_pre_page != self.cursor_page: #前に表示していたページ数と現在のページ数に変化があった時だけ
+                    if self.cursor_move_data == PAD_RIGHT:
+                        func.all_move_window(self,WINDOW_ID_SCORE_BOARD, 0.3,0, 1.2,0) #すべてのSCORE_BOARDウィンドウを右方向にフッ飛ばしていく
+                    else:
+                        func.all_move_window(self,WINDOW_ID_SCORE_BOARD,-0.3,0, 1.2,0) #すべてのSCORE_BOARDウィンドウを左方向にフッ飛ばしていく
+                    
+                    update_window.create_score_board(self,GAME_VERY_HARD)                           #スコアボードウィンドウ育成
+                    self.cursor_pre_page = self.cursor_page              #前回のページ数を保存
+                elif self.cursor_page == GAME_INSAME    and self.cursor_pre_page != self.cursor_page: #前に表示していたページ数と現在のページ数に変化があった時だけ
+                    if self.cursor_move_data == PAD_RIGHT:
+                        func.all_move_window(self,WINDOW_ID_SCORE_BOARD, 0.3,0, 1.2,0) #すべてのSCORE_BOARDウィンドウを右方向にフッ飛ばしていく
+                    else:
+                        func.all_move_window(self,WINDOW_ID_SCORE_BOARD,-0.3,0, 1.2,0) #すべてのSCORE_BOARDウィンドウを左方向にフッ飛ばしていく
+                    
+                    update_window.create_score_board(self,GAME_INSAME)                           #スコアボードウィンドウ育成
+                    self.cursor_pre_page = self.cursor_page              #前回のページ数を保存
+                elif self.cursor_decision_item_y != -1: #何かしらのアイテムの所でボタンが押されたのなら
+                    #SCORE BOARDはキー入力のタイミングで同じウィンドウIDを持つウィンドウが複数存在してしまう可能性があるので
+                    #ウィンドウIDナンバーを元にすべての同一IDウィンドウを調べ上げ画面外にフッ飛ばすようにする
+                    func.all_move_window(self,WINDOW_ID_SCORE_BOARD,0,0.3,0,1.2) #すべてのSCORE_BOARDウィンドウを下方向にフッ飛ばしていく
+                    func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)               #メインメニューのカーソルデータをPOP
+                    self.cursor_pre_decision_item_y = UNSELECTED                    #前回選択したアイテムも未決定に
+                    pyxel.play(0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
+                    self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
                 
             elif self.cursor_pre_decision_item_y == MENU_NAME_ENTRY and self.cursor_decision_item_x == MENU_NAME_ENTRY_OK:
                 update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
@@ -608,95 +618,99 @@ class update_title:
                 pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                 self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
                 
-            elif self.cursor_pre_decision_item_y == MENU_CONFIG and self.cursor_decision_item_y == MENU_CONFIG_SCREEN_MODE:
-                flag_index = self.window[self.active_window_index].item_text[MENU_CONFIG_SCREEN_MODE][LIST_WINDOW_TEXT_OPE_OBJ] #flag_indexにMENU_CONFIG_SCREEN_MODEが入ったリストインデックス値が入ります
-                num = self.window[self.active_window_index].flag_list[flag_index] #numにフルスクリーン起動モードフラグが代入されます
-                if num == FLAG_ON:  #フルスクリーン起動モードフラグが立っていたのなら
-                    pyxel.fullscreen(True)           #pyxel Ver1.5からfullscreen命令が追加されたらしい 裏技ッポイけど！？使っても良いのん？？
-                else:
-                    pyxel.fullscreen(False)          #フルスクリーンフラグが立っていなかったらノーフルスクリーンモード(ウィンドウ表示)にする
-            elif self.cursor_pre_decision_item_y == MENU_CONFIG and self.cursor_decision_item_y == MENU_CONFIG_INITIALIZE:
-                if func.search_window_id(self,WINDOW_ID_INITIALIZE) == -1: #「INITIALIZE」ウィンドウが存在しないのなら・・
-                    self.cursor_pre_pre_decision_item_y = self.cursor_pre_decision_item_y #前のレイヤー選択アイテム「CONFIG」を前の前のレイヤー選択アイテムとして保存する
-                    self.cursor_pre_decision_item_y     = self.cursor_decision_item_y     #今選択されたアイテム「INITIALIZE」を前のレイヤー選択アイテムとして保存する
-                    func.push_cursor_data(self,WINDOW_ID_CONFIG)           #「CONFIG」ウィンドウのカーソルデータをPUSH
-                    ox,oy = (WINDOW_W - 48) // 2,(WINDOW_H - 58) // 2 #「INITIALIZE」ウィンドウの座標指定
-                    update_window.create(self,WINDOW_ID_INITIALIZE,ox,oy)    #「INITIALIZE」ウィンドウの作製
-                    #選択カーソル表示をon,カーソルは上下移動のみ,,カーソル移動ステップはx4,y7,いま指示しているアイテムナンバーは2の「NORMAL」
-                    #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は7項目なので 7-1=6を代入,メニューの階層が増えたのでMENU_LAYER1からMENU_LAYER2にします
-                    func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,ox + 3,oy + 11,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,7-1,0,MENU_LAYER2)
-                    self.active_window_id = WINDOW_ID_INITIALIZE #このウィンドウIDを最前列でアクティブなものとする
-                    pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
-            elif self.cursor_pre_decision_item_y == MENU_CONFIG and self.cursor_decision_item_y == MENU_CONFIG_RETURN:
-                func.restore_master_flag_list(self) #フラグ＆データ関連のマスターリストを参照して個別のフラグ変数へリストアする
-                i = func.search_window_id(self,WINDOW_ID_CONFIG)
-                self.window[i].vx = -0.5            #WINDOW_ID_CONFIGウィンドウを左下にフッ飛ばしていく
-                self.window[i].vx_accel = 1.1
-                self.window[i].vy = 0.1
-                self.window[i].vy_accel = 1.1
-                self.window[i].window_status = WINDOW_CLOSE
-                self.window[i].comment_flag = COMMENT_FLAG_OFF
-                func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
+            elif self.cursor_pre_decision_item_y == MENU_CONFIG:
+                if   self.cursor_decision_item_y == MENU_CONFIG_SCREEN_MODE:
+                    flag_index = self.window[self.active_window_index].item_text[MENU_CONFIG_SCREEN_MODE][LIST_WINDOW_TEXT_OPE_OBJ] #flag_indexにMENU_CONFIG_SCREEN_MODEが入ったリストインデックス値が入ります
+                    num = self.window[self.active_window_index].flag_list[flag_index] #numにフルスクリーン起動モードフラグが代入されます
+                    if num == FLAG_ON:  #フルスクリーン起動モードフラグが立っていたのなら
+                        pyxel.fullscreen(True)           #pyxel Ver1.5からfullscreen命令が追加されたらしい 裏技ッポイけど！？使っても良いのん？？
+                    else:
+                        pyxel.fullscreen(False)          #フルスクリーンフラグが立っていなかったらノーフルスクリーンモード(ウィンドウ表示)にする
+                elif self.cursor_decision_item_y == MENU_CONFIG_INITIALIZE:
+                    update_window.change_window_priority_normal(self,WINDOW_ID_CONFIG) #CONFIGウィンドウの表示優先度を「normal」にする
+                    if func.search_window_id(self,WINDOW_ID_INITIALIZE) == -1: #「INITIALIZE」ウィンドウが存在しないのなら・・
+                        self.cursor_pre_pre_decision_item_y = self.cursor_pre_decision_item_y #前のレイヤー選択アイテム「CONFIG」を前の前のレイヤー選択アイテムとして保存する
+                        self.cursor_pre_decision_item_y     = self.cursor_decision_item_y     #今選択されたアイテム「INITIALIZE」を前のレイヤー選択アイテムとして保存する
+                        func.push_cursor_data(self,WINDOW_ID_CONFIG)           #「CONFIG」ウィンドウのカーソルデータをPUSH
+                        ox,oy = (WINDOW_W - 48) // 2,(WINDOW_H - 58) // 2 #「INITIALIZE」ウィンドウの座標指定
+                        update_window.create(self,WINDOW_ID_INITIALIZE,ox,oy)    #「INITIALIZE」ウィンドウの作製
+                        #選択カーソル表示をon,カーソルは上下移動のみ,,カーソル移動ステップはx4,y7,いま指示しているアイテムナンバーは2の「NORMAL」
+                        #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は7項目なので 7-1=6を代入,メニューの階層が増えたのでMENU_LAYER1からMENU_LAYER2にします
+                        func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,ox + 3,oy + 11,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,7-1,0,MENU_LAYER2)
+                        self.active_window_id = WINDOW_ID_INITIALIZE #このウィンドウIDを最前列でアクティブなものとする
+                        pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
+                elif self.cursor_decision_item_y == MENU_CONFIG_RETURN:
+                    func.restore_master_flag_list(self) #フラグ＆データ関連のマスターリストを参照して個別のフラグ変数へリストアする
+                    update_window.change_window_priority_normal(self,WINDOW_ID_CONFIG) #CONFIGウィンドウの表示優先度を「normal」にする
+                    i = func.search_window_id(self,WINDOW_ID_CONFIG)
+                    self.window[i].vx = -0.5            #WINDOW_ID_CONFIGウィンドウを左下にフッ飛ばしていく
+                    self.window[i].vx_accel = 1.1
+                    self.window[i].vy = 0.1
+                    self.window[i].vy_accel = 1.1
+                    self.window[i].window_status = WINDOW_CLOSE
+                    self.window[i].comment_flag = COMMENT_FLAG_OFF
+                    func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
+                    
+                    func.write_ship_equip_medal_data(self)                 #機体メダルスロット装備リストに現在プレイ中のシップリストのメダル情報を書き込む関数の呼び出し
+                    update_system.save_data(self)                            #システムデータをセーブします
+                    pyxel.load(os.path.abspath("./assets/graphic/min-sht2.pyxres")) #タイトル＆ステージ1＆2のリソースファイルを読み込む
+                    # pyxel.load("./assets/graphic/min-sht2.pyxres") #タイトル＆ステージ1＆2のリソースファイルを読み込む
+                    
+                    self.cursor_pre_decision_item_y = UNSELECTED
+                    pyxel.play(0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
+                    self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
                 
-                func.write_ship_equip_medal_data(self)                 #機体メダルスロット装備リストに現在プレイ中のシップリストのメダル情報を書き込む関数の呼び出し
-                update_system.save_data(self)                            #システムデータをセーブします
-                pyxel.load(os.path.abspath("./assets/graphic/min-sht2.pyxres")) #タイトル＆ステージ1＆2のリソースファイルを読み込む
-                # pyxel.load("./assets/graphic/min-sht2.pyxres") #タイトル＆ステージ1＆2のリソースファイルを読み込む
-                
-                self.cursor_pre_decision_item_y = UNSELECTED
-                pyxel.play(0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
-                self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
-                
-            elif self.cursor_pre_decision_item_y == MENU_MEDAL and self.cursor_decision_item_y == 4 and 6 <= self.cursor_decision_item_x <= 8: #OKボタンが押されたときの処理
-                update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
-                func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
-                i = func.search_window_id(self,WINDOW_ID_MEDAL_LIST)
-                self.window[i].vx = 0.3            #MEDAL_LISTウィンドウを右にフッ飛ばしていく
-                self.window[i].vx_accel = 1.2
-                self.window[i].vy = 0.1
-                self.window[i].vy_accel = 1.2
-                self.window[i].window_status = WINDOW_CLOSE
-                self.window[i].comment_flag = COMMENT_FLAG_OFF
-                
-                i = func.search_window_id(self,WINDOW_ID_EQUIPMENT)
-                self.window[i].vx = -0.3           #EQUIPMENTウィンドウを左にフッ飛ばしていく
-                self.window[i].vx_accel = 1.2
-                self.window[i].vy = 0.1
-                self.window[i].vy_accel = 1.2
-                self.window[i].window_status = WINDOW_CLOSE
-                self.window[i].comment_flag = COMMENT_FLAG_OFF
-                
-                func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
-                self.cursor_pre_decision_item_y = UNSELECTED
-                pyxel.play(0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
-                self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
-                self.cursor_size = CURSOR_SIZE_NORMAL       #矩形囲みタイプのセレクトカーソルのサイズを通常サイズに戻す
-            elif self.cursor_pre_decision_item_y == MENU_MEDAL and 2 <= self.cursor_decision_item_y <= 4:                                      #所持メダルリスト欄内でボタンが押されたときの処理
-                i = func.search_window_id(self,WINDOW_ID_MEDAL_LIST) #メダルリストウィンドウのインデックス値取得
-                if self.window[i].comment_disp_flag[self.cursor_decision_item_y][self.cursor_decision_item_x] == DISP_ON: #決定ボタンが押された位置のコメント表示フラグが立っている時はそこの部分のアイテムは所持しているので....
-                    num = self.window[i].item_id[self.cursor_decision_item_y][self.cursor_decision_item_x]                #決定ボタンが押された位置のアイテムIDを取得する
-                    if num != MEDAL_NO_SLOT:               #MEDAL_NO_SLOT(メダルは何もない)以外の場合は
-                        func.equip_medal_playing_ship(self,num) #アイテムID(この場合はメダルID)を書き込んで更新する
-                
-                i = func.search_window_id(self,WINDOW_ID_EQUIPMENT)    #メダル装備ウィンドウのインデックス値取得
-                self.window[i].ship_list = self.playing_ship_list #ウィンドウクラスのシップリストも更新してやります
-                func.medal_effect_plus_medallion(self)                #装備メダルに「スロット数を拡張するメダル」があればスロット数を増やし,無ければスロット数を初期状態にする関数の呼び出し
-                func.zero_clear_out_of_range_slot(self)               #現在の総メダルスロット以上のスロット部分をゼロクリアしてメダルなし状態にする関数の呼び出し
-                
-                self.cursor_decision_item_x = UNSELECTED
-                self.cursor_decision_item_y = UNSELECTED          #選択アイテムをすべて「未選択」にします
-            elif self.cursor_pre_decision_item_y == MENU_MEDAL and self.cursor_decision_item_y == MENU_MEDAL_MYSHIP_MEDAL_AREA:                #自機装備メダル欄内でボタンが押されたときの処理
-                i = func.search_window_id(self,WINDOW_ID_EQUIPMENT)             #メダル装備ウィンドウのインデックス値取得
-                func.purge_medal_playing_ship(self,self.cursor_decision_item_x) #決定ボタンが押された位置のスロットを空にする関数の呼び出し
-                func.zero_clear_out_of_range_slot(self)               #現在の総メダルスロット以上のスロット部分をゼロクリアしてメダルなし状態にする関数の呼び出し
-                func.playing_ship_medal_left_justified(self)          #装備スロットに空が出来たので左に詰めていく関数を呼び出す              
-                
-                i = func.search_window_id(self,WINDOW_ID_EQUIPMENT)    #メダル装備ウィンドウのインデックス値取得
-                self.window[i].ship_list = self.playing_ship_list #ウィンドウクラスのシップリストも更新してやります
-                func.medal_effect_plus_medallion(self)                #装備メダルに「スロット数を拡張するメダル」があればスロット数を増やし,無ければスロット数を初期状態にする関数の呼び出し
-                
-                self.cursor_decision_item_x = UNSELECTED
-                self.cursor_decision_item_y = UNSELECTED          #選択アイテムをすべて「未選択」にします
+            elif self.cursor_pre_decision_item_y == MENU_MEDAL:
+                if self.cursor_decision_item_y == 4 and 6 <= self.cursor_decision_item_x <= 8: #OKボタンが押されたときの処理
+                    update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                    func.create_master_flag_list(self) #フラグ＆データ関連のマスターリスト作成関数を呼び出す
+                    i = func.search_window_id(self,WINDOW_ID_MEDAL_LIST)
+                    self.window[i].vx = 0.3            #MEDAL_LISTウィンドウを右にフッ飛ばしていく
+                    self.window[i].vx_accel = 1.2
+                    self.window[i].vy = 0.1
+                    self.window[i].vy_accel = 1.2
+                    self.window[i].window_status = WINDOW_CLOSE
+                    self.window[i].comment_flag = COMMENT_FLAG_OFF
+                    
+                    i = func.search_window_id(self,WINDOW_ID_EQUIPMENT)
+                    self.window[i].vx = -0.3           #EQUIPMENTウィンドウを左にフッ飛ばしていく
+                    self.window[i].vx_accel = 1.2
+                    self.window[i].vy = 0.1
+                    self.window[i].vy_accel = 1.2
+                    self.window[i].window_status = WINDOW_CLOSE
+                    self.window[i].comment_flag = COMMENT_FLAG_OFF
+                    
+                    func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
+                    self.cursor_pre_decision_item_y = UNSELECTED
+                    pyxel.play(0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
+                    self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
+                    self.cursor_size = CURSOR_SIZE_NORMAL       #矩形囲みタイプのセレクトカーソルのサイズを通常サイズに戻す
+                elif 2 <= self.cursor_decision_item_y <= 4:                                    #所持メダルリスト欄内でボタンが押されたときの処理
+                    i = func.search_window_id(self,WINDOW_ID_MEDAL_LIST) #メダルリストウィンドウのインデックス値取得
+                    if self.window[i].comment_disp_flag[self.cursor_decision_item_y][self.cursor_decision_item_x] == DISP_ON: #決定ボタンが押された位置のコメント表示フラグが立っている時はそこの部分のアイテムは所持しているので....
+                        num = self.window[i].item_id[self.cursor_decision_item_y][self.cursor_decision_item_x]                #決定ボタンが押された位置のアイテムIDを取得する
+                        if num != MEDAL_NO_SLOT:               #MEDAL_NO_SLOT(メダルは何もない)以外の場合は
+                            func.equip_medal_playing_ship(self,num) #アイテムID(この場合はメダルID)を書き込んで更新する
+                    
+                    i = func.search_window_id(self,WINDOW_ID_EQUIPMENT)    #メダル装備ウィンドウのインデックス値取得
+                    self.window[i].ship_list = self.playing_ship_list #ウィンドウクラスのシップリストも更新してやります
+                    func.medal_effect_plus_medallion(self)                #装備メダルに「スロット数を拡張するメダル」があればスロット数を増やし,無ければスロット数を初期状態にする関数の呼び出し
+                    func.zero_clear_out_of_range_slot(self)               #現在の総メダルスロット以上のスロット部分をゼロクリアしてメダルなし状態にする関数の呼び出し
+                    
+                    self.cursor_decision_item_x = UNSELECTED
+                    self.cursor_decision_item_y = UNSELECTED          #選択アイテムをすべて「未選択」にします
+                elif self.cursor_decision_item_y == MENU_MEDAL_MYSHIP_MEDAL_AREA:              #自機装備メダル欄内でボタンが押されたときの処理
+                    i = func.search_window_id(self,WINDOW_ID_EQUIPMENT)             #メダル装備ウィンドウのインデックス値取得
+                    func.purge_medal_playing_ship(self,self.cursor_decision_item_x) #決定ボタンが押された位置のスロットを空にする関数の呼び出し
+                    func.zero_clear_out_of_range_slot(self)               #現在の総メダルスロット以上のスロット部分をゼロクリアしてメダルなし状態にする関数の呼び出し
+                    func.playing_ship_medal_left_justified(self)          #装備スロットに空が出来たので左に詰めていく関数を呼び出す              
+                    
+                    i = func.search_window_id(self,WINDOW_ID_EQUIPMENT)    #メダル装備ウィンドウのインデックス値取得
+                    self.window[i].ship_list = self.playing_ship_list #ウィンドウクラスのシップリストも更新してやります
+                    func.medal_effect_plus_medallion(self)                #装備メダルに「スロット数を拡張するメダル」があればスロット数を増やし,無ければスロット数を初期状態にする関数の呼び出し
+                    
+                    self.cursor_decision_item_x = UNSELECTED
+                    self.cursor_decision_item_y = UNSELECTED          #選択アイテムをすべて「未選択」にします
                 
             elif self.cursor_pre_decision_item_y == MENU_STATUS and 0 <= self.cursor_decision_item_y <= 12:
                 i = func.search_window_id(self,WINDOW_ID_STATUS)
@@ -714,6 +728,7 @@ class update_title:
                 self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
                 
             elif self.cursor_pre_decision_item_y == MENU_SELECT_SHIP and self.cursor_decision_item_y == 12:
+                update_window.change_window_priority_normal(self,WINDOW_ID_SELECT_SHIP) #SELECT_SHIPウィンドウの表示優先度を「normal」にする
                 i = func.search_window_id(self,WINDOW_ID_SELECT_SHIP)
                 self.window[i].vx = -0.3            #SELECT_SHIPウィンドウを左下にフッ飛ばしていく
                 self.window[i].vx_accel = 1.2
@@ -728,40 +743,42 @@ class update_title:
                 pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                 self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
                 
-            elif self.cursor_pre_decision_item_y == MENU_EXIT and self.cursor_decision_item_y == MENU_EXIT_NO:
-                i = func.search_window_id(self,WINDOW_ID_EXIT)
-                self.window[i].vy = -0.3            #WINDOW_ID_EXITウィンドウを右上にフッ飛ばしていく
-                self.window[i].vy_accel = 1.2
-                self.window[i].vx = 0.1
-                self.window[i].vx_accel = 1.2
-                self.window[i].window_status = WINDOW_CLOSE
-                self.window[i].comment_flag = COMMENT_FLAG_OFF
-                func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
-                self.cursor_pre_decision_item_y = UNSELECTED
-                pyxel.play(0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
-                self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
-            elif self.cursor_pre_decision_item_y == MENU_EXIT and self.cursor_decision_item_y == MENU_EXIT_YES:
-                self.star_scroll_flag  = 1
-                i = func.search_window_id(self,WINDOW_ID_EXIT)
-                self.window[i].vy = -0.1            #WINDOW_ID_EXITウィンドウを右上にフッ飛ばしていく
-                self.window[i].vy_accel = 1.05
-                self.window[i].vx = 0.1
-                self.window[i].vx_accel = 1.09
-                self.window[i].window_status = WINDOW_CLOSE
-                self.window[i].comment_flag = COMMENT_FLAG_OFF
-                
-                i = func.search_window_id(self,WINDOW_ID_MAIN_MENU)
-                self.window[i].vy = -0.1            #メインメニューウィンドウを左上にフッ飛ばしていく
-                self.window[i].vy_accel = 1.1
-                self.window[i].vx = -0.1
-                self.window[i].vx_accel = 1.1
-                self.window[i].window_status = WINDOW_CLOSE
-                self.window[i].comment_flag = COMMENT_FLAG_OFF
-                self.game_quit_from_playing = 0                  #タイトルメニューからの終了
-                self.game_status = SCENE_GAME_QUIT_START         #ステータスを「GAME QUIT START」ゲーム終了工程開始にする
+            elif self.cursor_pre_decision_item_y == MENU_EXIT:
+                if   self.cursor_decision_item_y == MENU_EXIT_NO:
+                    i = func.search_window_id(self,WINDOW_ID_EXIT)
+                    self.window[i].vy = -0.3            #WINDOW_ID_EXITウィンドウを右上にフッ飛ばしていく
+                    self.window[i].vy_accel = 1.2
+                    self.window[i].vx = 0.1
+                    self.window[i].vx_accel = 1.2
+                    self.window[i].window_status = WINDOW_CLOSE
+                    self.window[i].comment_flag = COMMENT_FLAG_OFF
+                    func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
+                    self.cursor_pre_decision_item_y = UNSELECTED
+                    pyxel.play(0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
+                    self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
+                elif self.cursor_decision_item_y == MENU_EXIT_YES:
+                    self.star_scroll_flag  = 1
+                    i = func.search_window_id(self,WINDOW_ID_EXIT)
+                    self.window[i].vy = -0.1            #WINDOW_ID_EXITウィンドウを右上にフッ飛ばしていく
+                    self.window[i].vy_accel = 1.05
+                    self.window[i].vx = 0.1
+                    self.window[i].vx_accel = 1.09
+                    self.window[i].window_status = WINDOW_CLOSE
+                    self.window[i].comment_flag = COMMENT_FLAG_OFF
+                    
+                    i = func.search_window_id(self,WINDOW_ID_MAIN_MENU)
+                    self.window[i].vy = -0.1            #メインメニューウィンドウを左上にフッ飛ばしていく
+                    self.window[i].vy_accel = 1.1
+                    self.window[i].vx = -0.1
+                    self.window[i].vx_accel = 1.1
+                    self.window[i].window_status = WINDOW_CLOSE
+                    self.window[i].comment_flag = COMMENT_FLAG_OFF
+                    self.game_quit_from_playing = 0                  #タイトルメニューからの終了
+                    self.game_status = SCENE_GAME_QUIT_START         #ステータスを「GAME QUIT START」ゲーム終了工程開始にする
             
         elif self.cursor_menu_layer == MENU_LAYER2: #メニューが2階層目の選択分岐
             if   self.cursor_pre_pre_decision_item_y == MENU_CONFIG and self.cursor_pre_decision_item_y == MENU_CONFIG_INITIALIZE and self.cursor_decision_item_y == MENU_CONFIG_INITIALIZE_RETURN:
+                update_window.change_window_priority_normal(self,WINDOW_ID_INITIALIZE) #INITIALIZEウィンドウの表示優先度を「normal」にする
                 func.create_master_flag_list(self)                    #フラグ＆データ関連のマスターリスト作成関数を呼び出す
                 i = func.search_window_id(self,WINDOW_ID_INITIALIZE)
                 self.window[i].vx = 0.3                           #WINDOW_ID_INITIALIZEウィンドウを右上にフッ飛ばしていく
@@ -776,6 +793,7 @@ class update_title:
                 self.cursor_pre_decision_item_y = MENU_CONFIG                   #前回選択されたアイテムを「CONFIG」にする 
                 pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                 self.active_window_id = WINDOW_ID_CONFIG                        #1階層前の「CONFIG」ウィンドウIDを最前列でアクティブなものとする
+                update_window.change_window_priority_top(self,WINDOW_ID_CONFIG) #CONFIGウィンドウの表示優先度を「TOP」にする
             elif self.cursor_pre_pre_decision_item_y == MENU_CONFIG and self.cursor_pre_decision_item_y == MENU_CONFIG_INITIALIZE and self.cursor_decision_item_y == MENU_CONFIG_INITIALIZE_SCORE:
                 if func.search_window_id(self,WINDOW_ID_PRINT_INIT_SCORE) == -1 and func.search_window_id(self,WINDOW_ID_SELECT_YES_NO) == -1: #PRINT_INIT_SCOREウィンドウとSELECT_YES_NOウィンドウが同時に存在しないのなら・・
                     self.cursor_pre_pre_pre_decision_item_y = self.cursor_pre_pre_decision_item_y #2回前に選択されたアイテムを3回前に選択されたアイテムにコピー 
