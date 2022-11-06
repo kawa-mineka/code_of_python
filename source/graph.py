@@ -1452,7 +1452,7 @@ class graph:
                 
             #下地が透明または半透明の場合＆「黒矩形塗りつぶし」した後表示の場合は黒く塗りつぶされたウィンドウを描く
             elif self.window[i].window_bg != WINDOW_BG_BLUE_BACK and draw_num == BLACK_RECTANGLE_FILL:
-                pyxel.rect(self.window[i].posx,self.window[i].posy,self.window[i].width,self.window[i].height,pyxel.COLOR_BLACK)
+                pyxel.rect(self.window[i].posx,self.window[i].posy,self.window[i].width + 9,self.window[i].height + 9,pyxel.COLOR_BLACK)
 
     #セレクトカーソルの表示
     def draw_select_cursor(self):
