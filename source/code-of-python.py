@@ -914,24 +914,25 @@ class App:
             graph.draw_sub_weapon_select_gauge(self)       #サブウェポン一覧表示graph
             graph.draw_status(self)                        #スコアやスピード、自機耐久力などの表示関数の呼び出し （通常ステータス表示）
             graph.draw_debug_status(self)                  #デバッグ用ステータスの表示関数の呼び出し          （デバック用ステータス表示）
-            #1回目のウィンドウ表示
-            graph.draw_window(self,WINDOW_PRIORITY_NORMAL,FIRST_DRAW) #ウィンドウの表示
-            graph.draw_window(self,WINDOW_PRIORITY_5,FIRST_DRAW)      #前面から6番目のウィンドウの表示
-            graph.draw_window(self,WINDOW_PRIORITY_4,FIRST_DRAW)      #前面から5番目ウィンドウの表示
-            graph.draw_window(self,WINDOW_PRIORITY_3,FIRST_DRAW)      #前面から4番目ウィンドウの表示
-            graph.draw_window(self,WINDOW_PRIORITY_2,FIRST_DRAW)      #前面から3番目ウィンドウの表示
-            graph.draw_window(self,WINDOW_PRIORITY_1,FIRST_DRAW)      #前面から2番目ウィンドウの表示
-            graph.draw_window(self,WINDOW_PRIORITY_TOP,FIRST_DRAW)    #最前面1番目ウィンドウの表示
+            
+            #1回目「黒矩形塗りつぶし」したあとウィンドウ表示
+            graph.draw_window(self,WINDOW_PRIORITY_NORMAL,BLACK_RECTANGLE_FILL) #ウィンドウの表示
+            graph.draw_window(self,WINDOW_PRIORITY_5,     BLACK_RECTANGLE_FILL) #前面から6番目のウィンドウの表示
+            graph.draw_window(self,WINDOW_PRIORITY_4,     BLACK_RECTANGLE_FILL) #前面から5番目ウィンドウの表示
+            graph.draw_window(self,WINDOW_PRIORITY_3,     BLACK_RECTANGLE_FILL) #前面から4番目ウィンドウの表示
+            graph.draw_window(self,WINDOW_PRIORITY_2,     BLACK_RECTANGLE_FILL) #前面から3番目ウィンドウの表示
+            graph.draw_window(self,WINDOW_PRIORITY_1,     BLACK_RECTANGLE_FILL) #前面から2番目ウィンドウの表示
+            graph.draw_window(self,WINDOW_PRIORITY_TOP,   BLACK_RECTANGLE_FILL) #最前面1番目ウィンドウの表示
             
             graph.redraw_star(self)                                   #透明または半透明のウィンドウが存在する範囲内だけ星を再描画する
-            #2回目のウィンドウ表示
-            graph.draw_window(self,WINDOW_PRIORITY_NORMAL,SECOND_DRAW)#ウィンドウの表示
-            graph.draw_window(self,WINDOW_PRIORITY_5,SECOND_DRAW)     #前面から6番目のウィンドウの表示
-            graph.draw_window(self,WINDOW_PRIORITY_4,SECOND_DRAW)     #前面から5番目ウィンドウの表示
-            graph.draw_window(self,WINDOW_PRIORITY_3,SECOND_DRAW)     #前面から4番目ウィンドウの表示
-            graph.draw_window(self,WINDOW_PRIORITY_2,SECOND_DRAW)     #前面から3番目ウィンドウの表示
-            graph.draw_window(self,WINDOW_PRIORITY_1,SECOND_DRAW)     #前面から2番目ウィンドウの表示
-            graph.draw_window(self,WINDOW_PRIORITY_TOP,SECOND_DRAW)   #最前面1番目ウィンドウの表示
+            #2回目 そのまま普通に重ね合わせてウィンドウ表示
+            graph.draw_window(self,WINDOW_PRIORITY_NORMAL,ORDINARY_SUPERPOSITION) #前面ウィンドウの表示
+            graph.draw_window(self,WINDOW_PRIORITY_5,     ORDINARY_SUPERPOSITION) #前面から6番目のウィンドウの表示
+            graph.draw_window(self,WINDOW_PRIORITY_4,     ORDINARY_SUPERPOSITION) #前面から5番目ウィンドウの表示
+            graph.draw_window(self,WINDOW_PRIORITY_3,     ORDINARY_SUPERPOSITION) #前面から4番目ウィンドウの表示
+            graph.draw_window(self,WINDOW_PRIORITY_2,     ORDINARY_SUPERPOSITION) #前面から3番目ウィンドウの表示
+            graph.draw_window(self,WINDOW_PRIORITY_1,     ORDINARY_SUPERPOSITION) #前面から2番目ウィンドウの表示
+            graph.draw_window(self,WINDOW_PRIORITY_TOP,   ORDINARY_SUPERPOSITION) #最前面1番目ウィンドウの表示
             
             graph.draw_select_cursor(self)                 #セレクトカーソルの表示graph
             graph.draw_warning_dialog(self)                #WARNINGダイアログの表示
