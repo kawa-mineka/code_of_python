@@ -207,6 +207,17 @@ class App:
         self.default_medal_list = [0,0,0,0,0,  0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0]     #取得メダルリストを作製初期化
                                                                                     #0=未入手 1=入手 メダルのIDナンバーがリストのインデックス値となります
         
+        #パッドボタン割り当て初期データのリスト [Aボタン,Bボタン,
+        #                                     Xボタン,Yボタン,
+        #                                     BACKボタン,GUIDEボタン,STARTボタン
+        #                                     LEFTSHOULDERボタン,RIGHTSHOULDERボタン]
+        self.default_pad_assign_list = [BTN_MISSILE,BTN_NO_ASSIGN,
+                                        BTN_SHOT_AND_SUB_WEAPON,BTN_SUB_WEAPON_CHANGE,
+                                        
+                                        BTN_SPEED_CHANGE,BTN_NO_ASSIGN,BTN_PAUSE,
+                                        
+                                        BTN_CHANGE_CLAW_STYLE,BTN_CHANGE_CLAW_INTERVAL]
+        
         define_data.default_achievement_list(self) #実績のIDナンバーとそれに対するグラフイックチップの位置や英語コメント、日本語コメントのデータリストの定義関数の呼び出し
         
         self.default_boss_number_of_defeat = [0] * 50                               #ボス撃破数デフォルトリストを作製します
@@ -215,6 +226,7 @@ class App:
         self.medal_list            = copy.deepcopy(self.default_medal_list)            #メダルリストの初期データを深い階層でコピーする
         self.achievement_list      = copy.deepcopy(self.default_achievement_list)      #実績リストの初期データを深い階層でコピーする
         self.boss_number_of_defeat = copy.deepcopy(self.default_boss_number_of_defeat) #ボスを倒した総数の初期データを深い階層でコピーする
+        self.pad_assign_list       = copy.deepcopy(self.default_pad_assign_list)       #パッド割り当て情報の初期データを深い階層でコピーする
         
         self.development_testtime            = 0  #ゲーム開発時の総テスト時間
         self.one_game_playtime_seconds       = 0  #1プレイでのゲームプレイ時間(秒単位)
@@ -289,6 +301,7 @@ class App:
         self.temp_graph_list = []               #スコアデータウィンドウを育成するときに使用する一時的なメダルリストグラフイック座標値などが入ったリスト群を初期化宣言
         self.master_se_vol_list = [[] for i in range(62)] #SE用のマスターボリュームリストを保存しておくためのリストです
         self.adjustable_se_vol_list =[[] for i in range(62)]
+        
         self.replay_control_data_size = []      #リプレイファイルのステージ毎のコントロールデータのファイルサイズリストです
         self.master_flag_list = [[] for i in range(128)] #ウィンドウ表示時に使用するフラグ＆データ関連の元リストを初期化
         self.replay_stage_num = 0               #リプレイ再生、録画時のステージ数を0で初期化します(1ステージ目=0→2ステージ目=1→3ステージ目=2って感じ)

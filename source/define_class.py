@@ -1411,6 +1411,7 @@ class Window:                 #メッセージ表示ウィンドウのクラス�
         self.animation_text = []                    #アニメーション表示されるテキストが入ります
         self.scroll_text  = []                      #スクロール表示されるテキストが入ります
         self.script       = []                      #スクリプト(書記系)が入ります
+        self.vector_grp   = []                      #ベクターグラフイックスで描かれる画像データリストが入ります
         
         self.posx = 0          #現在のウィンドウの座標(posx,posy)
         self.posy = 0
@@ -1490,6 +1491,7 @@ class Window:                 #メッセージ表示ウィンドウのクラス�
         animation_text,\
         scroll_text,\
         script,\
+        vector_grp,\
         
         x,y,dx,dy,width,height,open_width,open_height,change_x,change_y,open_speed,close_speed,open_accel,close_accel,marker,color,\
         vx,vy,vx_accel,vy_accel,wait_count,\
@@ -1531,6 +1533,7 @@ class Window:                 #メッセージ表示ウィンドウのクラス�
         self.animation_text = animation_text
         self.scroll_text  = scroll_text
         self.script       = script
+        self.vector_grp   = vector_grp
         
         self.posx = x
         self.posy = y

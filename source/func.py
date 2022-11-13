@@ -1,10 +1,13 @@
+import math  # 三角関数などを使用したいのでインポートぉぉおお！
 import os
-import math                #三角関数などを使用したいのでインポートぉぉおお！
-from random import random  #random.random() と呼ぶと、0から1の範囲(1は含まない)のランダムな実数が返される(主にパーティクル系で使用します)
-import pyxel               #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
-import pygame.mixer        #MP3再生するためだけに使用する予定・・・予定は未定・・・そして未定は確定に！やったあぁ！ BGMだけで使用しているサブゲームエンジン
-from const        import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
-from define_class import * #クラス宣言モジュールの読み込み やっぱりimport *は不味いのかなぁ・・・よくわかんない
+from random import \
+    random  # random.random() と呼ぶと、0から1の範囲(1は含まない)のランダムな実数が返される(主にパーティクル系で使用します)
+
+import pygame.mixer  # MP3再生するためだけに使用する予定・・・予定は未定・・・そして未定は確定に！やったあぁ！ BGMだけで使用しているサブゲームエンジン
+import pyxel  # グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
+from const import *  # 定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
+from define_class import *  # クラス宣言モジュールの読み込み やっぱりimport *は不味いのかなぁ・・・よくわかんない
+
 
 class func:
     def __init__(self):
@@ -119,6 +122,70 @@ class func:
         tile_x = num % 32   #置く場所のx座標は 32で割った余り
         tile_y = num // 32  #置く場所のy座標は 32での切り捨て除算
         pyxel.tilemap(tm).pset(x,y,(tile_x,tile_y))
+
+    #パッドのボタンが押されたかどうか調べる関数定義 押されていたらTrue 押されていなかったFalseを返します
+    def push_pad_btn(self,action_id):  #action_idはそれぞれのボタンアクションに割り当てられたIDです (例)BTN_SHOTは1,BTN_MISSILEは2,BTN_SHOT_AND_SUB_WEAPONは3などなど・・・
+        list_count = len(self.pad_assign_list)#list_countにpad_assign_listの長さが入る
+        for i in range (list_count): #pad_assign_listの長さの回数だけループ
+            assin_btn = self.pad_assign_list[i] #どの様なボタンIDが割り当てられているか取り出す
+            if action_id == assin_btn: #アクションIDとアサインIDが一致したらその時点でのassin_btnが押されているかどうか調べはじめる
+                if i == BTN_A:
+                    if pyxel.btn(pyxel.GAMEPAD1_BUTTON_A):
+                        return (True)
+                    else:
+                        return (False)
+                    
+                if i == BTN_B:
+                    if pyxel.btn(pyxel.GAMEPAD1_BUTTON_B):
+                        return (True)
+                    else:
+                        return (False)
+                    
+                if i == BTN_X:
+                    if pyxel.btn(pyxel.GAMEPAD1_BUTTON_X):
+                        return (True)
+                    else:
+                        return (False)
+                    
+                if i == BTN_Y:
+                    if pyxel.btn(pyxel.GAMEPAD1_BUTTON_Y):
+                        return (True)
+                    else:
+                        return (False)
+        
+        return (False)
+
+    #パッドのボタンが押されて離されたかどうか調べる関数定義 押されて話されたらTrue そうでなかったらFalseを返します
+    def push_pad_btnp(self,action_id): #action_idはそれぞれのボタンアクションに割り当てられたIDです (例)BTN_SHOTは1,BTN_MISSILEは2,BTN_SHOT_AND_SUB_WEAPONは3などなど・・・
+        list_count = len(self.pad_assign_list)#list_countにpad_assign_listの長さが入る
+        for i in range (list_count): #pad_assign_listの長さの回数だけループ
+            assin_btn = self.pad_assign_list[i] #どの様なボタンIDが割り当てられているか取り出す
+            if action_id == assin_btn: #アクションIDとアサインIDが一致したらその時点でのassin_btnが押されているかどうか調べはじめる
+                if i == BTN_A:
+                    if pyxel.btnp(pyxel.GAMEPAD1_BUTTON_A):
+                        return (True)
+                    else:
+                        return (False)
+                    
+                if i == BTN_B:
+                    if pyxel.btnp(pyxel.GAMEPAD1_BUTTON_B):
+                        return (True)
+                    else:
+                        return (False)
+                    
+                if i == BTN_X:
+                    if pyxel.btnp(pyxel.GAMEPAD1_BUTTON_X):
+                        return (True)
+                    else:
+                        return (False)
+                    
+                if i == BTN_Y:
+                    if pyxel.btnp(pyxel.GAMEPAD1_BUTTON_Y):
+                        return (True)
+                    else:
+                        return (False)
+        
+        return (False)
 
     #自機との距離を求める関数定義
     def to_my_ship_distance(self,x,y):

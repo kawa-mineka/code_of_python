@@ -977,6 +977,20 @@ LIST_WINDOW_SCRIPT_FOR_START_NUM   = 22 #スクリプトテキスト用FOR文で
 LIST_WINDOW_SCRIPT_FOR_END_NUM     = 23 #スクリプトテキスト用FOR文での終了値(リスト表記)
 LIST_WINDOW_SCRIPT_FOR_STEP_NUM    = 24 #スクリプトテキスト用FOR文での増分値(リスト表記) 
 
+#ウィンドウベクターグラフイックス群リストの2次元配列のインデックスナンバーとして使用する定数定義 windowクラスのwindow[i].vector_grp[ここで定義した定数]に入ります
+LIST_WINDOW_VECTOR_GRP_PSET        =  0 #ベクターグラフイック 点描画命令
+LIST_WINDOW_VECTOR_GRP_LINE        =  1 #ベクターグラフイック 線描画命令[LIST_WINDOW_VECTOR_GRP_LINE,始点座標x0,始点座標y0,終点座標x1,終点座標y1,色]
+LIST_WINDOW_VECTOR_GRP_BOX         =  2 #ベクターグラフイック 矩形描画命令
+LIST_WINDOW_VECTOR_GRP_BOXF        =  3 #ベクターグラフイック 塗りつぶし矩形描画命令
+LIST_WINDOW_VECTOR_GRP_CIRCLE      =  4 #ベクターグラフイック 円描画命令
+LIST_WINDOW_VECTOR_GRP_CIRCLEF     =  5 #ベクターグラフイック 塗りつぶし円描画命令
+LIST_WINDOW_VECTOR_GRP_ELLIE       =  6 #ベクターグラフイック 楕円描画命令
+LIST_WINDOW_VECTOR_GRP_ELLIEF      =  7 #ベクターグラフイック 塗りつぶし楕円描画命令
+LIST_WINDOW_VECTOR_GRP_TRI         =  8 #ベクターグラフイック 三角形描画命令
+LIST_WINDOW_VECTOR_GRP_TRIF        =  9 #ベクターグラフイック 塗りつぶし三角形描画命令
+LIST_WINDOW_VECTOR_GRP_FILL        = 10 #ベクターグラフイック ペイント命令
+LIST_WINDOW_VECTOR_GRP_CHR         = 11 #ベクターグラフイック 1文字表示命令
+
 #ウィンドウタイム＆カウンター群リストの２次元配列のインデックスナンバーとして使用する定数定義 windowクラスのwindow[i].time_counter_list[j][ここで定義した定数]に入ります
 LIST_WINDOW_TIME_COUNTER_TYPE      =  0  #ウィンドウに表示するタイムカウンターの種類
 LIST_WINDOW_TIME_COUNTER_OX        =  1  #表示座標(ox,oy)ウィンドウ原点からのオフセット値
@@ -998,6 +1012,7 @@ NO_EDIT_TEXT       = []
 NO_ANIMATION_TEXT  = []
 NO_SCROLL_TEXT     = []
 NO_SCRIPT          = []
+NO_VECTOR_GRP      = []
 
 NO_SHIP_LIST             = []
 NO_SHIP_MEDAL_LIST       = []
@@ -1442,3 +1457,33 @@ SE_WAVE_CUTTER    =  5
 SE_BOSS_EXPLOSION = 11
 SE_SHIP_DAMAGE    = 15
 
+#!ボタン割り当て(キーアサイン、キーコンフィグ)で使用する定数定義 アクションID
+BTN_NO_ASSIGN             =  0   #未割当ID
+BTN_SHOT                  =  1   #ショットボタンID
+BTN_MISSILE               =  2   #ミサイルボタンID
+BTN_SHOT_AND_SUB_WEAPON   =  3   #ショット＆サブウェポン同時発射ボタンID
+BTN_SUB_WEAPON            =  4   #サブウェポンボタンID
+
+BTN_MAIN_WEAPON_CHANGE    =  5   #メインウェポン切り替えボタンID
+BTN_SUB_WEAPON_CHANGE     =  6   #サブウェポン切り替えボタンID
+
+BTN_DUMMY_1               =  7   #ダミー用
+
+BTN_PAUSE                 =  8   #ポーズボタンID
+BTN_SPEED_CHANGE          =  9   #スピードチェンジボタンID
+
+BTN_CHANGE_CLAW_STYLE     = 10   #クロースタイルチェンジボタンID
+BTN_CHANGE_CLAW_INTERVAL  = 11   #クローインターバルチェンジボタンID
+
+#ボタン割り当てリストを参照するときに使用するインデックス値ラベル self.pad_assign_list[ここに入る]
+#例 self.pad_assign_list[BTN_A]で Aボタンを押したらどのアクションIDが割り当てられているか判る
+#初期状態はBTN_SHOT_AND_SUB_WEAPONなのでショット＆サブウェポン同時発射アクションIDが割り当てられているのが判る
+BTN_A             =  0
+BTN_B             =  1
+BTN_X             =  2
+BTN_Y             =  3
+BTN_BACK          =  4
+BTN_GUIDE         =  5
+BTN_START         =  6
+BTN_LEFTSHOULDER  =  7
+BTN_RIGHTSHOULDER =  8

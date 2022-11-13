@@ -117,6 +117,9 @@ class update_window:
             [ "EXIT"         ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH]],\
             
             NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
+            
+            [[LIST_WINDOW_VECTOR_GRP_LINE,60,60,100,90,pyxel.COLOR_WHITE],[LIST_WINDOW_VECTOR_GRP_BOXF,6,6,40,30,pyxel.COLOR_YELLOW],[LIST_WINDOW_VECTOR_GRP_CIRCLE,6,6,10,pyxel.COLOR_RED],[LIST_WINDOW_VECTOR_GRP_CIRCLEF,26,26,20,pyxel.COLOR_GRAY],[LIST_WINDOW_VECTOR_GRP_TRI,0,0, 80,10, 40,100,pyxel.COLOR_RED ]],\
+            
             MAIN_MENU_X+ox,MAIN_MENU_Y+oy,  MAIN_MENU_X+ox,MAIN_MENU_Y+oy,   0,0,  8*8,9*11,   2,1, 1,1,   0,0,    0,0,    0,0,0,0,   0,\
             BUTTON_DISP_OFF,0,0,0,\
             BUTTON_DISP_OFF,0,0,0,\
@@ -158,7 +161,7 @@ class update_window:
             [ "2",CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH],\
             [ "3",CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH]],\
             
-            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
+            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,NO_VECTOR_GRP,\
             ox,oy,ox,oy,   0,0,  2*8,5*8,   2,2, 1,0.5,   0,0,    0,0,    0,0,0,0,   0,\
             BUTTON_DISP_OFF,0,0,0,\
             BUTTON_DISP_OFF,0,0,0,\
@@ -200,7 +203,7 @@ class update_window:
             [ "2",CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH],\
             [ "3",CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH]],\
             
-            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
+            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,NO_VECTOR_GRP,\
             ox,oy,ox,oy,   0,0,  2*8,5*8,   2,2, 1,0.5,   0,0,    0,0,    0,0,0,0,   0,\
             BUTTON_DISP_OFF,0,0,0,\
             BUTTON_DISP_OFF,0,0,0,\
@@ -241,7 +244,7 @@ class update_window:
             [[".",    CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH,0,0,0,0,   0,0,0,0,0,0,0,0,0,0,   LIST_WINDOW_FLAG_BOSS_MODE,0,"OFF",DISP_CENTER,0, 0,0, 7,10],\
             [ ".",    CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH,0,0,0,0,   0,0,0,0,0,0,0,0,0,0,   LIST_WINDOW_FLAG_BOSS_MODE,0,"ON" ,DISP_CENTER,1, 0,0, 7,10]],\
             
-            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
+            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,NO_VECTOR_GRP,\
             ox,oy,ox,oy,   0,0,  2*8+7,21,   2,1, 1,0.7,   0,0,    0,0,    0,0,0,0,    0,\
             BUTTON_DISP_OFF,0,0,0,\
             BUTTON_DISP_OFF,0,0,0,\
@@ -282,7 +285,7 @@ class update_window:
             [[" ",    CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH,0,0,0,0,   0,0,0,0,0,0,0,0,0,0,   LIST_WINDOW_FLAG_HIT_BOX,0,"OFF",DISP_CENTER,0, 0,0, 7,10],\
             [ " ",    CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH,0,0,0,0,   0,0,0,0,0,0,0,0,0,0,   LIST_WINDOW_FLAG_HIT_BOX,0,"ON" ,DISP_CENTER,1, 0,0, 7,10]],\
             
-            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
+            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,NO_VECTOR_GRP,\
             ox,oy,ox,oy,   0,0,  2*8+7,21,   2,1, 1,0.7,   0,0,    0,0,    0,0,0,0,     0,\
             BUTTON_DISP_OFF,0,0,0,\
             BUTTON_DISP_OFF,0,0,0,\
@@ -327,7 +330,7 @@ class update_window:
             [ " ",        CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH,0,0,0,0,   0,0,0,0,0,0,0,0,0,0,   LIST_WINDOW_FLAG_DIFFICULTY,0, "VERY HARD",DISP_CENTER,4, 0,0, 7,10],\
             [ " ",        CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH,0,0,0,0,   0,0,0,0,0,0,0,0,0,0,   LIST_WINDOW_FLAG_DIFFICULTY,0, "INSAME",   DISP_CENTER,5, 0,0, 7,10]],\
             
-            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
+            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,NO_VECTOR_GRP,\
             ox,oy,ox,oy,   0,0,  48,51,   3,3, 1,0.7,   0,0,    0,0,    0,0,0,0,     0,\
             BUTTON_DISP_OFF,0,0,0,\
             BUTTON_DISP_OFF,0,0,0,\
@@ -368,7 +371,7 @@ class update_window:
             [["RETURN",      CLICK_SOUND_ON ,DISP_CENTER,0,0,6,MES_NO_FLASH],\
             ["SAVE & RETURN",CLICK_SOUND_ON ,DISP_CENTER,0,0,10,MES_NO_FLASH]],\
             
-            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
+            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,NO_VECTOR_GRP,\
             ox,oy,ox,oy,   0,0,  8*8,3*8,   2,1, 1,1,   0,0,    0,0,    0,0,0,0,     0,\
             BUTTON_DISP_OFF,0,0,0,\
             BUTTON_DISP_OFF,0,0,0,\
@@ -408,7 +411,7 @@ class update_window:
             
             [["RETURN",      CLICK_SOUND_ON ,DISP_CENTER,0,0,6,MES_NO_FLASH]],\
             
-            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
+            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,NO_VECTOR_GRP,\
             ox,oy,ox,oy,   0,0,  8*8,2*8,   2,1, 1,1,   0,0,    0,0,    0,0,0,0,     0,\
             BUTTON_DISP_OFF,0,0,0,\
             BUTTON_DISP_OFF,0,0,0,\
@@ -448,7 +451,7 @@ class update_window:
             
             [["",                            CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH]],\
             
-            NO_ITEM_KANJI_TEXT,[self.my_name,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,20,12,10,MES_NO_FLASH],NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
+            NO_ITEM_KANJI_TEXT,[self.my_name,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,20,12,10,MES_NO_FLASH],NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,NO_VECTOR_GRP,\
             ox,oy,ox,oy,   0,0,  6*11+2,6*3,   3,3, 1,1,   0,0,    0,0,    0,0,0,0,     0,\
             BUTTON_DISP_ON,51,12,WINDOW_BUTTON_SIZE_1TEXT,\
             BUTTON_DISP_OFF,0,0,0,\
@@ -499,7 +502,7 @@ class update_window:
             ["INITIALIZE",   CLICK_SOUND_ON ,DISP_LEFT_ALIGN,10,0,7,  MES_NO_FLASH,    0,0,0,0,   0,0,0,0,0,  0,0,0,0,0,  0,                           OPE_OBJ_TYPE_NONE,  "",DISP_LEFT_ALIGN,0,   70  ,0,7,10,0,   0,  [" "," "],              ],\
             ["RETURN",       CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,  MES_YELLOW_FLASH,0,0,0,0,   0,0,0,0,0,  0,0,0,0,0,  0,                           OPE_OBJ_TYPE_NONE,  "",DISP_LEFT_ALIGN,0,   70  ,0,7,10,0,   0,  ["",""]     ]           ],\
             
-            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
+            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,NO_VECTOR_GRP,\
             ox,oy,ox,oy,   0,0,  160-16,120-12,   2,2, 2,2,   0,0,    0,0,    0,0,0,0,    0,\
             BUTTON_DISP_OFF,0,0,0,\
             BUTTON_DISP_OFF,0,0,0,\
@@ -545,7 +548,7 @@ class update_window:
             [ "",         CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH],\
             [ "RETURN",   CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_YELLOW_FLASH]],\
             
-            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
+            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,NO_VECTOR_GRP,\
             ox,oy,ox,oy,   0,0,  48,58,   3,3, 1,0.7,   0,0,    0,0,    0,0,0,0,    0,\
             BUTTON_DISP_OFF,0,0,0,\
             BUTTON_DISP_OFF,0,0,0,\
@@ -594,7 +597,7 @@ class update_window:
             ["",            CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH],\
             ["",            CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH]],\
             
-            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
+            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,NO_VECTOR_GRP,\
             ox,oy,ox,oy,   0,0,  8*8,9*8+5,   2,1, 1,1,   0,0,    0,0,    0,0,0,0,     0,\
             BUTTON_DISP_OFF,0,0,0,\
             BUTTON_DISP_OFF,0,0,0,\
@@ -636,7 +639,7 @@ class update_window:
             [ " Lv2",CLICK_SOUND_ON ,DISP_LEFT_ALIGN,0,0,7,MES_NO_FLASH],\
             [ " Lv3",CLICK_SOUND_ON ,DISP_LEFT_ALIGN,0,0,7,MES_NO_FLASH]],\
             
-            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
+            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,NO_VECTOR_GRP,\
             ox,oy,ox,oy,   0,0,  13*8+17,6*8+3,   2,1, 1,1,   0,0,    0,0,    0,0,0,0,     0,\
             BUTTON_DISP_OFF,0,0,0,\
             BUTTON_DISP_OFF,0,0,0,\
@@ -718,7 +721,7 @@ class update_window:
             [["NO",         CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH],\
             [ "YES",        CLICK_SOUND_ON ,DISP_CENTER,0,0,10,MES_NO_FLASH]],\
             
-            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
+            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,NO_VECTOR_GRP,\
             ox,oy,ox,oy,   0,0,  51,23,   2,1, 1,0.7,   0,0,    0,0,    0,0,0,0,     0,\
             BUTTON_DISP_OFF,0,0,0,\
             BUTTON_DISP_OFF,0,0,0,\
@@ -761,7 +764,7 @@ class update_window:
             [  "EXIT GAME",     CLICK_SOUND_ON ,DISP_CENTER,0,0,10,MES_NO_FLASH],\
             [  " ",             CLICK_SOUND_ON ,DISP_CENTER,0,0,10,MES_NO_FLASH]],\
             
-            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
+            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,NO_VECTOR_GRP,\
             ox,oy,ox,oy,   0,0,  92,29,   2,2, 1,0.7,   0,0,    0,0,    0,0,0,0,     0,\
             BUTTON_DISP_OFF,0,0,0,\
             BUTTON_DISP_OFF,0,0,0,\
@@ -802,7 +805,7 @@ class update_window:
             [["NO",            CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH],\
             [ "YES",           CLICK_SOUND_ON ,DISP_CENTER,0,0,10,MES_NO_FLASH]],\
             
-            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
+            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,NO_VECTOR_GRP,\
             ox,oy,ox,oy,   0,0,  51,23,   2,1, 1,0.7,   0,0,    0,0,    0,0,0,0,     0,\
             BUTTON_DISP_OFF,0,0,0,\
             BUTTON_DISP_OFF,0,0,0,\
@@ -843,7 +846,7 @@ class update_window:
             
             [[" ",             CLICK_SOUND_ON ,DISP_LEFT_ALIGN,0,0,7,MES_NO_FLASH]],\
             
-            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
+            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,NO_VECTOR_GRP,\
             ox,oy,ox,oy,   0,0,  13*8+17,33,   2,1, 1,1,   0,0,    0,0,    0,0,0,0,    0,\
             BUTTON_DISP_OFF,0,0,0,\
             BUTTON_DISP_OFF,0,0,0,\
@@ -895,7 +898,7 @@ class update_window:
             [ "",              CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,  MES_NO_FLASH,    0,0,0,0,   0,0,0,0,0,  0,0,0,0,0,  0,                           OPE_OBJ_TYPE_NONE,  "",DISP_LEFT_ALIGN,0,   70  ,0,7,10,0,   0,  [" "," "],              ],\
             [ "RETURN",        CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,  MES_YELLOW_FLASH,0,0,0,0,   0,0,0,0,0,  0,0,0,0,0,  0,                           OPE_OBJ_TYPE_NONE,  "",DISP_LEFT_ALIGN,0,   70  ,0,7,10,0,   0,  [" "," "],              ]],\
             
-            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
+            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,NO_VECTOR_GRP,\
             ox,oy,ox,oy,   0,0,  160-16,120-8,   2,2, 2,2,   0,0,    0,0,    0,0,0,0,    0,\
             BUTTON_DISP_OFF,0,0,0,\
             BUTTON_DISP_OFF,0,0,0,\
@@ -1004,7 +1007,7 @@ class update_window:
             [ "LAST RUST",            CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,  MES_NO_FLASH,    0,0,0,0,   0,0,0,0,0,  0,0,0,0,0,  0,                           OPE_OBJ_TYPE_NONE,  "",DISP_LEFT_ALIGN,0,   70  ,0,7,10,0,   0,  [" "," "],              ],\
             [ "RETURN",               CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,  MES_YELLOW_FLASH,0,0,0,0,   0,0,0,0,0,  0,0,0,0,0,  0,                           OPE_OBJ_TYPE_NONE,  "",DISP_LEFT_ALIGN,0,   70  ,0,7,10,0,   0,  [" "," "],              ]],\
             
-            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
+            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,NO_VECTOR_GRP,\
             ox,oy,ox,oy,   0,0,  160-8,120-8,   2,2, 2,2,   0,0,    0,0,    0,0,0,0,    0,\
             BUTTON_DISP_OFF,0,0,0,\
             BUTTON_DISP_OFF,0,0,0,\
@@ -1097,7 +1100,7 @@ class update_window:
             [["NO",CLICK_SOUND_ON ,DISP_CENTER,0,0,6,MES_NO_FLASH],\
             ["YES",CLICK_SOUND_ON ,DISP_CENTER,0,0,10,MES_NO_FLASH]],\
             
-            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
+            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,NO_VECTOR_GRP,\
             ox,oy,ox,oy,   0,0,  28,22,   2,1, 1,1,   0,0,    0,0,    0,0,0,0,     0,\
             BUTTON_DISP_OFF,0,0,0,\
             BUTTON_DISP_OFF,0,0,0,\
@@ -1137,7 +1140,7 @@ class update_window:
             
             [["SCORE ?",    CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH]],\
             
-            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
+            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,NO_VECTOR_GRP,\
             ox,oy,ox,oy,   0,0,  54,18,   3,3, 1,0.7,   0,0,    0,0,    0,0,0,0,     0,\
             BUTTON_DISP_OFF,0,0,0,\
             BUTTON_DISP_OFF,0,0,0,\
@@ -1177,7 +1180,7 @@ class update_window:
             
             [["NAME ?",    CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH]],\
             
-            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
+            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,NO_VECTOR_GRP,\
             ox,oy,ox,oy,   0,0,  54,18,   3,3, 1,0.7,   0,0,    0,0,    0,0,0,0,     0,\
             BUTTON_DISP_OFF,0,0,0,\
             BUTTON_DISP_OFF,0,0,0,\
@@ -1217,7 +1220,7 @@ class update_window:
             
             [["ALL SAVE DATA ?",    CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH]],\
             
-            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
+            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,NO_VECTOR_GRP,\
             ox,oy,ox,oy,   0,0,  54,18,   3,3, 1,0.7,   0,0,    0,0,    0,0,0,0,     0,\
             BUTTON_DISP_OFF,0,0,0,\
             BUTTON_DISP_OFF,0,0,0,\
@@ -1276,7 +1279,7 @@ class update_window:
         [ " 9 " + str(self.score_board[d][8][LIST_SCORE_BOARD_NAME]) + str("{:>9}".format(self.score_board[d][8][LIST_SCORE_BOARD_SCORE])) + " L" + str("{:>2}".format(self.score_board[d][8][LIST_SCORE_BOARD_LOOP])) + " ST" + str("{:>2}".format(self.score_board[d][8][LIST_SCORE_BOARD_CLEAR_STAGE])),CLICK_SOUND_ON ,DISP_LEFT_ALIGN,0,0,13,MES_NO_FLASH],\
         [ "10 " + str(self.score_board[d][9][LIST_SCORE_BOARD_NAME]) + str("{:>9}".format(self.score_board[d][9][LIST_SCORE_BOARD_SCORE])) + " L" + str("{:>2}".format(self.score_board[d][9][LIST_SCORE_BOARD_LOOP])) + " ST" + str("{:>2}".format(self.score_board[d][9][LIST_SCORE_BOARD_CLEAR_STAGE])),CLICK_SOUND_ON ,DISP_LEFT_ALIGN,0,0, 2,MES_NO_FLASH]],\
         
-        NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
+        NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,NO_VECTOR_GRP,\
         0,14,2,14,   152,89,  152,89,   2,1, 2,1,   0,0,    0,0,    0,0,0,0,    0,\
         BUTTON_DISP_OFF,0,0,0,\
         BUTTON_DISP_OFF,0,0,0,\
@@ -1328,7 +1331,7 @@ class update_window:
         [ "6",  CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH],\
         [ "7",  CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH]],\
         
-        NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
+        NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,NO_VECTOR_GRP,\
         63,44,63,44,   0,0,  22,67,      2,1, 2,1,   1,1,    0,0,    0,0,0,0,   0,\
         BUTTON_DISP_OFF,0,0,0,\
         BUTTON_DISP_OFF,0,0,0,\
@@ -1408,7 +1411,7 @@ class update_window:
         [ get_cmnt_line1_jpn,   CLICK_SOUND_ON ,DISP_CENTER,9, 7, 7,MES_NO_FLASH],\
         [ get_cmnt_line2_jpn,   CLICK_SOUND_ON ,DISP_CENTER,9, 7, 7,MES_NO_FLASH]],\
         
-        NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
+        NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,NO_VECTOR_GRP,\
         ox - expand_width // 2,oy - expand_hight,ox - expand_width // 2,oy - expand_hight,   0,0,  110 + expand_width,30 + expand_hight,   2,1, 1,0.4,   0,0,    0,0,    0,0.01,0,1.04,   wait,\
         BUTTON_DISP_OFF,0,0,0,\
         BUTTON_DISP_OFF,0,0,0,\
@@ -1458,7 +1461,7 @@ class update_window:
         [achieve_cmnt_eng,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,-6,-7,7,MES_NO_FLASH],\
         
         NO_ITEM_TEXT,NO_ITEM_KANJI_TEXT,\
-        NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
+        NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,NO_VECTOR_GRP,\
         160 - len(achieve_cmnt_eng) * 4 + ox,115 + oy,   160 - len(achieve_cmnt_eng) * 4,115 + oy,   0,0,len(achieve_cmnt_eng) * 4,6,   1,1, 1,0.4,   0,0,    0,0,    0.02,0.04,1.1,1.04,   wait,\
         BUTTON_DISP_OFF,0,0,0,\
         BUTTON_DISP_OFF,0,0,0,\

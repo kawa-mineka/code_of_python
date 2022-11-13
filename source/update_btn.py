@@ -19,43 +19,43 @@ from update_ship   import *   #自機関連更新関数モジュール読み込�
 from update_window import *   #ポーズウィンドウ作成時に使用するのでインポート
 
 class update_btn:
-    #スペースキーかゲームパッドAが押されたかどうか？もしくはリプレイモードでショット発射したのか調べる     KEY SPACE GAMEPAD A
+    #スペースキーかゲームパッドのショットボタンが押されたかどうか？もしくはリプレイモードでショット発射したのか調べる     KEY SPACE GAMEPAD-SHOT GAMEPAD-SHOT&SUB_WEAPON
     def shot_btn(self):
         if self.replay_status == REPLAY_PLAY: #リプレイステータスが「再生中」の場合は
             if self.replay_data[self.replay_stage_num][self.replay_frame_index + 1 ] & 0b00010000 == 0b00010000: #LowByte リプレイデータを調べてPAD Aが押された記録だったのなら...
                 update_ship.fire_shot(self) #ショット発射関数呼び出し！
         elif self.move_mode == MOVE_MANUAL: #手動移動モードの場合は
-            if pyxel.btn(pyxel.KEY_SPACE) or pyxel.btn(pyxel.GAMEPAD1_BUTTON_A) or pyxel.btn(pyxel.GAMEPAD2_BUTTON_A): #パッドAかスペースキーが押されたか？
+            if pyxel.btn(pyxel.KEY_SPACE) or func.push_pad_btn(self,BTN_SHOT_AND_SUB_WEAPON) or func.push_pad_btn(self,BTN_SHOT): #パッドのショット発射ボタン又はスペースキーが押されたか？
                 self.pad_data_l += PAD_A #コントロールパッド入力記録にAボタンを押した情報ビットを立てて記録する
                 update_ship.fire_shot(self) #ショット発射関数呼び出し！
 
-    #スペースキーかゲームバットBボタンが押さたかどうか？もしくはリプレイモードでミサイル発射したのか調べる KEY SPACE GAMEPAD B
+    #スペースキーかゲームバットのミサイルボタンが押さたかどうか？もしくはリプレイモードでミサイル発射したのか調べる KEY SPACE GAMEPAD-MISSILE
     def missile_btn(self):
         if self.replay_status == REPLAY_PLAY: #リプレイステータスが「再生中」の場合は
             if self.replay_data[self.replay_stage_num][self.replay_frame_index + 1] & 0b00100000 == 0b00100000: #LowByte リプレイデータを調べてPAD Bが押された記録だったのなら...
                 update_ship.fire_missile(self) #ミサイル発射関数呼び出し！
         elif self.move_mode == MOVE_MANUAL: #手動移動モードの場合は
-            if pyxel.btn(pyxel.KEY_SPACE) or pyxel.btn(pyxel.GAMEPAD1_BUTTON_B) or pyxel.btn(pyxel.GAMEPAD2_BUTTON_B): #パッドBかスペースキーが押されたか？
+            if pyxel.btn(pyxel.KEY_SPACE) or func.push_pad_btn(self,BTN_MISSILE): #パッドのミサイル発射ボタン又はスペースキーが押されたか？
                 self.pad_data_l += PAD_B #コントロールパッド入力記録にBボタンを押した情報ビットを立てて記録する
                 update_ship.fire_missile(self) #ミサイル発射関数呼び出し！
 
-    #サブウェポン切り替えボタンが押された＆サブウェポンを一つでも所維持しているのか？チェックする         GAMEPAD Y
+    #サブウェポン切り替えボタンが押された＆サブウェポンを一つでも所維持しているのか？チェックする         GAMEPAD-SUB_WEAPON_CHANGE
     def change_sub_weapon_btn(self):
         if self.replay_status == REPLAY_PLAY: #リプレイステータスが「再生中」の場合は
             if self.replay_data[self.replay_stage_num][self.replay_frame_index + 1] & 0b10000000 == 0b10000000: #LowByte リプレイデータを調べてPAD Yが押された記録だったのなら...
                 update_ship.change_sub_weapon(self) #サブウェポン切り替え関数呼び出し！
         elif self.move_mode == MOVE_MANUAL: #手動移動モードの場合は
-            if pyxel.btnp(pyxel.GAMEPAD1_BUTTON_Y) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_Y) and self.select_sub_weapon_id != -1:#サブウェポン切り替えボタンが押された＆サブウェポンを一つでも所維持しているのか？
+            if func.push_pad_btnp(self,BTN_SUB_WEAPON_CHANGE) and self.select_sub_weapon_id != -1:#サブウェポン切り替えボタンが押された＆サブウェポンを一つでも所維持しているのか？
                 self.pad_data_l += PAD_Y #コントロールパッド入力記録にYボタンを押した情報ビットを立てて記録する
                 update_ship.change_sub_weapon(self) #サブウェポン切り替え関数呼び出し！
 
-    #クローが弾を発射するのか調べる関数                                                              KEY SPACE GAMEPAD A
+    #クローが弾を発射するのか調べる関数                                                              KEY SPACE GAMEPAD-SHOT GAEPAD-SHOT&SUB_WEAPON
     def claw_shot_btn(self):
         if self.replay_status == REPLAY_PLAY: #リプレイステータスが「再生中」の場合は
             if self.replay_data[self.replay_stage_num][self.replay_frame_index + 1] & 0b00010000 == 0b00010000: #LowByte リプレイデータを調べてPAD Aが押された記録だったのなら...
                 update_ship.fire_claw_shot(self) #クローショット発射関数呼び出し！
         elif self.move_mode == MOVE_MANUAL: #手動移動モードの場合は
-            if pyxel.btn(pyxel.KEY_SPACE) or pyxel.btn(pyxel.GAMEPAD1_BUTTON_A) or pyxel.btn(pyxel.GAMEPAD2_BUTTON_A): #パッドAかスペースキーが押されたか？
+            if pyxel.btn(pyxel.KEY_SPACE) or func.push_pad_btn(self,BTN_SHOT_AND_SUB_WEAPON) or func.push_pad_btn(self,BTN_SHOT):  #パッドのショット発射ボタン又はスペースキーが押されたか？
                 update_ship.fire_claw_shot(self) #クローショット発射関数呼び出し！
 
     #クローの消滅                                                                                  KEY W
