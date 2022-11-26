@@ -203,7 +203,7 @@ class update_title:
                     func.push_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPUSH
                     update_window.create(self,WINDOW_ID_SELECT_SHIP,0,0)     #「SELECT SHIP」ウィンドウの作製
                     #選択カーソル表示をon,カーソルは上下移動のみ,,カーソル移動ステップはx4,y7,いま指示しているアイテムナンバーは0の「JUSTICE PYTHON」
-                    #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は6項目なので 13-1=12を代入,メニューの階層が増えたのでMENU_LAYER0からMENU_LAYER1にします
+                    #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は13項目なので 13-1=12を代入,メニューの階層が増えたのでMENU_LAYER0からMENU_LAYER1にします
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,7,10,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,13-1,0,MENU_LAYER1)
                     self.active_window_id = WINDOW_ID_SELECT_SHIP #このウィンドウIDを最前列でアクティブなものとする
                     #!check##############################################################################################
@@ -626,6 +626,18 @@ class update_title:
                         pyxel.fullscreen(True)           #pyxel Ver1.5からfullscreen命令が追加されたらしい 裏技ッポイけど！？使っても良いのん？？
                     else:
                         pyxel.fullscreen(False)          #フルスクリーンフラグが立っていなかったらノーフルスクリーンモード(ウィンドウ表示)にする
+                elif self.cursor_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN:
+                    update_window.change_window_priority_normal(self,WINDOW_ID_CONFIG) #CONFIGウィンドウの表示優先度を「normal」にする
+                    if func.search_window_id(self,WINDOW_ID_JOYPAD_ASSIGN) == -1: #「JOYPAD_ASSIGN」ウィンドウが存在しないのなら・・
+                        self.cursor_pre_pre_decision_item_y = self.cursor_pre_decision_item_y #前のレイヤー選択アイテム「CONFIG」を前の前のレイヤー選択アイテムとして保存する
+                        self.cursor_pre_decision_item_y     = self.cursor_decision_item_y     #今選択されたアイテム「JOYPAD ASSIGN」を前のレイヤー選択アイテムとして保存する
+                        func.push_cursor_data(self,WINDOW_ID_CONFIG)             #「CONFIG」ウィンドウのカーソルデータをPUSH
+                        update_window.create(self,WINDOW_ID_JOYPAD_ASSIGN,0,0) #「JOYPAD ASSIGN」ウィンドウの作製
+                        #選択カーソル表示をon,カーソルは上下移動のみ,,カーソル移動ステップはx4,y7,いま指示しているアイテムナンバーは2の「NORMAL」
+                        #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は13項目なので 13-1=12を代入,メニューの階層が増えたのでMENU_LAYER1からMENU_LAYER2にします
+                        func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,7,10,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,13-1,0,MENU_LAYER2)
+                        self.active_window_id = WINDOW_ID_JOYPAD_ASSIGN #このウィンドウIDを最前列でアクティブなものとする
+                        pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
                 elif self.cursor_decision_item_y == MENU_CONFIG_INITIALIZE:
                     update_window.change_window_priority_normal(self,WINDOW_ID_CONFIG) #CONFIGウィンドウの表示優先度を「normal」にする
                     if func.search_window_id(self,WINDOW_ID_INITIALIZE) == -1: #「INITIALIZE」ウィンドウが存在しないのなら・・
@@ -836,6 +848,24 @@ class update_title:
                     
                     self.active_window_id = WINDOW_ID_SELECT_YES_NO #SELECT_YES_NOウィンドウを最前列でアクティブなものとする
                     pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
+                
+            elif self.cursor_pre_pre_decision_item_y == MENU_CONFIG and self.cursor_pre_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN and self.cursor_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN_SAVE_AND_RETURN:
+                update_window.change_window_priority_normal(self,MENU_CONFIG_JOYPAD_ASSIGN) #MENU_CONFIG_JOYPAD_ASSIGNウィンドウの表示優先度を「normal」にする
+                func.create_master_flag_list(self)                              #フラグ＆データ関連のマスターリスト作成関数を呼び出す
+                i = func.search_window_id(self,MENU_CONFIG_JOYPAD_ASSIGN)
+                self.window[i].vx = 0.3                                         #MENU_CONFIG_JOYPAD_ASSIGNウィンドウを右上にフッ飛ばしていく
+                self.window[i].vx_accel = 1.2
+                self.window[i].vy = -0.2
+                self.window[i].vy_accel = 1.2
+                self.window[i].window_status = WINDOW_CLOSE
+                self.window[i].comment_flag = COMMENT_FLAG_OFF
+                self.window[i].flag_list = self.master_flag_list                #マスターフラグデータリスト更新→ウィンドウのフラグリストに書き込んで更新します
+                func.pop_cursor_data(self,WINDOW_ID_CONFIG)                     #「CONFIG」ウィンドウのカーソルデータをPOP
+                self.cursor_pre_pre_decision_item_y = UNSELECTED                #前々回選択されたアイテムは未選択にして初期化
+                self.cursor_pre_decision_item_y = MENU_CONFIG                   #前回選択されたアイテムを「CONFIG」にする 
+                pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                self.active_window_id = WINDOW_ID_CONFIG                        #1階層前の「CONFIG」ウィンドウIDを最前列でアクティブなものとする
+                update_window.change_window_priority_top(self,WINDOW_ID_CONFIG) #CONFIGウィンドウの表示優先度を「TOP」にする
             
         elif self.cursor_menu_layer == MENU_LAYER3: #メニューが3階層目の選択分岐
             if   self.cursor_pre_pre_pre_decision_item_y == MENU_CONFIG and self.cursor_pre_pre_decision_item_y == MENU_CONFIG_INITIALIZE and self.cursor_pre_decision_item_y == MENU_CONFIG_INITIALIZE_SCORE and self.cursor_decision_item_y == 0:

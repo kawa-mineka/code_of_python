@@ -88,7 +88,7 @@ class update_window:
     def create(self,id,ox,oy):
         func.create_master_flag_list(self) #まず先にフラグ＆データ関連のマスターリスト作成関数を呼び出す
         new_window = Window()
-        if   id == WINDOW_ID_MAIN_MENU:
+        if   id == WINDOW_ID_MAIN_MENU:                 #メインメニューウィンドウ
             new_window.update(\
             WINDOW_ID_MAIN_MENU,\
             WINDOW_ID_SUB_NORMAL_MENU,\
@@ -144,7 +144,7 @@ class update_window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_SELECT_STAGE_MENU:
+        elif id == WINDOW_ID_SELECT_STAGE_MENU:         #ステージセレクトウィンドウ
             new_window.update(\
             WINDOW_ID_SELECT_STAGE_MENU,\
             WINDOW_ID_SUB_NORMAL_MENU,\
@@ -186,7 +186,7 @@ class update_window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_SELECT_LOOP_MENU:
+        elif id == WINDOW_ID_SELECT_LOOP_MENU:          #周回数セレクトウィンドウ
             new_window.update(\
             WINDOW_ID_SELECT_LOOP_MENU,\
             WINDOW_ID_SUB_NORMAL_MENU,\
@@ -228,7 +228,7 @@ class update_window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_BOSS_MODE_MENU:
+        elif id == WINDOW_ID_BOSS_MODE_MENU:            #ボスモードON/OFFウィンドウ
             new_window.update(\
             WINDOW_ID_BOSS_MODE_MENU,\
             WINDOW_ID_SUB_ON_OFF_MENU,\
@@ -269,7 +269,7 @@ class update_window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_HITBOX_MENU:
+        elif id == WINDOW_ID_HITBOX_MENU:               #当たり判定表示ON/OFFウィンドウ
             new_window.update(\
             WINDOW_ID_HITBOX_MENU,\
             WINDOW_ID_SUB_ON_OFF_MENU,\
@@ -310,7 +310,7 @@ class update_window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_SELECT_DIFFICULTY:
+        elif id == WINDOW_ID_SELECT_DIFFICULTY:         #難易度選択ウィンドウ
             new_window.update(\
             WINDOW_ID_SELECT_DIFFICULTY,\
             WINDOW_ID_SUB_MULTI_SELECT_MENU,\
@@ -355,7 +355,7 @@ class update_window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_GAME_OVER_RETURN:
+        elif id == WINDOW_ID_GAME_OVER_RETURN:          #ゲームオーバー後タイトルへ戻るウィンドウ
             new_window.update(\
             WINDOW_ID_GAME_OVER_RETURN,\
             WINDOW_ID_SUB_NORMAL_MENU,\
@@ -396,7 +396,7 @@ class update_window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_GAME_OVER_RETURN_NO_SAVE:
+        elif id == WINDOW_ID_GAME_OVER_RETURN_NO_SAVE:  #ゲームオーバー後タイトルへ戻るウィンドウ(リプレイ保存付き)
             new_window.update(\
             WINDOW_ID_GAME_OVER_RETURN_NO_SAVE,\
             WINDOW_ID_SUB_NORMAL_MENU,\
@@ -436,7 +436,7 @@ class update_window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_INPUT_YOUR_NAME:
+        elif id == WINDOW_ID_INPUT_YOUR_NAME:           #名前入力ウィンドウ
             new_window.update(\
             WINDOW_ID_INPUT_YOUR_NAME,\
             WINDOW_ID_SUB_NORMAL_MENU,\
@@ -476,7 +476,7 @@ class update_window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_CONFIG:
+        elif id == WINDOW_ID_CONFIG:                    #コンフィグウィンドウ
             new_window.update(\
             WINDOW_ID_CONFIG,\
             WINDOW_ID_SUB_SWITCH_TEXT_MENU,\
@@ -493,7 +493,7 @@ class update_window:
             [["SCREEN MODE", CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,  MES_NO_FLASH,    0,0,0,0,   0,0,0,0,0,  0,0,0,0,0,  LIST_WINDOW_FLAG_SCREEN_MODE,OPE_OBJ_TYPE_ON_OFF,"",DISP_LEFT_ALIGN,0,   70  ,0,7,10,0,   100,["WINDOW","FULL SCREEN"]],\
             ["BGM VOLUME",   CLICK_SOUND_OFF,DISP_LEFT_ALIGN,11,0,7,  MES_NO_FLASH,    0,0,0,0,   0,0,0,0,0,  0,0,0,0,0,  LIST_WINDOW_FLAG_BGM_VOL,    OPE_OBJ_TYPE_NUM,   "",DISP_LEFT_ALIGN,0,   70+4,0,7,10,0,   100,[" "," "],               0,     DISP_OFF,DISP_OFF,DISP_ON,DISP_ON, 0,0, 0,0, STEP4*25,STEP8*3+1, STEP4*19,STEP8*3+1],\
             ["SE VOLUME",    CLICK_SOUND_OFF,DISP_LEFT_ALIGN,11,0,7,  MES_NO_FLASH,    0,0,0,0,   0,0,0,0,0,  0,0,0,0,0,  LIST_WINDOW_FLAG_SE_VOL,     OPE_OBJ_TYPE_NUM,   "",DISP_LEFT_ALIGN,0,   70+4,0,7,10,0,   7,  [" "," "],               0,     DISP_OFF,DISP_OFF,DISP_ON,DISP_ON, 0,0, 0,0, STEP4*25,STEP8*4+1, STEP4*19,STEP8*4+1],\
-            ["CONTROL TYPE", CLICK_SOUND_ON ,DISP_LEFT_ALIGN,10,0,7,  MES_NO_FLASH,    0,0,0,0,   0,0,0,0,0,  0,0,0,0,0,  LIST_WINDOW_FLAG_CTRL_TYPE,  OPE_OBJ_TYPE_NUM,   "",DISP_LEFT_ALIGN,0,   70+4,0,7,10,1,   5,  [" "," "],               0,     DISP_OFF,DISP_OFF,DISP_ON,DISP_ON, 0,0, 0,0, STEP4*25,STEP8*5+1, STEP4*19,STEP8*5+1],\
+            ["JOYPAD ASSIGN",CLICK_SOUND_ON ,DISP_LEFT_ALIGN,10,0,7,  MES_NO_FLASH,    0,0,0,0,   0,0,0,0,0,  0,0,0,0,0,  0,                           OPE_OBJ_TYPE_NONE,  "",DISP_LEFT_ALIGN,0,   70  ,0,7,10,0,   0,  [" "," "],              ],\
             ["",             CLICK_SOUND_ON ,DISP_LEFT_ALIGN, 0,0,7,  MES_NO_FLASH,    0,0,0,0,   0,0,0,0,0,  0,0,0,0,0,  0,                           OPE_OBJ_TYPE_NONE,  "",DISP_LEFT_ALIGN,0,   70  ,0,7,10,0,   0,  [" "," "],              ],\
             ["",             CLICK_SOUND_ON ,DISP_LEFT_ALIGN, 0,0,7,  MES_NO_FLASH,    0,0,0,0,   0,0,0,0,0,  0,0,0,0,0,  0,                           OPE_OBJ_TYPE_NONE,  "",DISP_LEFT_ALIGN,0,   70  ,0,7,10,0,   0,  [" "," "],              ],\
             ["LANGUAGE",     CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,  MES_NO_FLASH,    0,0,0,0,   0,0,0,0,0,  0,0,0,0,0,  LIST_WINDOW_FLAG_LANGUAGE,   OPE_OBJ_TYPE_ON_OFF,"",DISP_LEFT_ALIGN,0,   70  ,0,7,10,0,   100,["ENGLISH","JAPANESE"], ],\
@@ -527,7 +527,7 @@ class update_window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_INITIALIZE:
+        elif id == WINDOW_ID_INITIALIZE:                #初期化ウィンドウ
             new_window.update(\
             WINDOW_ID_INITIALIZE,\
             WINDOW_ID_SUB_NORMAL_MENU,\
@@ -573,7 +573,7 @@ class update_window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_CONFIG_GRAPHICS:
+        elif id == WINDOW_ID_CONFIG_GRAPHICS:           #グラフイックス設定ウィンドウ(現時点では未使用)
             new_window.update(\
             WINDOW_ID_CONFIG_GRAPHICS,\
             WINDOW_ID_SUB_NORMAL_MENU,\
@@ -622,7 +622,7 @@ class update_window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_MEDAL_LIST:
+        elif id == WINDOW_ID_MEDAL_LIST:                #メダルリストウィ：ンドウ
             new_window.update(\
             WINDOW_ID_MEDAL_LIST,\
             WINDOW_ID_SUB_NORMAL_MENU,\
@@ -705,7 +705,7 @@ class update_window:
             [ MEDAL_BEFOREHAND_1SHOT_ITEM,MEDAL_BEFOREHAND_2SHOT_ITEM,MEDAL_BEFOREHAND_3SHOT_ITEM,MEDAL_BEFOREHAND_4SHOT_ITEM,0,0,0,0,0,0],\
             [ MEDAL_EQUIPMENT_LS_SHIELD,  MEDAL_PLUS_MEDALLION,       MEDAL_CONCENTRATION,         0,                         0,0,0,0,0,0],\
             [ MEDAL_FRAME_RESIST,         MEDAL_RECOVERY_OVER_TIME,   MEDAL_TWINKLE,               0,                         0,0,0,0,0,0]])
-        elif id == WINDOW_ID_EXIT:
+        elif id == WINDOW_ID_EXIT:                      #退出終了ウィンドウ
             new_window.update(\
             WINDOW_ID_EXIT,\
             WINDOW_ID_SUB_NORMAL_MENU,\
@@ -746,7 +746,7 @@ class update_window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_PAUSE_MENU:
+        elif id == WINDOW_ID_PAUSE_MENU:                #ポーズメニューウィンドウ
             new_window.update(\
             WINDOW_ID_PAUSE_MENU,\
             WINDOW_ID_SUB_NORMAL_MENU,\
@@ -789,7 +789,7 @@ class update_window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_RETURN_TITLE:
+        elif id == WINDOW_ID_RETURN_TITLE:              #タイトルへ戻るウィンドウ
             new_window.update(\
             WINDOW_ID_EXIT,\
             WINDOW_ID_SUB_NORMAL_MENU,\
@@ -830,7 +830,7 @@ class update_window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_EQUIPMENT:
+        elif id == WINDOW_ID_EQUIPMENT:                 #装備ウィンドウ
             shiplist = self.playing_ship_list
             new_window.update(\
             WINDOW_ID_EQUIPMENT,\
@@ -871,7 +871,7 @@ class update_window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_STATUS:
+        elif id == WINDOW_ID_STATUS:                    #ステータス表示ウィンドウ
             new_window.update(\
             WINDOW_ID_STATUS,\
             WINDOW_ID_SUB_NORMAL_MENU,\
@@ -980,7 +980,7 @@ class update_window:
             [0,0,0,0,0,0,0,0,0,0],\
             [0,0,0,0,0,0,0,0,0,0]],\
             )
-        elif id == WINDOW_ID_SELECT_SHIP:
+        elif id == WINDOW_ID_SELECT_SHIP:               #自機選択ウィンドウ
             new_window.update(\
             WINDOW_ID_SELECT_SHIP,\
             WINDOW_ID_SUB_NORMAL_MENU,\
@@ -1084,7 +1084,7 @@ class update_window:
             [0,0,0,0,0,0,0,0,0,0],\
             [0,0,0,0,0,0,0,0,0,0]],\
             )
-        elif id == WINDOW_ID_SELECT_YES_NO:
+        elif id == WINDOW_ID_SELECT_YES_NO:             #はい/いいえ選択ウィンドウ
             new_window.update(\
             WINDOW_ID_SELECT_YES_NO,\
             WINDOW_ID_SUB_YES_NO_MENU,\
@@ -1125,7 +1125,7 @@ class update_window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_PRINT_INIT_SCORE:
+        elif id == WINDOW_ID_PRINT_INIT_SCORE:          #スコア初期化ウィンドウ
             new_window.update(\
             WINDOW_ID_PRINT_INIT_SCORE,\
             WINDOW_ID_SUB_NORMAL_MENU,\
@@ -1165,7 +1165,7 @@ class update_window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_PRINT_INIT_NAME:
+        elif id == WINDOW_ID_PRINT_INIT_NAME:           #名前初期化ウィンドウ
             new_window.update(\
             WINDOW_ID_PRINT_INIT_NAME,\
             WINDOW_ID_SUB_NORMAL_MENU,\
@@ -1205,7 +1205,7 @@ class update_window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_PRINT_INIT_ALL:
+        elif id == WINDOW_ID_PRINT_INIT_ALL:            #全てを初期化ウィンドウ
             new_window.update(\
             WINDOW_ID_PRINT_INIT_ALL,\
             WINDOW_ID_SUB_NORMAL_MENU,\
@@ -1245,10 +1245,115 @@ class update_window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
+        elif id == WINDOW_ID_JOYPAD_ASSIGN:             #ジョイパッドボタン割り当て設定ウィンドウ
+            new_window.update(\
+            WINDOW_ID_MAIN_MENU,\
+            WINDOW_ID_SUB_NORMAL_MENU,\
+            WINDOW_TYPE_NORMAL,\
+            WINDOW_FRAME_NORMAL,\
+            WINDOW_BG_BLUE_BACK,\
+            WINDOW_PRIORITY_NORMAL,\
+            DIR_RIGHT_DOWN,\
+            DIR_LEFT_UP,\
+            WINDOW_OPEN,\
+            WINDOW_BETWEEN_LINE_7,\
+            ["JOYPAD ASSIGN"        ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_RAINBOW_FLASH],\
+            
+            [["FIRE & SUB WEAPON"   ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,MES_NO_FLASH],\
+            [ "MISSILE"             ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,MES_NO_FLASH],\
+            [ "MAIN WEAPON CHANGE"  ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,MES_NO_FLASH],\
+            [ "SUB WEAPON CHANGE"   ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,MES_NO_FLASH],\
+            [ "SPEED"               ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,MES_NO_FLASH],\
+            [ "PAUSE"               ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,MES_NO_FLASH],\
+            [ ""                    ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,MES_NO_FLASH],\
+            [ "CLAW STYLE"          ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,MES_NO_FLASH],\
+            [ "CLAW DISTANCE"       ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,MES_NO_FLASH],\
+            [ ""                    ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,3,MES_NO_FLASH],\
+            [ "DEFAULT"             ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,3,MES_NO_FLASH],\
+            [ "CANCEL"              ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,MES_NO_FLASH],\
+            [ "SAVE & RETURN"       ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,MES_YELLOW_FLASH]],\
+            
+            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
+            
+            # NO_VECTOR_GRP,\
+            
+            [[LIST_WINDOW_VECTOR_GRP_LINE  ,XBJ_X001,XBJ_Y001 ,XBJ_X002,XBJ_Y002 ,pyxel.COLOR_DARK_BLUE],\
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X002,XBJ_Y002 ,XBJ_X003,XBJ_Y003 ,pyxel.COLOR_DARK_BLUE],\
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X003,XBJ_Y003 ,XBJ_X004,XBJ_Y004 ,pyxel.COLOR_DARK_BLUE],\
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X004,XBJ_Y004 ,XBJ_X005,XBJ_Y005 ,pyxel.COLOR_DARK_BLUE],\
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X005,XBJ_Y005 ,XBJ_X006,XBJ_Y006 ,pyxel.COLOR_DARK_BLUE],\
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X006,XBJ_Y006 ,XBJ_X007,XBJ_Y007 ,pyxel.COLOR_DARK_BLUE],\
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X007,XBJ_Y007 ,XBJ_X008,XBJ_Y008 ,pyxel.COLOR_DARK_BLUE],\
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X008,XBJ_Y008 ,XBJ_X009,XBJ_Y009 ,pyxel.COLOR_DARK_BLUE],\
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X009,XBJ_Y009 ,XBJ_X010,XBJ_Y010 ,pyxel.COLOR_DARK_BLUE],\
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X010,XBJ_Y010 ,XBJ_X011,XBJ_Y011 ,pyxel.COLOR_DARK_BLUE],\
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X011,XBJ_Y011 ,XBJ_X012,XBJ_Y012 ,pyxel.COLOR_DARK_BLUE],\
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X012,XBJ_Y012 ,XBJ_X013,XBJ_Y013 ,pyxel.COLOR_DARK_BLUE],\
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X013,XBJ_Y013 ,XBJ_X014,XBJ_Y014 ,pyxel.COLOR_DARK_BLUE],\
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X014,XBJ_Y014 ,XBJ_X015,XBJ_Y015 ,pyxel.COLOR_DARK_BLUE],\
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X015,XBJ_Y015 ,XBJ_X016,XBJ_Y016 ,pyxel.COLOR_DARK_BLUE],\
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X016,XBJ_Y016 ,XBJ_X017,XBJ_Y017 ,pyxel.COLOR_DARK_BLUE],\
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X017,XBJ_Y017 ,XBJ_X018,XBJ_Y018 ,pyxel.COLOR_DARK_BLUE],\
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X018,XBJ_Y018 ,XBJ_X019,XBJ_Y019 ,pyxel.COLOR_DARK_BLUE],\
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X019,XBJ_Y019 ,XBJ_X020,XBJ_Y020 ,pyxel.COLOR_DARK_BLUE],\
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X020,XBJ_Y020 ,XBJ_X021,XBJ_Y021 ,pyxel.COLOR_DARK_BLUE],\
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X021,XBJ_Y021 ,XBJ_X022,XBJ_Y022 ,pyxel.COLOR_DARK_BLUE],\
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X022,XBJ_Y022 ,XBJ_X023,XBJ_Y023 ,pyxel.COLOR_DARK_BLUE],\
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X023,XBJ_Y023 ,XBJ_X024,XBJ_Y024 ,pyxel.COLOR_DARK_BLUE],\
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X024,XBJ_Y024 ,XBJ_X025,XBJ_Y025 ,pyxel.COLOR_DARK_BLUE],\
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X025,XBJ_Y025 ,XBJ_X026,XBJ_Y026 ,pyxel.COLOR_DARK_BLUE],\
+            
+            
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X100,XBJ_Y100 ,XBJ_X101,XBJ_Y101 ,pyxel.COLOR_DARK_BLUE],\
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X101,XBJ_Y101 ,XBJ_X102,XBJ_Y102 ,pyxel.COLOR_DARK_BLUE],\
+            
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X103,XBJ_Y103 ,XBJ_X104,XBJ_Y104 ,pyxel.COLOR_DARK_BLUE],\
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X104,XBJ_Y104 ,XBJ_X105,XBJ_Y105 ,pyxel.COLOR_DARK_BLUE],\
+            
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X106,XBJ_Y106 ,XBJ_X107,XBJ_Y107 ,pyxel.COLOR_DARK_BLUE],\
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X107,XBJ_Y107 ,XBJ_X108,XBJ_Y108 ,pyxel.COLOR_DARK_BLUE],\
+            
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X109,XBJ_Y109 ,XBJ_X110,XBJ_Y110 ,pyxel.COLOR_DARK_BLUE],\
+            [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X110,XBJ_Y110 ,XBJ_X111,XBJ_Y111 ,pyxel.COLOR_DARK_BLUE],\
+            
+            
+            [LIST_WINDOW_VECTOR_GRP_CIRCLE ,XBJ_XC00,XBJ_YC00 ,XBJ_R0  ,pyxel.COLOR_DARK_BLUE],\
+            [LIST_WINDOW_VECTOR_GRP_CIRCLE ,XBJ_XC00,XBJ_YC00 ,XBJ_R0A ,pyxel.COLOR_DARK_BLUE],\
+            
+            [LIST_WINDOW_VECTOR_GRP_CIRCLE ,XBJ_XC01,XBJ_YC01 ,XBJ_R1 ,pyxel.COLOR_DARK_BLUE],\
+            [LIST_WINDOW_VECTOR_GRP_CIRCLE ,XBJ_XC02,XBJ_YC02 ,XBJ_R2 ,pyxel.COLOR_DARK_BLUE],\
+            [LIST_WINDOW_VECTOR_GRP_CIRCLE ,XBJ_XC03,XBJ_YC03 ,XBJ_R3 ,pyxel.COLOR_DARK_BLUE],\
+            
+            
+            
+            ],\
+            ox,oy,ox,oy,   0,0,  160-8,120-8,   2,2, 2,2,   0,0,    0,0,    0,0,0,0,    0,\
+            
+            BUTTON_DISP_OFF,0,0,0,\
+            BUTTON_DISP_OFF,0,0,0,\
+            
+            CURSOR_MOVE_SE_NORMAL,CURSOR_PUSH_SE_NORMAL,CURSOR_OK_SE_NORMAL,CURSOR_CANCEL_SE_NORMAL,CURSOR_BOUNCE_SE_NORMAL,\
+            DISP_OFF,\
+            
+            NO_SHIP_LIST,      NO_SHIP_MEDAL_LIST,\
+            NO_WEAPON_LIST,    NO_WEAPON_GRAPH_LIST,\
+            NO_SUB_WEAPON_LIST,NO_SUB_WEAPON_GRAPH_LIST,\
+            NO_MISSILE_LIST,   NO_MISSILE_GRAPH_LIST,\
+            NO_MEDAL_LIST,     NO_MEDAL_GRAPH_LIST,\
+            NO_ITEM_LIST,      NO_ITEM_GRAPH_LIST,\
+            
+            self.master_flag_list,\
+            NO_GRAPH_LIST,NO_TIME_COUNTER_LIST,\
+            NO_EQUIP_MEDAL_GRAPH_LIST,NO_EQUIP_MEDAL_COMMENT_LIST,\
+            
+            COMMENT_FLAG_OFF,0,0,0,0,\
+            NO_COMMENT_DISP_FLAG,\
+            NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
+            NO_ITEM_ID,\
+            )
         else:
             return
-        
-        self.window.append(new_window)                      #ウィンドウを育成する
+        self.window.append(new_window)                  #ウィンドウを育成する
 
     #スコアボードウィンドウの育成
     def create_score_board(self,d): #引数dは難易度 difficulty

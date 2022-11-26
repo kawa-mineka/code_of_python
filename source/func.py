@@ -14,6 +14,9 @@ class func:
 
     #漢字フォントデータの読み込み
     def load_kanji_font_data(self):
+        """
+        漢字フォントデータの読み込み
+        """
         pyxel.load(os.path.abspath("./assets/fonts/misaki_font_k8x12s_001.pyxres")) #漢字フォントデータ(その1)を読み込みます
         # pyxel.load("./assets/fonts/misaki_font_k8x12s_001.pyxres") #漢字フォントデータ(その1)を読み込みます
         # self.kanji_fonts = [] #漢字フォントリストデータをまずは初期化して使えるようにします この方法だとダメだわ
@@ -79,6 +82,11 @@ class func:
 
     #漢字テキストの表示
     def kanji_text(self,x,y,text,col):
+        """
+        漢字を含んだ文章文字の表示
+        
+        x,y=表示座標 text=表示するテキスト col=pyxelのカラーコード 
+        """
         base_x,base_y = x,y
         for char in text:
             found = self.font_code_table.find(char) #foundにテキスト(char)を使ってフォント対応表にある位置を調べる→位置がfoundに入ります(見つからなかったらfoundに-1が入ります)
@@ -98,12 +106,22 @@ class func:
 
     #ドロップシャドウ漢字テキストの表示(影落ち漢字テキスト)
     def drop_shadow_kanji_text(self,x,y,text,col):
+        """
+        漢字を含んだ文章文字(影落ちあり)の表示
+        
+        x,y=表示座標 text=表示するテキスト col=pyxelのカラーコード 
+        """
         func.kanji_text(self,x+1,y,  text,0)       #なんでfunc.kanji_text(self,x+1,y,  text,0)にしないとエラーが出るのか判らない・・試行錯誤で func.kanji_text(self,x+1,y,  text,0)ってやったらうまくいった・・・クラスが違うところから呼び出される関数(この場合はメソッド？)は呼び出された関数自身を示すselfを付けないといけないのかな？謎は深まる・・・
         func.kanji_text(self,x+1,y+1,text,0)
         func.kanji_text(self,x,  y,  text,col)
 
     #ドロップシャドウテキスト(影落ちテキスト)の表示
     def drop_shadow_text(self,x,y,text,col):
+        """
+        影落ちありの文章文字の表示
+        
+        x,y=表示座標 text=表示するテキスト col=pyxelのカラーコード 
+        """
         pyxel.text(x+1,y,  text,0)
         pyxel.text(x+1,y+1,text,0)
         pyxel.text(x,  y,  text,int(col))
@@ -582,6 +600,10 @@ class func:
 
     #敵編隊出現時、現在の編隊IDナンバーとIDナンバーに対応した編隊数、そして現在の生存編隊数をenemy_formationクラスに登録する関数
     def record_enemy_formation(self,num):
+        """敵編隊出現時、現在の編隊IDナンバーとIDナンバーに対応した編隊数、そして現在の生存編隊数をenemy_formationクラスに登録する
+
+        num = 編隊ナンバー
+        """
         #編隊なので編隊のＩＤナンバーと編隊の総数、現在の編隊生存数をEnemy_formationリストに登録します
         new_enemy_formation = Enemy_formation()
         new_enemy_formation.update(self.current_formation_id,num,num,num)

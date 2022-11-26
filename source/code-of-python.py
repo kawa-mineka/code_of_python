@@ -211,8 +211,8 @@ class App:
         #                                     Xボタン,Yボタン,
         #                                     BACKボタン,GUIDEボタン,STARTボタン
         #                                     LEFTSHOULDERボタン,RIGHTSHOULDERボタン]
-        self.default_pad_assign_list = [BTN_MISSILE,BTN_NO_ASSIGN,
-                                        BTN_SHOT_AND_SUB_WEAPON,BTN_SUB_WEAPON_CHANGE,
+        self.default_pad_assign_list = [BTN_SHOT_AND_SUB_WEAPON,BTN_MISSILE,
+                                        BTN_NO_ASSIGN,BTN_SUB_WEAPON_CHANGE,
                                         
                                         BTN_SPEED_CHANGE,BTN_NO_ASSIGN,BTN_PAUSE,
                                         

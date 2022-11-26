@@ -1234,6 +1234,53 @@ class graph:
                         104 + self.window[i].window_bg * 32,96,
                         SIZE_8,SIZE_8,  pyxel.COLOR_GRAY)
                 
+                #ベクターグラフイックスの表示
+                if self.window[i].vector_grp != "": #ベクターグラフイック表示を行うリストが空でないのならば表示を始める
+                    for j in range(len(self.window[i].vector_grp)): #vector_grpの長さの分ループ処理する
+                        open_rate_x = self.window[i].width  / self.window[i].open_width  #開閉率(横軸)
+                        open_rate_y = self.window[i].height / self.window[i].open_height #開閉率(縦軸)
+                        if   self.window[i].vector_grp[j][0] == LIST_WINDOW_VECTOR_GRP_LINE:    #LINE命令
+                            x1,y1  = self.window[i].vector_grp[j][1],self.window[i].vector_grp[j][2] #始点座標の取得
+                            x2,y2  = self.window[i].vector_grp[j][3],self.window[i].vector_grp[j][4] #終点座標の取得
+                            colkey = self.window[i].vector_grp[j][5] #描画色の取得
+                            pyxel.line(self.window[i].posx + x1 * open_rate_x,self.window[i].posy + y1 * open_rate_y,self.window[i].posx + x2 * open_rate_x,self.window[i].posy + y2 * open_rate_y,colkey) #ライン描画
+                        elif self.window[i].vector_grp[j][0] == LIST_WINDOW_VECTOR_GRP_PSET:    #PSET命令
+                            x1,y1  = self.window[i].vector_grp[j][1],self.window[i].vector_grp[j][2] #座標の取得
+                            colkey = self.window[i].vector_grp[j][3] #描画色の取得
+                            pyxel.pset(self.window[i].posx + x1 * open_rate_x,self.window[i].posy + y1 * open_rate_y,colkey) #点描画
+                        elif self.window[i].vector_grp[j][0] == LIST_WINDOW_VECTOR_GRP_BOX:     #BOX命令
+                            x,y           = self.window[i].vector_grp[j][1],self.window[i].vector_grp[j][2] #座標の取得
+                            width,height  = self.window[i].vector_grp[j][3],self.window[i].vector_grp[j][4] #横幅縦幅の取得
+                            colkey = self.window[i].vector_grp[j][5] #描画色の取得
+                            pyxel.rectb(self.window[i].posx + x * open_rate_x,self.window[i].posy + y * open_rate_y,width * open_rate_x,height * open_rate_y,colkey) #矩形描画
+                        elif self.window[i].vector_grp[j][0] == LIST_WINDOW_VECTOR_GRP_BOXF:    #BOXFILL命令
+                            x,y           = self.window[i].vector_grp[j][1],self.window[i].vector_grp[j][2] #座標の取得
+                            width,height  = self.window[i].vector_grp[j][3],self.window[i].vector_grp[j][4] #横幅縦幅の取得
+                            colkey = self.window[i].vector_grp[j][5] #描画色の取得
+                            pyxel.rect(self.window[i].posx + x * open_rate_x,self.window[i].posy + y * open_rate_y,width * open_rate_x,height * open_rate_y,colkey) #矩形描画
+                        elif self.window[i].vector_grp[j][0] == LIST_WINDOW_VECTOR_GRP_CIRCLE:  #CIRCLE命令
+                            x1,y1  = self.window[i].vector_grp[j][1],self.window[i].vector_grp[j][2] #中心座標の取得
+                            r      = self.window[i].vector_grp[j][3]                                 #半径の取得
+                            colkey = self.window[i].vector_grp[j][4]                                 #描画色の取得
+                            pyxel.circb(self.window[i].posx + x1 * open_rate_x,self.window[i].posy + y1 * open_rate_y,r * open_rate_x * open_rate_y,colkey) #円描画
+                        elif self.window[i].vector_grp[j][0] == LIST_WINDOW_VECTOR_GRP_CIRCLEF: #CIRCLEF命令
+                            x1,y1  = self.window[i].vector_grp[j][1],self.window[i].vector_grp[j][2] #中心座標の取得
+                            r      = self.window[i].vector_grp[j][3]                                 #半径の取得
+                            colkey = self.window[i].vector_grp[j][4]                                 #描画色の取得
+                            pyxel.circ(self.window[i].posx + x1 * open_rate_x,self.window[i].posy + y1 * open_rate_y,r * open_rate_x * open_rate_y,colkey) #塗りつぶし円描画
+                        elif self.window[i].vector_grp[j][0] == LIST_WINDOW_VECTOR_GRP_TRI:     #TRIANGLE命令
+                            x1,y1  = self.window[i].vector_grp[j][1],self.window[i].vector_grp[j][2] #座標1の取得
+                            x2,y2  = self.window[i].vector_grp[j][3],self.window[i].vector_grp[j][4] #座標2の取得
+                            x3,y3  = self.window[i].vector_grp[j][5],self.window[i].vector_grp[j][6] #座標3の取得
+                            colkey = self.window[i].vector_grp[j][7] #描画色の取得
+                            pyxel.trib(self.window[i].posx + x1 * open_rate_x,self.window[i].posy + y1 * open_rate_y,self.window[i].posx + x2 * open_rate_x,self.window[i].posy + y2 * open_rate_y,self.window[i].posx + x3 * open_rate_x,self.window[i].posy + y3 * open_rate_y,colkey) #三角形描画
+                        elif self.window[i].vector_grp[j][0] == LIST_WINDOW_VECTOR_GRP_TRIF:    #TRIANGLE FILL命令
+                            x1,y1  = self.window[i].vector_grp[j][1],self.window[i].vector_grp[j][2] #座標1の取得
+                            x2,y2  = self.window[i].vector_grp[j][3],self.window[i].vector_grp[j][4] #座標2の取得
+                            x3,y3  = self.window[i].vector_grp[j][5],self.window[i].vector_grp[j][6] #座標3の取得
+                            colkey = self.window[i].vector_grp[j][7] #描画色の取得
+                            pyxel.tri(self.window[i].posx + x1 * open_rate_x,self.window[i].posy + y1 * open_rate_y,self.window[i].posx + x2 * open_rate_x,self.window[i].posy + y2 * open_rate_y,self.window[i].posx + x3 * open_rate_x,self.window[i].posy + y3 * open_rate_y,colkey) #塗りつぶし三角形描画
+                
                 #タイトルバーの表示######################################
                 if   self.window[i].title_text[LIST_WINDOW_TEXT_FLASH]  == MES_NO_FLASH:        #テキスト点滅無しの場合
                     col = self.window[i].title_text[LIST_WINDOW_TEXT_COLOR]
@@ -1363,54 +1410,7 @@ class graph:
                         open_rate_y = self.window[i].height / self.window[i].open_height #開閉率(縦軸)
                         pyxel.blt(self.window[i].posx + ox * open_rate_x,self.window[i].posy + oy * open_rate_y,imgb,u + u_offset,v,int(w * open_rate_x),int(h * open_rate_y),colkey) #グラフイック表示
                 
-                #ベクターグラフイックスの表示
-                if self.window[i].vector_grp != "": #ベクターグラフイック表示を行うリストが空でないのならば表示を始める
-                    for j in range(len(self.window[i].vector_grp)): #vector_grpの長さの分ループ処理する
-                        open_rate_x = self.window[i].width  / self.window[i].open_width  #開閉率(横軸)
-                        open_rate_y = self.window[i].height / self.window[i].open_height #開閉率(縦軸)
-                        if   self.window[i].vector_grp[j][0] == LIST_WINDOW_VECTOR_GRP_LINE:    #LINE命令
-                            x1,y1  = self.window[i].vector_grp[j][1],self.window[i].vector_grp[j][2] #始点座標の取得
-                            x2,y2  = self.window[i].vector_grp[j][3],self.window[i].vector_grp[j][4] #終点座標の取得
-                            colkey = self.window[i].vector_grp[j][5] #描画色の取得
-                            pyxel.line(self.window[i].posx + x1 * open_rate_x,self.window[i].posy + y1 * open_rate_y,self.window[i].posx + x2 * open_rate_x,self.window[i].posy + y2 * open_rate_y,colkey) #ライン描画
-                        elif self.window[i].vector_grp[j][0] == LIST_WINDOW_VECTOR_GRP_PSET:    #PSET命令
-                            x1,y1  = self.window[i].vector_grp[j][1],self.window[i].vector_grp[j][2] #座標の取得
-                            colkey = self.window[i].vector_grp[j][3] #描画色の取得
-                            pyxel.pset(self.window[i].posx + x1 * open_rate_x,self.window[i].posy + y1 * open_rate_y,colkey) #点描画
-                        elif self.window[i].vector_grp[j][0] == LIST_WINDOW_VECTOR_GRP_BOX:     #BOX命令
-                            x,y           = self.window[i].vector_grp[j][1],self.window[i].vector_grp[j][2] #座標の取得
-                            width,height  = self.window[i].vector_grp[j][3],self.window[i].vector_grp[j][4] #横幅縦幅の取得
-                            colkey = self.window[i].vector_grp[j][5] #描画色の取得
-                            pyxel.rectb(self.window[i].posx + x * open_rate_x,self.window[i].posy + y * open_rate_y,width * open_rate_x,height * open_rate_y,colkey) #矩形描画
-                        elif self.window[i].vector_grp[j][0] == LIST_WINDOW_VECTOR_GRP_BOXF:    #BOXFILL命令
-                            x,y           = self.window[i].vector_grp[j][1],self.window[i].vector_grp[j][2] #座標の取得
-                            width,height  = self.window[i].vector_grp[j][3],self.window[i].vector_grp[j][4] #横幅縦幅の取得
-                            colkey = self.window[i].vector_grp[j][5] #描画色の取得
-                            pyxel.rect(self.window[i].posx + x * open_rate_x,self.window[i].posy + y * open_rate_y,width * open_rate_x,height * open_rate_y,colkey) #矩形描画
-                        elif self.window[i].vector_grp[j][0] == LIST_WINDOW_VECTOR_GRP_CIRCLE:  #CIRCLE命令
-                            x1,y1  = self.window[i].vector_grp[j][1],self.window[i].vector_grp[j][2] #中心座標の取得
-                            r      = self.window[i].vector_grp[j][3]                                 #半径の取得
-                            colkey = self.window[i].vector_grp[j][4]                                 #描画色の取得
-                            pyxel.circb(self.window[i].posx + x1 * open_rate_x,self.window[i].posy + y1 * open_rate_y,r * open_rate_x * open_rate_y,colkey) #円描画
-                        elif self.window[i].vector_grp[j][0] == LIST_WINDOW_VECTOR_GRP_CIRCLEF: #CIRCLEF命令
-                            x1,y1  = self.window[i].vector_grp[j][1],self.window[i].vector_grp[j][2] #中心座標の取得
-                            r      = self.window[i].vector_grp[j][3]                                 #半径の取得
-                            colkey = self.window[i].vector_grp[j][4]                                 #描画色の取得
-                            pyxel.circ(self.window[i].posx + x1 * open_rate_x,self.window[i].posy + y1 * open_rate_y,r * open_rate_x * open_rate_y,colkey) #塗りつぶし円描画
-                        elif self.window[i].vector_grp[j][0] == LIST_WINDOW_VECTOR_GRP_TRI:     #TRIANGLE命令
-                            x1,y1  = self.window[i].vector_grp[j][1],self.window[i].vector_grp[j][2] #座標1の取得
-                            x2,y2  = self.window[i].vector_grp[j][3],self.window[i].vector_grp[j][4] #座標2の取得
-                            x3,y3  = self.window[i].vector_grp[j][5],self.window[i].vector_grp[j][6] #座標3の取得
-                            colkey = self.window[i].vector_grp[j][7] #描画色の取得
-                            pyxel.trib(self.window[i].posx + x1 * open_rate_x,self.window[i].posy + y1 * open_rate_y,self.window[i].posx + x2 * open_rate_x,self.window[i].posy + y2 * open_rate_y,self.window[i].posx + x3 * open_rate_x,self.window[i].posy + y3 * open_rate_y,colkey) #三角形描画
-                        elif self.window[i].vector_grp[j][0] == LIST_WINDOW_VECTOR_GRP_TRIF:    #TRIANGLE FILL命令
-                            x1,y1  = self.window[i].vector_grp[j][1],self.window[i].vector_grp[j][2] #座標1の取得
-                            x2,y2  = self.window[i].vector_grp[j][3],self.window[i].vector_grp[j][4] #座標2の取得
-                            x3,y3  = self.window[i].vector_grp[j][5],self.window[i].vector_grp[j][6] #座標3の取得
-                            colkey = self.window[i].vector_grp[j][7] #描画色の取得
-                            pyxel.tri(self.window[i].posx + x1 * open_rate_x,self.window[i].posy + y1 * open_rate_y,self.window[i].posx + x2 * open_rate_x,self.window[i].posy + y2 * open_rate_y,self.window[i].posx + x3 * open_rate_x,self.window[i].posy + y3 * open_rate_y,colkey) #塗りつぶし三角形描画
-                
-                
+
                 #メダルの表示
                 if self.window[i].medal_graph_list != []: #メダルグラフイックリストが空でないのならば表示を始める
                     for j in range(len(self.window[i].medal_graph_list)): #medal_graph_listの長さの分ループ処理する
