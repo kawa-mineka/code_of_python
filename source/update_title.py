@@ -72,6 +72,7 @@ class update_title:
                                             #選択してcursor_decision_item_yに入ったアイテムナンバーをcursor_pre_decision_item_yに入れて次の階層に潜るって手法かな？
         self.cursor_move_direction = 0         #セレクトカーソルがどう動かせることが出来るのか？の状態変数です
         self.cursor_move_data = 0              #カーソルが実際に動いた方向のデータが入ります
+        self.cursor_button_data =   BTN_NONE   #カーソル決定時に押されたボタンのIDが入ります
         self.cursor_size      = 0              #セレクトカーソルの大きさです(囲み矩形タイプで使用します)
         
         self.active_window_id = 0              #アクティブになっているウィンドウのIDが入ります
@@ -849,6 +850,26 @@ class update_title:
                     self.active_window_id = WINDOW_ID_SELECT_YES_NO #SELECT_YES_NOウィンドウを最前列でアクティブなものとする
                     pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
                 
+            elif self.cursor_pre_pre_decision_item_y == MENU_CONFIG and self.cursor_pre_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN and self.cursor_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN_FIRE_AND_SUBWEAPON:
+                if self.cursor_button_data != BTN_NONE: #スペースキーで決定は除く
+                    self.pad_assign_list[self.cursor_button_data] = BTN_SHOT_AND_SUB_WEAPON
+                    pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                    self.cursor_button_data = BTN_NONE #押されたボタンIDを初期化
+            elif self.cursor_pre_pre_decision_item_y == MENU_CONFIG and self.cursor_pre_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN and self.cursor_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN_MISSILE:
+                if self.cursor_button_data != BTN_NONE: #スペースキーで決定は除く
+                    self.pad_assign_list[self.cursor_button_data] = BTN_MISSILE
+                    pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                    self.cursor_button_data = BTN_NONE #押されたボタンIDを初期化
+            elif self.cursor_pre_pre_decision_item_y == MENU_CONFIG and self.cursor_pre_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN and self.cursor_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN_MAIN_WEAPON_CHANGE:
+                if self.cursor_button_data != BTN_NONE: #スペースキーで決定は除く
+                    self.pad_assign_list[self.cursor_button_data] = BTN_MAIN_WEAPON_CHANGE
+                    pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                    self.cursor_button_data = BTN_NONE #押されたボタンIDを初期化
+            elif self.cursor_pre_pre_decision_item_y == MENU_CONFIG and self.cursor_pre_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN and self.cursor_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN_SUB_WEAPON_CHANGE:
+                if self.cursor_button_data != BTN_NONE: #スペースキーで決定は除く
+                    self.pad_assign_list[self.cursor_button_data] = BTN_SUB_WEAPON_CHANGE
+                    pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                    self.cursor_button_data = BTN_NONE #押されたボタンIDを初期化
             elif self.cursor_pre_pre_decision_item_y == MENU_CONFIG and self.cursor_pre_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN and self.cursor_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN_SAVE_AND_RETURN:
                 update_window.change_window_priority_normal(self,MENU_CONFIG_JOYPAD_ASSIGN) #MENU_CONFIG_JOYPAD_ASSIGNウィンドウの表示優先度を「normal」にする
                 func.create_master_flag_list(self)                              #フラグ＆データ関連のマスターリスト作成関数を呼び出す

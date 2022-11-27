@@ -1463,6 +1463,8 @@ class Window:                 #メッセージ表示ウィンドウのクラス�
         self.missile_graph_list       = []   #所有しているのミサイルのグラフイックデータを指し示すリストが入ります
         self.medal_list               = []   #所有しているのメダルリストが入ります
         self.medal_graph_list         = []   #所有しているのメダルのグラフイックデータを指し示すリストが入ります
+        self.pad_assign_list          = []   #パッドアサイン(ジョイパッド割り当て)リストが入ります
+        self.pad_assign_graph_list    = []   #パッドアサイン(ジョイパッド割り当て)のグラフイックスデータが何所に入っているのかを指し示すリストが入ります
         self.item_list                = [[] for i in range(128)] #所有しているのアイテムリストが入ります
         self.item_graph_list          = [[] for i in range(128)] #所有しているのアイテムのグラフイックデータを指し示すリストが入ります
         self.flag_list                = [[] for i in range(128)] #各フラグ群のリストが入ります
@@ -1506,6 +1508,7 @@ class Window:                 #メッセージ表示ウィンドウのクラス�
         sub_weapon_list,sub_weapon_graph_list,\
         missile_list,missile_graph_list,\
         medal_list,medal_graph_list,\
+        pad_assign_list,pad_assign_graph_list,\
         item_list,item_graph_list,\
         flag_list,graph_list,time_counter_list,\
         
@@ -1585,6 +1588,8 @@ class Window:                 #メッセージ表示ウィンドウのクラス�
         self.missile_graph_list    = missile_graph_list
         self.medal_list            = medal_list
         self.medal_graph_list      = medal_graph_list
+        self.pad_assign_list       = pad_assign_list
+        self.pad_assign_graph_list = pad_assign_graph_list
         self.item_list             = item_list
         self.item_graph_list       = item_graph_list
         self.flag_list             = flag_list

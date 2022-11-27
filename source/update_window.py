@@ -133,6 +133,7 @@ class update_window:
             NO_SUB_WEAPON_LIST,NO_SUB_WEAPON_GRAPH_LIST,\
             NO_MISSILE_LIST,   NO_MISSILE_GRAPH_LIST,\
             NO_MEDAL_LIST,     NO_MEDAL_GRAPH_LIST,\
+            NO_PAD_ASSIGN_LIST,NO_PAD_ASSIGN_GRAPH_LIST,\
             NO_ITEM_LIST,      NO_ITEM_GRAPH_LIST,\
             
             self.master_flag_list,\
@@ -175,6 +176,7 @@ class update_window:
             NO_SUB_WEAPON_LIST,NO_SUB_WEAPON_GRAPH_LIST,\
             NO_MISSILE_LIST,   NO_MISSILE_GRAPH_LIST,\
             NO_MEDAL_LIST,     NO_MEDAL_GRAPH_LIST,\
+            NO_PAD_ASSIGN_LIST,NO_PAD_ASSIGN_GRAPH_LIST,\
             NO_ITEM_LIST,      NO_ITEM_GRAPH_LIST,\
             
             self.master_flag_list,\
@@ -217,6 +219,7 @@ class update_window:
             NO_SUB_WEAPON_LIST,NO_SUB_WEAPON_GRAPH_LIST,\
             NO_MISSILE_LIST,   NO_MISSILE_GRAPH_LIST,\
             NO_MEDAL_LIST,     NO_MEDAL_GRAPH_LIST,\
+            NO_PAD_ASSIGN_LIST,NO_PAD_ASSIGN_GRAPH_LIST,\
             NO_ITEM_LIST,      NO_ITEM_GRAPH_LIST,\
             
             self.master_flag_list,\
@@ -258,6 +261,7 @@ class update_window:
             NO_SUB_WEAPON_LIST,NO_SUB_WEAPON_GRAPH_LIST,\
             NO_MISSILE_LIST,   NO_MISSILE_GRAPH_LIST,\
             NO_MEDAL_LIST,     NO_MEDAL_GRAPH_LIST,\
+            NO_PAD_ASSIGN_LIST,NO_PAD_ASSIGN_GRAPH_LIST,\
             NO_ITEM_LIST,      NO_ITEM_GRAPH_LIST,\
             
             self.master_flag_list,\
@@ -299,6 +303,7 @@ class update_window:
             NO_SUB_WEAPON_LIST,NO_SUB_WEAPON_GRAPH_LIST,\
             NO_MISSILE_LIST,   NO_MISSILE_GRAPH_LIST,\
             NO_MEDAL_LIST,     NO_MEDAL_GRAPH_LIST,\
+            NO_PAD_ASSIGN_LIST,NO_PAD_ASSIGN_GRAPH_LIST,\
             NO_ITEM_LIST,      NO_ITEM_GRAPH_LIST,\
             
             self.master_flag_list,\
@@ -344,6 +349,7 @@ class update_window:
             NO_SUB_WEAPON_LIST,NO_SUB_WEAPON_GRAPH_LIST,\
             NO_MISSILE_LIST,   NO_MISSILE_GRAPH_LIST,\
             NO_MEDAL_LIST,     NO_MEDAL_GRAPH_LIST,\
+            NO_PAD_ASSIGN_LIST,NO_PAD_ASSIGN_GRAPH_LIST,\
             NO_ITEM_LIST,      NO_ITEM_GRAPH_LIST,\
             
             self.master_flag_list,\
@@ -385,6 +391,7 @@ class update_window:
             NO_SUB_WEAPON_LIST,NO_SUB_WEAPON_GRAPH_LIST,\
             NO_MISSILE_LIST,   NO_MISSILE_GRAPH_LIST,\
             NO_MEDAL_LIST,     NO_MEDAL_GRAPH_LIST,\
+            NO_PAD_ASSIGN_LIST,NO_PAD_ASSIGN_GRAPH_LIST,\
             NO_ITEM_LIST,      NO_ITEM_GRAPH_LIST,\
             
             self.master_flag_list,\
@@ -425,6 +432,7 @@ class update_window:
             NO_SUB_WEAPON_LIST,NO_SUB_WEAPON_GRAPH_LIST,\
             NO_MISSILE_LIST,   NO_MISSILE_GRAPH_LIST,\
             NO_MEDAL_LIST,     NO_MEDAL_GRAPH_LIST,\
+            NO_PAD_ASSIGN_LIST,NO_PAD_ASSIGN_GRAPH_LIST,\
             NO_ITEM_LIST,      NO_ITEM_GRAPH_LIST,\
             
             self.master_flag_list,\
@@ -465,6 +473,7 @@ class update_window:
             NO_SUB_WEAPON_LIST,NO_SUB_WEAPON_GRAPH_LIST,\
             NO_MISSILE_LIST,   NO_MISSILE_GRAPH_LIST,\
             NO_MEDAL_LIST,     NO_MEDAL_GRAPH_LIST,\
+            NO_PAD_ASSIGN_LIST,NO_PAD_ASSIGN_GRAPH_LIST,\
             NO_ITEM_LIST,      NO_ITEM_GRAPH_LIST,\
             
             self.master_flag_list,\
@@ -516,6 +525,7 @@ class update_window:
             NO_SUB_WEAPON_LIST,NO_SUB_WEAPON_GRAPH_LIST,\
             NO_MISSILE_LIST,   NO_MISSILE_GRAPH_LIST,\
             NO_MEDAL_LIST,     NO_MEDAL_GRAPH_LIST,\
+            NO_PAD_ASSIGN_LIST,NO_PAD_ASSIGN_GRAPH_LIST,\
             NO_ITEM_LIST,      NO_ITEM_GRAPH_LIST,\
             
             self.master_flag_list,[[108,4,  IMG2,  144,8,SIZE_8,SIZE_8, 0, 14,3],[40,4,  IMG2,  8,0,SIZE_8,SIZE_8, 0,  1,1]],\
@@ -562,6 +572,7 @@ class update_window:
             NO_SUB_WEAPON_LIST,NO_SUB_WEAPON_GRAPH_LIST,\
             NO_MISSILE_LIST,   NO_MISSILE_GRAPH_LIST,\
             NO_MEDAL_LIST,     NO_MEDAL_GRAPH_LIST,\
+            NO_PAD_ASSIGN_LIST,NO_PAD_ASSIGN_GRAPH_LIST,\
             NO_ITEM_LIST,      NO_ITEM_GRAPH_LIST,\
             
             self.master_flag_list,\
@@ -611,6 +622,7 @@ class update_window:
             NO_SUB_WEAPON_LIST,NO_SUB_WEAPON_GRAPH_LIST,\
             NO_MISSILE_LIST,   NO_MISSILE_GRAPH_LIST,\
             NO_MEDAL_LIST,     NO_MEDAL_GRAPH_LIST,\
+            NO_PAD_ASSIGN_LIST,NO_PAD_ASSIGN_GRAPH_LIST,\
             NO_ITEM_LIST,      NO_ITEM_GRAPH_LIST,\
             
             self.master_flag_list,\
@@ -667,6 +679,7 @@ class update_window:
             [ 30+10*1, 13+20,  IMG2,  176+8*8,176,SIZE_8,SIZE_8, 13, 1,1,    1,2],\
             [ 30+10*2, 13+20,  IMG2,  176+8*9,176,SIZE_8,SIZE_8, 13, 1,1,    2,2]],\
             
+            NO_PAD_ASSIGN_LIST,NO_PAD_ASSIGN_GRAPH_LIST,\
             NO_ITEM_LIST,      NO_ITEM_GRAPH_LIST,\
             
             self.master_flag_list,\
@@ -735,6 +748,7 @@ class update_window:
             NO_SUB_WEAPON_LIST,NO_SUB_WEAPON_GRAPH_LIST,\
             NO_MISSILE_LIST,   NO_MISSILE_GRAPH_LIST,\
             NO_MEDAL_LIST,     NO_MEDAL_GRAPH_LIST,\
+            NO_PAD_ASSIGN_LIST,NO_PAD_ASSIGN_GRAPH_LIST,\
             NO_ITEM_LIST,      NO_ITEM_GRAPH_LIST,\
             
             self.master_flag_list,\
@@ -778,6 +792,7 @@ class update_window:
             NO_SUB_WEAPON_LIST,NO_SUB_WEAPON_GRAPH_LIST,\
             NO_MISSILE_LIST,   NO_MISSILE_GRAPH_LIST,\
             NO_MEDAL_LIST,     NO_MEDAL_GRAPH_LIST,\
+            NO_PAD_ASSIGN_LIST,NO_PAD_ASSIGN_GRAPH_LIST,\
             NO_ITEM_LIST,      NO_ITEM_GRAPH_LIST,\
             
             self.master_flag_list,\
@@ -819,6 +834,7 @@ class update_window:
             NO_SUB_WEAPON_LIST,NO_SUB_WEAPON_GRAPH_LIST,\
             NO_MISSILE_LIST,   NO_MISSILE_GRAPH_LIST,\
             NO_MEDAL_LIST,     NO_MEDAL_GRAPH_LIST,\
+            NO_PAD_ASSIGN_LIST,NO_PAD_ASSIGN_GRAPH_LIST,\
             NO_ITEM_LIST,      NO_ITEM_GRAPH_LIST,\
             
             self.master_flag_list,\
@@ -860,6 +876,7 @@ class update_window:
             NO_SUB_WEAPON_LIST,NO_SUB_WEAPON_GRAPH_LIST,\
             NO_MISSILE_LIST,   NO_MISSILE_GRAPH_LIST,\
             self.medal_list,   NO_MEDAL_GRAPH_LIST,\
+            NO_PAD_ASSIGN_LIST,NO_PAD_ASSIGN_GRAPH_LIST,\
             NO_ITEM_LIST,      NO_ITEM_GRAPH_LIST,\
             
             self.master_flag_list,
@@ -912,6 +929,7 @@ class update_window:
             NO_SUB_WEAPON_LIST,NO_SUB_WEAPON_GRAPH_LIST,\
             NO_MISSILE_LIST,   NO_MISSILE_GRAPH_LIST,\
             NO_MEDAL_LIST,     NO_MEDAL_GRAPH_LIST,\
+            NO_PAD_ASSIGN_LIST,NO_PAD_ASSIGN_GRAPH_LIST,\
             NO_ITEM_LIST,      NO_ITEM_GRAPH_LIST,\
             
             self.master_flag_list,\
@@ -1021,6 +1039,7 @@ class update_window:
             NO_SUB_WEAPON_LIST,NO_SUB_WEAPON_GRAPH_LIST,\
             NO_MISSILE_LIST,   NO_MISSILE_GRAPH_LIST,\
             NO_MEDAL_LIST,     NO_MEDAL_GRAPH_LIST,\
+            NO_PAD_ASSIGN_LIST,NO_PAD_ASSIGN_GRAPH_LIST,\
             NO_ITEM_LIST,      NO_ITEM_GRAPH_LIST,\
             
             self.master_flag_list,\
@@ -1114,6 +1133,7 @@ class update_window:
             NO_SUB_WEAPON_LIST,NO_SUB_WEAPON_GRAPH_LIST,\
             NO_MISSILE_LIST,   NO_MISSILE_GRAPH_LIST,\
             NO_MEDAL_LIST,     NO_MEDAL_GRAPH_LIST,\
+            NO_PAD_ASSIGN_LIST,NO_PAD_ASSIGN_GRAPH_LIST,\
             NO_ITEM_LIST,      NO_ITEM_GRAPH_LIST,\
             
             self.master_flag_list,\
@@ -1154,6 +1174,7 @@ class update_window:
             NO_SUB_WEAPON_LIST,NO_SUB_WEAPON_GRAPH_LIST,\
             NO_MISSILE_LIST,   NO_MISSILE_GRAPH_LIST,\
             NO_MEDAL_LIST,     NO_MEDAL_GRAPH_LIST,\
+            NO_PAD_ASSIGN_LIST,NO_PAD_ASSIGN_GRAPH_LIST,\
             NO_ITEM_LIST,      NO_ITEM_GRAPH_LIST,\
             
             self.master_flag_list,\
@@ -1194,6 +1215,7 @@ class update_window:
             NO_SUB_WEAPON_LIST,NO_SUB_WEAPON_GRAPH_LIST,\
             NO_MISSILE_LIST,   NO_MISSILE_GRAPH_LIST,\
             NO_MEDAL_LIST,     NO_MEDAL_GRAPH_LIST,\
+            NO_PAD_ASSIGN_LIST,NO_PAD_ASSIGN_GRAPH_LIST,\
             NO_ITEM_LIST,      NO_ITEM_GRAPH_LIST,\
             
             self.master_flag_list,\
@@ -1234,6 +1256,7 @@ class update_window:
             NO_SUB_WEAPON_LIST,NO_SUB_WEAPON_GRAPH_LIST,\
             NO_MISSILE_LIST,   NO_MISSILE_GRAPH_LIST,\
             NO_MEDAL_LIST,     NO_MEDAL_GRAPH_LIST,\
+            NO_PAD_ASSIGN_LIST,NO_PAD_ASSIGN_GRAPH_LIST,\
             NO_ITEM_LIST,      NO_ITEM_GRAPH_LIST,\
             
             self.master_flag_list,\
@@ -1275,8 +1298,6 @@ class update_window:
             
             NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
             
-            # NO_VECTOR_GRP,\
-            
             [[LIST_WINDOW_VECTOR_GRP_LINE  ,XBJ_X001,XBJ_Y001 ,XBJ_X002,XBJ_Y002 ,pyxel.COLOR_DARK_BLUE],\
             [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X002,XBJ_Y002 ,XBJ_X003,XBJ_Y003 ,pyxel.COLOR_DARK_BLUE],\
             [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X003,XBJ_Y003 ,XBJ_X004,XBJ_Y004 ,pyxel.COLOR_DARK_BLUE],\
@@ -1289,7 +1310,7 @@ class update_window:
             [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X009,XBJ_Y009 ,XBJ_X010,XBJ_Y010 ,pyxel.COLOR_DARK_BLUE],\
             [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X010,XBJ_Y010 ,XBJ_X008,XBJ_Y008 ,pyxel.COLOR_DARK_BLUE],\
             [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X008,XBJ_Y008 ,XBJ_X011,XBJ_Y011 ,pyxel.COLOR_DARK_BLUE],\
-
+            
             [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X011,XBJ_Y011 ,XBJ_X012,XBJ_Y012 ,pyxel.COLOR_DARK_BLUE],\
             [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X012,XBJ_Y012 ,XBJ_X013,XBJ_Y013 ,pyxel.COLOR_DARK_BLUE],\
             [LIST_WINDOW_VECTOR_GRP_LINE   ,XBJ_X013,XBJ_Y013 ,XBJ_X014,XBJ_Y014 ,pyxel.COLOR_DARK_BLUE],\
@@ -1390,16 +1411,79 @@ class update_window:
             NO_SUB_WEAPON_LIST,NO_SUB_WEAPON_GRAPH_LIST,\
             NO_MISSILE_LIST,   NO_MISSILE_GRAPH_LIST,\
             NO_MEDAL_LIST,     NO_MEDAL_GRAPH_LIST,\
+            self.pad_assign_list,\
+            [[90, 11 + self.pad_assign_list[0] * 7 , IMG2,8 * 0,104, SIZE_8,SIZE_8, pyxel.COLOR_BLACK],\
+            [ 90, 11 + self.pad_assign_list[1] * 7 , IMG2,8 * 1,104, SIZE_8,SIZE_8, pyxel.COLOR_BLACK],\
+            [ 90, 11 + self.pad_assign_list[2] * 7 , IMG2,8 * 2,104, SIZE_8,SIZE_8, pyxel.COLOR_BLACK],\
+            [ 90, 11 + self.pad_assign_list[3] * 7 , IMG2,8 * 3,104, SIZE_8,SIZE_8, pyxel.COLOR_BLACK],\
+            [ 90, 11 + self.pad_assign_list[4] * 7 , IMG2,8 * 4,104, SIZE_8,SIZE_8, pyxel.COLOR_BLACK],\
+            [ 90, 11 + self.pad_assign_list[5] * 7 , IMG2,8 * 5,104, SIZE_8,SIZE_8, pyxel.COLOR_BLACK],\
+            [ 90, 11 + self.pad_assign_list[6] * 7 , IMG2,8 * 6,104, SIZE_8,SIZE_8, pyxel.COLOR_BLACK],\
+            [ 90, 11 + self.pad_assign_list[7] * 7 , IMG2,8 * 7,104, SIZE_8,SIZE_8, pyxel.COLOR_BLACK],\
+            [ 90, 11 + self.pad_assign_list[8] * 7 , IMG2,8 * 8,104, SIZE_8,SIZE_8, pyxel.COLOR_BLACK],\
+            ],\
             NO_ITEM_LIST,      NO_ITEM_GRAPH_LIST,\
             
-            self.master_flag_list,\
-            NO_GRAPH_LIST,NO_TIME_COUNTER_LIST,\
+            self.master_flag_list,[[120,51,  IMG2,  32,88,SIZE_8,SIZE_8, 0, 1,1],[129,42,  IMG2,  40,88,SIZE_8,SIZE_8, 0, 1,1],[112,41,  IMG2,  32,96,SIZE_8,SIZE_8, 0, 1,1],[120,30,  IMG2,  40,96,SIZE_8,SIZE_8, 0, 1,1]],\
+            NO_TIME_COUNTER_LIST,\
             NO_EQUIP_MEDAL_GRAPH_LIST,NO_EQUIP_MEDAL_COMMENT_LIST,\
             
-            COMMENT_FLAG_OFF,0,0,0,0,\
-            NO_COMMENT_DISP_FLAG,\
-            NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
-            NO_ITEM_ID,\
+            COMMENT_FLAG_ON,2,105,5,103,\
+            [[DISP_ON,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF],\
+            [DISP_ON,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF],\
+            [DISP_ON,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF],\
+            [DISP_ON,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF],\
+            [DISP_ON,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF],\
+            [DISP_ON,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF],\
+            [DISP_ON,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF],\
+            [DISP_ON,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF],\
+            [DISP_ON,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF],\
+            [DISP_ON,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF],\
+            [DISP_ON,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF],\
+            [DISP_ON,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF],\
+            [DISP_ON,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF,DISP_OFF]],\
+            
+            [["SHOT AND SUB WEAPON BUTTON","","","","","","","","",""],\
+            [ "MISSILE BUTTON","","","","","","","","",""],\
+            [ "MAIN WEAPON CHANGE BUTTON","","","","","","","","",""],\
+            [ "SUB WEAPON CHANGE BUTTON","","","","","","","","",""],\
+            [ "SPEED CHANGE BUTTON","","","","","","","","",""],\
+            [ "GAME PAUSE BUTTON","","","","","","","","",""],\
+            [ "","","","","","","","","",""],\
+            [ "CALW STYLE CHANGE BUTTON","","","","","","","","",""],\
+            [ "CLAW DISTANCE CHANGE BUTTON","","","","","","","","",""],\
+            [ "","","","","","","","","",""],\
+            [ "DEFAULT","","","","","","","","",""],\
+            [ "CANCEL","","","","","","","","",""],\
+            [ "RETURN","","","","","","","","",""]],\
+            
+            [["ショット発射ボタン","","","","","","","","",""],\
+            [ "ミサイル発射ボタン","","","","","","","","",""],\
+            [ "メインウェポンの変更ボタン","","","","","","","","",""],\
+            [ "サブウェポンの変更ボタン","","","","","","","","",""],\
+            [ "スピ─ドチェンジボタン","","","","","","","","",""],\
+            [ "一時停止ボタン","","","","","","","","",""],\
+            [ "","","","","","","","","",""],\
+            [ "クロ─スタイルチェンジ","","","","","","","","",""],\
+            [ "クロ─の間隔調整","","","","","","","","",""],\
+            [ "","","","","","","","","",""],\
+            [ "初期設定に戻します","","","","","","","","",""],\
+            [ "キャンセルして戻ります","","","","","","","","",""],\
+            [ "セ─ブします","","","","","","","","",""]],\
+            
+            [[0,0,0,0,0,0,0,0,0,0],\
+            [0,0,0,0,0,0,0,0,0,0],\
+            [0,0,0,0,0,0,0,0,0,0],\
+            [0,0,0,0,0,0,0,0,0,0],\
+            [0,0,0,0,0,0,0,0,0,0],\
+            [0,0,0,0,0,0,0,0,0,0],\
+            [0,0,0,0,0,0,0,0,0,0],\
+            [0,0,0,0,0,0,0,0,0,0],\
+            [0,0,0,0,0,0,0,0,0,0],\
+            [0,0,0,0,0,0,0,0,0,0],\
+            [0,0,0,0,0,0,0,0,0,0],\
+            [0,0,0,0,0,0,0,0,0,0],\
+            [0,0,0,0,0,0,0,0,0,0]],\
             )
         else:
             return
@@ -1448,6 +1532,7 @@ class update_window:
         NO_SUB_WEAPON_LIST,NO_SUB_WEAPON_GRAPH_LIST,\
         NO_MISSILE_LIST,   NO_MISSILE_GRAPH_LIST,\
         NO_MEDAL_LIST,     NO_MEDAL_GRAPH_LIST,\
+        NO_PAD_ASSIGN_LIST,NO_PAD_ASSIGN_GRAPH_LIST,\
         NO_ITEM_LIST,      NO_ITEM_GRAPH_LIST,\
         
         self.master_flag_list,self.temp_graph_list,\
@@ -1500,6 +1585,7 @@ class update_window:
         NO_SUB_WEAPON_LIST,NO_SUB_WEAPON_GRAPH_LIST,\
         NO_MISSILE_LIST,   NO_MISSILE_GRAPH_LIST,\
         NO_MEDAL_LIST,     NO_MEDAL_GRAPH_LIST,\
+        NO_PAD_ASSIGN_LIST,NO_PAD_ASSIGN_GRAPH_LIST,\
         NO_ITEM_LIST,      NO_ITEM_GRAPH_LIST,\
         
         self.master_flag_list,\
@@ -1580,6 +1666,7 @@ class update_window:
         NO_SUB_WEAPON_LIST,NO_SUB_WEAPON_GRAPH_LIST,\
         NO_MISSILE_LIST,   NO_MISSILE_GRAPH_LIST,\
         NO_MEDAL_LIST,     NO_MEDAL_GRAPH_LIST,\
+        NO_PAD_ASSIGN_LIST,NO_PAD_ASSIGN_GRAPH_LIST,\
         NO_ITEM_LIST,      NO_ITEM_GRAPH_LIST,\
         
         self.master_flag_list,\
@@ -1630,6 +1717,7 @@ class update_window:
         NO_SUB_WEAPON_LIST,NO_SUB_WEAPON_GRAPH_LIST,\
         NO_MISSILE_LIST,   NO_MISSILE_GRAPH_LIST,\
         NO_MEDAL_LIST,     NO_MEDAL_GRAPH_LIST,\
+        NO_PAD_ASSIGN_LIST,NO_PAD_ASSIGN_GRAPH_LIST,\
         NO_ITEM_LIST,      NO_ITEM_GRAPH_LIST,\
         
         self.master_flag_list,\
@@ -2473,7 +2561,17 @@ class update_window:
         
         #ABXYスペースキーが押された場合の処理
         if pyxel.btnp(pyxel.KEY_SPACE) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_A) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_A) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_B) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_B) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_X) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_X) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_Y) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_Y):
-            self.cursor_move_data = PAD_A
+            if   pyxel.btnp(pyxel.GAMEPAD1_BUTTON_A) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_A):
+                self.cursor_button_data = BTN_A
+            elif pyxel.btnp(pyxel.GAMEPAD1_BUTTON_B) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_B):
+                self.cursor_button_data = BTN_B
+            elif pyxel.btnp(pyxel.GAMEPAD1_BUTTON_X) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_X):
+                self.cursor_button_data = BTN_X
+            elif pyxel.btnp(pyxel.GAMEPAD1_BUTTON_Y) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_Y):
+                self.cursor_button_data = BTN_Y
+            else:
+                self.cursor_button_data = BTN_NONE
+            
             self.cursor_decision_item_x = self.cursor_item_x #ボタンが押されて決定されたら、いま指示しているアイテムナンバーをcursor_decision_item_xに代入！
             self.cursor_decision_item_y = self.cursor_item_y #ボタンが押されて決定されたら、いま指示しているアイテムナンバーをcursor_decision_item_yに代入！
             if self.cursor_move_direction == CURSOR_MOVE_UD_SLIDER:

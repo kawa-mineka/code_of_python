@@ -1410,7 +1410,6 @@ class graph:
                         open_rate_y = self.window[i].height / self.window[i].open_height #開閉率(縦軸)
                         pyxel.blt(self.window[i].posx + ox * open_rate_x,self.window[i].posy + oy * open_rate_y,imgb,u + u_offset,v,int(w * open_rate_x),int(h * open_rate_y),colkey) #グラフイック表示
                 
-
                 #メダルの表示
                 if self.window[i].medal_graph_list != []: #メダルグラフイックリストが空でないのならば表示を始める
                     for j in range(len(self.window[i].medal_graph_list)): #medal_graph_listの長さの分ループ処理する
@@ -1461,6 +1460,18 @@ class graph:
                         colkey = pyxel.COLOR_GRAY #透明色取得
                         pyxel.blt((self.window[i].posx + ox + j * 10 ) * open_rate_x,self.window[i].posy + oy * open_rate_y,imgb,u + u_offset,v,int(w * open_rate_x),int(h * open_rate_y),colkey) #メダルグラフイック表示
                         # pyxel.text(self.window[i].posx + ox + j * 10,self.window[i].posy + oy,str(medal_id),7)
+                
+                #パッドアサインリストを参考にしてそのパッドボタンのアイコンを表示する
+                if self.window[i].pad_assign_list != []: #パッドアサインリストが空でないのなら表示を始める
+                    for j in range(len(self.window[i].pad_assign_graph_list)): #pad_assign_listの長さの分ループ処理する
+                        ox,oy  = self.window[i].pad_assign_graph_list[j][LIST_WINDOW_GRAPH_OX],   self.window[i].pad_assign_graph_list[j][LIST_WINDOW_GRAPH_OY]#表示オフセット座標取得
+                        imgb   = self.window[i].pad_assign_graph_list[j][LIST_WINDOW_GRAPH_IMGB]  #参照イメージバンク値取得
+                        u,v    = self.window[i].pad_assign_graph_list[j][LIST_WINDOW_GRAPH_U],    self.window[i].pad_assign_graph_list[j][LIST_WINDOW_GRAPH_V] #ボタングラフイックデーター収納座標取得
+                        w,h    = self.window[i].pad_assign_graph_list[j][LIST_WINDOW_GRAPH_W],    self.window[i].pad_assign_graph_list[j][LIST_WINDOW_GRAPH_H] #幅と縦を取得
+                        colkey = self.window[i].pad_assign_graph_list[j][LIST_WINDOW_GRAPH_COLKEY] #透明色取得
+                        open_rate_x = self.window[i].width / self.window[i].open_width   #開閉率(横軸)
+                        open_rate_y = self.window[i].height / self.window[i].open_height #開閉率(縦軸)
+                        pyxel.blt(self.window[i].posx + ox * open_rate_x,self.window[i].posy + oy * open_rate_y,imgb,u,v,int(w * open_rate_x),int(h * open_rate_y),colkey) #グラフイック表示
                 
                 #今カーソルが指し示しているアイテムの説明文の表示
                 if      self.window[i].window_status == WINDOW_WRITE_MESSAGE\

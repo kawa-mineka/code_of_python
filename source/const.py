@@ -548,7 +548,8 @@ REPLAY_RECORD = 1 #リプレイデータを記録中です
 REPLAY_PLAY   = 2 #リプレイデータを再生中です
 
 #パッド入力でのリプレイデータ記録に使用する定数定義
-PAD_UP      =    1 #0b 0000 0001 Low byte
+PAD_NONE    =    0 #0b 0000 0000 Low byte
+PAD_UP      =    1 #0b 0000 0001
 PAD_DOWN    =    2 #0b 0000 0010
 PAD_LEFT    =    4 #0b 0000 0100
 PAD_RIGHT   =    8 #0b 0000 1000
@@ -655,7 +656,7 @@ EXPLOSION_MIDDLE           =  1 #スクランブルハッチや重爆撃機系�
 EXPLOSION_BOSS_PARTS_SMOKE =  2 #ボスのパーツが爆発した後に跳んでいく煙のパターン
 EXPLOSION_MY_SHIP          = 10 #自機の爆発パターン
 
-#メインメニューで使用する定数定義(0階層目)
+#!メインメニューで使用する定数定義(0階層目) ###############################################################################################
 MENU_GAME_START       =  0 #ゲームスタート！
 MENU_DIFFICULTY       =  1 #難易度選択
 MENU_SELECT_SHIP      =  2 #自機選択
@@ -1032,6 +1033,8 @@ NO_MISSILE_LIST          = []
 NO_MISSILE_GRAPH_LIST    = []
 NO_MEDAL_LIST            = []
 NO_MEDAL_GRAPH_LIST      = []
+NO_PAD_ASSIGN_LIST       = []
+NO_PAD_ASSIGN_GRAPH_LIST = []
 NO_ITEM_LIST             = []
 NO_ITEM_GRAPH_LIST       = []
 NO_FLAG_LIST             = []
@@ -1465,23 +1468,23 @@ SE_WAVE_CUTTER    =  5
 SE_BOSS_EXPLOSION = 11
 SE_SHIP_DAMAGE    = 15
 
-#!ボタン割り当て(キーアサイン、キーコンフィグ)で使用する定数定義 アクションID
-BTN_NO_ASSIGN             =  0   #未割当ID
-BTN_SHOT                  =  1   #ショットボタンID
-BTN_MISSILE               =  2   #ミサイルボタンID
-BTN_SHOT_AND_SUB_WEAPON   =  3   #ショット＆サブウェポン同時発射ボタンID
+#!ボタン割り当て(キーアサイン、キーコンフィグ)で使用する定数定義 アクションID 同時にCONFIG設定のPADアサイン項目のY座標(キャラ単位)としても使用します
+BTN_NO_ASSIGN             =  100 #未割当ID
+BTN_SHOT                  =  6   #ショットボタンID
+BTN_MISSILE               =  1   #ミサイルボタンID
+BTN_SHOT_AND_SUB_WEAPON   =  0   #ショット＆サブウェポン同時発射ボタンID
 BTN_SUB_WEAPON            =  4   #サブウェポンボタンID
 
-BTN_MAIN_WEAPON_CHANGE    =  5   #メインウェポン切り替えボタンID
-BTN_SUB_WEAPON_CHANGE     =  6   #サブウェポン切り替えボタンID
+BTN_MAIN_WEAPON_CHANGE    =  2   #メインウェポン切り替えボタンID
+BTN_SUB_WEAPON_CHANGE     =  3   #サブウェポン切り替えボタンID
 
-BTN_DUMMY_1               =  7   #ダミー用
+BTN_DUMMY_1               =  50   #ダミー用
 
-BTN_PAUSE                 =  8   #ポーズボタンID
-BTN_SPEED_CHANGE          =  9   #スピードチェンジボタンID
+BTN_PAUSE                 =  5   #ポーズボタンID
+BTN_SPEED_CHANGE          =  4   #スピードチェンジボタンID
 
-BTN_CHANGE_CLAW_STYLE     = 10   #クロースタイルチェンジボタンID
-BTN_CHANGE_CLAW_INTERVAL  = 11   #クローインターバルチェンジボタンID
+BTN_CHANGE_CLAW_STYLE     =  7   #クロースタイルチェンジボタンID
+BTN_CHANGE_CLAW_INTERVAL  =  8   #クローインターバルチェンジボタンID
 
 #ボタン割り当てリストを参照するときに使用するインデックス値ラベル self.pad_assign_list[ここに入る]
 #例 self.pad_assign_list[BTN_A]で Aボタンを押したらどのアクションIDが割り当てられているか判る
@@ -1495,6 +1498,8 @@ BTN_GUIDE         =  5
 BTN_START         =  6
 BTN_LEFTSHOULDER  =  7
 BTN_RIGHTSHOULDER =  8
+
+BTN_NONE          = -1
 
 #!#########################################
 #xbox-joypad vector graphics data (xboxコントローラー画像のベクター座標値データ群) XBJはX-Box-Joypadの略語です
