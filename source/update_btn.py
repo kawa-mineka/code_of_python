@@ -110,32 +110,42 @@ class update_btn:
             if self.replay_data[self.replay_stage_num][self.replay_frame_index] & 0b00000001 == 0b00000001: #HighByte リプレイデータを調べてPAD SELECTが押された記録だったのなら...
                 update_ship.change_ship_speed(self) #スピードチェンジ関数呼び出し！
         elif self.move_mode == MOVE_MANUAL: #手動移動モードの場合は
-            if pyxel.btnp(pyxel.KEY_3) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_BACK) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_BACK):
+            if pyxel.btnp(pyxel.KEY_3) or func.push_pad_btnp(self,BTN_BACK):
                 self.pad_data_h += PAD_SELECT #パッド入力データのSELECTボタンの情報ビットを立てる(GUIDE)
                 update_ship.change_ship_speed(self) #スピードチェンジ関数呼び出し！
 
     #ポーズボタンが押されたか調べる 「START」ボタン                                                 KEY TAB    GAMEPAD START
     def pause_btn(self):
         if pyxel.btnp(pyxel.KEY_TAB) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_START) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_START):
+        # if pyxel.btnp(pyxel.KEY_TAB) or func.push_pad_btnp(self,BTN_PAUSE):
+        # if func.push_pad_btnp(self,BTN_PAUSE) == True:
             if    self.game_status == SCENE_PLAY\
                 or self.game_status == SCENE_BOSS_APPEAR\
                 or self.game_status == SCENE_BOSS_BATTLE\
                 or self.game_status == SCENE_BOSS_EXPLOSION:#ステータスが「PLAY」もしくは「BOSS関連」のときにポーズボタンが押されたときは・・
                 
                 self.record_games_status = self.game_status #ステータスを一時記憶しておく
-                self.game_status = SCENE_PAUSE            #ステータスを「PAUSE」にする
+                self.game_status = SCENE_PAUSE              #ステータスを「PAUSE」にする
+                # self.cursor_button_data = BTN_NONE          #押されたボタンIDを初期化
+                
                 if func.search_window_id(self,WINDOW_ID_PAUSE_MENU) == -1: #ポーズメニューウィンドウが存在しないのなら・・
                     update_window.create(self,WINDOW_ID_PAUSE_MENU,30,70)          #ポーズメニューウィンドウウィンドウの作製
+                    
                     #選択カーソル表示をon,カーソルは上下移動のみ,,カーソル移動ステップはx4,y7,いま指示しているアイテムナンバーは0の「BACK TO GAMES」
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は3項目なので 4-1=3を代入,メニューの階層は一番低いMENU_LAYER0にします
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,46,73,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,4-1,0,MENU_LAYER0)
                     self.active_window_id = WINDOW_ID_PAUSE_MENU    #このウィンドウIDを最前列でアクティブなものとする
                     self.select_cursor_flag = 1            #セレクトカーソル移動フラグを建てる
                     pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
+                
+                
+                
             elif self.game_status == SCENE_PAUSE:          #ポーズ状態でポーズボタンが押されたときは・・・
                 self.game_status = self.record_games_status #一時記憶しておいたゲームステータスを元に戻してあげます
                 self.star_scroll_speed = 1                  #星のスクロールスピードを倍率1に戻す
                 self.cursor_type = CURSOR_TYPE_NO_DISP      #セレクトカーソルの表示をoffにする
+                # self.cursor_button_data = BTN_NONE          #押されたボタンIDを初期化
+                
                 if func.search_window_id(self,WINDOW_ID_PAUSE_MENU) != -1: #ポーズメニューウィンドウが存在するのならば・・
                     i = func.search_window_id(self,WINDOW_ID_PAUSE_MENU)
                     self.window[i].vy = -0.3            #WINDOW_ID_PAUSE_MENUウィンドウを右上にフッ飛ばしていく

@@ -220,13 +220,15 @@ class App:
         
         define_data.default_achievement_list(self) #実績のIDナンバーとそれに対するグラフイックチップの位置や英語コメント、日本語コメントのデータリストの定義関数の呼び出し
         
-        self.default_boss_number_of_defeat = [0] * 50                               #ボス撃破数デフォルトリストを作製します
+        self.default_boss_number_of_defeat = [0] * 50                                  #ボス撃破数デフォルトリストを作製します
         
         self.my_name               = copy.deepcopy(self.default_my_name)               #自分の名前の初期データを深い階層でコピーする
         self.medal_list            = copy.deepcopy(self.default_medal_list)            #メダルリストの初期データを深い階層でコピーする
         self.achievement_list      = copy.deepcopy(self.default_achievement_list)      #実績リストの初期データを深い階層でコピーする
         self.boss_number_of_defeat = copy.deepcopy(self.default_boss_number_of_defeat) #ボスを倒した総数の初期データを深い階層でコピーする
         self.pad_assign_list       = copy.deepcopy(self.default_pad_assign_list)       #パッド割り当て情報の初期データを深い階層でコピーする
+        
+        update_window.refresh_pad_assign_graph_list(self)#パッドアサイングラフイックリストを新規に作成する(self.pad_assign_listに依存しているためself.pad_assign_listを作製した直後この場所で作製するべし！)
         
         self.development_testtime            = 0  #ゲーム開発時の総テスト時間
         self.one_game_playtime_seconds       = 0  #1プレイでのゲームプレイ時間(秒単位)

@@ -151,21 +151,33 @@ class func:
                         return (True)
                     else:
                         return (False)
-                    
+                
                 if i == BTN_B:
                     if pyxel.btn(pyxel.GAMEPAD1_BUTTON_B):
                         return (True)
                     else:
                         return (False)
-                    
+                
                 if i == BTN_X:
                     if pyxel.btn(pyxel.GAMEPAD1_BUTTON_X):
                         return (True)
                     else:
                         return (False)
-                    
+                
                 if i == BTN_Y:
                     if pyxel.btn(pyxel.GAMEPAD1_BUTTON_Y):
+                        return (True)
+                    else:
+                        return (False)
+                
+                if i == BTN_BACK:
+                    if pyxel.btn(pyxel.GAMEPAD1_BUTTON_BACK):
+                        return (True)
+                    else:
+                        return (False)
+                
+                if i == BTN_START:
+                    if pyxel.btn(pyxel.GAMEPAD1_BUTTON_START):
                         return (True)
                     else:
                         return (False)
@@ -183,21 +195,33 @@ class func:
                         return (True)
                     else:
                         return (False)
-                    
+                
                 if i == BTN_B:
                     if pyxel.btnp(pyxel.GAMEPAD1_BUTTON_B):
                         return (True)
                     else:
                         return (False)
-                    
+                
                 if i == BTN_X:
                     if pyxel.btnp(pyxel.GAMEPAD1_BUTTON_X):
                         return (True)
                     else:
                         return (False)
-                    
+                
                 if i == BTN_Y:
                     if pyxel.btnp(pyxel.GAMEPAD1_BUTTON_Y):
+                        return (True)
+                    else:
+                        return (False)
+                
+                if i == BTN_BACK:
+                    if pyxel.btnp(pyxel.GAMEPAD1_BUTTON_BACK):
+                        return (True)
+                    else:
+                        return (False)
+                
+                if i == BTN_START:
+                    if pyxel.btnp(pyxel.GAMEPAD1_BUTTON_START):
                         return (True)
                     else:
                         return (False)
@@ -601,7 +625,7 @@ class func:
     #敵編隊出現時、現在の編隊IDナンバーとIDナンバーに対応した編隊数、そして現在の生存編隊数をenemy_formationクラスに登録する関数
     def record_enemy_formation(self,num):
         """敵編隊出現時、現在の編隊IDナンバーとIDナンバーに対応した編隊数、そして現在の生存編隊数をenemy_formationクラスに登録する
-
+        
         num = 編隊ナンバー
         """
         #編隊なので編隊のＩＤナンバーと編隊の総数、現在の編隊生存数をEnemy_formationリストに登録します

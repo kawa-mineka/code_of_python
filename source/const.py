@@ -697,7 +697,15 @@ MENU_CONFIG_RETURN = 11
 MENU_CONFIG_JOYPAD_ASSIGN_FIRE_AND_SUBWEAPON  =  0 
 MENU_CONFIG_JOYPAD_ASSIGN_MISSILE             =  1
 MENU_CONFIG_JOYPAD_ASSIGN_MAIN_WEAPON_CHANGE  =  2
-MENU_CONFIG_JOYPAD_ASSIGN_SUB_WEAPON_CHANGE   =  3 
+MENU_CONFIG_JOYPAD_ASSIGN_SUB_WEAPON_CHANGE   =  3
+MENU_CONFIG_JOYPAD_ASSIGN_SPEED               =  4
+
+MENU_CONFIG_JOYPAD_ASSIGN_PAUSE               =  6
+MENU_CONFIG_JOYPAD_ASSIGN_CLAW_STYLE          =  7
+MENU_CONFIG_JOYPAD_ASSIGN_CLAW_DISTANCE       =  8
+
+MENU_CONFIG_JOYPAD_ASSIGN_DEFAULT             = 10
+MENU_CONFIG_JOYPAD_ASSIGN_CANCEL              = 11
 MENU_CONFIG_JOYPAD_ASSIGN_SAVE_AND_RETURN     = 12
 
 MENU_MEDAL_MYSHIP_MEDAL_AREA = 0
@@ -1468,27 +1476,25 @@ SE_WAVE_CUTTER    =  5
 SE_BOSS_EXPLOSION = 11
 SE_SHIP_DAMAGE    = 15
 
-#!ボタン割り当て(キーアサイン、キーコンフィグ)で使用する定数定義 アクションID 同時にCONFIG設定のPADアサイン項目のY座標(キャラ単位)としても使用します
+#!ボタン割り当て(キーアサイン、キーコンフィグ)で使用する定数定義 アクションID 同時にCONFIG設定のPADアサイン項目のY座標(キャラ単位)としても使用します 連番にしちゃダメだよ(はぁと)
+BTN_DUMMY_1               =  50   #ダミー用
 BTN_NO_ASSIGN             =  100 #未割当ID
-BTN_SHOT                  =  6   #ショットボタンID
-BTN_MISSILE               =  1   #ミサイルボタンID
-BTN_SHOT_AND_SUB_WEAPON   =  0   #ショット＆サブウェポン同時発射ボタンID
-BTN_SUB_WEAPON            =  4   #サブウェポンボタンID
+BTN_SHOT                  =  600 #ショットボタンID
+BTN_SUB_WEAPON            =  400 #サブウェポンボタンID
 
+BTN_SHOT_AND_SUB_WEAPON   =  0   #ショット＆サブウェポン同時発射ボタンID
+BTN_MISSILE               =  1   #ミサイルボタンID
 BTN_MAIN_WEAPON_CHANGE    =  2   #メインウェポン切り替えボタンID
 BTN_SUB_WEAPON_CHANGE     =  3   #サブウェポン切り替えボタンID
-
-BTN_DUMMY_1               =  50   #ダミー用
-
-BTN_PAUSE                 =  5   #ポーズボタンID
 BTN_SPEED_CHANGE          =  4   #スピードチェンジボタンID
 
+BTN_PAUSE                 =  6   #ポーズボタンID
 BTN_CHANGE_CLAW_STYLE     =  7   #クロースタイルチェンジボタンID
 BTN_CHANGE_CLAW_INTERVAL  =  8   #クローインターバルチェンジボタンID
 
 #ボタン割り当てリストを参照するときに使用するインデックス値ラベル self.pad_assign_list[ここに入る]
-#例 self.pad_assign_list[BTN_A]で Aボタンを押したらどのアクションIDが割り当てられているか判る
-#初期状態はBTN_SHOT_AND_SUB_WEAPONなのでショット＆サブウェポン同時発射アクションIDが割り当てられているのが判る
+#例 self.pad_assign_list[BTN_A]で Aボタンを押したらどのアクションIDが割り当てられているか判る、判るマン
+#初期状態はBTN_SHOT_AND_SUB_WEAPONなのでショット＆サブウェポン同時発射アクションIDが割り当てられているのが判るのです
 BTN_A             =  0
 BTN_B             =  1
 BTN_X             =  2
@@ -1499,7 +1505,7 @@ BTN_START         =  6
 BTN_LEFTSHOULDER  =  7
 BTN_RIGHTSHOULDER =  8
 
-BTN_NONE          = -1
+BTN_NONE          = -1 #何も割り当てられてない時用のダミーぃ
 
 #!#########################################
 #xbox-joypad vector graphics data (xboxコントローラー画像のベクター座標値データ群) XBJはX-Box-Joypadの略語です

@@ -1287,8 +1287,8 @@ class update_window:
             [ "MAIN WEAPON CHANGE"  ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,MES_NO_FLASH],\
             [ "SUB WEAPON CHANGE"   ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,MES_NO_FLASH],\
             [ "SPEED"               ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,MES_NO_FLASH],\
-            [ "PAUSE"               ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,MES_NO_FLASH],\
             [ ""                    ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,MES_NO_FLASH],\
+            [ "PAUSE"               ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,MES_NO_FLASH],\
             [ "CLAW STYLE"          ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,MES_NO_FLASH],\
             [ "CLAW DISTANCE"       ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,MES_NO_FLASH],\
             [ ""                    ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,3,MES_NO_FLASH],\
@@ -1411,17 +1411,8 @@ class update_window:
             NO_SUB_WEAPON_LIST,NO_SUB_WEAPON_GRAPH_LIST,\
             NO_MISSILE_LIST,   NO_MISSILE_GRAPH_LIST,\
             NO_MEDAL_LIST,     NO_MEDAL_GRAPH_LIST,\
-            self.pad_assign_list,\
-            [[90, 11 + self.pad_assign_list[0] * 7 , IMG2,8 * 0,104, SIZE_8,SIZE_8, pyxel.COLOR_BLACK],\
-            [ 90, 11 + self.pad_assign_list[1] * 7 , IMG2,8 * 1,104, SIZE_8,SIZE_8, pyxel.COLOR_BLACK],\
-            [ 90, 11 + self.pad_assign_list[2] * 7 , IMG2,8 * 2,104, SIZE_8,SIZE_8, pyxel.COLOR_BLACK],\
-            [ 90, 11 + self.pad_assign_list[3] * 7 , IMG2,8 * 3,104, SIZE_8,SIZE_8, pyxel.COLOR_BLACK],\
-            [ 90, 11 + self.pad_assign_list[4] * 7 , IMG2,8 * 4,104, SIZE_8,SIZE_8, pyxel.COLOR_BLACK],\
-            [ 90, 11 + self.pad_assign_list[5] * 7 , IMG2,8 * 5,104, SIZE_8,SIZE_8, pyxel.COLOR_BLACK],\
-            [ 90, 11 + self.pad_assign_list[6] * 7 , IMG2,8 * 6,104, SIZE_8,SIZE_8, pyxel.COLOR_BLACK],\
-            [ 90, 11 + self.pad_assign_list[7] * 7 , IMG2,8 * 7,104, SIZE_8,SIZE_8, pyxel.COLOR_BLACK],\
-            [ 90, 11 + self.pad_assign_list[8] * 7 , IMG2,8 * 8,104, SIZE_8,SIZE_8, pyxel.COLOR_BLACK],\
-            ],\
+            self.pad_assign_list,self.pad_assign_graph_list,\
+            
             NO_ITEM_LIST,      NO_ITEM_GRAPH_LIST,\
             
             self.master_flag_list,[[120,51,  IMG2,  32,88,SIZE_8,SIZE_8, 0, 1,1],[129,42,  IMG2,  40,88,SIZE_8,SIZE_8, 0, 1,1],[112,41,  IMG2,  32,96,SIZE_8,SIZE_8, 0, 1,1],[120,30,  IMG2,  40,96,SIZE_8,SIZE_8, 0, 1,1]],\
@@ -1448,8 +1439,8 @@ class update_window:
             [ "MAIN WEAPON CHANGE BUTTON","","","","","","","","",""],\
             [ "SUB WEAPON CHANGE BUTTON","","","","","","","","",""],\
             [ "SPEED CHANGE BUTTON","","","","","","","","",""],\
-            [ "GAME PAUSE BUTTON","","","","","","","","",""],\
             [ "","","","","","","","","",""],\
+            [ "GAME PAUSE BUTTON","","","","","","","","",""],\
             [ "CALW STYLE CHANGE BUTTON","","","","","","","","",""],\
             [ "CLAW DISTANCE CHANGE BUTTON","","","","","","","","",""],\
             [ "","","","","","","","","",""],\
@@ -1462,8 +1453,8 @@ class update_window:
             [ "メインウェポンの変更ボタン","","","","","","","","",""],\
             [ "サブウェポンの変更ボタン","","","","","","","","",""],\
             [ "スピ─ドチェンジボタン","","","","","","","","",""],\
-            [ "一時停止ボタン","","","","","","","","",""],\
             [ "","","","","","","","","",""],\
+            [ "一時停止ボタン","","","","","","","","",""],\
             [ "クロ─スタイルチェンジ","","","","","","","","",""],\
             [ "クロ─の間隔調整","","","","","","","","",""],\
             [ "","","","","","","","","",""],\
@@ -2585,3 +2576,17 @@ class update_window:
                     
                     self.window[self.active_window_index].flag_list[flag_index] = k #フラグ＆数値リストを更新する
                     pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルok音を鳴らす
+
+    #パッドアサイングラフイックリストをリフレッシュ！する！
+    def refresh_pad_assign_graph_list(self):
+        self.pad_assign_graph_list =[
+            [ 90, 11 + self.pad_assign_list[0] * 7 , IMG2,8 * 0,104, SIZE_8,SIZE_8, pyxel.COLOR_BLACK],\
+            [ 90, 11 + self.pad_assign_list[1] * 7 , IMG2,8 * 1,104, SIZE_8,SIZE_8, pyxel.COLOR_BLACK],\
+            [ 90, 11 + self.pad_assign_list[2] * 7 , IMG2,8 * 2,104, SIZE_8,SIZE_8, pyxel.COLOR_BLACK],\
+            [ 90, 11 + self.pad_assign_list[3] * 7 , IMG2,8 * 3,104, SIZE_8,SIZE_8, pyxel.COLOR_BLACK],\
+            [ 90, 11 + self.pad_assign_list[4] * 7 , IMG2,8 * 4,104, SIZE_8,SIZE_8, pyxel.COLOR_BLACK],\
+            [ 90, 11 + self.pad_assign_list[5] * 7 , IMG2,8 * 5,104, SIZE_8,SIZE_8, pyxel.COLOR_BLACK],\
+            [ 90, 11 + self.pad_assign_list[6] * 7 , IMG2,8 * 6,104, SIZE_8,SIZE_8, pyxel.COLOR_BLACK],\
+            [ 90, 11 + self.pad_assign_list[7] * 7 , IMG2,8 * 7,104, SIZE_8,SIZE_8, pyxel.COLOR_BLACK],\
+            [ 90, 11 + self.pad_assign_list[8] * 7 , IMG2,8 * 8,104, SIZE_8,SIZE_8, pyxel.COLOR_BLACK],\
+            ]
