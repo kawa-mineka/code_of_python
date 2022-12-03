@@ -116,8 +116,8 @@ class update_btn:
 
     #ポーズボタンが押されたか調べる 「START」ボタン                                                 KEY TAB    GAMEPAD START
     def pause_btn(self):
-        if pyxel.btnp(pyxel.KEY_TAB) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_START) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_START):
-        # if pyxel.btnp(pyxel.KEY_TAB) or func.push_pad_btnp(self,BTN_PAUSE):
+        # if pyxel.btnp(pyxel.KEY_TAB) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_START) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_START):
+        if pyxel.btnp(pyxel.KEY_TAB) or func.push_pad_btnp(self,BTN_PAUSE):
         # if func.push_pad_btnp(self,BTN_PAUSE) == True:
             if    self.game_status == SCENE_PLAY\
                 or self.game_status == SCENE_BOSS_APPEAR\
@@ -138,7 +138,7 @@ class update_btn:
                     self.select_cursor_flag = 1            #セレクトカーソル移動フラグを建てる
                     pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
                 
-                
+                self.cursor_decision_item_y = UNSELECTED
                 
             elif self.game_status == SCENE_PAUSE:          #ポーズ状態でポーズボタンが押されたときは・・・
                 self.game_status = self.record_games_status #一時記憶しておいたゲームステータスを元に戻してあげます

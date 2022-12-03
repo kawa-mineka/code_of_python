@@ -2551,31 +2551,50 @@ class update_window:
                         update_se.se(self,2,SE_WAVE_CUTTER,self.master_se_vol)
         
         #ABXYスペースキーが押された場合の処理
-        if pyxel.btnp(pyxel.KEY_SPACE) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_A) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_A) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_B) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_B) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_X) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_X) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_Y) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_Y):
-            if   pyxel.btnp(pyxel.GAMEPAD1_BUTTON_A) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_A):
-                self.cursor_button_data = BTN_A
-            elif pyxel.btnp(pyxel.GAMEPAD1_BUTTON_B) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_B):
-                self.cursor_button_data = BTN_B
-            elif pyxel.btnp(pyxel.GAMEPAD1_BUTTON_X) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_X):
-                self.cursor_button_data = BTN_X
-            elif pyxel.btnp(pyxel.GAMEPAD1_BUTTON_Y) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_Y):
-                self.cursor_button_data = BTN_Y
-            else:
-                self.cursor_button_data = BTN_NONE
-            
-            self.cursor_decision_item_x = self.cursor_item_x #ボタンが押されて決定されたら、いま指示しているアイテムナンバーをcursor_decision_item_xに代入！
-            self.cursor_decision_item_y = self.cursor_item_y #ボタンが押されて決定されたら、いま指示しているアイテムナンバーをcursor_decision_item_yに代入！
-            if self.cursor_move_direction == CURSOR_MOVE_UD_SLIDER:
-                flag_index = self.window[self.active_window_index].item_text[self.cursor_item_y][LIST_WINDOW_TEXT_OPE_OBJ] #flag_indexに編集対象となるオブジェクトが入ったリストインデックス値が入ります
-                k = self.window[self.active_window_index].flag_list[flag_index] #Kに現在表示されている数値が代入されます(on/offの表示の場合はon=1 off=0が代入されます)
-                if self.window[self.active_window_index].item_text[self.cursor_item_y][LIST_WINDOW_TEXT_OPE_OBJ_TYPE] == OPE_OBJ_TYPE_ON_OFF:#操作テキストオブジェクトは「ON」「OFF」の二つから選ぶシンプルなタイプの時は
-                    if k == 0: #k=0(off)の時はk=1(on)に、k=1(on)の時はk=0(off)にする
-                        k = 1
-                    else:
-                        k = 0
-                    
-                    self.window[self.active_window_index].flag_list[flag_index] = k #フラグ＆数値リストを更新する
-                    pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルok音を鳴らす
+        if     pyxel.btnp(pyxel.KEY_SPACE):
+            self.cursor_button_data = BTN_NONE
+            update_window.select_cursor_push_button(self)
+        elif   pyxel.btnp(pyxel.GAMEPAD1_BUTTON_A) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_A):
+            self.cursor_button_data = BTN_A
+            update_window.select_cursor_push_button(self)
+        elif   pyxel.btnp(pyxel.GAMEPAD1_BUTTON_B) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_B):
+            self.cursor_button_data = BTN_B
+            update_window.select_cursor_push_button(self)
+        elif   pyxel.btnp(pyxel.GAMEPAD1_BUTTON_X) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_X):
+            self.cursor_button_data = BTN_X
+            update_window.select_cursor_push_button(self)
+        elif   pyxel.btnp(pyxel.GAMEPAD1_BUTTON_Y) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_Y):
+            self.cursor_button_data = BTN_Y
+            update_window.select_cursor_push_button(self)
+        elif   pyxel.btnp(pyxel.GAMEPAD1_BUTTON_BACK) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_BACK):
+            self.cursor_button_data = BTN_BACK
+            update_window.select_cursor_push_button(self)
+        elif   pyxel.btnp(pyxel.GAMEPAD1_BUTTON_START) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_START):
+            self.cursor_button_data = BTN_START
+            update_window.select_cursor_push_button(self)
+        else:
+            self.cursor_button_data = BTN_NONE
+
+    #セレクトカーソル移動時,ボタンを押した後の処理を行う
+    def select_cursor_push_button(self):
+        self.cursor_decision_item_x = self.cursor_item_x #ボタンが押されて決定されたら、いま指示しているアイテムナンバーをcursor_decision_item_xに代入！
+        self.cursor_decision_item_y = self.cursor_item_y #ボタンが押されて決定されたら、いま指示しているアイテムナンバーをcursor_decision_item_yに代入！
+        if self.cursor_move_direction == CURSOR_MOVE_UD_SLIDER:
+            flag_index = self.window[self.active_window_index].item_text[self.cursor_item_y][LIST_WINDOW_TEXT_OPE_OBJ] #flag_indexに編集対象となるオブジェクトが入ったリストインデックス値が入ります
+            k = self.window[self.active_window_index].flag_list[flag_index] #Kに現在表示されている数値が代入されます(on/offの表示の場合はon=1 off=0が代入されます)
+            if self.window[self.active_window_index].item_text[self.cursor_item_y][LIST_WINDOW_TEXT_OPE_OBJ_TYPE] == OPE_OBJ_TYPE_ON_OFF:#操作テキストオブジェクトは「ON」「OFF」の二つから選ぶシンプルなタイプの時は
+                if k == 0: #k=0(off)の時はk=1(on)に、k=1(on)の時はk=0(off)にする
+                    k = 1
+                else:
+                    k = 0
+                
+                self.window[self.active_window_index].flag_list[flag_index] = k #フラグ＆数値リストを更新する
+                pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルok音を鳴らす
+
+
+
+
+
 
     #パッドアサイングラフイックリストをリフレッシュ！する！
     def refresh_pad_assign_graph_list(self):
