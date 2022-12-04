@@ -218,6 +218,21 @@ class App:
                                         
                                         BTN_CHANGE_CLAW_STYLE,BTN_CHANGE_CLAW_INTERVAL]
         
+        # self.default_pad_assign_list = [BTN_SHOT_AND_SUB_WEAPON,BTN_MISSILE,
+        #                                 BTN_PAUSE,BTN_SUB_WEAPON_CHANGE,
+                                        
+        #                                 BTN_SPEED_CHANGE,BTN_NO_ASSIGN,BTN_NO_ASSIGN,
+                                        
+        #                                 BTN_CHANGE_CLAW_STYLE,BTN_CHANGE_CLAW_INTERVAL]
+        
+        #何も設定されてないパッドアサインリスト
+        self.empty_pad_assign_list =    [BTN_NO_ASSIGN,BTN_NO_ASSIGN,
+                                        BTN_NO_ASSIGN,BTN_NO_ASSIGN,
+                                        
+                                        BTN_NO_ASSIGN,BTN_NO_ASSIGN,BTN_NO_ASSIGN,
+                                        
+                                        BTN_NO_ASSIGN,BTN_NO_ASSIGN]
+        
         define_data.default_achievement_list(self) #実績のIDナンバーとそれに対するグラフイックチップの位置や英語コメント、日本語コメントのデータリストの定義関数の呼び出し
         
         self.default_boss_number_of_defeat = [0] * 50                                  #ボス撃破数デフォルトリストを作製します
@@ -329,7 +344,7 @@ class App:
         self.reference_tilemap  = 0            #BGタイルマップを調べたり書き換えたりする時、どのタイルマップナンバーを使用するのかの変数の初期化です
         
         func.load_kanji_font_data(self)        #漢字フォントデータをロードする関数の呼び出し
-        self.select_cursor_flag = FLAG_OFF     #セレクトカーソルの移動更新フラグはoffにして初期化しておく
+        self.select_cursor_flag = FLAG_OFF     #セレクトカーソルを動かすかどうかのフラグはOFFにして初期化しておく
         
         self.playing_ship_list = copy.deepcopy(self.default_ship_list) #シップ関連のリストはシステムデータロード関連はまだ未実装なのでとりあえずデフォルトのリストをコピーして仮状態でいきますっ！(システムデータリセットの事も考えてディープコピーします)
         

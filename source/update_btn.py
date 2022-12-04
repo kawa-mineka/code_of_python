@@ -74,7 +74,7 @@ class update_btn:
             if self.replay_data[self.replay_stage_num][self.replay_frame_index] & 0b00001000 == 0b00001000: #HighByte リプレイデータを調べてPAD_RIGHT_Sが押された記録だったのなら...
                 update_ship.change_fix_claw_interval(self) #フイックスクローの間隔変化関数呼び出し！
         elif self.move_mode == MOVE_MANUAL: #手動移動モードの場合は
-            if pyxel.btn(pyxel.KEY_N) or pyxel.btn(pyxel.GAMEPAD1_BUTTON_RIGHTSHOULDER) or pyxel.btn(pyxel.GAMEPAD2_BUTTON_RIGHTSHOULDER):#NキーかPAD_RIGHT_Sが押されたらフックスクローの間隔を変化させる
+            if pyxel.btn(pyxel.KEY_N) or func.push_pad_btn(self,BTN_CHANGE_CLAW_INTERVAL):#NキーかCHANGE_CLAW_INTERVALが押されたらフックスクローの間隔を変化させる
                 self.pad_data_h += PAD_RIGHT_S #パッド入力データのRIGHT_SHOULDERボタンの情報ビットを立てる
                 update_ship.change_fix_claw_interval(self) #フイックスクローの間隔変化関数呼び出し！
 
@@ -84,7 +84,7 @@ class update_btn:
             if self.replay_data[self.replay_stage_num][self.replay_frame_index] & 0b00000100 == 0b00000100: #HighByte リプレイデータを調べてPAD_LEFT_Sが押された記録だったのなら...
                 update_ship.change_claw_style(self) #クロースタイル変更関数呼び出し！
         elif self.move_mode == MOVE_MANUAL: #手動移動モードの場合は
-            if pyxel.btnp(pyxel.KEY_M) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_LEFTSHOULDER) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_LEFTSHOULDER):#MキーかPAD_LEFT_Sが押されたらクローの種類を変更する
+            if pyxel.btnp(pyxel.KEY_M) or func.push_pad_btnp(self,BTN_CHANGE_CLAW_STYLE):#MキーかCHANGE_CLAW_STYLEが押されたらクローの種類を変更する
                 self.pad_data_h += PAD_LEFT_S #パッド入力データのLEFT_SHOULDERボタンの情報ビットを立てる
                 update_ship.change_claw_style(self) #クロースタイル変更関数呼び出し！
 
@@ -116,9 +116,8 @@ class update_btn:
 
     #ポーズボタンが押されたか調べる 「START」ボタン                                                 KEY TAB    GAMEPAD START
     def pause_btn(self):
-        # if pyxel.btnp(pyxel.KEY_TAB) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_START) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_START):
-        if pyxel.btnp(pyxel.KEY_TAB) or func.push_pad_btnp(self,BTN_PAUSE):
-        # if func.push_pad_btnp(self,BTN_PAUSE) == True:
+        # if pyxel.btnp(pyxel.KEY_TAB) == True or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_START) == True:
+        if pyxel.btnp(pyxel.KEY_TAB) == True or func.push_pad_btnp(self,BTN_PAUSE) == True:
             if    self.game_status == SCENE_PLAY\
                 or self.game_status == SCENE_BOSS_APPEAR\
                 or self.game_status == SCENE_BOSS_BATTLE\
@@ -126,8 +125,6 @@ class update_btn:
                 
                 self.record_games_status = self.game_status #ステータスを一時記憶しておく
                 self.game_status = SCENE_PAUSE              #ステータスを「PAUSE」にする
-                # self.cursor_button_data = BTN_NONE          #押されたボタンIDを初期化
-                
                 if func.search_window_id(self,WINDOW_ID_PAUSE_MENU) == -1: #ポーズメニューウィンドウが存在しないのなら・・
                     update_window.create(self,WINDOW_ID_PAUSE_MENU,30,70)          #ポーズメニューウィンドウウィンドウの作製
                     
@@ -138,14 +135,13 @@ class update_btn:
                     self.select_cursor_flag = 1            #セレクトカーソル移動フラグを建てる
                     pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
                 
+                self.cursor_button_data = BTN_NONE          #押されたボタンIDを初期化
                 self.cursor_decision_item_y = UNSELECTED
                 
             elif self.game_status == SCENE_PAUSE:          #ポーズ状態でポーズボタンが押されたときは・・・
                 self.game_status = self.record_games_status #一時記憶しておいたゲームステータスを元に戻してあげます
                 self.star_scroll_speed = 1                  #星のスクロールスピードを倍率1に戻す
                 self.cursor_type = CURSOR_TYPE_NO_DISP      #セレクトカーソルの表示をoffにする
-                # self.cursor_button_data = BTN_NONE          #押されたボタンIDを初期化
-                
                 if func.search_window_id(self,WINDOW_ID_PAUSE_MENU) != -1: #ポーズメニューウィンドウが存在するのならば・・
                     i = func.search_window_id(self,WINDOW_ID_PAUSE_MENU)
                     self.window[i].vy = -0.3            #WINDOW_ID_PAUSE_MENUウィンドウを右上にフッ飛ばしていく
@@ -158,4 +154,6 @@ class update_btn:
                     pyxel.play(0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
                 
             else:
+                self.cursor_button_data = BTN_NONE          #押されたボタンIDを初期化
+                self.cursor_decision_item_y = UNSELECTED
                 return

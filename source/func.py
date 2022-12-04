@@ -150,48 +150,63 @@ class func:
                     if pyxel.btn(pyxel.GAMEPAD1_BUTTON_A):
                         return (True)
                     else:
-                        self.cursor_button_data = BTN_NONE
                         return (False)
                 
                 if i == BTN_B:
                     if pyxel.btn(pyxel.GAMEPAD1_BUTTON_B):
                         return (True)
                     else:
-                        self.cursor_button_data = BTN_NONE
                         return (False)
                 
                 if i == BTN_X:
                     if pyxel.btn(pyxel.GAMEPAD1_BUTTON_X):
                         return (True)
                     else:
-                        self.cursor_button_data = BTN_NONE
                         return (False)
                 
                 if i == BTN_Y:
                     if pyxel.btn(pyxel.GAMEPAD1_BUTTON_Y):
                         return (True)
                     else:
-                        self.cursor_button_data = BTN_NONE
                         return (False)
                 
                 if i == BTN_BACK:
                     if pyxel.btn(pyxel.GAMEPAD1_BUTTON_BACK):
                         return (True)
                     else:
-                        self.cursor_button_data = BTN_NONE
                         return (False)
                 
                 if i == BTN_START:
                     if pyxel.btn(pyxel.GAMEPAD1_BUTTON_START):
                         return (True)
                     else:
-                        self.cursor_button_data = BTN_NONE
+                        return (False)
+                
+                if i == BTN_LEFTSHOULDER:
+                    if pyxel.btn(pyxel.GAMEPAD1_BUTTON_LEFTSHOULDER):
+                        return (True)
+                    else:
+                        return (False)
+                
+                if i == BTN_RIGHTSHOULDER:
+                    if pyxel.btn(pyxel.GAMEPAD1_BUTTON_RIGHTSHOULDER):
+                        return (True)
+                    else:
                         return (False)
         
-        self.cursor_button_data = BTN_NONE
         return (False)
 
     #パッドのボタンが押されて離されたかどうか調べる関数定義 押されて話されたらTrue そうでなかったらFalseを返します
+    #
+    #2022 12/04現在このメソッドは特に問題ないように思えます STARTボタンの押すことによるポーズを掛ける解除するも問題ない感じ
+    #update_window.select_cursor(self)内のABXY,BACK,START,スペースキーが押された場合の処理
+    # elif   pyxel.btnp(pyxel.GAMEPAD1_BUTTON_START) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_START):
+    #     self.cursor_button_data = BTN_START
+    #     update_window.select_cursor_push_button(self)を
+    #コメントアウトするときちんと動作するのでこの部分が問題かと・・・
+    #
+    # まぁ良く判んないんだけどねぇ～～～～～☆彡
+    #
     def push_pad_btnp(self,action_id): #action_idはそれぞれのボタンアクションに割り当てられたIDです (例)BTN_SHOTは1,BTN_MISSILEは2,BTN_SHOT_AND_SUB_WEAPONは3などなど・・・
         list_count = len(self.pad_assign_list)#list_countにpad_assign_listの長さが入る
         for i in range (list_count): #pad_assign_listの長さの回数だけループ
@@ -201,45 +216,49 @@ class func:
                     if pyxel.btnp(pyxel.GAMEPAD1_BUTTON_A):
                         return (True)
                     else:
-                        self.cursor_button_data = BTN_NONE
                         return (False)
                 
                 if i == BTN_B:
                     if pyxel.btnp(pyxel.GAMEPAD1_BUTTON_B):
                         return (True)
                     else:
-                        self.cursor_button_data = BTN_NONE
                         return (False)
                 
                 if i == BTN_X:
                     if pyxel.btnp(pyxel.GAMEPAD1_BUTTON_X):
                         return (True)
                     else:
-                        self.cursor_button_data = BTN_NONE
                         return (False)
                 
                 if i == BTN_Y:
                     if pyxel.btnp(pyxel.GAMEPAD1_BUTTON_Y):
                         return (True)
                     else:
-                        self.cursor_button_data = BTN_NONE
                         return (False)
                 
                 if i == BTN_BACK:
                     if pyxel.btnp(pyxel.GAMEPAD1_BUTTON_BACK):
                         return (True)
                     else:
-                        self.cursor_button_data = BTN_NONE
                         return (False)
                 
                 if i == BTN_START:
                     if pyxel.btnp(pyxel.GAMEPAD1_BUTTON_START):
                         return (True)
                     else:
-                        self.cursor_button_data = BTN_NONE
                         return (False)
-        
-        self.cursor_button_data = BTN_NONE
+                
+                if i == BTN_LEFTSHOULDER:
+                    if pyxel.btnp(pyxel.GAMEPAD1_BUTTON_LEFTSHOULDER):
+                        return (True)
+                    else:
+                        return (False)
+                
+                if i == BTN_RIGHTSHOULDER:
+                    if pyxel.btnp(pyxel.GAMEPAD1_BUTTON_RIGHTSHOULDER):
+                        return (True)
+                    else:
+                        return (False)
         return (False)
 
     #自機との距離を求める関数定義

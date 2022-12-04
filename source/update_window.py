@@ -1282,7 +1282,7 @@ class update_window:
             WINDOW_BETWEEN_LINE_7,\
             ["JOYPAD ASSIGN"        ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_RAINBOW_FLASH],\
             
-            [["FIRE & SUB WEAPON"   ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,MES_NO_FLASH],\
+            [["FIRE - SUB WEAPON"   ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,MES_NO_FLASH],\
             [ "MISSILE"             ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,MES_NO_FLASH],\
             [ "MAIN WEAPON CHANGE"  ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,MES_NO_FLASH],\
             [ "SUB WEAPON CHANGE"   ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,MES_NO_FLASH],\
@@ -1293,8 +1293,8 @@ class update_window:
             [ "CLAW DISTANCE"       ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,MES_NO_FLASH],\
             [ ""                    ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,3,MES_NO_FLASH],\
             [ "DEFAULT"             ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,3,MES_NO_FLASH],\
-            [ "CANCEL"              ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,MES_NO_FLASH],\
-            [ "SAVE & RETURN"       ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,MES_YELLOW_FLASH]],\
+            [ "ALL CLEAR"           ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,MES_NO_FLASH],\
+            [ "SAVE - RETURN"       ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,11,0,7,MES_YELLOW_FLASH]],\
             
             NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
             
@@ -1445,8 +1445,8 @@ class update_window:
             [ "CLAW DISTANCE CHANGE BUTTON","","","","","","","","",""],\
             [ "","","","","","","","","",""],\
             [ "DEFAULT","","","","","","","","",""],\
-            [ "CANCEL","","","","","","","","",""],\
-            [ "RETURN","","","","","","","","",""]],\
+            [ "ALL CLEAR","","","","","","","","",""],\
+            [ "SAVE RETURN","","","","","","","","",""]],\
             
             [["ショット発射ボタン","","","","","","","","",""],\
             [ "ミサイル発射ボタン","","","","","","","","",""],\
@@ -1459,7 +1459,7 @@ class update_window:
             [ "クロ─の間隔調整","","","","","","","","",""],\
             [ "","","","","","","","","",""],\
             [ "初期設定に戻します","","","","","","","","",""],\
-            [ "キャンセルして戻ります","","","","","","","","",""],\
+            [ "全てのボタンを設定無しにします","","","","","","","","",""],\
             [ "セ─ブします","","","","","","","","",""]],\
             
             [[0,0,0,0,0,0,0,0,0,0],\
@@ -2550,9 +2550,11 @@ class update_window:
                         pygame.mixer.music.set_volume(self.master_bgm_vol / 100)
                         update_se.se(self,2,SE_WAVE_CUTTER,self.master_se_vol)
         
-        #ABXYスペースキーが押された場合の処理
+        #ABXY,BACK,START,スペースキーが押された場合の処理
+        self.cursor_button_data = BTN_NONE
+        
         if     pyxel.btnp(pyxel.KEY_SPACE):
-            self.cursor_button_data = BTN_NONE
+            self.cursor_button_data = BTN_KEYBOARD_SPACE
             update_window.select_cursor_push_button(self)
         elif   pyxel.btnp(pyxel.GAMEPAD1_BUTTON_A) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_A):
             self.cursor_button_data = BTN_A
@@ -2566,11 +2568,19 @@ class update_window:
         elif   pyxel.btnp(pyxel.GAMEPAD1_BUTTON_Y) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_Y):
             self.cursor_button_data = BTN_Y
             update_window.select_cursor_push_button(self)
-        elif   pyxel.btnp(pyxel.GAMEPAD1_BUTTON_BACK) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_BACK):
+            
+            #パッドアサインモードフラグが立っている時はパッド割り当てでBACKボタンやSTARTボタンLEFT SHOULDER,RIGHT SHOULDERボタンも「決定」ボタンとして使用したいので以下の処理も行います
+        elif (pyxel.btnp(pyxel.GAMEPAD1_BUTTON_BACK) and (self.cursor_pad_assign_mode == FLAG_ON)) or (pyxel.btnp(pyxel.GAMEPAD2_BUTTON_BACK) and (self.cursor_pad_assign_mode == FLAG_ON)):
             self.cursor_button_data = BTN_BACK
             update_window.select_cursor_push_button(self)
-        elif   pyxel.btnp(pyxel.GAMEPAD1_BUTTON_START) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_START):
+        elif   (pyxel.btnp(pyxel.GAMEPAD1_BUTTON_START) and (self.cursor_pad_assign_mode == FLAG_ON)) or (pyxel.btnp(pyxel.GAMEPAD2_BUTTON_START) and (self.cursor_pad_assign_mode == FLAG_ON)):
             self.cursor_button_data = BTN_START
+            update_window.select_cursor_push_button(self)
+        elif (pyxel.btnp(pyxel.GAMEPAD1_BUTTON_LEFTSHOULDER) and (self.cursor_pad_assign_mode == FLAG_ON)) or (pyxel.btnp(pyxel.GAMEPAD2_BUTTON_LEFTSHOULDER) and (self.cursor_pad_assign_mode == FLAG_ON)):
+            self.cursor_button_data = BTN_LEFTSHOULDER
+            update_window.select_cursor_push_button(self)
+        elif   (pyxel.btnp(pyxel.GAMEPAD1_BUTTON_RIGHTSHOULDER) and (self.cursor_pad_assign_mode == FLAG_ON)) or (pyxel.btnp(pyxel.GAMEPAD2_BUTTON_RIGHTSHOULDER) and (self.cursor_pad_assign_mode == FLAG_ON)):
+            self.cursor_button_data = BTN_RIGHTSHOULDER
             update_window.select_cursor_push_button(self)
         else:
             self.cursor_button_data = BTN_NONE

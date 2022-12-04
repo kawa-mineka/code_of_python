@@ -31,7 +31,7 @@ class update_pause:
                     self.window[i].vx = 0.1
                     self.window[i].vx_accel = 1.2
                     self.window[i].window_status = WINDOW_CLOSE
-                    self.select_cursor_flag = 0         #セレクトカーソル移動フラグを降ろす
+                    self.select_cursor_flag = FLAG_OFF         #セレクトカーソル移動フラグを降ろす
                     
                     pyxel.play(0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
                 
