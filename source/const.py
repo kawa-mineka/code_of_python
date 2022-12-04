@@ -1477,24 +1477,27 @@ SE_BOSS_EXPLOSION = 11
 SE_SHIP_DAMAGE    = 15
 
 #!ボタン割り当て(キーアサイン、キーコンフィグ)で使用する定数定義 アクションID 同時にCONFIG設定のPADアサイン項目のY座標(キャラ単位)としても使用します 連番にしちゃダメだよ(はぁと)
-BTN_DUMMY_1               =  50   #ダミー用
-BTN_NO_ASSIGN             =  100 #未割当ID
-BTN_SHOT                  =  600 #ショットボタンID
-BTN_SUB_WEAPON            =  400 #サブウェポンボタンID
+#!アクションID
+ACT_DUMMY_1               =  50   #ダミーアクション用
 
-BTN_SHOT_AND_SUB_WEAPON   =  0   #ショット＆サブウェポン同時発射ボタンID
-BTN_MISSILE               =  1   #ミサイルボタンID
-BTN_MAIN_WEAPON_CHANGE    =  2   #メインウェポン切り替えボタンID
-BTN_SUB_WEAPON_CHANGE     =  3   #サブウェポン切り替えボタンID
-BTN_SPEED_CHANGE          =  4   #スピードチェンジボタンID
+ACT_NO_ASSIGN             =  100 #未割当アクションID
+ACT_SHOT                  =  600 #ショットアクションID
+ACT_SUB_WEAPON            =  400 #サブウェポンアクションID
 
-BTN_PAUSE                 =  6   #ポーズボタンID
-BTN_CHANGE_CLAW_STYLE     =  7   #クロースタイルチェンジボタンID
-BTN_CHANGE_CLAW_INTERVAL  =  8   #クローインターバルチェンジボタンID
+ACT_SHOT_AND_SUB_WEAPON   =  0   #ショット＆サブウェポン同時発射アクションID
+ACT_MISSILE               =  1   #ミサイルアクションID
+ACT_MAIN_WEAPON_CHANGE    =  2   #メインウェポン切り替えアクションID
+ACT_SUB_WEAPON_CHANGE     =  3   #サブウェポン切り替えアクションID
+ACT_SPEED_CHANGE          =  4   #スピードチェンジアクションID
 
-#ボタン割り当てリストを参照するときに使用するインデックス値ラベル self.pad_assign_list[ここに入る]
-#例 self.pad_assign_list[BTN_A]で Aボタンを押したらどのアクションIDが割り当てられているか判る、判るマン
-#初期状態はBTN_SHOT_AND_SUB_WEAPONなのでショット＆サブウェポン同時発射アクションIDが割り当てられているのが判るのです
+ACT_PAUSE                 =  6   #ポーズアクションID
+ACT_CHANGE_CLAW_STYLE     =  7   #クロースタイルチェンジアクションID
+ACT_CHANGE_CLAW_INTERVAL  =  8   #クローインターバルチェンジアクションID
+
+#!ボタン割り当てリストを参照するときに使用するインデックス値ラベル self.pad_assign_list[ここに入る]
+#!例 self.pad_assign_list[BTN_A]で Aボタンを押したらどのアクションIDが割り当てられているか判る、判るマン
+#!初期状態はACT_SHOT_AND_SUB_WEAPONなのでショット＆サブウェポン同時発射アクションIDが割り当てられているのが判るのです
+#!ボタンID
 BTN_A             =  0
 BTN_B             =  1
 BTN_X             =  2

@@ -2570,16 +2570,16 @@ class update_window:
             update_window.select_cursor_push_button(self)
             
             #パッドアサインモードフラグが立っている時はパッド割り当てでBACKボタンやSTARTボタンLEFT SHOULDER,RIGHT SHOULDERボタンも「決定」ボタンとして使用したいので以下の処理も行います
-        elif (pyxel.btnp(pyxel.GAMEPAD1_BUTTON_BACK) and (self.cursor_pad_assign_mode == FLAG_ON)) or (pyxel.btnp(pyxel.GAMEPAD2_BUTTON_BACK) and (self.cursor_pad_assign_mode == FLAG_ON)):
+        elif (pyxel.btnp(pyxel.GAMEPAD1_BUTTON_BACK) and (self.cursor_pad_assign_mode == FLAG_ON))          or (pyxel.btnp(pyxel.GAMEPAD2_BUTTON_BACK) and (self.cursor_pad_assign_mode == FLAG_ON)):
             self.cursor_button_data = BTN_BACK
             update_window.select_cursor_push_button(self)
-        elif   (pyxel.btnp(pyxel.GAMEPAD1_BUTTON_START) and (self.cursor_pad_assign_mode == FLAG_ON)) or (pyxel.btnp(pyxel.GAMEPAD2_BUTTON_START) and (self.cursor_pad_assign_mode == FLAG_ON)):
+        elif (pyxel.btnp(pyxel.GAMEPAD1_BUTTON_START) and (self.cursor_pad_assign_mode == FLAG_ON))         or (pyxel.btnp(pyxel.GAMEPAD2_BUTTON_START) and (self.cursor_pad_assign_mode == FLAG_ON)):
             self.cursor_button_data = BTN_START
             update_window.select_cursor_push_button(self)
-        elif (pyxel.btnp(pyxel.GAMEPAD1_BUTTON_LEFTSHOULDER) and (self.cursor_pad_assign_mode == FLAG_ON)) or (pyxel.btnp(pyxel.GAMEPAD2_BUTTON_LEFTSHOULDER) and (self.cursor_pad_assign_mode == FLAG_ON)):
+        elif (pyxel.btnp(pyxel.GAMEPAD1_BUTTON_LEFTSHOULDER) and (self.cursor_pad_assign_mode == FLAG_ON))  or (pyxel.btnp(pyxel.GAMEPAD2_BUTTON_LEFTSHOULDER) and (self.cursor_pad_assign_mode == FLAG_ON)):
             self.cursor_button_data = BTN_LEFTSHOULDER
             update_window.select_cursor_push_button(self)
-        elif   (pyxel.btnp(pyxel.GAMEPAD1_BUTTON_RIGHTSHOULDER) and (self.cursor_pad_assign_mode == FLAG_ON)) or (pyxel.btnp(pyxel.GAMEPAD2_BUTTON_RIGHTSHOULDER) and (self.cursor_pad_assign_mode == FLAG_ON)):
+        elif (pyxel.btnp(pyxel.GAMEPAD1_BUTTON_RIGHTSHOULDER) and (self.cursor_pad_assign_mode == FLAG_ON)) or (pyxel.btnp(pyxel.GAMEPAD2_BUTTON_RIGHTSHOULDER) and (self.cursor_pad_assign_mode == FLAG_ON)):
             self.cursor_button_data = BTN_RIGHTSHOULDER
             update_window.select_cursor_push_button(self)
         else:
@@ -2600,11 +2600,6 @@ class update_window:
                 
                 self.window[self.active_window_index].flag_list[flag_index] = k #フラグ＆数値リストを更新する
                 pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルok音を鳴らす
-
-
-
-
-
 
     #パッドアサイングラフイックリストをリフレッシュ！する！
     def refresh_pad_assign_graph_list(self):

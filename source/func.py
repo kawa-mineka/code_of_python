@@ -141,11 +141,11 @@ class func:
         pyxel.tilemap(tm).pset(x,y,(tile_x,tile_y))
 
     #パッドのボタンが押されたかどうか調べる関数定義 押されていたらTrue 押されていなかったFalseを返します
-    def push_pad_btn(self,action_id):  #action_idはそれぞれのボタンアクションに割り当てられたIDです (例)BTN_SHOTは1,BTN_MISSILEは2,BTN_SHOT_AND_SUB_WEAPONは3などなど・・・
+    def push_pad_btn(self,action_id):  #action_idはそれぞれのボタンアクションに割り当てられたIDです (例)ACT_SHOTは1,ACT_MISSILEは2,ACT_SHOT_AND_SUB_WEAPONは3などなど・・・
         list_count = len(self.pad_assign_list)#list_countにpad_assign_listの長さが入る
         for i in range (list_count): #pad_assign_listの長さの回数だけループ
-            assin_btn = self.pad_assign_list[i] #どの様なボタンIDが割り当てられているか取り出す
-            if action_id == assin_btn: #アクションIDとアサインIDが一致したらその時点でのassin_btnが押されているかどうか調べはじめる
+            btn_id = self.pad_assign_list[i] #どの様なボタンIDが割り当てられているか取り出す
+            if action_id == btn_id: #アクションIDとボタンIDが一致したら、「割り当てられたボタンID」が押されているか？どうか？を調べはじめる
                 if i == BTN_A:
                     if pyxel.btn(pyxel.GAMEPAD1_BUTTON_A):
                         return (True)
@@ -207,11 +207,11 @@ class func:
     #
     # まぁ良く判んないんだけどねぇ～～～～～☆彡
     #
-    def push_pad_btnp(self,action_id): #action_idはそれぞれのボタンアクションに割り当てられたIDです (例)BTN_SHOTは1,BTN_MISSILEは2,BTN_SHOT_AND_SUB_WEAPONは3などなど・・・
+    def push_pad_btnp(self,action_id): #action_idはそれぞれのボタンアクションに割り当てられたIDです (例)ACT_SHOTは1,ACT_MISSILEは2,ACT_SHOT_AND_SUB_WEAPONは3などなど・・・
         list_count = len(self.pad_assign_list)#list_countにpad_assign_listの長さが入る
         for i in range (list_count): #pad_assign_listの長さの回数だけループ
-            assin_btn = self.pad_assign_list[i] #どの様なボタンIDが割り当てられているか取り出す
-            if action_id == assin_btn: #アクションIDとアサインIDが一致したらその時点でのassin_btnが押されているかどうか調べはじめる
+            btn_id = self.pad_assign_list[i] #どの様なボタンIDが割り当てられているか取り出す
+            if action_id == btn_id: #アクションIDとボタンIDが一致したら、「割り当てられたボタンID」が押されているか？どうか？を調べはじめる
                 if i == BTN_A:
                     if pyxel.btnp(pyxel.GAMEPAD1_BUTTON_A):
                         return (True)

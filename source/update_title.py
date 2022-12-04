@@ -7,12 +7,13 @@
 ###########################################################
 import copy #スコアボードでデフォルトスコアボードを深い階層までのコピーを使いたいのでインポートします
 
-import pyxel                #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
-from const         import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
-from func          import * #汎用性のある関数群のモジュールの読み込み
-from update_system import * #システムデータをセーブするときに使用します
-from update_window import * #各種ウィンドウ作成時に使用するのでインポート
-from update_se     import * #SEのVOLリスト原本を取得しバックアップするために必要なのでインポート
+import pyxel                    #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
+from const             import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
+from func              import * #汎用性のある関数群のモジュールの読み込み
+from update_system     import * #システムデータをセーブするときに使用します
+from update_window     import * #各種ウィンドウ作成時に使用するのでインポート
+from update_se         import * #SEのVOLリスト原本を取得しバックアップするために必要なのでインポート
+from update_btn_assign import * #パッドボタン割り当てのリスト更新で使用するのでインポートします
 
 class update_title:
     def __init__(self):
@@ -855,19 +856,24 @@ class update_title:
                     
                 elif self.cursor_pre_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN and self.cursor_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN_FIRE_AND_SUBWEAPON:
                     if self.cursor_button_data != BTN_KEYBOARD_SPACE: #スペースキーで決定の場合は何もしない
-                        self.pad_assign_list[self.cursor_button_data] = BTN_SHOT_AND_SUB_WEAPON
-                        pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
-                        # self.cursor_button_data = BTN_NONE                       #押されたボタンIDを初期化
-                        i = func.search_window_id(self,WINDOW_ID_JOYPAD_ASSIGN)  #ジョイパッドボタン割り当て設定ウィンドウのインデックス値を取得
-                        self.window[i].pad_assign_list = self.pad_assign_list    #ウィンドウクラスのパッドアサインリストも更新してやります
-                        update_window.refresh_pad_assign_graph_list(self)        #パッドアサイングラフイックリストを更新して新しいものにします(self.pad_assign_listに依存しているため)
-                        i = func.search_window_id(self,WINDOW_ID_JOYPAD_ASSIGN)  #ジョイパッドボタン割り当て設定ウィンドウのインデックス値を取得
-                        self.window[i].pad_assign_graph_list = self.pad_assign_graph_list    #ウィンドウクラスのパッドアサイングラフイックリストも更新してやります
+                        
+                        #! self.pad_assign_list[self.cursor_button_data] = ACT_SHOT_AND_SUB_WEAPON
+                        update_btn_assign.list(self,self.cursor_button_data,ACT_SHOT_AND_SUB_WEAPON)
+                        
+                        pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)  #カーソルOK音を鳴らす
+                        i = func.search_window_id(self,WINDOW_ID_JOYPAD_ASSIGN)           #ジョイパッドボタン割り当て設定ウィンドウのインデックス値を取得
+                        self.window[i].pad_assign_list = self.pad_assign_list             #ウィンドウクラスのパッドアサインリストも更新してやります
+                        update_window.refresh_pad_assign_graph_list(self)                 #パッドアサイングラフイックリストを更新して新しいものにします(self.pad_assign_listに依存しているため)
+                        i = func.search_window_id(self,WINDOW_ID_JOYPAD_ASSIGN)           #ジョイパッドボタン割り当て設定ウィンドウのインデックス値を取得
+                        self.window[i].pad_assign_graph_list = self.pad_assign_graph_list #ウィンドウクラスのパッドアサイングラフイックリストも更新してやります
                         self.cursor_decision_item_x = UNSELECTED
-                        self.cursor_decision_item_y = UNSELECTED          #選択アイテムをすべて「未選択」にします
+                        self.cursor_decision_item_y = UNSELECTED                          #選択アイテムをすべて「未選択」にします
                 elif self.cursor_pre_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN and self.cursor_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN_MISSILE:
                     if self.cursor_button_data != BTN_KEYBOARD_SPACE: #スペースキーで決定は除く
-                        self.pad_assign_list[self.cursor_button_data] = BTN_MISSILE
+                        
+                        #! self.pad_assign_list[self.cursor_button_data] = ACT_MISSILE
+                        update_btn_assign.list(self,self.cursor_button_data,ACT_MISSILE)
+                        
                         pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                         # self.cursor_button_data = BTN_NONE #押されたボタンIDを初期化
                         i = func.search_window_id(self,WINDOW_ID_JOYPAD_ASSIGN)  #ジョイパッドボタン割り当て設定ウィンドウのインデックス値を取得
@@ -879,7 +885,10 @@ class update_title:
                         self.cursor_decision_item_y = UNSELECTED          #選択アイテムをすべて「未選択」にします
                 elif self.cursor_pre_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN and self.cursor_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN_MAIN_WEAPON_CHANGE:
                     if self.cursor_button_data != BTN_KEYBOARD_SPACE: #スペースキーで決定は除く
-                        self.pad_assign_list[self.cursor_button_data] = BTN_MAIN_WEAPON_CHANGE
+                        
+                        #! self.pad_assign_list[self.cursor_button_data] = ACT_MAIN_WEAPON_CHANGE
+                        update_btn_assign.list(self,self.cursor_button_data,ACT_MAIN_WEAPON_CHANGE)
+                        
                         pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                         # self.cursor_button_data = BTN_NONE #押されたボタンIDを初期化
                         i = func.search_window_id(self,WINDOW_ID_JOYPAD_ASSIGN)  #ジョイパッドボタン割り当て設定ウィンドウのインデックス値を取得
@@ -891,7 +900,10 @@ class update_title:
                         self.cursor_decision_item_y = UNSELECTED          #選択アイテムをすべて「未選択」にします
                 elif self.cursor_pre_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN and self.cursor_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN_SUB_WEAPON_CHANGE:
                     if self.cursor_button_data != BTN_KEYBOARD_SPACE: #スペースキーで決定は除く
-                        self.pad_assign_list[self.cursor_button_data] = BTN_SUB_WEAPON_CHANGE
+                        
+                        #! self.pad_assign_list[self.cursor_button_data] = ACT_SUB_WEAPON_CHANGE
+                        update_btn_assign.list(self,self.cursor_button_data,ACT_SUB_WEAPON_CHANGE)
+                        
                         pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                         # self.cursor_button_data = BTN_NONE #押されたボタンIDを初期化
                         i = func.search_window_id(self,WINDOW_ID_JOYPAD_ASSIGN)  #ジョイパッドボタン割り当て設定ウィンドウのインデックス値を取得
@@ -903,7 +915,10 @@ class update_title:
                         self.cursor_decision_item_y = UNSELECTED          #選択アイテムをすべて「未選択」にします
                 elif self.cursor_pre_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN and self.cursor_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN_SPEED:
                     if self.cursor_button_data != BTN_KEYBOARD_SPACE: #スペースキーで決定は除く
-                        self.pad_assign_list[self.cursor_button_data] = BTN_SPEED_CHANGE
+                        
+                        #!self.pad_assign_list[self.cursor_button_data] = ACT_SPEED_CHANGE
+                        update_btn_assign.list(self,self.cursor_button_data,ACT_SPEED_CHANGE)
+                        
                         pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                         # self.cursor_button_data = BTN_NONE #押されたボタンIDを初期化
                         i = func.search_window_id(self,WINDOW_ID_JOYPAD_ASSIGN)  #ジョイパッドボタン割り当て設定ウィンドウのインデックス値を取得
@@ -915,7 +930,10 @@ class update_title:
                         self.cursor_decision_item_y = UNSELECTED          #選択アイテムをすべて「未選択」にします
                 elif self.cursor_pre_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN and self.cursor_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN_PAUSE:
                     if self.cursor_button_data != BTN_KEYBOARD_SPACE: #スペースキーで決定は除く
-                        self.pad_assign_list[self.cursor_button_data] = BTN_PAUSE
+                        
+                        #!self.pad_assign_list[self.cursor_button_data] = ACT_PAUSE
+                        update_btn_assign.list(self,self.cursor_button_data,ACT_PAUSE)
+                        
                         pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                         # self.cursor_button_data = BTN_NONE #押されたボタンIDを初期化
                         i = func.search_window_id(self,WINDOW_ID_JOYPAD_ASSIGN)  #ジョイパッドボタン割り当て設定ウィンドウのインデックス値を取得
@@ -927,7 +945,10 @@ class update_title:
                         self.cursor_decision_item_y = UNSELECTED          #選択アイテムをすべて「未選択」にします
                 elif self.cursor_pre_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN and self.cursor_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN_CLAW_STYLE:
                     if self.cursor_button_data != BTN_KEYBOARD_SPACE: #スペースキーで決定は除く
-                        self.pad_assign_list[self.cursor_button_data] = BTN_CHANGE_CLAW_STYLE
+                        
+                        #!self.pad_assign_list[self.cursor_button_data] = ACT_CHANGE_CLAW_STYLE
+                        update_btn_assign.list(self,self.cursor_button_data,ACT_CHANGE_CLAW_STYLE)
+                        
                         pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                         # self.cursor_button_data = BTN_NONE #押されたボタンIDを初期化
                         i = func.search_window_id(self,WINDOW_ID_JOYPAD_ASSIGN)  #ジョイパッドボタン割り当て設定ウィンドウのインデックス値を取得
@@ -939,7 +960,10 @@ class update_title:
                         self.cursor_decision_item_y = UNSELECTED          #選択アイテムをすべて「未選択」にします
                 elif self.cursor_pre_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN and self.cursor_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN_CLAW_DISTANCE:
                     if self.cursor_button_data != BTN_KEYBOARD_SPACE: #スペースキーで決定は除く
-                        self.pad_assign_list[self.cursor_button_data] = BTN_CHANGE_CLAW_INTERVAL
+                        
+                        #!self.pad_assign_list[self.cursor_button_data] = ACT_CHANGE_CLAW_INTERVAL
+                        update_btn_assign.list(self,self.cursor_button_data,ACT_CHANGE_CLAW_INTERVAL)
+                        
                         pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                         # self.cursor_button_data = BTN_NONE #押されたボタンIDを初期化
                         i = func.search_window_id(self,WINDOW_ID_JOYPAD_ASSIGN)  #ジョイパッドボタン割り当て設定ウィンドウのインデックス値を取得

@@ -211,27 +211,25 @@ class App:
         #                                     Xボタン,Yボタン,
         #                                     BACKボタン,GUIDEボタン,STARTボタン
         #                                     LEFTSHOULDERボタン,RIGHTSHOULDERボタン]
-        self.default_pad_assign_list = [BTN_SHOT_AND_SUB_WEAPON,BTN_MISSILE,
-                                        BTN_NO_ASSIGN,BTN_SUB_WEAPON_CHANGE,
+        # self.default_pad_assign_list = [ACT_SHOT_AND_SUB_WEAPON,ACT_MISSILE,
+        #                                 ACT_MAIN_WEAPON_CHANGE,ACT_SUB_WEAPON_CHANGE,
                                         
-                                        BTN_SPEED_CHANGE,BTN_NO_ASSIGN,BTN_PAUSE,
+        #                                 ACT_SPEED_CHANGE,ACT_NO_ASSIGN,ACT_PAUSE,
                                         
-                                        BTN_CHANGE_CLAW_STYLE,BTN_CHANGE_CLAW_INTERVAL]
-        
-        # self.default_pad_assign_list = [BTN_SHOT_AND_SUB_WEAPON,BTN_MISSILE,
-        #                                 BTN_PAUSE,BTN_SUB_WEAPON_CHANGE,
+        #                                 ACT_CHANGE_CLAW_STYLE,ACT_CHANGE_CLAW_INTERVAL]
+        self.default_pad_assign_list = [ACT_MISSILE,ACT_SHOT_AND_SUB_WEAPON,
+                                        ACT_MAIN_WEAPON_CHANGE,ACT_SUB_WEAPON_CHANGE,
                                         
-        #                                 BTN_SPEED_CHANGE,BTN_NO_ASSIGN,BTN_NO_ASSIGN,
+                                        ACT_SPEED_CHANGE,ACT_NO_ASSIGN,ACT_PAUSE,
                                         
-        #                                 BTN_CHANGE_CLAW_STYLE,BTN_CHANGE_CLAW_INTERVAL]
-        
+                                        ACT_CHANGE_CLAW_STYLE,ACT_CHANGE_CLAW_INTERVAL]
         #何も設定されてないパッドアサインリスト
-        self.empty_pad_assign_list =    [BTN_NO_ASSIGN,BTN_NO_ASSIGN,
-                                        BTN_NO_ASSIGN,BTN_NO_ASSIGN,
+        self.empty_pad_assign_list =    [ACT_NO_ASSIGN,ACT_NO_ASSIGN,
+                                        ACT_NO_ASSIGN,ACT_NO_ASSIGN,
                                         
-                                        BTN_NO_ASSIGN,BTN_NO_ASSIGN,BTN_NO_ASSIGN,
+                                        ACT_NO_ASSIGN,ACT_NO_ASSIGN,ACT_NO_ASSIGN,
                                         
-                                        BTN_NO_ASSIGN,BTN_NO_ASSIGN]
+                                        ACT_NO_ASSIGN,ACT_NO_ASSIGN]
         
         define_data.default_achievement_list(self) #実績のIDナンバーとそれに対するグラフイックチップの位置や英語コメント、日本語コメントのデータリストの定義関数の呼び出し
         
