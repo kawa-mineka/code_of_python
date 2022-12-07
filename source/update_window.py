@@ -6,12 +6,13 @@
 #  あとウィンドウシステムで使用するセレクトカーソルとかも      #
 # 2022 04/05からファイル分割してモジュールとして運用開始      #
 ###########################################################
-import math         #三角関数などを使用したいのでインポートぉぉおお！
-from random import random    #random.random() と呼ぶと、0から1の範囲(1は含まない)のランダムな実数が返される(主にパーティクル系で使用します)
-import pyxel        #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
-from const     import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
-from func      import * #汎用性のある関数群のモジュールの読み込み
-from update_se import * #CONFIGでSEボリュームを変化させたときSEを鳴らすために使用します
+import math               #三角関数などを使用したいのでインポートぉぉおお！
+from random import random #random.random() と呼ぶと、0から1の範囲(1は含まない)のランダムな実数が返される(主にパーティクル系で使用します)
+import pyxel              #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
+from const       import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
+from func        import * #汎用性のある関数群のモジュールの読み込み
+from update_se   import * #CONFIGでSEボリュームを変化させたときSEを鳴らすために使用します
+from update_btn  import * #カーソル移動時の方向パッド入力(キーリピート付き)を調べる時に使用します
 
 class update_window:
     def __init__(self):
@@ -2248,7 +2249,8 @@ class update_window:
     #セレクトカーソルの更新
     def select_cursor(self):
         # 上入力されたら  y座標を  -7する(1キャラ分)
-        if pyxel.btnp(pyxel.KEY_UP) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_UP) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_DPAD_UP):
+        # if pyxel.btnp(pyxel.KEY_UP) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_UP) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_DPAD_UP):
+        if update_btn.keypad_up(self) == True:
             self.cursor_move_data = PAD_UP
             if     self.cursor_move_direction == CURSOR_MOVE_UD\
                 or self.cursor_move_direction == CURSOR_MOVE_UD_SLIDER\
@@ -2318,7 +2320,8 @@ class update_window:
                     pyxel.play(0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
         
         # 下入力されたら  y座標を  +7する(1キャラ分)
-        if pyxel.btnp(pyxel.KEY_DOWN) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_DOWN) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_DPAD_DOWN):
+        # if pyxel.btnp(pyxel.KEY_DOWN) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_DOWN) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_DPAD_DOWN):
+        if update_btn.keypad_down(self) == True:
             self.cursor_move_data = PAD_DOWN
             if     self.cursor_move_direction == CURSOR_MOVE_UD\
                 or self.cursor_move_direction == CURSOR_MOVE_UD_SLIDER\

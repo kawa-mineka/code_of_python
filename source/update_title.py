@@ -75,6 +75,9 @@ class update_title:
         self.cursor_move_data = 0              #カーソルが実際に動いた方向のデータが入ります
         self.cursor_button_data =   BTN_NONE   #カーソル決定時に押されたボタンのIDが入ります
         self.cursor_size      = 0              #セレクトカーソルの大きさです(囲み矩形タイプで使用します)
+        self.cursor_repeat_flag = FLAG_OFF     #セレクトカーソルの移動リピートを行うかどうかのフラグです OFF=リピートは掛けないpyxelのbtnpでカーソル移動を判断する ON=キーリピートオン
+        self.cursor_repeat_time_count = 10     #セレクトカーソルの方向キーを押し続けた状態(キーリピート)のタイムカウントです(キーリピートカウンター) 初期値は10フレーム=(60分の1秒)x10なので6ぶんの1秒ごとにカーソルが動くという事です
+        self.keypad_repeat_num = 3             #キーパッドのリピートが掛ったとき何フレームごとにボタンをONにするかの数値(リピートが掛ると減少していくようにする)
         self.cursor_pad_assign_mode = FLAG_OFF #パッドボタンアサインモードのフラグをOFFにします FLAG_OFF=ABXYボタンとLRショルダーボタンのみ機能します(パッドアサインモード以外はこちらの状態での使用となります)
                                                 #                                               FLAG_ON=ABXY,BACK,STARTボタンとLRショルダーボタンすべてが「決定」ボタンとなりパッドアサイン機能として使用できるようになるです            
         self.active_window_id = 0              #アクティブになっているウィンドウのIDが入ります
