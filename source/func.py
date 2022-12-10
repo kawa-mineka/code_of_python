@@ -128,6 +128,11 @@ class func:
 
     #タイルマップの座標位置からキャラチップのアスキーコードを取得する
     def get_chrcode_tilemap(self,tm,x,y):         #tmはtilemapの数値,x,yは読み出す座標位置
+        """
+        タイルマップの座標位置からキャラチップのアスキーコードを取得する
+        
+        tmはtilemapの数値,x,yは読み出す座標位置
+        """
         global num   #なんやようわからんが・・・global命令で 「numはグローバル変数やで～」って宣言したら上手くいくようになった、なんでや・・・？？謎
         num = 0
         tile_x,tile_y = pyxel.tilemap(tm).pget(x,y) #タイルマップtm 座標(x,y)に格納されているマップチップを調べ、そのマップチップが格納されている座標を取得
@@ -136,12 +141,24 @@ class func:
 
     #タイルマップの座標位置へキャラチップのアスキーコードをタプル座標形式に変換したものをセットする(置く)
     def set_chrcode_tilemap(self,tm,x,y,num):         #tmはtilemapの数値,x,yはセット（置く）座標位置
+        """
+        タイルマップの座標位置へキャラチップのアスキーコードをタプル座標形式に変換したものをセットする
+        
+        tmはtilemapの数値  x,yはセットする座標
+        """
         tile_x = num % 32   #置く場所のx座標は 32で割った余り
         tile_y = num // 32  #置く場所のy座標は 32での切り捨て除算
         pyxel.tilemap(tm).pset(x,y,(tile_x,tile_y))
 
     #パッドのボタンが押されたかどうか調べる関数定義 押されていたらTrue 押されていなかったFalseを返します
     def push_pad_btn(self,action_id):  #action_idはそれぞれのボタンアクションに割り当てられたIDです (例)ACT_SHOTは1,ACT_MISSILEは2,ACT_SHOT_AND_SUB_WEAPONは3などなど・・・
+        """
+        パッドのボタンが押されたかどうか調べる
+        押されていたらTrue 押されていなかったFalseを返します
+        
+        action_idはそれぞれのボタンアクションに割り当てられたIDです
+        (例)ACT_SHOTは1,ACT_MISSILEは2,ACT_SHOT_AND_SUB_WEAPONは3などなど
+        """
         list_count = len(self.pad_assign_list)#list_countにpad_assign_listの長さが入る
         for i in range (list_count): #pad_assign_listの長さの回数だけループ
             btn_id = self.pad_assign_list[i] #どの様なボタンIDが割り当てられているか取り出す
@@ -197,17 +214,26 @@ class func:
         return (False)
 
     #パッドのボタンが押されて離されたかどうか調べる関数定義 押されて話されたらTrue そうでなかったらFalseを返します
-    #
-    #2022 12/04現在このメソッドは特に問題ないように思えます STARTボタンの押すことによるポーズを掛ける解除するも問題ない感じ
-    #update_window.select_cursor(self)内のABXY,BACK,START,スペースキーが押された場合の処理
-    # elif   pyxel.btnp(pyxel.GAMEPAD1_BUTTON_START) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_START):
-    #     self.cursor_button_data = BTN_START
-    #     update_window.select_cursor_push_button(self)を
-    #コメントアウトするときちんと動作するのでこの部分が問題かと・・・
-    #
-    # まぁ良く判んないんだけどねぇ～～～～～☆彡
-    #
     def push_pad_btnp(self,action_id): #action_idはそれぞれのボタンアクションに割り当てられたIDです (例)ACT_SHOTは1,ACT_MISSILEは2,ACT_SHOT_AND_SUB_WEAPONは3などなど・・・
+        """
+        パッドのボタンが押されたて離されたかどうか調べる
+        押されていたらTrue 押されていなかったFalseを返します
+        
+        action_idはそれぞれのボタンアクションに割り当てられたIDです
+        (例)ACT_SHOTは1,ACT_MISSILEは2,ACT_SHOT_AND_SUB_WEAPONは3などなど
+        """
+        #ポーズボタンをABXYボタンなどに割り当てるとポーズを掛けた瞬間にキャンセルされてポーズウィンドウが閉じてゲーム本編に戻るバグですが・・・
+        #2022 12/04現在このメソッドは特に問題ないように思えます
+        #STARTボタンを押すことによるポーズを掛ける、解除するも問題ない感じ
+        #
+        #update_window.select_cursor(self)内のABXY,BACK,START,スペースキーが押された場合の処理
+        # elif   pyxel.btnp(pyxel.GAMEPAD1_BUTTON_START) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_START):
+        #     self.cursor_button_data = BTN_START
+        #     update_window.select_cursor_push_button(self)このソースコード群を
+        #コメントアウトするときちんと動作するのでこの部分が問題かと・・・
+        #
+        # まぁ良く判んないんだけどねぇ～～～～～☆彡
+        #
         list_count = len(self.pad_assign_list)#list_countにpad_assign_listの長さが入る
         for i in range (list_count): #pad_assign_listの長さの回数だけループ
             btn_id = self.pad_assign_list[i] #どの様なボタンIDが割り当てられているか取り出す
@@ -263,6 +289,11 @@ class func:
 
     #自機との距離を求める関数定義
     def to_my_ship_distance(self,x,y):
+        """
+        自機との距離を求める
+        
+        x,y=自機との距離を求める座標位置 帰り値として距離が戻ってきます
+        """
         dx = x - self.my_x
         dy = y - self.my_y
         distance = math.sqrt(dx * dx + dy * dy)
@@ -270,6 +301,16 @@ class func:
 
     #狙い撃ち弾を射出する関数定義 
     def enemy_aim_bullet(self,ex,ey,div_type,div_count,div_num,stop_count,accel):
+        """
+        自機狙い撃ち弾を射出する関数定義
+        
+        ex,ey=敵の座標
+        div_type=育成する弾は通常弾なのか分裂弾なのかのフラグとそのタイプ
+        div_count=分裂するまでのカウント
+        div_num=分裂する回数
+        stop_count=その場に止まるカウント数
+        accel=弾の加速度 1.0で加速無し 1.1とかだと段々加速していく 0.9とかだと段々減速していく
+        """
         if len(self.enemy_shot) < 800:
             #目標までの距離を求めdに代入します
             d = math.sqrt((self.my_x - ex) * (self.my_x - ex) + (self.my_y - ey) * (self.my_y - ey))
@@ -288,6 +329,16 @@ class func:
 
     #狙い撃ち弾(ゲームランクに依存)を射出する関数定義 
     def enemy_aim_bullet_rank(self,ex,ey,div_type,div_count,div_num,stop_count,accel):
+        """
+        自機狙い撃ち弾(ゲームランクに依存)を射出する関数定義
+        
+        ex,ey=敵の座標
+        div_type=育成する弾は通常弾なのか分裂弾なのかのフラグとそのタイプ
+        div_count=分裂するまでのカウント
+        div_num=分裂する回数
+        stop_count=その場に止まるカウント数
+        accel=弾の加速度 1.0で加速無し 1.1とかだと段々加速していく 0.9とかだと段々減速していく
+        """
         if func.s_rndint(self,0,self.run_away_bullet_probability) != 0:
             return
         else:
@@ -295,6 +346,11 @@ class func:
 
     #前方3way弾を射出する関数定義 
     def enemy_forward_3way_bullet(self,ex,ey):
+        """
+        前方3way弾を射出する関数定義 
+        
+        ex,ey=敵の座標
+        """
         if len(self.enemy_shot) < 800:
             new_enemy_shot = Enemy_shot()
             new_enemy_shot.update(ENEMY_SHOT_NORMAL,ID00,ex,ey,ESHOT_COL_MIN88,ESHOT_SIZE8,ESHOT_SIZE8,0,0,-1,0,            1,1,1,1,0,0,1,0,0,0,0,PRIORITY_FRONT,0,0,0,0,0,0, 0,0, 0, 0,0, 0, 0,0, 0,0,   0,0)
@@ -310,6 +366,11 @@ class func:
 
     #前方5way弾を射出する関数定義 
     def enemy_forward_5way_bullet(self,ex,ey):
+        """
+        前方5way弾を射出する関数定義 
+        
+        ex,ey=敵の座標
+        """
         if len(self.enemy_shot) < 800:
             func.enemy_forward_3way_bullet(self,ex,ey) #まずは前方3way弾を射出
             
@@ -323,6 +384,17 @@ class func:
 
     #狙い撃ちn-way弾を射出する関数定義
     def enemy_aim_bullet_nway(self,ex,ey,theta,n,div_type,div_count,div_num,stop_count):#ex,ey=敵の座標(弾を出す座標),theta=弾と弾の角度,n=弾の総数,div_type=育成する弾は通常弾なのか分裂弾なのかのフラグとそのタイプ,div_count=分裂するまでのカウント(div_count_originにも同じ数値が入ります),div_num=分裂する回数,stop_count=その場に止まるカウント数
+        """
+        狙い撃ちn-way弾を射出する
+        
+        ex,ey=敵の座標(弾を出す座標)
+        theta=弾と弾の角度
+        n=弾の総数
+        div_type=育成する弾は通常弾なのか分裂弾なのかのフラグとそのタイプ
+        div_count=分裂するまでのカウント
+        div_num=分裂する回数
+        stop_count=その場に止まるカウント数
+        """
         if len(self.enemy_shot) < 800:
             #1度 = (1 × 3.14) ÷ 180 = 0.017453292519943295ラジアン
             #1度は約0.0174ラジアンと設定する
@@ -379,6 +451,13 @@ class func:
 
     #レーザービームを発射する関数定義
     def enemy_laser(self,ex,ey,length,speed):
+        """
+        レーザービームを発射する関数定義
+        
+        ex,ey=敵の座標
+        length=レーザーの長さ
+        speed=レーザーのスピード(数値がマイナスで右方向に発射)
+        """
         if len(self.enemy_shot) < 800: 
             for number in range(length):
                 new_enemy_shot = Enemy_shot()
@@ -388,6 +467,14 @@ class func:
 
     #サイン弾を射出する関数定義 
     def enemy_sin_bullet(self,ex,ey,timer,speed,intensity):
+        """
+        サイン弾を射出
+        
+        ex,ey=敵の座標
+        timer=時間(三角関数系で使用)
+        speed=速度(三角関数系で使用)
+        intensity=振れ幅(三角関数系で使用)
+        """
         if len(self.enemy_shot) < 800:
             new_enemy_shot = Enemy_shot()
             new_enemy_shot.update(ENEMY_SHOT_SIN,ID00,ex,ey,ESHOT_COL_MIN88,ESHOT_SIZE8,ESHOT_SIZE8,0,0, 0,0,  1,1,1, 1,1,   timer,speed,intensity,  0, 0,   0,PRIORITY_FRONT, 0,0,0,0,0,0, 0,0, 0, 0,0, 0, 0,0, 0,0,   0,0)
@@ -395,6 +482,13 @@ class func:
 
     #ボス用のレッドレーザービームを発射する関数定義
     def enemy_red_laser(self,ex,ey,length,speed):
+        """
+        ボス用のレッドレーザービームを発射する関数定義
+        
+        ex,ey=敵の座標
+        length=レーザーの長さ
+        speed=レーザーのスピード(数値がマイナスで右方向に発射)
+        """
         if len(self.enemy_shot) < 800: 
             for number in range(length):
                 new_enemy_shot = Enemy_shot()
@@ -404,6 +498,13 @@ class func:
 
     #ボス用のグリーンレーザービームを発射する関数定義
     def enemy_green_laser(self,ex,ey,length,speed):
+        """
+        ボス用のグリーンレーザービームを発射
+        
+        ex,ey=敵の座標
+        length=レーザーの長さ
+        speed=レーザーのスピード(数値がマイナスだと右方向に発射)
+        """
         if len(self.enemy_shot) < 800: 
             for number in range(length):
                 new_enemy_shot = Enemy_shot()
@@ -413,6 +514,12 @@ class func:
 
     #敵ホーミングレーザーの発射
     def enemy_homing_laser(self,ex,ey,performance):
+        """
+        敵ホーミングレーザーの発射
+        
+        ex,ey=敵の座標
+        performance=レーザーの誘導性能(20くらいが良いかも!?)
+        """
         if len(self.enemy_shot) < 800:
             posy = 60
             new_enemy_shot = Enemy_shot()
@@ -421,23 +528,41 @@ class func:
 
     #敵アップレーザーの発射
     def enemy_up_laser(self,ex,ey,vx,vy,expansion,width_max,height_max):
+        """
+        敵アップレーザーの発射
+        
+        ex,ey=敵の座標
+        vx,vy=速度ベクトル
+        expansion=広がっていくドット数
+        width_max=アップレーザーの横幅の最大値
+        height_max=アップレーザーの縦幅の最大値
+        """
         if len(self.enemy_shot) < 800:
             new_enemy_shot = Enemy_shot()
-            division_type        = 0
-            division_count       = 0
+            division_type         = 0
+            division_count        = 0
             division_count_origin = 0
-            division_num        = 0
+            division_num          = 0
             new_enemy_shot.update(ENEMY_SHOT_UP_LASER,ID00, ex,ey,ESHOT_COL_BOX,ESHOT_SIZE8,ESHOT_SIZE3, 0,0, vx,vy,     1,     1,1,    1,0, 0,1,0,        0,   0,0,PRIORITY_FRONT,   0,0,0,0,0,0, division_type,division_count,  0, division_count_origin,division_num, 0, expansion,0,width_max,height_max,   0,0)
             self.enemy_shot.append(new_enemy_shot)
 
     #敵ダウンレーザーの発射
     def enemy_down_laser(self,ex,ey,vx,vy,expansion,width_max,height_max):
+        """
+        敵ダウンレーザーの発射
+        
+        ex,ey=敵の座標
+        vx,vy=速度ベクトル
+        expansion=広がっていくドット数
+        width_max=ダウンレーザーの横幅の最大値
+        height_max=ダウンレーザーの縦幅の最大値
+        """
         if len(self.enemy_shot) < 800:
             new_enemy_shot = Enemy_shot()
-            division_type        = 0
-            division_count       = 0
+            division_type         = 0
+            division_count        = 0
             division_count_origin = 0
-            division_num        = 0
+            division_num          = 0
             new_enemy_shot.update(ENEMY_SHOT_DOWN_LASER,ID00, ex,ey,ESHOT_COL_BOX,ESHOT_SIZE8,ESHOT_SIZE3, 0,0, vx,vy,     1,     1,1,    1,0, 0,1,0,        0,   0,0,PRIORITY_FRONT,   0,0,0,0,0,0, division_type,division_count,  0, division_count_origin,division_num, 0, expansion,0,width_max,height_max,   0,0)
             self.enemy_shot.append(new_enemy_shot)
 
@@ -456,6 +581,11 @@ class func:
 
     #与えられたcx,cy座標を元に敵の全x,y座標を調べてx座標が一致した敵が存在するか調べる関数(サーチレーザー向け)
     def search_laser_enemy_cordinate(self,cx,cy):
+        """
+        与えられたcx,cy座標を元に敵の全x,y座標を調べてx座標が一致した敵が存在するか調べる関数(サーチレーザー向け)
+        
+        cx,cy=調べる元となる座標
+        """
         self.search_laser_flag = 0       #x軸が一致した敵を発見したかどうかのフラグ
         self.search_laser_y_direction = 0 #上下どちらかに曲げるかの反転値 -1=上方向 1=下方向
         enemy_count = len(self.enemy)
@@ -471,6 +601,11 @@ class func:
 
     #与えられたcx,cy座標を元に敵の全x,y座標から距離を求め一番近い敵の座標を調べる関数(ホーミングミサイル向け)
     def search_homing_missile_enemy_cordinate(self,cx,cy):
+        """
+        与えられたcx,cy座標を元に敵の全x,y座標から距離を求め一番近い敵の座標を調べる関数(ホーミングミサイル向け)
+        
+        cx,cy=調べる元となる座標
+        """
         self.search_homing_missile_flag = 0 #狙い撃つ敵を発見したかどうかのフラグ 0=未発見 1=発見
         self.search_homing_missile_tx = 200 #狙い撃つ敵のx座標が入る TargetX
         self.search_homing_missile_ty =  60 #狙い撃つ敵のy座標が入る TargetY
@@ -490,6 +625,12 @@ class func:
 
     #背景(BGタイルマップのキャラチップ)を取得する
     def get_bg_chip(self,x,y,bg_chip):
+        """
+        背景(BGタイルマップのキャラチップ)を取得する
+        
+        x,y=座標値(x=0~160)(y=0~120)
+        bg_chip=キャラチップのアスキーコード
+        """
         self.bgx = (((self.scroll_count // 8) -256) // 2) + x // 8
         #x座標を8で割った切り捨て値がBGマップでのx座標となる
         #(self.scroll_count // 8) -256) // 2)      この数値がスクロールした分x座標オフセット値となる
@@ -516,6 +657,17 @@ class func:
 
     #背景(BGタイルマップのキャラチップ)を取得し、更に障害物かどうかを判別する
     def check_bg_collision(self,x,y,bg_chip,collision_flag):
+        """
+        背景(BGタイルマップのキャラチップ)を取得し、更に障害物かどうかを判別する
+        
+        x,y=座標値(x=0~160)(y=0~120)
+        bg_chip=キャラチップのアスキーコード
+        collision_flag=コリジョンフラグ
+        
+        帰り値として
+        bg_chip=キャラチップのアスキーコード
+        collision_flag =(0=当たってない 1=接触しちゃった！)が戻ってくる
+        """
         self.collision_flag = 0#コリジョンフラグ（障害物と接触したかどうかのフラグ）を初期化 (0=当たってない 1=接触しちゃった！)
         
         self.bgy = y // 8#bgy座標はy座標を8で割った切り捨て値としてその位置にあるＢＧ（バックグラウンド（背景チップ））をチェックする
@@ -548,15 +700,32 @@ class func:
 
     #背景マップチップに書き込む関数x,yはキャラ単位 x=(0~255) y=(0~255) n=(0~255)マップチップナンバー
     def write_map_chip(self,x,y,n):
+        """
+        背景マップチップに書き込む関数
+        
+        x,yはキャラ単位 x=(0~255) y=(0~255)
+        n=(0~255)マップチップナンバー
+        """
         func.set_chrcode_tilemap(self,self.reference_tilemap,x,y + ((self.stage_loop - 1)* 16 * self.height_screen_num),n)
 
     #背景マップチップを消去する(NULLチップナンバーを書き込む) x,yはキャラ単位 x=(0~255) y=(0~15)
     def delete_map_chip(self,x,y):
+        """
+        背景マップチップを消去する(NULLチップナンバーを書き込む)
+        
+        x,yはキャラ単位 x=(0~255) y=(0~15)
+        """
         # func.set_chrcode_tilemap(self,self.reference_tilemap,x,y + (self.stage_loop - 1)* 16,0)#マップチップを消去する（0=何もない空白）を書き込む
         func.set_chrcode_tilemap(self,self.reference_tilemap,x,y + (self.stage_loop - 1)* 16 * self.height_screen_num,self.null_bg_chip_num)
 
     #背景(BGタイルマップのキャラチップ)を取得する (8方向フリースクロール専用)
     def get_bg_chip_free_scroll(self,x,y,bg_chip):
+        """
+        背景(BGタイルマップのキャラチップ)を取得する (8方向フリースクロール専用)
+        
+        x,y=座標値(x=0~160)(y=0~120)
+        bg_chip=キャラチップのアスキーコード
+        """
         #x座標を8で割った切り捨て値がBGマップでのx座標となる
         self.bgx = int(self.scroll_count         // 8 % (256 -20)) + x // 8
         
@@ -580,10 +749,19 @@ class func:
 
     #背景マップチップに書き込む関数(8方向フリースクロール専用)x,yはキャラ単位 x=(0~255) y=(0~255) n=(0~255)マップチップナンバー
     def write_map_chip_free_scroll(self,x,y,n):
+        """
+        背景マップチップに書き込む関数(8方向フリースクロール専用)
+        
+        x,yはキャラ単位 x=(0~255) y=(0~255) 
+        n=(0~255)マップチップナンバー
+        """
         func.set_chrcode_tilemap(self,self.reference_tilemap,x,y,n)#マップチップナンバーnを座標x,yに書き込む
 
     #背景マップ(BG)にアクセスする時に使用するself.bgx,self.bgyを0~255の間に収めるようにクリッピング処理する(-1とか256でタイルマップにアクセスするとエラーが出るため)
     def clip_bgx_bgy(self):
+        """
+        背景マップ(BG)にアクセスする時に使用するself.bgx,self.bgyを0~255の間に収めるようにクリッピング処理する(-1とか256でタイルマップにアクセスするとエラーが出るため)
+        """
         #bgx,bgyのクリッピング処理
         #bgxがMAPの外に存在するときは強制的にbgxを0または255にしちゃう(マイナスの値や256以上だとエラーになるため)
         if  self.bgx < 0:
@@ -598,6 +776,9 @@ class func:
 
     #背景タイルマップ(BG)に埋め込まれたボス用移動座標を調べてリストに登録していく関数
     def search_boss_bg_move_point(self):
+        """
+        背景タイルマップ(BG)に埋め込まれたボス用移動座標を調べてリストに登録していく
+        """
         mpx,mpy     = 0,0 #サーチ用の座標を初期化
         point_num   = 0   #移動ポイント数の初期化
         control_num = 0   #制御点ポイント数の初期化
@@ -635,6 +816,9 @@ class func:
 
     #自機ショットの経験値を調べ可能な場合レベルアップをさせる関数
     def level_up_my_shot(self):
+        """
+        自機ショットの経験値を調べ可能な場合レベルアップをさせる
+        """
         if self.shot_exp > SHOT_EXP_MAXIMUM:  #自機ショットの経験値は最大経験値を超えないように補正してやります
             self.shot_exp = SHOT_EXP_MAXIMUM
         if self.shot_exp < 0:              #自機ショットの経験値は0より小さくならないよう補正します
@@ -646,6 +830,9 @@ class func:
 
     #自機ミサイルの経験値を調べ可能な場合レベルアップをさせる関数
     def level_up_my_missile(self):
+        """
+        自機ミサイルの経験値を調べ可能な場合レベルアップをさせる
+        """
         if self.missile_exp > MISSILE_EXP_MAXIMUM:  #自機ミサイルの経験値は最大経験値を超えないように補正してやります
             self.missile_exp = MISSILE_EXP_MAXIMUM
         if self.missile_exp < 0:              #自機ミサイルの経験値は0より小さくならないよう補正します
@@ -657,7 +844,8 @@ class func:
 
     #敵編隊出現時、現在の編隊IDナンバーとIDナンバーに対応した編隊数、そして現在の生存編隊数をenemy_formationクラスに登録する関数
     def record_enemy_formation(self,num):
-        """敵編隊出現時、現在の編隊IDナンバーとIDナンバーに対応した編隊数、そして現在の生存編隊数をenemy_formationクラスに登録する
+        """
+        敵編隊出現時、現在の編隊IDナンバーとIDナンバーに対応した編隊数、そして現在の生存編隊数をenemy_formationクラスに登録する
         
         num = 編隊ナンバー
         """
@@ -669,6 +857,11 @@ class func:
 
     #敵破壊時、編隊ＩＤをみて編隊リストに登録されていた撃墜するべき総数を減少させ、全滅させたらフラグを立てて戻ってくる関数
     def check_enemy_formation_shoot_down_number(self,id):
+        """
+        敵破壊時、編隊ＩＤをみて編隊リストに登録されていた撃墜するべき総数を減少させ、全滅させたらフラグを立てて戻ってくる
+        
+        id=編隊id 編隊を全滅させたのならself.enemy_extermination_flag = FLAG_ONとなる
+        """
         enemy_formation_count = len(self.enemy_formation)
         for i in reversed(range(enemy_formation_count)): #インスタンスを消去するのでreversedで昇順ではなく降順で調べていきます
             if id == self.enemy_formation[i].formation_id: #調べるidとリストに登録されているidが同じだったら
@@ -682,6 +875,11 @@ class func:
     #敵が画面から消える時、編隊ＩＤをみて編隊リストに登録されていた「画面上に存在する編隊数」を減少させ0になったらインスタンスを破棄する関数です
     #まぁ所属する編隊idナンバーを見て編隊がもう存在しなかったリストからインスタンスを破棄するって事ですわん
     def check_enemy_formation_exists(self,id):
+        """
+        敵が画面から消える時、編隊ＩＤをみて編隊リストに登録されていた「画面上に存在する編隊数」を減少させ0になったらインスタンスを破棄する
+        
+        id=編隊id
+        """
         enemy_formation_count = len(self.enemy_formation)
         for i in reversed(range(enemy_formation_count)): #インスタンスを消去するのでreversedで昇順ではなく降順で調べていきます
             if id == self.enemy_formation[i].formation_id: #調べるidとリストに登録されているidが同じだったら
@@ -692,6 +890,12 @@ class func:
 
     #敵を破壊した後の処理
     def enemy_destruction(self,e):
+        """
+        敵を破壊した後の処理
+        
+        e=敵リストenemyのインデックス値となります 例enemy[e]
+        ループ内から呼ばれることを想定してるためです
+        """
         # 引数のeは敵リストenemyのインデックス値となります 例enemy[e]
         #ここから敵機破壊処理となります###################################################
         #自機ショットや自機ミサイル、クローショットが敵に当たり敵の耐久力が0以下になったらその座標に爆発を生成する
@@ -810,7 +1014,12 @@ class func:
         self.enemy[i].attack_method  = self.enemy_move_data[self.enemy[i].move_index][9]#リストから攻撃方法を取得し登録する
 
     #敵17をベジェ曲線で移動させるために必要な座標をリストから取得する関数
-    def enemy17_get_bezier_curve_coordinate(self,i):                    
+    def enemy17_get_bezier_curve_coordinate(self,i):
+        """
+        敵17をベジェ曲線で移動させるために必要な座標をリストから取得する
+        
+        i=enemyクラスのインデックス値(ループ処理中から呼ばれるためです)
+        """
         self.enemy[i].ax           = self.enemy_move_data17[self.enemy[i].move_index][0]#リストから新たな移動元座標を登録する
         self.enemy[i].ay           = self.enemy_move_data17[self.enemy[i].move_index][1]
         self.enemy[i].dx           = self.enemy_move_data17[self.enemy[i].move_index][2]#リストから新たな移動先座標を登録する
@@ -876,7 +1085,12 @@ class func:
             self.boss[e].status = BOSS_STATUS_EXPLOSION_START
 
     #ボスをベジェ曲線で移動させるために必要な座標をリストから取得する関数
-    def boss_get_bezier_curve_coordinate(self,i):                    
+    def boss_get_bezier_curve_coordinate(self,i):
+        """
+        ボスをベジェ曲線で移動させるために必要な座標をリストから取得する
+        
+        i=bossクラスのインデックス値(ループ処理中から呼ばれるためです)
+        """
         self.boss[i].ax           = self.boss_move_data1[self.boss[i].move_index][0]#リストから新たな移動元座標を登録する
         self.boss[i].ay           = self.boss_move_data1[self.boss[i].move_index][1]
         self.boss[i].dx           = self.boss_move_data1[self.boss[i].move_index][2]#リストから新たな移動先座標を登録する
@@ -893,6 +1107,11 @@ class func:
 
     #ボスをベジェ曲線でBG背景マップにマークされた通過ポイント座標をリストから取得する関数
     def boss_bg_move_get_bezier_curve_coordinate(self,i):
+        """
+        ボスをベジェ曲線でBG背景マップにマークされた通過ポイント座標をリストから取得する
+        
+        i=bossクラスのインデックス値(ループ処理中から呼ばれるためです)
+        """
         self.boss[i].ax           = self.boss_bg_move_point[self.boss[i].move_index][1] * 8         #リストから新たな移動元座標を登録する(8倍してキャラクター単位からドット単位に変換する)
         self.boss[i].ay           = self.boss_bg_move_point[self.boss[i].move_index][2] * 8
         self.boss[i].dx           = self.boss_bg_move_point[self.boss[i].move_index + 1][1] * 8     #リストから新たな移動先座標を登録する(8倍してキャラクター単位からドット単位に変換する)
@@ -942,10 +1161,20 @@ class func:
 
     #スコア加算処理
     def add_score(self,point):
+        """
+        スコア加算処理
+        
+        point=取得得点
+        """
         self.score += int(point * self.score_magnification) #スコアをpoint*スコア倍率分加算する(整数値で)
 
     #バックグラウンド(BG)を表示するときのカメラオフセット座標値を計算する
     def screen_camera_offset(self):
+        """
+        バックグラウンド(BG)を表示するときのカメラオフセット座標値を計算する
+        
+        self.camera_offset_yに計算されたカメラオフセット座標値が代入されます
+        """
         #WINDOW_H    ゲーム画面の縦幅 (定数です)
         #SHIP_H      自機の縦幅8ドット(定数です)
         #bg_height   BGスクロール面の全体としての縦幅
@@ -954,6 +1183,9 @@ class func:
 
     #ラスタースクロール用のデータの初期化＆生成
     def create_raster_scroll_data(self):
+        """
+        各ステージ用のラスタスクロール用のデータ群を初期化＆作成します
+        """
         if self.stage_number == STAGE_MOUNTAIN_REGION:     #1面STAGE_MOUNTAIN_REGIONのラスタースクロール用の設定値の初期化
             new_raster_scroll = Raster_scroll()
             for i in range(24-1):
@@ -980,6 +1212,12 @@ class func:
 
     #ラスタースクロールの表示のon/off(search_id,flag)
     def disp_control_raster_scroll(self,id,flag):
+        """
+        ラスタースクロールの表示のon/off(search_id,flag)
+        
+        search_id=ラスタースクロールクラスに登録したID
+        flag=(FLAG_OFF=ラスタスクロールを表示しないFLAG_ON=表示する)
+        """
         raster_scroll_count = len(self.raster_scroll)
         for i in range(raster_scroll_count): #ラスタースクロールクラスに登録されたインスタンスのdisplayを調べていきます
             if self.raster_scroll[i].scroll_id == id: #scroll_idと調べるidが一致したのなら
@@ -987,6 +1225,9 @@ class func:
 
     #ランクに応じた数値をリストから取得する
     def get_rank_data(self):
+        """
+        ランクに応じた数値をリストから取得する
+        """
         self.enemy_speed_mag           = self.game_rank_data_list[self.rank][LIST_RANK_E_SPEED_MAG]            #敵スピード倍率をリストを参照してランク数で取得、変数に代入する
         self.enemy_bullet_speed_mag    = self.game_rank_data_list[self.rank][LIST_RANK_BULLET_SPEED_MAG]        #敵狙い撃ち弾スピード倍率をリストを参照してランク数で取得、変数に代入する
         self.return_bullet_probability = self.game_rank_data_list[self.rank][LIST_RANK_RETURN_BULLET_PROBABILITY] #敵撃ち返し弾発射確率をリストを参照してランク数で取得、変数に代入する
@@ -997,6 +1238,9 @@ class func:
 
     #難易度に応じた数値をリストから取得する
     def get_difficulty_data(self):
+        """
+        難易度に応じた数値をリストから取得する
+        """
         self.start_bonus_shot         = self.game_difficulty_list[self.game_difficulty][LIST_START_BONUS_SHOT]           #初期ショットボーナスをリストを参照し難易度に合わせて取得、変数に代入する
         self.start_bonus_missile      = self.game_difficulty_list[self.game_difficulty][LIST_START_BONUS_MISSILE]        #初期ミサイルボーナスをリストを参照し難易度に合わせて取得、変数に代入する
         self.start_bonus_shield       = self.game_difficulty_list[self.game_difficulty][LIST_START_BONUS_SHIELD]         #初期シールドボーナスをリストを参照し難易度に合わせて取得、変数に代入する
@@ -1019,6 +1263,9 @@ class func:
 
     #ステージデータリストから各ステージの設定データを取り出す
     def get_stage_data(self):
+        """
+        ステージデータリストから各ステージの設定データを取り出す
+        """
         self.start_my_x                   = self.stage_data_list[self.stage_number - 1][ 1] #ステージスタート時の自機の座標(自由に縦スクロールできるステージは背景BGマップ左上を原点としての座標位置となります)
         self.start_my_y                   = self.stage_data_list[self.stage_number - 1][ 2]
         self.bg_obstacle_y                = self.stage_data_list[self.stage_number - 1][ 3] #BG障害物とみなすＹ座標位置をリストを参照して取得、変数に代入する
@@ -1036,12 +1283,18 @@ class func:
 
     #ランクダウンさせる関数
     def rank_down(self):
+        """
+        ランクダウンさせる
+        """
         if self.rank > 0: #ランク数が0より大きいのならば
             self.rank -= 1      #ランク数をデクリメント
             func.get_rank_data(self) #ランク数が変化したのでランク数をもとにしたデータをリストから各変数に代入する関数の呼び出し
 
     #各ステージBGMのロード
     def load_stage_bgm(self):
+        """
+        各ステージBGMのロード
+        """
         if   self.stage_number == STAGE_MOUNTAIN_REGION:
             pygame.mixer.music.load("assets/music/BGM088-100714-kongoushinkidaia-su.wav") #STAGE1 BGMファイルの読み込み
             pygame.mixer.music.set_volume(self.master_bgm_vol / 100)
@@ -1066,6 +1319,9 @@ class func:
 
     #線形合同法を使用した乱数関数 (0~65535のランダムな数値がself.rnd_seedに代入される)この乱数の周期は32768
     def s_rnd(self):
+        """
+        線形合同法を使用した乱数関数 (0~65535のランダムな数値がself.rnd_seedに代入される)この乱数の周期は32768
+        """
         self.rnd_seed = (self.rnd_seed * 48828125 + 129) % 65536 #129のように足す数値は絶対に奇数にするように！でないと奇数と偶数の乱数が交互に育成されるようになってしまうからね
 
     #s_rndint(min,max) と呼ぶと、minからmax(max自身を含む)までの間の整数が 等しい確率でランダムに返される
@@ -1126,16 +1382,24 @@ class func:
         pyxel.text(x-8*3+4,y,total_minutes, int(col))
         pyxel.text(x-8    ,y,total_seconds, int(col))
 
-    #矩形Aと矩形Bの当たり判定
-    #collision rectangle to rectangle
-    #矩形A(rect_ax,rect_ay,rect_aw,rect_ah)(xはx座標,yはy座標,wは横幅width,hは縦幅heightを意味します)
-    #矩形B(rect_bx,rect_by,rect_bw,rect_bh)
-    #1...矩形の中心座標を計算する
-    #2...x軸,y軸の距離を計算する
-    #3...2つの矩形のx軸,y軸のサイズの和を計算する
-    #4...サイズの和と距離を比較する
-    #衝突していたらTrueをしていなかったらFalseを返します
+    #矩形Aと矩形Bの当たり判定 矩形A(rect_ax,rect_ay,rect_aw,rect_ah)(xはx座標,yはy座標,wは横幅width,hは縦幅heightを意味します)矩形B(rect_bx,rect_by,rect_bw,rect_bh) 衝突していたらTrueをしていなかったらFalseを返します
     def collision_rect_rect(self,rect_ax,rect_ay,rect_aw,rect_ah,rect_bx,rect_by,rect_bw,rect_bh):
+        """
+        矩形Aと矩形Bの当たり判定
+        
+        矩形A(rect_ax,rect_ay,rect_aw,rect_ah)(xはx座標,yはy座標,wは横幅width,hは縦幅heightを意味します)
+        矩形B(rect_bx,rect_by,rect_bw,rect_bh)
+        帰り値 True=衝突した False=衝突していない
+        """
+        #collision rectangle to rectangle
+        #矩形A(rect_ax,rect_ay,rect_aw,rect_ah)(xはx座標,yはy座標,wは横幅width,hは縦幅heightを意味します)
+        #矩形B(rect_bx,rect_by,rect_bw,rect_bh)
+        #1...矩形の中心座標を計算する
+        #2...x軸,y軸の距離を計算する
+        #3...2つの矩形のx軸,y軸のサイズの和を計算する
+        #4...サイズの和と距離を比較する
+        #衝突していたらTrueをしていなかったらFalseを返します
+        
         #1..矩形の中心座標を計算する
         #矩形Aの中心座標(center_ax,center_ay)
         #矩形Bの中心座標(center_bx,center_by)
@@ -1160,6 +1424,9 @@ class func:
 
     #ゲーム関連のフラグ＆データリストを作成する
     def create_master_flag_list(self):
+        """
+        ゲーム関連のフラグ＆データリストを作成する
+        """
         self.master_flag_list[LIST_WINDOW_FLAG_DEBUG_MODE]  = self.debug_menu_status  #デバッグモードの有無フラグをリスト登録
         self.master_flag_list[LIST_WINDOW_FLAG_GOD_MODE]    = self.god_mode_status    #ゴッドモードの有無フラグをリスト登録
         self.master_flag_list[LIST_WINDOW_FLAG_HIT_BOX]     = self.boss_collision_rect_display_flag #ヒットボックス表示モードの有無フラグをリスト登録
@@ -1177,6 +1444,9 @@ class func:
 
     #マスターフラグ＆データリストを個別の変数にリストアさせる
     def restore_master_flag_list(self):
+        """
+        マスターフラグ＆データリストを個別の変数にリストアさせる
+        """
         self.debug_menu_status = self.master_flag_list[LIST_WINDOW_FLAG_DEBUG_MODE]              #デバッグモードの有無フラグをリストから参照してリストア
         self.god_mode_status   = self.master_flag_list[LIST_WINDOW_FLAG_GOD_MODE]                #ゴッドモードの有無フラグをリストから参照してリストア
         self.boss_collision_rect_display_flag = self.master_flag_list[LIST_WINDOW_FLAG_HIT_BOX]  #ヒットボックス表示モードの有無フラグをリストから参照してリストア
@@ -1194,6 +1464,9 @@ class func:
 
     #リプレイモードの為に今現在のステータスを退避しておく(リプレイ再生の直前に呼び出されます)(テンポラリ臨時変数に保存しておく)
     def backup_status_data_for_replay_mode(self):
+        """
+        リプレイモードの為に今現在のステータスを退避しておく(リプレイ再生の直前に呼び出されます)(テンポラリ臨時変数に保存しておく)
+        """
         self.temp_my_ship_id       = self.my_ship_id         #自機の種類を退避保存
         self.temp_stage_number     = self.stage_number       #ステージナンバー退避保存
         self.temp_stage_loop       = self.stage_loop         #ループ数退避保存
@@ -1206,6 +1479,9 @@ class func:
 
     #リプレイ再生後記録しておいたステータスを復帰させる(リプレイ再生が終わったら呼び出されます)(テンポラリ臨時変数から引き出す)
     def restore_status_data_for_replay_mode(self):
+        """
+        リプレイ再生後記録しておいたステータスを復帰させる(リプレイ再生が終わったら呼び出されます)(テンポラリ臨時変数から引き出す)
+        """
         self.my_ship_id       = self.temp_my_ship_id         #自機の種類リストア
         self.stage_number     = self.temp_stage_number       #ステージナンバーリストア
         self.stage_loop       = self.temp_stage_loop         #ループ数リストア
@@ -1262,6 +1538,9 @@ class func:
 
     #メダルリストウィンドウで「存在するアイテム」を調べ上げコメント表示フラグテーブルを作製する関数
     def make_medal_list_window_comment_disp_flag_table(self):
+        """
+        メダルリストウィンドウで「存在するアイテム」を調べ上げコメント表示フラグテーブルを作製する
+        """
         i = func.search_window_id(self,WINDOW_ID_MEDAL_LIST) #メダルリストウィンドウをIDを元にインデックス番号を調べる
         if i != -1: #メダルリストが存在するときは「存在するアイテム」を調べ上げて、テーブルを作製開始する
             for j in range(len(self.window[i].medal_graph_list)): #medal_graph_listの長さの分ループ処理する
@@ -1277,6 +1556,21 @@ class func:
 
     #カーソル関係の数値を変数にセットする関数
     def set_cursor_data(self,cu_type,cu_move_direction,posx,posy,step_x,step_y,page,page_max,item_x,item_y,d_item_x,d_item_y,max_item_x,max_item_y,color,menu_layer):
+        """
+        カーソル関係の数値を変数にセットする
+        
+        cu_type=カーソルの種類
+        cu_move_direction=カーソルの動く方向
+        posx,posy=カーソルの初期座標
+        step_x,step_y=カーソルの移動ステップドット数(横方向,縦方向)
+        page,page_max=いま指し示しているページナンバー,セレクトカーソルで捲ることが出来る最多ページ数
+        item_x,item_y=いま指し示しているアイテムナンバー(x,y軸方向)
+        d_item_x=ボタンが押されて「決定」されたアイテムのナンバーx軸方向
+        d_item_y=ボタンが押されて「決定」されたアイテムのナンバーy軸方向
+        max_item_x,max_item_y=それぞれの軸方向の最大項目数
+        color=セレクトカーソルの色
+        menu_layer=現在選択中のメニューの階層の数値が入ります
+        """
         self.cursor_type = cu_type
         self.cursor_move_direction = cu_move_direction
         self.cursor_x = posx
@@ -1297,6 +1591,11 @@ class func:
     #現在のカーソルの状態データ群をcursorクラスのリストに記録する(PUSH)cursorクラスのリストはLastInFastOut形式となってます「後入先出（LIFO）」
     #引数のidはウィンドウIDナンバーです
     def push_cursor_data(self,id):
+        """
+        現在のカーソルの状態データ群をcursorクラスのリストに記録する(PUSH)cursorクラスのリストはLastInFastOut形式となってます「後入先出（LIFO）」
+        
+        id=ウィンドウIDナンバー
+        """
         new_cursor = Cursor()
         new_cursor.update(\
         id,self.cursor_type,\
@@ -1312,6 +1611,11 @@ class func:
     #cursorクラスのリストに記録されたカーソルデータ群を現在のカーソルデータに代入して前のウィンドウでのカーソル位置に戻してやります(POP)
     #引数のidはウィンドウIDナンバーです
     def pop_cursor_data(self,id):
+        """
+        cursorクラスのリストに記録されたカーソルデータ群を現在のカーソルデータに代入して前のウィンドウでのカーソル位置に戻してやります(POP)
+        
+        id=ウィンドウIDナンバー
+        """
         #ウィンドウidナンバーを元にそのウィンドウで使用していたカーソルデータのインデックス値を探し出す
         i = func.search_window_id(self,id)
         if i == -1:
@@ -1330,6 +1634,9 @@ class func:
 
     #スコアボードへの書き込み ランク外である11位にスコアを書き込む関数(スコアボードは10位までしか表示されないのでこの状態では表示されませんバブルソートしてね)
     def recoard_score_board(self):
+        """
+        スコアボードへの書き込み ランク外である11位にスコアを書き込む関数(スコアボードは10位までしか表示されないのでこの状態では表示されませんバブルソートしてね)
+        """
         self.score_board[self.game_difficulty][11-1][LIST_SCORE_BOARD_NAME]        = self.my_name
         self.score_board[self.game_difficulty][11-1][LIST_SCORE_BOARD_SCORE]       = self.score
         self.score_board[self.game_difficulty][11-1][LIST_SCORE_BOARD_LOOP]        = self.stage_loop
@@ -1344,6 +1651,9 @@ class func:
 
     #スコアボードの点数によるバブルソート 11位に今プレイしたゲームの得点を書き込みその後この関数を呼び出し→順位の11がどの位置に移動したかチェック→その位置にカーソル移動させてネームエントリー→そしてリストに書き込む
     def score_board_bubble_sort(self,diff): #diffは難易度です
+        """
+        スコアボードの点数によるバブルソート 11位に今プレイしたゲームの得点を書き込みその後この関数を呼び出し→順位の11がどの位置に移動したかチェック→その位置にカーソル移動させてネームエントリー→そしてリストに書き込む
+        """
         for i in range(len(self.score_board[diff])): #ランキングデータは11位までなのでiは0~11まで変化する
             for j in range(len(self.score_board[diff])-1,i,-1):
                 if self.score_board[diff][j][LIST_SCORE_BOARD_SCORE] > self.score_board[diff][j-1][LIST_SCORE_BOARD_SCORE]: #位置jの得点より前の位置j-1の得点が大きいのなら要素を入れ替える
@@ -1352,6 +1662,11 @@ class func:
 
     #プレイ中の自機リスト(playing_ship_list)を参照して自機にメダルをはめ込む（装着？）する関数 (num=メダルIDナンバー)
     def equip_medal_playing_ship(self,num):
+        """
+        プレイ中の自機リスト(playing_ship_list)を参照して自機にメダルをはめ込む（装着？）する
+        
+        num=メダルIDナンバー
+        """
         for i in range(self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT_NUM]): #既にスロットに同じメダルがはめ込まれていないか調べ上げる
             if self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT0 + i] == num: #これからはめ込むメダルがすでにはめ込まれていたら・・・
                 pyxel.play(0,20)#カーソル衝突を鳴らしてはめ込まずそのままリターンする
@@ -1366,13 +1681,21 @@ class func:
         pyxel.play(0,20)#カーソル衝突音を鳴らす
         return
 
-    #プレイ中の自機リスト(playing_ship_list)を参照して自機からメダルを外す(パージ)する関数(num=自機のスロットナンバー)
+    #プレイ中の自機リスト(playing_ship_list)を参照して自機からメダルを外す(パージ)する関数(slot_num=自機のスロットナンバー)
     def purge_medal_playing_ship(self,slot_num):
+        """
+        プレイ中の自機リスト(playing_ship_list)を参照して自機からメダルを外す(パージ)する
+        
+        slot_num=自機のスロットナンバー
+        """
         self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT0 + slot_num] = MEDAL_NO_SLOT #決定ボタンが押された位置のスロットナンバーを空にする
         pyxel.play(0,18)#カーソルキャンセル音を鳴らす
 
     #自機に装備され,はめ込まれたメダルを左詰めにする関数(空きスロットの隙間を詰めて、空きスロットがどれだけあるのか見やすくする関数)
     def playing_ship_medal_left_justified(self):
+        """
+        自機に装備され,はめ込まれたメダルを左詰めにする(空きスロットの隙間を詰めて、空きスロットがどれだけあるのか見やすくする)
+        """
         # start_slot = 0
         for i in range(self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT_NUM]): #iは0から所持スロットの最大値まで変化していきます
             if self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT0 + i] == MEDAL_NO_SLOT: #これからはめ込む場所が空スロットの場合は・・・一つ右のスロットのメダルと現在のメダルスロットに移動させていく
@@ -1381,18 +1704,27 @@ class func:
 
     #今現在プレイしているシップリスト(playing_ship_list)に機体メダルスロット装備リスト(ship_equip_slot_list)を参照しながら装備メダルの情報を読み込んでいく関数
     def read_ship_equip_medal_data(self):
+        """
+        今現在プレイしているシップリスト(playing_ship_list)に機体メダルスロット装備リスト(ship_equip_slot_list)を参照しながら装備メダルの情報を読み込んでいく
+        """
         for i in range(LOOK_AT_LOGO):#iは0=J_pythonからLOOK_AT_LOGOまで変化
             for j in range(6):       #jはスロット0からスロット6まで変化
                 self.playing_ship_list[i][LIST_SHIP_SLOT0 + j] = self.ship_equip_slot_list[i][j]
 
     #機体メダルスロット装備リスト(ship_equip_slot_list)に今現在プレイしているシップリスト(playing_ship_list)を参照しながら装備メダルの情報を書き込んでいく関数
     def write_ship_equip_medal_data(self):
+        """
+        機体メダルスロット装備リスト(ship_equip_slot_list)に今現在プレイしているシップリスト(playing_ship_list)を参照しながら装備メダルの情報を書き込んでいく
+        """
         for i in range(LOOK_AT_LOGO):#iは0=J_pythonからLOOK_AT_LOGOまで変化
             for j in range(6):       #jはスロット0からスロット6まで変化
                 self.ship_equip_slot_list[i][j] = self.playing_ship_list[i][LIST_SHIP_SLOT0 + j]
 
     #装備されたメダルを調べ、事前にショットアイテム入手するタイプのメダルが装備されていたらショット経験値を加算する関数
     def add_medal_effect_shot_bonus(self):
+        """
+        装備されたメダルを調べ、事前にショットアイテム入手するタイプのメダルが装備されていたらショット経験値を加算する
+        """
         for i in range(6): #iは0から6(SLOT6)まで変化する
             if  self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT0 + i] == MEDAL_BEFOREHAND_1SHOT_ITEM: #事前ショット1アイテムゲットメダルならば
                 self.inc_shot_exp_medal += 1                                                                 #ショット経験値を増やす数値を+1する
@@ -1407,12 +1739,18 @@ class func:
 
     #装備されたメダルを調べ、L’ｓシールド装備メダルを作動させる関数
     def medal_effect_ls_shield(self):
+        """
+        装備されたメダルを調べ、L’ｓシールド装備メダルを作動させる
+        """
         for i in range(6): #iは0(SLOT0)から6(SLOT6)まで変化する
             if  self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT0 + i] == MEDAL_EQUIPMENT_LS_SHIELD: #L’ｓシールド装備メダルならば
                 self.ls_shield_hp = 10                                                                     #L'sシールドの耐久力を10にする
 
     #装備されたメダルを調べ、スロット数を拡張するメダルがあればスロット数を増やし、何も無ければスロット数を初期状態にする関数
     def medal_effect_plus_medallion(self):
+        """
+        装備されたメダルを調べ、スロット数を拡張するメダルがあればスロット数を増やし、何も無ければスロット数を初期状態にする
+        """
         for i in range(6): #iは0(SLOT0)から6(SLOT6)まで変化する
             if self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT0 + i] == MEDAL_PLUS_MEDALLION: #スロット増加メダルならば・・・
                 self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT_NUM] = self.playing_ship_list[self.my_ship_id][LIST_SHIP_INIT_SLOT_NUM] + 2                     #空きスロット増加メダルは初期総スロット数＋2つ分空きスロットに増やす
@@ -1424,6 +1762,9 @@ class func:
     #例 LIST_SHIP_SLOT_NUMの数値である「総スロット数」が2だったらSLOT0からSLOT1までは使用するのでそのままにして,SLOT2からSLOT6までゼロクリアする
     #現時点での確保しているスロット数は7
     def zero_clear_out_of_range_slot(self):
+        """
+        現在の総メダルスロット以上のスロット部分をゼロクリアしてメダルなし状態にする
+        """
         st = self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT_NUM]
         for i in range(7 - self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT_NUM]):
             self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT0 + i + st] = MEDAL_NO_SLOT

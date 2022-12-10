@@ -708,7 +708,6 @@ class Boss:                   #ボスキャラのクラス設定
         self.grp_parts9_offset_y  = 0 #パーツy軸方向のオフセット値(爆発の煙を育成するときの中心値の指定とかで使うかも？)
         self.grp_parts9_count     = 0 #カウント用
         self.grp_parts9_animation = 0 #アニメーション用
-
     def update(self,boss_id,boss_type,status,parts_number,
             main_hp,
             parts1_hp,parts2_hp,parts3_hp,
@@ -1239,6 +1238,47 @@ class Enemy_shot:             #敵弾のクラス設定
         self.color = 0              #色
         self.anime = 0              #アニメーション用カウンター
     def update(self,enemy_shot_type,enemy_shot_id, x, y,collision_type,width,height, cx,cy, vx,vy,accel,power, hp, count1, count2, timer, speed, intensity, aim,disappearance_count,stop_count,priority,turn_theta,search_flag,rotation_omega,rotation_omega_incremental,radius,radius_max,division_type,division_count,radius_incremental,division_count_origin,division_num,angle,expansion,expansion_flag,width_max,height_max,color,anime):
+        """
+        enemy_shot_type = 敵弾の種類
+        enemy_shot_id = 敵弾に振られたIDナンバー
+        x,y = 敵弾の座標
+        collision_type = 自機との当たり判定の種類 0=単純な小さな正方形で自機との距離を比べて当たったか判断 1=長方形でwidth,heightを見て自機と当たったかどうか判断する
+        width,height = 弾の横幅,縦幅
+        cx,cy = 回転弾で使用する回転の中心
+        vx,vy = 速度ベクトル
+        accel = 加速度
+        power = 弾のパワー
+        hp = 弾のヒットポイント
+        count1 = 汎用カウンタ1
+        count2 = 汎用カウンタ2
+        timer = 時間(三角関数系で使用)
+        speed = 速度(三角関数系で使用)
+        intensity = 振れ幅(三角関数系で使用)
+        aim = 狙い撃つ方向
+        disappearance_count = 消滅するまでのカウントタイマー
+        stop_count = その場に止まり続ける時に使用するカウンタ
+        priority = 描画優先度 0=一番最前面に表示 1=ボスより奥&敵より手前 2=ボスより奥&敵よりも奥
+        turn_theta = 誘導弾やホーミングミサイル,レーザーでの最大旋回可能角度(これ以上の角度では曲がることが出来ません)
+        search_flag = サーチレーザーなどで自機の位置を調べて曲がる位置を確定させたかどうかのフラグ
+        rotation_omega = 回転弾などで使用する角度が入ります(現在値)
+        rotation_omega_incremental = 回転弾などで使用する,1フレームで増加する角度が入ります
+        radius = 回転弾などで使用する半径(現在値)
+        radius_max = 回転弾などで使用する半径(目標となる最大値)
+        division_type = 分裂弾かどうかのフラグとそのタイプ
+                            0=分裂はしない 1=自機狙いの3way 2=自機狙いの5way 3=自機狙いの7way 4=16方向弾 5=誘導弾4個
+                            6=誘導弾8個
+        division_count = 分裂するまでのカウント
+        radius_incremental = 回転弾などで使用する半径の増分
+        division_count_origin = 分裂するまでのカウント(元となる数値です変化はしません)
+        division_num = 分裂する回数(0なら1回だけ分裂して通常弾に戻る 1なら2分裂(孫分裂),2なら3分裂(ひ孫)後通常弾に戻ります)
+        angle = グラフイック表示時に使用する回転角の数値
+        expansion = だんだんと広がっていくウェーブやレーザーの広がっていくドット数(毎フレーム)
+        expansion_flag = ウェーブやレーザーが最大まで広がったら立てるフラグ
+        width_max = 拡大ウェーブや拡大レーザーリップルレーザーの横幅の最大値
+        height_max = 拡大ウェーブや拡大レーザーリップルレーザーの縦幅の最大値
+        color = 色
+        anime = アニメーション用カウンター
+        """
         self.enemy_shot_type = enemy_shot_type
         self.enemy_shot_id   = enemy_shot_id
         self.posx = x

@@ -25,6 +25,11 @@ class update_btn_assign:
     #btn_id    = ボタンID     = 機能を割り当てるボタンのIDナンバー
     #action_id = アクションID = 割り当てる機能(アクション)のIDナンバー
     def list(self,btn_id,action_id):
+        """
+        パッドアサインリストを更新する
+        btn_id    = ボタンID     = 機能を割り当てるボタンのIDナンバー
+        action_id = アクションID = 割り当てる機能(アクション)のIDナンバー
+        """
         print("ボタンID "     + str(btn_id))
         print("アクションID " + str(action_id))
         print("")
@@ -47,6 +52,11 @@ class update_btn_assign:
     #action_id = アクションID = 割り当てる機能(アクション)のIDナンバー
     #返り値は=存在したbtn_idを返します 存在しなかった場合は -1を返します
     def check_action_id(self,action_id):
+        """
+        パッドアサインリストにアクションIDが既に存在するか調べる関数
+        action_id = アクションID = 割り当てる機能(アクション)のIDナンバー
+        返り値は=存在したbtn_idを返します 存在しなかった場合は -1を返します
+        """
         list_count = len(self.pad_assign_list) #list_countにpad_assign_listの長さが入る
         for i in range (list_count): #pad_assign_listの長さの回数だけループして調べ上げる
             dat = self.pad_assign_list[i] #どの様なボタンIDが割り当てられているか取り出す
