@@ -30,38 +30,12 @@ class update_btn:
             if    pyxel.btnr(pyxel.KEY_UP) == True\
             or  pyxel.btnr(pyxel.GAMEPAD1_BUTTON_DPAD_UP) == True\
             or  pyxel.btnr(pyxel.GAMEPAD2_BUTTON_DPAD_UP) == True:   #上ボタンが離された時は
-                self.cursor_repeat_time_count = 10                      #リピートタイムを初期状態に戻す
+                self.cursor_repeat_time_count = 10                   #カーソルリピートタイムカウントを初期状態に戻す
                 print("REPEAT RESET!")
                 print (self.cursor_repeat_time_count)
                 return(False)
             else:
                 return(False)
-        
-        #btnpにholdとrepeatっていう引数があるの知らなかったよ・・・いつの間に追加されてたんだろう？？？？？
-        #if pyxel.btnp(pyxel.KEY_UP) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_UP) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_DPAD_UP): #上ボタンが押されているかチェック
-        #    update_btn.reduce_repeat_time_count(self)
-        #    print (self.cursor_repeat_time_count)
-        #    return(True)
-        #
-        #else:
-        #    return(False)
-        #
-        # if pyxel.frame_count % self.cursor_repeat_time_count == 0: #フレーム総カウントがリピートタイムカウント数で割り切れる場合(余りが0の時)だけ・・・移動する
-        #         return(True)
-        # else:
-        #         return(False)
-        #
-        # elif   pyxel.btnr(pyxel.KEY_UP) == True\
-        #     or pyxel.btnr(pyxel.GAMEPAD1_BUTTON_DPAD_UP) == True\
-        #     or pyxel.btnr(pyxel.GAMEPAD2_BUTTON_DPAD_UP) == True:   #上ボタンが離された時は
-        #
-        #     self.cursor_repeat_time_count = 9                      #リピートタイムを初期状態に戻す
-        #     print("REPEAT RESET!")
-        #     print (self.cursor_repeat_time_count)
-        #     return(False)
-        # else:
-        #
-        #     return(False)
 
     #キーボードの下かカーソルとジョイパッドの下方向ボタンが押されたかどうかを調べる(キーリピート付き)                  KEY DOWN PAD DOWN
     #帰り値は下ボタンが押された時=True 下ボタンは押されていなかった時=Falseを返します
@@ -74,21 +48,21 @@ class update_btn:
             if    pyxel.btnr(pyxel.KEY_DOWN) == True\
             or  pyxel.btnr(pyxel.GAMEPAD1_BUTTON_DPAD_DOWN) == True\
             or  pyxel.btnr(pyxel.GAMEPAD2_BUTTON_DPAD_DOWN) == True:   #上ボタンが離された時は
-                self.cursor_repeat_time_count = 10                      #リピートタイムを初期状態に戻す
+                self.cursor_repeat_time_count = 10                     #カーソルリピートタイムカウントを初期状態に戻す
                 print("REPEAT RESET!")
                 print (self.cursor_repeat_time_count)
                 return(False)
             else:
                 return(False)
 
-    #リピートタイムカウントを減少させていく関数
+    #カーソルリピートタイムカウントを減少させていく関数
     def reduce_repeat_time_count(self):
         if   7 <= self.cursor_repeat_time_count <= 9:
             self.keypad_repeat_num = 4
-        elif 3 <= self.cursor_repeat_time_count <= 6:
+        elif 2 <= self.cursor_repeat_time_count <= 6:
             self.keypad_repeat_num = 3
         else:
-            self.keypad_repeat_num = 1
+            self.keypad_repeat_num = 2
         
         self.cursor_repeat_time_count -= 1
         

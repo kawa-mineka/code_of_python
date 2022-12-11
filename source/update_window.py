@@ -2268,7 +2268,11 @@ class update_window:
                             self.cursor_item_y -= 1 #現在指し示しているアイテムナンバーを1減らす
                             break #カーソルの移動先が見つかったのでループから脱出！
                     
-                else:
+                else: #上方向の限界位置で上入力された時の処理の開始---------------------------------------------------------------
+                    self.cursor_repeat_time_count = 40                   #カーソルリピートタイムカウントを初期状態に戻す
+                    self.keypad_repeat_num = 40
+                    self.cursor_y = self.cursor_y + self.cursor_step_y * self.cursor_max_item_y         #カーソルのy座標最下段項目の座標にする
+                    self.cursor_item_y = self.cursor_max_item_y                         #カーソルアイテムyをy軸最大項目にしてカーソル位置を最下段にワープさせる
                     pyxel.play(0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
                 
             elif self.cursor_move_direction == CURSOR_MOVE_4WAY:
@@ -2287,7 +2291,7 @@ class update_window:
                             self.cursor_item_y -= (ty+1) #現在指し示しているアイテムナンバーをty+1減らす
                             pyxel.play(0,self.window[self.active_window_index].cursor_move_se)#カーソル移動音を鳴らす
                             break #カーソルの移動先が見つかったのでループから脱出
-                else:
+                else: #上方向の限界位置で上入力された時の処理の開始---------------------------------------------------------------
                     pyxel.play(0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
                 
                 #comment_disp_flagを調べてカーソルサイズを変更する
@@ -2316,7 +2320,7 @@ class update_window:
                         new_text = left_text + chr(character) + right_text #新しい文字列を作り出す(pythonの文字列はimmutable(変更不能)らしいので新しい文字列変数を作ってそれを代入するしかない？？のかな？よくわかんない)
                         self.window[self.active_window_index].edit_text[LIST_WINDOW_TEXT] = new_text
                     
-                else:
+                else: #上方向の限界位置で上入力された時の処理の開始---------------------------------------------------------------
                     pyxel.play(0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
         
         # 下入力されたら  y座標を  +7する(1キャラ分)
@@ -2339,8 +2343,12 @@ class update_window:
                             self.cursor_item_y += 1 #現在指し示しているアイテムナンバーを1増やす
                             break #選択すべき項目テキストが見つかったのでループから脱出！
                     
-                else:
-                    pyxel.play(0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
+                else: #下方向の限界位置で下入力された時の処理の開始---------------------------------------------------------------
+                    self.cursor_repeat_time_count = 40                   #カーソルリピートタイムカウントを初期状態に戻す
+                    self.keypad_repeat_num = 40
+                    self.cursor_y = self.cursor_y - self.cursor_step_y * self.cursor_max_item_y #カーソルのy座標最上段項目の座標にする
+                    self.cursor_item_y = 0                                                      #カーソルアイテムyを0にしてカーソル位置を最上段にワープさせる
+                    pyxel.play(0,self.window[self.active_window_index].cursor_bounce_se)        #カーソル跳ね返り音を鳴らす
                 
             elif self.cursor_move_direction == CURSOR_MOVE_4WAY:
                 if self.cursor_item_y != self.cursor_max_item_y: #指し示しているアイテムナンバーが最大項目数でないのなら下方向にカーソルは移動できるので・・
@@ -2356,7 +2364,7 @@ class update_window:
                             self.cursor_y += self.cursor_step_y * (ty+1) #y座標をcursor_step_y*(ty+1)加算してカーソルを下に移動させる
                             self.cursor_item_y += (ty+1) #現在指し示しているアイテムナンバーをty+1増やす
                             break #カーソルの移動先が見つかったのでループから脱出
-                else:
+                else: #下方向の限界位置で下入力された時の処理の開始---------------------------------------------------------------
                     pyxel.play(0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
                 
                 #comment_disp_flagを調べてカーソルサイズを変更する
@@ -2385,7 +2393,7 @@ class update_window:
                         new_text = left_text + chr(character) + right_text #新しい文字列を作り出す(pythonの文字列はimmutable(いみゅーたぶる変更不能)らしいので新しい文字列変数を作ってそれを代入するしかない？？のかな？よくわかんない)
                         self.window[self.active_window_index].edit_text[LIST_WINDOW_TEXT] = new_text
                     
-                else:
+                else: #下方向の限界位置で下入力された時の処理の開始---------------------------------------------------------------
                     pyxel.play(0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
         
         #右入力されたらcursor_pageを +1する
