@@ -21,6 +21,9 @@ class update_title:
 
     #タイトル表示に必要な変数を設定＆初期化する##############
     def title_init(self):
+        """
+        タイトル表示に必要な変数を設定＆初期化する
+        """
         pyxel.load(os.path.abspath("./assets/graphic/min-sht2.pyxres")) #タイトル＆ステージ1＆2のリソースファイルを読み込む
         # pyxel.load("./assets/graphic/min-sht2.pyxres") #タイトル＆ステージ1＆2のリソースファイルを読み込む
         #タイトル関連の変数を初期化
@@ -101,6 +104,9 @@ class update_title:
 
     #タイトルの更新#######################################
     def title(self):
+        """
+        タイトルの更新
+        """
         self.display_title_time -= 1          #タイトルを表示する時間カウンターを1減らす
         if self.display_title_time <= 0:      #カウンターが0以下になったら・・・
             self.display_title_time = 0       #強制的に0の状態にする
@@ -132,6 +138,9 @@ class update_title:
 
     #タイトルメニューの選択中の更新#####################################
     def title_menu_select(self):
+        """
+        タイトルメニューの選択中の更新
+        """
         if   self.cursor_menu_layer == MENU_LAYER0: #メニューが0階層目の選択分岐
             if   self.cursor_decision_item_y == MENU_GAME_START:        #GAME STARTが押されたら
                 self.cursor_type = CURSOR_TYPE_NO_DISP      #セレクトカーソルの表示をoffにする

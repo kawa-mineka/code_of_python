@@ -13,6 +13,9 @@ from func  import * #汎用性のある関数群のモジュールの読み込�
 class graph:
     #IPLメッセージの表示#######################################
     def draw_ipl(self): 
+        """
+        IPLメッセージを表示する
+        """
         #テキストスクリーンリスト全体の行数を数える
         text_number_of_lines_count = len(self.text_screen)
         #どれだけの行が画面上に流れていったのか計算します
@@ -27,6 +30,9 @@ class graph:
 
     #タイトルの表示#######################################
     def draw_title(self):
+        """
+        タイトルを表示する
+        """
         for i in range(160):
             pyxel.blt(0,14 + i  * self.title_oscillation_count % 200 - self.title_slash_in_count,    IMG2,  0,192,  i*1.09,32,   pyxel.COLOR_BLACK)
         for i in range(160+1000):
@@ -46,6 +52,9 @@ class graph:
 
     #背景の星の表示
     def draw_star(self):
+        """
+        背景の星を表示する
+        """
         stars_count = len(self.stars)
         for i in range(stars_count):
             pyxel.pset(self.stars[i].posx, self.stars[i].posy,int(self.stars[i].posx  // 4 % 15)) 
@@ -53,6 +62,9 @@ class graph:
 
     #背景の星の再描画表示(透明または半透明ウィンドウ表示時にその範囲が消去されたのちその範囲に存在する星を描画する)
     def redraw_star(self):
+        """
+        背景の星の再描画表示する(透明または半透明ウィンドウ表示時にその範囲が消去されたのちその範囲に存在する星を描画する)
+        """
         stars_count = len(self.stars)
         for i in range(stars_count):
             st_x,st_y = self.stars[i].posx,self.stars[i].posy #星の座標を取り出す
@@ -65,6 +77,9 @@ class graph:
 
     #背景の星を最前面のウィンドウ部分に再描画表示(透明または半透明ウィンドウ表示時にその範囲が消去されたのちその範囲に存在する星を描画する)
     def redraw_star_priority_top(self):
+        """
+        背景の星を最前面のウィンドウ部分に再描画表示する(透明または半透明ウィンドウ表示時にその範囲が消去されたのちその範囲に存在する星を描画する)
+        """
         stars_count = len(self.stars)
         for i in range(stars_count):
             st_x,st_y = self.stars[i].posx,self.stars[i].posy #星の座標を取り出す
@@ -78,6 +93,9 @@ class graph:
 
     #自機表示
     def draw_my_ship(self):
+        """
+        自機を表示する
+        """
         if self.invincible_counter > 0: #無敵中のカウントが0より大きい時は無敵状態なので点滅表示する
             if pyxel.frame_count % 4 == 0: #4フレーム置きに自機を表示
                 pyxel.blt(self.my_x   ,self.my_y - self.camera_offset_y,IMG2,8 + ((self.my_rolling_flag) * 8),0,SHIP_W,SHIP_H,pyxel.COLOR_BLACK) #自機本体の表示
@@ -93,6 +111,9 @@ class graph:
 
     #自機弾の表示
     def draw_my_shot(self):
+        """
+        自機ショットを表示する
+        """
         shot_count = len(self.shots)
         for i in range(shot_count):
             if   0 <= self.shot_level <= 6: #ショットがバルカンショットとレーザーの場合
@@ -112,6 +133,9 @@ class graph:
 
     #ミサイルの表示
     def draw_missile(self):
+        """
+        ミサイルを表示する
+        """
         missile_count = len(self.missile)
         for i in range(missile_count):
             if 0 <= self.missile[i].missile_type <= 3:#通常ミサイル（地を這うミサイル）の表示
@@ -133,6 +157,9 @@ class graph:
 
     #クローの表示
     def draw_claw(self):
+        """
+        クローを表示する
+        """
         claw_count = len(self.claw)
         for i in range(claw_count):
             pyxel.blt(self.claw[i].posx, self.claw[i].posy - self.camera_offset_y,     IMG2,    184 + (((self.stage_count // 2.5 ) % 9) * 8),96,      8,8,    pyxel.COLOR_BLACK)
@@ -140,17 +167,26 @@ class graph:
 
     #クローショットの表示
     def draw_claw_shot(self):
+        """
+        クローショットを表示する
+        """
         claw_shot_count = len(self.claw_shot)
         for i in range(claw_shot_count):
             pyxel.blt(self.claw_shot[i].posx, self.claw_shot[i].posy - self.camera_offset_y, IMG2,   240,0,    8,8,  pyxel.COLOR_NAVY)
 
     #l'sシールド表示
     def draw_ls_shield(self):
+        """
+        l'sシールドを表示する
+        """
         if self.ls_shield_hp > 0:
             pyxel.blt(self.my_x + 8,self.my_y - 8 - self.camera_offset_y,IMG2,208 + (self.stage_count // 3) % 6 * 8,64,8,24,pyxel.COLOR_GRAY)
 
     #敵の表示
     def draw_enemy(self):
+        """
+        敵を表示する
+        """
         enemy_count = len(self.enemy)
         for i in range(enemy_count):
             if   self.enemy[i].enemy_type == 1:#敵タイプ１の表示   直進して斜め後退→勢いよく後退していく10機編隊
@@ -237,10 +273,15 @@ class graph:
                 pyxel.blt(self.enemy[i].posx    , self.enemy[i].posy - self.camera_offset_y,IMG2,      80,48,    SIZE_40 ,SIZE_24, pyxel.COLOR_PEACH)    
 
     #敵の弾の表示
-    def draw_enemy_shot(self,p): #pの数値と一致するプライオリティナンバーを持つ敵弾だけを描画します
+    def draw_enemy_shot(self,priority): #priorityの数値と一致するプライオリティナンバーを持つ敵弾だけを描画します
+        """
+        敵の弾の表示
+        
+        priorityの数値と一致するプライオリティナンバーを持つ敵弾だけを描画します
+        """
         enemy_shot_count = len(self.enemy_shot)
         for i in range(enemy_shot_count):
-            if self.enemy_shot[i].priority == p:
+            if self.enemy_shot[i].priority == priority:
                 if   self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_LASER:            #通常レーザーの表示
                     pyxel.blt(self.enemy_shot[i].posx, self.enemy_shot[i].posy - self.camera_offset_y, IMG2,   152,16,    8, 8,    pyxel.COLOR_BLACK)#敵レーザービームの表示
                 elif self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_GREEN_LASER:      #ボスのグリーンレーザーの表示
@@ -275,6 +316,9 @@ class graph:
 
     #ボスの表示
     def draw_boss(self):
+        """
+        ボスの表示
+        """
         boss_count = len(self.boss)
         for i in range(boss_count):
             if   self.boss[i].boss_type == BOSS_BREEZARDIA:        #1面 ブリザーディア          (山岳地帯ボス)
@@ -358,6 +402,9 @@ class graph:
 
     #ボスの耐久力の表示 (同じコードをコピペしまくりなのでいつかキチンとループ処理して短くしたい・・・)
     def draw_boss_hp(self):
+        """
+        ボスの耐久力の表示 (同じコードをコピペしまくりなのでいつかキチンとループ処理して短くしたい・・・)
+        """
         boss_count = len(self.boss)
         for i in range(boss_count):
             if self.boss[i].display_time_main_hp_bar >= 0: #ボス本体の耐久力を表示するタイムカウントが残っていたのなら
@@ -443,6 +490,11 @@ class graph:
 
     #ボス本体の当たり判定矩形の表示(i=ボスクラスのインデックス値となります)(デバッグ用)(同じコードをコピペしまくりなのでいつかキチンとループ処理して短くしたい・・・)
     def draw_boss_collision_rectangle(self,i):
+        """
+        ボス本体の当たり判定矩形の表示(デバッグ用)(同じコードをコピペしまくりなのでいつかキチンとループ処理して短くしたい・・・)
+        
+        (i=ボスクラスのインデックス値となります)
+        """
         if self.boss_collision_rect_display_flag != 1: #デバッグ時に使う当たり判定矩形表示フラグがonでないのならば
             return                             #何もしないで戻ります
             
@@ -492,10 +544,15 @@ class graph:
             pyxel.rectb(self.boss[i].posx + self.boss[i].col_damage_point4_x,self.boss[i].posy - self.camera_offset_y + self.boss[i].col_damage_point4_y,self.boss[i].col_damage_point4_w,self.boss[i].col_damage_point4_h,self.rainbow_flash_color[pyxel.frame_count // 3 % 15])
 
     #爆発パターンの表示
-    def draw_explosion(self,disp_priority):
-        explosioncount = len(self.explosions)
-        for i in reversed(range(explosioncount)):
-            if self.explosions[i].priority == disp_priority: #指定されたプライオリティナンバーの爆発だけ表示する
+    def draw_explosion(self,priority):
+        """
+        爆発パターンの表示
+        
+        priorityの数値と一致するプライオリティナンバーを持つ爆発パターンだけを描画します
+        """
+        explosion_count = len(self.explosions)
+        for i in reversed(range(explosion_count)):
+            if self.explosions[i].priority == priority: #指定されたプライオリティナンバーの爆発だけ表示する
                 if    self.explosions[i].explosion_type == EXPLOSION_NORMAL:#敵爆発の通常タイプの爆発パターン表示
                     pyxel.blt(self.explosions[i].posx,self.explosions[i].posy - self.camera_offset_y,IMG2,136 -(self.explosions[i].explosion_count * 8)      ,0,  SIZE_8,SIZE_8,pyxel.COLOR_BLACK)
                 elif  self.explosions[i].explosion_type == EXPLOSION_MIDDLE:#スクランブルハッチや重爆撃機系の敵を倒したときの中くらいの爆発パターン
@@ -506,10 +563,15 @@ class graph:
                     pyxel.blt(self.explosions[i].posx,self.explosions[i].posy - self.camera_offset_y,IMG2,120 -(self.explosions[i].explosion_count // 4 * 8)       ,168,  SIZE_8,SIZE_8,pyxel.COLOR_BLACK)
 
     #パーティクルの表示
-    def draw_particle(self,disp_priority):
-        particlecount = len(self.particle)
-        for i in reversed(range(particlecount)):
-            if self.particle[i].priority == disp_priority: #指定されたプライオリティナンバーのパーティクルだけ表示する
+    def draw_particle(self,priority):
+        """
+        パーティクルの表示
+        
+        priorityの数値と一致するプライオリティナンバーを持つパーティクルだけを描画します
+        """
+        particle_count = len(self.particle)
+        for i in reversed(range(particle_count)):
+            if self.particle[i].priority == priority: #指定されたプライオリティナンバーのパーティクルだけ表示する
                 if self.particle[i].particle_type == PARTICLE_DOT: #パーティクルタイプ 1~2ドット描画タイプ
                     pyxel.pset(self.particle[i].posx,self.particle[i].posy - self.camera_offset_y,int(self.particle[i].color)) #正方形1ドット分のパーティクルを描画
                     if self.particle[i].size > 0: #sizeが0より大きかったら横長2ドット分のパーティクルを描画する
@@ -543,6 +605,9 @@ class graph:
 
     #背景オブジェクトの表示
     def draw_background_object(self):
+        """
+        背景オブジェクトの表示
+        """
         object_count = len(self.background_object)
         for i in reversed(range(object_count)):
             if   self.background_object[i].background_object_type == BG_OBJ_CLOUD1: #雲小1
@@ -603,13 +668,18 @@ class graph:
                 pyxel.blt(self.background_object[i].posx     ,self.background_object[i].posy +2*8,  IMG1,  96,232,    24,16,    pyxel.COLOR_NAVY) #雲大21の左のしっぽ描画
 
     #ラスタースクロールの表示
-    def draw_raster_scroll(self,disp_priority):
+    def draw_raster_scroll(self,priority):
+        """
+        ラスタースクロールの表示
+        
+        priorityの数値と一致するプライオリティナンバーを持つラスタースクロール面だけを描画します
+        """
         if self.raster_scroll_flag == FLAG_OFF: #ラスタスクロール更新＆表示のフラグがたっていなかったらそのまま何もしないで戻る
             return
         
         raster_scroll_count = len(self.raster_scroll)
         for i in range(raster_scroll_count):#ラスタースクロールのリストの要素数を数えてその数の分だけループ処理する
-            if self.raster_scroll[i].display == 1 and self.raster_scroll[i].priority == disp_priority: #dispiay == 1(on) & priority == 引数のdisp_priorityの時だけ描画する
+            if self.raster_scroll[i].display == 1 and self.raster_scroll[i].priority == priority: #dispiay == 1(on) & priority == 引数のpriorityの時だけ描画する
                 pyxel.blt(self.raster_scroll[i].posx + self.raster_scroll[i].offset_x,self.raster_scroll[i].posy,
                 self.raster_scroll[i].img_bank,
                 self.raster_scroll[i].posu,self.raster_scroll[i].posv,
@@ -642,6 +712,9 @@ class graph:
 
     #パワーアップアイテム類の表示
     def draw_obtain_item(self):
+        """
+        パワーアップアイテム類の表示
+        """
         obtain_item_count = len(self.obtain_item)
         for i in reversed(range(obtain_item_count)):
             if    self.obtain_item[i].item_type == ITEM_SHOT_POWER_UP:            #ショットパワーアップカプセル（赤）の表示
@@ -677,6 +750,11 @@ class graph:
 
     #パワーアップアイテムの回転する四角形外枠の描画表示
     def draw_obtain_item_rotation_box(self,i): #iはobtain_itemクラスのインデックス値となります
+        """
+        パワーアップアイテムの回転する四角形外枠の描画表示
+        
+        iはobtain_itemクラスのインデックス値となります
+        """
         self.obtain_item[i].degree +=0.5 #0.5度回転
         self.obtain_item[i].degree = self.obtain_item[i].degree % 360#角度は３６０で割った余りとする(0~359)
         #アイテムのある座標は(x=0,y=0)となります
@@ -714,6 +792,11 @@ class graph:
 
     #トライアングルアイテム（ショット、ミサイル、シールド）の表示
     def draw_obtain_item_triangle_item(self,i): #iはobtain_itemクラスのインデックス値となります
+        """
+        トライアングルアイテム（ショット、ミサイル、シールド）の表示
+        
+        iはobtain_itemクラスのインデックス値となります
+        """
         self.obtain_item[i].degree -= self.obtain_item[i].speed #SPEED分,右回転する
         self.obtain_item[i].degree = self.obtain_item[i].degree % 360#角度は３６０で割った余りとする(0~359)
         #アイテムのある座標(x=0,y=0)は中心となります
@@ -778,17 +861,26 @@ class graph:
 
     #サブウェポンセレクトゲージの表示（画面上部にいま所持しているサブウェポンアイコンを描画する）
     def draw_sub_weapon_select_gauge(self):
+        """
+        サブウェポンセレクトゲージの表示（画面上部にいま所持しているサブウェポンアイコンを描画する）
+        """
         for i in range(5):
             #論理式(sub_weapon_list[i]が0)の場合括弧の中の値がtrue=1となるので y座標は16+1*8=24となる
             pyxel.blt(60 + i * 10,0,  IMG2, 216 + i * 8,16 + (self.sub_weapon_list[i] == 0) * 8,   8,8, pyxel.COLOR_GRAY)
 
     #サブウェポンセレクトガイドボックスの表示（今選択しているサブウェポンを示す四角い矩形輪郭線）
     def draw_sub_weapon_select_guidebox(self):
+        """
+        サブウェポンセレクトガイドボックスの表示（今選択しているサブウェポンを示す四角い矩形輪郭線）
+        """
         if self.select_sub_weapon_id != -1:#サブウェポンを全く所持していない状態（id=-1）以外ならガイドボックスを点滅表示させる
             pyxel.rectb(60 -1 + self.select_sub_weapon_id * 10,-1, 10,8, self.blinking_color[pyxel.frame_count // 8 % 10])
 
     #スコア表示やスピード、自機耐久力などのステータスの表示（画面上部の物やリプレイ再生中とか)
     def draw_status(self):
+        """
+        スコア表示やスピード、自機耐久力などのステータスの表示（画面上部の物やリプレイ再生中とか)
+        """
         s = "{:>7}".format(self.score)
         pyxel.text(9, 1, s, 1) #点数の影部分の表示
         if self.score >= self.hi_score: #スコアがハイスコア以上なら(ハイスコア更新状態)
@@ -832,6 +924,9 @@ class graph:
 
     #デバッグ用ステータスの表示
     def draw_debug_status(self):
+        """
+        デバッグ用ステータスの表示
+        """
         if self.debug_menu_status == 0: #デバッグメニュー表示ステータスが0なら表示せずリターンする
             return
         
@@ -1062,6 +1157,9 @@ class graph:
 
     #BGチップデータ書き換えアニメーション実装のために作ったダミーテスト関数 画面左から2列目の縦1列を取得し、そのＢＧデータを画面左端1列目に表示する
     def draw_dummy_put_bg_xy(self):
+        """
+        BGチップデータ書き換えアニメーション実装のために作ったダミーテスト関数 画面左から2列目の縦1列を取得し、そのＢＧデータを画面左端1列目に表示する
+        """
         if self.scroll_type == SCROLL_TYPE_8WAY_SCROLL_AND_RASTER: #全方向フリースクロール＋ラスタースクロールの場合
             for h in range(15): #縦は15キャラ分 8ドット*15キャラ=120ドット
                 self.get_bg_chip_free_scroll(8,h * 8,0)#画面左端＋１のマップチップのBGの数値を取得する
@@ -1077,6 +1175,9 @@ class graph:
 
     #WARNING警告ダイアログの表示(ボス出現)
     def draw_warning_dialog(self):
+        """
+        WARNING警告ダイアログの表示(ボス出現)
+        """
         if self.warning_dialog_display_time <= 0: #WARNING表示時間が0以下だったらリターンする
             return
             
@@ -1101,6 +1202,9 @@ class graph:
 
     #STAGE CLEARダイアログの表示(ステージクリア！)
     def draw_stage_clear_dialog(self):
+        """
+        STAGE CLEARダイアログの表示(ステージクリア！)
+        """
         if self.stage_clear_dialog_display_time <= 0: #STAGE CLEAR表示時間が0以下だったらリターンする
             return
         
@@ -1155,6 +1259,9 @@ class graph:
 
     #一時停止・ポーズメッセージの表示
     def draw_pause_message(self):
+        """
+        一時停止・ポーズメッセージの表示
+        """
         pyxel.text(80-8, 32, "PAUSE", pyxel.COLOR_WHITE)
         self.star_scroll_speed -= 0.01 #ポーズをかけると星のスクロールスピードの倍率を毎フレームごと0.01減らしていく
         if self.star_scroll_speed < 0:
@@ -1167,6 +1274,12 @@ class graph:
 
     #ウィンドウの表示
     def draw_window(self,priority,draw_num): #priorityの数値と一致するプライオリティナンバーを持つウィンドウだけを描画します
+        """
+        ウィンドウの表示
+        
+        priorityの数値と一致するプライオリティナンバーを持つウィンドウだけを描画します
+        draw_num=(ORDINARY_SUPERPOSITION=そのまま普通に重ね合わせて表示)(BLACK_RECTANGLE_FILL=「黒矩形塗りつぶし」した後表示する)
+        """
         window_count = len(self.window)
         for i in range(window_count):
             #priorityの数値と一致する、尚且つ下地が有色(透明でない)ウィンドウだけを描画します
@@ -1515,6 +1628,9 @@ class graph:
 
     #セレクトカーソルの表示
     def draw_select_cursor(self):
+        """
+        セレクトカーソルの表示
+        """
         if   self.cursor_type == CURSOR_TYPE_NORMAL:    #セレクトカーソルを表示するかどうかのフラグが建っていたらカーソルを表示する
             pyxel.blt(self.cursor_x, self.cursor_y,     IMG2,    184 + (((pyxel.frame_count // 2.5 ) % 9) * 8),96,      8,8,    pyxel.COLOR_BLACK)
         elif self.cursor_type == CURSOR_TYPE_UNDER_BAR: #アンダーバータイプのカーソルの表示
@@ -1531,10 +1647,16 @@ class graph:
 
     #ゲームオーバーダイアログを表示する
     def draw_gameover_dialog(self):
+        """
+        ゲームオーバーダイアログを表示する
+        """
         pyxel.blt(47, 48, IMG2, 0,72, 64,8, pyxel.COLOR_BLACK)
 
-    #フェードイン＆フェードアウト用のエフェクトスクリーン用描画関数
-    def draw_fade_in_out_screen(self,fade_in_out_flag,chip_type):
+    #フェードイン＆フェードアウト用のエフェクトスクリーン用描画関数(未使用)
+    def draw_fade_in_out_screen(self):
+        """
+        フェードイン＆フェードアウト用のエフェクトスクリーン用描画関数(未使用)
+        """
         for lx in range(self.fade_in_out_counter):
             for ly in range(15): #y軸は15キャラ分なので15回繰り返す
                 pyxel.blt(self.fade_in_out_counter // 8 * 8  - lx*8 -8,ly*8,   IMG2,   self.fade_in_out_counter // 8 * 4,248,   8,8,   pyxel.COLOR_GRAY)
@@ -1547,6 +1669,9 @@ class graph:
 
     #縦フェードイン用のエフェクトスクリーン描画関数
     def draw_vertical_fade_in_screen(self):
+        """
+        縦フェードイン用のエフェクトスクリーン描画
+        """
         for ly in range(self.fade_in_out_counter):
             for lx in range(20):#x軸は20キャラ分なので20回繰り返す
                 pyxel.blt(lx*8,self.fade_in_out_counter // 8  - ly*8,   IMG2,   self.fade_in_out_counter // 8,248,   8,8,   pyxel.COLOR_GRAY)
@@ -1559,6 +1684,9 @@ class graph:
 
     #シャドウイン用のエフェクトスクリーン用描画関数
     def draw_shadow_in_screen(self,shadow_width,col):
+        """
+        シャドウイン用のエフェクトスクリーン用描画
+        """
         for lx in range(self.shadow_in_out_counter):
             pyxel.rect(0,          0,           lx,WINDOW_H,    col)#左側の長方形描画
             pyxel.rect(WINDOW_W-lx,0,           lx,WINDOW_H,    col)#右側の長方形描画
@@ -1571,6 +1699,9 @@ class graph:
 
     #シャドウアウト用のエフェクトスクリーン用描画関数
     def draw_shadow_out_screen(self,shadow_width,col):
+        """
+        シャドウアウト用のエフェクトスクリーン用描画
+        """
         pyxel.rect(              - self.shadow_in_out_counter,0,           WINDOW_W // 2,WINDOW_H,    col)#左側の長方形描画
         pyxel.rect(WINDOW_W // 2 + self.shadow_in_out_counter,0,           WINDOW_W // 2,WINDOW_H,    col)#右側の長方形描画
         if self.shadow_in_out_counter == shadow_width:

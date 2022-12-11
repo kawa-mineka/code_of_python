@@ -23,6 +23,9 @@ class update_debug:
 
     #デバッグモードの更新（キーボードによる表示タイプや表示非表示の切り替え）           KEY CTRL
     def debug_status(self):
+        """
+        デバッグモードの更新（キーボードによる表示タイプや表示非表示の切り替え）           KEY CTRL
+        """
         if pyxel.btnp(pyxel.KEY_CTRL):
             if   self.debug_menu_status == 0:
                 self.debug_menu_status = 1
@@ -35,6 +38,9 @@ class update_debug:
 
     #デバッグモードによるキーボードやパッドでの敵や敵弾の強制追加発生
     def enemy_append(self):
+        """
+        デバッグモードによるキーボードやパッドでの敵や敵弾の強制追加発生
+        """
         #敵タイプ1サーコインの発生  直進して斜め後退→勢いよく後退していく10機編隊      KEY 4 +++++++
         if (pyxel.frame_count % 8) == 0:
             if pyxel.btn(pyxel.KEY_4) or pyxel.btn(pyxel.GAMEPAD1_BUTTON_LEFTSTICK) or pyxel.btn(pyxel.GAMEPAD2_BUTTON_LEFTSTICK):

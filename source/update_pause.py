@@ -19,6 +19,9 @@ class update_pause:
 
     #ポーズ時の処理
     def pause_menu(self):
+        """
+        ポーズ時の処理
+        """
         if   self.cursor_menu_layer == MENU_LAYER0: #メニューが0階層目の選択分岐
             if   self.cursor_decision_item_y == 0:    #選択したアイテムが「BACK TO GAMES」ならば
                 self.game_status = self.record_games_status #一時記憶しておいたゲームステータスを元に戻してあげます

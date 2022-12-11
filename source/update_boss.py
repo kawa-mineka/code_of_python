@@ -22,6 +22,9 @@ class update_boss:
 
     #!各面のボスをBossクラスに定義して出現させる
     def born_boss(self):
+        """
+        各面のボスをBossクラスに定義して出現させる
+        """
         #col_main1_x, col_main1_y, col_main1_w, col_main1_h  = 1*8,1*8,5*8,2*8
         if       self.stage_number == STAGE_MOUNTAIN_REGION:   #1面ボス ブリザーディア
             new_boss = Boss()
@@ -891,6 +894,9 @@ class update_boss:
     ####################################ボス関連の処理関数########################################
     #!ボスの更新
     def boss(self):
+        """
+        ボスの更新
+        """
         boss_count = len(self.boss)
         for i in reversed (range(boss_count)):
             if   self.boss[i].boss_type == BOSS_FATTY_VALGUARD: #2面ボス  ファッティ・バルガード  ############################
