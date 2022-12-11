@@ -217,7 +217,7 @@ class App:
         #                                 ACT_SPEED_CHANGE,ACT_NO_ASSIGN,ACT_PAUSE,
                                         
         #                                 ACT_CHANGE_CLAW_STYLE,ACT_CHANGE_CLAW_INTERVAL]
-        self.default_pad_assign_list = [ACT_MISSILE,ACT_SHOT_AND_SUB_WEAPON,
+        self.default_pad_assign_list = [ACT_SHOT_AND_SUB_WEAPON,ACT_MISSILE,
                                         ACT_MAIN_WEAPON_CHANGE,ACT_SUB_WEAPON_CHANGE,
                                         
                                         ACT_SPEED_CHANGE,ACT_NO_ASSIGN,ACT_PAUSE,
@@ -241,7 +241,6 @@ class App:
         self.boss_number_of_defeat = copy.deepcopy(self.default_boss_number_of_defeat) #ボスを倒した総数の初期データを深い階層でコピーする
         self.pad_assign_list       = copy.deepcopy(self.default_pad_assign_list)       #パッド割り当て情報の初期データを深い階層でコピーする
         
-        update_window.refresh_pad_assign_graph_list(self)#パッドアサイングラフイックリストを新規に作成する(self.pad_assign_listに依存しているためself.pad_assign_listを作製した直後この場所で作製するべし！)
         
         self.development_testtime            = 0  #ゲーム開発時の総テスト時間
         self.one_game_playtime_seconds       = 0  #1プレイでのゲームプレイ時間(秒単位)
@@ -256,6 +255,8 @@ class App:
             #pyxel.init(WINDOW_W,WINDOW_H,title="CODE OF PYTHON",fps = 60,fullscreen = True,quit_key=pyxel.KEY_NONE) #フルスクリーンでpyxelを再起動する ver1.5以降からfullscreen = Trueは使えなくなったらしいです
             pyxel.fullscreen(True)           #pyxel Ver1.5からfullscreen命令が追加されたらしい 裏技ッポイけど！？使っても良いのん？？
         pyxel.mouse(False)                   #マウスカーソルを非表示にする
+        
+        update_window.refresh_pad_assign_graph_list(self)#パッドアサイングラフイックリストを新規に作成する(self.pad_assign_listに依存しているためself.pad_assign_listを作製した直後この場所で作製するべし！)
         
         self.bg_cls_color         = pyxel.COLOR_BLACK  #BGをCLS(クリアスクリーン)するときの色の指定(通常は0=pyxel.COLOR_BLACK=黒色です)
         self.bg_transparent_color = pyxel.COLOR_BLACK  #BGタイルマップを敷き詰めるときに指定する透明色です

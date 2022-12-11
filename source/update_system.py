@@ -190,7 +190,7 @@ class update_system:
         
         #各ステージボス撃破数の読み込み
         for i in range(14):
-            self.boss_number_of_defeat[i] = update_system.read_data_num(self,27,210 + i,0,4)
+            self.boss_number_of_defeat[i] = update_system.read_data_num(self,27,210 + i,TM0,4)
         
         #実績(アチーブメント)の読み込み
         for i in range(len(self.achievement_list)):
@@ -207,6 +207,11 @@ class update_system:
         self.get_score_star_num   = update_system.read_data_num(self,7,142,0,8) #スコアスター累計取得数の読み込み
         self.get_triangle_pow_num = update_system.read_data_num(self,7,144,0,8) #トライアングルアイテム累計取得数の読み込み
         self.fast_forward_num     = update_system.read_data_num(self,7,145,0,8) #累計早回し発生数の読み込み
+        
+        #パッドボタン割り当て情報(パッドアサイン)の読み込み
+        for i in range(9):
+            act_id = update_system.read_data_num(self,1,241 + i,TM0,2)     #x,yは1の位の座標です,tmはtilemapの数値,digitは桁数です
+            self.pad_assign_list[i] = act_id #読みだしたアクションIDをアサインリストに書き込んでいく
         
         # self.test_read_num = update_system.read_data_num(self,15,156,0,16) #数値の読み取りテストです
 
@@ -285,6 +290,11 @@ class update_system:
         update_system.write_data_num(self,7,142,0,8,self.get_score_star_num )  #スコアスター累計取得数の書き込み
         update_system.write_data_num(self,7,144,0,8,self.get_triangle_pow_num) #トライアングルアイテム累計取得数の書き込み
         update_system.write_data_num(self,7,145,0,8,self.fast_forward_num)     #累計早回し発生数の書き込み
+        
+        #パッドボタン割り当て情報(パッドアサイン)の書き込み
+        for i in range(9):
+            act_id = self.pad_assign_list[i]                          #パッドアサインリストに書き込まれたアクションIDを読み出す
+            update_system.write_data_num(self,1,241 + i,TM0,2,act_id) #x=1,y=241+iの座標値に(タイルマップナンバーは0)に2桁のact_id(整数)を書き込む
         
         #総ゲームプレイ時間(秒)のそれぞれの桁の数値を計算する (自分でも訳が分からないよ・・・)------------------------------
         t_sec = self.total_game_playtime_seconds

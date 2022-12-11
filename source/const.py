@@ -1478,12 +1478,6 @@ SE_SHIP_DAMAGE    = 15
 
 #!ボタン割り当て(キーアサイン、キーコンフィグ)で使用する定数定義 アクションID 同時にCONFIG設定のPADアサイン項目のY座標(キャラ単位)としても使用します 連番にしちゃダメだよ(はぁと)
 #!アクションID
-ACT_DUMMY_1               =  50   #ダミーアクション用
-
-ACT_NO_ASSIGN             =  100 #未割当アクションID
-ACT_SHOT                  =  600 #ショットアクションID
-ACT_SUB_WEAPON            =  400 #サブウェポンアクションID
-
 ACT_SHOT_AND_SUB_WEAPON   =  0   #ショット＆サブウェポン同時発射アクションID
 ACT_MISSILE               =  1   #ミサイルアクションID
 ACT_MAIN_WEAPON_CHANGE    =  2   #メインウェポン切り替えアクションID
@@ -1494,6 +1488,12 @@ ACT_PAUSE                 =  6   #ポーズアクションID
 ACT_CHANGE_CLAW_STYLE     =  7   #クロースタイルチェンジアクションID
 ACT_CHANGE_CLAW_INTERVAL  =  8   #クローインターバルチェンジアクションID
 
+ACT_DUMMY_1               =  50   #ダミーアクション用
+
+ACT_SHOT                  =  60 #ショットアクションID
+ACT_SUB_WEAPON            =  70 #サブウェポンアクションID
+
+ACT_NO_ASSIGN             =  99 #未割当アクションID
 #!ボタン割り当てリストを参照するときに使用するインデックス値ラベル self.pad_assign_list[ここに入る]
 #!例 self.pad_assign_list[BTN_A]で Aボタンを押したらどのアクションIDが割り当てられているか判る、判るマン
 #!初期状態はACT_SHOT_AND_SUB_WEAPONなのでショット＆サブウェポン同時発射アクションIDが割り当てられているのが判るのです
