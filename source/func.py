@@ -568,6 +568,12 @@ class func:
 
     #ミサイルリスト内から同じタイプのミサイルが何発存在するのか数をカウントする関数定義
     def count_missile_type(self,missile_type1,missile_type2,missile_type3,missile_type4):
+        """
+        ミサイルリスト内から同じタイプのミサイルが何発存在するのか数をカウントする
+        
+        missile_type1,missile_type2,missile_type3,missile_type4=引数は0を代入してこのメソッドを呼んでください
+        帰り値 quantity=現時点で同じタイプのミサイルが存在する数値が戻ってきます
+        """
         quantity = 0
         self.type_check_quantity = 0
         missile_count = len(self.missile)#ミサイルリストの総数を数える
@@ -998,6 +1004,12 @@ class func:
 
     #敵をベジェ曲線で移動させるために必要な座標をリストから取得する関数
     def enemy_get_bezier_curve_coordinate(self,enemy_type,i): #enemy_type=敵のタイプナンバー,i=インデックスナンバ値         
+        """
+        敵をベジェ曲線で移動させるために必要な座標をリストから取得する
+        
+        enemy_type=敵のタイプナンバー
+        i=インデックスナンバ値 
+        """
         self.enemy_move_data = self.enemy_move_data_list[enemy_type][1]
         self.enemy[i].ax           = self.enemy_move_data[self.enemy[i].move_index][0]#リストから新たな移動元座標を登録する
         self.enemy[i].ay           = self.enemy_move_data[self.enemy[i].move_index][1]
@@ -1036,6 +1048,13 @@ class func:
 
     #ボスにショットを当てた後の処理(ドットパーティクル育成、背景の星をオマケで追加,ボス本体のHPが0以下になった時の処理などなど)
     def boss_processing_after_hitting(self,e,hit_x,hit_y,hit_vx,hit_vy): #e=ボスのクラスのインデックス値 hit_x,hit_y=パーティクル育成座標 hit_vx,hit_vy=パーティクル育成時に使用する散らばり具合の速度
+        """
+        ボスにショットを当てた後の処理(ドットパーティクル育成、背景の星をオマケで追加,ボス本体のHPが0以下になった時の処理などなど)
+        
+        e=ボスのクラスのインデックス値
+        hit_x,hit_y=パーティクルを育成する座標
+        hit_vx,hit_vy=パーティクル育成時に使用する散らばり具合の速度
+        """
         #ドットパーティクル生成
         if len(self.particle) < 1000: #パーティクル総数が1000以下なら発生させる
             for _number in range(10):
@@ -1127,21 +1146,44 @@ class func:
 
     #ボスの耐久力バーの表示(ボスの付近にＨＰバーを描画する)
     def display_boss_hp_bar(self,x,y,hp):
+        """
+        ボスの耐久力バーの表示(ボスの付近にＨＰバーを描画する)
+        
+        x,y=表示座標
+        hp=耐久力値
+        """
         pyxel.rectb(x-1,y-1, 32+2,3, self.blinking_color[pyxel.frame_count // 8 % 10]) #点滅四角線描画
         pyxel.line(x,y, x + hp,y, 8) #赤色の耐久力バーの表示
 
     #ボスの各部位耐久力バーの表示(破壊可能部位の付近にＨＰバーを描画する)短いタイプ横16ドット
     def display_boss_hp_short_bar(self,x,y,hp):
+        """
+        ボスの各部位耐久力バーの表示(破壊可能部位の付近にＨＰバーを描画する)短いタイプ横16ドット
+        
+        x,y=表示座標
+        hp=耐久力値
+        """
         pyxel.line(x,y + 1, x + 12,y + 1, self.red_flash_color[pyxel.frame_count // 8 % 10]) #点滅線描画
         pyxel.line(x,y    , x + hp,y    ,8) #赤色の耐久力バーの表示
 
     #ボスの各部位耐久力バーの表示(破壊可能部位の付近にＨＰバーを描画する)更に短いタイプ横8ドット
     def display_boss_hp_short2_bar(self,x,y,hp):
+        """
+        ボスの各部位耐久力バーの表示(破壊可能部位の付近にＨＰバーを描画する)更に短いタイプ横8ドット
+        
+        x,y=表示座標
+        hp=耐久力値
+        """
         pyxel.line(x,y + 1, x + 4,y + 1, self.red_flash_color[pyxel.frame_count // 8 % 10]) #点滅線描画
         pyxel.line(x,y    , x + hp,y    ,8) #赤色の耐久力バーの表示
 
     #ゲーム全体でボスをトータル何体破壊したか計算する関数(戻り値num=トータル累計ボス破壊数)
     def total_defeat_boss_num(self):
+        """
+        ゲーム全体でボスをトータル何体破壊したか計算する関数(戻り値num=トータル累計ボス破壊数)
+        
+        戻り値num=トータル累計ボス破壊数
+        """
         global num 
         num = 0
         for i in range(len(self.boss_number_of_defeat)):
@@ -1152,6 +1194,11 @@ class func:
     #ボス撃破時にすべてのボスパーツを破壊したかどうか調べる関数
     #parts1~parts4まで調べ上げます 全てのパーツを破壊したのならTrueを返す、出来てなかったらFalseを返します
     def check_destroy_all_boss_parts(self):
+        """
+        ボス撃破時にすべてのボスパーツを破壊したかどうか調べる
+        
+        parts1~parts4まで調べ上げます 全てのパーツを破壊したのならTrueを返す、出来てなかったらFalseを返します
+        """
         boss_hit = len(self.boss)
         for i in reversed(range (boss_hit) ):
             if self.boss[i].parts1_flag == 0 and self.boss[i].parts2_flag == 0 and self.boss[i].parts3_flag == 0 and self.boss[i].parts4_flag == 0:
@@ -1307,12 +1354,22 @@ class func:
 
     #0~9の範囲の乱数関数
     def rnd0_9(self):
+        """
+        0~9の範囲の乱数関数
+        
+        帰り値として0~9の整数の乱数が戻ってきます
+        """
         global num
         num = self.rnd0_9_num
         return(num)
 
     #0~99の範囲の乱数関数
     def rnd0_99(self):
+        """
+        0~99の範囲の乱数関数
+        
+        帰り値として0~99の整数の乱数が戻ってきます
+        """
         global num
         num = self.rnd0_99_num
         return(num)
@@ -1326,6 +1383,9 @@ class func:
 
     #s_rndint(min,max) と呼ぶと、minからmax(max自身を含む)までの間の整数が 等しい確率でランダムに返される
     def s_rndint(self,min,max):
+        """
+        s_rndint(min,max) と呼ぶと、minからmax(max自身を含む)までの間の整数が 等しい確率でランダムに返される
+        """
         global num   #なんやようわからんが・・・global命令で 「numはグローバル変数やで～」って宣言したら上手くいくようになった、なんでや・・・？？謎
         func.s_rnd(self)                              #0~65535のランダムな数値がself.rnd_seedに代入される
         num_zero_to_max = self.rnd_seed % (max - min) #  0 から(max - min)までの乱数を取得
@@ -1335,6 +1395,9 @@ class func:
 
     #s_random() と呼ぶと、0から1の範囲(1は含まない)のランダムな実数が返される(パーティクル系で使おうとしたけど結構動作が遅いので標準ライブラリ使ったほうがいいなぁ→結局random()を使う事にしました)
     def s_random(self):
+        """
+        s_random() と呼ぶと、0から1の範囲(1は含まない)のランダムな実数が返される(パーティクル系で使おうとしたけど結構動作が遅いので標準ライブラリ使ったほうがいいなぁ→結局random()を使う事にしました)
+        """
         global num
         num_0_1  =  self.rnd0_9() /10        #小数点1桁目の乱数を取得(0~9)
         num_0_01 =  self.rnd0_9() / 100       #小数点2桁目の乱数を取得(0~9)
@@ -1346,6 +1409,11 @@ class func:
 
     #点滅系カラーコードの取得
     def get_flashing_type_color_code(self,flash_type):
+        """
+        点滅系カラーコードの取得
+        
+        flash_type=フラッシュタイプのカラーコードを入れてください MES_****_FLASHなどの定数でお願いします
+        """
         global col
         if flash_type == MES_BLINKING_FLASH:                     #テキスト点滅の場合
             col = self.blinking_color[pyxel.frame_count // 4 % 10]
@@ -1366,6 +1434,12 @@ class func:
 
     #1プレイ時間の表示(秒まで表示します)
     def disp_one_game_playtime(self,x,y,col):
+        """
+        1プレイ時間の表示(秒まで表示します)
+        
+        x,y=表示する座標
+        col=表示色
+        """
         pyxel.text(x-8*3,y,"   :", int(col))
         minutes = "{:>3}".format(self.one_game_playtime_seconds // 60)
         seconds = "{:>02}".format(self.one_game_playtime_seconds % 60)
@@ -1374,6 +1448,12 @@ class func:
 
     #総プレイ時間の表示(秒まで表示します)
     def disp_total_game_playtime(self,x,y,col):
+        """
+        総プレイ時間の表示(秒まで表示します)
+        
+        x,y=表示する座標
+        col=表示色
+        """
         pyxel.text(x-8*3,y,":  :", int(col))
         total_seconds = "{:>02}".format(self.total_game_playtime_seconds % 60)
         total_minutes = "{:>02}".format(self.total_game_playtime_seconds // 60 % 60)
@@ -1495,6 +1575,11 @@ class func:
 
     #スコアボードウィンドウ育成時に使用するランクインした機体が装備しているメダルのgraph_listを作製する
     def create_medal_graph_list_for_score_board(self,d,x,y,step_y): #d=difficult(難易度)x,y=メダルを表示し始める座標(1位のSLOT1のメダルから表示し始める),y軸のドット増分数
+        """
+        スコアボードウィンドウ育成時に使用するランクインした機体が装備しているメダルのgraph_listを作製する
+        
+        d=difficult(難易度)x,y=メダルを表示し始める座標(1位のSLOT1のメダルから表示し始める),y軸のドット増分数
+        """
         for i in range(10): #iは0(1位)から10(11位)まで変化する
             for j in range(ALL_SLOT5): #jは0(SLOT0)から5(SLOT5)まで変化する
                 meda_id = self.score_board[d][i][LIST_SCORE_BOARD_SHIP_SLOT0 + j]
@@ -1505,6 +1590,12 @@ class func:
 
     #ウィンドウIDの検索(与えられたウィンドウIDを元にしてウィンドウ群を検索しインデックスナンバーを取得する)
     def search_window_id(self,id): #id=windowクラスの window_idに入っている数値 発見できなかった時は-1を返します
+        """
+        ウィンドウIDの検索(与えられたウィンドウIDを元にしてウィンドウ群を検索しインデックスナンバーを取得する)
+        
+        id=windowクラスの window_idに入っている数値
+        発見できなかった時は帰り値としてnum=-1を返します
+        """
         window_count = len(self.window)
         num = -1
         for i in range(window_count):
@@ -1516,6 +1607,13 @@ class func:
 
     #ウィンドウIDを調べて一致するウィンドウIDの速度、加速度を更新する(同タイプウィンドウ移動消去モード)
     def all_move_window(self,id,vx,vy,vx_accel,vy_accel):
+        """
+        ウィンドウIDを調べて一致するウィンドウIDの速度、加速度を更新する(同タイプウィンドウ移動消去モード)
+        
+        id=windowクラスの window_idに入っている数値
+        vx,vy=速度ベクトル
+        vx_accel,vy_accel=加速度
+        """
         window_count = len(self.window)
         for i in range(window_count):
             if self.window[i].window_id == id:
@@ -1524,6 +1622,12 @@ class func:
 
     #背景のスター再描画範囲リストにウィンドウIDが存在するか検索する(与えられたウィンドウIDを元にしてスターリドローエリア群を検索しインデックスナンバーを取得する)
     def search_window_id_star_redraw(self,id): #id=windowクラスの window_idに入っている数値 発見できなかった時は-1を返します
+        """
+        背景のスター再描画範囲リストにウィンドウIDが存在するか検索する(与えられたウィンドウIDを元にしてスターリドローエリア群を検索しインデックスナンバーを取得する)
+        
+        id=windowクラスの window_idに入っている数値
+        発見できなかった時は-1を返します
+        """
         area_count = len(self.redraw_star_area)
         num = -1
         if self.redraw_star_area == []: #まだリストに何も登録されていなくて空リストだったら直ぐにリターンする
@@ -1769,7 +1873,7 @@ class func:
         for i in range(7 - self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT_NUM]):
             self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT0 + i + st] = MEDAL_NO_SLOT
 
-    ################################################################ボツ関数群・・・・・・(涙)##########################################################
+    #!###############################################################ボツ関数群・・・・・・(涙)##########################################################
     #外積を計算する関数 self.cpに結果が入る(バグありなので使えないっぽい・・・この関数)
     def cross_product_calc_function(self,ax,ay,bx,by,cx,cy):
         self.cp = (ax - cx) * (by - cy) - (bx - cx) * (ay - cy)
