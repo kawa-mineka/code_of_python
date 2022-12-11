@@ -20,6 +20,9 @@ class update_window:
 
     #ウィンドウの更新
     def window(self):
+        """
+        ウィンドウの更新
+        """
         window_count = len(self.window)
         for i in range(window_count):
             if   self.window[i].window_status == WINDOW_OPEN:     #ステータスが「オープン」の時は・・・・・・・・・・・・
@@ -87,6 +90,12 @@ class update_window:
 
     #各種ウィンドウの育成             id=windowクラスの window_idに入っている数値 ox,oy=ウィンドウ作成座標のオフセット値
     def create(self,id,ox,oy):
+        """
+        各種ウィンドウの育成
+        
+        id=windowクラスの window_idに入っている数値(それぞれのウィンドウに付けられた個別ウィンドウID)
+        ox,oy=ウィンドウ作成座標のオフセット値
+        """
         func.create_master_flag_list(self) #まず先にフラグ＆データ関連のマスターリスト作成関数を呼び出す
         new_window = Window()
         if   id == WINDOW_ID_MAIN_MENU:                 #メインメニューウィンドウ
@@ -1483,6 +1492,11 @@ class update_window:
 
     #スコアボードウィンドウの育成
     def create_score_board(self,d): #引数dは難易度 difficulty
+        """
+        スコアボードウィンドウの育成
+        
+        dは難易度 difficulty
+        """
         func.create_master_flag_list(self) #まず先にフラグ＆データ関連のマスターリスト作成関数を呼び出す
         self.temp_graph_list = [] #一時的なグラフイックリストを初期化する
         func.create_medal_graph_list_for_score_board(self,d,121,12,STEP8) #次にスコアボードに記録された機体群の装備メダルリストを一時的なグラフイックリストとして作製するtemp_graph_listにリストが作成される
@@ -1541,6 +1555,9 @@ class update_window:
 
     #リプレイファイルスロット選択ウィンドウの育成
     def create_replay_data_slot_select(self):
+        """
+        リプレイファイルスロット選択ウィンドウの育成
+        """
         func.create_master_flag_list(self) #まず先にフラグ＆データ関連のマスターリスト作成関数を呼び出す
         new_window = Window()
         new_window.update(\
@@ -1594,6 +1611,12 @@ class update_window:
 
     #メダル取得報告ウィンドウの育成
     def create_medal_acquisition_report_window(self,ox,oy,id,wait): #idはメダルidとなります waitはその場に留まる時間(単位はフレーム)
+        """
+        メダル取得報告ウィンドウの育成
+        
+        idはメダルidとなります
+        waitはその場に留まる時間(単位はフレーム)
+        """
         u,v = self.medal_graph_and_comment_list[id][LIST_MEDAL_GRP_CMNT_U],self.medal_graph_and_comment_list[id][LIST_MEDAL_GRP_CMNT_V] #メダルグラフイックの格納先座標u,vを取得
         imgb = self.medal_graph_and_comment_list[id][LIST_MEDAL_GRP_CMNT_IMGB] #イメージバンク数も取得
         if self.language == LANGUAGE_ENG: #英語の場合
@@ -1675,6 +1698,14 @@ class update_window:
 
     #実績(アチーブメント)取得報告ウィンドウの育成
     def create_achievement_acquisition_report_window(self,ox,oy,id,priority,wait): #idは実績idとなります priorityはウィンドウ描画優先度(通常はWINDOW_PRIORITY_NORMAL),waitはその場に留まる時間(単位はフレーム) ox,oyはオフセット値(デフォルトは右下に表示される)
+        """
+        実績(アチーブメント)取得報告ウィンドウの育成
+        
+        idは実績idとなります
+        priorityはウィンドウ描画優先度(通常はWINDOW_PRIORITY_NORMAL)
+        waitはその場に留まる時間(単位はフレーム)
+        ox,oyはオフセット値(デフォルトは右下に表示される)
+        """
         u,v  = self.achievement_list[id][LIST_ACHIEVE_GRP_X],self.achievement_list[id][LIST_ACHIEVE_GRP_Y] #実績グラフイックの格納先座標u,vを取得
         imgb = self.achievement_list[id][LIST_ACHIEVE_IMGB] #イメージバンク数も取得
         #ゲームプレイ中に実績解除ダイアログを出すので英語オンリーで行きます（日本語フォントデカいからねぇ・・・しかたない画面が塞がっちゃうし)
@@ -1726,6 +1757,9 @@ class update_window:
 
     #メインメニューウィンドウを左にずらす
     def move_left_main_menu_window(self):
+        """
+        メインメニューウィンドウを左にずらす
+        """
         i = func.search_window_id(self,WINDOW_ID_MAIN_MENU)
         self.window[i].window_status = WINDOW_MOVE
         self.window[i].dx = 44 - 30
@@ -1734,6 +1768,9 @@ class update_window:
 
     #メインメニューウィンドウを右にずらす
     def move_right_main_menu_window(self):
+        """
+        メインメニューウィンドウを右にずらす
+        """
         i = func.search_window_id(self,WINDOW_ID_MAIN_MENU)
         self.window[i].window_status = WINDOW_MOVE
         self.window[i].dx = 44
@@ -1742,6 +1779,9 @@ class update_window:
 
     #ポーズメニューウィンドウを下にずらす
     def move_down_pause_menu(self):
+        """
+        ポーズメニューウィンドウを下にずらす
+        """
         i = func.search_window_id(self,WINDOW_ID_PAUSE_MENU)
         self.window[i].window_status = WINDOW_MOVE
         self.window[i].dy = 109
@@ -1750,6 +1790,9 @@ class update_window:
 
     #ポーズメニューウィンドウを上にずらす
     def move_up_pause_menu(self):
+        """
+        ポーズメニューウィンドウを上にずらす
+        """
         i = func.search_window_id(self,WINDOW_ID_PAUSE_MENU)
         self.window[i].window_status = WINDOW_MOVE
         self.window[i].dy = 70
@@ -1758,6 +1801,9 @@ class update_window:
 
     #メダルの取得判定をする関数
     def judge_medal_acquisition(self):
+        """
+        メダルの取得判定をする関数
+        """
         if func.search_window_id(self,WINDOW_ID_MEDAL_ACQUISITION_REPORT) != -1: #メダル取得報告ウィンドウがまだ画面に存在するときはそのままリターンする
             return
         
@@ -1802,6 +1848,9 @@ class update_window:
 
     #実績(アチーブメント)の取得判定をする関数
     def judge_achievement_acquisition(self):
+        """
+        実績(アチーブメント)の取得判定をする関数
+        """
         if func.search_window_id(self,WINDOW_ID_ACHIEVEMENT_ACQUISITION_REPORT) != -1: #実績取得報告ウィンドウがまだ画面に存在するときはそのままリターンする
             return
         
@@ -2209,6 +2258,9 @@ class update_window:
 
     #ウィンドウのはみだしチェック（表示座標が完全に画面外になったのなら消去する）
     def clip_window(self):
+        """
+        ウィンドウのはみだしチェック（表示座標が完全に画面外になったのなら消去する）
+        """
         window_count = len(self.window)#ウィンドウの数を数える
         rect_ax,rect_ay = 0,0
         rect_aw,rect_ah = WINDOW_W,WINDOW_H
@@ -2231,23 +2283,41 @@ class update_window:
 
     #現在どのウィンドウがもつインデックス値が最前面にあるのか調べあげ,アクティブウィンドウインデックス値に登録し更新する
     def active_window(self):
+        """
+        現在どのウィンドウがもつインデックス値が最前面にあるのか調べあげ,アクティブウィンドウインデックス値に登録し更新する
+        
+        self.active_window_indexに現在アクティブになっているウィンドウのインデックスナンバー(i)が代入される
+        """
         i = func.search_window_id(self,self.active_window_id) #アクティブなウィンドウIDを元にインデックス値を求める関数の呼び出し
         self.active_window_index = i           #アクティブになっているウィンドウのインデックスナンバー(i)を代入
 
     #ウィンドウIDを元にそのウィンドウの描画優先度を最前面にする
     def change_window_priority_top(self,id): #idはウィンドウidとなります そのidのウィンドウが存在しない場合は何もしない
+        """
+        ウィンドウIDを元にそのウィンドウの描画優先度を最前面にする
+        
+        idはウィンドウidとなります そのidのウィンドウが存在しない場合は何もしない
+        """
         i = func.search_window_id(self,id) #iにウィンドウIDを元にしたインデックス値が入る 存在しなかったら-1が帰ってくる
         if i != -1: #そのウィンドウが存在したのならば
             self.window[i].window_priority = WINDOW_PRIORITY_TOP #描画優先度を一番前の最前面にする
 
     #ウィンドウIDを元にそのウィンドウの描画優先度を普通にする
     def change_window_priority_normal(self,id): #idはウィンドウidとなります そのidのウィンドウが存在しない場合は何もしない
+        """
+        ウィンドウIDを元にそのウィンドウの描画優先度を普通にする
+        
+        idはウィンドウidとなります そのidのウィンドウが存在しない場合は何もしない
+        """
         i = func.search_window_id(self,id) #iにウィンドウIDを元にしたインデックス値が入る 存在しなかったら-1が帰ってくる
         if i != -1: #そのウィンドウが存在したのならば
             self.window[i].window_priority = WINDOW_PRIORITY_NORMAL #描画優先度を普通(通常)にする
 
     #セレクトカーソルの更新
     def select_cursor(self):
+        """
+        セレクトカーソルの更新
+        """
         # 上入力されたら  y座標を  -7する(1キャラ分)
         # if pyxel.btnp(pyxel.KEY_UP) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_UP) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_DPAD_UP):
         if update_btn.keypad_up(self) == True:
@@ -2611,6 +2681,9 @@ class update_window:
 
     #セレクトカーソル移動時,ボタンを押した後の処理を行う
     def select_cursor_push_button(self):
+        """
+        セレクトカーソル移動時,ボタンを押した後の処理を行う
+        """
         self.cursor_decision_item_x = self.cursor_item_x #ボタンが押されて決定されたら、いま指示しているアイテムナンバーをcursor_decision_item_xに代入！
         self.cursor_decision_item_y = self.cursor_item_y #ボタンが押されて決定されたら、いま指示しているアイテムナンバーをcursor_decision_item_yに代入！
         if self.cursor_move_direction == CURSOR_MOVE_UD_SLIDER:
@@ -2627,6 +2700,9 @@ class update_window:
 
     #パッドアサイングラフイックリストをリフレッシュ！する！
     def refresh_pad_assign_graph_list(self):
+        """
+        パッドアサイングラフイックリストをリフレッシュ！する！
+        """
         self.pad_assign_graph_list =[
             [ 90, 11 + self.pad_assign_list[0] * 7 , IMG2,8 * 0,104, SIZE_8,SIZE_8, pyxel.COLOR_BLACK],\
             [ 90, 11 + self.pad_assign_list[1] * 7 , IMG2,8 * 1,104, SIZE_8,SIZE_8, pyxel.COLOR_BLACK],\
