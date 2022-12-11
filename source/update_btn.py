@@ -47,8 +47,46 @@ class update_btn:
         else:
             if    pyxel.btnr(pyxel.KEY_DOWN) == True\
             or  pyxel.btnr(pyxel.GAMEPAD1_BUTTON_DPAD_DOWN) == True\
-            or  pyxel.btnr(pyxel.GAMEPAD2_BUTTON_DPAD_DOWN) == True:   #上ボタンが離された時は
+            or  pyxel.btnr(pyxel.GAMEPAD2_BUTTON_DPAD_DOWN) == True:   #下ボタンが離された時は
                 self.cursor_repeat_time_count = 10                     #カーソルリピートタイムカウントを初期状態に戻す
+                print("REPEAT RESET!")
+                print (self.cursor_repeat_time_count)
+                return(False)
+            else:
+                return(False)
+
+    #キーボードの左かカーソルとジョイパッドの左方向ボタンが押されたかどうかを調べる(キーリピート付き)                  KEY LEFT PAD LEFT
+    #帰り値は左ボタンが押された時=True 左ボタンは押されていなかった時=Falseを返します
+    def keypad_left(self):
+        if pyxel.btnp(pyxel.KEY_LEFT,10,self.keypad_repeat_num) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT,10,self.keypad_repeat_num) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_DPAD_LEFT,10,self.keypad_repeat_num): #左ボタンが押されているかチェック
+            update_btn.reduce_repeat_time_count(self)
+            print (self.cursor_repeat_time_count)
+            return(True)
+            
+        else:
+            if    pyxel.btnr(pyxel.KEY_LEFT) == True\
+            or  pyxel.btnr(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT) == True\
+            or  pyxel.btnr(pyxel.GAMEPAD2_BUTTON_DPAD_LEFT) == True: #左ボタンが離された時は
+                self.cursor_repeat_time_count = 10                   #カーソルリピートタイムカウントを初期状態に戻す
+                print("REPEAT RESET!")
+                print (self.cursor_repeat_time_count)
+                return(False)
+            else:
+                return(False)
+
+    #キーボードの右かカーソルとジョイパッドの右方向ボタンが押されたかどうかを調べる(キーリピート付き)                  KEY RIGHT PAD RIGHT
+    #帰り値は右ボタンが押された時=True 右ボタンは押されていなかった時=Falseを返します
+    def keypad_right(self):
+        if pyxel.btnp(pyxel.KEY_RIGHT,10,self.keypad_repeat_num) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_RIGHT,10,self.keypad_repeat_num) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_DPAD_RIGHT,10,self.keypad_repeat_num): #右ボタンが押されているかチェック
+            update_btn.reduce_repeat_time_count(self)
+            print (self.cursor_repeat_time_count)
+            return(True)
+            
+        else:
+            if    pyxel.btnr(pyxel.KEY_RIGHT) == True\
+            or  pyxel.btnr(pyxel.GAMEPAD1_BUTTON_DPAD_RIGHT) == True\
+            or  pyxel.btnr(pyxel.GAMEPAD2_BUTTON_DPAD_RIGHT) == True: #右ボタンが離された時は
+                self.cursor_repeat_time_count = 10                   #カーソルリピートタイムカウントを初期状態に戻す
                 print("REPEAT RESET!")
                 print (self.cursor_repeat_time_count)
                 return(False)

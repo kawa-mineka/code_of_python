@@ -2397,7 +2397,8 @@ class update_window:
                     pyxel.play(0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
         
         #右入力されたらcursor_pageを +1する
-        if pyxel.btnp(pyxel.KEY_RIGHT) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_RIGHT) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_DPAD_RIGHT) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_RIGHTSHOULDER) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_RIGHTSHOULDER):
+        # if pyxel.btnp(pyxel.KEY_RIGHT) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_RIGHT) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_DPAD_RIGHT) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_RIGHTSHOULDER) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_RIGHTSHOULDER):
+        if update_btn.keypad_right(self) == True:
             self.cursor_move_data = PAD_RIGHT
             if   self.cursor_move_direction == CURSOR_MOVE_SHOW_PAGE:
                 self.cursor_page += 1 #ページ数インクリメント
@@ -2476,9 +2477,16 @@ class update_window:
                         func.restore_master_flag_list(self)
                         pygame.mixer.music.set_volume(self.master_bgm_vol / 100)
                         update_se.se(self,2,SE_WAVE_CUTTER,self.master_se_vol)
+                
+            elif self.cursor_move_direction == CURSOR_MOVE_UD:
+                if self.cursor_repeat_time_count <= 8: #パッドを押し続けてリピートタイムが8以下になったら
+                    self.cursor_y = self.cursor_y + self.cursor_step_y * (self.cursor_max_item_y -  self.cursor_item_y)    #カーソルのy座標最下段項目の座標にする
+                    self.cursor_item_y = self.cursor_max_item_y                                                            #カーソルアイテムyをy軸最大項目にしてカーソル位置を最下段にワープさせる
+                    pyxel.play(0,self.window[self.active_window_index].cursor_bounce_se)                                   #カーソル跳ね返り音を鳴らす
         
         #左入力されたらcursor_pageを -1する
-        if pyxel.btnp(pyxel.KEY_LEFT) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_DPAD_LEFT) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_LEFTSHOULDER) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_LEFTSHOULDER):
+        # if pyxel.btnp(pyxel.KEY_LEFT) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_DPAD_LEFT) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_LEFTSHOULDER) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_LEFTSHOULDER):
+        if update_btn.keypad_left(self) == True:
             self.cursor_move_data = PAD_LEFT
             if   self.cursor_move_direction == CURSOR_MOVE_SHOW_PAGE:
                 self.cursor_page -= 1 #ページ数デクリメント
@@ -2529,7 +2537,6 @@ class update_window:
             elif self.cursor_move_direction == CURSOR_MOVE_UD_SLIDER:
                 flag_index = self.window[self.active_window_index].item_text[self.cursor_item_y][LIST_WINDOW_TEXT_OPE_OBJ] #flag_indexに編集対象となるオブジェクトが入ったリストインデックス値が入ります
                 k = self.window[self.active_window_index].flag_list[flag_index] #Kに現在表示されている数値が代入されます(on/offの表示の場合はon=1 off=0が代入されます)
-                
                 if self.window[self.active_window_index].item_text[self.cursor_item_y][LIST_WINDOW_TEXT_OPE_OBJ_TYPE]  == OPE_OBJ_TYPE_NUM: #操作テキストオブジェクトが数値を左右キーで増減させるタイプの場合は
                     if k > self.window[self.active_window_index].item_text[self.cursor_item_y][LIST_WINDOW_TEXT_OPE_OBJ_MIN_NUM]: #kがLIST_WINDOW_TEXT_OPE_OBJ_MIN_NUMより大きい時は
                         k -= 1 #オブジェクトの数値をデクリメント
@@ -2560,6 +2567,12 @@ class update_window:
                         func.restore_master_flag_list(self)
                         pygame.mixer.music.set_volume(self.master_bgm_vol / 100)
                         update_se.se(self,2,SE_WAVE_CUTTER,self.master_se_vol)
+                
+            elif self.cursor_move_direction == CURSOR_MOVE_UD:
+                if self.cursor_repeat_time_count <= 8: #パッドを押し続けてリピートタイムが8以下になったら
+                    self.cursor_y = self.cursor_y - self.cursor_step_y * self.cursor_item_y   #カーソルのy座標最上段項目の座標にする
+                    self.cursor_item_y = 0                                                    #カーソルアイテムyをy軸最小項目にしてカーソル位置を最上段にワープさせる
+                    pyxel.play(0,self.window[self.active_window_index].cursor_bounce_se)      #カーソル跳ね返り音を鳴らす
         
         #ABXY,BACK,START,スペースキーが押された場合の処理
         self.cursor_button_data = BTN_NONE
