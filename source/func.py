@@ -5,7 +5,8 @@ from random import random  # random.random() と呼ぶと、0から1の範囲(1�
 import pygame.mixer  # MP3再生するためだけに使用する予定・・・予定は未定・・・そして未定は確定に！やったあぁ！ BGMだけで使用しているサブゲームエンジン
 import pyxel  # グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
 from const import *  # 定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
-from define_class import *  # クラス宣言モジュールの読み込み やっぱりimport *は不味いのかなぁ・・・よくわかんない
+from const_window import * #主にウィンドウクラスで使用する定数定義
+from define_class import * # クラス宣言モジュールの読み込み やっぱりimport *は不味いのかなぁ・・・よくわかんない
 
 
 class func:
@@ -1721,9 +1722,24 @@ class func:
         id=ウィンドウIDナンバー
         """
         #ウィンドウidナンバーを元にそのウィンドウで使用していたカーソルデータのインデックス値を探し出す
+        window_count = len(self.window)
+        print ("window count")
+        print(window_count)
+        
+        cursor_stack_count = len(self.cursor)
+        print ("cursor stack count")
+        print(cursor_stack_count)
+        print (self.cursor)
+        
+        print ("search window id")
+        print (id)
+        
         i = func.search_window_id(self,id)
         if i == -1:
             return  #もしもカーソルデータが無かったのならどうしようもないのでリターンする(1対1でカーソルとウィンドウデータを反映してるのでそれは無いと思うですけれども）
+        
+        print ("active window index")
+        print (i)
         
         self.cursor_type = self.cursor[i].cursor_type
         self.cursor_x,self.cursor_y = self.cursor[i].posx,self.cursor[i].posy

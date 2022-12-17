@@ -1,11 +1,12 @@
 =============================================================================================
-プログラムファイルの詳細な説明です    2022 10/30更新
+プログラムファイルの詳細な説明です    2022 12/17更新
 =============================================================================================
 code-of-python.py       メインプログラムです、このパイソンプログラムを実行してね
 
 code-of-python.spec     pyinstaller用specファイルです
 
 const.py                定数定義です ほとんどのプログラムで使われてるのでimportしないと動かないよ
+const_window            ウィンドウクラスで主に使用する定数定義です
 
 define_boss_data.py     ボス関連のデータ
 define_class.py         各クラスのメンバ変数とか宣言してます、あとコンストラクタの処理とか
@@ -42,13 +43,14 @@ update_title.py         タイトルメニューでの選択メニューをす�
 update_window.py        メインメニューなどで表示されるウィンドウの更新処理です セレクトカーソルの更新も行います
 
 =============================================================================================
-This is a detailed description of the program file 2022 Updated 10/30/2010
+This is a detailed description of the program file 2022 Updated 12/17
 =============================================================================================
 code-of-python.py       The main program, run this python program
 
 code-of-python.spec     Spec file for pyinstaller
 
 const.py                constants definitions, used by most programs, so import them or they won't work!
+const_window.pygame     Constant definitions mainly used in the window class.
 
 define_boss_data.py     Boss related data
 define_class.py         Declaration of member variables of each class, and constructor processing.

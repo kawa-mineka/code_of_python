@@ -96,6 +96,7 @@ import pyxel        #グラフイックキャラやバックグラウンドグ�
 import pygame.mixer #MP3再生するためだけに使用する予定・・・予定は未定・・・そして未定は確定に！やったあぁ！ BGMだけで使用しているサブゲームエンジン
 
 from const             import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？)
+from const_window      import * #主にウィンドウクラスで使用する定数定義
 
 from define_class      import * #クラス宣言モジュールの読み込み やっぱりimport *は不味いのかなぁ・・・よくわかんない
 from define_data       import * #初期データリスト登録モジュールの読み込み
@@ -250,6 +251,8 @@ class App:
         self.number_of_play                  = 0  #遊んだ回数
         self.number_of_times_destroyed       = 0  #自機が破壊された回数
         
+        self.title_startup_count             = 0  #タイトルロゴの起動表示回数カウンタ(初回起動なのか？2回目以降のタイトル表示なのかを判別します)
+        
         update_system.load_data(self)        #システムデータをロードする関数の呼び出し
         if self.fullscreen_mode == FLAG_ON:  #フルスクリーン起動モードフラグが立っていたのなら
             #pyxel.init(WINDOW_W,WINDOW_H,title="CODE OF PYTHON",fps = 60,fullscreen = True,quit_key=pyxel.KEY_NONE) #フルスクリーンでpyxelを再起動する ver1.5以降からfullscreen = Trueは使えなくなったらしいです
@@ -391,11 +394,32 @@ class App:
         if self.game_status == SCENE_TITLE_INIT:  #ゲームステータスが「SCENE_TITLE_INIT」の場合タイトル関連の変数を初期化する関数を呼び出す
             update_title.title_init(self)         #タイトル関連の変数の初期化関数を呼び出す
         
+        ################################ タイトルロゴの初回表示 ###################################################################
+        if self.game_status == SCENE_TITLE_FIRST: #ゲームステータスが「SCENE_TITLE_FIRST」の場合タイトルの更新を行う
+            update_title.title(self)              #タイトルの更新
+            update_obj.append_star(self)          #背景の星の追加＆発生育成関数呼び出し
+            update_obj.star(self)                 #背景の星の更新（移動）関数呼び出し
+            update_window.window(self)            #ウィンドウの更新（ウィンドウの開き閉じ画面外に消え去っていくとか）関数を呼び出し
+            update_window.clip_window(self)       #画面外にはみ出たウィンドウを消去する関数の呼び出し
+            update_window.active_window(self)     #現在アクティブ(最前面)になっているウィンドウのインデックス値(i)を求める関数の呼び出し
+        
         ################################ タイトル ###################################################################
-        if self.game_status == SCENE_TITLE:          #ゲームステータスが「SCENE_TITLE」の場合タイトルの更新を行う
-            update_title.title(self)                 #タイトルの更新
-            update_obj.append_star(self)             #背景の星の追加＆発生育成関数呼び出し
-            update_obj.star(self)                    #背景の星の更新（移動）関数呼び出し
+        if self.game_status == SCENE_TITLE_HIT_ANY_BTN: #ゲームステータスが「SCENE_TITLE_HIT_ANY_BTN」場合は何かしらのボタン入力待ちをする
+            update_title.title_hit_any_btn(self)        #タイトルメニューを表示した後,何かしらのボタンの入力待ち状態
+            update_obj.append_star(self)                #背景の星の追加＆発生育成関数呼び出し
+            update_obj.star(self)                       #背景の星の更新（移動）関数呼び出し
+            update_window.window(self)                  #ウィンドウの更新（ウィンドウの開き閉じ画面外に消え去っていくとか）関数を呼び出し
+            update_window.clip_window(self)             #画面外にはみ出たウィンドウを消去する関数の呼び出し
+            update_window.active_window(self)           #現在アクティブ(最前面)になっているウィンドウのインデックス値(i)を求める関数の呼び出し
+        
+        ################################ タイトルロゴの2回目以降の表示 ###################################################################
+        if self.game_status == SCENE_TITLE_SECOND: #ゲームステータスが「SCENE_TITLE_SECOND」の場合タイトルの更新を行う
+            update_title.title(self)               #タイトルの更新
+            update_obj.append_star(self)           #背景の星の追加＆発生育成関数呼び出し
+            update_obj.star(self)                  #背景の星の更新（移動）関数呼び出し
+            update_window.window(self)             #ウィンドウの更新（ウィンドウの開き閉じ画面外に消え去っていくとか）関数を呼び出し
+            update_window.clip_window(self)        #画面外にはみ出たウィンドウを消去する関数の呼び出し
+            update_window.active_window(self)      #現在アクティブ(最前面)になっているウィンドウのインデックス値(i)を求める関数の呼び出し
         
         ################################ タイトルでメニュー選択中 ###################################################################
         if self.game_status == SCENE_TITLE_MENU_SELECT:
@@ -765,7 +789,9 @@ class App:
         if self.game_status == SCENE_IPL:
             graph.draw_ipl(self)                    #IPLメッセージを表示する関数の呼び出し
         
-        if     self.game_status == SCENE_TITLE\
+        if     self.game_status == SCENE_TITLE_FIRST\
+            or self.game_status == SCENE_TITLE_HIT_ANY_BTN\
+            or self.game_status == SCENE_TITLE_SECOND\
             or self.game_status == SCENE_TITLE_MENU_SELECT\
             or self.game_status == SCENE_SELECT_LOAD_SLOT\
             or self.game_status == SCENE_GAME_QUIT_START\
@@ -972,6 +998,10 @@ class App:
         #一時停止・ポーズメッセージの表示#########################################
         if self.game_status == SCENE_PAUSE:
             graph.draw_pause_message(self)            #一時停止・ポーズメッセージの表示
+        
+        #タイトルメッセージテキストの表示#########################################
+        if self.game_status == SCENE_TITLE_HIT_ANY_BTN:
+            graph.draw_title_message(self)            #タイトルメッセージテキストの表示
         
         #ゲームオーバー画像の表示##################################################
         if     self.game_status == SCENE_GAME_OVER\

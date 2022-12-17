@@ -23,7 +23,7 @@ class update_btn:
     def keypad_up(self):
         if pyxel.btnp(pyxel.KEY_UP,10,self.keypad_repeat_num) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_UP,10,self.keypad_repeat_num) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_DPAD_UP,10,self.keypad_repeat_num): #上ボタンが押されているかチェック
             update_btn.reduce_repeat_time_count(self)
-            print (self.cursor_repeat_time_count)
+            # print (self.cursor_repeat_time_count)
             return(True)
             
         else:
@@ -31,8 +31,8 @@ class update_btn:
             or  pyxel.btnr(pyxel.GAMEPAD1_BUTTON_DPAD_UP) == True\
             or  pyxel.btnr(pyxel.GAMEPAD2_BUTTON_DPAD_UP) == True:   #上ボタンが離された時は
                 self.cursor_repeat_time_count = 10                   #カーソルリピートタイムカウントを初期状態に戻す
-                print("REPEAT RESET!")
-                print (self.cursor_repeat_time_count)
+                # print("REPEAT RESET!")
+                # print (self.cursor_repeat_time_count)
                 return(False)
             else:
                 return(False)
@@ -42,15 +42,15 @@ class update_btn:
     def keypad_down(self):
         if pyxel.btnp(pyxel.KEY_DOWN,10,self.keypad_repeat_num) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_DOWN,10,self.keypad_repeat_num) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_DPAD_DOWN,10,self.keypad_repeat_num): #下ボタンが押されているかチェック
             update_btn.reduce_repeat_time_count(self)
-            print (self.cursor_repeat_time_count)
+            # print (self.cursor_repeat_time_count)
             return(True)
         else:
             if    pyxel.btnr(pyxel.KEY_DOWN) == True\
             or  pyxel.btnr(pyxel.GAMEPAD1_BUTTON_DPAD_DOWN) == True\
             or  pyxel.btnr(pyxel.GAMEPAD2_BUTTON_DPAD_DOWN) == True:   #下ボタンが離された時は
                 self.cursor_repeat_time_count = 10                     #カーソルリピートタイムカウントを初期状態に戻す
-                print("REPEAT RESET!")
-                print (self.cursor_repeat_time_count)
+                # print("REPEAT RESET!")
+                # print (self.cursor_repeat_time_count)
                 return(False)
             else:
                 return(False)
@@ -60,7 +60,7 @@ class update_btn:
     def keypad_left(self):
         if pyxel.btnp(pyxel.KEY_LEFT,10,self.keypad_repeat_num) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT,10,self.keypad_repeat_num) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_DPAD_LEFT,10,self.keypad_repeat_num): #左ボタンが押されているかチェック
             update_btn.reduce_repeat_time_count(self)
-            print (self.cursor_repeat_time_count)
+            # print (self.cursor_repeat_time_count)
             return(True)
             
         else:
@@ -68,8 +68,8 @@ class update_btn:
             or  pyxel.btnr(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT) == True\
             or  pyxel.btnr(pyxel.GAMEPAD2_BUTTON_DPAD_LEFT) == True: #左ボタンが離された時は
                 self.cursor_repeat_time_count = 10                   #カーソルリピートタイムカウントを初期状態に戻す
-                print("REPEAT RESET!")
-                print (self.cursor_repeat_time_count)
+                # print("REPEAT RESET!")
+                # print (self.cursor_repeat_time_count)
                 return(False)
             else:
                 return(False)
@@ -79,7 +79,7 @@ class update_btn:
     def keypad_right(self):
         if pyxel.btnp(pyxel.KEY_RIGHT,10,self.keypad_repeat_num) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_RIGHT,10,self.keypad_repeat_num) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_DPAD_RIGHT,10,self.keypad_repeat_num): #右ボタンが押されているかチェック
             update_btn.reduce_repeat_time_count(self)
-            print (self.cursor_repeat_time_count)
+            # print (self.cursor_repeat_time_count)
             return(True)
             
         else:
@@ -87,8 +87,8 @@ class update_btn:
             or  pyxel.btnr(pyxel.GAMEPAD1_BUTTON_DPAD_RIGHT) == True\
             or  pyxel.btnr(pyxel.GAMEPAD2_BUTTON_DPAD_RIGHT) == True: #右ボタンが離された時は
                 self.cursor_repeat_time_count = 10                   #カーソルリピートタイムカウントを初期状態に戻す
-                print("REPEAT RESET!")
-                print (self.cursor_repeat_time_count)
+                # print("REPEAT RESET!")
+                # print (self.cursor_repeat_time_count)
                 return(False)
             else:
                 return(False)

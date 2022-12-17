@@ -9,7 +9,10 @@
 import math               #三角関数などを使用したいのでインポートぉぉおお！
 from random import random #random.random() と呼ぶと、0から1の範囲(1は含まない)のランダムな実数が返される(主にパーティクル系で使用します)
 import pyxel              #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
+
 from const       import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
+from const_window      import * #主にウィンドウクラスで使用する定数定義の読み込み
+
 from func        import * #汎用性のある関数群のモジュールの読み込み
 from update_se   import * #CONFIGでSEボリュームを変化させたときSEを鳴らすために使用します
 from update_btn  import * #カーソル移動時の方向パッド入力(キーリピート付き)を調べる時に使用します
@@ -1486,6 +1489,52 @@ class update_window:
             [0,0,0,0,0,0,0,0,0,0],\
             [0,0,0,0,0,0,0,0,0,0]],\
             )
+        elif id == WINDOW_ID_TITLE_TEXT:                #タイトルで表示されるテキスト群
+            new_window.update(\
+            WINDOW_ID_TITLE_TEXT,\
+            WINDOW_ID_SUB_NORMAL_MENU,\
+            WINDOW_TYPE_NORMAL,\
+            WINDOW_FRAME_NONE,\
+            WINDOW_BG_NONE,\
+            WINDOW_PRIORITY_NORMAL,\
+            DIR_RIGHT_DOWN,\
+            DIR_LEFT_UP,\
+            WINDOW_OPEN,\
+            WINDOW_BETWEEN_LINE_7,\
+            ["CODE OF PYTHON POWED BY PYXEL",          CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_RAINBOW_FLASH],\
+            
+            [["PROJECT MINE 2020"   ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH],\
+            [ " "   ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH],\
+            [ "HIT ANY KEY"         ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_RAINBOW_FLASH]],\
+            
+            NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
+            
+            NO_VECTOR_GRP,\
+            
+            ox,oy,  ox,oy,   0,0,  8*8,9*11,   2,1, 1,1,   0,0,    0,0,    0,0,0,0,   0,\
+            BUTTON_DISP_OFF,0,0,0,\
+            BUTTON_DISP_OFF,0,0,0,\
+            
+            CURSOR_MOVE_SE_NORMAL,CURSOR_PUSH_SE_NORMAL,CURSOR_OK_SE_NORMAL,CURSOR_CANCEL_SE_NORMAL,CURSOR_BOUNCE_SE_NORMAL,\
+            DISP_OFF,\
+            
+            NO_SHIP_LIST,      NO_SHIP_MEDAL_LIST,\
+            NO_WEAPON_LIST,    NO_WEAPON_GRAPH_LIST,\
+            NO_SUB_WEAPON_LIST,NO_SUB_WEAPON_GRAPH_LIST,\
+            NO_MISSILE_LIST,   NO_MISSILE_GRAPH_LIST,\
+            NO_MEDAL_LIST,     NO_MEDAL_GRAPH_LIST,\
+            NO_PAD_ASSIGN_LIST,NO_PAD_ASSIGN_GRAPH_LIST,\
+            NO_ITEM_LIST,      NO_ITEM_GRAPH_LIST,\
+            
+            self.master_flag_list,\
+            NO_GRAPH_LIST,NO_TIME_COUNTER_LIST,\
+            NO_EQUIP_MEDAL_GRAPH_LIST,NO_EQUIP_MEDAL_COMMENT_LIST,\
+            
+            COMMENT_FLAG_OFF,0,0,0,0,\
+            NO_COMMENT_DISP_FLAG,\
+            NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
+            NO_ITEM_ID,\
+            )
         else:
             return
         self.window.append(new_window)                  #ウィンドウを育成する
@@ -2339,7 +2388,7 @@ class update_window:
                             self.cursor_item_y -= 1 #現在指し示しているアイテムナンバーを1減らす
                             break #カーソルの移動先が見つかったのでループから脱出！
                     
-                else: #上方向の限界位置で上入力された時の処理の開始---------------------------------------------------------------
+                else: #!上方向の限界位置で上入力された時の処理の開始------------------------------------------------------------もうちょっと調整がいるかもしれない---
                     self.cursor_repeat_time_count = 40                   #カーソルリピートタイムカウントを初期状態に戻す
                     self.keypad_repeat_num = 40
                     self.cursor_y = self.cursor_y + self.cursor_step_y * self.cursor_max_item_y         #カーソルのy座標最下段項目の座標にする
@@ -2414,7 +2463,7 @@ class update_window:
                             self.cursor_item_y += 1 #現在指し示しているアイテムナンバーを1増やす
                             break #選択すべき項目テキストが見つかったのでループから脱出！
                     
-                else: #下方向の限界位置で下入力された時の処理の開始---------------------------------------------------------------
+                else: #!下方向の限界位置で下入力された時の処理の開始----------------------------------------------もうちょっと調整がいるかもしれない-----------------
                     self.cursor_repeat_time_count = 40                   #カーソルリピートタイムカウントを初期状態に戻す
                     self.keypad_repeat_num = 40
                     self.cursor_y = self.cursor_y - self.cursor_step_y * self.cursor_max_item_y #カーソルのy座標最上段項目の座標にする

@@ -5,10 +5,11 @@
 #  主に描画関係のみだけを行う関数(メソッド？）ですよ～♪        #
 # 2022 04/03からファイル分割してモジュールとして運用開始      #
 ###########################################################
-import math         #三角関数などを使用したいのでインポートぉぉおお！
-import pyxel        #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
-from const import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
-from func  import * #汎用性のある関数群のモジュールの読み込み
+import math                 #三角関数などを使用したいのでインポートぉぉおお！
+import pyxel                #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
+from const         import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
+from const_window  import * #主にウィンドウクラスで使用する定数定義
+from func          import * #汎用性のある関数群のモジュールの読み込み
 
 class graph:
     #IPLメッセージの表示#######################################
@@ -189,11 +190,11 @@ class graph:
         """
         enemy_count = len(self.enemy)
         for i in range(enemy_count):
-            if   self.enemy[i].enemy_type == 1:#敵タイプ１の表示   直進して斜め後退→勢いよく後退していく10機編隊
+            if   self.enemy[i].enemy_type ==  1:#敵タイプ１の表示  直進して斜め後退→勢いよく後退していく10機編隊
                 pyxel.blt(self.enemy[i].posx, self.enemy[i].posy - self.camera_offset_y,IMG2,self.anime_enemy001[pyxel.frame_count % 15],40,SIZE_8,SIZE_8,pyxel.COLOR_BLACK)
-            elif self.enemy[i].enemy_type == 2:#敵タイプ２の表示   サインカーブを描く3機編隊
+            elif self.enemy[i].enemy_type ==  2:#敵タイプ２の表示  サインカーブを描く3機編隊
                 pyxel.blt(self.enemy[i].posx, self.enemy[i].posy - self.camera_offset_y,IMG2,self.anime_enemy002[pyxel.frame_count % 40],24,SIZE_8,SIZE_8,pyxel.COLOR_BLACK)
-            elif self.enemy[i].enemy_type == 3:#敵タイプ３の表示   固定砲台（地面に張り付く単装砲タイプ）
+            elif self.enemy[i].enemy_type ==  3:#敵タイプ３の表示  固定砲台（地面に張り付く単装砲タイプ）
                 self.reverse_flag = 8
                 if self.my_x > self.enemy[i].posx:
                     self.reverse_flag =-8
@@ -208,7 +209,7 @@ class graph:
                      pyxel.blt(self.enemy[i].posx, self.enemy[i].posy - self.camera_offset_y,IMG2, 32 + (self.enemy[i].item != 0) * 24,32, self.reverse_flag,SIZE_8, pyxel.COLOR_BLACK)
                 else:
                      pyxel.blt(self.enemy[i].posx, self.enemy[i].posy - self.camera_offset_y,IMG2, 40 + (self.enemy[i].item != 0) * 24,32, self.reverse_flag,SIZE_8, pyxel.COLOR_BLACK)
-            elif self.enemy[i].enemy_type == 4:#敵タイプ４の表示   固定砲台（天井に張り付く単装砲タイプ）
+            elif self.enemy[i].enemy_type ==  4:#敵タイプ４の表示  固定砲台（天井に張り付く単装砲タイプ）
                 self.reverse_flag = 8
                 if self.my_x > self.enemy[i].posx:
                     self.reverse_flag =-8
@@ -223,13 +224,13 @@ class graph:
                      pyxel.blt(self.enemy[i].posx, self.enemy[i].posy - self.camera_offset_y,IMG2, 32 + (self.enemy[i].item != 0) * 24,32, self.reverse_flag,-(SIZE_8), pyxel.COLOR_BLACK)
                 else:
                      pyxel.blt(self.enemy[i].posx, self.enemy[i].posy - self.camera_offset_y,IMG2, 40 + (self.enemy[i].item != 0) * 24,32, self.reverse_flag,-(SIZE_8), pyxel.COLOR_BLACK)
-            elif self.enemy[i].enemy_type == 5:#敵タイプ５の表示   ぴょんぴょんはねるホッパーちゃんmk2
+            elif self.enemy[i].enemy_type ==  5:#敵タイプ５の表示  ぴょんぴょんはねるホッパーちゃんmk2
                 pyxel.blt(self.enemy[i].posx, self.enemy[i].posy - self.camera_offset_y,IMG2,self.anime_enemy005[pyxel.frame_count % 40],24,SIZE_8,SIZE_8,pyxel.COLOR_BLACK)       
-            elif self.enemy[i].enemy_type == 6:#敵タイプ６の表示   謎の回転飛翔体Ｍ５４
+            elif self.enemy[i].enemy_type ==  6:#敵タイプ６の表示  謎の回転飛翔体Ｍ５４
                 pyxel.blt(self.enemy[i].posx, self.enemy[i].posy - self.camera_offset_y,IMG2,24+(((self.stage_count // 30) % 2) * 8),24,SIZE_8,SIZE_8,pyxel.COLOR_BLACK)
-            elif self.enemy[i].enemy_type == 7:#敵タイプ７の表示   追尾戦闘機（サインカーブを描きつつ追尾してくる）
+            elif self.enemy[i].enemy_type ==  7:#敵タイプ７の表示  追尾戦闘機（サインカーブを描きつつ追尾してくる）
                 pyxel.blt(self.enemy[i].posx, self.enemy[i].posy - self.camera_offset_y,IMG2,   88,32,   SIZE_8,SIZE_8,  pyxel.COLOR_BLACK)
-            elif self.enemy[i].enemy_type == 8:#敵タイプ８の表示   追尾戦闘機
+            elif self.enemy[i].enemy_type ==  8:#敵タイプ８の表示  追尾戦闘機
                 if self.enemy[i].vy < 0:
                     up_down_reverse = 8
                 else:
@@ -241,7 +242,7 @@ class graph:
                     right_left_reverse = -8
                     
                 pyxel.blt(self.enemy[i].posx, self.enemy[i].posy - self.camera_offset_y,IMG2,   96 ,32,   right_left_reverse,up_down_reverse,  pyxel.COLOR_BLACK)
-            elif self.enemy[i].enemy_type == 9:#敵タイプ９の表示   Ｙ軸を合わせた後突っ込んで来る敵機
+            elif self.enemy[i].enemy_type ==  9:#敵タイプ９の表示  Ｙ軸を合わせた後突っ込んで来る敵機
                 pyxel.blt(self.enemy[i].posx, self.enemy[i].posy - self.camera_offset_y, IMG2,     self.anime_enemy009[pyxel.frame_count % 40],48,    SIZE_8,SIZE_8,    pyxel.COLOR_BLACK)
             elif self.enemy[i].enemy_type == 10:#敵タイプ10の表示  スクランブルハッチ地面タイプ
                 pyxel.blt(self.enemy[i].posx, self.enemy[i].posy - self.camera_offset_y, IMG2,  112,32,  3*8,2*8,  0)
@@ -1271,6 +1272,15 @@ class graph:
         pyxel.text(0, 42, "The space-time interference system still",pyxel.COLOR_WHITE)
         pyxel.text(0, 50, "  seems to take a long time to work on",pyxel.COLOR_WHITE)
         pyxel.text(0, 58, "    a much more distant object.", pyxel.COLOR_WHITE)         #時空干渉システムはやはりはるか遠くの天体に作用するのに時間が掛るようだ
+
+    #タイトルメッセージの表示(何かボタン押してね～)
+    def draw_title_message(self):
+        """
+        タイトルメッセージの表示(何かボタン押してね～)
+        """
+        pyxel.text(20, 52, "CODE OF PYTHON POWED BY PYXEL",pyxel.COLOR_WHITE)
+        pyxel.text(20, 72, "PROJECT MINE 2020",pyxel.COLOR_WHITE)
+        pyxel.text(40, 100, "HIT ANY KEY",self.blinking_color[pyxel.frame_count // 8 % 10])
 
     #ウィンドウの表示
     def draw_window(self,priority,draw_num): #priorityの数値と一致するプライオリティナンバーを持つウィンドウだけを描画します

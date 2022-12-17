@@ -36,13 +36,18 @@ class update_title:
         update_se.backup_se_vol_list(self)            #各効果音のVOLのリストを原本として保存しておくメソッドの呼び出し
         update_se.create_adjustable_se_vol_list(self) #マスターSEボリュームリストを参考にボリューム調整を施したリストを作り上げるメソッドの呼び出し
         
-        self.display_title_time = 204               #タイトルを表示する時間
-        self.title_oscillation_count = 200          #タイトルグラフイックの振れ幅カウンター
-        self.title_slash_in_count =    100          #タイトルグラフイックが下から切り込んで競りあがってくる時に使うカウンター
+        if self.title_startup_count == 0:
+            #初回起動
+            self.display_title_time      = 204       #タイトルを表示する時間
+            self.title_oscillation_count = 200       #タイトルグラフイックの振れ幅カウンター
+            self.title_slash_in_count    = 100       #タイトルグラフイックが下から切り込んで競りあがってくる時に使うカウンター
+        else:#2回目以降の起動
+            self.display_title_time      = 104        #タイトルを表示する時間
+            self.title_oscillation_count = 100        #タイトルグラフイックの振れ幅カウンター
+            self.title_slash_in_count =    50       #タイトルグラフイックが下から切り込んで競りあがってくる時に使うカウンター
         
-        # self.display_title_time      = 10         #タイトルを表示する時間
-        # self.title_oscillation_count = 10         #タイトルグラフイックの振れ幅カウンター
-        # self.title_slash_in_count =    10         #タイトルグラフイックが下から切り込んで競りあがってくる時に使うカウンター
+        self.push_any_btn_flag    = FLAG_OFF        #何かしらかのボタンが押されたかどうかのフラグを降ろしておく
+        self.release_the_btn_flag = FLAG_OFF        #すべての決定ボタンが離された？かどうかのフラグを降ろしておく
         
         self.stars = []                        #タイトル表示時も背景の星を流したいのでリストをここで初期化してやります
         self.star_scroll_speed = 1             #背景の流れる星のスクロールスピード 1=通常スピード 0.5なら半分のスピードとなります
@@ -100,9 +105,12 @@ class update_title:
         func.read_ship_equip_medal_data(self)    #プレイ中の自機リスト群にメダルスロット装備関連のデータを読み込んで行く関数の呼び出し
         func.zero_clear_out_of_range_slot(self)  #総スロット以上の場所のスロットを空にする関数の呼び出し
         
-        self.game_status = SCENE_TITLE           #ゲームステータスを「SCENE_TITLE」にしてタイトル表示を開始する
+        if self.title_startup_count == 0:
+            self.game_status = SCENE_TITLE_FIRST   #初回起動の場合は,       ゲームステータスを「SCENE_TITLE_FIRST」 にしてタイトル表示を開始する
+        else:
+            self.game_status = SCENE_TITLE_SECOND  #2回目以降の起動の場合は,ゲームステータスを「SCENE_TITLE_SECOND」にしてタイトル表示を開始する
 
-    #タイトルの更新#######################################
+    #タイトルの更新############################################################
     def title(self):
         """
         タイトルの更新
@@ -129,12 +137,48 @@ class update_title:
         
         #全てのカウンター類が0になったらゲームメニューウィンドウを育成する
         if self.title_oscillation_count == 0 and self.title_slash_in_count == 0 and self.display_title_time == 0:
+            if self.title_startup_count == 0:
+                self.game_status = SCENE_TITLE_HIT_ANY_BTN  #初回起動の場合はゲームステータスを「TITLE_HIT_ANY_BTN」(タイトルを表示した後、何かしらのボタンの入力待ち状態)」にする
+            else:
+                update_window.create(self,WINDOW_ID_MAIN_MENU,0,0)         #メニューウィンドウを作製
+                #選択カーソル表示をon,カーソルは上下移動のみ,いま指示しているアイテムナンバーは0,まだボタンも押されておらず未決定状態なのでdecision_item_yは-1
+                #選択できる項目数は13項目なので 13-1=12を代入,メニューの階層は最初は0にします,カーソル移動ステップはx4,y7
+                func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,MAIN_MENU_X+5,MAIN_MENU_Y+10,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,13-1,0,MENU_LAYER0)
+                self.active_window_id = WINDOW_ID_MAIN_MENU         #このウィンドウIDを最前列アクティブなものとする
+                self.push_any_btn_flag    = FLAG_OFF                #決定ボタンを押した,離したフラグをオフにする
+                self.release_the_btn_flag = FLAG_OFF
+                self.game_status = SCENE_TITLE_MENU_SELECT  #2回目以降の起動の場合は,ゲームステータスを「SCENE_TITLE_MENU_SELECT」にして直ぐにメニューセレクトに入る
+
+    #タイトルメニューを表示した後,何かしらのボタンの入力待ち状態##########################
+    def title_hit_any_btn(self):
+        print (self.push_any_btn_flag)
+        print(self.release_the_btn_flag)
+        if self.push_any_btn_flag == FLAG_ON and self.release_the_btn_flag == FLAG_ON:
             update_window.create(self,WINDOW_ID_MAIN_MENU,0,0)         #メニューウィンドウを作製
             #選択カーソル表示をon,カーソルは上下移動のみ,いま指示しているアイテムナンバーは0,まだボタンも押されておらず未決定状態なのでdecision_item_yは-1
             #選択できる項目数は13項目なので 13-1=12を代入,メニューの階層は最初は0にします,カーソル移動ステップはx4,y7
             func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,MAIN_MENU_X+5,MAIN_MENU_Y+10,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,13-1,0,MENU_LAYER0)
             self.active_window_id = WINDOW_ID_MAIN_MENU         #このウィンドウIDを最前列アクティブなものとする
+            self.push_any_btn_flag    = FLAG_OFF                #決定ボタンを押した,離したフラグをオフにする
+            self.release_the_btn_flag = FLAG_OFF
+            self.title_startup_count = 1                        #初回起動は終わったのでスタートアップカウントを2回目以降の起動カウント(とりあえず整数の1)にする
             self.game_status = SCENE_TITLE_MENU_SELECT          #ゲームステータスを「TITLE_MENU_SELECT」(タイトルでメニューを選択中)」にする
+            
+        elif self.push_any_btn_flag == FLAG_ON and self.release_the_btn_flag == FLAG_OFF:
+            if      pyxel.btnp(pyxel.GAMEPAD1_BUTTON_A) == False\
+                and  pyxel.btnp(pyxel.GAMEPAD1_BUTTON_B) == False\
+                and  pyxel.btnp(pyxel.GAMEPAD1_BUTTON_X) == False\
+                and  pyxel.btnp(pyxel.GAMEPAD1_BUTTON_Y) == False:
+                
+                self.release_the_btn_flag = FLAG_ON #全てのボタンが離されたフラグをON
+            
+        elif self.push_any_btn_flag == FLAG_OFF and self.release_the_btn_flag == FLAG_OFF:
+            if     pyxel.btnp(pyxel.GAMEPAD1_BUTTON_A) == True\
+                or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_B) == True\
+                or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_X) == True\
+                or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_Y) == True:
+                
+                self.push_any_btn_flag = FLAG_ON #何かしらかのボタンが押されたかどうかのフラグをON
 
     #タイトルメニューの選択中の更新#####################################
     def title_menu_select(self):
@@ -1077,7 +1121,6 @@ class update_title:
                 self.score_board = copy.deepcopy(self.default_score_board)      #現在のスコアボードをデフォルトの物からコピーして初期化する
                 update_system.save_data(self)                                         #システムデータをセーブします
                 pyxel.load(os.path.abspath("./assets/graphic/min-sht2.pyxres"))                   #タイトル＆ステージ1＆2のリソースファイルを読みます
-                # pyxel.load("./assets/graphic/min-sht2.pyxres")                    #タイトル＆ステージ1＆2のリソースファイルを読みます
                 
             elif self.cursor_pre_pre_pre_decision_item_y == MENU_CONFIG and self.cursor_pre_pre_decision_item_y == MENU_CONFIG_INITIALIZE and self.cursor_pre_decision_item_y == MENU_CONFIG_INITIALIZE_NAME and self.cursor_decision_item_y == 0:
                 #CONFIG→INITIALIZE→NAME→NO
@@ -1126,7 +1169,6 @@ class update_title:
                 self.my_name = copy.deepcopy(self.default_my_name)              #現在のマイネームリストをデフォルトの物からディープコピーして初期化する
                 update_system.save_data(self)                                         #システムデータをセーブします
                 pyxel.load(os.path.abspath("./assets/graphic/min-sht2.pyxres"))                   #タイトル＆ステージ1＆2のリソースファイルを読みます
-                # pyxel.load("./assets/graphic/min-sht2.pyxres")                    #タイトル＆ステージ1＆2のリソースファイルを読みます
                 
             elif self.cursor_pre_pre_pre_decision_item_y == MENU_CONFIG and self.cursor_pre_pre_decision_item_y == MENU_CONFIG_INITIALIZE and self.cursor_pre_decision_item_y == MENU_CONFIG_INITIALIZE_ALL and self.cursor_decision_item_y == 0:
                 #CONFIG→INITIALIZE→ALL→NO
@@ -1215,4 +1257,3 @@ class update_title:
                 
                 update_system.save_data(self)                                   #システムデータをセーブします
                 pyxel.load(os.path.abspath("./assets/graphic/min-sht2.pyxres"))                    #タイトル＆ステージ1＆2のリソースファイルを読みます
-                # pyxel.load("./assets/graphic/min-sht2.pyxres")                    #タイトル＆ステージ1＆2のリソースファイルを読みます
