@@ -1632,6 +1632,26 @@ class graph:
                             str_total_score = "{:>16}".format(int(self.total_score))
                             func.drop_shadow_text(self,self.window[i].posx + ox * open_rate_x,self.window[i].posy + oy * open_rate_y,str_total_score,col)
                 
+                #スクロールするテキストの表示
+                if self.window[i].scroll_text  != "": #スクロールテキストリストが空でないのならば表示を始める
+                    all_line_num = len(self.window[i].scroll_text)         #スクロールする文章の全体の行数を求める
+                    all_text_size = all_line_num * self.window[i].between_line #スクロールするテキストの全体の画像ドット数を求める
+                    for j in range (all_line_num):
+                        disp_text = self.window[i].scroll_text[j][0]
+                        dis_x = self.window[i].posx + self.window[i].text_disp_x
+                        dis_y = self.window[i].posy + self.window[i].between_line * j - self.window[i].text_disp_scrolled_dot + self.window[i].text_disp_y
+                        if 40 <=  dis_y <= 90:
+                            if abs(dis_y -   85) <= 6:
+                                func.drop_shadow_text(self,dis_x ,dis_y,disp_text,7)
+                            elif abs(dis_y - 85) <= 8:
+                                func.drop_shadow_text(self,dis_x ,dis_y,disp_text,6)
+                            elif abs(dis_y - 85) <= 17:
+                                func.drop_shadow_text(self,dis_x ,dis_y,disp_text,12)
+                            elif abs(dis_y - 85) <= 30:
+                                func.drop_shadow_text(self,dis_x ,dis_y,disp_text,5)
+                            else:
+                                func.drop_shadow_text(self,dis_x ,dis_y,disp_text,1)
+                
             #下地が透明または半透明の場合＆「黒矩形塗りつぶし」した後表示の場合は黒く塗りつぶされたウィンドウを描く
             elif self.window[i].window_bg != WINDOW_BG_BLUE_BACK and draw_num == BLACK_RECTANGLE_FILL:
                 pyxel.rect(self.window[i].posx,self.window[i].posy,self.window[i].width + 9,self.window[i].height + 9,pyxel.COLOR_BLACK)

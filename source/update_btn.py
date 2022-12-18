@@ -227,7 +227,7 @@ class update_btn:
                     DIR_RIGHT_DOWN,\
                     DIR_LEFT_UP,\
                     WINDOW_OPEN,\
-                    0,0,0,0,0,0,0,0,0,0,   0,0,0,0,\
+                    0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,  0,0,0,0,\
                     WINDOW_BETWEEN_LINE_7,\
                     ["BACK TO GAMES",   CLICK_SOUND_ON ,DISP_CENTER,0,0, 7,MES_RED_FLASH],\
                     

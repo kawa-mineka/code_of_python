@@ -1454,6 +1454,18 @@ class Window:                 #メッセージ表示ウィンドウのクラス�
         self.text_scroll_line_count = 0 #テキストのスクロールした行数(スクリプトやスクロールテキストで変化する時に使用されます)
         self.text_wait              = 0 #テキスト表示関連で使われるのウェイト値(スクリプトやスクロールテキストで変化する時に使用されます)
         self.text_count             = 0 #テキスト表示関連で使われるのカウンタ値(スクリプトやスクロールテキストで変化する時に使用されます)
+        
+        self.text_disp_x            = 0 #テキスト表示領域の指定(開始始点座標)posx,posyからのオフセット値となります
+        self.text_disp_y            = 0
+        self.text_disp_width        = 0 #テキスト表示領域の指定(幅)
+        self.text_disp_height       = 0 #テキスト表示領域の指定(高さ)
+        
+        self.text_disp_scrolled_dot     = 0 #予約用1~4
+        self.text_disp_reserve2     = 0
+        self.text_disp_reserve3     = 0
+        self.text_disp_reserve4     = 0
+        
+        
         self.text_flag1             = 0 #テキスト表示関連で使われるのフラグ類1(スクリプトやスクロールテキストで変化する時に使用されます)
         self.text_flag2             = 0 #テキスト表示関連で使われるのフラグ類2(スクリプトやスクロールテキストで変化する時に使用されます)
         self.text_flag3             = 0 #テキスト表示関連で使われるのフラグ類3(スクリプトやスクロールテキストで変化する時に使用されます)
@@ -1541,7 +1553,11 @@ class Window:                 #メッセージ表示ウィンドウのクラス�
         self.comment_list_jpn       = []  #アイテムの説明文(日本語)
         self.item_id                = []  #カーソル位置に存在するアイテムIDナンバー
     def update(self,window_id,window_id_sub,window_type,window_frame,window_bg,window_priority,open_direction,close_direction,window_status,\
+        
         text_disp_speed,text_disp_type,text_digits,text_lines,text_align,text_scroll_type,text_scroll_speed,text_scroll_line_count,text_wait,text_count,\
+        text_disp_x,text_disp_y,text_disp_width,text_disp_height,\
+        text_disp_scrolled_dot,text_disp_reserve2,text_disp_reserve3,text_disp_reserve4,\
+        
         text_flag1,text_flag2,text_flag3,text_flag4,\
         between_line,\
         
@@ -1596,10 +1612,19 @@ class Window:                 #メッセージ表示ウィンドウのクラス�
         self.text_scroll_line_count = text_scroll_line_count
         self.text_wait              = text_wait
         self.text_count             = text_count
+        text_disp_x                 = text_disp_x
+        text_disp_y                 = text_disp_y
+        text_disp_width             = text_disp_width
+        text_disp_height            = text_disp_height
+        text_disp_scrolled_dot      = text_disp_scrolled_dot
+        text_disp_reserve2          = text_disp_reserve2
+        text_disp_reserve3          = text_disp_reserve3
+        text_disp_reserve4          = text_disp_reserve4
         self.text_flag1             = text_flag1
         self.text_flag2             = text_flag2
         self.text_flag3             = text_flag3
         self.text_flag4             = text_flag4
+        
         self.between_line = between_line
         
         self.title_text   = title_text
