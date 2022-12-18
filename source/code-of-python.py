@@ -403,7 +403,7 @@ class App:
             update_window.clip_window(self)       #画面外にはみ出たウィンドウを消去する関数の呼び出し
             update_window.active_window(self)     #現在アクティブ(最前面)になっているウィンドウのインデックス値(i)を求める関数の呼び出し
         
-        ################################ タイトル ###################################################################
+        ################################ タイトルでのボタン入力待ち###################################################################
         if self.game_status == SCENE_TITLE_HIT_ANY_BTN: #ゲームステータスが「SCENE_TITLE_HIT_ANY_BTN」場合は何かしらのボタン入力待ちをする
             update_title.title_hit_any_btn(self)        #タイトルメニューを表示した後,何かしらのボタンの入力待ち状態
             update_obj.append_star(self)                #背景の星の追加＆発生育成関数呼び出し
@@ -800,6 +800,8 @@ class App:
             
             graph.draw_star(self)                          #背景の星を表示する関数の呼び出し
             
+            graph.draw_window(self,WINDOW_PRIORITY_TITLE_BACK,   ORDINARY_SUPERPOSITION)#タイトルより奥にあるウィンドウをそのまま重ね合わせて表示する
+            
             #ゲームプレイ中からの終了工程の場合はタイトルロゴを表示しない
             if  self.game_quit_from_playing == FLAG_OFF:
                 graph.draw_title(self)                     #タイトルロゴの表示関数の呼び出し
@@ -999,9 +1001,9 @@ class App:
         if self.game_status == SCENE_PAUSE:
             graph.draw_pause_message(self)            #一時停止・ポーズメッセージの表示
         
-        #タイトルメッセージテキストの表示#########################################
-        if self.game_status == SCENE_TITLE_HIT_ANY_BTN:
-            graph.draw_title_message(self)            #タイトルメッセージテキストの表示
+        # #タイトルメッセージテキストの表示#########################################
+        # if self.game_status == SCENE_TITLE_HIT_ANY_BTN:
+        #     graph.draw_title_message(self)            #タイトルメッセージテキストの表示
         
         #ゲームオーバー画像の表示##################################################
         if     self.game_status == SCENE_GAME_OVER\

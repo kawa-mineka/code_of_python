@@ -106,6 +106,13 @@ class update_title:
         func.zero_clear_out_of_range_slot(self)  #総スロット以上の場所のスロットを空にする関数の呼び出し
         
         if self.title_startup_count == 0:
+            update_window.create(self,WINDOW_ID_TITLE_TEXT,0,0)  #タイトルで表示されるテキスト群ウィンドウ(フレームレス)(外枠は表示しない)を作製
+            #選択カーソル表示はoff,カーソルは上下移動のみ,いま指示しているアイテムナンバーは0,まだボタンも押されておらず未決定状態なのでdecision_item_yは-1
+            #選択できる項目数は13項目なので 13-1=12を代入,メニューの階層は最初は0にします,カーソル移動ステップはx4,y7
+            func.set_cursor_data(self,CURSOR_TYPE_NO_DISP,CURSOR_MOVE_UD,0,0,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,13-1,0,MENU_LAYER0)
+            self.active_window_id = WINDOW_ID_TITLE_TEXT  #このウィンドウIDを最前列アクティブなものとする
+            self.push_any_btn_flag    = FLAG_OFF          #決定ボタンを押した,離したフラグをオフにする
+            self.release_the_btn_flag = FLAG_OFF
             self.game_status = SCENE_TITLE_FIRST   #初回起動の場合は,       ゲームステータスを「SCENE_TITLE_FIRST」 にしてタイトル表示を開始する
         else:
             self.game_status = SCENE_TITLE_SECOND  #2回目以降の起動の場合は,ゲームステータスを「SCENE_TITLE_SECOND」にしてタイトル表示を開始する
@@ -154,7 +161,13 @@ class update_title:
         print (self.push_any_btn_flag)
         print(self.release_the_btn_flag)
         if self.push_any_btn_flag == FLAG_ON and self.release_the_btn_flag == FLAG_ON:
-            update_window.create(self,WINDOW_ID_MAIN_MENU,0,0)         #メニューウィンドウを作製
+            pyxel.play(0,CURSOR_OK_SE_NORMAL)                   #カーソルOK音を鳴らす
+            i = func.search_window_id(self,WINDOW_ID_TITLE_TEXT)
+            self.window[i].vy = 0.3                             #WINDOW_ID_TITLE_TEXTウィンドウを下にフッ飛ばしていく
+            self.window[i].vy_accel = 1.2
+            self.window[i].window_status = WINDOW_CLOSE
+            
+            update_window.create(self,WINDOW_ID_MAIN_MENU,0,0)  #メニューウィンドウを作製
             #選択カーソル表示をon,カーソルは上下移動のみ,いま指示しているアイテムナンバーは0,まだボタンも押されておらず未決定状態なのでdecision_item_yは-1
             #選択できる項目数は13項目なので 13-1=12を代入,メニューの階層は最初は0にします,カーソル移動ステップはx4,y7
             func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,MAIN_MENU_X+5,MAIN_MENU_Y+10,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,13-1,0,MENU_LAYER0)

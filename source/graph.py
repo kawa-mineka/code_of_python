@@ -1300,8 +1300,8 @@ class graph:
             #下地が有色のウィンドウを描画します
             if self.window[i].window_bg == WINDOW_BG_BLUE_BACK or (self.window[i].window_bg != WINDOW_BG_BLUE_BACK and draw_num == ORDINARY_SUPERPOSITION):
                 #ウィンドウ下地描画###############################################################
-                for h in range(self.window[i].height // 8 + 1):
-                    for w in range((self.window[i].width // 8 + 1)) :
+                for h in range (int(self.window[i].height // 8 + 1)):
+                    for w in range (int(self.window[i].width // 8 + 1)) :
                         pyxel.blt(self.window[i].posx + w * 8,self.window[i].posy + h * 8,            
                             IMG2,
                             96 + self.window[i].window_bg * 32,88,
@@ -1310,7 +1310,7 @@ class graph:
                 #ウィンドウ外枠フレーム描画###############################################################
                 if self.window[i].window_frame == WINDOW_FRAME_NORMAL: #ウィンドウフレーム表示有の場合は外枠を表示する
                     #ウィンドウ横パーツ描画#############################################################
-                    for w in range(self.window[i].width // 8 + 1):
+                    for w in range(int(self.window[i].width // 8 + 1)):
                         #上部の横パーツ描画
                         pyxel.blt(self.window[i].posx + w * 8,self.window[i].posy,                         
                             IMG2,
@@ -1323,7 +1323,7 @@ class graph:
                             SIZE_8,SIZE_8, pyxel.COLOR_GRAY)
                     
                     #ウィンドウ縦パーツ描画####################################################
-                    for h in range(self.window[i].height // 8 + 1):
+                    for h in range(int(self.window[i].height // 8 + 1)):
                         #左の縦パーツ描画
                         pyxel.blt(self.window[i].posx                      ,self.window[i].posy + h * 8,
                             IMG2,

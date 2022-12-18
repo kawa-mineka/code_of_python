@@ -28,12 +28,12 @@ class update_window:
         """
         window_count = len(self.window)
         for i in range(window_count):
-            if   self.window[i].window_status == WINDOW_OPEN:     #ステータスが「オープン」の時は・・・・・・・・・・・・
+            if   self.window[i].window_status == WINDOW_OPEN or self.window[i].window_status == WINDOW_WRITE_MESSAGE:     #ステータスが「オープン」の時は・・・・・・・・・・・・
                 if self.window[i].width < self.window[i].open_width:#widthをopen_widthの数値になるまで増加させていく
-                    self.window[i].width += int(self.window[i].change_x * self.window[i].open_speed)
+                    self.window[i].width += self.window[i].change_x * self.window[i].open_speed
                 
                 if self.window[i].height < self.window[i].open_height:#heightをopen_heightの数値になるまで増加させていく
-                    self.window[i].height += int(self.window[i].change_y * self.window[i].open_speed)
+                    self.window[i].height += self.window[i].change_y * self.window[i].open_speed
                 
                 #ウィンドウが開ききったのか判断する
                 if  -2 <= self.window[i].open_width  - self.window[i].width  <= 2 and\
@@ -1496,22 +1496,21 @@ class update_window:
             WINDOW_TYPE_NORMAL,\
             WINDOW_FRAME_NONE,\
             WINDOW_BG_NONE,\
-            WINDOW_PRIORITY_NORMAL,\
+            WINDOW_PRIORITY_TITLE_BACK,\
             DIR_RIGHT_DOWN,\
             DIR_LEFT_UP,\
             WINDOW_OPEN,\
             WINDOW_BETWEEN_LINE_7,\
-            ["CODE OF PYTHON POWED BY PYXEL",          CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_RAINBOW_FLASH],\
+            ["CODE OF PYTHON POWERED BY PYXEL",          CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_MONOCHROME_FLASH],\
             
             [["PROJECT MINE 2020"   ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH],\
-            [ " "   ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH],\
             [ "HIT ANY KEY"         ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_RAINBOW_FLASH]],\
             
             NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,\
             
             NO_VECTOR_GRP,\
             
-            ox,oy,  ox,oy,   0,0,  8*8,9*11,   2,1, 1,1,   0,0,    0,0,    0,0,0,0,   0,\
+            ox,oy+93,  ox,oy+93,   0,0,  160-8,30-8,   1,1, 0.5,0.6,   0,0,    0,0,    0,0,0,0,   0,\
             BUTTON_DISP_OFF,0,0,0,\
             BUTTON_DISP_OFF,0,0,0,\
             
