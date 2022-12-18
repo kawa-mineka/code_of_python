@@ -1443,7 +1443,24 @@ class Window:                 #メッセージ表示ウィンドウのクラス�
         self.close_direction = 0    #ウィンドウが閉まっていく方向(通常右下から左上へ閉まって行く)
         self.window_status = 0      #ウィンドウの現在の状態を表しますステータスです WINDOW_OPEN=ウィンドウ開き中 WINDOW_CLOSE=ウィンドウ閉じ中
                                     #                                           WINDOW_WRITE_MESSAGE=メッセージテキスト表示中
+        
+        self.text_disp_type  = 0     #テキストの表示タイプ(スクリプトやスクロールテキストで変化する時に使用されます)
+        self.text_disp_speed = 0     #テキストの表示スピード(スクリプトやスクロールテキストで変化する時に使用されます)
+        self.text_digits     = 0     #テキストの表示する桁数(スクリプトやスクロールテキストで変化する時に使用されます)
+        self.text_lines      = 0     #テキストの表示する行数(スクリプトやスクロールテキストで変化する時に使用されます)
+        self.text_align      = 0     #テキストの表示揃えの仕方(スクリプトやスクロールテキストで変化する時に使用されます)
+        self.text_scroll_type = 0    #テキストのスクロールタイプ(スクロールする方向)(スクリプトやスクロールテキストで変化する時に使用されます)
+        self.text_scroll_speed = 0   #テキストのスクロールスピード(スクリプトやスクロールテキストで変化する時に使用されます)
+        self.text_scroll_line_count = 0 #テキストのスクロールした行数(スクリプトやスクロールテキストで変化する時に使用されます)
+        self.text_wait              = 0 #テキスト表示関連で使われるのウェイト値(スクリプトやスクロールテキストで変化する時に使用されます)
+        self.text_count             = 0 #テキスト表示関連で使われるのカウンタ値(スクリプトやスクロールテキストで変化する時に使用されます)
+        self.text_flag1             = 0 #テキスト表示関連で使われるのフラグ類1(スクリプトやスクロールテキストで変化する時に使用されます)
+        self.text_flag2             = 0 #テキスト表示関連で使われるのフラグ類2(スクリプトやスクロールテキストで変化する時に使用されます)
+        self.text_flag3             = 0 #テキスト表示関連で使われるのフラグ類3(スクリプトやスクロールテキストで変化する時に使用されます)
+        self.text_flag4             = 0 #テキスト表示関連で使われるのフラグ類4(スクリプトやスクロールテキストで変化する時に使用されます)
+        
         self.between_line = 0       #テキスト表示時の行と行の間隔(通常は7ドット)
+
         self.title_text = []                      #タイトルが入ります
         self.item_text       = [[] for i in range(12)] #アイテムテキスト(選択メニューの項目文章)が入ります
         self.item_kanji_text = [[] for i in range(12)] #アイテムテキスト(選択メニューの項目文章)が入ります(日本語)
@@ -1524,6 +1541,8 @@ class Window:                 #メッセージ表示ウィンドウのクラス�
         self.comment_list_jpn       = []  #アイテムの説明文(日本語)
         self.item_id                = []  #カーソル位置に存在するアイテムIDナンバー
     def update(self,window_id,window_id_sub,window_type,window_frame,window_bg,window_priority,open_direction,close_direction,window_status,\
+        text_disp_speed,text_disp_type,text_digits,text_lines,text_align,text_scroll_type,text_scroll_speed,text_scroll_line_count,text_wait,text_count,\
+        text_flag1,text_flag2,text_flag3,text_flag4,\
         between_line,\
         
         title_text,\
@@ -1567,6 +1586,20 @@ class Window:                 #メッセージ表示ウィンドウのクラス�
         self.close_direction = close_direction
         self.window_status = window_status
         
+        self.text_disp_type         = text_disp_type     
+        self.text_disp_speed        = text_disp_speed     
+        self.text_digits            = text_digits     
+        self.text_lines             = text_lines     
+        self.text_align             = text_align     
+        self.text_scroll_type       = text_scroll_type
+        self.text_scroll_speed      = text_scroll_speed    
+        self.text_scroll_line_count = text_scroll_line_count
+        self.text_wait              = text_wait
+        self.text_count             = text_count
+        self.text_flag1             = text_flag1
+        self.text_flag2             = text_flag2
+        self.text_flag3             = text_flag3
+        self.text_flag4             = text_flag4
         self.between_line = between_line
         
         self.title_text   = title_text

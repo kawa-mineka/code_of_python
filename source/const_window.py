@@ -44,6 +44,7 @@ WINDOW_ID_MEDAL_ACQUISITION_REPORT       = 37 #メダル取得報告ウィンド
 WINDOW_ID_ACHIEVEMENT_ACQUISITION_REPORT = 38 #実績(アチーブメント)取得報告ウィンドウ
 WINDOW_ID_JOYPAD_ASSIGN                  = 39 #ジョイパッドボタン割り当て設定ウィンドウ
 WINDOW_ID_TITLE_TEXT                     = 40 #タイトルで表示されるテキスト群ウィンドウ(フレームレス)(外枠は表示しない)
+WINDOW_ID_TITLE_STORY_TEXT               = 41 #タイトルで表示されるストーリー(フレームレス)(外枠は表示しない)(上方向に自動スクロールします)
 
 #ウィンドウのid_subの定数定義 windowクラスの window[i].window_id_subに入ります
 WINDOW_ID_SUB_NORMAL_MENU            = 0 #通常の選択メニュー
@@ -62,6 +63,7 @@ WINDOW_TYPE_EDIT_TEXT                = 1 #メッセージを表示しさらに�
 WINDOW_TYPE_SCROLL_TEXT              = 2 #カーソルキーで上下スクロールできる長文を読ませる時に使用するタイプ
 WINDOW_TYPE_PRINT_TEXT               = 3 #テキストメッセージを表示するだけのタイプ
 WINDOW_TYPE_BANNER                   = 4 #タイトルテキストをバナーとして表示するタイプ(テキストの圧縮あり)
+WINDOW_TYPE_AUTO_SCROLL_TEXT         = 5 #テキストが自動で上方向下方向に流れていくデモなどで使用するタイプ
 
 #ウィンドウの下地の定数定義 windowクラスの window[i].window_bgに入ります
 WINDOW_BG_TRANSLUCENT     = 0 #半透明
@@ -92,6 +94,7 @@ WINDOW_FRAME_NORMAL       = 0 #通常のフレーム
 WINDOW_FRAME_NONE         = 1 #フレーム無し BGだけのタイプ 外枠無しのウィンドウ
 
 #ウィンドウの開閉していく方向 windowクラスの window[i].open_direction または window[i].close_directionに入ります
+#スクロールするテキストをどの様な方向にスクロールさせるのか？を指定するためにwindow[i].scroll_text[LIST_WINDOW_TEXT_SLIDE_IN_WAY]に入ります
 DIR_RIGHT_DOWN            = 3 #右下方向
 DIR_LEFT_UP               = 7 #左上方向
 DIR_RIGHT_UP              = 9 #右上方向
@@ -168,7 +171,7 @@ LIST_WINDOW_TEXT_LINEFEED_WIDTH     = 10 #ウィンドウテキストの折り�
 LIST_WINDOW_TEXT_LINEFEED_HEIGHT    = 11 #ウィンドウテキストの折り返し改行幅(縦書きモードの時)
 LIST_WINDOW_TEXT_DISP_TYPE          = 12 #ウィンドウテキストの文字の表示のしかた
 LIST_WINDOW_TEXT_DISP_SPEED         = 13 #ウィンドウテキストの文字の表示スピード(一文字ずつ表示する場合のみ)
-LIST_WINDOW_TEXT_SCROLL_SPEED       = 14 #ウィンドウテキストの上下スクロールスピード値
+LIST_WINDOW_TEXT_SCROLL_SPEED       = 14 #ウィンドウテキストのスクロールスピード値
 LIST_WINDOW_TEXT_SLIDE_IN_WAY       = 15 #ウィンドウテキストがスライドインしてくる方向
 
 LIST_WINDOW_TEXT_SLIDE_OUT_WAY      = 16 #ウィンドウテキストをスライドアウトさせる方向
