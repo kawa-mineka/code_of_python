@@ -91,11 +91,11 @@ class update_window:
             else:
                 self.window[i].wait_count -= 1  #カウンターをデクリメント
             
-            #スクロールテキストに何かテキストが入っている時はスクロールドットカウンタを増やしていく
-            if self.window[i].scroll_text  != "":
-                if self.window[i].text_scroll_speed != 0: #スクロールスピードが0の時は何もしない(0で割り算をしてエラーになっちゃう為)
-                    if int(pyxel.frame_count % self.window[i].text_scroll_speed) == 0:
-                        self.window[i].text_disp_scrolled_dot += 1  #スクロールテキストのスクロールしたドットカウンタを1増やしていく
+            # #スクロールテキストに何かテキストが入っている時はスクロールドットカウンタを増やしていく
+            # if self.window[i].scroll_text  != "":
+            #     if self.window[i].text_scroll_speed != 0: #スクロールスピードが0の時は何もしない(0で割り算をしてエラーになっちゃう為)
+            #         if int(pyxel.frame_count % self.window[i].text_scroll_speed) == 0:
+            #             self.window[i].text_disp_scrolled_dot += 1  #スクロールテキストのスクロールしたドットカウンタを1増やしていく
 
     #各種ウィンドウの育成             id=windowクラスの window_idに入っている数値 ox,oy=ウィンドウ作成座標のオフセット値
     def create(self,id,ox,oy):
@@ -1532,24 +1532,35 @@ class update_window:
             WINDOW_OPEN,\
             0,0,0,0,0,0,32,0,0,0, 0,80,160,100,0,0,0,0,  0,0,0,0,\
             WINDOW_BETWEEN_LINE_7,\
-            ["CODE OF PYTHON POWERED BY PYXEL",          CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_MONOCHROME_FLASH],\
+            ["PROJECT MINE 2020",          CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH],\
             
-            [["PROJECT MINE 2020"   ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH],\
-            [ "HIT ANY KEY"         ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_RAINBOW_FLASH]],\
+            [[ "HIT ANY KEY"         ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_YELLOW_FLASH]],\
             
             NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,\
             [
-            ["Augusta Ada King, Countess of Lovelace née Byron;"          ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,  MES_MONOCHROME_FLASH,0,0,0,0,  0,0,0,SPEED2,DIR_UP  ],\
-            ["10 December 1815 – 27 November 1852"                        ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
-            ["was an English mathematician and writer"                    ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
-            ["chiefly known for her work on Charles Babbage's proposed"   ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
-            ["mechanical general-purpose computer"                        ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
-            ["the Analytical Engine."                                     ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
-            ["She was the first to recognise that the machine"            ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
-            [" had applications beyond pure calculation"                  ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
-            ["and to have published the first algorithm intended"         ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
-            ["to be carried out by such a machine. As a result"           ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
-            ["she is often regarded as the first computer programmer"     ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
+            [""                                      ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,  MES_MONOCHROME_FLASH,0,0,0,0,  0,0,0,SPEED2,DIR_UP  ],\
+            [""                                      ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,  MES_MONOCHROME_FLASH,0,0,0,0,  0,0,0,SPEED2,DIR_UP  ],\
+            ["Augusta Ada King"                      ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,  MES_MONOCHROME_FLASH,0,0,0,0,  0,0,0,SPEED2,DIR_UP  ],\
+            ["Countess of Lovelace née Byron"        ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,0,0,7,  MES_MONOCHROME_FLASH,0,0,0,0,  0,0,0,SPEED2,DIR_UP  ],\
+            ["10 December 1815"                      ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
+            ["–--"                                   ,CLICK_SOUND_ON ,DISP_LEFT_ALIGN,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
+            ["27 November 1852"                      ,CLICK_SOUND_ON ,DISP_RIGHT_ALIGN,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
+            ["was an English mathematician"          ,CLICK_SOUND_ON ,DISP_RIGHT_ALIGN,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
+            ["and writer"                            ,CLICK_SOUND_ON ,DISP_RIGHT_ALIGN,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
+            ["chiefly known for her work"            ,CLICK_SOUND_ON ,DISP_RIGHT_ALIGN,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
+            ["on Charles Babbage's proposed"         ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
+            ["mechanical general-purpose computer"   ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
+            ["the Analytical Engine."                ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
+            ["She was the first to recognise"        ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
+            ["that the machine"                      ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
+            ["had applications beyond"               ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
+            ["pure calculation"                      ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
+            ["and to have published"                 ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
+            ["the first algorithm intended"          ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
+            ["to be carried out by"                  ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
+            ["such a machine. As a result"           ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
+            ["she is often regarded"                 ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
+            ["as the first computer programmer"      ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
             [""             ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
             [""             ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
             [""             ,CLICK_SOUND_ON ,DISP_CENTER,0,0,7,  MES_NO_FLASH,0,0,0,0,          0,0,0,SPEED2,DIR_UP  ],\
@@ -1561,7 +1572,7 @@ class update_window:
             
             NO_VECTOR_GRP,\
             
-            ox,oy+93,  ox,oy+93,   0,0,  160-8,30-8,   1,1, 0.5,0.6,   0,0,    0,0,    0,0,0,0,   0,\
+            ox,oy+93,  ox,oy+93,   0,0,  160,30,   1,1, 0.5,0.6,   0,0,    0,0,    0,0,0,0,   0,\
             BUTTON_DISP_OFF,0,0,0,\
             BUTTON_DISP_OFF,0,0,0,\
             

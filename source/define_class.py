@@ -1444,35 +1444,34 @@ class Window:                 #メッセージ表示ウィンドウのクラス�
         self.window_status = 0      #ウィンドウの現在の状態を表しますステータスです WINDOW_OPEN=ウィンドウ開き中 WINDOW_CLOSE=ウィンドウ閉じ中
                                     #                                           WINDOW_WRITE_MESSAGE=メッセージテキスト表示中
         
-        self.text_disp_type  = 0     #テキストの表示タイプ(スクリプトやスクロールテキストで変化する時に使用されます)
-        self.text_disp_speed = 0     #テキストの表示スピード(スクリプトやスクロールテキストで変化する時に使用されます)
-        self.text_digits     = 0     #テキストの表示する桁数(スクリプトやスクロールテキストで変化する時に使用されます)
-        self.text_lines      = 0     #テキストの表示する行数(スクリプトやスクロールテキストで変化する時に使用されます)
-        self.text_align      = 0     #テキストの表示揃えの仕方(スクリプトやスクロールテキストで変化する時に使用されます)
-        self.text_scroll_type = 0    #テキストのスクロールタイプ(スクロールする方向)(スクリプトやスクロールテキストで変化する時に使用されます)
-        self.text_scroll_speed = 0   #テキストのスクロールスピード(スクリプトやスクロールテキストで変化する時に使用されます)
-        self.text_scroll_line_count = 0 #テキストのスクロールした行数(スクリプトやスクロールテキストで変化する時に使用されます)
-        self.text_wait              = 0 #テキスト表示関連で使われるのウェイト値(スクリプトやスクロールテキストで変化する時に使用されます)
-        self.text_count             = 0 #テキスト表示関連で使われるのカウンタ値(スクリプトやスクロールテキストで変化する時に使用されます)
+        self.script_disp_type         = 0 #スクリプトテキストの表示タイプ                  (スクリプトやスクロールテキストで変化する時に使用されます)
+        self.script_disp_speed        = 0 #スクリプトテキストの表示スピード                (スクリプトやスクロールテキストで変化する時に使用されます)
+        self.script_digits            = 0 #スクリプトテキストの表示する桁数                (スクリプトやスクロールテキストで変化する時に使用されます)
+        self.script_lines             = 0 #スクリプトテキストの表示する行数                (スクリプトやスクロールテキストで変化する時に使用されます)
+        self.script_align             = 0 #スクリプトテキストの表示揃えの仕方              (スクリプトやスクロールテキストで変化する時に使用されます)
+        self.script_scroll_type       = 0 #スクリプトテキストのスクロールタイプ(スクロールする方向)(スクリプトやスクロールテキストで変化する時に使用されます)
+        self.script_scroll_speed      = 0 #スクリプトテキストのスクロールスピード          (スクリプトやスクロールテキストで変化する時に使用されます)
+        self.script_scroll_line_count = 0 #スクリプトテキストのスクロールした行数          (スクリプトやスクロールテキストで変化する時に使用されます)
+        self.script_wait              = 0 #スクリプトテキスト表示関連で使われるのウェイト値(スクリプトやスクロールテキストで変化する時に使用されます)
+        self.script_count             = 0 #スクリプトテキスト表示関連で使われるのカウンタ値(スクリプトやスクロールテキストで変化する時に使用されます)
         
-        self.text_disp_x            = 0 #テキスト表示領域の指定(開始始点座標)posx,posyからのオフセット値となります
-        self.text_disp_y            = 0
-        self.text_disp_width        = 0 #テキスト表示領域の指定(幅)
-        self.text_disp_height       = 0 #テキスト表示領域の指定(高さ)
+        self.script_disp_x            = 0 #スクリプトテキスト表示領域の指定(開始始点座標)posx,posyからのオフセット値となります
+        self.script_disp_y            = 0
+        self.script_disp_width        = 0 #スクリプトテキスト表示領域の指定(幅)
+        self.script_disp_height       = 0 #スクリプトテキスト表示領域の指定(高さ)
         
-        self.text_disp_scrolled_dot     = 0 #予約用1~4
-        self.text_disp_reserve2     = 0
-        self.text_disp_reserve3     = 0
-        self.text_disp_reserve4     = 0
+        self.script_disp_scrolled_dot = 0 #スクリプトテキスト関連の予約用1~4
+        self.script_disp_reserve2     = 0
+        self.script_disp_reserve3     = 0
+        self.script_disp_reserve4     = 0
         
-        
-        self.text_flag1             = 0 #テキスト表示関連で使われるのフラグ類1(スクリプトやスクロールテキストで変化する時に使用されます)
-        self.text_flag2             = 0 #テキスト表示関連で使われるのフラグ類2(スクリプトやスクロールテキストで変化する時に使用されます)
-        self.text_flag3             = 0 #テキスト表示関連で使われるのフラグ類3(スクリプトやスクロールテキストで変化する時に使用されます)
-        self.text_flag4             = 0 #テキスト表示関連で使われるのフラグ類4(スクリプトやスクロールテキストで変化する時に使用されます)
+        self.script_flag1             = 0 #スクリプトテキスト表示関連で使われるのフラグ類1(スクリプトやスクロールテキストで変化する時に使用されます)
+        self.script_flag2             = 0 #スクリプトテキスト表示関連で使われるのフラグ類2(スクリプトやスクロールテキストで変化する時に使用されます)
+        self.script_flag3             = 0 #スクリプトテキスト表示関連で使われるのフラグ類3(スクリプトやスクロールテキストで変化する時に使用されます)
+        self.script_flag4             = 0 #スクリプトテキスト表示関連で使われるのフラグ類4(スクリプトやスクロールテキストで変化する時に使用されます)
         
         self.between_line = 0       #テキスト表示時の行と行の間隔(通常は7ドット)
-
+        
         self.title_text = []                      #タイトルが入ります
         self.item_text       = [[] for i in range(12)] #アイテムテキスト(選択メニューの項目文章)が入ります
         self.item_kanji_text = [[] for i in range(12)] #アイテムテキスト(選択メニューの項目文章)が入ります(日本語)
@@ -1554,11 +1553,11 @@ class Window:                 #メッセージ表示ウィンドウのクラス�
         self.item_id                = []  #カーソル位置に存在するアイテムIDナンバー
     def update(self,window_id,window_id_sub,window_type,window_frame,window_bg,window_priority,open_direction,close_direction,window_status,\
         
-        text_disp_speed,text_disp_type,text_digits,text_lines,text_align,text_scroll_type,text_scroll_speed,text_scroll_line_count,text_wait,text_count,\
-        text_disp_x,text_disp_y,text_disp_width,text_disp_height,\
-        text_disp_scrolled_dot,text_disp_reserve2,text_disp_reserve3,text_disp_reserve4,\
+        script_disp_type,script_disp_speed,script_digits,script_lines,script_align,script_scroll_type,script_scroll_speed,script_scroll_line_count,script_wait,script_count,\
+        script_disp_x,script_disp_y,script_disp_width,script_disp_height,\
+        script_disp_scrolled_dot,script_disp_reserve2,script_disp_reserve3,script_disp_reserve4,\
         
-        text_flag1,text_flag2,text_flag3,text_flag4,\
+        script_flag1,script_flag2,script_flag3,script_flag4,\
         between_line,\
         
         title_text,\
@@ -1602,28 +1601,28 @@ class Window:                 #メッセージ表示ウィンドウのクラス�
         self.close_direction = close_direction
         self.window_status = window_status
         
-        self.text_disp_type         = text_disp_type     
-        self.text_disp_speed        = text_disp_speed     
-        self.text_digits            = text_digits     
-        self.text_lines             = text_lines     
-        self.text_align             = text_align     
-        self.text_scroll_type       = text_scroll_type
-        self.text_scroll_speed      = text_scroll_speed    
-        self.text_scroll_line_count = text_scroll_line_count
-        self.text_wait              = text_wait
-        self.text_count             = text_count
-        text_disp_x                 = text_disp_x
-        text_disp_y                 = text_disp_y
-        text_disp_width             = text_disp_width
-        text_disp_height            = text_disp_height
-        text_disp_scrolled_dot      = text_disp_scrolled_dot
-        text_disp_reserve2          = text_disp_reserve2
-        text_disp_reserve3          = text_disp_reserve3
-        text_disp_reserve4          = text_disp_reserve4
-        self.text_flag1             = text_flag1
-        self.text_flag2             = text_flag2
-        self.text_flag3             = text_flag3
-        self.text_flag4             = text_flag4
+        self.script_disp_type         = script_disp_type     
+        self.script_disp_speed        = script_disp_speed     
+        self.script_digits            = script_digits     
+        self.script_lines             = script_lines     
+        self.script_align             = script_align     
+        self.script_scroll_type       = script_scroll_type
+        self.script_scroll_speed      = script_scroll_speed    
+        self.script_scroll_line_count = script_scroll_line_count
+        self.script_wait              = script_wait
+        self.script_count             = script_count
+        self.script_disp_x            = script_disp_x
+        self.script_disp_y            = script_disp_y
+        self.script_disp_width        = script_disp_width
+        self.script_disp_height       = script_disp_height
+        self.script_disp_scrolled_dot = script_disp_scrolled_dot
+        self.script_disp_reserve2     = script_disp_reserve2
+        self.script_disp_reserve3     = script_disp_reserve3
+        self.script_disp_reserve4     = script_disp_reserve4
+        self.script_flag1             = script_flag1
+        self.script_flag2             = script_flag2
+        self.script_flag3             = script_flag3
+        self.script_flag4             = script_flag4
         
         self.between_line = between_line
         
@@ -1706,7 +1705,7 @@ class Window:                 #メッセージ表示ウィンドウのクラス�
         self.comment_list_eng  = comment_list_eng
         self.comment_list_jpn  = comment_list_jpn
         self.item_id           = item_id
-class Redraw_star_area: #背景の星を再描画する範囲指定のクラス設定
+class Redraw_star_area:       #背景の星を再描画する範囲指定のクラス設定
     def __init__(self):             #コンストラクタ
         self.window_id = 0          #再描画するウィンドウのID
         self.posx   = 0             #背景の星を再描画する領域 始点のx座標
@@ -1871,7 +1870,7 @@ class Raster_scroll:          #背景でラスタースクロールするとき�
         self.total_line_num = total_line_num
         self.posx = x
         self.posy = y
-        self.offsrt_x = offset_y
+        self.offset_x = offset_x
         self.offset_y = offset_y
         self.img_bank = img_bank
         self.posu = u
@@ -1883,3 +1882,31 @@ class Raster_scroll:          #背景でラスタースクロールするとき�
         self.wave_timer = wave_timer
         self.wave_speed = wave_speed
         self.wave_intensity = wave_intensity
+class Visualscene:            #オープニングや中間デモ、アドバタイズデモ、エンディングなどの自動で進行していく「ビジュアルシーン」などのクラス設定
+    def __init__(self):
+        self.id                     = 0        #IDナンバー
+        self.id_sub                 = 0        #サブIDナンバー
+        self.type                   = 0        #種類(タイプ)
+        self.status                 = 0        #状態(ステータス)
+        self.priority               = 0        #描画優先度
+        self.color                  = 0        #色            (予約用)
+        self.transparent_color      = 0        #透明色
+        self.posx                   = 0        #x座標
+        self.posy                   = 0        #y座標
+        self.width                  = 0        #横幅
+        self.height                 = 0        #縦幅
+        self.vx,self.vy             = 0,0      #速度(速度ベクトル)
+        self.vx_accel,self.vy_accel = 0,0      #速度に掛け合わせる加速度(accel)
+        self.dx,self.dy             = 0,0      #移動先の座標(destination_x,y)
+        self.wait                   = [[] for i in range(128)] #ウェイトカウンター
+        self.flag                   = [[] for i in range(128)] #各種フラグ
+        self.grp                    = [[] for i in range(128)] #各種グラフイック類
+        self.face                   = [[] for i in range(128)] #各種顔グラフイック類
+        self.sound                  = [[] for i in range(128)] #各種サウンドエフェクト類
+        self.bgm                    = [[] for i in range(128)] #各種BGM類
+        self.effect                 = [[] for i in range(128)] #各種画面エフェクト類
+        self.text                   = [[] for i in range(128)] #各種画面テキスト類
+        self.scroll_text            = [[] for i in range(128)] #各種画面テキスト類(自動スクロールするテキスト類)
+        self.script                 = [[] for i in range(128)] #スクリプト(書記系)が入ります
+        self.vector_grp             = [[] for i in range(128)] #ベクターグラフイックスで描かれる画像データリストが入ります
+        self.timeline               = [[] for i in range(128)] #各種制御用のタイムラインデータが入ります

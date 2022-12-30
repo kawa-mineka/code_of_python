@@ -96,7 +96,8 @@ import pyxel        #グラフイックキャラやバックグラウンドグ�
 import pygame.mixer #MP3再生するためだけに使用する予定・・・予定は未定・・・そして未定は確定に！やったあぁ！ BGMだけで使用しているサブゲームエンジン
 
 from const             import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？)
-from const_window      import * #主にウィンドウクラスで使用する定数定義
+from const_window      import * #主にウィンドウクラスで使用する定数定義の読み込み
+from const_visualscene import * #主にビジュアルシーンで使用する定数定義の読み込み
 
 from define_class      import * #クラス宣言モジュールの読み込み やっぱりimport *は不味いのかなぁ・・・よくわかんない
 from define_data       import * #初期データリスト登録モジュールの読み込み
