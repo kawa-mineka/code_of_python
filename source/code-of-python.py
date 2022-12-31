@@ -95,44 +95,45 @@ import copy #スコアボードでデフォルトスコアボードを深い階�
 import pyxel        #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
 import pygame.mixer #MP3再生するためだけに使用する予定・・・予定は未定・・・そして未定は確定に！やったあぁ！ BGMだけで使用しているサブゲームエンジン
 
-from const             import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？)
-from const_window      import * #主にウィンドウクラスで使用する定数定義の読み込み
-from const_visualscene import * #主にビジュアルシーンで使用する定数定義の読み込み
+from const              import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？)
+from const_window       import * #主にウィンドウクラスで使用する定数定義の読み込み
+from const_visualscene  import * #主にビジュアルシーンで使用する定数定義の読み込み
 
-from define_class      import * #クラス宣言モジュールの読み込み やっぱりimport *は不味いのかなぁ・・・よくわかんない
-from define_data       import * #初期データリスト登録モジュールの読み込み
-from define_ship_data  import * #各種機体(シップ)データ関連の登録モジュールの読み込み
-from define_enemy_data import * #敵のデータ関連の登録モジュールの読み込み
-from define_boss_data  import * #ボスのデータ関連の登録モジュールの読み込み
-from define_stage_data import * #各ステージのイベントリスト登録モジュールの読み込み
-from define_sound      import * #音声ファイルのリスト登録&ローディング
-from func              import * #汎用性のある関数群のモジュールの読み込み
+from define_class       import * #クラス宣言モジュールの読み込み やっぱりimport *は不味いのかなぁ・・・よくわかんない
+from define_data        import * #初期データリスト登録モジュールの読み込み
+from define_ship_data   import * #各種機体(シップ)データ関連の登録モジュールの読み込み
+from define_enemy_data  import * #敵のデータ関連の登録モジュールの読み込み
+from define_boss_data   import * #ボスのデータ関連の登録モジュールの読み込み
+from define_stage_data  import * #各ステージのイベントリスト登録モジュールの読み込み
+from define_sound       import * #音声ファイルのリスト登録&ローディング
+from func               import * #汎用性のある関数群のモジュールの読み込み
 
-from graph             import * #Appクラスのdraw関数から呼び出される関数群のモジュールの読み込み 基本的に画像表示だけを行う関数(メソッド)群です
+from graph              import * #Appクラスのdraw関数から呼び出される関数群のモジュールの読み込み 基本的に画像表示だけを行う関数(メソッド)群です
 
-from update_obj        import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主に背景オブジェクトの更新を行う関数(メソッド？）です
+from update_obj         import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主に背景オブジェクトの更新を行う関数(メソッド？）です
 
-from update_ipl        import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にIPL表示関連の更新を行う関数(メソッド？）です
-from update_init       import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にゲームスタート時の初期化,ステージスタート時の初期化の更新を行うメソッドです  
-from update_title      import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にタイトルメニューの更新を行う関数(メソッド？）です
-from update_pause      import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み ゲーム中のポーズ更新のメソッド群です
-from update_score      import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み スコア加算やハイスコアのチェック、登録などの更新メソッド
-from update_status     import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にステータス表示ウィンドウで使われる項目を更新するメソッドです
+from update_ipl         import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にIPL表示関連の更新を行う関数(メソッド？）です
+from update_init        import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にゲームスタート時の初期化,ステージスタート時の初期化の更新を行うメソッドです  
+from update_title       import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にタイトルメニューの更新を行う関数(メソッド？）です
+from update_pause       import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み ゲーム中のポーズ更新のメソッド群です
+from update_score       import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み スコア加算やハイスコアのチェック、登録などの更新メソッド
+from update_status      import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にステータス表示ウィンドウで使われる項目を更新するメソッドです
 
-from update_system     import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にシステムデータのセーブロードを行う関数(メソッド？）です
-from update_window     import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にウィンドウやセレクトカーソルの更新を行う関数(メソッド？）です
-from update_replay     import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み リプレイ記録再生の更新を行う関数(メソッド？）です
-from update_debug      import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み デバッグ用パラメーターの更新やキー入力による直接デバッグを行うメソッドです
-from update_btn        import * #Appクラスのupdate関数から呼び出されるモジュール 主にショット＆ミサイル関連のボタンが押されたかを調べるメソッドです
-from update_btn_assign import * #Appクラスのupdate関数から呼び出されるモジュール パッドのボタンの機能変更（ボタンアサインコンフィグ)メソッドです
+from update_system      import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にシステムデータのセーブロードを行う関数(メソッド？）です
+from update_window      import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にウィンドウやセレクトカーソルの更新を行う関数(メソッド？）です
+from update_visualscene import * #ppクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にビジュアルシーンの作製や更新を行うのです
+from update_replay      import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み リプレイ記録再生の更新を行う関数(メソッド？）です
+from update_debug       import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み デバッグ用パラメーターの更新やキー入力による直接デバッグを行うメソッドです
+from update_btn         import * #Appクラスのupdate関数から呼び出されるモジュール 主にショット＆ミサイル関連のボタンが押されたかを調べるメソッドです
+from update_btn_assign  import * #Appクラスのupdate関数から呼び出されるモジュール パッドのボタンの機能変更（ボタンアサインコンフィグ)メソッドです
 
-from update_ship       import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主に自機関連のメソッドです
-from update_enemy      import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主に敵の更新や敵弾の更新を行います
-from update_boss       import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み ボスの更新を行います
-from update_collision  import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主に衝突当たり判定を行います
-from update_item       import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にパワーアップアイテム関連の更新を行います
+from update_ship        import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主に自機関連のメソッドです
+from update_enemy       import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主に敵の更新や敵弾の更新を行います
+from update_boss        import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み ボスの更新を行います
+from update_collision   import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主に衝突当たり判定を行います
+from update_item        import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にパワーアップアイテム関連の更新を行います
 
-from update_event      import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にイベントリストでの敵発生やマップスクロール時に敵を出す処理を行います
+from update_event       import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にイベントリストでの敵発生やマップスクロール時に敵を出す処理を行います
 
 class App:
     ##########################################################################################################################################
@@ -403,7 +404,7 @@ class App:
             update_window.window(self)            #ウィンドウの更新（ウィンドウの開き閉じ画面外に消え去っていくとか）関数を呼び出し
             update_window.clip_window(self)       #画面外にはみ出たウィンドウを消去する関数の呼び出し
             update_window.active_window(self)     #現在アクティブ(最前面)になっているウィンドウのインデックス値(i)を求める関数の呼び出し
-        
+            update_visualscene.visualscene(self)        #ビジュアルシーンの更新関数の呼び出し
         ################################ タイトルでのボタン入力待ち###################################################################
         if self.game_status == SCENE_TITLE_HIT_ANY_BTN: #ゲームステータスが「SCENE_TITLE_HIT_ANY_BTN」場合は何かしらのボタン入力待ちをする
             update_title.title_hit_any_btn(self)        #タイトルメニューを表示した後,何かしらのボタンの入力待ち状態
@@ -412,7 +413,7 @@ class App:
             update_window.window(self)                  #ウィンドウの更新（ウィンドウの開き閉じ画面外に消え去っていくとか）関数を呼び出し
             update_window.clip_window(self)             #画面外にはみ出たウィンドウを消去する関数の呼び出し
             update_window.active_window(self)           #現在アクティブ(最前面)になっているウィンドウのインデックス値(i)を求める関数の呼び出し
-        
+            update_visualscene.visualscene(self)        #ビジュアルシーンの更新関数の呼び出し
         ################################ タイトルロゴの2回目以降の表示 ###################################################################
         if self.game_status == SCENE_TITLE_SECOND: #ゲームステータスが「SCENE_TITLE_SECOND」の場合タイトルの更新を行う
             update_title.title(self)               #タイトルの更新
@@ -800,7 +801,7 @@ class App:
             or self.game_status == SCENE_GAME_QUIT:
             
             graph.draw_star(self)                          #背景の星を表示する関数の呼び出し
-            
+            graph.draw_visualscene(self,WINDOW_PRIORITY_TITLE_BACK)                     #タイトルより奥にあるビジュアルシーンを表示する
             graph.draw_window(self,WINDOW_PRIORITY_TITLE_BACK,   ORDINARY_SUPERPOSITION)#タイトルより奥にあるウィンドウをそのまま重ね合わせて表示する
             
             #ゲームプレイ中からの終了工程の場合はタイトルロゴを表示しない

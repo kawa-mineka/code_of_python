@@ -1910,3 +1910,34 @@ class Visualscene:            #オープニングや中間デモ、アドバタ�
         self.script                 = [[] for i in range(128)] #スクリプト(書記系)が入ります
         self.vector_grp             = [[] for i in range(128)] #ベクターグラフイックスで描かれる画像データリストが入ります
         self.timeline               = [[] for i in range(128)] #各種制御用のタイムラインデータが入ります
+    def update(self,id,id_sub,type,status,priority,color,transparent_color,x,y,width,height,vx,vy,vx_accel,vy_accel,dx,dy,\
+        wait,flag,grp,face,sound,bgm,effect,text,scroll_text,script,vector_grp,timeline):
+        self.id                = id
+        self.id_sub            = id_sub
+        self.type              = type
+        self.status            = status
+        self.priority          = priority
+        self.color             = color
+        self.transparent_color = transparent_color
+        self.posx              = x
+        self.posy              = y
+        self.width             = width
+        self.height            = height
+        self.vx                = vx
+        self.vy                = vy
+        self.vx_accel          = vx_accel
+        self.vy_accel          = vy_accel
+        self.dx                = dx
+        self.dy                = dy
+        self.wait              = wait
+        self.flag              = flag
+        self.grp               = grp
+        self.face              = face
+        self.sound             = sound
+        self.bgm               = bgm
+        self.effect            = effect
+        self.text              = text
+        self.scroll_text       = scroll_text
+        self.script            = script
+        self.vector_grp        = vector_grp
+        self.timeline          = timeline

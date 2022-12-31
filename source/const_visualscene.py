@@ -97,8 +97,8 @@ LIST_VS_SCROLL_TEXT_SUBTITLES_Y          =  8 #字幕を表示するy座標
 LIST_VS_SCROLL_TEXT_SUBTITLES_WIDTH      =  9 #字幕の横幅
 LIST_VS_SCROLL_TEXT_SUBTITLES_HEIGHT     = 10 #字幕の縦幅
 
-LIST_VS_SCROLL_TEXT_SHADOW_FLAG          = 11 #スクロールテキストの上下に影を付けるかどうかのフラグ
-LIST_VS_SCROLL_TEXT_SHADOW_COL           = 12 #スクロールテキストの上下に影を付ける際、どの様な色にするかの指定
+LIST_VS_SCROLL_TEXT_SHADOW_FLAG          = 11 #スクロールテキストの上下端に影を付けるかどうかのフラグ
+LIST_VS_SCROLL_TEXT_SHADOW_COL           = 12 #スクロールテキストの上下端に影を付ける際、どの様な色にするかの指定
 LIST_VS_SCROLL_TEXT_SHADOW_UP_LINE_NUM   = 13 #スクロールテキストの上下に影を付ける際の上部分のラインドット数
 LIST_VS_SCROLL_TEXT_SHADOW_DOWN_LINE_NUM = 14 #スクロールテキストの上下に影を付ける際の下部分のラインドット数
 
@@ -142,13 +142,13 @@ LIST_VS_TIMELINE_5         = 5
 #             またはvisualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_DATA_ENG][ここで定義した定数]
 #                   visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_DATA_JPN][ここで定義した定数]に入ります
 LIST_VS_TEXT                    =  0 #VSテキスト
-LIST_VS_TEXT_BTN_SE_FLAG        =  1 #パッドボタン音を出すかどうかのフラグ
+LIST_VS_TEXT_COLOR              =  1 #VSテキストの表示色
 LIST_VS_TEXT_ALIGN              =  2 #VSテキストの揃え方(アライメント)(整列の仕方)
-LIST_VS_TEXT_OX                 =  3 #VSテキスト表示x軸のオフセット値
-LIST_VS_TEXT_OY                 =  4 #VSテキスト表示y軸のオフセット値
-LIST_VS_TEXT_COLOR              =  5 #VSテキストの表示色
+LIST_VS_TEXT_FLASH              =  3 #VSテキストの点滅の仕方
+LIST_VS_TEXT_BTN_SE_FLAG        =  4 #パッドボタン音を出すかどうかのフラグ
+LIST_VS_TEXT_OX                 =  5 #VSテキスト表示x軸のオフセット値
 
-LIST_VS_TEXT_FLASH              =  6 #VSテキストの点滅のしかた
+LIST_VS_TEXT_OY                 =  6 #VSテキスト表示y軸のオフセット値
 LIST_VS_TEXT_TYPE               =  7 #VSテキストのタイプ
 LIST_VS_TEXT_STATUS             =  8 #VSテキストのステータス(状態)
 LIST_VS_TEXT_LENGTH             =  9 #VSテキストの長さ
@@ -179,3 +179,15 @@ NO_VS_SCROLL_TEXT_LIST   = []
 NO_VS_SCRIPT_LIST        = []
 NO_VS_VECTOR_GRP_LIST    = []
 NO_VS_TIMELINE_LIST      = []
+
+NO_VS_TEXT_ENG = []
+NO_VS_TEXT_JPN = []
+
+SUBTITLES_OFF = 0 #字幕表示のオンオフ
+SUBTITLES_ON  = 1
+
+EDGE_SHADOW_OFF = 0 #テキストの端に影を付けるかのオンオフ
+EDGE_SHADOW_ON  = 1
+
+END_ACTION_NONE = 0 #終了後は何もしない
+END_ACTION_DEL  = 1 #終了したらビジュアルシーン自体を消去する

@@ -7,13 +7,14 @@
 ###########################################################
 import copy #スコアボードでデフォルトスコアボードを深い階層までのコピーを使いたいのでインポートします
 
-import pyxel                    #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
-from const             import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
-from func              import * #汎用性のある関数群のモジュールの読み込み
-from update_system     import * #システムデータをセーブするときに使用します
-from update_window     import * #各種ウィンドウ作成時に使用するのでインポート
-from update_se         import * #SEのVOLリスト原本を取得しバックアップするために必要なのでインポート
-from update_btn_assign import * #パッドボタン割り当てのリスト更新で使用するのでインポートします
+import pyxel                     #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
+from const              import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
+from func               import * #汎用性のある関数群のモジュールの読み込み
+from update_system      import * #システムデータをセーブするときに使用します
+from update_window      import * #各種ウィンドウ作成時に使用するのでインポート
+from update_visualscene import * #ビジュアルシーン作成時に使用するのでインポートします
+from update_se          import * #SEのVOLリスト原本を取得しバックアップするために必要なのでインポート
+from update_btn_assign  import * #パッドボタン割り当てのリスト更新で使用するのでインポートします
 
 class update_title:
     def __init__(self):
@@ -38,22 +39,23 @@ class update_title:
         
         if self.title_startup_count == 0:
             #初回起動
-            self.display_title_time      = 204       #タイトルを表示する時間
-            self.title_oscillation_count = 200       #タイトルグラフイックの振れ幅カウンター
-            self.title_slash_in_count    = 100       #タイトルグラフイックが下から切り込んで競りあがってくる時に使うカウンター
+            self.display_title_time      = 204      #タイトルを表示する時間
+            self.title_oscillation_count = 200      #タイトルグラフイックの振れ幅カウンター
+            self.title_slash_in_count    = 100      #タイトルグラフイックが下から切り込んで競りあがってくる時に使うカウンター
         else:#2回目以降の起動
-            self.display_title_time      = 104        #タイトルを表示する時間
-            self.title_oscillation_count = 100        #タイトルグラフイックの振れ幅カウンター
+            self.display_title_time      = 104      #タイトルを表示する時間
+            self.title_oscillation_count = 100      #タイトルグラフイックの振れ幅カウンター
             self.title_slash_in_count =    50       #タイトルグラフイックが下から切り込んで競りあがってくる時に使うカウンター
         
         self.push_any_btn_flag    = FLAG_OFF        #何かしらかのボタンが押されたかどうかのフラグを降ろしておく
         self.release_the_btn_flag = FLAG_OFF        #すべての決定ボタンが離された？かどうかのフラグを降ろしておく
         
-        self.stars = []                        #タイトル表示時も背景の星を流したいのでリストをここで初期化してやります
-        self.star_scroll_speed = 1             #背景の流れる星のスクロールスピード 1=通常スピード 0.5なら半分のスピードとなります
-        self.window = []                       #タイトル表示時もメッセージウィンドウを使いたいのでリストをここで初期化してあげます
-        self.redraw_star_area = []             #タイトル表示時も半透明ウィンドウ表示でのスターリドロー処理も行いたいのでここで初期化してあげます
-        self.cursor = []                       #タイトル表示時もウィンドウカーソルを使いたいのでリストをここで初期化してあげます
+        self.stars             = []  #タイトル表示時も背景の星を流したいのでリストをここで初期化してやります
+        self.star_scroll_speed = 1   #背景の流れる星のスクロールスピード 1=通常スピード 0.5なら半分のスピードとなります
+        self.window            = []  #タイトル表示時もメッセージウィンドウを使いたいのでリストをここで初期化してあげます
+        self.visualscene       = []  #タイトル表示時もビジュアルシーンを使いたいのでリストをここで初期化してあげます
+        self.redraw_star_area  = []  #タイトル表示時も半透明ウィンドウ表示でのスターリドロー処理も行いたいのでここで初期化してあげます
+        self.cursor            = []  #タイトル表示時もウィンドウカーソルを使いたいのでリストをここで初期化してあげます
         
         #リプレイ記録用に使用する横無限大,縦50ステージ分の空っぽのリプレイデータリストを作成します
         self.replay_recording_data =[[] for i in range(50)]
@@ -70,7 +72,7 @@ class update_title:
         self.cursor_pre_page = 0               #前フレームで表示していたページ数 pre_pageとpageが同じなら新規ウィンドウは育成しない
         self.cursor_page_max = 0               #セレクトカーソルで捲ることが出来る最多ページ数
         self.cursor_item_x = 0                 #いま指し示しているアイテムナンバーx軸方向
-        self.cursor_item_y = 0                   #いま指し示しているアイテムナンバーy軸方向
+        self.cursor_item_y = 0                 #いま指し示しているアイテムナンバーy軸方向
         self.cursor_decision_item_x = UNSELECTED #ボタンが押されて「決定」されたアイテムのナンバーx軸方向 UNSELECTEDは未決定 ここをチェックしてどのアイテムが選択されたのか判断する
         self.cursor_decision_item_y = UNSELECTED #ボタンが押されて「決定」されたアイテムのナンバーy軸方向 UNSELECTEDは未決定 ここをチェックしてどのアイテムが選択されたのか判断する
         self.cursor_max_item_x = 0             #x軸の最大項目数 5の場合(0~4)の5項目分カーソルが移動することになります 3だったら(0~2)って感じで
@@ -113,6 +115,7 @@ class update_title:
             self.active_window_id = WINDOW_ID_TITLE_TEXT  #このウィンドウIDを最前列アクティブなものとする
             self.push_any_btn_flag    = FLAG_OFF          #決定ボタンを押した,離したフラグをオフにする
             self.release_the_btn_flag = FLAG_OFF
+            update_visualscene.create(self,VS_ID_OPENING_STORY1)             #オープニングのストーリーテキストその1のビジュアルシーンを作製する
             self.game_status = SCENE_TITLE_FIRST   #初回起動の場合は,       ゲームステータスを「SCENE_TITLE_FIRST」 にしてタイトル表示を開始する
         else:
             self.game_status = SCENE_TITLE_SECOND  #2回目以降の起動の場合は,ゲームステータスを「SCENE_TITLE_SECOND」にしてタイトル表示を開始する

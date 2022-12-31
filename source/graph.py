@@ -5,11 +5,12 @@
 #  主に描画関係のみだけを行う関数(メソッド？）ですよ～♪        #
 # 2022 04/03からファイル分割してモジュールとして運用開始      #
 ###########################################################
-import math                 #三角関数などを使用したいのでインポートぉぉおお！
-import pyxel                #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
-from const         import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
-from const_window  import * #主にウィンドウクラスで使用する定数定義
-from func          import * #汎用性のある関数群のモジュールの読み込み
+import math                     #三角関数などを使用したいのでインポートぉぉおお！
+import pyxel                    #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
+from const             import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
+from const_window      import * #主にウィンドウクラスで使用する定数定義
+from const_visualscene import * #主にビジュアルシーンクラスで使用する定数定義
+from func              import * #汎用性のある関数群のモジュールの読み込み
 
 class graph:
     #IPLメッセージの表示#######################################
@@ -1751,3 +1752,48 @@ class graph:
             if (pyxel.frame_count % 2) == 0:
                 self.shadow_in_out_counter += 1 #カウンタを1増やす
         return()
+
+    #ビジュアルシーンの表示
+    def draw_visualscene(self,priority): #priorityの数値と一致するプライオリティナンバーを持つビジュアルシーンだけを描画します
+        """
+        ビジュアルシーンの表示
+        
+        priorityの数値と一致するプライオリティナンバーを持つビジュアルシーンだけを描画します
+        """
+        visualscene_count = len(self.visualscene)
+        for i in range(visualscene_count):
+                #スクロールするテキストの表示
+                if self.visualscene[i].scroll_text  != "": #スクロールテキストリストが空でないのならば表示を始める
+                    all_line_num = len(self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_DATA_ENG])         #スクロールする文章の全体の行数を求める
+                    between_line = self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_BETWEEN_LINE_ENG] #テキストの行間ドット数を求める
+                    for j in range (all_line_num):
+                        disp_text = self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_DATA_ENG][j][LIST_VS_TEXT] #このあたりの添え字の指定が判りにくいのう・・・多次元配列が判らん・・・こまめにprint命令でコンソール出力して確認していくしかないわめ！
+                        dis_x = self.visualscene[i].posx
+                        dis_y = self.visualscene[i].posy + between_line * j - self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_SCROLLED_DOT_ENG]
+                        # dis_y = self.visualscene[i].posy
+                        # print (" ")
+                        # print ("disp visuaulscene text")
+                        # print(disp_text)
+                        # print (" ")
+                        #アライメントオフセット値の計算
+                        if   self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_DATA_ENG][j][LIST_VS_TEXT_ALIGN] == DISP_CENTER:      #中央表示
+                            dis_offset_x = self.visualscene[i].width // 2 - len(disp_text) * 2
+                        elif self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_DATA_ENG][j][LIST_VS_TEXT_ALIGN] == DISP_LEFT_ALIGN:  #左詰め
+                            dis_offset_x = 0
+                        elif self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_DATA_ENG][j][LIST_VS_TEXT_ALIGN] == DISP_RIGHT_ALIGN: #右詰め
+                            dis_offset_x = self.visualscene[i].width      - len(disp_text) * 4
+                        else:
+                            dis_offset_x = 0
+                        
+                        if 40 <=  dis_y <= 90:
+                            if abs(dis_y -   85) <= 6:
+                                func.drop_shadow_text(self,dis_x + dis_offset_x ,dis_y,disp_text,7)
+                            elif abs(dis_y - 85) <= 8:
+                                func.drop_shadow_text(self,dis_x + dis_offset_x ,dis_y,disp_text,6)
+                            elif abs(dis_y - 85) <= 17:
+                                func.drop_shadow_text(self,dis_x + dis_offset_x ,dis_y,disp_text,12)
+                            elif abs(dis_y - 85) <= 30:
+                                func.drop_shadow_text(self,dis_x + dis_offset_x ,dis_y,disp_text,5)
+                            else:
+                                func.drop_shadow_text(self,dis_x + dis_offset_x ,dis_y,disp_text,1)
+                
