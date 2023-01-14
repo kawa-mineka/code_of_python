@@ -179,13 +179,16 @@ class App:
         update_system.check_exist_sysytem_file(self) #ユーザープロファイルのcode-of-pythonフォルダにシステムファイルがあるかどうか調べなかったらデフォルトのシステムデータをコピーする
         
         print(" ")
-        print("PYXEL VERSION " + pyxel.PYXEL_VERSION)
-        print("PYXEL WORKING DIR " + pyxel.PYXEL_WORKING_DIR)
+        # print("PYXEL VERSION " + pyxel.PYXEL_VERSION)         #pyxel 1.8.15まで使えていたけどpyxel 1.9.10以降は使えなくなった模様
+        # print("PYXEL WORKING DIR " + pyxel.PYXEL_WORKING_DIR) #pyxel 1.8.15まで使えていたけどpyxel 1.9.10以降は使えなくなった模様
         
-        print("APP FILE EXTENSION " + pyxel.APP_FILE_EXTENSION)
-        print("APP STARTUP SCRIPT FILE " + pyxel.APP_STARTUP_SCRIPT_FILE)
-        print("RESOURCE_FILE_EXTENSION " + pyxel.RESOURCE_FILE_EXTENSION)
-        print("RESOURCE_ARCHIVE_DIRNAME " + pyxel.RESOURCE_ARCHIVE_DIRNAME)
+        print("PYXEL VERSION "             + pyxel.VERSION)         #pyxel 1.9.10以降はこれでいける模様
+        print("PYXEL WORKING DIR "         + pyxel.WORKING_DIR)     #pyxel 1.9.10以降はこれでいける模様
+        
+        print("APP FILE EXTENSION "        + pyxel.APP_FILE_EXTENSION)
+        print("APP STARTUP SCRIPT FILE "   + pyxel.APP_STARTUP_SCRIPT_FILE)
+        print("RESOURCE_FILE_EXTENSION "   + pyxel.RESOURCE_FILE_EXTENSION)
+        print("RESOURCE_ARCHIVE_DIRNAME "  + pyxel.RESOURCE_ARCHIVE_DIRNAME)
         print(" ")
         print("NUM_COLORS "     + str(pyxel.NUM_COLORS))
         print("NUM_IMAGES "     + str(pyxel.NUM_IMAGES))

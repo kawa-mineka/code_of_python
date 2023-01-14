@@ -1893,8 +1893,10 @@ class Visualscene:            #オープニングや中間デモ、アドバタ�
         self.transparent_color      = 0        #透明色
         self.posx                   = 0        #x座標
         self.posy                   = 0        #y座標
-        self.width                  = 0        #横幅
-        self.height                 = 0        #縦幅
+        self.width                  = 0        #現在の横幅
+        self.height                 = 0        #現在の縦幅
+        self.open_width             = 0        #ビジュアルシーンが完全に開いた状態の横幅と縦幅(width,heighがこの値になったらビジュアルシーンオープン完了)
+        self.open_height            = 0   
         self.vx,self.vy             = 0,0      #速度(速度ベクトル)
         self.vx_accel,self.vy_accel = 0,0      #速度に掛け合わせる加速度(accel)
         self.dx,self.dy             = 0,0      #移動先の座標(destination_x,y)
@@ -1910,7 +1912,7 @@ class Visualscene:            #オープニングや中間デモ、アドバタ�
         self.script                 = [[] for i in range(128)] #スクリプト(書記系)が入ります
         self.vector_grp             = [[] for i in range(128)] #ベクターグラフイックスで描かれる画像データリストが入ります
         self.timeline               = [[] for i in range(128)] #各種制御用のタイムラインデータが入ります
-    def update(self,id,id_sub,type,status,priority,color,transparent_color,x,y,width,height,vx,vy,vx_accel,vy_accel,dx,dy,\
+    def update(self,id,id_sub,type,status,priority,color,transparent_color,x,y,width,height,open_width,open_height,vx,vy,vx_accel,vy_accel,dx,dy,\
         wait,flag,grp,face,sound,bgm,effect,text,scroll_text,script,vector_grp,timeline):
         self.id                = id
         self.id_sub            = id_sub
@@ -1923,6 +1925,8 @@ class Visualscene:            #オープニングや中間デモ、アドバタ�
         self.posy              = y
         self.width             = width
         self.height            = height
+        self.open_width        = open_width
+        self.open_height       = open_height
         self.vx                = vx
         self.vy                = vy
         self.vx_accel          = vx_accel

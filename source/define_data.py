@@ -220,14 +220,14 @@ class define_data:
     def medal_graph_and_comment_list(self): #メダルのIDナンバーとそれに対するグラフイックチップの位置や英語コメント、日本語コメントのデータリスト
         self.medal_graph_and_comment_list = [
             [MEDAL_NO_SLOT              ,168         ,176,IMG2,"NO SLOT"                   ,"空スロット",                 "","",                                                                                "",""],
-            [MEDAL_BEFOREHAND_1SHOT_ITEM,168 + 8 * 1 ,176,IMG2,"BEFOREHAND 1 SHOT"         ,"事前にショットアイテム①個取得","TOTAL PLAY TIME EXCEEDED","10 MINUTES",                                              "ト─タルプレイ時間が①⓪分を超えました！",""],
-            [MEDAL_BEFOREHAND_2SHOT_ITEM,168 + 8 * 2 ,176,IMG2,"BEFOREHAND 2 SHOT"         ,"事前にショットアイテム②個取得","COMPLETED DEFEATING THE BOSS","ON THE FIRST PAGE",                                   "①面ボスを撃破完了！",""],
-            [MEDAL_BEFOREHAND_3SHOT_ITEM,168 + 8 * 3 ,176,IMG2,"BEFOREHAND 3 SHOT"         ,"事前にショットアイテム③個取得","OBTAINED WITH A TOTAL SCORE OF","2000 POINTS",                                       "ト─タルスコア②⓪⓪⓪点超え！",""],
-            [MEDAL_BEFOREHAND_4SHOT_ITEM,168 + 8 * 4 ,176,IMG2,"BEFOREHAND 4 SHOT"         ,"事前にショットアイテム④個取得","OBTAINED WITH A TOTAL PLAY TIME OF 180 MINUTES", "OR A TOTAL SCORE OF 10000 POINTS", "ト─タルプレイタイム①⑧⓪分","またはト─タルスコア①⓪⓪⓪⓪点超え！"],
-            [MEDAL_EQUIPMENT_LS_SHIELD  ,168 + 8 * 5 ,176,IMG2,"EQUIP L's SHIELD"          ,"エルズシ─ルド装備",           "","",                                                                                "",""],
-            [MEDAL_PLUS_MEDALLION       ,168 + 8 * 6 ,176,IMG2,"2 OPTION SLOT"             ,"スロットが②個増える",         "STAR SCORING MULTIPLIER IS","OVER 7",                                                "スタ─得点倍率が⑦を超えました",""],
-            [MEDAL_CONCENTRATION        ,168 + 8 * 7 ,176,IMG2,"ONE POINT OF CONCENTRATION","一点集中",                   "THE THIRD BOSS IS DEFEATED!","",                                                     "③面ボスを撃破完了！",""],
-            [MEDAL_FRAME_RESIST         ,168 + 8 * 8 ,176,IMG2,"INFLAMMATION RESISTANCE+"  ,"炎耐性＋",                   "OBTAINED BY PLAYING 20 TIMES","OR MORE",                                             "プレイ回数が②⓪回を超えました","" ],
+            [MEDAL_BEFOREHAND_1SHOT_ITEM,168 + 8 * 1 ,176,IMG2,"BEFOREHAND 1 SHOT"         ,"事前にショットアイテム①個取得","TOTAL PLAY TIME EXCEEDED","10 MINUTES",                                              "トータルプレイ時間が１０分を超えました！",""],
+            [MEDAL_BEFOREHAND_2SHOT_ITEM,168 + 8 * 2 ,176,IMG2,"BEFOREHAND 2 SHOT"         ,"事前にショットアイテム②個取得","COMPLETED DEFEATING THE BOSS","ON THE FIRST PAGE",                                   "１面ボスを撃破完了！",""],
+            [MEDAL_BEFOREHAND_3SHOT_ITEM,168 + 8 * 3 ,176,IMG2,"BEFOREHAND 3 SHOT"         ,"事前にショットアイテム③個取得","OBTAINED WITH A TOTAL SCORE OF","2000 POINTS",                                       "トータルスコア２０００点超え！",""],
+            [MEDAL_BEFOREHAND_4SHOT_ITEM,168 + 8 * 4 ,176,IMG2,"BEFOREHAND 4 SHOT"         ,"事前にショットアイテム④個取得","OBTAINED WITH A TOTAL PLAY TIME OF 180 MINUTES", "OR A TOTAL SCORE OF 10000 POINTS", "トータルプレイタイム１８０分","またはトータルスコア１万点超え！"],
+            [MEDAL_EQUIPMENT_LS_SHIELD  ,168 + 8 * 5 ,176,IMG2,"EQUIP L's SHIELD"          ,"エルズシールド装備",           "","",                                                                                "",""],
+            [MEDAL_PLUS_MEDALLION       ,168 + 8 * 6 ,176,IMG2,"2 OPTION SLOT"             ,"スロットが２個増える",         "STAR SCORING MULTIPLIER IS","OVER 7",                                                "スター得点倍率が７を超えました",""],
+            [MEDAL_CONCENTRATION        ,168 + 8 * 7 ,176,IMG2,"ONE POINT OF CONCENTRATION","一点集中",                   "THE THIRD BOSS IS DEFEATED!","",                                                     "３面ボスを撃破完了！",""],
+            [MEDAL_FRAME_RESIST         ,168 + 8 * 8 ,176,IMG2,"INFLAMMATION RESISTANCE+"  ,"炎耐性＋",                   "OBTAINED BY PLAYING 20 TIMES","OR MORE",                                             "プレイ回数が２０回を超えました","" ],
             [MEDAL_RECOVERY_OVER_TIME   ,168 + 8 * 9 ,176,IMG2,"RECOVERY OVER TIME"        ,"時間経過で回復",              "","",                                                                                "",""],
             [MEDAL_TWINKLE              ,168 + 8 *10 ,176,IMG2,"TWINKLE!!"                 ,"ぴかぴか光る！",              "","",                                                                                "",""],
             ]
@@ -236,7 +236,7 @@ class define_data:
         #いきなり美咲フォントコードテーブルを直接代入という破天荒なコード・・・・
         #「シールド」は「シ─ルド」と入力しないと文字化けするので注意 ー→─
         self.font_code_table = (
-            "　、。,.・:;?!゛゜´`¨^‾_ヽヾゝゞ〃仝々〆〇ー—‐/\〜‖|…‥‘’“”()〔〕[]{}〈〉《》「」『』【】+−±×÷=≠<>≦≧∞∴♂♀°′″℃¥$¢£%#&*@§☆★○●◎◇\n"
+            "　、。,.・:;?!゛゜´`¨^‾_ヽヾゝゞ〃仝々〆〇─—‐/\〜‖|…‥‘’“”()〔〕[]{}〈〉《》「」『』【】+−±×÷=≠<>≦≧∞∴♂♀°′″℃¥$¢£%#&*@§☆★○●◎◇\n"
             "◆□■△▲▽▼※〒→←↑↓〓         ∈∋⊆⊇⊂⊃∪∩       ∧∨¬⇒⇔∀∃         ∠⊥⌒∂∇≡≒≪≫√∽∝∵∫∬      Å‰♯♭♪†‡¶    ◯\n"
             "\n" 
             "0123456789      ABCDEFGHIJKLMNOPQRSTUVWXYZ     abcdefghijklmnopqrstuvwxyz\n"
@@ -244,12 +244,12 @@ class define_data:
             "ァアィイゥウェエォオカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモャヤュユョヨラリルレロヮワヰヱヲンヴヵヶ\n"
             "ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ♤♠♢♦♡♥♧♣αβγδεζηθικλμνξοπρστυφχψω\n"
             "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ            абвгдеёжзийклмнопрстуфхцчшщъыьэюя\n"
-            "─│┌┐┘└├┬┤┴┼━┃┏┓┛┗┣┳┫┻╋┠┯┨┷┿┝┰┥┸╂\n"
+            "ー│┌┐┘└├┬┤┴┼━┃┏┓┛┗┣┳┫┻╋┠┯┨┷┿┝┰┥┸╂\n"
             "\n"
             "\n"
             "\n"
             "\n"
-            "⓪①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩⅪ㍉㌔㌢㍍㌘㌧㌃㌶㍑㍗㌍㌦㌣㌫㍊㌻㎜㎝㎞㎎㎏㏄㎡            ㊥㊦㊧㊨㈱㈲㈹㍾㍽㍼∮∟⊿❖☞\n"
+            "０１２３４５６７８９⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩⅪ㍉㌔㌢㍍㌘㌧㌃㌶㍑㍗㌍㌦㌣㌫㍊㌻㎜㎝㎞㎎㎏㏄㎡            ㊥㊦㊧㊨㈱㈲㈹㍾㍽㍼∮∟⊿❖☞\n"
             "\n"          
             "\n"
             "亜唖娃阿哀愛挨姶逢葵茜穐悪握渥旭葦芦鯵梓圧斡扱宛姐虻飴絢綾鮎或粟袷安庵按暗案闇鞍杏以伊位依偉囲夷委威尉惟意慰易椅為畏異移維緯胃萎衣謂違遺医井亥域育郁磯一壱溢逸稲茨芋鰯允印咽員因姻引飲淫胤蔭\n"

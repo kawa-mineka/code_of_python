@@ -1762,8 +1762,70 @@ class graph:
         """
         visualscene_count = len(self.visualscene)
         for i in range(visualscene_count):
-                #スクロールするテキストの表示
-                if self.visualscene[i].scroll_text  != "": #スクロールテキストリストが空でないのならば表示を始める
+                #ベクターグラフイックスの表示
+                if self.visualscene[i].vector_grp != "": #ベクターグラフイック表示を行うリストが空でないのならば表示を始める
+                    for j in range(len(self.visualscene[i].vector_grp)): #vector_grpの長さの分ループ処理する
+                        open_rate_x = self.visualscene[i].width  / self.visualscene[i].open_width  #開閉率(横軸)
+                        open_rate_y = self.visualscene[i].height / self.visualscene[i].open_height #開閉率(縦軸)
+                        if   self.visualscene[i].vector_grp[j][0] == LIST_VISUALSCENE_VECTOR_GRP_LINE:    #LINE命令
+                            x1,y1  = self.visualscene[i].vector_grp[j][1],self.visualscene[i].vector_grp[j][2] #始点座標の取得
+                            x2,y2  = self.visualscene[i].vector_grp[j][3],self.visualscene[i].vector_grp[j][4] #終点座標の取得
+                            colkey = self.visualscene[i].vector_grp[j][5] #描画色の取得
+                            pyxel.line(self.visualscene[i].posx + x1 * open_rate_x,self.visualscene[i].posy + y1 * open_rate_y,self.visualscene[i].posx + x2 * open_rate_x,self.visualscene[i].posy + y2 * open_rate_y,colkey) #ライン描画
+                        elif self.visualscene[i].vector_grp[j][0] == LIST_VISUALSCENE_VECTOR_GRP_PSET:    #PSET命令
+                            x1,y1  = self.visualscene[i].vector_grp[j][1],self.visualscene[i].vector_grp[j][2] #座標の取得
+                            colkey = self.visualscene[i].vector_grp[j][3] #描画色の取得
+                            pyxel.pset(self.visualscene[i].posx + x1 * open_rate_x,self.visualscene[i].posy + y1 * open_rate_y,colkey) #点描画
+                        elif self.visualscene[i].vector_grp[j][0] == LIST_VISUALSCENE_VECTOR_GRP_BOX:     #BOX命令
+                            x,y           = self.visualscene[i].vector_grp[j][1],self.visualscene[i].vector_grp[j][2] #座標の取得
+                            width,height  = self.visualscene[i].vector_grp[j][3],self.visualscene[i].vector_grp[j][4] #横幅縦幅の取得
+                            colkey = self.visualscene[i].vector_grp[j][5] #描画色の取得
+                            pyxel.rectb(self.visualscene[i].posx + x * open_rate_x,self.visualscene[i].posy + y * open_rate_y,width * open_rate_x,height * open_rate_y,colkey) #矩形描画
+                        elif self.visualscene[i].vector_grp[j][0] == LIST_VISUALSCENE_VECTOR_GRP_BOXF:    #BOXFILL命令
+                            x,y           = self.visualscene[i].vector_grp[j][1],self.visualscene[i].vector_grp[j][2] #座標の取得
+                            width,height  = self.visualscene[i].vector_grp[j][3],self.visualscene[i].vector_grp[j][4] #横幅縦幅の取得
+                            colkey = self.visualscene[i].vector_grp[j][5] #描画色の取得
+                            pyxel.rect(self.visualscene[i].posx + x * open_rate_x,self.visualscene[i].posy + y * open_rate_y,width * open_rate_x,height * open_rate_y,colkey) #矩形描画
+                        elif self.visualscene[i].vector_grp[j][0] == LIST_VISUALSCENE_VECTOR_GRP_CIRCLE:  #CIRCLE命令
+                            x1,y1  = self.visualscene[i].vector_grp[j][1],self.visualscene[i].vector_grp[j][2] #中心座標の取得
+                            r      = self.visualscene[i].vector_grp[j][3]                                 #半径の取得
+                            colkey = self.visualscene[i].vector_grp[j][4]                                 #描画色の取得
+                            pyxel.circb(self.visualscene[i].posx + x1 * open_rate_x,self.visualscene[i].posy + y1 * open_rate_y,r * open_rate_x * open_rate_y,colkey) #円描画
+                        elif self.visualscene[i].vector_grp[j][0] == LIST_VISUALSCENE_VECTOR_GRP_CIRCLEF: #CIRCLEF命令
+                            x1,y1  = self.visualscene[i].vector_grp[j][1],self.visualscene[i].vector_grp[j][2] #中心座標の取得
+                            r      = self.visualscene[i].vector_grp[j][3]                                 #半径の取得
+                            colkey = self.visualscene[i].vector_grp[j][4]                                 #描画色の取得
+                            pyxel.circ(self.visualscene[i].posx + x1 * open_rate_x,self.visualscene[i].posy + y1 * open_rate_y,r * open_rate_x * open_rate_y,colkey) #塗りつぶし円描画
+                        elif self.visualscene[i].vector_grp[j][0] == LIST_VISUALSCENE_VECTOR_GRP_TRI:     #TRIANGLE命令
+                            x1,y1  = self.visualscene[i].vector_grp[j][1],self.visualscene[i].vector_grp[j][2] #座標1の取得
+                            x2,y2  = self.visualscene[i].vector_grp[j][3],self.visualscene[i].vector_grp[j][4] #座標2の取得
+                            x3,y3  = self.visualscene[i].vector_grp[j][5],self.visualscene[i].vector_grp[j][6] #座標3の取得
+                            colkey = self.visualscene[i].vector_grp[j][7] #描画色の取得
+                            pyxel.trib(self.visualscene[i].posx + x1 * open_rate_x,self.visualscene[i].posy + y1 * open_rate_y,self.visualscene[i].posx + x2 * open_rate_x,self.visualscene[i].posy + y2 * open_rate_y,self.visualscene[i].posx + x3 * open_rate_x,self.visualscene[i].posy + y3 * open_rate_y,colkey) #三角形描画
+                        elif self.visualscene[i].vector_grp[j][0] == LIST_VISUALSCENE_VECTOR_GRP_TRIF:    #TRIANGLE FILL命令
+                            x1,y1  = self.visualscene[i].vector_grp[j][1],self.visualscene[i].vector_grp[j][2] #座標1の取得
+                            x2,y2  = self.visualscene[i].vector_grp[j][3],self.visualscene[i].vector_grp[j][4] #座標2の取得
+                            x3,y3  = self.visualscene[i].vector_grp[j][5],self.visualscene[i].vector_grp[j][6] #座標3の取得
+                            colkey = self.visualscene[i].vector_grp[j][7] #描画色の取得
+                            pyxel.tri(self.visualscene[i].posx + x1 * open_rate_x,self.visualscene[i].posy + y1 * open_rate_y,self.visualscene[i].posx + x2 * open_rate_x,self.visualscene[i].posy + y2 * open_rate_y,self.visualscene[i].posx + x3 * open_rate_x,self.visualscene[i].posy + y3 * open_rate_y,colkey) #塗りつぶし三角形描画
+                
+                #グラフイックキャラ,グラフイックパターン,画像の表示などなど
+                if self.visualscene[i].grp != "": #ビジュアルシーングラフイック表示を行うリストが空でないのならば表示を始める
+                    for j in range(len(self.visualscene[i].grp)): #grの長さの分ループ処理する
+                        ox,oy       = self.visualscene[i].grp[j][LIST_VISUALSCENE_GRAPH_OX],self.visualscene[i].grp[j][LIST_VISUALSCENE_GRAPH_OY]#表示オフセット座標取得
+                        imgb        = self.visualscene[i].grp[j][LIST_VISUALSCENE_GRAPH_IMGB]#参照イメージバンク値取得
+                        u,v         = self.visualscene[i].grp[j][LIST_VISUALSCENE_GRAPH_U],self.visualscene[i].grp[j][LIST_VISUALSCENE_GRAPH_V]#グラフイックデーター収納座標取得
+                        w,h         = self.visualscene[i].grp[j][LIST_VISUALSCENE_GRAPH_W],self.visualscene[i].grp[j][LIST_VISUALSCENE_GRAPH_H]#幅と縦を取得
+                        colkey      = self.visualscene[i].grp[j][LIST_VISUALSCENE_GRAPH_COLKEY]#透明色取得
+                        ani_num     = self.visualscene[i].grp[j][LIST_VISUALSCENE_GRAPH_ANIME_FRAME_NUM]#アニメーション枚数取得
+                        ani_speed   = self.visualscene[i].grp[j][LIST_VISUALSCENE_GRAPH_ANIME_SPEED]#アニメーションスピード取得
+                        u_offset    = (pyxel.frame_count // ani_speed % ani_num) * w #アニメ枚数とアニメスピード、描画幅から参照すべきグラフイックデーター収納座標のオフセット値を求める
+                        open_rate_x = self.visualscene[i].width  / self.visualscene[i].open_width  #開閉率(横軸)
+                        open_rate_y = self.visualscene[i].height / self.visualscene[i].open_height #開閉率(縦軸)
+                        pyxel.blt(self.visualscene[i].posx + ox * open_rate_x,self.visualscene[i].posy + oy * open_rate_y,imgb,u + u_offset,v,int(w * open_rate_x),int(h * open_rate_y),colkey) #グラフイック表示
+                
+                #スクロールするテキストの表示(言語が英語の時に字幕フラグが立っていたら日本語の字幕も表示する)
+                if   self.visualscene[i].scroll_text  != "" and self.language == LANGUAGE_ENG: #スクロールテキストリストが空でない&選択言語が英語ならば表示を始める
                     all_line_num = len(self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_DATA_ENG])         #スクロールする文章の全体の行数を求める
                     between_line = self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_BETWEEN_LINE_ENG] #テキストの行間ドット数を求める
                     for j in range (all_line_num):
@@ -1777,11 +1839,11 @@ class graph:
                         # print (" ")
                         #アライメントオフセット値の計算
                         if   self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_DATA_ENG][j][LIST_VS_TEXT_ALIGN] == DISP_CENTER:      #中央表示
-                            dis_offset_x = self.visualscene[i].width // 2 - len(disp_text) * 2
+                            dis_offset_x = self.visualscene[i].open_width // 2 - len(disp_text) * 2
                         elif self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_DATA_ENG][j][LIST_VS_TEXT_ALIGN] == DISP_LEFT_ALIGN:  #左詰め
                             dis_offset_x = 0
                         elif self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_DATA_ENG][j][LIST_VS_TEXT_ALIGN] == DISP_RIGHT_ALIGN: #右詰め
-                            dis_offset_x = self.visualscene[i].width      - len(disp_text) * 4
+                            dis_offset_x = self.visualscene[i].open_width      - len(disp_text) * 4
                         else:
                             dis_offset_x = 0
                         
@@ -1796,4 +1858,59 @@ class graph:
                                 func.drop_shadow_text(self,dis_x + dis_offset_x ,dis_y,disp_text,5)
                             else:
                                 func.drop_shadow_text(self,dis_x + dis_offset_x ,dis_y,disp_text,1)
+                    
+                    #字幕表示フラグが立っていたら日本語字幕の表示を行う\
+                    if self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_SUBTITLES_FLAG] ==  SUBTITLES_ON: 
+                        subtitle_index = int(self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_SUBTITLES_COUNT1] // 7) #字幕表示用のカウンタを8で割った数値(切り捨て)が字幕データのインデックス値となる
+                        subtitle_text  = self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_DATA_SUBTITLES_JPN][subtitle_index][LIST_VS_TEXT] #このあたりの添え字の指定が判りにくいのう・・・多次元配列が判らん・・・こまめにprint命令でコンソール出力して確認していくしかないわめ！
+                        dis_x = self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_SUBTITLES_X]
+                        dis_y = self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_SUBTITLES_Y]
+                        
+                        #アライメントオフセット値の計算
+                        if   self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_DATA_SUBTITLES_JPN][subtitle_index][LIST_VS_TEXT_ALIGN] == DISP_CENTER:      #中央表示
+                            dis_offset_x = self.visualscene[i].open_width // 2 - len(subtitle_text) // 2 * 7
+                        elif self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_DATA_SUBTITLES_JPN][subtitle_index][LIST_VS_TEXT_ALIGN] == DISP_LEFT_ALIGN:  #左詰め
+                            dis_offset_x = 0
+                        elif self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_DATA_SUBTITLES_JPN][subtitle_index][LIST_VS_TEXT_ALIGN] == DISP_RIGHT_ALIGN: #右詰め
+                            dis_offset_x = self.visualscene[i].open_width      - len(subtitle_text) * 4
+                        else:
+                            dis_offset_x = 0
+                        
+                        print(subtitle_text)
+                        func.drop_shadow_kanji_text(self,dis_x + dis_offset_x ,dis_y,subtitle_text,7) #日本語字幕の表示
+                    
+                elif self.visualscene[i].scroll_text  != "" and self.language == LANGUAGE_JPN: #スクロールテキストリストが空でない&選択言語が日本語ならば表示を始める
+                    all_line_num = len(self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_DATA_JPN])         #スクロールする文章の全体の行数を求める
+                    between_line = self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_BETWEEN_LINE_JPN] #テキストの行間ドット数を求める
+                    for j in range (all_line_num):
+                        disp_text = self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_DATA_JPN][j][LIST_VS_TEXT] #このあたりの添え字の指定が判りにくいのう・・・多次元配列が判らん・・・こまめにprint命令でコンソール出力して確認していくしかないわめ！
+                        dis_x = self.visualscene[i].posx
+                        dis_y = self.visualscene[i].posy + between_line * j - self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_SCROLLED_DOT_JPN]
+                        # dis_y = self.visualscene[i].posy
+                        # print (" ")
+                        # print ("disp visuaulscene text")
+                        # print(disp_text)
+                        # print (" ")
+                        #アライメントオフセット値の計算
+                        if   self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_DATA_JPN][j][LIST_VS_TEXT_ALIGN] == DISP_CENTER:      #中央表示
+                            dis_offset_x = self.visualscene[i].open_width // 2 - len(disp_text) // 2 * 7
+                        elif self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_DATA_JPN][j][LIST_VS_TEXT_ALIGN] == DISP_LEFT_ALIGN:  #左詰め
+                            dis_offset_x = 0
+                        elif self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_DATA_JPN][j][LIST_VS_TEXT_ALIGN] == DISP_RIGHT_ALIGN: #右詰め
+                            dis_offset_x = self.visualscene[i].open_width      - len(disp_text) * 4
+                        else:
+                            dis_offset_x = 0
+                        
+                        if 40 <=  dis_y <= 90:
+                            if abs(dis_y -   85) <= 6:
+                                func.drop_shadow_kanji_text(self,dis_x + dis_offset_x ,dis_y,disp_text,7)
+                            elif abs(dis_y - 85) <= 8:
+                                func.drop_shadow_kanji_text(self,dis_x + dis_offset_x ,dis_y,disp_text,6)
+                            elif abs(dis_y - 85) <= 17:
+                                func.drop_shadow_kanji_text(self,dis_x + dis_offset_x ,dis_y,disp_text,12)
+                            elif abs(dis_y - 85) <= 30:
+                                func.drop_shadow_kanji_text(self,dis_x + dis_offset_x ,dis_y,disp_text,5)
+                            else:
+                                func.drop_shadow_kanji_text(self,dis_x + dis_offset_x ,dis_y,disp_text,1)
                 
+                self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_BETWEEN_LINE_JPN] #テキストの行間ドット数を求める

@@ -14,6 +14,8 @@ VS_TYPE_NORMAL                           = 0 #通常
 
 #ビジュアルシーンのstatusの定数定義 visualsceneクラスのvisualscene[i].statusに入ります
 VS_STATUS_NORMAL                         = 0 #通常
+VS_STATUS_OPEN                           = 1 #展開中
+VS_STATUS_START                          = 2 #展開終了してビジュアルシーンを開始する
 
 #ビジュアルシーンのpriority(プライオリティ)(優先度)の定数定義 visualsceneクラスのvisualscene[i].priorityに入ります,行番号が小さいものほど前面に表示される
 VS_PRIORITY_TOP        = 0 #最前面
@@ -88,30 +90,35 @@ LIST_VS_TEXT_5         = 5
 LIST_VS_SCROLL_TEXT_X                    =  0  #スクロールテキストを表示する座標
 LIST_VS_SCROLL_TEXT_Y                    =  1
 LIST_VS_SCROLL_TEXT_WIDTH                =  2 #表示するエリアの横幅
-LIST_VS_SCROLL_TEXT_HEIGHT               =  3 #表示するエリアの縦幅(
+LIST_VS_SCROLL_TEXT_HEIGHT               =  3 #表示するエリアの縦幅
 LIST_VS_SCROLL_TEXT_DATA_ENG             =  4 #実際に表示されるテキストデータ(英語)  (このリストの中に更にリストが入ります)
+
 LIST_VS_SCROLL_TEXT_DATA_JPN             =  5 #実際に表示されるテキストデータ(日本語)(このリストの中に更にリストが入ります)
-LIST_VS_SCROLL_TEXT_SUBTITLES_FLAG       =  6 #字幕表示するかどうかのフラグ
-LIST_VS_SCROLL_TEXT_SUBTITLES_X          =  7 #字幕を表示するx座標
-LIST_VS_SCROLL_TEXT_SUBTITLES_Y          =  8 #字幕を表示するy座標
-LIST_VS_SCROLL_TEXT_SUBTITLES_WIDTH      =  9 #字幕の横幅
-LIST_VS_SCROLL_TEXT_SUBTITLES_HEIGHT     = 10 #字幕の縦幅
+LIST_VS_SCROLL_TEXT_DATA_SUBTITLES_JPN   =  6 #実際に表示される字幕データ(日本語)(このリストの中に更にリストが入ります)
+LIST_VS_SCROLL_TEXT_SUBTITLES_FLAG       =  7 #字幕表示するかどうかのフラグ
+LIST_VS_SCROLL_TEXT_SUBTITLES_X          =  8 #字幕を表示するx座標
+LIST_VS_SCROLL_TEXT_SUBTITLES_Y          =  9 #字幕を表示するy座標
 
-LIST_VS_SCROLL_TEXT_SHADOW_FLAG          = 11 #スクロールテキストの上下端に影を付けるかどうかのフラグ
-LIST_VS_SCROLL_TEXT_SHADOW_COL           = 12 #スクロールテキストの上下端に影を付ける際、どの様な色にするかの指定
-LIST_VS_SCROLL_TEXT_SHADOW_UP_LINE_NUM   = 13 #スクロールテキストの上下に影を付ける際の上部分のラインドット数
-LIST_VS_SCROLL_TEXT_SHADOW_DOWN_LINE_NUM = 14 #スクロールテキストの上下に影を付ける際の下部分のラインドット数
+LIST_VS_SCROLL_TEXT_SUBTITLES_WIDTH      = 10 #字幕の横幅
+LIST_VS_SCROLL_TEXT_SUBTITLES_HEIGHT     = 11 #字幕の縦幅
+LIST_VS_SCROLL_TEXT_SUBTITLES_COUNT1     = 12 #字幕表示用のカウンタ類1
+LIST_VS_SCROLL_TEXT_SUBTITLES_COUNT2     = 13 #字幕表示用のカウンタ類2
+LIST_VS_SCROLL_TEXT_SHADOW_FLAG          = 14 #スクロールテキストの上下端に影を付けるかどうかのフラグ
 
-LIST_VS_SCROLL_TEXT_BETWEEN_LINE_ENG     = 15 #実際に表示されるテキストデータ(英語)表示時の行間ドット数
-LIST_VS_SCROLL_TEXT_BETWEEN_LINE_JPN     = 16 #実際に表示されるテキストデータ(日本語)表示時の行間ドット数
-LIST_VS_SCROLL_TEXT_SCROLLED_DOT_ENG     = 17 #スクロールしたドット数(最初は0で変化していきます)(英語)
-LIST_VS_SCROLL_TEXT_SCROLLED_DOT_JPN     = 18 #スクロールしたドット数(最初は0で変化していきます)(日本語)
-LIST_VS_SCROLL_TEXT_SCROLLED_DOT_MAX_ENG = 19 #スクロールしたドット数の最大値(この数値までスクロールさせたら終了とする)(英語)
-LIST_VS_SCROLL_TEXT_SCROLLED_DOT_MAX_JPN = 20 #スクロールしたドット数の最大値(この数値までスクロールさせたら終了とする)(日本語)
-LIST_VS_SCROLL_TEXT_SPEED_ENG            = 21 #スクロールするスピード(英語)
-LIST_VS_SCROLL_TEXT_SPEED_JPN            = 22 #スクロールするスピード(日本語)
-LIST_VS_SCROLL_TEXT_END_FLAG             = 23 #テキストが最後までスクロール完了したかどうかのフラグ
-LIST_VS_SCROLL_TEXT_END_ACTION           = 24 #テキストが最後までスクロール完了した後どうするか？の指定
+LIST_VS_SCROLL_TEXT_SHADOW_COL           = 15 #スクロールテキストの上下端に影を付ける際、どの様な色にするかの指定
+LIST_VS_SCROLL_TEXT_SHADOW_UP_LINE_NUM   = 16 #スクロールテキストの上下に影を付ける際の上部分のラインドット数
+LIST_VS_SCROLL_TEXT_SHADOW_DOWN_LINE_NUM = 17 #スクロールテキストの上下に影を付ける際の下部分のラインドット数
+
+LIST_VS_SCROLL_TEXT_BETWEEN_LINE_ENG     = 18 #実際に表示されるテキストデータ(英語)表示時の行間ドット数
+LIST_VS_SCROLL_TEXT_BETWEEN_LINE_JPN     = 19 #実際に表示されるテキストデータ(日本語)表示時の行間ドット数
+LIST_VS_SCROLL_TEXT_SCROLLED_DOT_ENG     = 20 #スクロールしたドット数(最初は0で変化していきます)(英語)
+LIST_VS_SCROLL_TEXT_SCROLLED_DOT_JPN     = 21 #スクロールしたドット数(最初は0で変化していきます)(日本語)
+LIST_VS_SCROLL_TEXT_SCROLLED_DOT_MAX_ENG = 22 #スクロールしたドット数の最大値(この数値までスクロールさせたら終了とする)(英語)
+LIST_VS_SCROLL_TEXT_SCROLLED_DOT_MAX_JPN = 23 #スクロールしたドット数の最大値(この数値までスクロールさせたら終了とする)(日本語)
+LIST_VS_SCROLL_TEXT_SPEED_ENG            = 24 #スクロールするスピード(英語)
+LIST_VS_SCROLL_TEXT_SPEED_JPN            = 25 #スクロールするスピード(日本語)
+LIST_VS_SCROLL_TEXT_END_FLAG             = 26 #テキストが最後までスクロール完了したかどうかのフラグ
+LIST_VS_SCROLL_TEXT_END_ACTION           = 27 #テキストが最後までスクロール完了した後どうするか？の指定
 
 #ビジュアルシーンscriptの２次元配列のインデックスナンバーとして使用する定数定義 visualsceneクラスのvisualscene[i].script[ここで定義した定数]に入ります
 LIST_VS_SCRIPT_0         = 0
@@ -136,11 +143,12 @@ LIST_VS_TIMELINE_4         = 4
 LIST_VS_TIMELINE_5         = 5
 
 #!ビジュアルシーンテキストの2次元配列のインデックスナンバーとして使用する定数定義
-#visualsceneクラスのvisualscene[i].text[LIST_VS_SCROLL_TEXT_DATA_ENG][ここで定義した定数]
-#                   visualscene[i].text[LIST_VS_SCROLL_TEXT_DATA_JPN][ここで定義した定数]
+#visualsceneクラスのvisualscene[i].text[LIST_VS_SCROLL_TEXT_DATA_ENG][j][ここで定義した定数]
+#                   visualscene[i].text[LIST_VS_SCROLL_TEXT_DATA_JPN][j][ここで定義した定数]
 #
-#             またはvisualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_DATA_ENG][ここで定義した定数]
-#                   visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_DATA_JPN][ここで定義した定数]に入ります
+#             またはvisualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_DATA_ENG][j][ここで定義した定数]
+#                   visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_DATA_JPN][j][ここで定義した定数]に入ります
+#                   visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_DATA_SUBTILE_JPN][j][ここで定義した定数]に入ります
 LIST_VS_TEXT                    =  0 #VSテキスト
 LIST_VS_TEXT_COLOR              =  1 #VSテキストの表示色
 LIST_VS_TEXT_ALIGN              =  2 #VSテキストの揃え方(アライメント)(整列の仕方)
@@ -166,6 +174,34 @@ LIST_VS_TEXT_SLIDE_START_SPEED  = 18 #VSテキストをスライドインアウ�
 LIST_VS_TEXT_SLIDE_END_SPEED    = 19 #VSテキストをスライドインアウトさせる時の最後のスピード値(目標となるスピード値ですの)
 LIST_VS_TEXT_SLIDE_MAG_SPEED    = 20 #VSテキストをスライドインアウトさせる時のスピード値に掛ける加速度
 
+#ビジュアルシーンベクターグラフイックス群リストの2次元配列のインデックスナンバーとして使用する定数定義 visualsceneクラスのvisuaulscene[i].vector_grp[ここで定義した定数]に入ります
+LIST_VISUALSCENE_VECTOR_GRP_PSET        =  0 #ベクターグラフイック 点描画命令
+LIST_VISUALSCENE_VECTOR_GRP_LINE        =  1 #ベクターグラフイック 線描画命令[LIST_WINDOW_VECTOR_GRP_LINE,始点座標x0,始点座標y0,終点座標x1,終点座標y1,色]
+LIST_VISUALSCENE_VECTOR_GRP_BOX         =  2 #ベクターグラフイック 矩形描画命令
+LIST_VISUALSCENE_VECTOR_GRP_BOXF        =  3 #ベクターグラフイック 塗りつぶし矩形描画命令
+LIST_VISUALSCENE_VECTOR_GRP_CIRCLE      =  4 #ベクターグラフイック 円描画命令
+LIST_VISUALSCENE_VECTOR_GRP_CIRCLEF     =  5 #ベクターグラフイック 塗りつぶし円描画命令
+LIST_VISUALSCENE_VECTOR_GRP_ELLIE       =  6 #ベクターグラフイック 楕円描画命令
+LIST_VISUALSCENE_VECTOR_GRP_ELLIEF      =  7 #ベクターグラフイック 塗りつぶし楕円描画命令
+LIST_VISUALSCENE_VECTOR_GRP_TRI         =  8 #ベクターグラフイック 三角形描画命令
+LIST_VISUALSCENE_VECTOR_GRP_TRIF        =  9 #ベクターグラフイック 塗りつぶし三角形描画命令
+LIST_VISUALSCENE_VECTOR_GRP_FILL        = 10 #ベクターグラフイック ペイント命令
+LIST_VISUALSCENE_VECTOR_GRP_CHR         = 11 #ベクターグラフイック 1文字表示命令
+#ビジュアルシーングラフイック群リストの２次元配列のインデックスナンバーとして使用する定数定義 visualsceneクラスのvisualscene[i].graph_list[ここで定義した定数]に入ります
+LIST_VISUALSCENE_GRAPH_OX               =  0 #グラフイックキャラを表示する座標(ox,oy)ウィンドウ表示座標からのオフセット値となります
+LIST_VISUALSCENE_GRAPH_OY               =  1 #
+LIST_VISUALSCENE_GRAPH_IMGB             =  2 #表示するグラフイックキャラが入っているイメージバンクの数値
+LIST_VISUALSCENE_GRAPH_U                =  3 #表示するグラフイックキャラが入っている場所を示した座標(u,v)
+LIST_VISUALSCENE_GRAPH_V                =  4 #
+LIST_VISUALSCENE_GRAPH_W                =  5 #表示するグラフイックキャラの縦幅、横幅(width,height)マイナス値の場合は反転します
+LIST_VISUALSCENE_GRAPH_H                =  6 #
+LIST_VISUALSCENE_GRAPH_COLKEY           =  7 #透明色の指定
+LIST_VISUALSCENE_GRAPH_ANIME_FRAME_NUM  =  8 #アニメーションパターンの枚数(1の場合はアニメーション無し)
+LIST_VISUALSCENE_GRAPH_ANIME_SPEED      =  9 #アニメーションのスピード(1が速く数値が増えるにつれて遅くなる4位が良いかも？)
+# LIST_VISUALSCENE_GRAPH_ITEM_X           = 10 #このグラフイックキャラはアイテムとしてどこに位置するのかを指定する(x座標)
+# LIST_VISUALSCENE_GRAPH_ITEM_Y           = 11 #このグラフイックキャラはアイテムとしてどこに位置するのかを指定する(y座標)(0,0)だったらdecision_item_x=0,decision_item_y=0
+                                        #                                                                   (2,1)だったらdecision_item_x=2,decision_item_y=1って事になります
+
 #ビジュアルシーンクラスのリスト関連で何も入ってない空リスト作成時に使用する定数定義
 NO_VS_WAIT_LIST          = []
 NO_VS_FLAG_LIST          = []
@@ -189,5 +225,9 @@ SUBTITLES_ON  = 1
 EDGE_SHADOW_OFF = 0 #テキストの端に影を付けるかのオンオフ
 EDGE_SHADOW_ON  = 1
 
-END_ACTION_NONE = 0 #終了後は何もしない
-END_ACTION_DEL  = 1 #終了したらビジュアルシーン自体を消去する
+END_ACTION_NONE              = 0 #終了後は何もしない(待機)
+END_ACTION_LOOP              = 1 #最初からまた始める
+END_ACTION_DEL               = 2 #終了したらビジュアルシーン自体を瞬時に消去する
+END_ACTION_CLOSE_UP          = 3 #終了したら上方向に閉じていく
+END_ACTION_CLOSE_DOWN        = 4 #終了したら下方向に閉じていく
+END_ACTION_DEL_AND_NEW_SCENE = 5 #終了したらビジュアルシーン自体を瞬時に消去し新たなビジュアルシーンを作製する
