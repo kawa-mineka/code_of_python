@@ -237,76 +237,7 @@ class update_visualscene:
             NO_VS_TIMELINE_LIST,\
             )
             start_line = 60
-            self.attrib_line_col[start_line - 10] = [1,0]
-            self.attrib_line_col[start_line - 9] = [0,1]
-            self.attrib_line_col[start_line - 8] = [1,0]
-            self.attrib_line_col[start_line - 7] = [0,1]
-            self.attrib_line_col[start_line - 6] = [1,0]
-            
-            self.attrib_line_col[start_line - 5] = [1,0]
-            self.attrib_line_col[start_line - 4] = [0,1]
-            self.attrib_line_col[start_line - 3] = [1,0]
-            self.attrib_line_col[start_line - 2] = [0,1]
-            self.attrib_line_col[start_line - 1] = [1,0]
-            
-            self.attrib_line_col[start_line + 0] = [1,1]
-            self.attrib_line_col[start_line + 1] = [1,1]
-            self.attrib_line_col[start_line + 2] = [1,1]
-            self.attrib_line_col[start_line + 3] = [1,1]
-            self.attrib_line_col[start_line + 4] = [1,1]
-            
-            self.attrib_line_col[start_line + 5] = [1,1]
-            self.attrib_line_col[start_line + 6] = [1,1]
-            self.attrib_line_col[start_line + 7] = [1,1]
-            self.attrib_line_col[start_line + 8] = [1,1]
-            self.attrib_line_col[start_line + 9] = [1,1]
-            
-            self.attrib_line_col[start_line + 10] = [1,5]
-            self.attrib_line_col[start_line + 11] = [5,1]
-            self.attrib_line_col[start_line + 12] = [1,5]
-            self.attrib_line_col[start_line + 13] = [5,1]
-            self.attrib_line_col[start_line + 14] = [1,5]
-            
-            self.attrib_line_col[start_line + 15] = [5,5]
-            self.attrib_line_col[start_line + 16] = [5,5]
-            self.attrib_line_col[start_line + 17] = [5,5]
-            self.attrib_line_col[start_line + 18] = [5,5]
-            self.attrib_line_col[start_line + 19] = [5,5]
-            
-            
-            self.attrib_line_col[start_line + 20] = [12,12]
-            self.attrib_line_col[start_line + 21] = [12,12]
-            self.attrib_line_col[start_line + 22] = [12,12]
-            self.attrib_line_col[start_line + 23] = [12,12]
-            self.attrib_line_col[start_line + 24] = [12,12]
-            
-            
-            self.attrib_line_col[start_line + 25] = [6,12]
-            self.attrib_line_col[start_line + 26] = [12,6]
-            self.attrib_line_col[start_line + 27] = [6,6]
-            self.attrib_line_col[start_line + 28] = [6,6]
-            self.attrib_line_col[start_line + 29] = [6,6]
-            
-            self.attrib_line_col[start_line + 30] = [7,7]
-            self.attrib_line_col[start_line + 31] = [7,7]
-            self.attrib_line_col[start_line + 32] = [7,7]
-            self.attrib_line_col[start_line + 33] = [7,7]
-            self.attrib_line_col[start_line + 34] = [7,7]
-            
-            self.attrib_line_col[start_line + 35] = [7,7]
-            self.attrib_line_col[start_line + 36] = [7,7]
-            self.attrib_line_col[start_line + 37] = [7,7]
-            self.attrib_line_col[start_line + 38] = [7,7]
-            self.attrib_line_col[start_line + 39] = [7,7]
-            
-            self.attrib_line_col[start_line + 40] = [7,7]
-            self.attrib_line_col[start_line + 41] = [7,7]
-            self.attrib_line_col[start_line + 42] = [7,7]
-            self.attrib_line_col[start_line + 43] = [7,7]
-            self.attrib_line_col[start_line + 44] = [7,7]
-            
-            
-            
+            func.set_title_scroll_jpn_text_color(self,start_line) #タイトルデモ日本語テキストのグラデーション色の指定を行うメソッドの呼び出し
             
         else:
             return

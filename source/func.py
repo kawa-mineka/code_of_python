@@ -135,6 +135,91 @@ class func:
         pyxel.text(x+1,y+1,text,0)
         pyxel.text(x,  y,  text,int(col))
 
+    #タイトルデモで漢字テキスト表示時にライン毎ごとの色指定を行う
+    def set_title_scroll_jpn_text_color(self,start_line):
+        """
+        タイトルデモで漢字テキスト表示時にライン毎ごとの色指定を行う
+        
+        start_line = グラデーション指定を行う開始ラインの数値
+        """
+        self.attrib_line_col[start_line - 10] = [1,0]
+        self.attrib_line_col[start_line - 9] = [0,1]
+        self.attrib_line_col[start_line - 8] = [1,0]
+        self.attrib_line_col[start_line - 7] = [0,1]
+        self.attrib_line_col[start_line - 6] = [1,0]
+        
+        self.attrib_line_col[start_line - 5] = [1,0]
+        self.attrib_line_col[start_line - 4] = [0,1]
+        self.attrib_line_col[start_line - 3] = [1,0]
+        self.attrib_line_col[start_line - 2] = [0,1]
+        self.attrib_line_col[start_line - 1] = [1,0]
+        
+        self.attrib_line_col[start_line + 0] = [1,1]
+        self.attrib_line_col[start_line + 1] = [1,1]
+        self.attrib_line_col[start_line + 2] = [1,1]
+        self.attrib_line_col[start_line + 3] = [1,1]
+        self.attrib_line_col[start_line + 4] = [1,1]
+        
+        self.attrib_line_col[start_line + 5] = [1,1]
+        self.attrib_line_col[start_line + 6] = [1,1]
+        self.attrib_line_col[start_line + 7] = [1,1]
+        self.attrib_line_col[start_line + 8] = [1,1]
+        self.attrib_line_col[start_line + 9] = [1,1]
+        
+        self.attrib_line_col[start_line + 10] = [1,5]
+        self.attrib_line_col[start_line + 11] = [5,1]
+        self.attrib_line_col[start_line + 12] = [1,5]
+        self.attrib_line_col[start_line + 13] = [5,1]
+        self.attrib_line_col[start_line + 14] = [1,5]
+        
+        self.attrib_line_col[start_line + 15] = [5,5]
+        self.attrib_line_col[start_line + 16] = [5,5]
+        self.attrib_line_col[start_line + 17] = [5,5]
+        self.attrib_line_col[start_line + 18] = [5,5]
+        self.attrib_line_col[start_line + 19] = [5,5]
+        
+        
+        self.attrib_line_col[start_line + 20] = [12,12]
+        self.attrib_line_col[start_line + 21] = [12,12]
+        self.attrib_line_col[start_line + 22] = [12,12]
+        self.attrib_line_col[start_line + 23] = [12,12]
+        self.attrib_line_col[start_line + 24] = [12,12]
+        
+        
+        self.attrib_line_col[start_line + 25] = [6,12]
+        self.attrib_line_col[start_line + 26] = [12,6]
+        self.attrib_line_col[start_line + 27] = [6,6]
+        self.attrib_line_col[start_line + 28] = [6,6]
+        self.attrib_line_col[start_line + 29] = [6,6]
+        
+        self.attrib_line_col[start_line + 30] = [7,7]
+        self.attrib_line_col[start_line + 31] = [7,7]
+        self.attrib_line_col[start_line + 32] = [7,7]
+        self.attrib_line_col[start_line + 33] = [7,7]
+        self.attrib_line_col[start_line + 34] = [7,7]
+        
+        self.attrib_line_col[start_line + 35] = [7,7]
+        self.attrib_line_col[start_line + 36] = [7,7]
+        self.attrib_line_col[start_line + 37] = [7,7]
+        self.attrib_line_col[start_line + 38] = [7,7]
+        self.attrib_line_col[start_line + 39] = [7,7]
+        
+        self.attrib_line_col[start_line + 40] = [7,7]
+        self.attrib_line_col[start_line + 41] = [7,7]
+        self.attrib_line_col[start_line + 42] = [7,7]
+        self.attrib_line_col[start_line + 43] = [7,7]
+        self.attrib_line_col[start_line + 44] = [7,7]
+
+    #横ライン単位でのアトリビュートリスト(色情報)に色指定をする(タイリングパターン定義もできます)
+    def set_attrib_line_col(self,left_col,right_col):
+        for i in range(WINDOW_H):
+            if i % 2 == 0:
+                self.attrib_line_col[i] = [left_col,right_col] #偶数ラインの場合
+            else:
+                self.attrib_line_col[i] = [right_col,left_col] #奇数ラインの場合
+        
+        print(self.attrib_line_col) #デバッグ用にコンソール表示
+
     #タイルマップの座標位置からキャラチップのアスキーコードを取得する
     def get_chrcode_tilemap(self,tm,x,y):         #tmはtilemapの数値,x,yは読み出す座標位置
         """

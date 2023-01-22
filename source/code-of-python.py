@@ -207,7 +207,7 @@ class App:
         
         self.attrib_chr_col    = [[0] * int(WINDOW_W // 8)  for i in range (int(WINDOW_H // 8)) ] #キャラ表示単位でのアトリビュートリスト(色情報)初期化
         self.attrib_screen_col = [[0] * WINDOW_W for i in range (WINDOW_H) ]                      #ドット表示単位でのアトリビュートリスト(色情報)初期化
-        self.attrib_line_col   = [[0] * 2  for i in range(WINDOW_H)]                                                  #横ライン単位でのアトリビュートリスト(色情報)初期化 横2ドット単位でのタイリングパターンに対応するので[0,0]の色指定整数値2項目にしてますの
+        self.attrib_line_col   = [[0] * 2  for i in range(WINDOW_H)]                              #横ライン単位でのアトリビュートリスト(色情報)初期化 横2ドット単位でのタイリングパターンに対応するので[0,0]の色指定整数値2項目にしてますの
         
         # print(self.attrib_chr_col)
         # print(self.attrib_screen_col)

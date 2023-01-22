@@ -170,7 +170,8 @@ class update_title:
             self.window[i].vy_accel = 1.2
             self.window[i].window_status = WINDOW_CLOSE
             
-            self.visualscene = []                               #ビジュアルシーンを全て初期化する
+            self.visualscene = []                                              #ビジュアルシーンを全て初期化する
+            func.set_attrib_line_col(self,pyxel.COLOR_WHITE,pyxel.COLOR_WHITE) #タイトルデモのビジュアルシーンでは日本語テキストスクロールにグラデを掛けていたので白色に初期化する
             
             update_window.create(self,WINDOW_ID_MAIN_MENU,0,0)  #メニューウィンドウを作製
             #選択カーソル表示をon,カーソルは上下移動のみ,いま指示しているアイテムナンバーは0,まだボタンも押されておらず未決定状態なのでdecision_item_yは-1
