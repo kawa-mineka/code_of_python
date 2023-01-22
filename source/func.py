@@ -129,7 +129,9 @@ class func:
         """
         影落ちありの文章文字の表示
         
-        x,y=表示座標 text=表示するテキスト col=pyxelのカラーコード 
+        x,y = 表示座標\\
+        text = 表示するテキスト\\
+        col = pyxelのカラーコード 
         """
         pyxel.text(x+1,y,  text,0)
         pyxel.text(x+1,y+1,text,0)
@@ -212,6 +214,12 @@ class func:
 
     #横ライン単位でのアトリビュートリスト(色情報)に色指定をする(タイリングパターン定義もできます)
     def set_attrib_line_col(self,left_col,right_col):
+        """
+        横ライン単位でのアトリビュートリスト(色情報)に色指定をする(タイリングパターン定義もできます)
+        
+        left_col  = 左側のタイルパターン色\\
+        right_col = 右側のタイルパターン色
+        """
         for i in range(WINDOW_H):
             if i % 2 == 0:
                 self.attrib_line_col[i] = [left_col,right_col] #偶数ラインの場合
@@ -225,7 +233,8 @@ class func:
         """
         タイルマップの座標位置からキャラチップのアスキーコードを取得する
         
-        tmはtilemapの数値,x,yは読み出す座標位置
+        tmはtilemapの数値\\
+        x,yは読み出す座標位置
         """
         global num   #なんやようわからんが・・・global命令で 「numはグローバル変数やで～」って宣言したら上手くいくようになった、なんでや・・・？？謎
         num = 0
@@ -238,7 +247,8 @@ class func:
         """
         タイルマップの座標位置へキャラチップのアスキーコードをタプル座標形式に変換したものをセットする
         
-        tmはtilemapの数値  x,yはセットする座標
+        tmはtilemapの数値\\
+        x,yはセットする座標
         """
         tile_x = num % 32   #置く場所のx座標は 32で割った余り
         tile_y = num // 32  #置く場所のy座標は 32での切り捨て除算
@@ -247,10 +257,10 @@ class func:
     #パッドのボタンが押されたかどうか調べる関数定義 押されていたらTrue 押されていなかったFalseを返します
     def push_pad_btn(self,action_id):  #action_idはそれぞれのボタンアクションに割り当てられたIDです (例)ACT_SHOTは1,ACT_MISSILEは2,ACT_SHOT_AND_SUB_WEAPONは3などなど・・・
         """
-        パッドのボタンが押されたかどうか調べる
+        パッドのボタンが押されたかどうか調べる\\
         押されていたらTrue 押されていなかったFalseを返します
         
-        action_idはそれぞれのボタンアクションに割り当てられたIDです
+        action_idはそれぞれのボタンアクションに割り当てられたIDです\\
         (例)ACT_SHOTは1,ACT_MISSILEは2,ACT_SHOT_AND_SUB_WEAPONは3などなど
         """
         list_count = len(self.pad_assign_list)#list_countにpad_assign_listの長さが入る
@@ -310,10 +320,10 @@ class func:
     #パッドのボタンが押されて離されたかどうか調べる関数定義 押されて話されたらTrue そうでなかったらFalseを返します
     def push_pad_btnp(self,action_id): #action_idはそれぞれのボタンアクションに割り当てられたIDです (例)ACT_SHOTは1,ACT_MISSILEは2,ACT_SHOT_AND_SUB_WEAPONは3などなど・・・
         """
-        パッドのボタンが押されたて離されたかどうか調べる
+        パッドのボタンが押されたて離されたかどうか調べる\\
         押されていたらTrue 押されていなかったFalseを返します
         
-        action_idはそれぞれのボタンアクションに割り当てられたIDです
+        action_idはそれぞれのボタンアクションに割り当てられたIDです\\
         (例)ACT_SHOTは1,ACT_MISSILEは2,ACT_SHOT_AND_SUB_WEAPONは3などなど
         """
         #ポーズボタンをABXYボタンなどに割り当てるとポーズを掛けた瞬間にキャンセルされてポーズウィンドウが閉じてゲーム本編に戻るバグですが・・・
@@ -398,11 +408,11 @@ class func:
         """
         自機狙い撃ち弾を射出する関数定義
         
-        ex,ey=敵の座標
-        div_type=育成する弾は通常弾なのか分裂弾なのかのフラグとそのタイプ
-        div_count=分裂するまでのカウント
-        div_num=分裂する回数
-        stop_count=その場に止まるカウント数
+        ex,ey=敵の座標\\
+        div_type=育成する弾は通常弾なのか分裂弾なのかのフラグとそのタイプ\\
+        div_count=分裂するまでのカウント\\
+        div_num=分裂する回数\\
+        stop_count=その場に止まるカウント数\\
         accel=弾の加速度 1.0で加速無し 1.1とかだと段々加速していく 0.9とかだと段々減速していく
         """
         if len(self.enemy_shot) < 800:
@@ -426,10 +436,10 @@ class func:
         """
         自機狙い撃ち弾(ゲームランクに依存)を射出する関数定義
         
-        ex,ey=敵の座標
-        div_type=育成する弾は通常弾なのか分裂弾なのかのフラグとそのタイプ
-        div_count=分裂するまでのカウント
-        div_num=分裂する回数
+        ex,ey=敵の座標\\
+        div_type=育成する弾は通常弾なのか分裂弾なのかのフラグとそのタイプ\\
+        div_count=分裂するまでのカウント\\
+        div_num=分裂する回数\\
         stop_count=その場に止まるカウント数
         accel=弾の加速度 1.0で加速無し 1.1とかだと段々加速していく 0.9とかだと段々減速していく
         """
@@ -481,12 +491,12 @@ class func:
         """
         狙い撃ちn-way弾を射出する
         
-        ex,ey=敵の座標(弾を出す座標)
-        theta=弾と弾の角度
-        n=弾の総数
-        div_type=育成する弾は通常弾なのか分裂弾なのかのフラグとそのタイプ
-        div_count=分裂するまでのカウント
-        div_num=分裂する回数
+        ex,ey=敵の座標(弾を出す座標)\\
+        theta=弾と弾の角度\\
+        n=弾の総数\\
+        div_type=育成する弾は通常弾なのか分裂弾なのかのフラグとそのタイプ\\
+        div_count=分裂するまでのカウント\\
+        div_num=分裂する回数\\
         stop_count=その場に止まるカウント数
         """
         if len(self.enemy_shot) < 800:
@@ -548,8 +558,8 @@ class func:
         """
         レーザービームを発射する関数定義
         
-        ex,ey=敵の座標
-        length=レーザーの長さ
+        ex,ey=敵の座標\\
+        length=レーザーの長さ\\
         speed=レーザーのスピード(数値がマイナスで右方向に発射)
         """
         if len(self.enemy_shot) < 800: 
@@ -564,9 +574,9 @@ class func:
         """
         サイン弾を射出
         
-        ex,ey=敵の座標
-        timer=時間(三角関数系で使用)
-        speed=速度(三角関数系で使用)
+        ex,ey=敵の座標\\
+        timer=時間(三角関数系で使用)\\
+        speed=速度(三角関数系で使用)\\
         intensity=振れ幅(三角関数系で使用)
         """
         if len(self.enemy_shot) < 800:
@@ -579,8 +589,8 @@ class func:
         """
         ボス用のレッドレーザービームを発射する関数定義
         
-        ex,ey=敵の座標
-        length=レーザーの長さ
+        ex,ey=敵の座標\\
+        length=レーザーの長さ\\
         speed=レーザーのスピード(数値がマイナスで右方向に発射)
         """
         if len(self.enemy_shot) < 800: 
@@ -595,8 +605,8 @@ class func:
         """
         ボス用のグリーンレーザービームを発射
         
-        ex,ey=敵の座標
-        length=レーザーの長さ
+        ex,ey=敵の座標\\
+        length=レーザーの長さ\\
         speed=レーザーのスピード(数値がマイナスだと右方向に発射)
         """
         if len(self.enemy_shot) < 800: 
@@ -611,7 +621,7 @@ class func:
         """
         敵ホーミングレーザーの発射
         
-        ex,ey=敵の座標
+        ex,ey=敵の座標\\
         performance=レーザーの誘導性能(20くらいが良いかも!?)
         """
         if len(self.enemy_shot) < 800:
@@ -625,10 +635,10 @@ class func:
         """
         敵アップレーザーの発射
         
-        ex,ey=敵の座標
-        vx,vy=速度ベクトル
-        expansion=広がっていくドット数
-        width_max=アップレーザーの横幅の最大値
+        ex,ey=敵の座標\\
+        vx,vy=速度ベクトル\\
+        expansion=広がっていくドット数\\
+        width_max=アップレーザーの横幅の最大値\\
         height_max=アップレーザーの縦幅の最大値
         """
         if len(self.enemy_shot) < 800:
@@ -645,10 +655,10 @@ class func:
         """
         敵ダウンレーザーの発射
         
-        ex,ey=敵の座標
-        vx,vy=速度ベクトル
-        expansion=広がっていくドット数
-        width_max=ダウンレーザーの横幅の最大値
+        ex,ey=敵の座標\\
+        vx,vy=速度ベクトル\\
+        expansion=広がっていくドット数\\
+        width_max=ダウンレーザーの横幅の最大値\\
         height_max=ダウンレーザーの縦幅の最大値
         """
         if len(self.enemy_shot) < 800:
@@ -665,7 +675,7 @@ class func:
         """
         ミサイルリスト内から同じタイプのミサイルが何発存在するのか数をカウントする
         
-        missile_type1,missile_type2,missile_type3,missile_type4=引数は0を代入してこのメソッドを呼んでください
+        missile_type1,missile_type2,missile_type3,missile_type4=引数は0を代入してこのメソッドを呼んでください\\
         帰り値 quantity=現時点で同じタイプのミサイルが存在する数値が戻ってきます
         """
         quantity = 0
@@ -728,7 +738,7 @@ class func:
         """
         背景(BGタイルマップのキャラチップ)を取得する
         
-        x,y=座標値(x=0~160)(y=0~120)
+        x,y=座標値(x=0~160)(y=0~120)\\
         bg_chip=キャラチップのアスキーコード
         """
         self.bgx = (((self.scroll_count // 8) -256) // 2) + x // 8
@@ -760,12 +770,12 @@ class func:
         """
         背景(BGタイルマップのキャラチップ)を取得し、更に障害物かどうかを判別する
         
-        x,y=座標値(x=0~160)(y=0~120)
-        bg_chip=キャラチップのアスキーコード
-        collision_flag=コリジョンフラグ
+        x,y=座標値(x=0~160)(y=0~120)\\
+        bg_chip=キャラチップのアスキーコード\\
+        collision_flag=コリジョンフラグ\\
         
         帰り値として
-        bg_chip=キャラチップのアスキーコード
+        bg_chip=キャラチップのアスキーコード\\
         collision_flag =(0=当たってない 1=接触しちゃった！)が戻ってくる
         """
         self.collision_flag = 0#コリジョンフラグ（障害物と接触したかどうかのフラグ）を初期化 (0=当たってない 1=接触しちゃった！)
@@ -803,7 +813,7 @@ class func:
         """
         背景マップチップに書き込む関数
         
-        x,yはキャラ単位 x=(0~255) y=(0~255)
+        x,yはキャラ単位 x=(0~255) y=(0~255)\\
         n=(0~255)マップチップナンバー
         """
         func.set_chrcode_tilemap(self,self.reference_tilemap,x,y + ((self.stage_loop - 1)* 16 * self.height_screen_num),n)
@@ -823,7 +833,7 @@ class func:
         """
         背景(BGタイルマップのキャラチップ)を取得する (8方向フリースクロール専用)
         
-        x,y=座標値(x=0~160)(y=0~120)
+        x,y=座標値(x=0~160)(y=0~120)\\
         bg_chip=キャラチップのアスキーコード
         """
         #x座標を8で割った切り捨て値がBGマップでのx座標となる
@@ -852,7 +862,7 @@ class func:
         """
         背景マップチップに書き込む関数(8方向フリースクロール専用)
         
-        x,yはキャラ単位 x=(0~255) y=(0~255) 
+        x,yはキャラ単位 x=(0~255) y=(0~255)\\
         n=(0~255)マップチップナンバー
         """
         func.set_chrcode_tilemap(self,self.reference_tilemap,x,y,n)#マップチップナンバーnを座標x,yに書き込む
@@ -993,7 +1003,7 @@ class func:
         """
         敵を破壊した後の処理
         
-        e=敵リストenemyのインデックス値となります 例enemy[e]
+        e=敵リストenemyのインデックス値となります 例enemy[e]\\
         ループ内から呼ばれることを想定してるためです
         """
         # 引数のeは敵リストenemyのインデックス値となります 例enemy[e]
@@ -1101,7 +1111,7 @@ class func:
         """
         敵をベジェ曲線で移動させるために必要な座標をリストから取得する
         
-        enemy_type=敵のタイプナンバー
+        enemy_type=敵のタイプナンバー\\
         i=インデックスナンバ値 
         """
         self.enemy_move_data = self.enemy_move_data_list[enemy_type][1]
@@ -1145,8 +1155,8 @@ class func:
         """
         ボスにショットを当てた後の処理(ドットパーティクル育成、背景の星をオマケで追加,ボス本体のHPが0以下になった時の処理などなど)
         
-        e=ボスのクラスのインデックス値
-        hit_x,hit_y=パーティクルを育成する座標
+        e=ボスのクラスのインデックス値\\
+        hit_x,hit_y=パーティクルを育成する座標\\
         hit_vx,hit_vy=パーティクル育成時に使用する散らばり具合の速度
         """
         #ドットパーティクル生成
@@ -1243,7 +1253,7 @@ class func:
         """
         ボスの耐久力バーの表示(ボスの付近にＨＰバーを描画する)
         
-        x,y=表示座標
+        x,y=表示座標\\
         hp=耐久力値
         """
         pyxel.rectb(x-1,y-1, 32+2,3, self.blinking_color[pyxel.frame_count // 8 % 10]) #点滅四角線描画
@@ -1254,7 +1264,7 @@ class func:
         """
         ボスの各部位耐久力バーの表示(破壊可能部位の付近にＨＰバーを描画する)短いタイプ横16ドット
         
-        x,y=表示座標
+        x,y=表示座標\\
         hp=耐久力値
         """
         pyxel.line(x,y + 1, x + 12,y + 1, self.red_flash_color[pyxel.frame_count // 8 % 10]) #点滅線描画
@@ -1265,7 +1275,7 @@ class func:
         """
         ボスの各部位耐久力バーの表示(破壊可能部位の付近にＨＰバーを描画する)更に短いタイプ横8ドット
         
-        x,y=表示座標
+        x,y=表示座標\\
         hp=耐久力値
         """
         pyxel.line(x,y + 1, x + 4,y + 1, self.red_flash_color[pyxel.frame_count // 8 % 10]) #点滅線描画
@@ -1356,7 +1366,7 @@ class func:
         """
         ラスタースクロールの表示のon/off(search_id,flag)
         
-        search_id=ラスタースクロールクラスに登録したID
+        search_id=ラスタースクロールクラスに登録したID\\
         flag=(FLAG_OFF=ラスタスクロールを表示しないFLAG_ON=表示する)
         """
         raster_scroll_count = len(self.raster_scroll)
@@ -1545,7 +1555,7 @@ class func:
         """
         総プレイ時間の表示(秒まで表示します)
         
-        x,y=表示する座標
+        x,y=表示する座標\\
         col=表示色
         """
         pyxel.text(x-8*3,y,":  :", int(col))
@@ -1561,8 +1571,8 @@ class func:
         """
         矩形Aと矩形Bの当たり判定
         
-        矩形A(rect_ax,rect_ay,rect_aw,rect_ah)(xはx座標,yはy座標,wは横幅width,hは縦幅heightを意味します)
-        矩形B(rect_bx,rect_by,rect_bw,rect_bh)
+        矩形A(rect_ax,rect_ay,rect_aw,rect_ah)(xはx座標,yはy座標,wは横幅width,hは縦幅heightを意味します)\\
+        矩形B(rect_bx,rect_by,rect_bw,rect_bh)\\
         帰り値 True=衝突した False=衝突していない
         """
         #collision rectangle to rectangle
@@ -1672,7 +1682,9 @@ class func:
         """
         スコアボードウィンドウ育成時に使用するランクインした機体が装備しているメダルのgraph_listを作製する
         
-        d=difficult(難易度)x,y=メダルを表示し始める座標(1位のSLOT1のメダルから表示し始める),y軸のドット増分数
+        d = difficult(難易度)\\
+        x,y = メダルを表示し始める座標(1位のSLOT1のメダルから表示し始める)\\
+        step_y = y軸のドット増分数
         """
         for i in range(10): #iは0(1位)から10(11位)まで変化する
             for j in range(ALL_SLOT5): #jは0(SLOT0)から5(SLOT5)まで変化する
@@ -1704,8 +1716,8 @@ class func:
         """
         ウィンドウIDを調べて一致するウィンドウIDの速度、加速度を更新する(同タイプウィンドウ移動消去モード)
         
-        id=windowクラスの window_idに入っている数値
-        vx,vy=速度ベクトル
+        id=windowクラスの window_idに入っている数値\\
+        vx,vy=速度ベクトル\\
         vx_accel,vy_accel=加速度
         """
         window_count = len(self.window)
@@ -1757,16 +1769,16 @@ class func:
         """
         カーソル関係の数値を変数にセットする
         
-        cu_type=カーソルの種類
-        cu_move_direction=カーソルの動く方向
-        posx,posy=カーソルの初期座標
-        step_x,step_y=カーソルの移動ステップドット数(横方向,縦方向)
-        page,page_max=いま指し示しているページナンバー,セレクトカーソルで捲ることが出来る最多ページ数
-        item_x,item_y=いま指し示しているアイテムナンバー(x,y軸方向)
-        d_item_x=ボタンが押されて「決定」されたアイテムのナンバーx軸方向
-        d_item_y=ボタンが押されて「決定」されたアイテムのナンバーy軸方向
-        max_item_x,max_item_y=それぞれの軸方向の最大項目数
-        color=セレクトカーソルの色
+        cu_type=カーソルの種類\\
+        cu_move_direction=カーソルの動く方向\\
+        posx,posy=カーソルの初期座標\\
+        step_x,step_y=カーソルの移動ステップドット数(横方向,縦方向)\\
+        page,page_max=いま指し示しているページナンバー,セレクトカーソルで捲ることが出来る最多ページ数\\
+        item_x,item_y=いま指し示しているアイテムナンバー(x,y軸方向)\\
+        d_item_x=ボタンが押されて「決定」されたアイテムのナンバーx軸方向\\
+        d_item_y=ボタンが押されて「決定」されたアイテムのナンバーy軸方向\\
+        max_item_x,max_item_y=それぞれの軸方向の最大項目数\\
+        color=セレクトカーソルの色\\
         menu_layer=現在選択中のメニューの階層の数値が入ります
         """
         self.cursor_type = cu_type
