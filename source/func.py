@@ -89,6 +89,7 @@ class func:
         x,y=表示座標 text=表示するテキスト col=pyxelのカラーコード 
         """
         base_x,base_y = x,y
+        sx,sy = 0,0
         for char in text:
             found = self.font_code_table.find(char) #foundにテキスト(char)を使ってフォント対応表にある位置を調べる→位置がfoundに入ります(見つからなかったらfoundに-1が入ります)
             if found >= 0 and char != '\n': #文字を見つけて尚且つ改行コードでないのなら漢字を描画し始めます
@@ -98,7 +99,14 @@ class func:
                 for i in range(8): #漢字フォントの横ドット数8
                     for j in range(12): #漢字フォントの縦ドット数12
                         if self.kanji_fonts[(sy-1)*12+j][sx*8+i] == 7: #フォントのデータは 0=黒が透明で 7=白が描画する点なので色コードが7だったらpsetで点を打ちます
-                            pyxel.pset(x+i,y+j,int(col))
+                            if 0 <= y+j <= WINDOW_H and col != 0: #y軸座標値が表示画面内、なおかつ指定色が黒以外ならば
+                                # print((x+i) % 2)
+                                # print (y+j)
+                                new_col = int(self.attrib_line_col[y+j][(x+i) % 2])
+                                # print (new_col)
+                                pyxel.pset(x+i,y+j,int(new_col))
+                            else:
+                                pyxel.pset(x+i,y+j,int(col))
                 
                 x += 8
                 if char == '\n':

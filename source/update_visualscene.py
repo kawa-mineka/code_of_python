@@ -125,50 +125,56 @@ class update_visualscene:
             [""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ]],\
             
             
-            [[""                                   ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_MONOCHROME_FLASH],\
-            [""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_MONOCHROME_FLASH],\
-            [""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_MONOCHROME_FLASH],\
-            ["遊んでいたんだがカイで１０連勝とか"                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_MONOCHROME_FLASH],\
-            [ "してるやつがいたんで見ていたら" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "１０連勝の相手は小学生くらいの子供だった" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "俺は「恥かしくないのか」ときくと" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "聞こえないフリしていきなり" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "飛ぶながら叩きつけるワザ使っていたが" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "子供は１回攻撃無視のワザを使っていて" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "無残に返り討ち食らっていた" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "子供は「何故？」と苦笑しながら" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "ダウンしてるカイに近付きおきぜめを狙っていたんだが" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "カイは卑怯にも無敵の昇竜拳を使っていた" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "だが子供はそれを読んでたみたいで" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "防御してた絶望しひややせかきながら" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "無残に落下してくるカイに" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "バスター（最強攻撃）を食らわせてた" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "カイ使いは「今の離れてただろ・・」と" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "一人ごと言っていたが誰も聞いてなかった" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "卑怯にもきょりがあいたので" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "氷だして削っていたんだが" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "ぽちょきんも飛び跳ねて頑張っていたら" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "ギャラリーが集まってきてたんだが" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "その攻めが恥かしくなったんだろうな" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "急に「そろそろかな」といって攻撃的になって" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "空中から攻めて行ったら" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "そこにあったポチョムキンの腕で捕まってた" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "俺は「お前まさか…」というと" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "顔真っ赤にしながら" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "「今の飛んでないんだが・・」と" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "レバーにグルグルまわしてた" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "そのかいあってか残念な事に" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "強力な追加攻撃はミスしてたみたいだが" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "安心して落下してきたカイに" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "またおき攻めで攻め掛かり" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "蹴りをガードさせた直後の" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "バスター（最強攻撃）で止めを刺されていた" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "青くなってるカイ使いに" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "「お前誰に勝ったの？」と聞くと" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "奥のほうでメダルゲームしてる子供を指した" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "しかも「呼んで来て…」と頼んできたが" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [ "アワレで仕方が無かった" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [[""                                  ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [""                                   ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [""                                   ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [""                                   ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [""                                   ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [""                                   ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            ["（）〔〕［］｛｝〈〉《》「」『』【】"                  ,pyxel.COLOR_WHITE,DISP_LEFT_ALIGN     ,MES_MONOCHROME_FLASH],\
+            ["￣＿ヽヾゝゞ〃仝々〆〇ー"                              ,pyxel.COLOR_WHITE,DISP_LEFT_ALIGN     ,MES_MONOCHROME_FLASH],\
+            ["、。．，・：；？！゛゜＇｀＂＾"                        ,pyxel.COLOR_WHITE,DISP_LEFT_ALIGN     ,MES_MONOCHROME_FLASH],\
+            [ "０１２３４５６７８９ＡＢＣ"                           ,pyxel.COLOR_WHITE,DISP_RIGHT_ALIGN     ,MES_MONOCHROME_FLASH],\
+            [ "遊んでいたんだがカイで１０連勝とか"                   ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_MONOCHROME_FLASH],\
+            [ "してるやつがいたんで見ていたら"                       ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "１０連勝の相手は小学生くらいの子供だった"             ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "俺は「恥かしくないのか」ときくと"                     ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "聞こえないフリしていきなり"                           ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "飛ぶながら叩きつけるワザ使っていたが"                 ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "子供は１回攻撃無視のワザを使っていて"                 ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "無残に返り討ち食らっていた"                           ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "子供は「何故？」と苦笑しながら"                       ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "ダウンしてるカイに近付きおきぜめを狙っていたんだが"    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "カイは卑怯にも無敵の昇竜拳を使っていた"                ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "だが子供はそれを読んでたみたいで"                      ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "防御してた絶望しひややせかきながら"                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "無残に落下してくるカイに"                              ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "バスター（最強攻撃）を食らわせてた"                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "カイ使いは「今の離れてただろ・・」と"                  ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "一人ごと言っていたが誰も聞いてなかった"                ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "卑怯にもきょりがあいたので"                            ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "氷だして削っていたんだが"                              ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "ぽちょきんも飛び跳ねて頑張っていたら"                  ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "ギャラリーが集まってきてたんだが"                      ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "その攻めが恥かしくなったんだろうな"                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "急に「そろそろかな」といって攻撃的になって"            ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "空中から攻めて行ったら"                                ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "そこにあったポチョムキンの腕で捕まってた"              ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "俺は「お前まさか…」というと"                           ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "顔真っ赤にしながら"                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "「今の飛んでないんだが・・」と"                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "レバーにグルグルまわしてた"                            ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "そのかいあってか残念な事に"                            ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "強力な追加攻撃はミスしてたみたいだが"                  ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "安心して落下してきたカイに"                            ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "またおき攻めで攻め掛かり"                              ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "蹴りをガードさせた直後の"                              ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "バスター（最強攻撃）で止めを刺されていた"              ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "青くなってるカイ使いに"                                ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "「お前誰に勝ったの？」と聞くと"                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "奥のほうでメダルゲームしてる子供を指した"              ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "しかも「呼んで来て…」と頼んできたが"                   ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "アワレで仕方が無かった"                                ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
             [ "" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
             [ "" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
             [ "" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
@@ -217,7 +223,7 @@ class update_visualscene:
             
             SUBTITLES_ON, 0,90, 160,16,0,0,\
             
-            EDGE_SHADOW_ON, pyxel.COLOR_DARK_BLUE, 0,0, 8,13, 0,0, 33*8,44*13,\
+            EDGE_SHADOW_ON, pyxel.COLOR_DARK_BLUE, 0,0, BETWEEN_LINE_8,BETWEEN_LINE_13, 0,0, 33*8,50*13,\
             SPEED20,SPEED13, FLAG_OFF, END_ACTION_NONE],\
             NO_VS_SCRIPT_LIST,\
             [[LIST_WINDOW_VECTOR_GRP_LINE  ,XBJ_X001,XBJ_Y001 ,XBJ_X002,XBJ_Y002 ,pyxel.COLOR_DARK_BLUE],\
@@ -230,6 +236,78 @@ class update_visualscene:
             ],\
             NO_VS_TIMELINE_LIST,\
             )
+            start_line = 60
+            self.attrib_line_col[start_line - 10] = [1,0]
+            self.attrib_line_col[start_line - 9] = [0,1]
+            self.attrib_line_col[start_line - 8] = [1,0]
+            self.attrib_line_col[start_line - 7] = [0,1]
+            self.attrib_line_col[start_line - 6] = [1,0]
+            
+            self.attrib_line_col[start_line - 5] = [1,0]
+            self.attrib_line_col[start_line - 4] = [0,1]
+            self.attrib_line_col[start_line - 3] = [1,0]
+            self.attrib_line_col[start_line - 2] = [0,1]
+            self.attrib_line_col[start_line - 1] = [1,0]
+            
+            self.attrib_line_col[start_line + 0] = [1,1]
+            self.attrib_line_col[start_line + 1] = [1,1]
+            self.attrib_line_col[start_line + 2] = [1,1]
+            self.attrib_line_col[start_line + 3] = [1,1]
+            self.attrib_line_col[start_line + 4] = [1,1]
+            
+            self.attrib_line_col[start_line + 5] = [1,1]
+            self.attrib_line_col[start_line + 6] = [1,1]
+            self.attrib_line_col[start_line + 7] = [1,1]
+            self.attrib_line_col[start_line + 8] = [1,1]
+            self.attrib_line_col[start_line + 9] = [1,1]
+            
+            self.attrib_line_col[start_line + 10] = [1,5]
+            self.attrib_line_col[start_line + 11] = [5,1]
+            self.attrib_line_col[start_line + 12] = [1,5]
+            self.attrib_line_col[start_line + 13] = [5,1]
+            self.attrib_line_col[start_line + 14] = [1,5]
+            
+            self.attrib_line_col[start_line + 15] = [5,5]
+            self.attrib_line_col[start_line + 16] = [5,5]
+            self.attrib_line_col[start_line + 17] = [5,5]
+            self.attrib_line_col[start_line + 18] = [5,5]
+            self.attrib_line_col[start_line + 19] = [5,5]
+            
+            
+            self.attrib_line_col[start_line + 20] = [12,12]
+            self.attrib_line_col[start_line + 21] = [12,12]
+            self.attrib_line_col[start_line + 22] = [12,12]
+            self.attrib_line_col[start_line + 23] = [12,12]
+            self.attrib_line_col[start_line + 24] = [12,12]
+            
+            
+            self.attrib_line_col[start_line + 25] = [6,12]
+            self.attrib_line_col[start_line + 26] = [12,6]
+            self.attrib_line_col[start_line + 27] = [6,6]
+            self.attrib_line_col[start_line + 28] = [6,6]
+            self.attrib_line_col[start_line + 29] = [6,6]
+            
+            self.attrib_line_col[start_line + 30] = [7,7]
+            self.attrib_line_col[start_line + 31] = [7,7]
+            self.attrib_line_col[start_line + 32] = [7,7]
+            self.attrib_line_col[start_line + 33] = [7,7]
+            self.attrib_line_col[start_line + 34] = [7,7]
+            
+            self.attrib_line_col[start_line + 35] = [7,7]
+            self.attrib_line_col[start_line + 36] = [7,7]
+            self.attrib_line_col[start_line + 37] = [7,7]
+            self.attrib_line_col[start_line + 38] = [7,7]
+            self.attrib_line_col[start_line + 39] = [7,7]
+            
+            self.attrib_line_col[start_line + 40] = [7,7]
+            self.attrib_line_col[start_line + 41] = [7,7]
+            self.attrib_line_col[start_line + 42] = [7,7]
+            self.attrib_line_col[start_line + 43] = [7,7]
+            self.attrib_line_col[start_line + 44] = [7,7]
+            
+            
+            
+            
         else:
             return
         self.visualscene.append(new_visualscene)       #ビジュアルシーンを作製する

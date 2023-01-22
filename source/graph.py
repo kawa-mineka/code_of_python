@@ -1893,11 +1893,11 @@ class graph:
                         # print (" ")
                         #アライメントオフセット値の計算
                         if   self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_DATA_JPN][j][LIST_VS_TEXT_ALIGN] == DISP_CENTER:      #中央表示
-                            dis_offset_x = self.visualscene[i].open_width // 2 - len(disp_text) // 2 * 7
+                            dis_offset_x = int((self.visualscene[i].open_width - (len(disp_text)* 8)) // 2) 
                         elif self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_DATA_JPN][j][LIST_VS_TEXT_ALIGN] == DISP_LEFT_ALIGN:  #左詰め
                             dis_offset_x = 0
                         elif self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_DATA_JPN][j][LIST_VS_TEXT_ALIGN] == DISP_RIGHT_ALIGN: #右詰め
-                            dis_offset_x = self.visualscene[i].open_width      - len(disp_text) * 4
+                            dis_offset_x = int(self.visualscene[i].open_width      - len(disp_text) * 8)
                         else:
                             dis_offset_x = 0
                         

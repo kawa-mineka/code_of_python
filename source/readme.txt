@@ -1,5 +1,5 @@
 =============================================================================================
-プログラムファイルの詳細な説明です    2022 12/17更新
+プログラムファイルの詳細な説明です    2023 01/15更新
 =============================================================================================
 code-of-python.py       メインプログラムです、このパイソンプログラムを実行してね
 
@@ -7,6 +7,7 @@ code-of-python.spec     pyinstaller用specファイルです
 
 const.py                定数定義です ほとんどのプログラムで使われてるのでimportしないと動かないよ
 const_window            ウィンドウクラスで主に使用する定数定義です
+const_visualscene       ビジュアルシーンで主に使用する定数定義です
 
 define_boss_data.py     ボス関連のデータ
 define_class.py         各クラスのメンバ変数とか宣言してます、あとコンストラクタの処理とか
@@ -40,17 +41,19 @@ update_ship.py          自機関連の更新、自機が出すショット、�
 update_status.py        メニューから表示される「STATUS」関連の計算を行います
 update_system.py        システムデータのセーブ＆ロードの処理
 update_title.py         タイトルメニューでの選択メニューをすべて行ってます
+update_visualscene      ビジュアルシーンの作製や更新を行います
 update_window.py        メインメニューなどで表示されるウィンドウの更新処理です セレクトカーソルの更新も行います
 
 =============================================================================================
-This is a detailed description of the program file 2022 Updated 12/17
+This is a detailed description of the program file 2023 Updated 01/15
 =============================================================================================
 code-of-python.py       The main program, run this python program
 
 code-of-python.spec     Spec file for pyinstaller
 
-const.py                constants definitions, used by most programs, so import them or they won't work!
-const_window.pygame     Constant definitions mainly used in the window class.
+const.py                Constants definitions, used by most programs, so import them or they won't work!
+const_window.py         Constant definitions mainly used in the window class.
+const_visualscene.py    Constant definitions mainly used in visual scenes.
 
 define_boss_data.py     Boss related data
 define_class.py         Declaration of member variables of each class, and constructor processing.
@@ -84,4 +87,5 @@ update_ship.py          Updates to the ship's engine, shots, missiles, and claws
 update_status.py        Performs calculations related to the "STATUS" displayed from the menu
 update_system.py        Handling of system data save and load
 update_title.py         All menu selections in the title menu
+update_visualscene      Create and update visual scenes.
 update_window.py        Updates the window displayed in the main menu, etc. It also updates the select cursor

@@ -205,6 +205,14 @@ class App:
         
         define_data.default_score_board(self) #スコアボードの初期データ(デフォルトデータ)を登録する関数の呼び出し        
         
+        self.attrib_chr_col    = [[0] * int(WINDOW_W // 8)  for i in range (int(WINDOW_H // 8)) ] #キャラ表示単位でのアトリビュートリスト(色情報)初期化
+        self.attrib_screen_col = [[0] * WINDOW_W for i in range (WINDOW_H) ]                      #ドット表示単位でのアトリビュートリスト(色情報)初期化
+        self.attrib_line_col   = [[0] * 2  for i in range(WINDOW_H)]                                                  #横ライン単位でのアトリビュートリスト(色情報)初期化 横2ドット単位でのタイリングパターンに対応するので[0,0]の色指定整数値2項目にしてますの
+        
+        # print(self.attrib_chr_col)
+        # print(self.attrib_screen_col)
+        print(self.attrib_line_col)
+
         #self.score_board = self.default_score_b11oard この方法でのリストコピーだとリストの「参照元id」がコピーされるだけなのでscore_boardリストの要素を変更するとdefault_score_boardリストの要素も変更されたように見えるので使えないので注意
         self.score_board = copy.deepcopy(self.default_score_board)  #ですのでdeepcopyを使います、そうすれば深い階層までコピーされ、コピー前後でidが変更されて全くの別リストになります 
                                                                     #他の方法としてはスライスを使ったself.score_board = self.default_score_board[:]とかあるみたいだけど浅い階層しかコピーされないみたい
