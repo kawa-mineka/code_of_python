@@ -116,6 +116,7 @@ class update_title:
             self.push_any_btn_flag    = FLAG_OFF          #決定ボタンを押した,離したフラグをオフにする
             self.release_the_btn_flag = FLAG_OFF
             update_visualscene.create(self,VS_ID_OPENING_STORY1)             #オープニングのストーリーテキストその1のビジュアルシーンを作製する
+            update_visualscene.init_storyboard(self)                         #ストーリーボードの初期化
             self.game_status = SCENE_TITLE_FIRST   #初回起動の場合は,       ゲームステータスを「SCENE_TITLE_FIRST」 にしてタイトル表示を開始する
         else:
             self.game_status = SCENE_TITLE_SECOND  #2回目以降の起動の場合は,ゲームステータスを「SCENE_TITLE_SECOND」にしてタイトル表示を開始する

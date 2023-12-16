@@ -1,4 +1,5 @@
-from const import *         #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
+from const import *             #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
+from const_visualscene import * #Visualsceneクラスで使用する定数定義のよみこみ
 
 class define_data:
     def __init__(self):
@@ -220,10 +221,10 @@ class define_data:
     def medal_graph_and_comment_list(self): #メダルのIDナンバーとそれに対するグラフイックチップの位置や英語コメント、日本語コメントのデータリスト
         self.medal_graph_and_comment_list = [
             [MEDAL_NO_SLOT              ,168         ,176,IMG2,"NO SLOT"                   ,"空スロット",                 "","",                                                                                "",""],
-            [MEDAL_BEFOREHAND_1SHOT_ITEM,168 + 8 * 1 ,176,IMG2,"BEFOREHAND 1 SHOT"         ,"事前にショットアイテム①個取得","TOTAL PLAY TIME EXCEEDED","10 MINUTES",                                              "トータルプレイ時間が１０分を超えました！",""],
-            [MEDAL_BEFOREHAND_2SHOT_ITEM,168 + 8 * 2 ,176,IMG2,"BEFOREHAND 2 SHOT"         ,"事前にショットアイテム②個取得","COMPLETED DEFEATING THE BOSS","ON THE FIRST PAGE",                                   "１面ボスを撃破完了！",""],
-            [MEDAL_BEFOREHAND_3SHOT_ITEM,168 + 8 * 3 ,176,IMG2,"BEFOREHAND 3 SHOT"         ,"事前にショットアイテム③個取得","OBTAINED WITH A TOTAL SCORE OF","2000 POINTS",                                       "トータルスコア２０００点超え！",""],
-            [MEDAL_BEFOREHAND_4SHOT_ITEM,168 + 8 * 4 ,176,IMG2,"BEFOREHAND 4 SHOT"         ,"事前にショットアイテム④個取得","OBTAINED WITH A TOTAL PLAY TIME OF 180 MINUTES", "OR A TOTAL SCORE OF 10000 POINTS", "トータルプレイタイム１８０分","またはトータルスコア１万点超え！"],
+            [MEDAL_BEFOREHAND_1SHOT_ITEM,168 + 8 * 1 ,176,IMG2,"BEFOREHAND 1 SHOT"         ,"事前にショットアイテム１個取得","TOTAL PLAY TIME EXCEEDED","10 MINUTES",                                              "トータルプレイ時間が１０分を超えました！",""],
+            [MEDAL_BEFOREHAND_2SHOT_ITEM,168 + 8 * 2 ,176,IMG2,"BEFOREHAND 2 SHOT"         ,"事前にショットアイテム２個取得","COMPLETED DEFEATING THE BOSS","ON THE FIRST PAGE",                                   "１面ボスを撃破完了！",""],
+            [MEDAL_BEFOREHAND_3SHOT_ITEM,168 + 8 * 3 ,176,IMG2,"BEFOREHAND 3 SHOT"         ,"事前にショットアイテム３個取得","OBTAINED WITH A TOTAL SCORE OF","2000 POINTS",                                       "トータルスコア２０００点超え！",""],
+            [MEDAL_BEFOREHAND_4SHOT_ITEM,168 + 8 * 4 ,176,IMG2,"BEFOREHAND 4 SHOT"         ,"事前にショットアイテム４個取得","OBTAINED WITH A TOTAL PLAY TIME OF 180 MINUTES", "OR A TOTAL SCORE OF 10000 POINTS", "トータルプレイタイム１８０分","またはトータルスコア１万点超え！"],
             [MEDAL_EQUIPMENT_LS_SHIELD  ,168 + 8 * 5 ,176,IMG2,"EQUIP L's SHIELD"          ,"エルズシールド装備",           "","",                                                                                "",""],
             [MEDAL_PLUS_MEDALLION       ,168 + 8 * 6 ,176,IMG2,"2 OPTION SLOT"             ,"スロットが２個増える",         "STAR SCORING MULTIPLIER IS","OVER 7",                                                "スター得点倍率が７を超えました",""],
             [MEDAL_CONCENTRATION        ,168 + 8 * 7 ,176,IMG2,"ONE POINT OF CONCENTRATION","一点集中",                   "THE THIRD BOSS IS DEFEATED!","",                                                     "３面ボスを撃破完了！",""],
@@ -454,4 +455,12 @@ class define_data:
             [97,    1.7,         2.0,            18,               1.6,        7,        59,          4],
             [98,    1.7,         2.0,            19,               1.6,        7,        58,          4],
             [99,    1.7,         2.0,            20,               1.6,        7,        57,          4],
+            ]
+
+    def storyboard(self):                  #タイトルデモ、ミドルデモなどのビジュアルシーンの絵コンテ(ストーリーボード）の定義とか
+        #フォーマット
+        #   ビジュアルシーンID,            トータルタイムカウンタ(フレーム), 終了時の動作
+        self.title_storyboard = [
+            [VS_ID_OPENING_STORY1,         100000,                         END_ACTION_DEL            ],
+            [VS_ID_OPENING_STORY1,         100000,                         END_ACTION_LOOP            ],
             ]

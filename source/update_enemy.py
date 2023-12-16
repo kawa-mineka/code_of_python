@@ -283,8 +283,8 @@ class update_enemy:
                 
                 if self.enemy[i].enemy_flag1 == 22:#敵機発射？
                     if len(self.enemy) < 400:
-                        new_enemy = Enemy()#敵９を1機生み出す
-                        new_enemy.update(9,ID00,ENEMY_STATUS_NORMAL,ENEMY_ATTCK_ANY,    self.enemy[i].posx + 7,self.enemy[i].posy - 2,0,0,      0,0,0,0,0,0,0,0,     0,0,0,0,0,0,0,0,0,0,  -self.side_scroll_speed * 0.5,0,     0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0,     SIZE_8,SIZE_8,   1.2,0,   0,    HP01,    0,0,   E_SIZE_NORMAL,  0,0,0,      0,0,0,0,       E_NO_POW,ID00 ,0,0,0,    0  ,0,0,0,    0,AERIAL_OBJ,  PT01,PT01,PT01,  PT01,PT01,PT01)
+                        new_enemy = Enemy()#ロルボードを1機生み出す
+                        new_enemy.update(EnemyName.ROLBOARD,ID00,ENEMY_STATUS_NORMAL,ENEMY_ATTCK_ANY,    self.enemy[i].posx + 7,self.enemy[i].posy - 2,0,0,      0,0,0,0,0,0,0,0,     0,0,0,0,0,0,0,0,0,0,  -self.side_scroll_speed * 0.5,0,     0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0,     SIZE_8,SIZE_8,   1.2,0,   0,    HP01,    0,0,   E_SIZE_NORMAL,  0,0,0,      0,0,0,0,       E_NO_POW,ID00 ,0,0,0,    0  ,0,0,0,    0,AERIAL_OBJ,  PT01,PT01,PT01,  PT01,PT01,PT01)
                         self.enemy.append(new_enemy)#リストにアペンド追加！
                     
                     self.enemy[i].enemy_count2  -= 1#敵射出数を1減らす
@@ -327,8 +327,8 @@ class update_enemy:
                 
                 if self.enemy[i].enemy_flag1 == 22:#敵機発射？
                     if len(self.enemy) < 400:
-                        new_enemy = Enemy()#敵９を1機生み出す
-                        new_enemy.update(9,ID00,ENEMY_STATUS_NORMAL,ENEMY_ATTCK_ANY,    self.enemy[i].posx + 7,self.enemy[i].posy + 10,0,0,       0,0,0,0,0,0,0,0,     0,0,0,0,0,0,0,0,0,0,  -self.side_scroll_speed * 0.5,0,     0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0,     SIZE_8,SIZE_8,   1.2,0,    0,    HP01,    0,0,   E_SIZE_NORMAL,  0,0,0,     0,0,0,0,        E_NO_POW,ID00 ,0,0,0,    0  ,0,0,0,    0,AERIAL_OBJ,  PT01,PT01,PT01,  PT01,PT01,PT01)
+                        new_enemy = Enemy()#ロルボードを1機生み出す
+                        new_enemy.update(EnemyName.ROLBOARD,ID00,ENEMY_STATUS_NORMAL,ENEMY_ATTCK_ANY,    self.enemy[i].posx + 7,self.enemy[i].posy + 10,0,0,       0,0,0,0,0,0,0,0,     0,0,0,0,0,0,0,0,0,0,  -self.side_scroll_speed * 0.5,0,     0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0,     SIZE_8,SIZE_8,   1.2,0,    0,    HP01,    0,0,   E_SIZE_NORMAL,  0,0,0,     0,0,0,0,        E_NO_POW,ID00 ,0,0,0,    0  ,0,0,0,    0,AERIAL_OBJ,  PT01,PT01,PT01,  PT01,PT01,PT01)
                         self.enemy.append(new_enemy)#リストにアペンド追加！
                     
                     self.enemy[i].enemy_count2  -= 1#敵射出数を1減らす

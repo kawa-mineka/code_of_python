@@ -5,6 +5,10 @@
 #!ビジュアルシーンのidの定数定義 visualsceneクラスの visualscene[i].idに入ります
 VS_ID_DUMMY                              =  0 #ダミー用 (VSはVisualSceneの略語です VSCodeって意味じゃないですよぉ～♪)
 VS_ID_OPENING_STORY1                     =  1 #オープニングのストーリーテキスト1
+VS_ID_OPENING_STORY2                     =  2 #オープニングのストーリーテキスト2
+VS_ID_OPENING_STORY3                     =  3 #オープニングのストーリーテキスト3
+VS_ID_OPENING_STORY4                     =  4 #オープニングのストーリーテキスト4
+
 
 #ビジュアルシーンのid_subの定数定義 visualsceneクラスの visualscene[i].id_subに入ります
 VS_ID_SUB_NORMAL                         = 0 #通常
@@ -16,6 +20,8 @@ VS_TYPE_NORMAL                           = 0 #通常
 VS_STATUS_NORMAL                         = 0 #通常
 VS_STATUS_OPEN                           = 1 #展開中
 VS_STATUS_START                          = 2 #展開終了してビジュアルシーンを開始する
+VS_STATUS_CLOSE                          = 3 #閉じ中
+VS_STATUS_END                            = 4 #終了
 
 #ビジュアルシーンのpriority(プライオリティ)(優先度)の定数定義 visualsceneクラスのvisualscene[i].priorityに入ります,行番号が小さいものほど前面に表示される
 VS_PRIORITY_TOP        = 0 #最前面
@@ -225,12 +231,6 @@ SUBTITLES_ON  = 1
 EDGE_SHADOW_OFF = 0 #テキストの端に影を付けるかのオンオフ
 EDGE_SHADOW_ON  = 1
 
-END_ACTION_NONE              = 0 #終了後は何もしない(待機)
-END_ACTION_LOOP              = 1 #最初からまた始める
-END_ACTION_DEL               = 2 #終了したらビジュアルシーン自体を瞬時に消去する
-END_ACTION_CLOSE_UP          = 3 #終了したら上方向に閉じていく
-END_ACTION_CLOSE_DOWN        = 4 #終了したら下方向に閉じていく
-END_ACTION_DEL_AND_NEW_SCENE = 5 #終了したらビジュアルシーン自体を瞬時に消去し新たなビジュアルシーンを作製する
 
 BETWEEN_LINE_3   =  3     #行間 3ドット
 BETWEEN_LINE_4   =  4     #行間 4ドット
@@ -249,3 +249,15 @@ BETWEEN_LINE_16  = 16     #行間16ドット
 BETWEEN_LINE_17  = 17     #行間17ドット
 BETWEEN_LINE_18  = 18     #行間18ドット
 BETWEEN_LINE_19  = 19     #行間19ドット
+
+
+#!###############################################################################################
+#!ビジュアルシーン用の絵コンテ(ストーリーボード)で使用する定数定義です
+#!###############################################################################################
+#終了時の動作の定数定義
+END_ACTION_NONE                   = 0 #終了後は何もしない(待機)
+END_ACTION_LOOP                   = 1 #ストーリーボードの最初からまた始める
+END_ACTION_DEL                    = 2 #終了したらビジュアルシーン自体を瞬時に消去する
+END_ACTION_CLOSE_UP               = 3 #終了したら上方向に閉じていく
+END_ACTION_CLOSE_DOWN             = 4 #終了したら下方向に閉じていく
+END_ACTION_HIT_ANY_BTN            = 5 #何かしらのボタン入力待ち

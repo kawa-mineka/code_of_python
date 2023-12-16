@@ -188,7 +188,7 @@ class App:
         print("APP FILE EXTENSION "        + pyxel.APP_FILE_EXTENSION)
         print("APP STARTUP SCRIPT FILE "   + pyxel.APP_STARTUP_SCRIPT_FILE)
         print("RESOURCE_FILE_EXTENSION "   + pyxel.RESOURCE_FILE_EXTENSION)
-        print("RESOURCE_ARCHIVE_DIRNAME "  + pyxel.RESOURCE_ARCHIVE_DIRNAME)
+        # print("RESOURCE_ARCHIVE_DIRNAME "  + pyxel.RESOURCE_ARCHIVE_DIRNAME) pyxel2.0.0だとサポートされていないのでコメントアウト
         print(" ")
         print("NUM_COLORS "     + str(pyxel.NUM_COLORS))
         print("NUM_IMAGES "     + str(pyxel.NUM_IMAGES))
@@ -212,7 +212,7 @@ class App:
         # print(self.attrib_chr_col)
         # print(self.attrib_screen_col)
         print(self.attrib_line_col)
-
+        
         #self.score_board = self.default_score_b11oard この方法でのリストコピーだとリストの「参照元id」がコピーされるだけなのでscore_boardリストの要素を変更するとdefault_score_boardリストの要素も変更されたように見えるので使えないので注意
         self.score_board = copy.deepcopy(self.default_score_board)  #ですのでdeepcopyを使います、そうすれば深い階層までコピーされ、コピー前後でidが変更されて全くの別リストになります 
                                                                     #他の方法としてはスライスを使ったself.score_board = self.default_score_board[:]とかあるみたいだけど浅い階層しかコピーされないみたい
@@ -266,6 +266,8 @@ class App:
         
         self.title_startup_count             = 0  #タイトルロゴの起動表示回数カウンタ(初回起動なのか？2回目以降のタイトル表示なのかを判別します)
         
+        self.storyboard_index                = 0 #ストーリーボードのインデックス値を初期化
+        
         update_system.load_data(self)        #システムデータをロードする関数の呼び出し
         if self.fullscreen_mode == FLAG_ON:  #フルスクリーン起動モードフラグが立っていたのなら
             #pyxel.init(WINDOW_W,WINDOW_H,title="CODE OF PYTHON",fps = 60,fullscreen = True,quit_key=pyxel.KEY_NONE) #フルスクリーンでpyxelを再起動する ver1.5以降からfullscreen = Trueは使えなくなったらしいです
@@ -299,6 +301,7 @@ class App:
         define_data.font_code_table(self)       #美咲フォントコードテーブルの定義関数の呼び出し
         define_data.game_difficulty_list(self)  #難易度ごとの各種設定数値のリストの定義関数の呼び出し
         define_data.game_rank_data_list(self)   #ランク値による各種設定数値のリストの定義関数の呼び出し
+        define_data.storyboard(self)            #タイトルデモ、ミドルデモなどのビジュアルシーンの絵コンテ(ストーリーボード）の定義関数の呼び出し
         
         define_enemy_data.anime_ptn(self)       #敵キャラのアニメパターンのキャラチップ番号の定義関数の呼び出し
         define_enemy_data.move_data(self)       #敵の移動データリストの定義関数の呼び出し

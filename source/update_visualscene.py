@@ -51,7 +51,7 @@ class update_visualscene:
                         self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_SCROLLED_DOT_ENG] += 1  #スクロールテキストのスクロールしたドットカウンタを1増やしていく
                         self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_SUBTITLES_COUNT1] += 1  #字幕表示用のカウンタ1も増やしていく
                         if self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_SCROLLED_DOT_ENG] >= self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_SCROLLED_DOT_MAX_ENG]:
-                            self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_SCROLLED_DOT_ENG] = 0 #スクロールしたドットカウンタが最大値まで行ったら0へ戻してループさせる
+                            self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_SCROLLED_DOT_ENG] = 0 #スクロールしたドットカウンxxxxタが最大値まで行ったら0へ戻してループさせる
                             self.visualscene[i].scroll_text[LIST_VS_SCROLL_TEXT_SUBTITLES_COUNT1] = 0 #字幕表示用のカウンタ1もゼロリセットする
             
             #スクロールテキストに何かテキストが入っている時&選択言語が日本語の時はスクロールドットカウンタを増やしていく
@@ -124,17 +124,16 @@ class update_visualscene:
             [""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
             [""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ]],\
             
-            
-            [[""                                  ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [""                                   ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [""                                   ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [""                                   ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [""                                   ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            [""                                   ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
-            ["（）〔〕［］｛｝〈〉《》「」『』【】"                  ,pyxel.COLOR_WHITE,DISP_LEFT_ALIGN     ,MES_MONOCHROME_FLASH],\
-            ["￣＿ヽヾゝゞ〃仝々〆〇ー"                              ,pyxel.COLOR_WHITE,DISP_LEFT_ALIGN     ,MES_MONOCHROME_FLASH],\
-            ["、。．，・：；？！゛゜＇｀＂＾"                        ,pyxel.COLOR_WHITE,DISP_LEFT_ALIGN     ,MES_MONOCHROME_FLASH],\
-            [ "０１２３４５６７８９ＡＢＣ"                           ,pyxel.COLOR_WHITE,DISP_RIGHT_ALIGN     ,MES_MONOCHROME_FLASH],\
+            [[""                                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [""                                                     ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [""                                                     ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [""                                                     ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [""                                                     ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [""                                                     ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            ["（）〔〕［］｛｝〈〉《》「」『』【】"                  ,pyxel.COLOR_WHITE,DISP_LEFT_ALIGN ,MES_MONOCHROME_FLASH],\
+            ["￣＿ヽヾゝゞ〃仝々〆〇ー"                              ,pyxel.COLOR_WHITE,DISP_LEFT_ALIGN ,MES_MONOCHROME_FLASH],\
+            ["、。．，・：；？！゛゜＇｀＂＾"                        ,pyxel.COLOR_WHITE,DISP_LEFT_ALIGN ,MES_MONOCHROME_FLASH],\
+            [ "０１２３４５６７８９ＡＢＣ"                           ,pyxel.COLOR_WHITE,DISP_RIGHT_ALIGN,MES_MONOCHROME_FLASH],\
             [ "遊んでいたんだがカイで１０連勝とか"                   ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_MONOCHROME_FLASH],\
             [ "してるやつがいたんで見ていたら"                       ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
             [ "１０連勝の相手は小学生くらいの子供だった"             ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
@@ -180,46 +179,46 @@ class update_visualscene:
             [ "" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
             [ "" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ]],\
             
-            [[""                          ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH],\
-            [ ""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH],\
-            [ ""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH],\
-            [ ""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH],\
-            [ "オーガスタ・エイダ"                  ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH],\
-            [ "ラブレス＝ニーバイロン"              ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH],\
+            [[""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH],\
+            [ "オーガスタ・エイダ"                      ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH],\
+            [ "ラブレス＝ニーバイロン"                  ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH],\
             [ "１８１５年１２月１０日生まれ"            ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ "–--"                                 ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ "１８５２年１１月２７日没"                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ "19世紀のイギリスの貴族・数学者"        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ "ジョージゴードンバイロンの"      ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ "一人娘であり数学を愛好した"                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ "ミドルネームのエイダで知られる"             ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ "旧姓はバイロン"                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ ""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ "主にチャールズバベッジの考案した"                          ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ "初期の汎用計算機である解析機関の著作で"          ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ "世界初のコンピュータープログラマーとして"       ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ "知られる"                             ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ ""                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ ""               ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ ""        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ ""                ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ ""         ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ ""               ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ ""    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ ""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ ""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ ""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ ""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ ""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ ""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ ""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ ""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ ""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ ""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ ""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ ""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ ""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
-            [ ""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ]],\
+            [ "＝＝"                                   ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ "１８５２年１１月２７日没"                ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ "19世紀のイギリスの貴族・数学者"          ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ "ジョージゴードンバイロンの"              ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ "一人娘であり数学を愛好した"              ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ "ミドルネームのエイダで知られる"          ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ "旧姓はバイロン"                          ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ "主にチャールズバベッジの考案した"         ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ "初期の汎用計算機である解析機関の著作で"   ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ "世界初のコンピュータープログラマーとして" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ "知られる"                                ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ]],\
             
             SUBTITLES_ON, 0,90, 160,16,0,0,\
             
@@ -239,6 +238,103 @@ class update_visualscene:
             start_line = 60
             func.set_title_scroll_jpn_text_color(self,start_line) #タイトルデモ日本語テキストのグラデーション色の指定を行うメソッドの呼び出し
             
+        elif id == VS_ID_OPENING_STORY2:                 #オープニングのストーリーテキストその2
+            new_visualscene.update(\
+            VS_ID_OPENING_STORY2,\
+            VS_ID_SUB_NORMAL,\
+            VS_TYPE_NORMAL,\
+            VS_STATUS_OPEN,\
+            VS_PRIORITY_TITLE_BACK,\
+            pyxel.COLOR_WHITE,\
+            pyxel.COLOR_BLACK,\
+            0,60,\
+            0,0,160,60,\
+            1,1, 1,1,\
+            
+            0,0,\
+            NO_VS_WAIT_LIST,NO_VS_FLAG_LIST,\
+            [[140,16,  IMG2, 0,152,SIZE_16,SIZE_16, 0,  1,1]],\
+            NO_VS_FACE_LIST,NO_VS_SOUND_LIST,NO_VS_BGM_LIST,NO_VS_EFFECT_LIST,NO_VS_TEXT_LIST,\
+            [0,60,  120,40,\
+            
+            [[""                                   ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_MONOCHROME_FLASH],\
+            [""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_MONOCHROME_FLASH],\
+            [""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_MONOCHROME_FLASH],\
+            [""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_MONOCHROME_FLASH],\
+            [""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_MONOCHROME_FLASH],\
+            [""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_MONOCHROME_FLASH],\
+            [""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_MONOCHROME_FLASH],\
+            ["AAAAAAAAAAAAAAAAA"                   ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_MONOCHROME_FLASH],\
+            ["BBBBBBBBBBBBBBBBB"                   ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_MONOCHROME_FLASH],\
+            ["CCCCCCCCCCCCCCCCC"                   ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            ["DDDDDDDDDDDDDDDDD"                   ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [""                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ]],\
+            
+            [[""                                                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [""                                                     ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [""                                                     ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [""                                                     ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [""                                                     ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [""                                                     ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            ["あいうえお"                                           ,pyxel.COLOR_WHITE,DISP_LEFT_ALIGN ,MES_MONOCHROME_FLASH],\
+            ["かきくけこ"                                           ,pyxel.COLOR_WHITE,DISP_LEFT_ALIGN ,MES_MONOCHROME_FLASH],\
+            ["さしすせそ"                                           ,pyxel.COLOR_WHITE,DISP_LEFT_ALIGN ,MES_MONOCHROME_FLASH],\
+            [ "たちつてと"                                          ,pyxel.COLOR_WHITE,DISP_RIGHT_ALIGN,MES_MONOCHROME_FLASH],\
+            [ "なにぬねの"                                          ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_MONOCHROME_FLASH],\
+            [ "はひふへほ"                                          ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "まみむめも"                                          ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "やいゆえよ"                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "らりるれろ"                                         ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "わをん"                                             ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ],\
+            [ "" ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH ]],\
+            
+            [[""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH],\
+            [ "えええええええええええ"                   ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH],\
+            [ "びぃびぃびぃびぃびぃ"                     ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH],\
+            [ "しぃしぃしぃしぃしぃ"                     ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ "でぃでぃでぃでぃでぃ"                    ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ],\
+            [ ""                                        ,pyxel.COLOR_WHITE,DISP_CENTER     ,MES_NO_FLASH        ]],\
+            
+            SUBTITLES_ON, 0,90, 160,16,0,0,\
+            
+            EDGE_SHADOW_ON, pyxel.COLOR_DARK_BLUE, 0,0, BETWEEN_LINE_8,BETWEEN_LINE_13, 0,0, 33*8,50*13,\
+            SPEED20,SPEED13, FLAG_OFF, END_ACTION_NONE],\
+            NO_VS_SCRIPT_LIST,NO_VS_VECTOR_GRP_LIST,\
+            NO_VS_TIMELINE_LIST,\
+            )
+            start_line = 60
+            func.set_title_scroll_jpn_text_color(self,start_line) #タイトルデモ日本語テキストのグラデーション色の指定を行うメソッドの呼び出し
+            
         else:
             return
         self.visualscene.append(new_visualscene)       #ビジュアルシーンを作製する
@@ -247,3 +343,18 @@ class update_visualscene:
         visualscene_count = len(self.visualscene)
         for i in range(visualscene_count):
             print(self.visualscene[i].scroll_text)
+
+    #ストーリーボードの初期化
+    def init_storyboard(self):
+        self.storyboard_index = 0                                       #ストーリーボードのインデックス値を初期化
+        self.storyboard_timecount = self.title_storyboard[self.storyboard_index][1] #一番初めの要素の総タイムカウントを読み出す
+
+
+    #ストーリーボードの更新
+    def storyboard(self):
+        if self.storyboard_timecount > 0: #もしタイムカウンタが0より大きいのならば
+            self.storyboard_timecount -= 1 #タイムカウントをデクリメント
+        
+        if self.storyboard_timecount == 0: #タイムカウンタが0になったのならば
+            self.storyboard_index += 1     #インデックス値をインクリメント
+        

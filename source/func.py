@@ -86,7 +86,9 @@ class func:
         """
         漢字を含んだ文章文字の表示
         
-        x,y=表示座標 text=表示するテキスト col=pyxelのカラーコード 
+        x,y=表示座標\\xxx
+        text=表示するテキスト\\
+        col=pyxelのカラーコード 
         """
         base_x,base_y = x,y
         sx,sy = 0,0
@@ -100,10 +102,10 @@ class func:
                     for j in range(12): #漢字フォントの縦ドット数12
                         if self.kanji_fonts[(sy-1)*12+j][sx*8+i] == 7: #フォントのデータは 0=黒が透明で 7=白が描画する点なので色コードが7だったらpsetで点を打ちます
                             if 0 <= y+j <= WINDOW_H and col != 0: #y軸座標値が表示画面内、なおかつ指定色が黒以外ならば
-                                # print((x+i) % 2)
-                                # print (y+j)
-                                new_col = int(self.attrib_line_col[y+j][(x+i) % 2])
-                                # print (new_col)
+                                
+                                #print (int(y+j))
+                                new_col = self.attrib_line_col[int(y+j)][int((x+i) % 2)]
+                                #print (new_col)
                                 pyxel.pset(x+i,y+j,int(new_col))
                             else:
                                 pyxel.pset(x+i,y+j,int(col))
@@ -118,7 +120,9 @@ class func:
         """
         漢字を含んだ文章文字(影落ちあり)の表示
         
-        x,y=表示座標 text=表示するテキスト col=pyxelのカラーコード 
+        x,y=表示座標\\
+        text=表示するテキスト\\
+        col=pyxelのカラーコード 
         """
         func.kanji_text(self,x+1,y,  text,0)       #なんでfunc.kanji_text(self,x+1,y,  text,0)にしないとエラーが出るのか判らない・・試行錯誤で func.kanji_text(self,x+1,y,  text,0)ってやったらうまくいった・・・クラスが違うところから呼び出される関数(この場合はメソッド？)は呼び出された関数自身を示すselfを付けないといけないのかな？謎は深まる・・・
         func.kanji_text(self,x+1,y+1,text,0)
@@ -252,7 +256,8 @@ class func:
         """
         tile_x = num % 32   #置く場所のx座標は 32で割った余り
         tile_y = num // 32  #置く場所のy座標は 32での切り捨て除算
-        pyxel.tilemap(tm).pset(x,y,(tile_x,tile_y))
+        # pyxel.tilemap(tm).pset(x,y,(tile_x,tile_y)) pyxel 2.0.0以降はあんまり使わない方が良いらしい？
+        pyxel.tilemaps[tm].pset(x,y,(tile_x,tile_y)) #pyxel 2.0.0以降はこういう風にするべきッポイ？？？？
 
     #パッドのボタンが押されたかどうか調べる関数定義 押されていたらTrue 押されていなかったFalseを返します
     def push_pad_btn(self,action_id):  #action_idはそれぞれのボタンアクションに割り当てられたIDです (例)ACT_SHOTは1,ACT_MISSILEは2,ACT_SHOT_AND_SUB_WEAPONは3などなど・・・
