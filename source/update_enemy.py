@@ -26,7 +26,7 @@ class update_enemy:
     def enemy(self):
         enemy_count = len(self.enemy)
         for i in range (enemy_count):
-            if   self.enemy[i].enemy_type ==  1:#敵タイプ1の更新   サーコイン 直進して斜め後退→勢いよく後退していく10機編隊
+            if   self.enemy[i].enemy_type == EnemyName.CIR_COIN:#サーコイン 直進して斜め後退→勢いよく後退していく10機編隊
                 if self.enemy[i].enemy_flag1 == 0:
                 #敵１を前進させる
                     self.enemy[i].posx = self.enemy[i].posx - self.enemy[i].move_speed#X座標をmove_speed分減らして左方向に進む
@@ -47,13 +47,13 @@ class update_enemy:
                             self.ey = self.enemy[i].posy
                             func.enemy_aim_bullet(self,self.ex,self.ey,0,0,0,0,1)#後退時に自機狙いの弾を射出して去っていく
                 
-            elif self.enemy[i].enemy_type ==  2:#敵タイプ2の更新   サイシーロ サインカーブを描く3機編隊
+            elif self.enemy[i].enemy_type == EnemyName.SAISEE_RO:#サイシーロ サインカーブを描く3機編隊
                 #敵２をサインカーブを描きながら移動させる 
                 self.enemy[i].posx -= self.enemy[i].move_speed#X座標をmove_speed分減らして左方向に進む
                 self.enemy[i].enemy_count3 += self.enemy[i].enemy_count2#enemy_count3はタイマー enemy_count_2は速度
                 self.enemy[i].posy += self.enemy[i].enemy_count1 * math.sin(self.enemy[i].enemy_count3)#enemy_count_1は振れ幅
                 
-            elif self.enemy[i].enemy_type ==  3:#敵タイプ3の更新  固定砲台ホウダ（地面に張り付く１連射タイプ）
+            elif self.enemy[i].enemy_type == EnemyName.HOUDA_UNDER:#固定砲台ホウダ（地面に張り付く１連射タイプ）
                 #敵３を背景スクロールに合わせて左へ移動させる
                 self.enemy[i].posx -= self.side_scroll_speed * 0.5
                 if self.enemy[i].posx < WINDOW_W -80 and (func.s_rndint(self,0,(self.run_away_bullet_probability) * 50) == 0):
@@ -61,7 +61,7 @@ class update_enemy:
                     self.ey = self.enemy[i].posy
                     func.enemy_aim_bullet(self,self.ex,self.ey,0,0,0,0,1)#画面端から出現して８０ドット進んだら、自機狙いの弾を射出
                 
-            elif self.enemy[i].enemy_type ==  4:#敵タイプ4の更新   固定砲台ホウダ（天井に張り付く１連射タイプ）
+            elif self.enemy[i].enemy_type == EnemyName.HOUDA_UPPER:#固定砲台ホウダ（天井に張り付く１連射タイプ）
                 #敵４を背景スクロールに合わせて左へ移動させる
                 self.enemy[i].posx -= self.side_scroll_speed * 0.5
                 if self.enemy[i].posx < WINDOW_W -80 and (func.s_rndint(self,0,(self.run_away_bullet_probability) * 50) == 0):
@@ -69,7 +69,7 @@ class update_enemy:
                     self.ey = self.enemy[i].posy
                     func.enemy_aim_bullet(self,self.ex,self.ey,0,0,0,0,1)#画面端から出現して８０ドット進んだら、自機狙いの弾を射出
                 
-            elif self.enemy[i].enemy_type ==  5:#敵タイプ5の更新   ホッパーチャンmk2
+            elif self.enemy[i].enemy_type == EnemyName.HOPPER_CHAN2:#ホッパーチャンmk2
                 #敵５を背景スクロールに合わせて左へ移動させる
                 #
                 #enemy_count1をy_prevとして使用してます
@@ -139,7 +139,7 @@ class update_enemy:
                 if self.enemy[i].posx < 0:
                     self.enemy[i].direction = 1#もしx座標が0まで画面の左端に進んだら跳ね返りdirectionフラグを(+1右方向増加）にして右に反転後退していく
                 
-            elif self.enemy[i].enemy_type ==  6:#敵タイプ6の更新   謎の回転飛翔体Ｍ５４
+            elif self.enemy[i].enemy_type == EnemyName.MIST_M54 :#謎の回転飛翔体Ｍ５４
                 #敵6を回転させる 
                 
                 self.enemy[i].enemy_count3 += self.enemy[i].enemy_count2#enemy_count3はタイマー(timer) enemy_count_2は速度(speed)
@@ -147,7 +147,7 @@ class update_enemy:
                 self.enemy[i].posy += self.enemy[i].enemy_count1 * -math.sin(self.enemy[i].enemy_count3)#enemy_count_1は振れ幅(intensity)
                 self.enemy[i].posx -= 0.05
                 
-            elif self.enemy[i].enemy_type ==  7:#敵タイプ7の更新   真！(SIN)ツインアロー追尾戦闘機(サインカーブを描きつつ追尾してくる)
+            elif self.enemy[i].enemy_type == EnemyName.TWIN_ARROW_SIN:#真！(SIN)ツインアロー追尾戦闘機(サインカーブを描きつつ追尾してくる)
                 #敵７を自機に追尾させる
                 #目標までの距離を求める dに距離が入る
                 self.d = math.sqrt((self.my_x - self.enemy[i].posx) * (self.my_x - self.enemy[i].posx) + (self.my_y - self.enemy[i].posy) * (self.my_y - self.enemy[i].posy))
@@ -170,7 +170,7 @@ class update_enemy:
                 self.enemy[i].posy += self.enemy[i].enemy_count1 * -math.sin(self.enemy[i].enemy_count3)#enemy_count_1は振れ幅(intensity)
                 self.enemy[i].posx -= 0.05
                 
-            elif self.enemy[i].enemy_type ==  8:#敵タイプ8の更新   ツインアロー追尾戦闘機
+            elif self.enemy[i].enemy_type == EnemyName.TWIN_ARROW  :#ツインアロー追尾戦闘機
                 #敵８を自機に追尾させる
                 vx0 = self.enemy[i].vx
                 vy0 = self.enemy[i].vy #敵の速度(vx,vy)を(vx0,vy0)に退避する
@@ -227,7 +227,7 @@ class update_enemy:
                 self.enemy[i].posx += self.enemy[i].vx
                 self.enemy[i].posy += self.enemy[i].vy
                 
-            elif self.enemy[i].enemy_type ==  9:#敵タイプ9の更新   ロルボード 自機のＹ軸を合わせた後突進してくる敵
+            elif self.enemy[i].enemy_type == EnemyName.ROLBOARD:#ロルボード 自機のＹ軸を合わせた後突進してくる敵
                 if self.enemy[i].enemy_flag2 == 0:#自機撃墜フラグ（自機と完全に重なったフラグ）はまだ建ってない？？
                     if self.enemy[i].enemy_flag1 == 0:#自機の位置をサーチしてどちらの方向に進むかのフラグはまだ建ってない？
                         if self.my_y > self.enemy[i].posy:
@@ -256,7 +256,7 @@ class update_enemy:
                 self.enemy[i].posx += self.enemy[i].vx
                 self.enemy[i].posy += self.enemy[i].vy
                 
-            elif self.enemy[i].enemy_type == 10:#敵タイプ10の更新  クランブルアンダー スクランブルハッチ（地面タイプ）
+            elif self.enemy[i].enemy_type == EnemyName.KURANBURU_UNDER:#クランブルアンダー スクランブルハッチ（地面タイプ）
                 #enemy_flag1を状態遷移フラグとして使用します
                 #    0=待機中（射出開始カウンタを減らしていく）
                 #    1～20ハッチ開放アニメーション中
@@ -300,7 +300,7 @@ class update_enemy:
                 #背景スクロールに合わせて左へ移動させる
                 self.enemy[i].posx -= self.side_scroll_speed * 0.5#基本BGスクロールスピードは0.5、それと倍率扱いのside_scroll_speedを掛け合わせてスクロールと同じように移動させてやる（地面スクロールに引っ付いた状態で飛んでいくように見せるため）         
                 
-            elif self.enemy[i].enemy_type == 11:#敵タイプ11の更新  クランブルアッパー スクランブルハッチ（天井タイプ）
+            elif self.enemy[i].enemy_type == EnemyName.KURANBURU_UPPER:#クランブルアッパー スクランブルハッチ（天井タイプ）
                 #enemy_flag1を状態遷移フラグとして使用します
                 #    0=待機中（射出開始カウンタを減らしていく）
                 #    1～20ハッチ開放アニメーション中
@@ -344,7 +344,7 @@ class update_enemy:
                 #背景スクロールに合わせて左へ移動させる
                 self.enemy[i].posx -= self.side_scroll_speed * 0.5 #基本BGスクロールスピードは0.5、それと倍率扱いのside_scroll_speedを掛け合わせてスクロールと同じように移動させてやる（地面スクロールに引っ付いた状態で飛んでいくように見せるため）
                 
-            elif self.enemy[i].enemy_type == 12:#敵タイプ12の更新  レイブラスター 直進して画面前方のどこかで停止→レーザービーム射出→急いで後退
+            elif self.enemy[i].enemy_type == EnemyName.RAY_BLASTER:#レイブラスター 直進して画面前方のどこかで停止→レーザービーム射出→急いで後退
                 #enemy_flag1を状態遷移フラグとして使用します
                 #  0=前進中
                 #  1=レーザービーム発射スタート
@@ -375,7 +375,7 @@ class update_enemy:
                 else:
                     self.enemy[i].posx = self.enemy[i].posx + 2#2ドットの増分で右方向に逃げていく                 
                 
-            elif self.enemy[i].enemy_type == 13:#敵タイプ13の更新  グリーンランサー ゆらゆら浮遊する3way弾を発射する硬い敵(倒すとショットパワーアップアイテム)
+            elif self.enemy[i].enemy_type == EnemyName.GREEN_LANCER :#グリーンランサー ゆらゆら浮遊する3way弾を発射する硬い敵(倒すとショットパワーアップアイテム)
                 #サインカーブを描きながら移動させる 
                 self.enemy[i].posx -= self.enemy[i].move_speed#X座標をmove_speed分減らして左方向に進む
                 self.enemy[i].enemy_count3 += self.enemy[i].enemy_count2#enemy_count3はタイマー enemy_count_2は速度
@@ -386,12 +386,12 @@ class update_enemy:
                     func.enemy_forward_3way_bullet(self,self.enemy[i].posx,self.enemy[i].posy) #前方3way弾発射
                     self.enemy[i].enemy_flag1 = 0
                 
-            elif self.enemy[i].enemy_type == 14:#敵タイプ14の更新  テミー ゆっくり直進してくる赤いアイテムキャリアー
+            elif self.enemy[i].enemy_type == EnemyName.TEMI  :#テミー ゆっくり直進してくる赤いアイテムキャリアー
                 #vx,vyで敵の座標posx,posy更新！移動！！
                 self.enemy[i].posx += self.enemy[i].vx
                 self.enemy[i].posy += self.enemy[i].vy
                 
-            elif self.enemy[i].enemy_type == 15:#敵タイプ15の更新  ムーロボ 地面を左右に動きながらチョット進んできて弾を撃つ移動砲台
+            elif self.enemy[i].enemy_type == EnemyName.MUU_ROBO  :#ムーロボ 地面を左右に動きながらチョット進んできて弾を撃つ移動砲台
                 #敵１５を背景スクロールに合わせて移動させる（地上キャラなので不自然が無いように・・・）
                 self.enemy[i].posx -= self.side_scroll_speed * 0.5
                 if self.enemy[i].posx < WINDOW_W -80 and (func.s_rndint(self,0,(self.run_away_bullet_probability) * 50) == 0):
@@ -432,7 +432,7 @@ class update_enemy:
                 self.enemy[i].posx += self.enemy[i].vx * self.enemy[i].move_speed #移動ベクトル分加減算して移動！
                 self.enemy[i].posy += self.enemy[i].vy * self.enemy[i].move_speed
                 
-            elif self.enemy[i].enemy_type == 16:#敵タイプ16の更新  クランパリオン 2機一体で挟みこみ攻撃をしてくる
+            elif self.enemy[i].enemy_type == EnemyName.CLAMPARION :#クランパリオン 2機一体で挟みこみ攻撃をしてくる
                 #enemy_flag1は自機とx座標が一致して挟みこむ行動を開始するかのフラグ 0=off 1=on
                 if self.enemy[i].enemy_flag1 == 0 and -3 <= self.enemy[i].posx - self.my_x <= 3: #もしflag1がたっていない&自機と敵のx座標の差が+-3以内だったら
                     self.enemy[i].enemy_flag1 = 1  #挟みこみ開始フラグをonにする
@@ -447,7 +447,7 @@ class update_enemy:
                 self.enemy[i].posx += self.enemy[i].vx #移動ベクトル分加減算して移動！
                 self.enemy[i].posy += self.enemy[i].vy
                 
-            elif self.enemy[i].enemy_type == 17:#敵タイプ17の更新  ロールブリッツ ベジェ曲線で定点まで移動して離脱する敵
+            elif self.enemy[i].enemy_type == EnemyName.ROLL_BLITZ:#ロールブリッツ ベジェ曲線で定点まで移動して離脱する敵
                 if self.enemy[i].status == ENEMY_STATUS_MOVE_COORDINATE_INIT: #「移動用座標初期化」ベジェ曲線で移動するための移動元、移動先、制御点をまず初めに取得する
                     enemy_type = self.enemy[i].enemy_type
                     func.enemy_get_bezier_curve_coordinate(self,enemy_type,i) #敵をベジェ曲線で移動させるために必要な座標をリストから取得する関数の呼び出し
@@ -489,7 +489,7 @@ class update_enemy:
                         self.enemy[i].move_speed = 0.2
                     self.enemy[i].obj_time += self.enemy[i].move_speed * self.enemy[i].move_speed_offset #タイムフレーム番号を(スピード*スピードオフセット)分加算していく
                 
-            elif self.enemy[i].enemy_type == 18:#敵タイプ18の更新  ボルダー 硬めの弾バラマキ重爆撃機 大きいサイズ
+            elif self.enemy[i].enemy_type == EnemyName.VOLDAR :#ボルダー 硬めの弾バラマキ重爆撃機 大きいサイズ
                 #敵18をサインカーブを描きながら移動させる 
                 self.enemy[i].posx += self.enemy[i].move_speed  #X座標をmove_speed分加減算する
                 self.enemy[i].timer += self.enemy[i].speed     #タイマーをスピード分増やしていく
@@ -530,7 +530,7 @@ class update_enemy:
                     division_count       = 80 #分裂するまでのカウント数
                     division_count_origin = 80 #分裂するまでのカウント数(元数値)
                     division_num        = 0    #分裂する回数
-                    new_enemy_shot.update(ENEMY_SHOT_NORMAL,ID00, self.enemy[i].posx + 4*8,self.enemy[i].posy + 10,ESHOT_COL_MIN88,ESHOT_SIZE8,ESHOT_SIZE8, 0,0, 1,0,     0.95,     1,1,    1,0, 0,1,0,        0,   0,0,PRIORITY_FRONT,   0,0,0,0,0,0, division_type,division_count,  0, division_count_origin,division_num, 0, 0,0, 0,0,   0,0)
+                    new_enemy_shot.update(EnemyShot.NORMAL,ID00, self.enemy[i].posx + 4*8,self.enemy[i].posy + 10,ESHOT_COL_MIN88,ESHOT_SIZE8,ESHOT_SIZE8, 0,0, 1,0,     0.95,     1,1,    1,0, 0,1,0,        0,   0,0,PRIORITY_FRONT,   0,0,0,0,0,0, division_type,division_count,  0, division_count_origin,division_num, 0, 0,0, 0,0,   0,0)
                     self.enemy_shot.append(new_enemy_shot)            
                 
                 if self.enemy[i].enemy_flag2 == 1: #反転離脱中の時は
@@ -559,18 +559,18 @@ class update_enemy:
         for i in reversed(range (enemy_shot_count)):
             #敵の弾の位置を更新する！
             #サインカーブ弾の場合
-            if self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_SIN:
+            if self.enemy_shot[i].enemy_shot_type == EnemyShot.SIN:
                 self.enemy_shot[i].posx += self.enemy_shot[i].vx      #敵の弾のx座標をvx分加減算して更新
                 self.enemy_shot[i].timer += self.enemy_shot[i].speed
                 self.enemy_shot[i].posy += self.enemy_shot[i].intensity * math.sin(self.enemy_shot[i].timer + 3.14 / 4)
             #コサインカーブ弾の場合
-            elif self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_COS:
+            elif self.enemy_shot[i].enemy_shot_type == EnemyShot.COS:
                 self.enemy_shot[i].posx += self.enemy_shot[i].vx       #敵の弾のx座標をvx分加減算して更新
                 self.enemy_shot[i].timer += self.enemy_shot[i].speed
                 self.enemy_shot[i].posy += self.enemy_shot[i].intensity * math.cos(self.enemy_shot[i].timer + 3.14/2 + 3.14/4)
             #誘導弾orホーミングレーザーの場合
-            elif    self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_HOMING_BULLET\
-                or self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_HOMING_LASER:
+            elif    self.enemy_shot[i].enemy_shot_type == EnemyShot.HOMING_BULLET\
+                or self.enemy_shot[i].enemy_shot_type == EnemyShot.HOMING_LASER:
                 #誘導弾orホーミングレーザーを自機に追尾させる
                 vx0 = self.enemy_shot[i].vx
                 vy0 = self.enemy_shot[i].vy #誘導弾の速度ベクトル(vx,vy)を(vx0,vy0)に退避しておきます
@@ -643,22 +643,22 @@ class update_enemy:
                         self.enemy_shot[i].turn_theta = 0 #turn_thetaはマイナスにならないようにする
                     self.enemy_shot[i].count1 = 0 #誘導性能を落として行くカウンタ数を初期化
                 
-                if self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_HOMING_LASER: #ホーミングレーザーの場合は
+                if self.enemy_shot[i].enemy_shot_type == EnemyShot.HOMING_LASER: #ホーミングレーザーの場合は
                     #ホーミングレーザーの尻尾部分を育成する
                     if (pyxel.frame_count % 3) == 0:
                         new_enemy_shot = Enemy_shot()
-                        new_enemy_shot.update(ENEMY_SHOT_HOMING_LASER_TAIL,ID00,self.enemy_shot[i].posx,self.enemy_shot[i].posy,ESHOT_COL_MIN88,ESHOT_SIZE8,ESHOT_SIZE8,  0,0, 0,0,   0,  1,1, 0,0,  0,0,0, 0, 60,0,PRIORITY_FRONT, 0,0,0,0,0,0, 0,0, 0, 0,0, 0, 0,0, 0,0,   0,0)
+                        new_enemy_shot.update(EnemyShot.HOMING_LASER_TAIL,ID00,self.enemy_shot[i].posx,self.enemy_shot[i].posy,ESHOT_COL_MIN88,ESHOT_SIZE8,ESHOT_SIZE8,  0,0, 0,0,   0,  1,1, 0,0,  0,0,0, 0, 60,0,PRIORITY_FRONT, 0,0,0,0,0,0, 0,0, 0, 0,0, 0, 0,0, 0,0,   0,0)
                         self.enemy_shot.append(new_enemy_shot)
                 
             #ホーミングレーザーの尻尾の場合
-            elif self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_HOMING_LASER_TAIL:
+            elif self.enemy_shot[i].enemy_shot_type == EnemyShot.HOMING_LASER_TAIL:
                 self.enemy_shot[i].disappearance_count -= 1 #消滅カウンターを1減少させる
                 if self.enemy_shot[i].disappearance_count <= 0:#消滅カウンターが0以下になったのなら
                     del self.enemy_shot[i]    #インスタンスを消滅させる 古い尻尾から消えていく・・・
                     continue                #これ以下の処理はせずにループを続けていく
                 
             #サーチレーザーの場合
-            elif self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_SEARCH_LASER:
+            elif self.enemy_shot[i].enemy_shot_type == EnemyShot.SEARCH_LASER:
                 if self.enemy_shot[i].search_flag == 0: #サーチフラグがまだだっていないのなら自機とのx座標の比較を以下行っていく
                     if -2 <= self.my_x - self.enemy_shot[i].posx <= 2: #自機のx座標とサーチレーザーのx座標の差が+-2以内なら
                         self.enemy_shot[i].search_flag = 1 #サーチ完了フラグを立てる
@@ -673,18 +673,18 @@ class update_enemy:
                 #サーチレーザーの尻尾部分を育成する
                 if (pyxel.frame_count % 4) == 0:
                     new_enemy_shot = Enemy_shot()
-                    new_enemy_shot.update(ENEMY_SHOT_SEARCH_LASER_TAIL,ID00,self.enemy_shot[i].posx,self.enemy_shot[i].posy,ESHOT_COL_MIN88,ESHOT_SIZE8,ESHOT_SIZE8,  0,0, 0,self.enemy_shot[i].vy, 0,  1,1, 0,0,  0,0,0, 0, 60,0,PRIORITY_FRONT,0,self.enemy_shot[i].search_flag,0,0,0,0, 0,0, 0, 0,0, 0, 0,0, 0,0,   0,0) #search_flagとvyはdraw時に使用するのでそのままコピーします
+                    new_enemy_shot.update(EnemyShot.SEARCH_LASER_TAIL,ID00,self.enemy_shot[i].posx,self.enemy_shot[i].posy,ESHOT_COL_MIN88,ESHOT_SIZE8,ESHOT_SIZE8,  0,0, 0,self.enemy_shot[i].vy, 0,  1,1, 0,0,  0,0,0, 0, 60,0,PRIORITY_FRONT,0,self.enemy_shot[i].search_flag,0,0,0,0, 0,0, 0, 0,0, 0, 0,0, 0,0,   0,0) #search_flagとvyはdraw時に使用するのでそのままコピーします
                     self.enemy_shot.append(new_enemy_shot)
                 
             #サーチレーザーの尻尾の場合
-            elif self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_SEARCH_LASER_TAIL:
+            elif self.enemy_shot[i].enemy_shot_type == EnemyShot.SEARCH_LASER_TAIL:
                 self.enemy_shot[i].disappearance_count -= 1 #消滅カウンターを1減少させる
                 if self.enemy_shot[i].disappearance_count <= 0:#消滅カウンターが0以下になったのなら
                     del self.enemy_shot[i]    #インスタンスを消滅させる 古い尻尾から消えていく・・・
                     continue                #これ以下の処理はせずにループを続けていく
                 
             #回転弾の場合
-            elif self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_CIRCLE_BULLET:
+            elif self.enemy_shot[i].enemy_shot_type == EnemyShot.CIRCLE_BULLET:
                 self.enemy_shot[i].rotation_omega += self.enemy_shot[i].rotation_omega_incremental #rotation_omega_incrementalの分だけ角度を増加させていく(回転していく)
                 self.enemy_shot[i].rotation_omega = self.enemy_shot[i].rotation_omega % 360 #角度は３６０で割った余りとする(0~359)
                 
@@ -703,13 +703,13 @@ class update_enemy:
                 self.enemy_shot[i].posy = self.enemy_shot[i].cy+ self.enemy_shot[i].radius * math.sin(math.radians(self.enemy_shot[i].rotation_omega))
                 
             #落下弾の場合
-            elif self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_DROP_BULLET:
+            elif self.enemy_shot[i].enemy_shot_type == EnemyShot.DROP_BULLET:
                 #速度ベクトルを加速度で掛け合わせて加速もしくは減速させる x軸の速度ベクトルは変化させない
                 self.enemy_shot[i].vy += self.enemy_shot[i].accel #y軸の速度ベクトルに加速度を足し合わせて加速もしくは減速させる
                 self.enemy_shot[i].posx += self.enemy_shot[i].vx#敵の弾のx座標をvx分加減算して更新
                 self.enemy_shot[i].posy += self.enemy_shot[i].vy#敵の弾のy座標をvy分加減算して更新
             #アップレーザー,ダウンレーザーの場合
-            elif self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_UP_LASER or self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_DOWN_LASER:
+            elif self.enemy_shot[i].enemy_shot_type == EnemyShot.UP_LASER or self.enemy_shot[i].enemy_shot_type == EnemyShot.DOWN_LASER:
                 if self.enemy_shot[i].stop_count == 0:#もしストップカウントが0で動き出しても良いのなら・・・
                     self.enemy_shot[i].vx = self.enemy_shot[i].vx * self.enemy_shot[i].accel #速度ベクトルを加速度で掛け合わせて加速もしくは減速させる
                     self.enemy_shot[i].vy = self.enemy_shot[i].vy * self.enemy_shot[i].accel
@@ -724,7 +724,7 @@ class update_enemy:
                     self.enemy_shot[i].stop_count -= 1#ストップカウントがまだ残っていたら１減らし、座標の更新は行わずそのままの位置で留まる
                 
             #ベクトルレーザーの場合
-            elif self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_VECTOR_LASER:
+            elif self.enemy_shot[i].enemy_shot_type == EnemyShot.VECTOR_LASER:
                 if self.enemy_shot[i].stop_count == 0:#もしストップカウントが0で動き出しても良いのなら・・・
                     self.enemy_shot[i].vx = self.enemy_shot[i].vx * self.enemy_shot[i].accel #速度ベクトルを加速度で掛け合わせて加速もしくは減速させる
                     self.enemy_shot[i].vy = self.enemy_shot[i].vy * self.enemy_shot[i].accel
@@ -825,7 +825,7 @@ class update_enemy:
                     self.enemy_shot[i].stop_count -= 1#ストップカウントがまだ残っていたら１減らし、座標の更新は行わずそのままの位置で留まる
             
             #敵のレーザー兵器がＬ’ｓシールドシステムに当たっているか判別###################################
-            if self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_LASER and self.ls_shield_hp > 0:#敵のショットがレーザーの時かつシールドエナジーが残っているときのみ処理する
+            if self.enemy_shot[i].enemy_shot_type == EnemyShot.LASER and self.ls_shield_hp > 0:#敵のショットがレーザーの時かつシールドエナジーが残っているときのみ処理する
                 if   0 <= self.enemy_shot[i].posx - (self.my_x + 8) <= 4 and 0 <= self.enemy_shot[i].posy - (self.my_y - 12) < 26:#シールドと敵レーザーが接触したのなら
                     self.ls_shield_hp -= 1#シールドエナジーを1減らす
                     del self.enemy_shot[i]
@@ -852,7 +852,7 @@ class update_enemy:
     def clip_shot(self):
         enemy_shot_count = len(self.enemy_shot)#敵の弾数を数える
         for i in reversed(range (enemy_shot_count)):
-            if self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_CIRCLE_BULLET or self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_CIRCLE_LASER:
+            if self.enemy_shot[i].enemy_shot_type == EnemyShot.CIRCLE_BULLET or self.enemy_shot[i].enemy_shot_type == EnemyShot.CIRCLE_LASER:
                 #回転系の弾の座標はcx,cyを基準としてはみだし判定する(結構大きくはみ出しても消えない感じで判定します)
                 if  (-40 < self.enemy_shot[i].cx < WINDOW_W + 40 ) and ( -40 < self.enemy_shot[i].cy < self.bg_height + 40 ):
                     continue

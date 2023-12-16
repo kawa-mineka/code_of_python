@@ -1028,10 +1028,10 @@ class update_collision:
     def enemy_shot_to_bg(self):
         enemy_shot_count = len(self.enemy_shot)#敵の弾数を数える
         for i in reversed(range(enemy_shot_count)):
-            if     self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_WAVE\
-                or self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_VECTOR_LASER:    #ウェーブ、ベクトルレーザーは当たり判定無し
+            if     self.enemy_shot[i].enemy_shot_type == EnemyShot.WAVE\
+                or self.enemy_shot[i].enemy_shot_type == EnemyShot.VECTOR_LASER:    #ウェーブ、ベクトルレーザーは当たり判定無し
                 continue #当たり判定はしないで次のループ回へ突入！
-            elif self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_LASER: #レーザービームの場合は障害物にギリギリまで当たり食い込みたいのでx座標を右に1ブロック分(8ドット)だけ補正を入れてやる
+            elif self.enemy_shot[i].enemy_shot_type == EnemyShot.LASER: #レーザービームの場合は障害物にギリギリまで当たり食い込みたいのでx座標を右に1ブロック分(8ドット)だけ補正を入れてやる
                 func.check_bg_collision(self,self.enemy_shot[i].posx + 6 + 8,self.enemy_shot[i].posy + 4,0,0)
             else:
                 func.check_bg_collision(self,self.enemy_shot[i].posx + 6   ,self.enemy_shot[i].posy + 4,0,0)

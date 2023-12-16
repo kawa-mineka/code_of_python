@@ -284,34 +284,34 @@ class graph:
         enemy_shot_count = len(self.enemy_shot)
         for i in range(enemy_shot_count):
             if self.enemy_shot[i].priority == priority:
-                if   self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_LASER:            #通常レーザーの表示
+                if   self.enemy_shot[i].enemy_shot_type == EnemyShot.LASER:            #通常レーザーの表示
                     pyxel.blt(self.enemy_shot[i].posx, self.enemy_shot[i].posy - self.camera_offset_y, IMG2,   152,16,    8, 8,    pyxel.COLOR_BLACK)#敵レーザービームの表示
-                elif self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_GREEN_LASER:      #ボスのグリーンレーザーの表示
+                elif self.enemy_shot[i].enemy_shot_type == EnemyShot.GREEN_LASER:      #ボスのグリーンレーザーの表示
                     pyxel.line(self.enemy_shot[i].posx,self.enemy_shot[i].posy - self.camera_offset_y,  self.enemy_shot[i].posx + 8,self.enemy_shot[i].posy- self.camera_offset_y  ,pyxel.COLOR_LIME) #グリーンレーザービームの表示
                     #pyxel.line(self.enemy_shot[i].posx,self.enemy_shot[i].posy+1,self.enemy_shot[i].posx + 8,self.enemy_shot[i].posy+1,3) #影部分の線を描画
-                elif self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_RED_LASER:        #ボスのレッドレーザーの表示
+                elif self.enemy_shot[i].enemy_shot_type == EnemyShot.RED_LASER:        #ボスのレッドレーザーの表示
                     pyxel.line(self.enemy_shot[i].posx,self.enemy_shot[i].posy - self.camera_offset_y,  self.enemy_shot[i].posx + 8,self.enemy_shot[i].posy- self.camera_offset_y  ,pyxel.COLOR_RED)#レッドレーザービームの表示
-                elif self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_HOMING_LASER:     #ホーミングレーザーの表示
+                elif self.enemy_shot[i].enemy_shot_type == EnemyShot.HOMING_LASER:     #ホーミングレーザーの表示
                     pyxel.blt(self.enemy_shot[i].posx, self.enemy_shot[i].posy - self.camera_offset_y, IMG2,   200,16,    8, 8,    pyxel.COLOR_BLACK)#ホーミングレーザーの頭の表示
-                elif self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_HOMING_LASER_TAIL:#ホーミングレーザーの尻尾の表示
+                elif self.enemy_shot[i].enemy_shot_type == EnemyShot.HOMING_LASER_TAIL:#ホーミングレーザーの尻尾の表示
                     pyxel.blt(self.enemy_shot[i].posx, self.enemy_shot[i].posy - self.camera_offset_y, IMG2,   160+(self.enemy_shot[i].disappearance_count // 12) * 8,16,    8, 8,    pyxel.COLOR_BLACK)#ホーミングレーザーの尻尾の表示
-                elif self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_SEARCH_LASER:     #サーチレーザーの表示
+                elif self.enemy_shot[i].enemy_shot_type == EnemyShot.SEARCH_LASER:     #サーチレーザーの表示
                     if self.enemy_shot[i].search_flag == 0: #自機サーチ完了フラグがたっていない場合は横状態のグラフイックを表示する
                         pyxel.blt(self.enemy_shot[i].posx, self.enemy_shot[i].posy - self.camera_offset_y, IMG2,   216,40,    8, 8,    pyxel.COLOR_BLACK)#サーチレーザーの頭の表示(横)
                     else: ##自機サーチ完了フラグがたってたら縦状態のグラフイックを表示する
                         pyxel.blt(self.enemy_shot[i].posx, self.enemy_shot[i].posy - self.camera_offset_y, IMG2,   216,48,    8, 8 * ((self.enemy_shot[i].vy < 0)-(self.enemy_shot[i].vy > 0)),    pyxel.COLOR_BLACK)#サーチレーザーの頭の表示(縦),vyの符号を求めてグラフイックを反転してます(論理式を使用)                 
-                elif self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_SEARCH_LASER_TAIL:#サーチレーザーの尻尾の表示
+                elif self.enemy_shot[i].enemy_shot_type == EnemyShot.SEARCH_LASER_TAIL:#サーチレーザーの尻尾の表示
                     if self.enemy_shot[i].search_flag == 0:
                         pyxel.blt(self.enemy_shot[i].posx, self.enemy_shot[i].posy - self.camera_offset_y, IMG2,   224+8*(self.enemy_shot[i].disappearance_count < 30)+8*(self.enemy_shot[i].disappearance_count < 15),40,    8, 8,    pyxel.COLOR_BLACK)#サーチレーザーの尻尾(横)の表示
                     else:
                         pyxel.blt(self.enemy_shot[i].posx, self.enemy_shot[i].posy - self.camera_offset_y, IMG2,   224+8*(self.enemy_shot[i].disappearance_count < 30)+8*(self.enemy_shot[i].disappearance_count < 15),48,    8, 8*((self.enemy_shot[i].vy < 0)-(self.enemy_shot[i].vy > 0)),    pyxel.COLOR_BLACK)#サーチレーザーの尻尾(縦)の表示,vyの符号を求めてグラフイックを反転してます(論理式を使用)
-                elif self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_UP_LASER:         #アップレーザーの表示
+                elif self.enemy_shot[i].enemy_shot_type == EnemyShot.UP_LASER:         #アップレーザーの表示
                     pyxel.line(self.enemy_shot[i].posx,self.enemy_shot[i].posy - self.camera_offset_y+4,  self.enemy_shot[i].posx + self.enemy_shot[i].width,self.enemy_shot[i].posy- self.camera_offset_y+4  ,pyxel.COLOR_LIME) #アップレーザーの表示
-                elif self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_DOWN_LASER:       #ダウンレーザーの表示
+                elif self.enemy_shot[i].enemy_shot_type == EnemyShot.DOWN_LASER:       #ダウンレーザーの表示
                     pyxel.line(self.enemy_shot[i].posx,self.enemy_shot[i].posy - self.camera_offset_y+4,  self.enemy_shot[i].posx + self.enemy_shot[i].width,self.enemy_shot[i].posy- self.camera_offset_y+4  ,pyxel.COLOR_ORANGE) #ダウンレーザーの表示
-                elif self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_VECTOR_LASER:     #ベクトルレーザーの表示
+                elif self.enemy_shot[i].enemy_shot_type == EnemyShot.VECTOR_LASER:     #ベクトルレーザーの表示
                     pyxel.line(self.enemy_shot[i].posx+4,self.enemy_shot[i].posy - self.camera_offset_y,  self.enemy_shot[i].posx+4,self.enemy_shot[i].posy - self.camera_offset_y+ self.enemy_shot[i].height   ,pyxel.COLOR_RED) #ベクトルレーザーの表示
-                elif self.enemy_shot[i].enemy_shot_type == ENEMY_SHOT_GREEN_CUTTER:     #ブリザーディア」が尾翼部から射出するグリーンカッターの表示
+                elif self.enemy_shot[i].enemy_shot_type == EnemyShot.GREEN_CUTTER:     #ブリザーディア」が尾翼部から射出するグリーンカッターの表示
                     pyxel.blt(self.enemy_shot[i].posx, self.enemy_shot[i].posy - self.camera_offset_y, IMG2,   64,56,    SIZE_16, SIZE_16,    15)
                 else:                                                                   #通常弾の表示
                     pyxel.blt(self.enemy_shot[i].posx, self.enemy_shot[i].posy - self.camera_offset_y, IMG2,   32 + (self.enemy_shot[i].posx // 8) % 4 * 8,0,    8, 8,    pyxel.COLOR_GRAY)#敵通常弾の表示 posxを使用してアニメーションパターンのオフセット値を計算する                
