@@ -25,6 +25,9 @@ class update_collision:
     #################################自機との当たり判定#################################################################
     #自機と敵との衝突判定
     def ship_to_enemy(self):
+        """
+        自機と敵との当たり判定を行います
+        """
         if self.invincible_counter > 0: #無敵時間が残っていた場合は・・・
             return                 #衝突判定はせずそのまま帰っちゃう・・・無敵最高！
         
@@ -40,6 +43,9 @@ class update_collision:
 
     #自機とボスとの衝突判定
     def ship_to_boss(self):
+        """
+        自機とボスとの当たり判定を行います
+        """
         if self.invincible_counter > 0: #無敵時間が残っていた場合は・・・
             return                 #衝突判定はせずそのまま帰っちゃう・・・無敵最高！
         boss_count = len(self.boss)
@@ -114,6 +120,9 @@ class update_collision:
 
     #自機と背景障害物との当たり判定
     def ship_to_bg(self):
+        """
+        自機と背景障害物との当たり判定を行います
+        """
         if self.bg_collision_Judgment_flag == 0: #デバッグ用の当たり判定を行うフラグが立っていなかったら
             return                        #衝突判定はせずそのまま帰っちゃう
         if self.invincible_counter > 0: #無敵時間が残っていた場合は・・・
@@ -124,6 +133,11 @@ class update_collision:
 
     #自機とパワーアップアイテム類との当たり判定（パワーアップアイテムゲット！！）
     def ship_to_obtain_item(self):
+        """
+        自機とパワーアップアイテム類との当たり判定を行います
+        
+        パワーアイテムゲット！
+        """
         obtain_item_count = len(self.obtain_item)
         for i in reversed(range (obtain_item_count)):
             #パワーアップアイテム類が自機に当たっているか判別
@@ -227,6 +241,9 @@ class update_collision:
     #################################自機弾との当たり判定##################################################################
     #自機弾と敵の当たり判定
     def my_shot_to_enemy(self):
+        """
+        自機弾と敵の当たり判定を行います
+        """
         shot_hit = len(self.shots)
         for h in reversed(range (shot_hit)):
             enemy_hit = len(self.enemy)
@@ -263,6 +280,9 @@ class update_collision:
 
     #自機弾とボスとの当たり判定
     def my_shot_to_boss(self):
+        """
+        自機弾とボスとの当たり判定を行います
+        """
         shot_hit = len(self.shots)
         for h in reversed(range (shot_hit)):
             boss_hit = len(self.boss)
@@ -531,6 +551,9 @@ class update_collision:
 
     #自機弾と背景障害物の当たり判定
     def my_shot_to_bg(self):
+        """
+        自機弾と背景障害物との当たり判定を行います
+        """
         if  0 <= self.shot_level <= 6:#ウェーブカッターの場合は背景は貫通する
             shot_count = len(self.shots)
             for i in reversed(range(shot_count)):
@@ -542,6 +565,9 @@ class update_collision:
     #################################自機ミサイルとの当たり判定###############################################################
     #自機ミサイルと敵の当たり判定
     def missile_to_enemy(self):
+        """
+        自機ミサイルと敵との当たり判定を行います
+        """
         missile_hit = len(self.missile)
         for h in reversed(range (missile_hit)):
             enemy_hit = len(self.enemy)
@@ -564,6 +590,9 @@ class update_collision:
 
     #自機ミサイルとボスとの当たり判定
     def missile_to_boss(self):
+        """
+        自機ミサイルとボスとの当たり判定を行います
+        """
         missile_hit = len(self.missile)
         for h in reversed(range (missile_hit)):
             boss_hit = len(self.boss)
@@ -780,6 +809,9 @@ class update_collision:
     ################################クローショットとの当たり判定############################################################
     #クローショットと敵の当たり判定
     def claw_shot_to_enemy(self):
+        """
+        クローショットと敵の当たり判定を行います
+        """
         claw_shot_hit = len(self.claw_shot)#クローの弾の数を数える
         for h in reversed(range (claw_shot_hit)):
             enemy_hit = len(self.enemy)
@@ -802,6 +834,9 @@ class update_collision:
 
     #クローショットとボスとの当たり判定
     def claw_shot_to_boss(self):
+        """
+        クローショットとボスとの当たり判定を行います
+        """
         claw_shot_hit = len(self.claw_shot)#クローの弾の数を数える
         for h in reversed(range (claw_shot_hit)):
             boss_hit = len(self.boss)
@@ -1017,6 +1052,9 @@ class update_collision:
 
     #クローショットと背景との当たり判定
     def claw_shot_to_bg(self):
+        """
+        クローショットと背景との当たり判定を行います
+        """
         claw_shot_count = len(self.claw_shot)
         for i in reversed(range(claw_shot_count)):
             func.check_bg_collision(self,self.claw_shot[i].posx,(self.claw_shot[i].posy) + 4,0,0)
@@ -1026,6 +1064,9 @@ class update_collision:
     #敵の弾との当たり判定####################################################################################################
     #敵の弾と背景障害物の当たり判定
     def enemy_shot_to_bg(self):
+        """
+        敵弾と背景障害物との当たり判定を行います
+        """
         enemy_shot_count = len(self.enemy_shot)#敵の弾数を数える
         for i in reversed(range(enemy_shot_count)):
             if     self.enemy_shot[i].enemy_shot_type == EnemyShot.WAVE\
@@ -1042,6 +1083,11 @@ class update_collision:
     ################################パワーアップアイテムと敵弾との当たり判定##################################################
     #パワーアップアイテム類と敵弾の当たり判定(難易度によってパワーアップアイテムは敵弾を消す効果あり)
     def obtain_item_to_enemy_shot(self):
+        """
+        パワーアップアイテム類と敵弾との当たり判定を行います
+        
+        (難易度によってパワーアップアイテムは敵弾を消す効果あり)
+        """
         if self.item_erace_bullet_flag == FLAG_OFF: #パワーアップアイテムが敵弾を消すフラグが立っていないのならそのままリターンする
             return
         

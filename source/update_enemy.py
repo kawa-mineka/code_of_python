@@ -1,12 +1,12 @@
 ###########################################################
 #  update_enemyクラス                                     #
 ###########################################################
-# Appクラスのupdate関数から呼び出される関数群                #
-# 主に敵の更新を行うメソッド                                #
-# 敵の移動更新、敵のクリッピング                             #
-# 敵弾の移動更新,敵弾のクリッピング                          #
-# 当たり判定は別のクラス(update_collision)で行う             #
-# 2022 04/06からファイル分割してモジュールとして運用開始      #
+# Appクラスのupdate関数から呼び出される関数群              #
+# 主に敵の更新を行うメソッド                               #
+# 敵の移動更新、敵のクリッピング                           #
+# 敵弾の移動更新,敵弾のクリッピング                        #
+# 当たり判定は別のクラス(update_collision)で行う           #
+# 2022 04/06からファイル分割してモジュールとして運用開始   #
 ###########################################################
 import math         #三角関数などを使用したいのでインポートぉぉおお！
 from random import random    #random.random() と呼ぶと、0から1の範囲(1は含まない)のランダムな実数が返される(主にパーティクル系で使用します)
@@ -24,6 +24,9 @@ class update_enemy:
     #####################################敵関連の処理関数######################################
     #敵の更新（移動とか弾の発射とか他の敵を生み出すとか、そういう処理）
     def enemy(self):
+        """
+        敵の更新を行います
+        """
         enemy_count = len(self.enemy)
         for i in range (enemy_count):
             if   self.enemy[i].enemy_type == EnemyName.CIR_COIN:#サーコイン 直進して斜め後退→勢いよく後退していく10機編隊
@@ -538,6 +541,9 @@ class update_enemy:
 
     #画面外に出た敵を消去する
     def clip(self):
+        """
+        画面外にはみ出てしまった敵を消去(消滅)させます
+        """
         enemy_count = len(self.enemy)
         for i in reversed(range (enemy_count)):
             if -30 < self.enemy[i].posx and self.enemy[i].posx < WINDOW_W + 200:#敵のx座標は-30~160+200以内？
@@ -555,6 +561,9 @@ class update_enemy:
     #################################敵弾関連の処理関数##################################################
     #敵の弾の更新&自機と敵弾の衝突判定
     def shot(self):
+        """
+        敵弾の更新と自機との当たり判定をまとめて行います
+        """
         enemy_shot_count = len(self.enemy_shot)#敵の弾数を数える
         for i in reversed(range (enemy_shot_count)):
             #敵の弾の位置を更新する！
@@ -850,6 +859,11 @@ class update_enemy:
 
     #敵の弾のはみだしチェック（はみ出していたら消去する）
     def clip_shot(self):
+        """
+        敵の弾のはみだしチェック
+        
+        (はみ出していたら消去する)
+        """
         enemy_shot_count = len(self.enemy_shot)#敵の弾数を数える
         for i in reversed(range (enemy_shot_count)):
             if self.enemy_shot[i].enemy_shot_type == EnemyShot.CIRCLE_BULLET or self.enemy_shot[i].enemy_shot_type == EnemyShot.CIRCLE_LASER:

@@ -6,6 +6,9 @@ class define_data:
         None
 
     def ipl_mes(self):                      #IPLで使用するテキストメッセージの定義
+        """
+        IPLメッセージテキストの定義
+        """
         #IPLメッセージデータその1
         self.ipl_mes1 = [
             ["INITIAL PROGRAM LOADING",7],
@@ -37,6 +40,9 @@ class define_data:
             ]
 
     def default_score_board(self):          #スコアボードの初期データ 
+        """
+        スコアボードの初期データの定義を行います
+        """
         # [難易度ID,       順位,名前,      得点,周回数,最終到達ステージ,使用した機体]
         self.default_score_board = [
         [
@@ -119,6 +125,9 @@ class define_data:
         ]
 
     def default_achievement_list(self):     #実績(アチーブメント)のIDナンバーとそれに対するグラフイックチップの位置や英語コメント、日本語コメントのデータリスト
+        """
+        実績(アチーブメント)のIDナンバーとそれに対するグラフイックチップの位置や英語コメント、日本語コメントの定義を行います
+        """
         self.default_achievement_list = [
             [ACHIEVEMENT_FIRST_CAMPAIGN,        RESULTS_NOT_OBTAINED,168     ,176,IMG2,"FIRST CAMPAIGN",               "",  "戦火への誘い",                    "初めての出撃！",                           "20210828",LV01,10],
             [ACHIEVEMENT_DESTROY_STAGE01_BOSS,  RESULTS_NOT_OBTAINED,168     ,176,IMG2,"DESTROY BREEZARDIA",           "",  "巨大なる衝撃",                    "ブリザーディアを破壊した",                  "20210828",LV01,10],
@@ -205,6 +214,9 @@ class define_data:
             ]
 
     def stage_asset_list(self):             #ステージごとのアセットファイル名(pyxresファイル)が登録されたリストを作成する
+        """
+        各ステージのアセットファイル名(pyxresファイル)が登録されたリストを作成します
+        """
         self.stage_asset_list = [
             [STAGE_MOUNTAIN_REGION,         "min-sht2.pyxres"],
             [STAGE_ADVANCE_BASE,            "min-sht2.pyxres"],
@@ -219,6 +231,9 @@ class define_data:
             ]
 
     def medal_graph_and_comment_list(self): #メダルのIDナンバーとそれに対するグラフイックチップの位置や英語コメント、日本語コメントのデータリスト
+        """
+        メダルのIDナンバーとそれに対するグラフイックチップの位置や英語コメント、日本語コメントのデータリストを作製します
+        """
         self.medal_graph_and_comment_list = [
             [MEDAL_NO_SLOT              ,168         ,176,IMG2,"NO SLOT"                   ,"空スロット",                 "","",                                                                                "",""],
             [MEDAL_BEFOREHAND_1SHOT_ITEM,168 + 8 * 1 ,176,IMG2,"BEFOREHAND 1 SHOT"         ,"事前にショットアイテム１個取得","TOTAL PLAY TIME EXCEEDED","10 MINUTES",                                              "トータルプレイ時間が１０分を超えました！",""],
@@ -236,6 +251,9 @@ class define_data:
     def font_code_table(self):              #美咲フォント(漢字)コードテーブルの定義 
         #いきなり美咲フォントコードテーブルを直接代入という破天荒なコード・・・・
         #「シールド」は「シ─ルド」と入力しないと文字化けするので注意 ー→─
+        """
+        美咲フォント(漢字)コードテーブルの定義 
+        """
         self.font_code_table = (
             "　+−±×÷=≠<>≦≧∞∴♂♀°′″℃¥$¢£%#&*@§☆★○●◎◇\n"
             "◆□■△▲▽▼※〒→←↑↓〓         ∈∋⊆⊇⊂⊃∪∩       ∧∨¬⇒⇔∀∃         ∠⊥⌒∂∇≡≒≪≫√∽∝∵∫∬      Å‰♯♭♪†‡¶    ◯\n"
@@ -324,6 +342,9 @@ class define_data:
             "堯槇遙瑤凜熙\n")
 
     def flash_color_list(self):             #点滅用カラーリスト群の定義
+        """
+        点滅用カラーコードリストの定義
+        """
         #サブウェポンセレクターカーソルなどで使用する点滅用カラーリスト群(pyxelのカラーナンバーだよ)
         self.blinking_color         = [0,1,5,12, 6,7,6,12,5,1]
         self.red_flash_color        = [0,1,5, 4, 2,8,2, 4,5,1]
@@ -333,9 +354,15 @@ class define_data:
         self.rainbow_flash_color    = [3,4,5,6,7,8,9,10,11,12,13,14,15,1,2]
 
     def expansion_shrink(self):             #サブウェポンアイテムの外を回っている四角形描画で使用するための「おっきくなったり、ちいさくなったりするオフセット数値」のリスト群(単位はドット)
+        """
+        サブウェポンアイテムの外を回っている四角形描画で使用するための「おっきくなったり、ちいさくなったりするオフセット数値」のリスト群(単位はドット)定義
+        """
         self.expansion_shrink_number = [1,1,1,2,2,2,3,3,3,4,   4,5,5,6,6,7,8,9,10,9,   8,7,6,6,5,5,4,4,3,3,   3,2,2,2,1,1,1,1,1,1,1,1]
 
     def game_difficulty_list(self):         #難易度ごとの各種設定数値のリストの定義
+        """
+        難易度ごとの各種設定数値のリストの定義
+        """
         #フォーマット
         #[s=start b=bonusの略です
         #難易度名,   説明文,sショットb,sミサイルb,sシールドb,クロー初期値,ステージ後に回復するシールド値,撃ち返し弾の有無,      スコア倍率, ランク上昇frame,sランク数,被弾後無敵時間,アイテム取得後無敵時間,アイテム敵弾消去,ランク限界,撃ち返し開始loop,撃ち返し開始stage,1ランクダウンに必要なダメージ数,ループ時の動作,        アイテムが接近開始してくる距離, アイテムバウンド数]
@@ -350,6 +377,9 @@ class define_data:
             ]
 
     def game_rank_data_list(self):          #ランク値による各種設定数値のリストの定義
+        """
+        ランク値による各種設定数値のリストの定義
+        """
         #フォーマット
         #敵スピード倍率は3.9までにしておいてください、追尾戦闘機のスピードが速すぎると一瞬で画面外に飛んでいくみたいで・・
         # [ランク, 敵スピード倍率, 敵弾スピード倍率, 撃ち返し弾確率%, 敵耐久力倍率, 弾追加数, 弾発射間隔%, nWAY弾レベル]
@@ -458,6 +488,9 @@ class define_data:
             ]
 
     def storyboard(self):                  #タイトルデモ、ミドルデモなどのビジュアルシーンの絵コンテ(ストーリーボード）の定義とか
+        """
+        タイトルデモ、ミドルデモなどのビジュアルシーンの絵コンテ(ストーリーボード）の定義とかそういうの
+        """
         #フォーマット
         #   ビジュアルシーンID,            トータルタイムカウンタ(フレーム), 終了時の動作
         self.title_storyboard = [
