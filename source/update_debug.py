@@ -363,5 +363,5 @@ class update_debug:
         if (pyxel.frame_count % 8) == 0:
             if pyxel.btn(pyxel.KEY_0):
                 new_event_append_request = Event_append_request()
-                new_event_append_request.update(self.stage_count + 10,EVENT_ENEMY,CIR_COIN,WINDOW_W + 8,func.s_rndint(self,0,WINDOW_H - 8),10)
+                new_event_append_request.update(self.stage_count + 10,EVENT_ENEMY,EnemyName.CIR_COIN,WINDOW_W + 8,func.s_rndint(self,0,WINDOW_H - 8),10)
                 self.event_append_request.append(new_event_append_request)#現在のstage_countから10カウント過ぎた時点でサーコインが発生するようイベントアペンドリストに追加する

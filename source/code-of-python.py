@@ -188,7 +188,9 @@ class App:
         print("APP FILE EXTENSION "        + pyxel.APP_FILE_EXTENSION)
         print("APP STARTUP SCRIPT FILE "   + pyxel.APP_STARTUP_SCRIPT_FILE)
         print("RESOURCE_FILE_EXTENSION "   + pyxel.RESOURCE_FILE_EXTENSION)
+        
         # print("RESOURCE_ARCHIVE_DIRNAME "  + pyxel.RESOURCE_ARCHIVE_DIRNAME) pyxel 2.0.0だとサポートされていないのでコメントアウト
+        
         print(" ")
         print("NUM_COLORS "     + str(pyxel.NUM_COLORS))
         print("NUM_IMAGES "     + str(pyxel.NUM_IMAGES))
@@ -196,6 +198,8 @@ class App:
         print("NUM_TILEMAPS "   + str(pyxel.NUM_TILEMAPS))
         print("TILEMAP_SIZE "   + str(pyxel.TILEMAP_SIZE))
         print("TILE_SIZE "      + str(pyxel.TILE_SIZE))
+        
+        # pyxel.screen_mode(scr = 2) #将来的にはスクリーンフィルターエフェクト(ブラウン管再現フィルターとかドットスムースフィルター)が変えられるかもしれないので記述しておくです
         
         pygame.mixer.init()  #pygameミキサー関連の初期化 pyxel.initよりも先にpygameをinitしないと上手く動かないみたい・・・
         pyxel.init(WINDOW_W,WINDOW_H,title="CODE OF PYTHON",fps = 60,quit_key=pyxel.KEY_NONE) #ゲームウィンドウのタイトルバーの表示とfpsの設定(60fpsにした),キーボード入力による強制終了は無しとする pyxel.init(caption=)がpyxel.init(title=)に変更されたっぽい？？？

@@ -18,6 +18,9 @@ class update_obj:
 
     #背景の星の追加（発生＆育成）
     def append_star(self):
+        """
+        背景の星の追加（発生＆育成）
+        """
         if (pyxel.frame_count % 3) == 0:
             if len(self.stars) < 600:
                 new_stars = Star()
@@ -27,6 +30,9 @@ class update_obj:
 
     #背景の星の更新（移動）
     def star(self):
+        """
+        背景の星の更新（移動）
+        """
         stars_count = len(self.stars)
         for i in reversed(range (stars_count)):
             if 0 < self.stars[i].posx and self.stars[i].posx < WINDOW_W + 2:#背景の星が画面内に存在するのか判定
@@ -37,6 +43,19 @@ class update_obj:
 
     #パーティクルの追加（発生＆育成）
     def append_particle(self,particle_type,priority,x,y,dx,dy,life,wait,color):
+        """
+        パーティクルの追加（発生＆育成）
+        
+        particle_type=パーティクルの種類,priority=描画優先度
+        
+        x,y=座標値,dx,dy=跳んでいく方向(速度ベクトル)
+        
+        life=表示される時間(この耐久値が0になるまでは表示される)
+        
+        wait=その場に留まる時間
+        
+        color=色
+        """
         if len(self.particle) < 1000: #パーティクルの総数が1000以下なら追加発生させる
             if particle_type == PARTICLE_DOT or particle_type == PARTICLE_CIRCLE: #ドットパーティクル 円形パーティクルの追加
                 new_particle = Particle()
@@ -86,6 +105,23 @@ class update_obj:
 
     #パーティクルの追加(自由な画像を定義できるタイプ)(発生＆育成)PARTICLE_BOSS_DEBRIS_FREE_IMAGE専用
     def append_free_image_particle(self,priority,x,y,dx,dy,life,wait,width,height,imgb,u,v,offset_x,offset_y,count,animation,transparent_color):
+        """
+        パーティクルの追加(自由な画像を定義できるタイプ)(発生＆育成)PARTICLE_BOSS_DEBRIS_FREE_IMAGE専用
+        
+        priority=描画優先度,x,y=座標値,dx,dy=跳んでいく方向(速度ベクトル)
+        
+        life=表示される時間(この耐久値が0になるまでは表示される)
+        
+        wait=その場に留まる時間
+        
+        width,height,imgb,u,v = 画像の横幅,縦幅,イメージバンク値,画像が格納されている座標(u,v)
+        
+        offset_x,offset_y = 座標オフセット値
+        
+        count,animation = アニメーション用のカウンタ値
+        
+        transparent_color = 透明色
+        """
         if len(self.particle) < 1000: #パーティクルの総数が1000以下なら追加発生させる
             new_particle = Particle()
             new_particle.update(PARTICLE_BOSS_DEBRIS_FREE_IMAGE,priority, x,y,    0,    dx,dy,   life,   0,transparent_color,width,height,imgb,u,v,count,count,animation,animation,offset_x,offset_y)
@@ -93,6 +129,9 @@ class update_obj:
 
     #パーティクルの更新
     def particle(self):
+        """
+        パーティクルの更新
+        """
         particlecount = len(self.particle)
         for i in reversed(range(particlecount)):#パーティクルのリストの要素数を数えてその数の分だけループ処理する（delしちゃう可能性があるのでreversedするよ）
             if self.particle[i].wait == 0: #ウェイトカウンターが0になったら位置を更新（移動する）
@@ -139,6 +178,12 @@ class update_obj:
 
     #ボスのパーツ破壊後の破片の育成
     def append_boss_parts_debris(self,num,type,x,y,life):
+        """
+        ボスのパーツ破壊した後に出現する「破片」を育成する
+        
+        num=個数,type=破片の種類
+        x,y,life = 座標値(x,y),破片が存在する時間(破片の耐久値0になると消えちゃうのん)
+        """
         for i in range(num):
             dx = -0.2 - random()
             dy = -0.2 - random() // 2
@@ -146,12 +191,28 @@ class update_obj:
 
     #ボスのパーツ破壊後の吹っ飛んで行くパーツの育成
     def append_blow_away_boss_parts(self,x,y,life,width,height,imgb,u,v,offset_x,offset_y,count,animation,transparent_color):
+        """
+        ボスのパーツ破壊後の吹っ飛んで行くパーツの育成
+        
+        x,y,life = 座標値(x,y),破片が存在する時間(破片の耐久値0になると消えちゃうのん)
+        
+        width,height,imgb,u,v = 画像の横幅,縦幅,イメージバンク値,画像が格納されている座標(u,v)
+        
+        offset_x,offset_y = 座標オフセット値
+        
+        count,animation = アニメーション用のカウンタ値
+        
+        transparent_color = 透明色
+        """
         dx = -random() - 0.05
         dy = -0.1 - random()
         update_obj.append_free_image_particle(self,PRIORITY_MORE_FRONT,x,y,dx,dy,life,0,width,height,imgb,u,v,offset_x,offset_y,count,animation,transparent_color)
 
     #背景オブジェクトの更新
     def background_object(self):
+        """
+        背景オブジェクトの更新
+        """
         object_count = len(self.background_object)
         for i in reversed(range(object_count)):#背景オブジェクトのリストの要素数を数えてその数の分だけループ処理する（delしちゃう可能性があるのでreversedするよ）
             
@@ -172,6 +233,9 @@ class update_obj:
 
     #雲の追加(背景オブジェクト)
     def append_cloud(self):
+        """
+        雲の追加(背景オブジェクト)
+        """
         if (pyxel.frame_count % self.cloud_append_interval) == 0 and self.display_cloud_flag == DISP_ON: #表示インタバールが0になった&表示フラグがonだったのなら
             if self.cloud_quantity == 0: #雲の量が0の時は「雲小」のみ表示する
                 t = func.s_rndint(self,BG_OBJ_CLOUD1,BG_OBJ_CLOUD10)
@@ -187,6 +251,11 @@ class update_obj:
 
     #タイマーフレアの更新(接触した物質の時間経過を遅くするフレアエフェクト)
     def timer_flare(self):
+        """
+        タイマーフレアの更新
+        
+        (接触した物質の時間経過を遅くするフレアエフェクト)
+        """
         if self.timer_flare_flag == 0: #タイマーフレアのフラグが建っていなかったらそのまま戻る
             return
             
@@ -197,6 +266,9 @@ class update_obj:
 
     #大気圏突入時の火花の更新
     def atmospheric_entry_spark(self):
+        """
+        大気圏突入時の火花の更新
+        """
         if self.atmospheric_entry_spark_flag == SPARK_OFF: #大気圏突入時の火花のフラグが建っていなかったらそのまま戻る
             return
             
@@ -209,6 +281,9 @@ class update_obj:
 
     #ラスタースクロールの更新
     def raster_scroll(self):
+        """
+        ラスタースクロールの更新
+        """
         if self.raster_scroll_flag == 0: #ラスタスクロール更新＆表示のフラグがたっていなかったらそのまま何もしないで戻る
             return
             
@@ -240,6 +315,9 @@ class update_obj:
 
     #爆発パターンの更新→撃ち返し弾の発生
     def explosion(self):
+        """
+        爆発パターンの更新→撃ち返し弾の発生
+        """
         explosioncount = len(self.explosions)
         for i in reversed(range(explosioncount)):
             #爆発パターンを背景スクロールに合わせて移動させる
@@ -281,6 +359,11 @@ class update_obj:
 
     #最前面(FRONT)のBGチップナンバー書き換えによる背景アニメーション(bg_rewrite_animation関数から呼び出されます)
     def front_bg_rewrite_animation(self):
+        """
+        最前面(FRONT)のBGチップナンバー書き換えによる背景アニメーション
+        
+        (bg_rewrite_animation関数から呼び出されます)
+        """
         if pyxel.frame_count % 8 != 0: #BG書き換えは8フレームに1回
             return
         
@@ -305,6 +388,11 @@ class update_obj:
 
     #中面(MIDDLE)の1画面分だけのBGチップを調べて書き換える背景アニメーション(bg_rewrite_animation関数から呼び出されます)
     def middle_bg_rewrite_animation(self):
+        """
+        中面(MIDDLE)の1画面分だけのBGチップを調べて書き換える背景アニメーション
+        
+        (bg_rewrite_animation関数から呼び出されます)
+        """
         if pyxel.frame_count % 8 != 0: #BG書き換えは8フレームに1回
             return
         
@@ -332,6 +420,11 @@ class update_obj:
 
     #横1ラインだけのBGチップナンバー書き換えにより背景アニメーション(bg_rewrite_animation関数から呼び出されます)
     def one_line_bg_rewrite_animation(self):
+        """
+        横1ラインだけのBGチップナンバー書き換えにより背景アニメーション
+        
+        (bg_rewrite_animation関数から呼び出されます)
+        """
         for w in range (WINDOW_W // 8 + 1):# x座表は理論的には0~20で行けるはずなんだけど20の時書き換えると微妙に画面右端で書き換えていないのかバレるので +1してます、ハイ！
             bg_animation_count = len(self.bg_animation_list) #bg_animation_listのなかにどれだけのリストが入っているのか数える
             for i in range(bg_animation_count):
@@ -348,6 +441,15 @@ class update_obj:
 
     #横1ラインだけのBGチップナンバー書き換えにより背景アニメーション(bg_rewrite_animation関数から呼び出されます)(同タイミングで書き換えるのではなく1キャラナンバーづつ増加させていくタイプ)(非同期タイプ)
     def one_line_inc_bg_rewrite_animation(self): 
+        """
+        横1ラインだけのBGチップナンバー書き換えにより背景アニメーション
+        
+        (bg_rewrite_animation関数から呼び出されます)
+        
+        (同タイミングで書き換えるのではなく1キャラナンバーづつ増加させていくタイプ)
+        
+        (非同期タイプ)
+        """
         for w in range (WINDOW_W // 8 + 1):# x座表は理論的には0~20で行けるはずなんだけど20の時書き換えると微妙に画面右端で書き換えていないのかバレるので +1してます、ハイ！
             bg_animation_count = len(self.bg_animation_list) #bg_animation_listのなかにどれだけのリストが入っているのか数える
             for i in range(bg_animation_count):
@@ -370,6 +472,9 @@ class update_obj:
 
     #BGマップチップデータ書き換えによる背景アニメーション
     def bg_rewrite_animation(self):
+        """
+        BGマップチップデータ書き換えによる背景アニメーション
+        """
         #今表示したマップに書き換え対象のキャラチップが含まれていたらＢＧデータナンバーを1増やしてアニメーションさせる
         if   self.stage_number == STAGE_MOUNTAIN_REGION:        #1面 MOUNTAIN REGION
             #最前面のＢＧ書き換えアニメーション----------------------------------------
@@ -411,5 +516,10 @@ class update_obj:
 
     #座標直接指定によるBGチップデータの書き換えアニメーション (ダミーでござる)
     def dummy_bg_animation(self):
+        """
+        座標直接指定によるBGチップデータの書き換えアニメーション 
+        
+        (ダミーでござる)
+        """
         for i in range(15):
             func.write_map_chip_free_scroll(self,95,184-i,(64 // 8) * 32 + (144 // 8) + pyxel.frame_count * 3 % 8)

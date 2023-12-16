@@ -19,6 +19,9 @@ class update_event:
 
     #イベントリストを解析してその内容を実行し,敵の発生や背景オブジェクトの発生、スクロール方向スピードなどの調整を行う (まぁこのメソッドで敵が出現する訳です)
     def list_execution(self):
+        """
+        イベントリストを解析してその内容を実行し,敵の発生や背景オブジェクトの発生、スクロール方向スピードなどの調整を行う (まぁこのメソッドで敵が出現する訳です)
+        """
         if self.stage_count == self.event_list[self.event_index][0]:#ステージカウントとリストのカウント値が同じならリスト内容を実行する
             if   self.event_list[self.event_index][1] == EVENT_ENEMY:             #イベント「敵出現」の場合
                 if   self.event_list[self.event_index][2] == EnemyName.CIR_COIN:      #サーコイン発生！
@@ -152,6 +155,9 @@ class update_event:
 
     #マップスクロールによる敵の発生を行う
     def map_scroll(self):
+        """
+        マップスクロールによる敵の発生を行う
+        """
         if self.no_enemy_mode == 1: #敵が出ないモードがonだったら・・・
             return              #何もせずに帰ります・・・・・
         
@@ -276,6 +282,9 @@ class update_event:
 
     #アペンドイベントリクエスト(イベント追加依頼）による敵の発生
     def append_request(self):
+        """
+        アペンドイベントリクエスト(イベント追加依頼）による敵の発生
+        """
         event_append_request_count = len(self.event_append_request)
         for i in reversed (range(event_append_request_count)):
             if self.stage_count == self.event_append_request[i].timer:

@@ -23,6 +23,9 @@ class update_item:
 
     #パワーアップアイテム類の更新
     def obtain_item(self):
+        """
+        パワーアップアイテムの更新を行います
+        """
         obtain_item_count = len(self.obtain_item)
         for i in reversed(range (obtain_item_count)):
             if     ITEM_SHOT_POWER_UP     <= self.obtain_item[i].item_type <= ITEM_CLAW_POWER_UP\
@@ -108,6 +111,9 @@ class update_item:
 
     #画面外に出たパワーアップアイテム類を消去する
     def clip_obtain_item(self):
+        """
+        画面外に出たパワーアップアイテム類を消去します
+        """
         obtain_item_count = len(self.obtain_item)
         for i in reversed(range (obtain_item_count)):
             if -50 < self.obtain_item[i].posx < WINDOW_W + 200 and -150 < self.obtain_item[i].posy < WINDOW_H + 150: #xは-50~160+200 Yは-150~120+150以内？
@@ -117,6 +123,9 @@ class update_item:
 
     #ボス破壊後にリペアアイテムを出現させる 
     def present_repair_item(self):
+        """
+        ボス破壊後にリペアアイテム(シールドアイテム)を出現させる 
+        """
         if self.present_repair_item_flag == 0: #ボーナスアイテムを出したフラグがまだ建っていないのなら
             #ボーナスアイテムを出現させる
             for _i in range(self.repair_shield):

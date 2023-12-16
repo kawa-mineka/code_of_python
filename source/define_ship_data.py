@@ -5,6 +5,9 @@ class define_ship_data:
         None
 
     def default_ship_list(self):          #各機体リスト(原本)
+        """
+        各機体リスト(原本)のリスト定義を行います
+        """
         #[[機体IDナンバー,         機体名,              機体分類,            所持フラグ,x,   y,  IMG,  初期総スロット数,総スロット数,slot*のメダルID, レベル,経験値,shot最大経験値,ミサイル最大経験値, 出撃回数,破壊回数, 撃墜点数,     飛行時間,      移動スピード,min,max,   次元シフト,サーチライト,横幅, 縦幅,    claw_max,   クロー防御,  roll,   trace, fix,    reverse,自動回復タイム,自動回復上限値,ボス内侵入,被弾後無敵時間,カプセル取得後無敵時間, カプセル引き寄せ力
         self.default_ship_list = [
             [J_PYTHON,           "JUSTICE PYTHON"    ,SHIP_FIRST_STEP,     FLAG_ON,  8,   0,  IMG2, ALL_SLOT2,     ALL_SLOT2,    0,0,0,0,0,0,0,  LEVEL1,EXP0, 71,            71,             SORTIE0,BROKEN0, SHOOT_DOWN0, FLIGHT_TIME0, SPEED0, SPEED0, SPEED2, FLAG_OFF, FLAG_OFF,   SIZE_4,SIZE_4, TWO_CLAW,  FLAG_OFF,  FLAG_ON,FLAG_ON,FLAG_ON,FLAG_ON, 0,           0,           FLAG_OFF, 0,            0,                    0],
@@ -26,6 +29,9 @@ class define_ship_data:
             ]
 
     def sub_weapon_level_data_list(self): #サブウェポンのレベルデータリスト
+        """
+        サブウェポンのレベルデータリストを定義します
+        """
         #テイルショット
         #    [レベル,連射数 ,スピード ,攻撃力 ,1-2-3-5way?,加速度]
         self.sub_weapon_tail_shot_level_data_list = [
@@ -55,6 +61,9 @@ class define_ship_data:
             [10,   4*4,     1.8,      0.3,     3,          1    ],]
 
     def shot_table_list(self):            #ショットパワーアップテーブルリスト定義
+        """
+        ショットパワーアップテーブルリストを定義します
+        """
         #ショットパワーアップテーブルのフォーマット
         #
         #x軸 [ショットレベル,ショットスピード(倍率),バルカンショットの連射数,ショットの攻撃力(倍率)]
@@ -95,6 +104,9 @@ class define_ship_data:
             [99999],]
 
     def missile_table_list(self):         #ミサイルパワーアップテーブルリストの定義
+        """
+        ミサイルパワーアップテーブルリストの定義します
+        """
         #ミサイルパワーアップテーブルのフォーマット
         #
         #x軸 [ミサイルレベル,ミサイルスピード(倍率),ミサイルの連射数,ミサイルの攻撃力(倍率)]

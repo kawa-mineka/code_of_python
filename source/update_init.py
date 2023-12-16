@@ -20,6 +20,9 @@ class update_init:
 
     #!ゲームスタート時の初期化#########################################
     def game_start(self):
+        """
+        新規ゲームを開始した時のみに必要な初期化
+        """
         self.score = 0               #スコア
         self.my_shield = 5           #自機のシールド耐久値
         self.my_speed = SPEED1       #自機の初期スピード
@@ -125,12 +128,20 @@ class update_init:
 
     #!ステージスタート時にグラフイック系のアセットを読み込む##############
     def stage_start_load_asset(self,st_num): #st_num = ステージ数
+        """
+        ステージスタート時にグラフイック系のアセットを読み込みます
+        
+        st_num = ステージ数
+        """
         #ステージ数から判断してそのステージに対応した画像リソースファイルを読み込みます
         filename = self.stage_asset_list[st_num][1]
         pyxel.load(os.path.abspath("./assets/graphic/" + filename))
 
     #!ステージスタート時の初期化#######################################
     def stage_start(self):
+        """
+        各ステージを開始するために必要な初期化です
+        """
         #画像リソースファイルを読み込みます
         update_init.stage_start_load_asset(self,self.stage_number - 1)
         # pyxel.load(os.path.abspath("./assets/graphic/min-sht2.pyxres"))

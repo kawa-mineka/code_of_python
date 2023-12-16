@@ -12,4 +12,7 @@ class define_sound:
         None
 
     def load_bgm(self):
+        """
+        BGMサウンドファイルの読み込みを行います
+        """
         self.game_over_bgm = pygame.mixer.Sound("assets/music/facton-Morning-Dreams-3727468_0_1.ogg") #GAME OVER BGMファイルの読み込み
