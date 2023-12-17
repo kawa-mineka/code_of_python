@@ -28,7 +28,7 @@ class update_ship:
         self.my_rolling_flag = 0  #自機ローリングフラグ(旋回フラグ)を0に初期化する
         self.my_moved_flag = 0    #自機が動いたかどうかのフラグを0に初期化する
         
-        if self.game_status == SCENE_STAGE_CLEAR_MY_SHIP_BOOST: #ゲームステータスが「ステージクリア後、自機がブースト加速して右に過ぎ去っていく」なら
+        if self.game_status == Scene.STAGE_CLEAR_MY_SHIP_BOOST: #ゲームステータスが「ステージクリア後、自機がブースト加速して右に過ぎ去っていく」なら
             self.my_x += self.my_vx
             self.my_vx += 0.025                #速度0.01で加速していく
             self.my_boost_injection_count += 1 #ステージクリア後のブースト噴射用のカウンターを1増やしていく
@@ -119,9 +119,9 @@ class update_ship:
             
             if -1 <= self.my_x - self.move_mode_auto_x <= 1 and -1 <= self.my_y - self.move_mode_auto_y <= 1: #自機座標(x,y)と移動目的先の座標の差が誤差+-1以内ならば
                 self.move_mode_auto_complete = 1    #自動移動完了フラグをonにする
-                if self.game_status == SCENE_STAGE_CLEAR_MOVE_MY_SHIP: #ゲームステータスが「ステージクリア後の自機自動移動」だったら
+                if self.game_status == Scene.STAGE_CLEAR_MOVE_MY_SHIP: #ゲームステータスが「ステージクリア後の自機自動移動」だったら
                     self.move_mode = MOVE_MANUAL    #自動移動モードを解除し手動移動モードに移行します
-                    self.game_status = SCENE_STAGE_CLEAR_MY_SHIP_BOOST   #ゲームステータスを「ステージクリア後、自機がブーストして右へ過ぎ去っていくシーン」にする
+                    self.game_status = Scene.STAGE_CLEAR_MY_SHIP_BOOST   #ゲームステータスを「ステージクリア後、自機がブーストして右へ過ぎ去っていくシーン」にする
                     self.my_vx = -1.3 #ブースト開始の初期スピードは左へ1ドット毎フレーム（ちょっと左に戻ってから加速し、右へ飛んでいく）
                     self.my_boost_injection_count = 1 #ステージクリア後のブースト噴射用のカウンターの数値を初期化
                     self.my_moved_flag = 1          #トレースクローも動かしたいので自機移動フラグOnにする
@@ -142,8 +142,8 @@ class update_ship:
 
     #自機をはみ出さないようにする
     def clip(self):
-        if    self.game_status == SCENE_STAGE_CLEAR_MY_SHIP_BOOST\
-            or self.game_status == SCENE_STAGE_CLEAR_FADE_OUT: #ステータスが「ブースト加速して去る」「ステージクリアフェードアウト」なら
+        if    self.game_status == Scene.STAGE_CLEAR_MY_SHIP_BOOST\
+            or self.game_status == Scene.STAGE_CLEAR_FADE_OUT: #ステータスが「ブースト加速して去る」「ステージクリアフェードアウト」なら
             if self.my_x < 0:
                 self.my_x = 0
             if self.my_x >= WINDOW_W + 80:
@@ -886,7 +886,7 @@ class update_ship:
     #自機のシールドパワーがまだあるのかチェックする
     def check_shield(self):
         if self.my_shield <= 0:
-            self.game_status = SCENE_EXPLOSION #シールドパワーが0以下になってしまったのでステータスを爆発中にする
+            self.game_status = Scene.EXPLOSION #シールドパワーが0以下になってしまったのでステータスを爆発中にする
             #自機の座標に爆発を生成する
             new_explosion = Explosion()
             new_explosion.update(EXPLOSION_MY_SHIP,PRIORITY_MORE_FRONT,self.my_x - 4 ,self.my_y-2,0,0,64,RETURN_BULLET_NONE,0,  1,1)

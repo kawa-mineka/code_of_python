@@ -17,7 +17,7 @@ class update_ipl:
     def ipl(self):
         self.display_ipl_time -= 1    #IPLメッセージを表示する時間カウンターを1減らす
         if self.display_ipl_time <= 0: #カウンターが0以下になったら・・・
-            self.game_status = SCENE_TITLE_INIT #ゲームステータスを「SCENE_TITLE_INIT(タイトル表示に必要な変数を初期化)」にする
+            self.game_status = Scene.TITLE_INIT #ゲームステータスを「SCENE_TITLE_INIT(タイトル表示に必要な変数を初期化)」にする
         
         if (pyxel.frame_count % 10) == 0:
             if len(self.ipl_mes1) > self.ipl_mes_write_line_num: #まだ書き込むべき文字列があるのなら・・・

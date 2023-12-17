@@ -196,9 +196,9 @@ class update_replay:
     #リプレイデータの記録   自動移動モードの時とステージクリアのブーストの時とリプレイ再生中の時はリプレイデータを記録しません
     def record_data(self):
         if     self.move_mode     == MOVE_AUTO\
-            or self.game_status   == SCENE_STAGE_CLEAR_MOVE_MY_SHIP\
-            or self.game_status   == SCENE_STAGE_CLEAR_MY_SHIP_BOOST\
-            or self.game_status   == SCENE_STAGE_CLEAR_FADE_OUT\
+            or self.game_status   == Scene.STAGE_CLEAR_MOVE_MY_SHIP\
+            or self.game_status   == Scene.STAGE_CLEAR_MY_SHIP_BOOST\
+            or self.game_status   == Scene.STAGE_CLEAR_FADE_OUT\
             or self.replay_status == REPLAY_PLAY:
             self.pad_data_h = 0b00000000             #次のフレーム時の記録のためにデータを初期化してあげます
             self.pad_data_l = 0b00000000

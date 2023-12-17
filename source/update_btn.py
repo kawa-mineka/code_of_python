@@ -206,13 +206,13 @@ class update_btn:
     def pause_btn(self):
         # if pyxel.btnp(pyxel.KEY_TAB) == True or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_START) == True:
         if pyxel.btnp(pyxel.KEY_TAB) == True or func.push_pad_btnp(self,ACT_PAUSE) == True:
-            if    self.game_status == SCENE_PLAY\
-                or self.game_status == SCENE_BOSS_APPEAR\
-                or self.game_status == SCENE_BOSS_BATTLE\
-                or self.game_status == SCENE_BOSS_EXPLOSION:#ステータスが「PLAY」もしくは「BOSS関連」のときにポーズボタンが押されたときは・・
+            if    self.game_status == Scene.PLAY\
+                or self.game_status == Scene.BOSS_APPEAR\
+                or self.game_status == Scene.BOSS_BATTLE\
+                or self.game_status == Scene.BOSS_EXPLOSION:#ステータスが「PLAY」もしくは「BOSS関連」のときにポーズボタンが押されたときは・・
                 
                 self.record_games_status = self.game_status #ステータスを一時記憶しておく
-                self.game_status = SCENE_PAUSE              #ステータスを「PAUSE」にする
+                self.game_status = Scene.PAUSE              #ステータスを「PAUSE」にする
                 if func.search_window_id(self,WINDOW_ID_PAUSE_MENU) == -1: #ポーズメニューウィンドウが存在しないのなら・・
                     # update_window.create(self,WINDOW_ID_PAUSE_MENU,30,70)          #ポーズメニューウィンドウウィンドウの作製 なんかどうもimportの循環エラー出るのでここで直接ポーズメニューウィンドウを育成しちゃう 後日どうしたら良いのか考えよう・・・多分忘れてると思うけど
                     func.create_master_flag_list(self) #まず先にフラグ＆データ関連のマスターリスト作成関数を呼び出す
@@ -273,7 +273,7 @@ class update_btn:
                 self.cursor_button_data = BTN_NONE          #押されたボタンIDを初期化
                 self.cursor_decision_item_y = UNSELECTED
                 
-            elif self.game_status == SCENE_PAUSE:          #ポーズ状態でポーズボタンが押されたときは・・・
+            elif self.game_status == Scene.PAUSE:          #ポーズ状態でポーズボタンが押されたときは・・・
                 self.game_status = self.record_games_status #一時記憶しておいたゲームステータスを元に戻してあげます
                 self.star_scroll_speed = 1                  #星のスクロールスピードを倍率1に戻す
                 self.cursor_type = CURSOR_TYPE_NO_DISP      #セレクトカーソルの表示をoffにする

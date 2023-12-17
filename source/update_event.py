@@ -148,7 +148,7 @@ class update_event:
                 pyxel.playm(2)#警告音発生！
             elif self.event_list[self.event_index][1] == EVENT_BOSS:              #イベントの内容が「BOSS」の場合
                 self.boss_battle_damaged_flag  = FLAG_OFF #ボス戦でダメージを受けたかどうかのフラグをオフにします(ステージスタートした時にオフ、ボス出現時にオフ、ダメージ受けたらオン)
-                self.game_status = SCENE_BOSS_APPEAR      #ゲームのステータスを「BOSS_APPEAR」ボス出現！にします
+                self.game_status = Scene.BOSS_APPEAR      #ゲームのステータスを「BOSS_APPEAR」ボス出現！にします
                 update_boss.born_boss(self)                      #各面のボスを生み出す関数を呼び出します
                 self.boss_battle_time = 0                 #ボスとの戦闘時間を0で初期化！ボスとの戦闘スタート！
             self.event_index += 1 #イベントインデックス値を1増やして次のイベントの実行に移ります

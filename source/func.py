@@ -1208,7 +1208,7 @@ class func:
                     self.destroy_all_boss_parts_flag = FLAG_ON #ボスのパーツを全部破壊したフラグをON
             
             #ゲームステータス(状態遷移)を「SCENE_BOSS_EXPLOSION」ボスキャラ爆発中！にする
-            self.game_status = SCENE_BOSS_EXPLOSION           
+            self.game_status = Scene.BOSS_EXPLOSION           
             #ボスの状態遷移フラグステータスを「BOSS_STATUS_EXPLOSION_START」ボス撃破！爆発開始！にしてやる
             self.boss[e].status = BOSS_STATUS_EXPLOSION_START
 

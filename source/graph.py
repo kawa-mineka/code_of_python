@@ -110,7 +110,7 @@ class graph:
         else:
             pyxel.blt(self.my_x   ,self.my_y - self.camera_offset_y,IMG2,8 + ((self.my_rolling_flag) * 8),0,SHIP_W,SHIP_H,pyxel.COLOR_BLACK) #自機本体の表示
         
-        if self.game_status == SCENE_STAGE_CLEAR_MY_SHIP_BOOST:
+        if self.game_status == Scene.STAGE_CLEAR_MY_SHIP_BOOST:
             pyxel.blt(self.my_x -6*8,self.my_y - self.camera_offset_y,IMG2,    208,120 + (pyxel.frame_count // 2  % 2) * 8,    6*8,8,pyxel.COLOR_BLACK) #ブーストモードイオンエンジン噴射の描画
         else:
             pyxel.blt(self.my_x   -8,self.my_y - self.camera_offset_y,IMG2,    176 + (pyxel.frame_count // 2  % 3) * 8,104,     8,8,pyxel.COLOR_BLACK) #イオンエンジン噴射の描画
@@ -1258,7 +1258,7 @@ class graph:
             
             self.stage_clear_dialog_display_time -= 1    #STAGE CLEAR表示時間を1減らす
             if self.stage_clear_dialog_display_time == 0: #STAGE CLEAR表示時間が0になったら
-                self.game_status = SCENE_STAGE_CLEAR_FADE_OUT #ゲームステータスを「ステージクリア後のフェードアウト」にする
+                self.game_status = Scene.STAGE_CLEAR_FADE_OUT #ゲームステータスを「ステージクリア後のフェードアウト」にする
             
             if self.stage_clear_dialog_text_time > 0:   #テキスト表示に掛ける時間が0より大きいのなら
                 self.stage_clear_dialog_text_time -= 1 #STAGE CLEARテキスト表示に掛ける時間を1減らす

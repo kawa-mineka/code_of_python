@@ -77,7 +77,7 @@ class update_pause:
                 pyxel.play(0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
                 self.active_window_id = WINDOW_ID_PAUSE_MENU        #1階層前ポーズメニューウィンドウIDを最前列でアクティブなものとする
             elif   self.cursor_pre_decision_item_y == 1 and self.cursor_decision_item_y == 1: #「RETURN TITLE」→「YES」
-                self.game_status = SCENE_TITLE_INIT         #ステータスを「TITLE INIT」にする
+                self.game_status = Scene.TITLE_INIT         #ステータスを「TITLE INIT」にする
                 self.game_playing_flag  = FLAG_OFF          #ゲームプレイ中フラグを降ろす
                 self.select_cursor_flag = FLAG_OFF          #セレクトカーソル移動フラグを降ろす
                 self.cursor_type = CURSOR_TYPE_NO_DISP      #セレクトカーソルの表示をoffにする
@@ -141,4 +141,4 @@ class update_pause:
                 self.bg_cls_color = 0                        #BGをCLS(クリアスクリーン)するときの色の指定(通常は0=黒色です)
                 self.game_playing_flag = FLAG_ON             #ゲームプレイ中フラグを立てる
                 self.game_quit_from_playing = FLAG_ON        #ゲームプレイ中からの終了フラグを立てる
-                self.game_status = SCENE_GAME_QUIT_START     #ステータスを「GAME QUIT START」(ゲームプレイ中からのゲーム終了工程開始)にする
+                self.game_status = Scene.GAME_QUIT_START     #ステータスを「GAME QUIT START」(ゲームプレイ中からのゲーム終了工程開始)にする

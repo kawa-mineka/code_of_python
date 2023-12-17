@@ -117,9 +117,9 @@ class update_title:
             self.release_the_btn_flag = FLAG_OFF
             update_visualscene.create(self,VS_ID_OPENING_STORY1)             #オープニングのストーリーテキストその1のビジュアルシーンを作製する
             update_visualscene.init_storyboard(self)                         #ストーリーボードの初期化
-            self.game_status = SCENE_TITLE_FIRST   #初回起動の場合は,       ゲームステータスを「SCENE_TITLE_FIRST」 にしてタイトル表示を開始する
+            self.game_status = Scene.TITLE_FIRST   #初回起動の場合は,       ゲームステータスを「TITLE_FIRST」 にしてタイトル表示を開始する
         else:
-            self.game_status = SCENE_TITLE_SECOND  #2回目以降の起動の場合は,ゲームステータスを「SCENE_TITLE_SECOND」にしてタイトル表示を開始する
+            self.game_status = Scene.TITLE_SECOND  #2回目以降の起動の場合は,ゲームステータスを「TITLE_SECOND」にしてタイトル表示を開始する
 
     #タイトルの更新############################################################
     def title(self):
@@ -149,7 +149,7 @@ class update_title:
         #全てのカウンター類が0になったらゲームメニューウィンドウを育成する
         if self.title_oscillation_count == 0 and self.title_slash_in_count == 0 and self.display_title_time == 0:
             if self.title_startup_count == 0:
-                self.game_status = SCENE_TITLE_HIT_ANY_BTN  #初回起動の場合はゲームステータスを「TITLE_HIT_ANY_BTN」(タイトルを表示した後、何かしらのボタンの入力待ち状態)」にする
+                self.game_status = Scene.TITLE_HIT_ANY_BTN  #初回起動の場合はゲームステータスを「TITLE_HIT_ANY_BTN」(タイトルを表示した後、何かしらのボタンの入力待ち状態)」にする
             else:
                 update_window.create(self,WINDOW_ID_MAIN_MENU,0,0)         #メニューウィンドウを作製
                 #選択カーソル表示をon,カーソルは上下移動のみ,いま指示しているアイテムナンバーは0,まだボタンも押されておらず未決定状態なのでdecision_item_yは-1
@@ -158,7 +158,7 @@ class update_title:
                 self.active_window_id = WINDOW_ID_MAIN_MENU         #このウィンドウIDを最前列アクティブなものとする
                 self.push_any_btn_flag    = FLAG_OFF                #決定ボタンを押した,離したフラグをオフにする
                 self.release_the_btn_flag = FLAG_OFF
-                self.game_status = SCENE_TITLE_MENU_SELECT  #2回目以降の起動の場合は,ゲームステータスを「SCENE_TITLE_MENU_SELECT」にして直ぐにメニューセレクトに入る
+                self.game_status = Scene.TITLE_MENU_SELECT  #2回目以降の起動の場合は,ゲームステータスを「SCENE_TITLE_MENU_SELECT」にして直ぐにメニューセレクトに入る
 
     #タイトルメニューを表示した後,何かしらのボタンの入力待ち状態##########################
     def title_hit_any_btn(self):
@@ -182,7 +182,7 @@ class update_title:
             self.push_any_btn_flag    = FLAG_OFF                #決定ボタンを押した,離したフラグをオフにする
             self.release_the_btn_flag = FLAG_OFF
             self.title_startup_count = 1                        #初回起動は終わったのでスタートアップカウントを2回目以降の起動カウント(とりあえず整数の1)にする
-            self.game_status = SCENE_TITLE_MENU_SELECT          #ゲームステータスを「TITLE_MENU_SELECT」(タイトルでメニューを選択中)」にする
+            self.game_status = Scene.TITLE_MENU_SELECT          #ゲームステータスを「TITLE_MENU_SELECT」(タイトルでメニューを選択中)」にする
             
         elif self.push_any_btn_flag == FLAG_ON and self.release_the_btn_flag == FLAG_OFF:
             if      pyxel.btnp(pyxel.GAMEPAD1_BUTTON_A) == False\
@@ -212,7 +212,7 @@ class update_title:
                 self.replay_status = REPLAY_RECORD          #リプレイデータを「記録中」にする
                 self.start_stage_number = self.stage_number #リプレイファイル保存用にゲーム開始時のステージナンバーとループ数を保管しておきます（リプレイデータはゲーム終了後にセーブされるのでstage_numberなどの値が変化するのでstart_stage_numberって変数を作ってリプレイ記録時にはこれを使うのです)
                 self.start_stage_loop   = self.stage_loop
-                self.game_status = SCENE_GAME_START_INIT    #ゲームステータスを「GAME_START_INIT」にしてゲーム全体を初期化＆リスタートする
+                self.game_status = Scene.GAME_START_INIT    #ゲームステータスを「GAME_START_INIT」にしてゲーム全体を初期化＆リスタートする
                 self.active_window_id = WINDOW_ID_MAIN_MENU #メインメニューウィンドウIDを最前列でアクティブなものとする
                 
             elif self.cursor_decision_item_y == MENU_SELECT_STAGE:      #SELECT STAGEが押されて
@@ -326,7 +326,7 @@ class update_title:
                     pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
                 
             elif self.cursor_decision_item_y == MENU_REPLAY:            #REPLAYが押されたら
-                self.game_status = SCENE_SELECT_LOAD_SLOT           #ゲームステータスを「SCENE_SELECT_LOAD_SLOT」にしてロードデータスロットの選択に移る
+                self.game_status = Scene.SELECT_LOAD_SLOT           #ゲームステータスを「SCENE_SELECT_LOAD_SLOT」にしてロードデータスロットの選択に移る
                 update_window.create_replay_data_slot_select(self)               #リプレイデータファイルスロット選択ウィンドウの表示
                 #選択カーソル表示をonにする,カーソルは上下移動のみ,カーソル移動ステップはx4,y7,いま指示しているアイテムナンバーは0の「1」
                 #まだボタンも押されておらず未決定状態なのでdecision_item_yは-1最大項目数は「1」「2」「3」「4」「5」「6」「7」の7項目なので 7-1=6を代入,メニューの階層が増えたので,MENU_LAYER0からMENU_LAYER1にします
@@ -866,7 +866,7 @@ class update_title:
                     self.window[i].window_status = WINDOW_CLOSE
                     self.window[i].comment_flag = COMMENT_FLAG_OFF
                     self.game_quit_from_playing = 0                  #タイトルメニューからの終了
-                    self.game_status = SCENE_GAME_QUIT_START         #ステータスを「GAME QUIT START」ゲーム終了工程開始にする
+                    self.game_status = Scene.GAME_QUIT_START         #ステータスを「GAME QUIT START」ゲーム終了工程開始にする
             
         elif self.cursor_menu_layer == MENU_LAYER2: #メニューが2階層目の選択分岐
             if   self.cursor_pre_pre_decision_item_y == MENU_CONFIG:

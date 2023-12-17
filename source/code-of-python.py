@@ -319,8 +319,8 @@ class App:
         define_ship_data.shot_table_list(self)            #ショットパワーアップテーブルリストの定義関数の呼び出し
         define_ship_data.missile_table_list(self)         #ミサイルパワーアップテーブルリストの定義関数の呼び出し
         
-        self.game_status = SCENE_IPL                #ゲームステータスを「IPL表示」にする
-        #self.game_status = SCENE_GAME_START_INIT   #ゲームの状況ステータスを表してます（ゲームそのもの自体の状態遷移フラグとして使用します）
+        self.game_status = Scene.IPL                #ゲームステータスを「IPL表示」にする
+        #self.game_status = Scene.GAME_START_INIT   #ゲームの状況ステータスを表してます（ゲームそのもの自体の状態遷移フラグとして使用します）
                                                     #まず最初はゲームステータスは「ゲームスタート時の初期化」にします
                                                     #将来的には「起動処理中」とか「タイトル表示中」にする予定
         
@@ -407,15 +407,15 @@ class App:
     ##########################################################################
     def update(self):
         ################################起動処理中 IPL ###################################################################
-        if self.game_status == SCENE_IPL:         #ゲームステータスが「SCENE_IPL」の場合IPLメッセージの更新を行う
+        if self.game_status == Scene.IPL:         #ゲームステータスが「IPL」の場合IPLメッセージの更新を行う
             update_ipl.ipl(self)                  #IPLの更新
         
         ################################ タイトル関連の変数を初期化 ###################################################################
-        if self.game_status == SCENE_TITLE_INIT:  #ゲームステータスが「SCENE_TITLE_INIT」の場合タイトル関連の変数を初期化する関数を呼び出す
+        if self.game_status == Scene.TITLE_INIT:  #ゲームステータスが「TITLE_INIT」の場合タイトル関連の変数を初期化する関数を呼び出す
             update_title.title_init(self)         #タイトル関連の変数の初期化関数を呼び出す
         
         ################################ タイトルロゴの初回表示 ###################################################################
-        if self.game_status == SCENE_TITLE_FIRST: #ゲームステータスが「SCENE_TITLE_FIRST」の場合タイトルの更新を行う
+        if self.game_status == Scene.TITLE_FIRST: #ゲームステータスが「TITLE_FIRST」の場合タイトルの更新を行う
             update_title.title(self)              #タイトルの更新
             update_obj.append_star(self)          #背景の星の追加＆発生育成関数呼び出し
             update_obj.star(self)                 #背景の星の更新（移動）関数呼び出し
@@ -424,7 +424,7 @@ class App:
             update_window.active_window(self)     #現在アクティブ(最前面)になっているウィンドウのインデックス値(i)を求める関数の呼び出し
             update_visualscene.visualscene(self)        #ビジュアルシーンの更新関数の呼び出し
         ################################ タイトルでのボタン入力待ち###################################################################
-        if self.game_status == SCENE_TITLE_HIT_ANY_BTN: #ゲームステータスが「SCENE_TITLE_HIT_ANY_BTN」場合は何かしらのボタン入力待ちをする
+        if self.game_status == Scene.TITLE_HIT_ANY_BTN: #ゲームステータスが「TITLE_HIT_ANY_BTN」場合は何かしらのボタン入力待ちをする
             update_title.title_hit_any_btn(self)        #タイトルメニューを表示した後,何かしらのボタンの入力待ち状態
             update_obj.append_star(self)                #背景の星の追加＆発生育成関数呼び出し
             update_obj.star(self)                       #背景の星の更新（移動）関数呼び出し
@@ -433,7 +433,7 @@ class App:
             update_window.active_window(self)           #現在アクティブ(最前面)になっているウィンドウのインデックス値(i)を求める関数の呼び出し
             update_visualscene.visualscene(self)        #ビジュアルシーンの更新関数の呼び出し
         ################################ タイトルロゴの2回目以降の表示 ###################################################################
-        if self.game_status == SCENE_TITLE_SECOND: #ゲームステータスが「SCENE_TITLE_SECOND」の場合タイトルの更新を行う
+        if self.game_status == Scene.TITLE_SECOND: #ゲームステータスが「TITLE_SECOND」の場合タイトルの更新を行う
             update_title.title(self)               #タイトルの更新
             update_obj.append_star(self)           #背景の星の追加＆発生育成関数呼び出し
             update_obj.star(self)                  #背景の星の更新（移動）関数呼び出し
@@ -442,7 +442,7 @@ class App:
             update_window.active_window(self)      #現在アクティブ(最前面)になっているウィンドウのインデックス値(i)を求める関数の呼び出し
         
         ################################ タイトルでメニュー選択中 ###################################################################
-        if self.game_status == SCENE_TITLE_MENU_SELECT:
+        if self.game_status == Scene.TITLE_MENU_SELECT:
             update_title.title_menu_select(self)        #タイトルでのメニュー選択処理をする関数の呼び出し
             update_obj.append_star(self)                #背景の星の追加＆発生育成関数呼び出し
             update_obj.star(self)                       #背景の星の更新（移動）関数呼び出し
@@ -453,7 +453,7 @@ class App:
             update_window.judge_medal_acquisition(self) #メダルの取得判定を行う関数を呼び出す
         
         ############################### ロード用リプレイデータスロットの選択中 #######################################################
-        if self.game_status == SCENE_SELECT_LOAD_SLOT:#「SCENE_SELECT_LOAD_SLOT」の時は
+        if self.game_status == Scene.SELECT_LOAD_SLOT:#「SELECT_LOAD_SLOT」の時は
             update_obj.append_star(self)                #背景の星の追加＆発生育成関数呼び出し
             update_obj.star(self)                       #背景の星の更新（移動）関数呼び出し
             update_window.window(self)                  #ウィンドウの更新（ウィンドウの開き閉じ画面外に消え去っていくとか）関数を呼び出し
@@ -470,31 +470,31 @@ class App:
                 update_replay.data_file_load(self)            #リプレイデータファイルのロードを行います
                 update_replay.load_stage_data(self)           #リプレイ再生時は,ステージスタート時のパラメーターをロードする関数を呼び出します
                 self.active_window_id = WINDOW_ID_MAIN_MENU   #メインメニューウィンドウIDを最前列でアクティブなものとする
-                self.game_status = SCENE_GAME_START_INIT      #ゲームステータスを「SCENE_GAME_START_INIT」にしてゲームスタート時の初期化にする
+                self.game_status = Scene.GAME_START_INIT      #ゲームステータスを「SCENE_GAME_START_INIT」にしてゲームスタート時の初期化にする
         
         ################################ ゲームスタート時の初期化 #################################################################
-        if self.game_status == SCENE_GAME_START_INIT: #ゲームステータスが「GAME_START_INIT」の場合（ゲームスタート時の状態遷移）は以下を実行する
+        if self.game_status == Scene.GAME_START_INIT: #ゲームステータスが「START_INIT」の場合（ゲームスタート時の状態遷移）は以下を実行する
             update_init.game_start(self)              #ゲーム開始前の初期化    スコアやシールド値、ショットレベルやミサイルレベルなどの初期化
             update_replay.push_status_data(self)      #リプレイデータ(ステータス関連)をバックアップする(プッシュする感じみたいな？？？)関数の呼び出し
-            self.game_status = SCENE_STAGE_START_INIT #ゲームステータスを「STAGE_START_INIT」にする
+            self.game_status = Scene.STAGE_START_INIT #ゲームステータスを「STAGE_START_INIT」にする
         
         ################################ステージスタート時の初期化 #################################################################
-        if self.game_status == SCENE_STAGE_START_INIT: #ゲームステータスが「GAME_START_INIT」の場合（ゲームスタート時の状態遷移）は以下を実行する
+        if self.game_status == Scene.STAGE_START_INIT: #ゲームステータスが「START_INIT」の場合（ゲームスタート時の状態遷移）は以下を実行する
             update_init.stage_start(self)              #ステージ開始前の初期化   自機の座標や各リストの初期化、カウンター類の初期化
-            self.game_status = SCENE_PLAY              #ゲームステータスを「STAGE_START_INIT」にする
+            self.game_status = Scene.PLAY              #ゲームステータスを「STAGE_START_INIT」にする
         
         ################################ ゲームプレイ中！！！！！！ ###############################################################
-        if     self.game_status == SCENE_PLAY\
-            or self.game_status == SCENE_EXPLOSION\
-            or self.game_status == SCENE_STAGE_CLEAR\
-            or self.game_status == SCENE_GAME_OVER\
-            or self.game_status == SCENE_BOSS_APPEAR\
-            or self.game_status == SCENE_BOSS_BATTLE\
-            or self.game_status == SCENE_BOSS_EXPLOSION\
-            or self.game_status == SCENE_STAGE_CLEAR\
-            or self.game_status == SCENE_STAGE_CLEAR_MOVE_MY_SHIP\
-            or self.game_status == SCENE_STAGE_CLEAR_MY_SHIP_BOOST\
-            or self.game_status == SCENE_STAGE_CLEAR_FADE_OUT:
+        if     self.game_status == Scene.PLAY\
+            or self.game_status == Scene.EXPLOSION\
+            or self.game_status == Scene.STAGE_CLEAR\
+            or self.game_status == Scene.GAME_OVER\
+            or self.game_status == Scene.BOSS_APPEAR\
+            or self.game_status == Scene.BOSS_BATTLE\
+            or self.game_status == Scene.BOSS_EXPLOSION\
+            or self.game_status == Scene.STAGE_CLEAR\
+            or self.game_status == Scene.STAGE_CLEAR_MOVE_MY_SHIP\
+            or self.game_status == Scene.STAGE_CLEAR_MY_SHIP_BOOST\
+            or self.game_status == Scene.STAGE_CLEAR_FADE_OUT:
             #自機関連の処理######################################################################################
             # ##################################################################################################
             update_ship.ship(self)                 #自機の更新処理（移動処理）関数を呼び出す
@@ -540,7 +540,7 @@ class App:
             update_enemy.clip(self)                   #画面からはみ出た敵を消去する関数を呼び出し
             #ボス関連の処理#############################################################################################################
             update_boss.boss(self)                    #ボスの更新移動とかを行う関数を呼び出す
-            if self.game_status == SCENE_BOSS_APPEAR or self.game_status == SCENE_BOSS_BATTLE:
+            if self.game_status == Scene.BOSS_APPEAR or self.game_status == Scene.BOSS_BATTLE:
                 self.boss_battle_time += 1          #状態遷移が「ボス出現中」と「ボスと戦闘中」の時だけボス戦闘時間をインクリメント
             #パワーアップアイテム類の処理################################################################################################
             update_item.obtain_item(self)                    #パワーアップアイテム類の更新（移動とか）する関数を呼び出します
@@ -581,10 +581,10 @@ class App:
             if self.replay_status == REPLAY_RECORD:               #リプレイデータを保存している時(ゲームプレイ中)だけは実績取得の判定を行う(リプレイ再生時に実績取得すると不味いからね～～♪)
                 update_window.judge_achievement_acquisition(self) #実績(アチーブメント)を取得したかどうかを調べる関数の呼び出し
         
-        if     self.game_status == SCENE_PLAY\
-            or self.game_status == SCENE_BOSS_APPEAR\
-            or self.game_status == SCENE_BOSS_BATTLE\
-            or self.game_status == SCENE_BOSS_EXPLOSION :#「プレイ中」とボス関連の時だけ自機の当たり判定関連とシールド値のチェック&ボタンを押したら何かをする処理を実行する
+        if     self.game_status == Scene.PLAY\
+            or self.game_status == Scene.BOSS_APPEAR\
+            or self.game_status == Scene.BOSS_BATTLE\
+            or self.game_status == Scene.BOSS_EXPLOSION :#「プレイ中」とボス関連の時だけ自機の当たり判定関連とシールド値のチェック&ボタンを押したら何かをする処理を実行する
             #自機と色んなオブジェクトとの当たり判定処理#############################
             update_collision.ship_to_enemy(self)       #自機と敵との当たり判定関数を呼び出す             
             update_collision.ship_to_bg(self)          #自機と背景障害物との当たり判定関数を呼び出す
@@ -610,21 +610,21 @@ class App:
             #大気圏突入時の火花の発生##########################################################
             update_obj.atmospheric_entry_spark(self)   #大気圏突入時の火花を発せさせる関数の呼び出し
         
-        if self.game_status == SCENE_BOSS_EXPLOSION:         #「BOSS_EXPLOSION」の時は
+        if self.game_status == Scene.BOSS_EXPLOSION:         #「BOSS_EXPLOSION」の時は
             update_item.present_repair_item(self)            #リペアアイテムを出現させる関数の呼び出し
         
-        if self.game_status == SCENE_EXPLOSION:              #「EXPLOSION」の時は
+        if self.game_status == Scene.EXPLOSION:              #「EXPLOSION」の時は
             self.my_ship_explosion_timer += 1                # my_ship_explosionタイマーを加算していき
             if self.my_ship_explosion_timer >= SHIP_EXPLOSION_TIMER_LIMIT:#リミット値まで行ったのなら
-                self.game_status = SCENE_GAME_OVER         #「GAME_OVER」にする
+                self.game_status = Scene.GAME_OVER         #「GAME_OVER」にする
                 pygame.mixer.music.fadeout(6000)           #BGMフェードアウト開始
         
         ############################### ゲーム一時中断中(PAUSE) ###################################################################
-        if self.game_status == SCENE_PAUSE:                  #「PAUSE」の時は
+        if self.game_status == Scene.PAUSE:                  #「PAUSE」の時は
             update_pause.pause_menu(self)                    #ポーズ時のメニューセレクト処理を行う関数を呼び出す
         
         #######ゲームオーバー後の処理#############################################################
-        if self.game_status == SCENE_GAME_OVER:              #「GAME_OVER」の時は
+        if self.game_status == Scene.GAME_OVER:              #「GAME_OVER」の時は
             self.game_over_timer += 1                         # game_overタイマーを加算していき
             if self.game_over_timer >= GAME_OVER_TIMER_LIMIT: #リミット値まで行ったのなら
                 if self.replay_status == REPLAY_RECORD:      #リプレイデータを記録している場合(ゲームプレイ中)は・・・・
@@ -635,23 +635,23 @@ class App:
                 # pygame.mixer.music.set_volume(self.master_bgm_vol / 100)                      #ボリューム値設定
                 # pygame.mixer.music.play(-1)                                                   #GAME OVER BGMをループ再生
                 
-                self.game_status = SCENE_GAME_OVER_FADE_OUT   #「ゲームオーバーフェードアウト開始」にする
+                self.game_status = Scene.GAME_OVER_FADE_OUT   #「ゲームオーバーフェードアウト開始」にする
         
-        if self.game_status == SCENE_GAME_OVER_FADE_OUT:     #「GAME_OVER_FADE_OUT」の時は
+        if self.game_status == Scene.GAME_OVER_FADE_OUT:     #「GAME_OVER_FADE_OUT」の時は
             if self.fade_complete_flag == FLAG_ON:           #フェードアウト完了のフラグが建ったのなら
                 self.bg_cls_color = 0                        #クリアスクリーン時の塗りつぶし色を初期値の0(黒)に戻す（イベントとかで変化する場合があるため） 
                 self.star_scroll_flag = FLAG_ON              #背景星のスクロール表示をonにする（イベントとかで変化する場合があるため） 
-                self.game_status = SCENE_GAME_OVER_SHADOW_IN #「GAME_OVER_SHADOW_IN」状態にする
+                self.game_status = Scene.GAME_OVER_SHADOW_IN #「GAME_OVER_SHADOW_IN」状態にする
         
-        if self.game_status == SCENE_GAME_OVER_SHADOW_IN:    #「GAME_OVER_SHADOW_IN」の時は
+        if self.game_status == Scene.GAME_OVER_SHADOW_IN:    #「GAME_OVER_SHADOW_IN」の時は
             if self.shadow_in_out_complete_flag == FLAG_ON:  #シャドウイン完了のフラグが建ったのなら
                 
                 self.game_over_bgm.set_volume(self.master_bgm_vol / 100)      #ボリューム値設定
                 self.game_over_bgm.play()                                     #ゲームオーバーBGM再生開始
                 
-                self.game_status = SCENE_GAME_OVER_STOP      #「GAME_OVER_STOP」状態にする
+                self.game_status = Scene.GAME_OVER_STOP      #「GAME_OVER_STOP」状態にする
         
-        if self.game_status == SCENE_GAME_OVER_STOP:         #「GAME_OVER_STOP」の時は
+        if self.game_status == Scene.GAME_OVER_STOP:         #「GAME_OVER_STOP」の時は
             if self.replay_status == REPLAY_RECORD: #リプレイ録画中の時のリターンタイトルウィンドウ表示
                 update_window.create(self,WINDOW_ID_GAME_OVER_RETURN,43,68)    #RETRN? SAVE&RETURNウィンドウの作成
                 self.cursor_type = CURSOR_TYPE_NORMAL             #選択カーソル表示をonにする
@@ -663,7 +663,7 @@ class App:
                 self.cursor_decision_item_y = UNSELECTED          #まだボタンも押されておらず未決定状態なのでdecision_item_yは-1
                 self.cursor_max_item_y = 1                        #最大項目数は「RETURN」「SAVE & RETURN」の2項目なので 2-1=1を代入
                 self.active_window_id = WINDOW_ID_GAME_OVER_RETURN#このウィンドウIDを最前列でアクティブなものとする
-                self.game_status = SCENE_RETURN_TITLE             #ゲームステータスを「RETURN_TITLE」にする
+                self.game_status = Scene.RETURN_TITLE             #ゲームステータスを「RETURN_TITLE」にする
             elif self.replay_status == REPLAY_PLAY: #リプレイ再生中の時のリターンタイトルウィンドウ表示(SAVE&RETURN項目は表示しない)  
                 update_window.create(self,WINDOW_ID_GAME_OVER_RETURN_NO_SAVE,43,68)     #RETRN?ウィンドウの作成
                 func.restore_status_data_for_replay_mode(self)             #リプレイ再生が終了したので記録しておいたステータスを復帰させる
@@ -676,9 +676,9 @@ class App:
                 self.cursor_decision_item_y = UNSELECTED                   #まだボタンも押されておらず未決定状態なのでdecision_item_yは-1
                 self.cursor_max_item_y = 0                                 #最大項目数は「RETURN」の1項目なので 1-1=0を代入
                 self.active_window_id = WINDOW_ID_GAME_OVER_RETURN_NO_SAVE #このウィンドウIDを最前列でアクティブなものとする
-                self.game_status = SCENE_RETURN_TITLE                      #ゲームステータスを「RETURN_TITLE」にする
+                self.game_status = Scene.RETURN_TITLE                      #ゲームステータスを「RETURN_TITLE」にする
         
-        if self.game_status == SCENE_RETURN_TITLE:           #「RETURN_TITLE」の時は        
+        if self.game_status == Scene.RETURN_TITLE:           #「RETURN_TITLE」の時は        
             if   self.cursor_decision_item_y == 0:           #メニューでアイテムナンバー0の「RETURN」が押されたら
                 self.game_playing_flag = FLAG_OFF            #ゲームプレイ中のフラグを降ろす
                 self.select_cursor_flag = FLAG_OFF           #セレクトカーソルの移動更新は行わないのでフラグを降ろす
@@ -690,7 +690,7 @@ class App:
                     func.score_board_bubble_sort(self,self.game_difficulty) #現在選択している難易度を引数として書き込んだスコアデータをソートする関数の呼び出し
                 
                 self.game_over_bgm.fadeout(1200)                     #GAME OVER BGMフェードアウト開始
-                self.game_status = SCENE_TITLE_INIT            #ゲームステータスを「SCENE_TITLE_INIT」にしてタイトルの初期化工程にする
+                self.game_status = Scene.TITLE_INIT            #ゲームステータスを「SCENE_TITLE_INIT」にしてタイトルの初期化工程にする
                 
             elif self.cursor_decision_item_y == 1:             #メニューでアイテムナンバー1の「SAVE & RETURN」が押されたら
                 update_window.create_replay_data_slot_select(self)           #リプレイデータファイルスロット選択ウィンドウの表示
@@ -705,11 +705,11 @@ class App:
                 self.cursor_max_item_y = 6                          #最大項目数は「1」「2」「3」「4」「5」「6」「7」の7項目なので 7-1=6を代入
                 self.cursor_menu_layer = 0                          #メニューの階層は最初は0にします
                 self.active_window_id = WINDOW_ID_SELECT_FILE_SLOT  #このウィンドウIDを最前列でアクティブなものとする
-                self.game_status = SCENE_SELECT_SAVE_SLOT    #ゲームステータスを「SCENE_SELECT_SAVE_SLOT」にしてセーブスロット選択にする
+                self.game_status = Scene.SELECT_SAVE_SLOT    #ゲームステータスを「SCENE_SELECT_SAVE_SLOT」にしてセーブスロット選択にする
                 
                 self.game_over_bgm.fadeout(3000)                    #GAME OVER BGMフェードアウト開始
         
-        if self.game_status == SCENE_SELECT_SAVE_SLOT:       #「SCENE_SELECT_SAVE_SLOT」の時
+        if self.game_status == Scene.SELECT_SAVE_SLOT:       #「SCENE_SELECT_SAVE_SLOT」の時
             if self.cursor_decision_item_y != UNSELECTED:          #決定ボタンが押されたら
                 self.replay_slot_num = self.cursor_decision_item_y #スロット番号は決定ボタンを押した時点でのアイテムy座標値とする
                 self.game_playing_flag = FLAG_OFF                  #ゲームプレイ中のフラグを降ろす
@@ -726,10 +726,10 @@ class App:
                 
                 self.replay_recording_data = []            #録画したリプレイデータは登録したので元のデータは消去します
                 self.replay_mode_stage_data_backup = self.replay_mode_stage_data #各ステージ開始時のデータ履歴をバックアップ
-                self.game_status = SCENE_TITLE_INIT        #ゲームステータスを「SCENE_TITLE_INIT」にしてタイトルの初期化工程にする
+                self.game_status = Scene.TITLE_INIT        #ゲームステータスを「SCENE_TITLE_INIT」にしてタイトルの初期化工程にする
         
         #########ステージクリア後の処理#############################################################
-        if self.game_status == SCENE_STAGE_CLEAR_FADE_OUT:   #「SCENE_STAGE_CLEAR_FADE_OUT」の時は
+        if self.game_status == Scene.STAGE_CLEAR_FADE_OUT:   #「SCENE_STAGE_CLEAR_FADE_OUT」の時は
             if self.fade_complete_flag == FLAG_ON:           #フェードアウト完了のフラグが建ったのなら
                 self.stage_number += 1    #ステージ数を1増やす
                 self.replay_stage_num += 1#リプレイ再生記録用のステージ数も1増やします
@@ -743,34 +743,34 @@ class App:
                     if self.stage_loop >= 4: #4周目以降は作っていないので\\\
                         self.stage_loop = 1  #1周目に戻ります
                 
-                self.game_status = SCENE_STAGE_START_INIT    #ゲームステータスを「STAGE_START_INIT」にして次のステージへ・・・・
+                self.game_status = Scene.STAGE_START_INIT    #ゲームステータスを「STAGE_START_INIT」にして次のステージへ・・・・
         
         #########ゲーム終了工程開始#################################################################
-        if self.game_status == SCENE_GAME_QUIT_START:    #「GAME QUIT START」の時は
+        if self.game_status == Scene.GAME_QUIT_START:    #「GAME QUIT START」の時は
             self.star_scroll_speed = 1                   #星のスクロールスピードを倍率1に戻す
             self.select_cursor_flag = FLAG_OFF           #セレクトカーソル移動フラグを降ろす
             self.cursor_type = CURSOR_TYPE_NO_DISP       #セレクトカーソルの表示をoffにする
             pygame.mixer.music.fadeout(4000)
             pyxel.playm(4)                               #ゲーム終了音楽再生
             self.game_quit_timer = 420                   #終了タイマーセット(420フレーム=7秒)
-            self.game_status = SCENE_GAME_QUIT_WAIT
+            self.game_status = Scene.GAME_QUIT_WAIT
             
-        elif self.game_status == SCENE_GAME_QUIT_WAIT:   #「GAME QUIT WAIT」の時は
+        elif self.game_status == Scene.GAME_QUIT_WAIT:   #「GAME QUIT WAIT」の時は
             self.star_scroll_speed -= 0.003              #ゲーム終了時は星のスクロールスピードの倍率を毎フレームごと0.003減らしていく
             if self.star_scroll_speed < 0:
                 self.star_scroll_speed = 0               #0以下になったら強制的に0を代入
             
             self.game_quit_timer -= 1                    #終了タイマーデクリメント
             if self.game_quit_timer <=0:                 #タイマーが0以下になったら
-                self.game_status = SCENE_GAME_QUIT       #「GAME QUIT」にする
+                self.game_status = Scene.GAME_QUIT       #「GAME QUIT」にする
             
-        elif self.game_status == SCENE_GAME_QUIT:        #「GAME QUIT」の時は
+        elif self.game_status == Scene.GAME_QUIT:        #「GAME QUIT」の時は
             func.write_ship_equip_medal_data(self)       #機体メダルスロット装備リストに現在プレイ中のシップリストのメダル情報を書き込む関数の呼び出し
             update_system.save_data(self)                #システムデータをセーブします
             pyxel.quit()                                 #ゲーム終了！！！！！！！！！！！！！！！！！！！！！！！！！！
         
         ################################ ゲーム終了工程時の処理 ###################################################################
-        if self.game_status == SCENE_GAME_QUIT_START or self.game_status == SCENE_GAME_QUIT_WAIT:
+        if self.game_status == Scene.GAME_QUIT_START or self.game_status == Scene.GAME_QUIT_WAIT:
             update_obj.append_star(self)      #背景の星の追加＆発生育成関数呼び出し
             update_obj.star(self)             #背景の星の更新（移動）関数呼び出し
             update_window.window(self)        #ウィンドウの更新（ウィンドウの開き閉じ画面外に消え去っていくとか）関数を呼び出し
@@ -806,17 +806,17 @@ class App:
     ###########################################################
     def draw(self):
         pyxel.cls(self.bg_cls_color)                #背景を指定色で消去する(初期値は0なので真っ黒になります)
-        if self.game_status == SCENE_IPL:
+        if self.game_status == Scene.IPL:
             graph.draw_ipl(self)                    #IPLメッセージを表示する関数の呼び出し
         
-        if     self.game_status == SCENE_TITLE_FIRST\
-            or self.game_status == SCENE_TITLE_HIT_ANY_BTN\
-            or self.game_status == SCENE_TITLE_SECOND\
-            or self.game_status == SCENE_TITLE_MENU_SELECT\
-            or self.game_status == SCENE_SELECT_LOAD_SLOT\
-            or self.game_status == SCENE_GAME_QUIT_START\
-            or self.game_status == SCENE_GAME_QUIT_WAIT\
-            or self.game_status == SCENE_GAME_QUIT:
+        if     self.game_status == Scene.TITLE_FIRST\
+            or self.game_status == Scene.TITLE_HIT_ANY_BTN\
+            or self.game_status == Scene.TITLE_SECOND\
+            or self.game_status == Scene.TITLE_MENU_SELECT\
+            or self.game_status == Scene.SELECT_LOAD_SLOT\
+            or self.game_status == Scene.GAME_QUIT_START\
+            or self.game_status == Scene.GAME_QUIT_WAIT\
+            or self.game_status == Scene.GAME_QUIT:
             
             graph.draw_star(self)                          #背景の星を表示する関数の呼び出し
             graph.draw_visualscene(self,WINDOW_PRIORITY_TITLE_BACK)                     #タイトルより奥にあるビジュアルシーンを表示する
@@ -839,18 +839,18 @@ class App:
         if self.game_playing_flag == FLAG_ON and self.star_scroll_flag == FLAG_ON:#ゲームプレイ中フラグon,星スクロールフラグonの時は背景の星を表示する
             graph.draw_star(self)                  #背景の星を表示する関数の呼び出し 
         
-        if     self.game_status == SCENE_PLAY\
-            or self.game_status == SCENE_BOSS_APPEAR\
-            or self.game_status == SCENE_BOSS_BATTLE\
-            or self.game_status == SCENE_BOSS_EXPLOSION\
-            or self.game_status == SCENE_EXPLOSION\
-            or self.game_status == SCENE_STAGE_CLEAR\
-            or self.game_status == SCENE_STAGE_CLEAR_MOVE_MY_SHIP\
-            or self.game_status == SCENE_STAGE_CLEAR_MY_SHIP_BOOST\
-            or self.game_status == SCENE_STAGE_CLEAR_FADE_OUT\
-            or self.game_status == SCENE_GAME_OVER\
-            or self.game_status == SCENE_GAME_OVER_FADE_OUT\
-            or self.game_status == SCENE_PAUSE:
+        if     self.game_status == Scene.PLAY\
+            or self.game_status == Scene.BOSS_APPEAR\
+            or self.game_status == Scene.BOSS_BATTLE\
+            or self.game_status == Scene.BOSS_EXPLOSION\
+            or self.game_status == Scene.EXPLOSION\
+            or self.game_status == Scene.STAGE_CLEAR\
+            or self.game_status == Scene.STAGE_CLEAR_MOVE_MY_SHIP\
+            or self.game_status == Scene.STAGE_CLEAR_MY_SHIP_BOOST\
+            or self.game_status == Scene.STAGE_CLEAR_FADE_OUT\
+            or self.game_status == Scene.GAME_OVER\
+            or self.game_status == Scene.GAME_OVER_FADE_OUT\
+            or self.game_status == Scene.PAUSE:
             
             #一番奥の背景の表示
             if   self.stage_number == STAGE_MOUNTAIN_REGION:
@@ -953,15 +953,15 @@ class App:
             
             graph.draw_enemy_shot(self,PRIORITY_TOP)        #敵の弾を表示する関数を呼び出す (最前面)-------------------------------------
         #自機、クロー、シールドの表示###############################################
-        if     self.game_status == SCENE_PLAY\
-            or self.game_status == SCENE_BOSS_APPEAR\
-            or self.game_status == SCENE_BOSS_BATTLE\
-            or self.game_status == SCENE_BOSS_EXPLOSION\
-            or self.game_status == SCENE_STAGE_CLEAR\
-            or self.game_status == SCENE_STAGE_CLEAR_MOVE_MY_SHIP\
-            or self.game_status == SCENE_STAGE_CLEAR_MY_SHIP_BOOST\
-            or self.game_status == SCENE_STAGE_CLEAR_FADE_OUT\
-            or self.game_status == SCENE_PAUSE:
+        if     self.game_status == Scene.PLAY\
+            or self.game_status == Scene.BOSS_APPEAR\
+            or self.game_status == Scene.BOSS_BATTLE\
+            or self.game_status == Scene.BOSS_EXPLOSION\
+            or self.game_status == Scene.STAGE_CLEAR\
+            or self.game_status == Scene.STAGE_CLEAR_MOVE_MY_SHIP\
+            or self.game_status == Scene.STAGE_CLEAR_MY_SHIP_BOOST\
+            or self.game_status == Scene.STAGE_CLEAR_FADE_OUT\
+            or self.game_status == Scene.PAUSE:
             
             graph.draw_my_ship(self)     #自機の表示
             graph.draw_claw(self)        #クローの表示
@@ -973,16 +973,16 @@ class App:
             graph.draw_particle(self,PRIORITY_MORE_FRONT)  #パーティクルを表示する関数の呼び出し(パーティクルの中でも更に前面)
         
         #フェードアウトスクリーンの表示###############################################
-        if    self.game_status == SCENE_GAME_OVER_FADE_OUT\
-            or self.game_status == SCENE_STAGE_CLEAR_FADE_OUT:
+        if    self.game_status == Scene.GAME_OVER_FADE_OUT\
+            or self.game_status == Scene.STAGE_CLEAR_FADE_OUT:
             
             # self.draw_fade_in_out_screen(FADE_OUT,0)        #フェードイン＆フェードアウト用のエフェクトスクリーンの描画表示
             graph.draw_vertical_fade_in_screen(self)        #フェードイン＆フェードアウト用のエフェクトスクリーンの描画表示
         
         #画面中央80ドットだけ表示する処理###########################################
-        if    self.game_status == SCENE_GAME_OVER_SHADOW_IN\
-            or self.game_status == SCENE_GAME_OVER_STOP\
-            or self.game_status == SCENE_RETURN_TITLE:
+        if    self.game_status == Scene.GAME_OVER_SHADOW_IN\
+            or self.game_status == Scene.GAME_OVER_STOP\
+            or self.game_status == Scene.RETURN_TITLE:
             
             graph.draw_shadow_out_screen(self,40,0)  #中央付近80ドット分だけ残してシャドウアウトする
         
@@ -1018,18 +1018,18 @@ class App:
             # self.draw_dummy_put_bg_xy()  #BG Get&Put dummy test
         
         #一時停止・ポーズメッセージの表示#########################################
-        if self.game_status == SCENE_PAUSE:
+        if self.game_status == Scene.PAUSE:
             graph.draw_pause_message(self)            #一時停止・ポーズメッセージの表示
         
         # #タイトルメッセージテキストの表示#########################################
-        # if self.game_status == SCENE_TITLE_HIT_ANY_BTN:
+        # if self.game_status == Scene.TITLE_HIT_ANY_BTN:
         #     graph.draw_title_message(self)            #タイトルメッセージテキストの表示
         
         #ゲームオーバー画像の表示##################################################
-        if     self.game_status == SCENE_GAME_OVER\
-            or self.game_status == SCENE_GAME_OVER_FADE_OUT\
-            or self.game_status == SCENE_GAME_OVER_SHADOW_IN\
-            or self.game_status == SCENE_GAME_OVER_STOP\
-            or self.game_status == SCENE_RETURN_TITLE:
+        if     self.game_status == Scene.GAME_OVER\
+            or self.game_status == Scene.GAME_OVER_FADE_OUT\
+            or self.game_status == Scene.GAME_OVER_SHADOW_IN\
+            or self.game_status == Scene.GAME_OVER_STOP\
+            or self.game_status == Scene.RETURN_TITLE:
             graph.draw_gameover_dialog(self)          #ゲームオーバー表示をする関数呼び出し
 App()

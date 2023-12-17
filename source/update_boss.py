@@ -1033,7 +1033,7 @@ class update_boss:
                         self.boss[i].status = BOSS_STATUS_DISAPPEARANCE #ボスステータスを「ボス消滅」にします
                     
                 elif self.boss[i].status == BOSS_STATUS_DISAPPEARANCE:         #ボスステータスが「ボス消滅」の処理
-                    self.game_status = SCENE_STAGE_CLEAR_MOVE_MY_SHIP #ゲームステータス(状態遷移)を「ステージクリア自機自動移動」にする
+                    self.game_status = Scene.STAGE_CLEAR_MOVE_MY_SHIP #ゲームステータス(状態遷移)を「ステージクリア自機自動移動」にする
                     
                     self.stage_clear_dialog_flag          = 1   #STAGE CLEARダイアログ表示フラグをonにする
                     self.stage_clear_dialog_display_time  = 300 #STAGE CLEARダイアログ表示時間その1を代入(単位は1フレーム)
@@ -1184,7 +1184,7 @@ class update_boss:
                         self.boss[i].status = BOSS_STATUS_DISAPPEARANCE #ボスステータスを「ボス消滅」にします 
                     
                 elif self.boss[i].status == BOSS_STATUS_DISAPPEARANCE:        #ボスステータスが「ボス消滅」の処理
-                    self.game_status = SCENE_STAGE_CLEAR_MOVE_MY_SHIP #ゲームステータス(状態遷移)を「ステージクリア自機自動移動」にする
+                    self.game_status = Scene.STAGE_CLEAR_MOVE_MY_SHIP #ゲームステータス(状態遷移)を「ステージクリア自機自動移動」にする
                     
                     self.stage_clear_dialog_flag             = 1   #STAGE CLEARダイアログ表示フラグをonにする
                     self.stage_clear_dialog_display_time     = 300 #STAGE CLEARダイアログ表示時間その1を代入(単位は1フレーム)
@@ -1434,7 +1434,7 @@ class update_boss:
                         self.boss[i].status = BOSS_STATUS_DISAPPEARANCE #ボスステータスを「ボス消滅」にします
                     
                 elif self.boss[i].status == BOSS_STATUS_DISAPPEARANCE:         #ボスステータスが「ボス消滅」の処理
-                    self.game_status = SCENE_STAGE_CLEAR_MOVE_MY_SHIP #ゲームステータス(状態遷移)を「ステージクリア自機自動移動」にする
+                    self.game_status = Scene.STAGE_CLEAR_MOVE_MY_SHIP #ゲームステータス(状態遷移)を「ステージクリア自機自動移動」にする
                     
                     self.stage_clear_dialog_flag          = 1   #STAGE CLEARダイアログ表示フラグをonにする
                     self.stage_clear_dialog_display_time  = 300 #STAGE CLEARダイアログ表示時間その1を代入(単位は1フレーム)
