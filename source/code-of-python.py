@@ -533,7 +533,7 @@ class App:
             update_btn.change_claw_style_btn(self)        #クロースタイル変更ボタンが押されたか調べる関数を呼び出す    
             #イベントリスト関連の処理###############################################################################################################
             update_event.list_execution(self)         #イベントリスト解析による敵の発生関数を呼び出す
-            update_event.map_scroll(self)             #マップスクロールによる敵の発生関数を呼び出す
+            update_event.enemy_born_map_scroll(self)  #マップスクロールによる敵の発生関数を呼び出す
             update_event.append_request(self)         #アペンドイベントリクエストによる敵の追加発生関数を呼び出す（早回しなどの追加注文発生とかの処理）(イベント追加依頼）
             #敵関連の処理###############################################################################################################
             update_enemy.enemy(self)                  #敵の更新（移動とか）関数を呼び出す
@@ -737,7 +737,7 @@ class App:
                     self.replay_status = REPLAY_STOP      #リプレイの記録はストップさせるようにします
                     self.replay_stage_num = 50            #念のため記録ステージ数は最高の50で丸めておきます
                 
-                if self.stage_number > STAGE_NIGHT_SKYSCRAPER: #ステージ4 夜間超高層ビル地帯はまだ未完成なので・・・
+                if self.stage_number > STAGE_NIGHT_SKYSCRAPER: #ステージ4 夜間超高層ビル地帯以降のステージはまだ未完成なので・・・
                     self.stage_number = STAGE_MOUNTAIN_REGION   #ステージ1 山岳地帯に戻してやります
                     self.stage_loop += 1     #ループ数を1増やします
                     if self.stage_loop >= 4: #4周目以降は作っていないので\\\

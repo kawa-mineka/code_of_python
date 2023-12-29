@@ -154,7 +154,7 @@ class update_event:
             self.event_index += 1 #イベントインデックス値を1増やして次のイベントの実行に移ります
 
     #マップスクロールによる敵の発生を行う
-    def map_scroll(self):
+    def enemy_born_map_scroll(self):
         """
         マップスクロールによる敵の発生を行う
         """

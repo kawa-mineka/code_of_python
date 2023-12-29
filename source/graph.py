@@ -1707,7 +1707,7 @@ class graph:
             for ly in range(15): #y軸は15キャラ分なので15回繰り返す
                 pyxel.blt(self.fade_in_out_counter // 8 * 8  - lx*8 -8,ly*8,   IMG2,   self.fade_in_out_counter // 8 * 4,248,   8,8,   pyxel.COLOR_GRAY)
         
-        if self.fade_in_out_counter >= 160 * 3 + 8 * 3:
+        if self.fade_in_out_counter > 160 * 3 + 8 * 3:
                 self.fade_complete_flag = FLAG_ON #右端まで描画したら完了フラグを立てる
         else:
             self.fade_in_out_counter += 3 #開始x軸（キャラ単位）を1増やして右の列に移る
@@ -1722,7 +1722,7 @@ class graph:
             for lx in range(20):#x軸は20キャラ分なので20回繰り返す
                 pyxel.blt(lx*8,self.fade_in_out_counter // 8  - ly*8,   IMG2,   self.fade_in_out_counter // 8,248,   8,8,   pyxel.COLOR_GRAY)
         
-        if self.fade_in_out_counter >= 120 * 16:
+        if self.fade_in_out_counter > 120 * 16:
                 self.fade_complete_flag = FLAG_ON #下端まで描画したら完了フラグを立てる
         else:
             self.fade_in_out_counter += 16 #開始y軸（キャラ単位）を1増やして下の行に移る

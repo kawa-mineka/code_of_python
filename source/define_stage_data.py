@@ -58,7 +58,7 @@ class define_stage_data:
         # 大気圏突入時の火花を表示するかどうかのフラグ
         # 背景マップチップを消去するときに使うチップ番号(主にマップスクロールで出来を出現させた後、その敵がいたマップチップをnull(消去)するときに使われます)]
         # 背景の縦幅(通常ステージは120で2画面分自由スクロールするステージなどは240になったりする)
-        # 縦方向の画面数(8方向スクロールのMOUNTAIN REGIONなどは1,ADVACE_BASEなどは縦スクロールしないので1,VOLCANIC_BELTは縦に2画面分スクロールするので2が入る)
+        # 縦方向の画面数(8方向スクロールのMOUNTAIN REGIONなどはSINGLE_SCREENにしておく,ADVACE_BASEなどは縦スクロールしないのでSINGLE_SCREEN,VOLCANIC_BELTは縦に2画面分スクロールするのでDUAL_SCREENが入る)
         self.stage_data_list = [
             [STAGE_MOUNTAIN_REGION,
             24,50,
@@ -69,7 +69,8 @@ class define_stage_data:
             SPARK_ON,
             0,
             WINDOW_H,
-            1,],
+            SINGLE_SCREEN,
+            BG_ENEMY_NONE],
             
             [STAGE_ADVANCE_BASE,
             24,50,
@@ -80,7 +81,8 @@ class define_stage_data:
             SPARK_OFF,
             0,
             WINDOW_H,
-            1],
+            SINGLE_SCREEN,
+            BG_ENEMY_BONE1],
             
             [STAGE_VOLCANIC_BELT,
             24,80,
@@ -91,7 +93,8 @@ class define_stage_data:
             SPARK_OFF,
             32*2,
             (WINDOW_H * 2) + 8 * 3,
-            2],
+            DUAL_SCREEN,
+            BG_ENEMY_BONE1],
             
             [STAGE_NIGHT_SKYSCRAPER,
             24,50,
@@ -102,7 +105,8 @@ class define_stage_data:
             SPARK_OFF,
             0,
             WINDOW_H,
-            1],
+            SINGLE_SCREEN,
+            BG_ENEMY_BONE2],
             
             ]
 
