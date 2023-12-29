@@ -148,7 +148,7 @@ class update_init:
         # pyxel.load("./assets/graphic/min-sht2.pyxres")
         pygame.mixer.init(frequency = 44100)    #pygameミキサー関連の初期化
         pygame.mixer.music.set_volume(0.7)      #音量設定(0~1の範囲内)
-        func.load_stage_bgm(self)               #BGMファイルの読み込み
+        update_sound.load_stage_bgm(self)          #BGMファイルの読み込み
         pygame.mixer.music.play(-1)             #BGMループ再生
         if self.replay_status == REPLAY_RECORD:
             update_replay.save_stage_data(self)    #リプレイ保存時は,ステージスタート時のパラメーターをセーブする関数を呼び出します(リプレイ再生で使用)

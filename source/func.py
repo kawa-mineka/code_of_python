@@ -2,7 +2,7 @@ import math  # 三角関数などを使用したいのでインポートぉぉ�
 import os
 from random import random  # random.random() と呼ぶと、0から1の範囲(1は含まない)のランダムな実数が返される(主にパーティクル系で使用します)
 
-import pygame.mixer  # MP3再生するためだけに使用する予定・・・予定は未定・・・そして未定は確定に！やったあぁ！ BGMだけで使用しているサブゲームエンジン
+# import pygame.mixer  # MP3再生するためだけに使用する予定・・・予定は未定・・・そして未定は確定に！やったあぁ！ BGMだけで使用しているサブゲームエンジン
 import pyxel  # グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
 from const import *  # 定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
 from const_window import * #主にウィンドウクラスで使用する定数定義
@@ -1445,21 +1445,6 @@ class func:
         if self.rank > 0: #ランク数が0より大きいのならば
             self.rank -= 1      #ランク数をデクリメント
             func.get_rank_data(self) #ランク数が変化したのでランク数をもとにしたデータをリストから各変数に代入する関数の呼び出し
-
-    #各ステージBGMのロード
-    def load_stage_bgm(self):
-        """
-        各ステージBGMのロード
-        """
-        if   self.stage_number == STAGE_MOUNTAIN_REGION:
-            pygame.mixer.music.load("assets/music/BGM088-100714-kongoushinkidaia-su.wav") #STAGE1 BGMファイルの読み込み
-            pygame.mixer.music.set_volume(self.master_bgm_vol / 100)
-        elif self.stage_number == STAGE_ADVANCE_BASE:
-            pygame.mixer.music.load("assets/music/BGM056-081012-kakeroginnnogennya.wav")  #STAGE2 BGMファイルの読み込み
-            pygame.mixer.music.set_volume(self.master_bgm_vol / 100)
-        elif self.stage_number == STAGE_VOLCANIC_BELT:
-            pygame.mixer.music.load("assets/music/BGM219-181031-hankotsunoranbu.wav")     #STAGE3 BGMファイルの読み込み
-            pygame.mixer.music.set_volume(self.master_bgm_vol / 100)
 
     #0~9の範囲の乱数関数
     def rnd0_9(self):

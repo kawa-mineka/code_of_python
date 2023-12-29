@@ -13,7 +13,7 @@ from func               import * #汎用性のある関数群のモジュール�
 from update_system      import * #システムデータをセーブするときに使用します
 from update_window      import * #各種ウィンドウ作成時に使用するのでインポート
 from update_visualscene import * #ビジュアルシーン作成時に使用するのでインポートします
-from update_se          import * #SEのVOLリスト原本を取得しバックアップするために必要なのでインポート
+# from update_sound       import * #SEのVOLリスト原本を取得しバックアップするために必要なのでインポート
 from update_btn_assign  import * #パッドボタン割り当てのリスト更新で使用するのでインポートします
 
 class update_title:
@@ -34,8 +34,8 @@ class update_title:
         # for i in range(len(dat)):
         #     print(str(dat[i]))
         
-        update_se.backup_se_vol_list(self)            #各効果音のVOLのリストを原本として保存しておくメソッドの呼び出し
-        update_se.create_adjustable_se_vol_list(self) #マスターSEボリュームリストを参考にボリューム調整を施したリストを作り上げるメソッドの呼び出し
+        update_sound.backup_se_vol_list(self)            #各効果音のVOLのリストを原本として保存しておくメソッドの呼び出し
+        update_sound.create_adjustable_se_vol_list(self) #マスターSEボリュームリストを参考にボリューム調整を施したリストを作り上げるメソッドの呼び出し
         
         if self.title_startup_count == 0:
             #初回起動
@@ -223,8 +223,8 @@ class update_title:
                     func.push_cursor_data(self,WINDOW_ID_MAIN_MENU)       #メインメニューのカーソルデータをPUSH
                     update_window.create(self,WINDOW_ID_SELECT_STAGE_MENU,90,60)  #ステージセレクトウィンドウの作製
                     #選択カーソル表示をon,カーソルは上下移動のみ,,カーソル移動ステップはx4,y7,いま指示しているアイテムナンバーは0の「1」
-                    #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は3項目なので 3-1=2を代入,メニューの階層が増えたのでMENU_LAYER0からMENU_LAYER1にします
-                    func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,92,71,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,3-1,0,MENU_LAYER1)
+                    #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は4項目なので 4-1=3を代入,メニューの階層が増えたのでMENU_LAYER0からMENU_LAYER1にします
+                    func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,92,71,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,4-1,0,MENU_LAYER1)
                     self.active_window_id = WINDOW_ID_SELECT_STAGE_MENU #このウィンドウIDを最前列アクティブなものとする
                     pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
                 
@@ -419,7 +419,23 @@ class update_title:
                     func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
                     self.cursor_pre_decision_item_y = UNSELECTED
                     self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
+                elif self.cursor_decision_item_y == MENU_SELECT_STAGE_4:
+                    #「SELECT STAGE」→「4」
+                    self.stage_number   = 4                        #ステージナンバー4
+                    update_window.move_right_main_menu_window(self) #メインメニューウィンドウを右にずらす関数の呼び出し
+                    
+                    i = func.search_window_id(self,WINDOW_ID_SELECT_STAGE_MENU)
+                    self.window[i].vx = 0.3            #WINDOW_ID_SELECT_STAGE_MENUウィンドウを右にフッ飛ばしていく
+                    self.window[i].vx_accel = 1.1
+                    self.window[i].vy = 0.1 * self.stage_number
+                    self.window[i].vy_accel = 1.1
+                    self.window[i].window_status = WINDOW_CLOSE
+                    self.window[i].comment_flag = COMMENT_FLAG_OFF
+                    func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
+                    self.cursor_pre_decision_item_y = UNSELECTED
+                    self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
                 
+
             elif self.cursor_pre_decision_item_y == MENU_SELECT_LOOP:
                 if   self.cursor_decision_item_y == MENU_SELECT_LOOP_1:
                     #「SELECT LOOP NUMBER」→「1」

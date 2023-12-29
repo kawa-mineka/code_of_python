@@ -97,7 +97,7 @@ SUB_WEAPON_LEVEL_MAXIMUM = 10 #自機サブウェポンのレベルの最大値
 # SCENE_GAME_QUIT                    = 999 #ゲーム終了(スリーナインで終了 汽車は～♪闇を抜けて～～光の海へ～～～☆彡)
 
 #!ゲームステータス関連の定数定義 game_statusに代入されます#######################################################################
-#2023 12/16より別クラスにて列挙型を使用し自動で任意の数値を定義するようにしました
+#2023 12/17より別クラスにて列挙型を使用し自動で任意の数値を定義するようにしました
 class Scene(IntEnum):
     IPL               = auto()    #IPL(Initial Program Load)
     SPLASH_LOGO       = auto()    #起動処理中（スプラッシュロゴ表示）
@@ -405,8 +405,6 @@ ACHIEVEMENT_128_FAST_FORWARD               = 64 #累計128回、早回しを発�
 ACHIEVEMENT_256_FAST_FORWARD               = 65 #累計256回、早回しを発生させた
 ACHIEVEMENT_512_FAST_FORWARD               = 66 #累計512回、早回しを発生させた
 ACHIEVEMENT_1024_FAST_FORWARD              = 67 #累計1024回、早回しを発生させた
-
-
 
 #アチーブメント(実績)リストを参照するときに使用するインデックスナンバー定数定義 achievement_list[idナンバー例ACHIEVEMENT_1STAGE_CLEARなど][ここで定義した定数]
 LIST_ACHIEVE_ID                           =  0 #アチーブメントのIDナンバーが入ります

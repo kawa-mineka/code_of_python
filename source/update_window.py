@@ -13,9 +13,9 @@ import pyxel              #グラフイックキャラやバックグラウン�
 from const       import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
 from const_window      import * #主にウィンドウクラスで使用する定数定義の読み込み
 
-from func        import * #汎用性のある関数群のモジュールの読み込み
-from update_se   import * #CONFIGでSEボリュームを変化させたときSEを鳴らすために使用します
-from update_btn  import * #カーソル移動時の方向パッド入力(キーリピート付き)を調べる時に使用します
+from func         import * #汎用性のある関数群のモジュールの読み込み
+from update_sound import * #CONFIGでSEボリュームを変化させたときSEを鳴らすために使用します
+from update_btn   import * #カーソル移動時の方向パッド入力(キーリピート付き)を調べる時に使用します
 
 class update_window:
     def __init__(self):
@@ -182,7 +182,14 @@ class update_window:
             
             [["1",CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH],\
             [ "2",CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH],\
-            [ "3",CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH]],\
+            [ "3",CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH],\
+            [ "4",CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH],\
+            [ "5",CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH],\
+            [ "6",CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH],\
+            [ "7",CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH],\
+            [ "8",CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH],\
+            [ "9",CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH],\
+            [ "A",CLICK_SOUND_ON ,DISP_CENTER,0,0,7,MES_NO_FLASH]],\
             
             NO_ITEM_KANJI_TEXT,NO_EDIT_TEXT,NO_ANIMATION_TEXT,NO_SCROLL_TEXT,NO_SCRIPT,NO_VECTOR_GRP,\
             ox,oy,ox,oy,   0,0,  2*8,5*8,   2,2, 1,0.5,   0,0,    0,0,    0,0,0,0,   0,\
@@ -2627,7 +2634,7 @@ class update_window:
                         or self.window[self.active_window_index].item_text[self.cursor_item_y][LIST_WINDOW_TEXT_OPE_OBJ] == LIST_WINDOW_FLAG_SE_VOL:
                         func.restore_master_flag_list(self)
                         pygame.mixer.music.set_volume(self.master_bgm_vol / 100)
-                        update_se.se(self,2,SE_WAVE_CUTTER,self.master_se_vol)
+                        update_sound.se(self,2,SE_WAVE_CUTTER,self.master_se_vol)
                 
             elif self.cursor_move_direction == CURSOR_MOVE_UD:
                 if self.cursor_repeat_time_count <= 8: #パッドを押し続けてリピートタイムが8以下になったら
@@ -2717,7 +2724,7 @@ class update_window:
                         or self.window[self.active_window_index].item_text[self.cursor_item_y][LIST_WINDOW_TEXT_OPE_OBJ] == LIST_WINDOW_FLAG_SE_VOL:
                         func.restore_master_flag_list(self)
                         pygame.mixer.music.set_volume(self.master_bgm_vol / 100)
-                        update_se.se(self,2,SE_WAVE_CUTTER,self.master_se_vol)
+                        update_sound.se(self,2,SE_WAVE_CUTTER,self.master_se_vol)
                 
             elif self.cursor_move_direction == CURSOR_MOVE_UD:
                 if self.cursor_repeat_time_count <= 8: #パッドを押し続けてリピートタイムが8以下になったら

@@ -105,7 +105,6 @@ from define_ship_data   import * #各種機体(シップ)データ関連の登�
 from define_enemy_data  import * #敵のデータ関連の登録モジュールの読み込み
 from define_boss_data   import * #ボスのデータ関連の登録モジュールの読み込み
 from define_stage_data  import * #各ステージのイベントリスト登録モジュールの読み込み
-from define_sound       import * #音声ファイルのリスト登録&ローディング
 from func               import * #汎用性のある関数群のモジュールの読み込み
 
 from graph              import * #Appクラスのdraw関数から呼び出される関数群のモジュールの読み込み 基本的に画像表示だけを行う関数(メソッド)群です
@@ -117,6 +116,7 @@ from update_init        import * #Appクラスのupdate関数から呼び出さ�
 from update_title       import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にタイトルメニューの更新を行う関数(メソッド？）です
 from update_pause       import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み ゲーム中のポーズ更新のメソッド群です
 from update_score       import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み スコア加算やハイスコアのチェック、登録などの更新メソッド
+from update_sound       import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み BGNやSEの読み込み、再生など
 from update_status      import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にステータス表示ウィンドウで使われる項目を更新するメソッドです
 
 from update_system      import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にシステムデータのセーブロードを行う関数(メソッド？）です
@@ -377,7 +377,7 @@ class App:
         func.read_ship_equip_medal_data(self)  #プレイ中の自機リスト群にメダルスロット装備関連のデータを読み込んで行く関数の呼び出し
         func.medal_effect_plus_medallion(self) #装備されたメダルを調べ、メダルスロットを増やすメダルがはめ込まれていたらスロット数を増やす関数の呼び出し
         
-        define_sound.load_bgm(self)                 #BGMファイルの読み込み
+        update_sound.pre_load_bgm(self)           #事前にバッファーに読み込むタイプのBGMファイルをローディングする
         
         #毎フレームごとにupdateとdrawを呼び出す
         #近年のゲームエンジンはみんなこんな感じらしい？？？unityやUEもこんな感じなのかな？？使ったことないけど
@@ -737,7 +737,7 @@ class App:
                     self.replay_status = REPLAY_STOP      #リプレイの記録はストップさせるようにします
                     self.replay_stage_num = 50            #念のため記録ステージ数は最高の50で丸めておきます
                 
-                if self.stage_number == STAGE_NIGHT_SKYSCRAPER: #ステージ4 夜間超高層ビル地帯はまだ未完成なので・・・
+                if self.stage_number > STAGE_NIGHT_SKYSCRAPER: #ステージ4 夜間超高層ビル地帯はまだ未完成なので・・・
                     self.stage_number = STAGE_MOUNTAIN_REGION   #ステージ1 山岳地帯に戻してやります
                     self.stage_loop += 1     #ループ数を1増やします
                     if self.stage_loop >= 4: #4周目以降は作っていないので\\\
@@ -891,6 +891,11 @@ class App:
                 pyxel.bltm(-((self.scroll_count // 3) % 256),4  ,TM2,  0*8,208*8   + self.camera_offset_y // 3,  256*8, 1*8 + 4 ,pyxel.COLOR_BLACK)
                 pyxel.bltm(-((self.scroll_count // 2) % 256),2  ,TM2,  0*8,208*8   + self.camera_offset_y // 3,  256*8, 1*8 + 3 ,pyxel.COLOR_BLACK)
                 pyxel.bltm(-((self.scroll_count )     % 256),0  ,TM2,  0*8,208*8   + self.camera_offset_y // 2,  256*8, 1*8     ,pyxel.COLOR_BLACK) #下の方
+            elif self.stage_number == STAGE_NIGHT_SKYSCRAPER:
+                # pyxel.bltm(-int(self.scroll_count %(256*8) -160) // 1,0,TM0,  0*8,48*8,  256*8,120*8,self.bg_transparent_color)
+                pyxel.bltm(-int(pyxel.frame_count % 256 * 8 - 160),0,TM0,  0*8,38*8,  256*8,120*8,self.bg_transparent_color)
+                # pyxel.frame_count 
+            
             
             ####################背景表示
             ###################pyxel.bltm(-(pyxel.frame_count // 8),0,0,((pyxel.frame_count / 2) - 160) ,0,160,120,0)最初はこれで上手くいかなかった・・・・なぜ？
@@ -906,6 +911,10 @@ class App:
                         pyxel.bltm(-int(self.scroll_count % (256*8 - 160)),     -self.vertical_scroll_count,  TM1,    0*8,0*8,    256 * 8,256 * 8,    self.bg_transparent_color)
             elif self.stage_number == STAGE_VOLCANIC_BELT:
                 pyxel.bltm(-(self.scroll_count // 4) + 400,-self.camera_offset_y // 4,TM2,   0*8, 76*8, 256*8,120*8,    self.bg_transparent_color)
+            elif self.stage_number == STAGE_NIGHT_SKYSCRAPER:
+                # pyxel.bltm(-int(self.scroll_count %(256*8) -160) // 1,0,TM0,  0*8,48*8,  256*8,120*8,self.bg_transparent_color)
+                pyxel.bltm(-int(pyxel.frame_count % 256 * 6 - 160),0,TM0,  0*8,48*8,  256*8,120*8,self.bg_transparent_color)
+                # pyxel.frame_count
             
             graph.draw_background_object(self)               #背景オブジェクトの描画関数の呼び出し
             

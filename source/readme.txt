@@ -14,7 +14,6 @@ define_class.py         各クラスのメンバ変数とか宣言してます�
 define_data.py          色んなデータのリスト登録です
 define_enemy_data.py    敵データ関連のリスト登録
 define_ship_data.py     自機関連のデータリスト登録
-define_sound.py         BGMファイルを事前に読み込み、リストに登録する処理
 define_stage_data.py    各ステージのイベントデータとか、ゲーム全体のステージ配列などのリスト登録です
 
 func.py                 ある程度の汎用性のある関数群です update_* の各メソッドから呼ばれる場合が多いですねぇ
@@ -36,7 +35,7 @@ update_obj.py           背景に表示される色んなオブジェクト(雲�
 update_pause.py         ゲーム中ポーズを掛けたときの処理         
 update_replay.py        リプレイ関連の更新です
 update_score.py         スコア加算の計算とかです
-update_se.py            サウンドエフェクト(効果音)関連の処理を行います
+update_sound.py         サウンドエフェクト(効果音)関連の処理を行います
 update_ship.py          自機関連の更新、自機が出すショット、ミサイル、クロー関連も更新しております
 update_status.py        メニューから表示される「STATUS」関連の計算を行います
 update_system.py        システムデータのセーブ＆ロードの処理
@@ -60,7 +59,6 @@ define_class.py         Declaration of member variables of each class, and const
 define_data.py          List of various data
 define_enemy_data.py    Enemy data related list
 define_ship_data.py     Register the list of ship data.
-define_sound.py         The process of loading BGM files in advance and registering them in the list.
 define_stage_data.py    Register a list of event data for each stage and the stage array for the whole game.
 
 func.py                 A group of functions with a certain degree of versatility, often called from update_* methods.
@@ -82,7 +80,7 @@ update_obj.py           Updates various objects displayed in the background (clo
 update_pause.py         Processes when the game is paused         
 update_replay.py        Replay related updates
 update_score.py         Calculation of score addition
-update_se.py            Processing of sound effects
+update_sound.py            Processing of sound effects
 update_ship.py          Updates to the ship's engine, shots, missiles, and claws.
 update_status.py        Performs calculations related to the "STATUS" displayed from the menu
 update_system.py        Handling of system data save and load

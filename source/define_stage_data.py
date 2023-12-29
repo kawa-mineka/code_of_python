@@ -32,7 +32,12 @@ class define_stage_data:
                             
                             [self.event_list_stage_volcanic_belt_l1,
                             self.event_list_stage_volcanic_belt_l1,
-                            self.event_list_stage_volcanic_belt_l1]
+                            self.event_list_stage_volcanic_belt_l1],
+                            
+                            [self.event_list_stage_nightskyscraper_l1,
+                            self.event_list_stage_nightskyscraper_l1,
+                            self.event_list_stage_nightskyscraper_l1]
+                            
                             ]
 
     def stage_data_list(self):     #ステージデータリストの定義
@@ -87,6 +92,17 @@ class define_stage_data:
             32*2,
             (WINDOW_H * 2) + 8 * 3,
             2],
+            
+            [STAGE_NIGHT_SKYSCRAPER,
+            24,50,
+            256 ,TM0,
+            SCROLL_TYPE_TRIPLE_SCROLL_AND_STAR    ,STAR_SCROLL_ON,
+            RASTER_SCROLL_OFF,
+            FRONT_BG_DISP_ON,CENTER_BG_DISP_ON,BACK_BG_DISP_ON,
+            SPARK_OFF,
+            0,
+            WINDOW_H,
+            1],
             
             ]
 
@@ -432,7 +448,48 @@ class define_stage_data:
             
             [4900,EVENT_SCROLL,SCROLL_SPEED_CHANGE,4,0.002],
             [99999999],]
-
+        
+        self.event_list_stage_nightskyscraper_l1= [
+            
+            [  10,EVENT_FAST_FORWARD_NUM,4,30],
+            [ 200,EVENT_ENEMY,EnemyName.CIR_COIN    ,160, 10   ,6],
+            [ 500,EVENT_ENEMY,EnemyName.CIR_COIN    ,160, 90   ,6],
+            [ 700,EVENT_ENEMY,EnemyName.CIR_COIN    ,160, 20   ,6],
+            [ 900,EVENT_ENEMY,EnemyName.CIR_COIN    ,160, 80   ,6],
+            
+            [950,EVENT_ADD_APPEAR_ENEMY,EnemyName.CIR_COIN,160, 60,10],
+            
+            [1050,EVENT_ENEMY,EnemyName.SAISEE_RO,160, 60-24],
+            [1051,EVENT_ENEMY,EnemyName.SAISEE_RO,160, 60   ],
+            [1052,EVENT_ENEMY,EnemyName.SAISEE_RO,160, 60+24],
+            
+            [1080,EVENT_ENEMY,EnemyName.SAISEE_RO,160, 40-24],
+            [1081,EVENT_ENEMY,EnemyName.SAISEE_RO,160, 40,  ],
+            [1082,EVENT_ENEMY,EnemyName.SAISEE_RO,160, 40+24],
+            
+            [1095,EVENT_ENEMY,EnemyName.GREEN_LANCER,180,10],
+            
+            [1100,EVENT_ENEMY,EnemyName.CIR_COIN,    160,20    ,7],
+            [1300,EVENT_ENEMY,EnemyName.CIR_COIN,    160,80    ,7],
+            
+            [1400,EVENT_ENEMY,EnemyName.TWIN_ARROW,160, 40],
+            [1401,EVENT_ENEMY,EnemyName.TWIN_ARROW,160, 60],
+            [1402,EVENT_ENEMY,EnemyName.TWIN_ARROW,160, 80],
+            
+            [1500,EVENT_ENEMY,EnemyName.TWIN_ARROW,160,  20],
+            [1501,EVENT_ENEMY,EnemyName.TWIN_ARROW,160,  60],
+            [1502,EVENT_ENEMY,EnemyName.TWIN_ARROW,160, 100],
+            
+            [1600,EVENT_ENEMY,EnemyName.TWIN_ARROW,160, 60   ],
+            [1601,EVENT_ENEMY,EnemyName.TWIN_ARROW,160, 60+10],
+            [1602,EVENT_ENEMY,EnemyName.TWIN_ARROW,160, 60-10],
+            [1603,EVENT_ENEMY,EnemyName.TWIN_ARROW,160, 60+20],
+            [1604,EVENT_ENEMY,EnemyName.TWIN_ARROW,160, 60-20],
+            
+            [2000,EVENT_WARNING,500,120,240],
+            [2300,EVENT_BOSS],
+            [99999999],]
+    
     def bg_animation_list(self):   #各ステージのＢＧ書き換えによるアニメーションの為のデータリスト群の定義
         """
         各ステージのＢＧ書き換えによるアニメーションの為のデータリスト群の定義

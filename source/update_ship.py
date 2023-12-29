@@ -15,8 +15,8 @@ import pyxel        #グラフイックキャラやバックグラウンドグ�
 from const import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
 from func  import * #汎用性のある関数群のモジュールの読み込み
 
-from update_obj import * #背景オブジェクト更新関数モジュール読み込み(パーティクルで使用)
-from update_se  import * #SE再生で使用
+from update_obj    import * #背景オブジェクト更新関数モジュール読み込み(パーティクルで使用)
+from update_sound  import * #SE再生で使用
 
 class update_ship:
     def __init__(self):
@@ -613,7 +613,7 @@ class update_ship:
             if len(self.shots) < self.shot_rapid_of_fire:
             #if self.shot_type_count(self.shot_level) < 3: 
                 if (pyxel.frame_count % 8) == 0:
-                    update_se.se(self,2,SE_WAVE_CUTTER,self.master_se_vol)#チャンネル2でサウンドナンバー5=SE_WAVE_CUTTERを鳴らす
+                    update_sound.se(self,2,SE_WAVE_CUTTER,self.master_se_vol)#チャンネル2でサウンドナンバー5=SE_WAVE_CUTTERを鳴らす
                     new_shot = Shot()
                     new_shot.update(self.shot_level,self.my_x + 5,self.my_y -4,      3,0,  8,16,  0,   2,1)
                     
@@ -622,7 +622,7 @@ class update_ship:
         if self.shot_level == SHOT_LV8_WAVE_CUTTER_LV2:#ウェーブカッターLv2発射
             if len(self.shots) < self.shot_rapid_of_fire:
                 if (pyxel.frame_count % 8) == 0:
-                    update_se.se(self,2,SE_WAVE_CUTTER,self.master_se_vol)#チャンネル2でサウンドナンバー5=SE_WAVE_CUTTERを鳴らす
+                    update_sound.se(self,2,SE_WAVE_CUTTER,self.master_se_vol)#チャンネル2でサウンドナンバー5=SE_WAVE_CUTTERを鳴らす
                     new_shot = Shot()
                     new_shot.update(self.shot_level,self.my_x + 5,self.my_y -8,      3,0,  8,24,  0,   2,1)
                     self.shots.append(new_shot)
@@ -630,7 +630,7 @@ class update_ship:
         if self.shot_level == SHOT_LV9_WAVE_CUTTER_LV3:#ウェーブカッターLv3発射
             if len(self.shots) < self.shot_rapid_of_fire:
                 if (pyxel.frame_count % 8) == 0:
-                    update_se.se(self,2,SE_WAVE_CUTTER,self.master_se_vol)#チャンネル2でサウンドナンバー5=SE_WAVE_CUTTERを鳴らす
+                    update_sound.se(self,2,SE_WAVE_CUTTER,self.master_se_vol)#チャンネル2でサウンドナンバー5=SE_WAVE_CUTTERを鳴らす
                     new_shot = Shot()
                     new_shot.update(self.shot_level,self.my_x + 5,self.my_y -12,      3,0,  8,32,  0,   2,1)
                     self.shots.append(new_shot)
@@ -638,7 +638,7 @@ class update_ship:
         if self.shot_level == SHOT_LV10_WAVE_CUTTER_LV4:#ウェーブカッターLv4発射
             if len(self.shots) < self.shot_rapid_of_fire:
                 if (pyxel.frame_count % 6) == 0:
-                    update_se.se(self,2,SE_WAVE_CUTTER,self.master_se_vol) #チャンネル2でサウンドナンバー5=SE_WAVE_CUTTERを鳴らす
+                    update_sound.se(self,2,SE_WAVE_CUTTER,self.master_se_vol) #チャンネル2でサウンドナンバー5=SE_WAVE_CUTTERを鳴らす
                     new_shot = Shot()
                     new_shot.update(self.shot_level,self.my_x + 5,self.my_y -12,      4,0,  8,32,  0,   2,1)
                     self.shots.append(new_shot)
@@ -646,7 +646,7 @@ class update_ship:
         if self.shot_level == SHOT_LV4_LASER:      #レーザー発射
             if len(self.shots) < 20:
                 if (pyxel.frame_count % 2) == 0:
-                    update_se.se(self,2,SE_LASER,self.master_se_vol)
+                    update_sound.se(self,2,SE_LASER,self.master_se_vol)
                     new_shot = Shot()
                     new_shot.update(self.shot_level,self.my_x + 5,self.my_y,         3,1,  8,8,  0,   0.3,1)
                     self.shots.append(new_shot)
@@ -654,7 +654,7 @@ class update_ship:
         if self.shot_level == SHOT_LV5_TWIN_LASER: #ツインレーザー発射
             if len(self.shots) < 40:
                 if (pyxel.frame_count % 2) == 0:
-                    update_se.se(self,2,SE_LASER,self.master_se_vol)
+                    update_sound.se(self,2,SE_LASER,self.master_se_vol)
                     new_shot = Shot()
                     new_shot.update(self.shot_level,self.my_x + 5,self.my_y - 3,     3,1,  8,8,  -3,  0.3,1)
                     self.shots.append(new_shot)
@@ -666,7 +666,7 @@ class update_ship:
         if self.shot_level == SHOT_LV6_3WAY_LASER: #３ＷＡＹレーザー発射
             if len(self.shots) < 80:
                 if (pyxel.frame_count % 2) == 0:
-                    update_se.se(self,2,SE_LASER,self.master_se_vol)
+                    update_sound.se(self,2,SE_LASER,self.master_se_vol)
                     new_shot = Shot()
                     new_shot.update(self.shot_level,self.my_x + 1,self.my_y  -1,    1,-1.08,   8,8,   -1,  0.2,1)
                     self.shots.append(new_shot)
@@ -762,13 +762,13 @@ class update_ship:
         if len(self.shots) < (self.shot_rapid_of_fire + (self.shot_level) * 2):#バルカンショットの発射
             if (pyxel.frame_count % 6) == 0:    
                 if self.shot_level == SHOT_LV0_VULCAN_SHOT:#初期ショット バルカンショット1連装
-                    update_se.se(self,2,SE_VULCAN_SHOT,self.master_se_vol)
+                    update_sound.se(self,2,SE_VULCAN_SHOT,self.master_se_vol)
                     new_shot = Shot()
                     new_shot.update(self.shot_level,self.my_x + 4,self.my_y    ,4,0,  8,8,    0, 1,1)
                     self.shots.append(new_shot)
                 
                 if self.shot_level == SHOT_LV1_TWIN_VULCAN_SHOT:#ツインバルカンショット 2連装
-                    update_se.se(self,2,SE_VULCAN_SHOT,self.master_se_vol)
+                    update_sound.se(self,2,SE_VULCAN_SHOT,self.master_se_vol)
                     new_shot = Shot()
                     new_shot.update(self.shot_level,self.my_x + 6,self.my_y - 2,4,0,  8,8,    0,  1,1)
                     self.shots.append(new_shot)
@@ -778,7 +778,7 @@ class update_ship:
                     self.shots.append(new_shot)
                 
                 if self.shot_level == SHOT_LV2_3WAY_VULCAN_SHOT:#３ＷＡＹバルカンショット
-                    update_se.se(self,2,SE_VULCAN_SHOT,self.master_se_vol)
+                    update_sound.se(self,2,SE_VULCAN_SHOT,self.master_se_vol)
                     
                     new_shot = Shot()
                     new_shot.update(self.shot_level,self.my_x + 6,self.my_y - 2  ,5,-0.3,  8,8,    0,  1,1)
@@ -793,7 +793,7 @@ class update_ship:
                     self.shots.append(new_shot)
                 
                 if self.shot_level == SHOT_LV3_5WAY_VULCAN_SHOT:#５ＷＡＹバルカンショット
-                    update_se.se(self,2,SE_VULCAN_SHOT,self.master_se_vol)
+                    update_sound.se(self,2,SE_VULCAN_SHOT,self.master_se_vol)
                     
                     new_shot = Shot()
                     new_shot.update(self.shot_level,self.my_x + 6,self.my_y - 2,    5,-1,    8,8,    0,  1,1)
@@ -821,13 +821,13 @@ class update_ship:
             func.count_missile_type(self,0,1,2,3)#ミサイルタイプ0,1,2,3の合計数を数える
             if self.type_check_quantity < (self.missile_level + 1) * self.missile_rapid_of_fire:  #初期段階では２発以上は出せないようにする
                 if self.missile_level == MISSILE_LV0_NORMAL_MISSILE:
-                    update_se.se(self,2,SE_MISSILE,self.master_se_vol)
+                    update_sound.se(self,2,SE_MISSILE,self.master_se_vol)
                     new_missile = Missile()
                     new_missile.update(0,self.my_x + 4,self.my_y,   0.7,0.7,   3,    1   ,0,0,    1,1,  8,8  ,0,0,   0,0) #前方右下に落ちていくミサイル
                     self.missile.append(new_missile)#ミサイル育成
                     
                 elif self.missile_level == MISSILE_LV1_TWIN_MISSILE:
-                    update_se.se(self,2,SE_MISSILE,self.master_se_vol)
+                    update_sound.se(self,2,SE_MISSILE,self.master_se_vol)
                     new_missile = Missile()
                     new_missile.update(0,self.my_x + 2,self.my_y +2,   0.7,0.7,   3,    1   ,0,0,    1,1,  8,8,  0,0,   0,0) #前方右下に落ちていくミサイル
                     self.missile.append(new_missile)#ミサイル育成
@@ -837,7 +837,7 @@ class update_ship:
                     self.missile.append(new_missile)#ミサイル育成
                     
                 elif self.missile_level == MISSILE_LV2_MULTI_MISSILE:
-                    update_se.se(self,2,SE_MISSILE,self.master_se_vol)
+                    update_sound.se(self,2,SE_MISSILE,self.master_se_vol)
                     new_missile = Missile()
                     new_missile.update(0,self.my_x +2,self.my_y +2,   0.7,0.7,    3,    1   ,0,0,    1,1,   8,8,  0,0,  0,0) #前方右下に落ちていくミサイル
                     self.missile.append(new_missile)#ミサイル育成
@@ -875,7 +875,7 @@ class update_ship:
         if self.my_shield < 0:
             self.my_shield = 0 #シールドパワーがマイナスまで行ってしまったら0に修正する
         
-        update_se.se(self,0,SE_SHIP_DAMAGE,self.master_se_vol) #自機ダメージ音再生
+        update_sound.se(self,0,SE_SHIP_DAMAGE,self.master_se_vol) #自機ダメージ音再生
         self.invincible_counter += self.invincible_time        #ダメージ後の無敵時間を加算する
         
         self.rank_down_count += 1 #ランクダウン用カウンタを１増やす
@@ -893,4 +893,4 @@ class update_ship:
             self.explosions.append(new_explosion)
             
             #爆発音再生
-            update_se.se(self,2,SE_SHIP_BROKEN,self.master_se_vol)
+            update_sound.se(self,2,SE_SHIP_BROKEN,self.master_se_vol)
