@@ -11,11 +11,11 @@
 import math         #三角関数などを使用したいのでインポートぉぉおお！
 from random import random    #random.random() と呼ぶと、0から1の範囲(1は含まない)のランダムな実数が返される(主にパーティクル系で使用します)
 import pyxel        #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
-from const import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
+from const.const import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
 
-from update_obj    import *   #背景オブジェクト更新関数モジュール読み込み(パーティクルで使用)
-from update_ship   import *   #自機関連更新関数モジュール読み込み
-# from update_window import *   #ポーズウィンドウ作成時に使用するのでインポート
+from update.update_obj    import *   #背景オブジェクト更新関数モジュール読み込み(パーティクルで使用)
+from update.update_ship   import *   #自機関連更新関数モジュール読み込み
+# from update.update_window import *   #ポーズウィンドウ作成時に使用するのでインポート
 
 class update_btn:
     #キーボードの上かカーソルとジョイパッドの上方向ボタンが押されたかどうかを調べる(キーリピート付き)                  KEY UP PAD UP

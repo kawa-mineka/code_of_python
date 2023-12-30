@@ -2,17 +2,17 @@
 
 [[日本語](README.md) | [Engligh](README.ENG.md)  ]
 
-![source/gif/pyxel-210222-065611.gif](source/gif/pyxel-210222-065611.gif)
-![source/gif/pyxel-210222-065611.gif](source/gif/pyxel-210222-065917.gif)
+![gif/pyxel-210222-065611.gif](gif/pyxel-210222-065611.gif)
+![gif/pyxel-210222-065611.gif](gif/pyxel-210222-065917.gif)
 
-![source/gif/pyxel-210226-194506.gif](source/gif/pyxel-210226-194506.gif)
-![source/gif/pyxel-210226-194639.gif](source/gif/pyxel-210226-194639.gif)
+![gif/pyxel-210226-194506.gif](gif/pyxel-210226-194506.gif)
+![gif/pyxel-210226-194639.gif](gif/pyxel-210226-194639.gif)
 
-![source/gif/pyxel-210226-194737.gif](source/gif/pyxel-210226-194737.gif)
-![source/gif/pyxel-210226-195228.gif](source/gif/pyxel-210226-195228.gif)
+![gif/pyxel-210226-194737.gif](gif/pyxel-210226-194737.gif)
+![gif/pyxel-210226-195228.gif](gif/pyxel-210226-195228.gif)
 
-![source/gif/pyxel-210403-175232.gif](source/gif/pyxel-210403-175232.gif)
-![source/gif/pyxel-210403-175305.gif](source/gif/pyxel-210403-175305.gif)
+![gif/pyxel-210403-175232.gif](gif/pyxel-210403-175232.gif)
+![gif/pyxel-210403-175305.gif](gif/pyxel-210403-175305.gif)
 
 Shooting game-like? It's not finished, but...
 
@@ -23,7 +23,7 @@ Shooting game-like? It's not finished, but...
 
 First install [Python3](https://www.python.org/) (version 3.6.8 or higher).
 
-Then, install Pyxel (version 1.6.9 or higher) from the command prompt with the following `pip` command.
+Then, install Pyxel (version  2.0.0 or higher) from the command prompt with the following `pip` command.
 
 ```sh
 pip install -U pyxel

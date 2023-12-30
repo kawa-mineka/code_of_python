@@ -8,10 +8,10 @@
 import math               #三角関数などを使用したいのでインポートぉぉおお！
 from random import random #random.random() と呼ぶと、0から1の範囲(1は含まない)のランダムな実数が返される(主にパーティクル系で使用します)
 import pyxel              #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
-from const import *       #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
-from define_class import * #クラス宣言モジュールの読み込み やっぱりimport *は不味いのかなぁ・・・よくわかんない
+from const.const import *       #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
+from define.define_class import * #クラス宣言モジュールの読み込み やっぱりimport *は不味いのかなぁ・・・よくわかんない
 
-from func  import *       #汎用性のある関数群のモジュールの読み込み
+from common.func  import *       #汎用性のある関数群のモジュールの読み込み
 class update_obj:
     def __init__(self):
         None

@@ -8,13 +8,13 @@
 import copy #スコアボードでデフォルトスコアボードを深い階層までのコピーを使いたいのでインポートします
 
 import pyxel                     #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
-from const              import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
-from func               import * #汎用性のある関数群のモジュールの読み込み
-from update_system      import * #システムデータをセーブするときに使用します
-from update_window      import * #各種ウィンドウ作成時に使用するのでインポート
-from update_visualscene import * #ビジュアルシーン作成時に使用するのでインポートします
-# from update_sound       import * #SEのVOLリスト原本を取得しバックアップするために必要なのでインポート
-from update_btn_assign  import * #パッドボタン割り当てのリスト更新で使用するのでインポートします
+from const.const              import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
+from common.func               import * #汎用性のある関数群のモジュールの読み込み
+from update.update_system      import * #システムデータをセーブするときに使用します
+from update.update_window      import * #各種ウィンドウ作成時に使用するのでインポート
+from update.update_visualscene import * #ビジュアルシーン作成時に使用するのでインポートします
+# from update.update_sound       import * #SEのVOLリスト原本を取得しバックアップするために必要なのでインポート
+from update.update_btn_assign  import * #パッドボタン割り当てのリスト更新で使用するのでインポートします
 
 class update_title:
     def __init__(self):

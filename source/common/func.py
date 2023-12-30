@@ -4,9 +4,9 @@ from random import random  # random.random() と呼ぶと、0から1の範囲(1�
 
 # import pygame.mixer  # MP3再生するためだけに使用する予定・・・予定は未定・・・そして未定は確定に！やったあぁ！ BGMだけで使用しているサブゲームエンジン
 import pyxel  # グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
-from const import *  # 定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
-from const_window import * #主にウィンドウクラスで使用する定数定義
-from define_class import * # クラス宣言モジュールの読み込み やっぱりimport *は不味いのかなぁ・・・よくわかんない
+from const.const import *  # 定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
+from const.const_window import * #主にウィンドウクラスで使用する定数定義
+from define.define_class import * # クラス宣言モジュールの読み込み やっぱりimport *は不味いのかなぁ・・・よくわかんない
 
 
 class func:

@@ -8,10 +8,10 @@
 # 2022 05/07からファイル分割してモジュールとして運用開始      #
 ###########################################################
 
-from const import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
-from func  import * #汎用性のある関数群のモジュールの読み込み
+from const.const import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
+from common.func  import * #汎用性のある関数群のモジュールの読み込み
 
-from update_boss import * #ボスを出現させる時に使用します
+from update.update_boss import * #ボスを出現させる時に使用します
 
 class update_event:
     def __init__(self):

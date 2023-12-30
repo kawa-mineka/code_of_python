@@ -7,12 +7,12 @@
 # 2022 04/06からファイル分割してモジュールとして運用開始           #
 ################################################################
 import pyxel        #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
-from const import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
-from func  import * #汎用性のある関数群のモジュールの読み込み
+from const.const import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
+from common.func  import * #汎用性のある関数群のモジュールの読み込み
 
-from define_stage_data import * #各ステージのイベントリスト登録モジュールの読み込み
-from update_replay     import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み リプレイ記録再生の更新を行う関数(メソッド？）です
-from update_ship       import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み ゲーム開始時のイージーやベリーイージーでのクローの追加に使用する
+from define.define_stage_data import * #各ステージのイベントリスト登録モジュールの読み込み
+from update.update_replay     import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み リプレイ記録再生の更新を行う関数(メソッド？）です
+from update.update_ship       import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み ゲーム開始時のイージーやベリーイージーでのクローの追加に使用する
 
 class update_init:
     def __init__(self):

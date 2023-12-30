@@ -1,5 +1,5 @@
-from const import *             #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
-from const_visualscene import * #Visualsceneクラスで使用する定数定義のよみこみ
+from const.const import *             #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
+from const.const_visualscene import * #Visualsceneクラスで使用する定数定義のよみこみ
 
 class define_data:
     def __init__(self):

@@ -7,10 +7,10 @@
 ###########################################################
 import math                     #三角関数などを使用したいのでインポートぉぉおお！
 import pyxel                    #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
-from const             import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
-from const_window      import * #主にウィンドウクラスで使用する定数定義
-from const_visualscene import * #主にビジュアルシーンクラスで使用する定数定義
-from func              import * #汎用性のある関数群のモジュールの読み込み
+from const.const             import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
+from const.const_window      import * #主にウィンドウクラスで使用する定数定義
+from const.const_visualscene import * #主にビジュアルシーンクラスで使用する定数定義
+from common.func              import * #汎用性のある関数群のモジュールの読み込み
 
 class graph:
     #IPLメッセージの表示#######################################

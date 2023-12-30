@@ -10,12 +10,12 @@ import math               #三角関数などを使用したいのでインポ�
 from random import random #random.random() と呼ぶと、0から1の範囲(1は含まない)のランダムな実数が返される(主にパーティクル系で使用します)
 import pyxel              #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
 
-from const       import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
-from const_window      import * #主にウィンドウクラスで使用する定数定義の読み込み
+from const.const       import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
+from const.const_window      import * #主にウィンドウクラスで使用する定数定義の読み込み
 
-from func         import * #汎用性のある関数群のモジュールの読み込み
-from update_sound import * #CONFIGでSEボリュームを変化させたときSEを鳴らすために使用します
-from update_btn   import * #カーソル移動時の方向パッド入力(キーリピート付き)を調べる時に使用します
+from common.func         import * #汎用性のある関数群のモジュールの読み込み
+from update.update_sound import * #CONFIGでSEボリュームを変化させたときSEを鳴らすために使用します
+from update.update_btn   import * #カーソル移動時の方向パッド入力(キーリピート付き)を調べる時に使用します
 
 class update_window:
     def __init__(self):
