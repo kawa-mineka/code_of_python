@@ -15,6 +15,9 @@ from update.update_system import * #リプレイファイルの読み書きで�
 class update_replay:
     #リプレイデータ・ファイルロード
     def data_file_load(self):
+        """
+        リプレイデータ・ファイルロード
+        """
         self.replay_data          = [[] for i in range(50)] #リプレイデータが入るリスト(50ステージ分)を初期化
         self.replay_control_data_size = []                  #ステージ毎のコントロールデータのサイズが入るリストを初期化
         slot_num = "slot_" + str(self.replay_slot_num)      #これからアクセスするスロットナンバーを取得
@@ -98,6 +101,9 @@ class update_replay:
 
     #リプレイデータ・ファイルセーブ
     def data_file_save(self):
+        """
+        リプレイデータ・ファイルセーブ
+        """
         self.replay_control_data_size = [] #まず最初にステージ毎のコントロールデータのサイズが入るリストを初期化
         slot_num = "slot_" + str(self.replay_slot_num) #これからアクセスするスロットナンバーを取得
         
@@ -195,6 +201,11 @@ class update_replay:
 
     #リプレイデータの記録   自動移動モードの時とステージクリアのブーストの時とリプレイ再生中の時はリプレイデータを記録しません
     def record_data(self):
+        """
+        リプレイデータの記録
+        
+        自動移動モードの時とステージクリアのブーストの時とリプレイ再生中の時はリプレイデータを記録しません
+        """
         if     self.move_mode     == MOVE_AUTO\
             or self.game_status   == Scene.STAGE_CLEAR_MOVE_MY_SHIP\
             or self.game_status   == Scene.STAGE_CLEAR_MY_SHIP_BOOST\
@@ -211,11 +222,17 @@ class update_replay:
 
     #リプレイデータ再生用のインデックス値を1増やしていく関数(リプレイフレームインデックス値の更新)
     def increace_frame_index(self):
+        """
+        リプレイデータ再生用のインデックス値を1増やしていく関数(リプレイフレームインデックス値の更新)
+        """
         if self.replay_frame_index < len(self.replay_data[self.replay_stage_num]) - 2:
             self.replay_frame_index += 2  #インデックス値がリストの大きさを超えていなかったら2(PADデータは2バイト長(16ビット長)なので次のデータに移行するには2増やす)増やして次のデータを取り込めるようにしてやります
 
     #リプレイデータ(ステータス関連)をバックアップする(プッシュする感じみたいな？？？)
     def push_status_data(self):
+        """
+        リプレイデータ(ステータス関連)をバックアップする(プッシュする感じみたいな？？？)
+        """
         self.backup_rnd_seed         = self.master_rnd_seed  #乱数の種(ゲームスタート時)をバックアップ
         self.backup_game_difficulty  = self.game_difficulty  #難易度をバックアップ
         self.backup_stage_number     = self.stage_number     #ステージ数をバックアップ
@@ -223,11 +240,19 @@ class update_replay:
 
     #リプレイデータ(リスト本体)をバックアップする(プッシュする感じみたいな？？？)
     def push_list_data(self):
+        """
+        リプレイデータ(リスト本体)をバックアップする(プッシュする感じみたいな？？？)
+        """
         self.replay_data      = self.replay_recording_data    #録画されたリプレイデータをデータリストを登録
 
     #リプレイデータ(ステータス関連)をリストアする(ポップする感じみたいな？？？)
     #未使用メソッド・・・・・・・orz
     def restore_data(self):
+        """
+        リプレイデータ(ステータス関連)をリストアする(ポップする感じみたいな？？？)
+        
+        未使用メソッド・・・・・・・orz
+        """
         self.master_rnd_seed   = self.backup_rnd_seed         #乱数の種(ゲームスタート時)をリストア
         self.game_difficulty   = self.backup_game_difficulty  #難易度をリストア
         self.stage_number      = self.backup_stage_number     #ステージ数をリストア
@@ -235,6 +260,9 @@ class update_replay:
 
     #リプレイデータ記録中に使用するステージスタート時のパラメータのセーブ
     def save_stage_data(self):
+        """
+        リプレイデータ記録中に使用するステージスタート時のパラメータのセーブ
+        """
         self.replay_mode_stage_data[self.replay_stage_num][ST_SCORE]                       = self.score          #リプレイファイルに記録されたスコアをセーブ
         self.replay_mode_stage_data[self.replay_stage_num][ST_MY_SHIELD]                   = self.my_shield      #リプレイファイルに記録されたシールド値をセーブ
         self.replay_mode_stage_data[self.replay_stage_num][ST_MY_SPEED]                    = self.my_speed       #リプレイファイルに記録された自機移動スピードをセーブ
@@ -283,6 +311,9 @@ class update_replay:
 
     #リプレイデータ記録中に使用するステージスタート時のパラメータのロード
     def load_stage_data(self):
+        """
+        リプレイデータ記録中に使用するステージスタート時のパラメータのロード
+        """
         self.score     = self.replay_mode_stage_data[self.replay_stage_num][ST_SCORE]                #リプレイファイルに記録されたスコアをロード
         self.my_shield = self.replay_mode_stage_data[self.replay_stage_num][ST_MY_SHIELD]            #リプレイファイルに記録されたシールド値をロード
         self.my_speed  = self.replay_mode_stage_data[self.replay_stage_num][ST_MY_SPEED]             #リプレイファイルに記録された自機移動スピードをロード

@@ -15,6 +15,9 @@ class update_ipl:
 
     #IPLの更新#######################################
     def ipl(self):
+        """
+        IPLの更新
+        """
         self.display_ipl_time -= 1    #IPLメッセージを表示する時間カウンターを1減らす
         if self.display_ipl_time <= 0: #カウンターが0以下になったら・・・
             self.game_status = Scene.TITLE_INIT #ゲームステータスを「SCENE_TITLE_INIT(タイトル表示に必要な変数を初期化)」にする

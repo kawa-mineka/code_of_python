@@ -1483,5 +1483,3 @@ class update_boss:
                         if self.boss[i].count3 >= self.boss[i].count4:
                             self.boss[i].count3 = 0
                             self.boss[i].attack_method = BOSS_ATTACK_HOMING_LASER
-
-

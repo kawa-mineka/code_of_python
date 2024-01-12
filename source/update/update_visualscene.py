@@ -346,15 +346,19 @@ class update_visualscene:
 
     #ストーリーボードの初期化
     def init_storyboard(self):
+        """
+        ストーリーボードの初期化
+        """
         self.storyboard_index = 0                                       #ストーリーボードのインデックス値を初期化
         self.storyboard_timecount = self.title_storyboard[self.storyboard_index][1] #一番初めの要素の総タイムカウントを読み出す
 
-
     #ストーリーボードの更新
     def storyboard(self):
+        """
+        ストーリーボードの更新
+        """
         if self.storyboard_timecount > 0: #もしタイムカウンタが0より大きいのならば
             self.storyboard_timecount -= 1 #タイムカウントをデクリメント
         
         if self.storyboard_timecount == 0: #タイムカウンタが0になったのならば
             self.storyboard_index += 1     #インデックス値をインクリメント
-        

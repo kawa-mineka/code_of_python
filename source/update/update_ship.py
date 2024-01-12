@@ -25,6 +25,9 @@ class update_ship:
     #自機の移動関連#################################################################################################################
     #自機の移動          キーボードとゲームパッド、または移動座標先を指定しての「自動移動モード」による自機の移動処理を行う関数です
     def ship(self):
+        """
+        自機の移動
+        """
         self.my_rolling_flag = 0  #自機ローリングフラグ(旋回フラグ)を0に初期化する
         self.my_moved_flag = 0    #自機が動いたかどうかのフラグを0に初期化する
         
@@ -129,6 +132,9 @@ class update_ship:
 
     #自機の座標を過去履歴リストに書き込んでいく関数（トレースクローの座標として使用します）
     def record_coordinate(self):
+        """
+        自機の座標を過去履歴リストに書き込んでいく関数（トレースクローの座標として使用します）
+        """
         if self.my_moved_flag == 1:#自機が移動したフラグがonならＸＹ座標を過去履歴リストに書き込み一番古い物を削除する
             new_traceclaw = Trace_coordinates()#new_traceclawにTrace_coordinatesクラスの型を登録
             new_traceclaw.update(self.my_x,self.my_y)#クラス登録された（クラス設計された？）new_traceclawに自機のＸＹ座標データを入れてインスタンスを作成する
@@ -142,6 +148,9 @@ class update_ship:
 
     #自機をはみ出さないようにする
     def clip(self):
+        """
+        自機をはみ出さないようにする
+        """
         if    self.game_status == Scene.STAGE_CLEAR_MY_SHIP_BOOST\
             or self.game_status == Scene.STAGE_CLEAR_FADE_OUT: #ステータスが「ブースト加速して去る」「ステージクリアフェードアウト」なら
             if self.my_x < 0:
@@ -169,6 +178,9 @@ class update_ship:
     #自機弾の移動関連###############################################################################################################
     #自機弾の更新
     def shot(self):
+        """
+        自機弾の更新
+        """
         shot_count = len(self.shots)#弾の数を数える
         for i in reversed(range (shot_count)):
             #弾の位置を更新！
@@ -192,6 +204,9 @@ class update_ship:
 
     #自機弾のはみだしチェック（はみ出て画面外に出てしまったら消去する)
     def clip_shot(self):
+        """
+        自機弾のはみだしチェック（はみ出て画面外に出てしまったら消去する)
+        """
         shot_count = len(self.shots)#弾の数を数える
         for i in reversed(range (shot_count)):
             if (-16 < self.shots[i].posx < WINDOW_W + 16 ) and (-16 <self.shots[i].posy < self.bg_height + 16):
@@ -202,6 +217,9 @@ class update_ship:
     #自機ミサイルの移動関連###############################################################################################################
     #自機ミサイルの更新（背景障害物との当たり判定も行っています）
     def missile(self):
+        """
+        自機ミサイルの更新（ついでに背景障害物との当たり判定も行っています）
+        """
         missile_count = len(self.missile)#ミサイルの総数を数える
         for i in reversed(range (missile_count)):
             if 0 <= self.missile[i].missile_type <= 3:#通常ミサイルの処理
@@ -360,6 +378,9 @@ class update_ship:
 
     #自機ミサイルのはみだしチェック（はみ出て画面外に出てしまったら消去する）
     def clip_missile(self):
+        """
+        自機ミサイルのはみだしチェック（はみ出て画面外に出てしまったら消去する）
+        """
         missile_count = len(self.missile)#ミサイルリストの総数を数える
         for i in reversed(range (missile_count)):
             if (-24 < self.missile[i].posx < WINDOW_W + 18 ) and (-18 <self.missile[i].posy < self.bg_height + 18):
@@ -370,6 +391,9 @@ class update_ship:
     #自機クローの移動関連###############################################################################################################
     #クローの更新
     def claw(self):
+        """
+        クローの更新
+        """
         if   self.claw_type == ROLLING_CLAW: #ローリングクローの時のみ実行
             #ひとつ前を回るクローとの回転角度の差の計算処理
             if self.claw_number   == 4:#クロー4機の時の処理
@@ -509,6 +533,9 @@ class update_ship:
 
     #クローショットの更新
     def claw_shot(self):
+        """
+        クローショットの更新
+        """
         claw_shot_count = len(self.claw_shot)#クローの弾の数を数える
         for i in reversed(range (claw_shot_count)):
             #クローの弾の位置を更新！
@@ -525,6 +552,9 @@ class update_ship:
 
     #クローの追加
     def append_claw(self):
+        """
+        クローの追加
+        """
         if   len(self.claw) == NO_CLAW:#1機目のクローの発生
             posx = self.my_x
             posy = self.my_y
@@ -567,11 +597,14 @@ class update_ship:
 
     #クローが弾を発射!!!!!!
     def fire_claw_shot(self):
-            if (pyxel.frame_count % 16) == 0: #16フレーム毎だったら クローショットを育成する
-                if len(self.claw_shot) < CLAW_RAPID_FIRE_NUMBER * (self.claw_number):#クローショットの要素数がクローの数x２以下なら弾を発射する
-                    #ここからクローが弾を発射する実処理
-                    claw_count = len(self.claw)#クローの数を数える
-                    for i in range(claw_count):
+        """
+        クローが弾を発射!!!!!!
+        """
+        if (pyxel.frame_count % 16) == 0: #16フレーム毎だったら クローショットを育成する
+            if len(self.claw_shot) < CLAW_RAPID_FIRE_NUMBER * (self.claw_number):#クローショットの要素数がクローの数x２以下なら弾を発射する
+                #ここからクローが弾を発射する実処理
+                claw_count = len(self.claw)#クローの数を数える
+                for i in range(claw_count):
                         if self.claw[i].status != 0:#ステータスが0の時は初期回転位置や初期固定位置に移動中なので弾は発射しない
                             new_claw_shot = Claw_shot()
                             if self.claw_type == REVERSE_CLAW:#クロータイプがリバースクローの時はクローショットの方向をreverse_claw_svx,reverse_claw_svyにして8方向弾にする
@@ -583,6 +616,9 @@ class update_ship:
 
     #フイックスクローの間隔を変化させる
     def change_fix_claw_interval(self):
+        """
+        フイックスクローの間隔を変化させる
+        """
         if (pyxel.frame_count % 8) == 0:
             self.fix_claw_magnification += 0.1      #ボタンが押されたら0.1刻みで増加させる
             if self.fix_claw_magnification >= 2:
@@ -590,6 +626,9 @@ class update_ship:
 
     #クロースタイルの変更
     def change_claw_style(self):
+        """
+        クロースタイルの変更
+        """
         self.claw_type += 1#クローの種類を変化させる
         if self.claw_type > REVERSE_CLAW: #もしtype3のリバースタイプを超えてしまったら0のローリングタイプにする
             self.claw_type = ROLLING_CLAW
@@ -600,6 +639,9 @@ class update_ship:
 
     #自機のスピードチェンジ!!!!
     def change_ship_speed(self):
+        """
+        自機のスピードチェンジ!!!!
+        """
         if self.my_speed == 1:
             self.my_speed = 1.5
         elif self.my_speed == 1.5:
@@ -609,6 +651,9 @@ class update_ship:
 
     #ショットを発射する!!!!!
     def fire_shot(self):
+        """
+        ショットを発射する!!!!!
+        """
         if self.shot_level == SHOT_LV7_WAVE_CUTTER_LV1:#ウェーブカッターLv1発射
             if len(self.shots) < self.shot_rapid_of_fire:
             #if self.shot_type_count(self.shot_level) < 3: 
@@ -817,6 +862,9 @@ class update_ship:
 
     #ミサイルを発射する!!!!!
     def fire_missile(self):
+        """
+        ミサイルを発射する!!!!!
+        """
         if (pyxel.frame_count % 10) == 0:
             func.count_missile_type(self,0,1,2,3)#ミサイルタイプ0,1,2,3の合計数を数える
             if self.type_check_quantity < (self.missile_level + 1) * self.missile_rapid_of_fire:  #初期段階では２発以上は出せないようにする
@@ -856,6 +904,9 @@ class update_ship:
 
     #サブウェポンを切り替える!!!!!
     def change_sub_weapon(self):
+        """
+        サブウェポンを切り替える!!!!!
+        """
         for __i in range(5):#5回繰り返す
             self.select_sub_weapon_id += 1#サブウェポンIDを増やして切り替えていく
             if self.select_sub_weapon_id >= 5:#idナンバーが5以上になったら
@@ -866,7 +917,12 @@ class update_ship:
 
     #自機が被弾しダメージを受け、シールドパワー減少、ダメージ音再生、ダメージを受けた後の無敵時間の設定
     def damage(self,damage):
-        self.my_shield -= damage     #シールドパワーをdamage分減少させる
+        """
+        自機が被弾しダメージを受け、シールドパワー減少、ダメージ音再生、ダメージを受けた後の無敵時間の設定
+        
+        damage=ダメージ値
+        """
+        self.my_shield -= damage                 #シールドパワーをdamage分減少させる
         self.damaged_flag              = FLAG_ON #自機がダメージを受けたかどうかのフラグをONにします(スコアスターの連続取得時の倍率上昇で使用するフラグです)
         self.stage_battle_damaged_flag = FLAG_ON #1ステージ用のダメージを受けたかどうかのフラグをONにします(ステージスタートした時にオフ、ダメージ受けたらオン)
         self.boss_battle_damaged_flag  = FLAG_ON #ボス戦用のダメージを受けたかどうかのフラグをONにします   (ステージスタートした時にオフ、ボス出現時にオフ、ダメージ受けたらオン)
@@ -885,6 +941,9 @@ class update_ship:
 
     #自機のシールドパワーがまだあるのかチェックする
     def check_shield(self):
+        """
+        自機のシールドパワーがまだあるのかチェックする
+        """
         if self.my_shield <= 0:
             self.game_status = Scene.EXPLOSION #シールドパワーが0以下になってしまったのでステータスを爆発中にする
             #自機の座標に爆発を生成する

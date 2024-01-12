@@ -162,6 +162,9 @@ class update_title:
 
     #タイトルメニューを表示した後,何かしらのボタンの入力待ち状態##########################
     def title_hit_any_btn(self):
+        """
+        タイトルメニューを表示した後,何かしらのボタンの入力待ち状態にしちゃう
+        """
         print (self.push_any_btn_flag)
         print(self.release_the_btn_flag)
         if self.push_any_btn_flag == FLAG_ON and self.release_the_btn_flag == FLAG_ON:

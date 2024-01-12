@@ -18,6 +18,9 @@ class update_system:
 
     #ユーザープロファイルのcode-of-pythonフォルダにシステムファイルがあるかどうか調べ、なかったらデフォルトのシステムデータをコピーする
     def check_exist_sysytem_file(self):
+        """
+        ユーザープロファイルのcode-of-pythonフォルダにシステムファイルがあるかどうか調べ、なかったらデフォルトのシステムデータをコピーする
+        """
         if os.path.isfile(self.user_profile + "/AppData/Local/code_of_python/system/system-data.pyxres") == False: #システムファイルが存在しないのなら
             if self.exe_mode == FLAG_OFF: #pyファイルで実行時
                 source_folder = self.program_directory                     + "/assets/system/master-system-data.pyxres"
@@ -35,6 +38,11 @@ class update_system:
 
     #システムデータからの数値読み込み
     def read_data_num(self,x,y,tm,digit):      #x,yは1の位の座標です,tmはtilemapの数値,digitは桁数です
+        """
+        システムデータからの数値読み込み
+        
+        x,yは1の位の座標です,tmはtilemapの数値,digitは桁数です
+        """
         global num   #なんやようわからんが・・・global命令で 「numはグローバル変数やで～」って宣言したら上手くいくようになった、なんでや・・・？？謎
         num = 0
         a = 1
@@ -45,6 +53,11 @@ class update_system:
 
     #システムデータへの数値書き込み
     def write_data_num(self,x,y,tm,digit,num): #x,yは1の位の座標です,tmはtilemapの数値,digitは桁数 numは書き込む数値です(整数を推奨)
+        """
+        システムデータへの数値書き込み
+        
+        x,yは1の位の座標です,tmはtilemapの数値,digitは桁数 numは書き込む数値です(整数を推奨)
+        """
         a = 10
         for i in range(digit):
             n = num % a * 10 // a
@@ -64,6 +77,9 @@ class update_system:
 
     #システムデータのロード
     def load_data(self):
+        """
+        システムデータのロード
+        """
         pyxel.load(self.user_profile + "/AppData/Local/code_of_python/system/system-data.pyxres") #システムデータを読み込む
         # pyxel.load(os.path.abspath("./assets/system/system-data.pyxres")) #システムデータを読み込む
         # pyxel.load("./assets/system/system-data.pyxres") #システムデータを読み込む
@@ -217,6 +233,9 @@ class update_system:
 
     #システムデータのセーブ
     def save_data(self):
+        """
+        システムデータのセーブ
+        """
         pyxel.load(self.user_profile + "/AppData/Local/code_of_python/system/system-data.pyxres") #システムデータにアクセスするためにローディングだけしてやります(グラフイック関連のアセットをローディングしている時がほとんどなので)
         # pyxel.load(os.path.abspath("./assets/system/system-data.pyxres")) #システムデータにアクセスするためにローディングだけしてやります(グラフイック関連のアセットをローディングしている時がほとんどなので)
         # pyxel.load("./assets/system/system-data.pyxres") #システムデータにアクセスするためにローディングだけしてやります(グラフイック関連のアセットをローディングしている時がほとんどなので)
