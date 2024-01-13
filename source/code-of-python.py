@@ -241,7 +241,7 @@ class App:
                                         ACT_SPEED_CHANGE,ACT_NO_ASSIGN,ACT_PAUSE,
                                         
                                         ACT_CHANGE_CLAW_STYLE,ACT_CHANGE_CLAW_INTERVAL]
-        #何も設定されてないパッドアサインリスト
+        #何も設定されてないパッドアサインリストを作製
         self.empty_pad_assign_list =    [ACT_NO_ASSIGN,ACT_NO_ASSIGN,
                                         ACT_NO_ASSIGN,ACT_NO_ASSIGN,
                                         
@@ -415,13 +415,13 @@ class App:
             update_title.title_init(self)         #タイトル関連の変数の初期化関数を呼び出す
         
         ################################ タイトルロゴの初回表示 ###################################################################
-        if self.game_status == Scene.TITLE_FIRST: #ゲームステータスが「TITLE_FIRST」の場合タイトルの更新を行う
-            update_title.title(self)              #タイトルの更新
-            update_obj.append_star(self)          #背景の星の追加＆発生育成関数呼び出し
-            update_obj.star(self)                 #背景の星の更新（移動）関数呼び出し
-            update_window.window(self)            #ウィンドウの更新（ウィンドウの開き閉じ画面外に消え去っていくとか）関数を呼び出し
-            update_window.clip_window(self)       #画面外にはみ出たウィンドウを消去する関数の呼び出し
-            update_window.active_window(self)     #現在アクティブ(最前面)になっているウィンドウのインデックス値(i)を求める関数の呼び出し
+        if self.game_status == Scene.TITLE_FIRST:       #ゲームステータスが「TITLE_FIRST」の場合タイトルの更新を行う
+            update_title.title(self)                    #タイトルの更新
+            update_obj.append_star(self)                #背景の星の追加＆発生育成関数呼び出し
+            update_obj.star(self)                       #背景の星の更新（移動）関数呼び出し
+            update_window.window(self)                  #ウィンドウの更新（ウィンドウの開き閉じ画面外に消え去っていくとか）関数を呼び出し
+            update_window.clip_window(self)             #画面外にはみ出たウィンドウを消去する関数の呼び出し
+            update_window.active_window(self)           #現在アクティブ(最前面)になっているウィンドウのインデックス値(i)を求める関数の呼び出し
             update_visualscene.visualscene(self)        #ビジュアルシーンの更新関数の呼び出し
         ################################ タイトルでのボタン入力待ち###################################################################
         if self.game_status == Scene.TITLE_HIT_ANY_BTN: #ゲームステータスが「TITLE_HIT_ANY_BTN」場合は何かしらのボタン入力待ちをする

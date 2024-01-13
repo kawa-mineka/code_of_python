@@ -493,7 +493,7 @@ class define_stage_data:
             [2000,EVENT_WARNING,500,120,240],
             [2300,EVENT_BOSS],
             [99999999],]
-    
+
     def bg_animation_list(self):   #各ステージのＢＧ書き換えによるアニメーションの為のデータリスト群の定義
         """
         各ステージのＢＧ書き換えによるアニメーションの為のデータリスト群の定義

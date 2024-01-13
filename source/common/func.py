@@ -8,7 +8,6 @@ from const.const import *  # 定数定義モジュールの読み込み(公式�
 from const.const_window import * #主にウィンドウクラスで使用する定数定義
 from define.define_class import * # クラス宣言モジュールの読み込み やっぱりimport *は不味いのかなぁ・・・よくわかんない
 
-
 class func:
     def __init__(self):
         None
@@ -2032,4 +2031,4 @@ class func:
         else:
             self.point_inside_triangle_flag = 0 #三角形の外側だった・・・・のでフラグをoff   
 
-    #自機を追尾してくる敵キャラ用のvx,vyの増分とdir（方向）を求める関数   まだ未完成
+    #自機を追尾してくる敵キャラ用のvx,vyの増分とdir（方向）を求める関数→まだ未完成→別に完成させなくてもいい関数な気がする・・・・・
