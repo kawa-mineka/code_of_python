@@ -158,7 +158,7 @@ class update_event:
         """
         マップスクロールによる敵の発生を行う
         """
-        if self.no_enemy_mode == 1: #敵が出ないモードがonだったら・・・
+        if self.no_enemy_mode == FLAG_ON: #敵が出ないモードがonだったら・・・
             return              #何もせずに帰ります・・・・・
         
         #今表示したマップに（「敵出現」情報）のキャラチップが含まれていたら敵を発生させる
@@ -279,6 +279,24 @@ class update_event:
                 new_enemy.update(EnemyName.ROLL_BLITZ,ID00,ENEMY_STATUS_MOVE_COORDINATE_INIT,ENEMY_ATTCK_ANY,    WINDOW_W,i * 8,0,0,     0,0,0,0,0,0,0,0,       0,0,0,0,0,0,0,0,0,0,    0,0,     0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0,    SIZE_8,SIZE_8,   0,1,   0,    HP01,  0,0,    E_SIZE_NORMAL,   0,0,0,    0,0,0,0,      E_NO_POW,   ID00    ,0,0,0,    0  ,0,0,0,    0,AERIAL_OBJ,  PT01,PT01,PT01,  PT01,PT01,PT01)
                 self.enemy.append(new_enemy)
                 func.delete_map_chip(self,self.bgx,i)#敵を出現させたら（「敵出現」情報）のキャラチップは不要なのでそこに（0=何もない空白）を書き込む
+
+    #マップスクロールによる建物の追加発生を行う
+    def building_born_map_scroll(self):
+        """
+        マップスクロールによる建物の追加発生を行う
+        """
+        if self.bg_append_building_flag == BG_APPEND_BUILDING_FLAG_OFF: #建物の追加発注モードがoffだったら・・・
+            return              #何もせずに帰ります・・・・・
+        
+        #ビル1を発生させる
+        if(pyxel.frame_count % 200) == 0:
+            num = 0
+            update_obj.append_building(self,num)
+        
+        #ビル2を発生させる
+        if(pyxel.frame_count % 180) == 0:
+            num = 1
+            update_obj.append_building(self,num)
 
     #アペンドイベントリクエスト(イベント追加依頼）による敵の発生
     def append_request(self):

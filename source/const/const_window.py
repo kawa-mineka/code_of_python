@@ -75,7 +75,7 @@ WINDOW_BG_NONE            = 3 #下地無し
 ORDINARY_SUPERPOSITION = 0 #そのまま普通に重ね合わせて表示
 BLACK_RECTANGLE_FILL   = 1 #「黒矩形塗りつぶし」した後、表示する
 
-#ウィンドウの表示プライオリティ(優先度) 行番号が小さいものほど前面に表示されます
+#ウィンドウの表示プライオリティ(優先度) 数値が小さいものほど前面に表示されます
 WINDOW_PRIORITY_TOP        = 0 #最前面
 WINDOW_PRIORITY_1          = 1 #1番目
 WINDOW_PRIORITY_2          = 2

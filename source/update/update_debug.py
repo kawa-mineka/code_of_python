@@ -334,8 +334,17 @@ class update_debug:
                 y = func.s_rndint(self,0,120+30)
                 
                 new_background_object = Background_object()
-                new_background_object.update(t, 160+10,y,  0,    1.009,1,0,0,0,0,0,0,   -3,-0.25,  0,0,   0,0,0,0,0,   0,0,0, 0,0,0,  0,0,0)
+                new_background_object.update(t, 160+10,y,  0,    1,1,0,0,0,0,0,0,   -3,-0.25,  0,0,   0,0,0,0,0,   0,0,0, 0,0,0,  0,0,0)
                 self.background_object.append(new_background_object)
+        
+        #建物オブジェクト１を発生させる                        KEY N
+        if(pyxel.frame_count % 6) == 0:
+            if pyxel.btn(pyxel.KEY_N):
+                num = 0
+                update_obj.append_building(self,num)
+                
+                num = 1
+                update_obj.append_building(self,num)
         
         #パワーアップアイテム類を発生させる                       KEY U I O
         if(pyxel.frame_count % 8) == 0:

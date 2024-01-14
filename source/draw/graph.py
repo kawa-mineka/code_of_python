@@ -673,6 +673,19 @@ class graph:
                 pyxel.blt(self.background_object[i].posx +3*8,self.background_object[i].posy +3*8,  IMG1, 112,240,    64,16,    pyxel.COLOR_NAVY) #雲大21の下部右描画
                 pyxel.blt(self.background_object[i].posx     ,self.background_object[i].posy +2*8,  IMG1,  96,232,    24,16,    pyxel.COLOR_NAVY) #雲大21の左のしっぽ描画
 
+    #建物オブジェクトの表示
+    def draw_building_object(self,priority):
+        """
+        建物オブジェクトの表示
+        """
+        building_count = len(self.building_object)
+        for i in reversed(range(building_count)):
+            if   self.building_object[i].priority == priority: #プライオリティ―ナンバーが一致する建物だけ描画する
+                tm = self.building_object[i].tm
+                u,v = self.building_object[i].u,self.building_object[i].v
+                w,h = self.building_object[i].width,self.building_object[i].height
+                pyxel.bltm(self.building_object[i].posx,self.building_object[i].posy,    tm,    u,v,   w,h,   pyxel.COLOR_PEACH) #ビル表示
+
     #ラスタースクロールの表示
     def draw_raster_scroll(self,priority):
         """

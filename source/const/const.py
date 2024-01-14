@@ -720,6 +720,51 @@ BG_OBJ_CLOUD19,BG_OBJ_CLOUD20,BG_OBJ_CLOUD21                                 = 1
 
 BG_OBJ_CLOUD22                                                               = 21              #雲特大22
 
+#背景建物の表示プライオリティ(優先度) 数値が小さいものほど前面に表示されます
+BUILDING_PRIORITY_0          = 0 #最前面
+BUILDING_PRIORITY_1          = 1 
+BUILDING_PRIORITY_2          = 2
+BUILDING_PRIORITY_3          = 3
+BUILDING_PRIORITY_4          = 4
+BUILDING_PRIORITY_5          = 5
+BUILDING_PRIORITY_6          = 6
+BUILDING_PRIORITY_7          = 7
+BUILDING_PRIORITY_8          = 8
+BUILDING_PRIORITY_9          = 9 #9番目
+#----------------------------------この面に自機、自機弾、敵、敵弾、ボスなどが表示される
+BUILDING_PRIORITY_10         = 10 #前ビル
+BUILDING_PRIORITY_11         = 11
+BUILDING_PRIORITY_12         = 12
+BUILDING_PRIORITY_13         = 13
+BUILDING_PRIORITY_14         = 14
+BUILDING_PRIORITY_15         = 15
+BUILDING_PRIORITY_16         = 16
+BUILDING_PRIORITY_17         = 17
+BUILDING_PRIORITY_18         = 18
+BUILDING_PRIORITY_19         = 19
+#----------------------------------------------------------------------------------------
+BUILDING_PRIORITY_20         = 20 #中ビル
+BUILDING_PRIORITY_21         = 21
+BUILDING_PRIORITY_22         = 22
+BUILDING_PRIORITY_23         = 23
+BUILDING_PRIORITY_24         = 24
+BUILDING_PRIORITY_25         = 25
+BUILDING_PRIORITY_26         = 26
+BUILDING_PRIORITY_27         = 27
+BUILDING_PRIORITY_28         = 28
+BUILDING_PRIORITY_29         = 29
+#---------------------------------------------------------------------------------------
+BUILDING_PRIORITY_30         = 30 #奥ビル
+BUILDING_PRIORITY_31         = 31
+BUILDING_PRIORITY_32         = 32
+BUILDING_PRIORITY_33         = 33
+BUILDING_PRIORITY_34         = 34
+BUILDING_PRIORITY_35         = 35
+BUILDING_PRIORITY_36         = 36
+BUILDING_PRIORITY_37         = 37
+BUILDING_PRIORITY_38         = 38
+BUILDING_PRIORITY_39         = 39
+
 #爆発パターンの種類
 EXPLOSION_NORMAL           =  0 #標準サイズ(8x8サイズ)の敵を倒したときの爆発パターン
 EXPLOSION_MIDDLE           =  1 #スクランブルハッチや重爆撃機系の敵を倒したときの中くらいの爆発パターン
@@ -961,6 +1006,9 @@ BG_ENEMY_NONE   =   0      #BGマップでは敵は出現させない
 BG_ENEMY_BONE1  =   1      #BGマップのマップチップを調べて敵を出現させる(その1)
 BG_ENEMY_BONE2  =   2      #BGマップのマップチップを調べて敵を出現させる(その2)
 
+#背景BGスクロールで建物の追加発注を行うかどうかのフラグ
+BG_APPEND_BUILDING_FLAG_OFF = 0 #マップスクロールでの建物の追加を行う
+BG_APPEND_BUILDING_FLAG_ON  = 1 #行わない
 
 
 # 敵キャラの名前(タイプナンバー)定数定義#################################### 敵の名称として連番で定数定義していましたが20231216より列挙型でautoを使用して自動で定数定義するようにしました(中に入る数字はどんな数値でも良い為です)

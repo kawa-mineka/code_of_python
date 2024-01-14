@@ -524,24 +524,25 @@ class App:
             update_collision.claw_shot_to_bg(self)    #クローの弾と背景との当たり判定関数を呼び出す
             #敵の弾関連の処理 ###################################################################################
             ####################################################################################################
-            update_enemy.shot(self)                   #敵の弾の更新（移動処理とか）＆自機と敵弾と自機との当たり判定の関数の呼び出し
-            update_enemy.clip_shot(self)              #敵の弾が画面からはみ出したら消去する関数の呼び出し
-            update_collision.enemy_shot_to_bg(self)   #敵の弾と背景との当たり判定を行う関数の呼び出し
+            update_enemy.shot(self)                       #敵の弾の更新（移動処理とか）＆自機と敵弾と自機との当たり判定の関数の呼び出し
+            update_enemy.clip_shot(self)                  #敵の弾が画面からはみ出したら消去する関数の呼び出し
+            update_collision.enemy_shot_to_bg(self)       #敵の弾と背景との当たり判定を行う関数の呼び出し
             #クロー関連の処理###########################################################################################################
             update_btn.delete_claw_btn(self)              #クローを消滅させるキーが押されたか調べる関数の呼び出し
             update_btn.change_fix_claw_interval_btn(self) #フイックスクロー間隔変化ボタンが押されたか調べる関数を呼び出す
             update_btn.change_claw_style_btn(self)        #クロースタイル変更ボタンが押されたか調べる関数を呼び出す    
             #イベントリスト関連の処理###############################################################################################################
-            update_event.list_execution(self)         #イベントリスト解析による敵の発生関数を呼び出す
-            update_event.enemy_born_map_scroll(self)  #マップスクロールによる敵の発生関数を呼び出す
-            update_event.append_request(self)         #アペンドイベントリクエストによる敵の追加発生関数を呼び出す（早回しなどの追加注文発生とかの処理）(イベント追加依頼）
+            update_event.list_execution(self)             #イベントリスト解析による敵の発生関数を呼び出す
+            update_event.enemy_born_map_scroll(self)      #マップスクロールによる敵の発生関数を呼び出す
+            update_event.building_born_map_scroll(self)   #マップスクロールによる建物の発生関数を呼び出す
+            update_event.append_request(self)             #アペンドイベントリクエストによる敵の追加発生関数を呼び出す（早回しなどの追加注文発生とかの処理）(イベント追加依頼）
             #敵関連の処理###############################################################################################################
-            update_enemy.enemy(self)                  #敵の更新（移動とか）関数を呼び出す
-            update_enemy.clip(self)                   #画面からはみ出た敵を消去する関数を呼び出し
+            update_enemy.enemy(self)                      #敵の更新（移動とか）関数を呼び出す
+            update_enemy.clip(self)                       #画面からはみ出た敵を消去する関数を呼び出し
             #ボス関連の処理#############################################################################################################
-            update_boss.boss(self)                    #ボスの更新移動とかを行う関数を呼び出す
+            update_boss.boss(self)                        #ボスの更新移動とかを行う関数を呼び出す
             if self.game_status == Scene.BOSS_APPEAR or self.game_status == Scene.BOSS_BATTLE:
-                self.boss_battle_time += 1          #状態遷移が「ボス出現中」と「ボスと戦闘中」の時だけボス戦闘時間をインクリメント
+                self.boss_battle_time += 1                #状態遷移が「ボス出現中」と「ボスと戦闘中」の時だけボス戦闘時間をインクリメント
             #パワーアップアイテム類の処理################################################################################################
             update_item.obtain_item(self)                    #パワーアップアイテム類の更新（移動とか）する関数を呼び出します
             update_collision.obtain_item_to_enemy_shot(self) #パワーアップアイテムと敵弾の当たり判定を行う関数を呼び出します
@@ -786,6 +787,7 @@ class App:
             update_obj.star(self)              #背景の星の更新（移動）関数呼び出し
             update_obj.particle(self)          #パーティクルの更新関数呼び出し
             update_obj.background_object(self) #背景オブジェクトの更新関数の呼び出し
+            update_obj.building_object(self)   #建物オブジェクトの更新関数の呼び出し
             update_obj.explosion(self)         #爆発パターンの更新関数呼び出し 
             #一時停止(pause)の処理###################################################################################################
             update_btn.pause_btn(self)         #ポーズボタンが押されたらポーズをかける関数を呼び出し
@@ -800,7 +802,7 @@ class App:
     ###########################################################
     ###########################################################
     ###########################################################
-    # ゲーム内での描画処理を行う            どろ～～☆彡          #
+    # ゲーム内での描画処理を行う            どろ～～☆彡       #
     ###########################################################
     ###########################################################
     ###########################################################
@@ -893,8 +895,10 @@ class App:
                 pyxel.bltm(-((self.scroll_count )     % 256),0  ,TM2,  0*8,208*8   + self.camera_offset_y // 2,  256*8, 1*8     ,pyxel.COLOR_BLACK) #下の方
             elif self.stage_number == STAGE_NIGHT_SKYSCRAPER:
                 # pyxel.bltm(-int(self.scroll_count %(256*8) -160) // 1,0,TM0,  0*8,48*8,  256*8,120*8,self.bg_transparent_color)
-                pyxel.bltm(-int(pyxel.frame_count % 256 * 8 - 160),0,TM0,  0*8,38*8,  256*8,120*8,self.bg_transparent_color)
-                # pyxel.frame_count 
+                
+                #MAPチップx座標(0~19)と(236~255)は同じパターンのマップチップを敷き詰めて背景ループスクロール時不自然にならないようにしてください(横幅20キャラ縦幅15キャラ分)
+                pyxel.bltm(-int(pyxel.frame_count % (256*8 - 160)),0,TM0,  0*8,48*8,  256*8,120*8,self.bg_transparent_color)
+                
             
             
             ####################背景表示
@@ -911,12 +915,42 @@ class App:
                         pyxel.bltm(-int(self.scroll_count % (256*8 - 160)),     -self.vertical_scroll_count,  TM1,    0*8,0*8,    256 * 8,256 * 8,    self.bg_transparent_color)
             elif self.stage_number == STAGE_VOLCANIC_BELT:
                 pyxel.bltm(-(self.scroll_count // 4) + 400,-self.camera_offset_y // 4,TM2,   0*8, 76*8, 256*8,120*8,    self.bg_transparent_color)
-            elif self.stage_number == STAGE_NIGHT_SKYSCRAPER:
-                # pyxel.bltm(-int(self.scroll_count %(256*8) -160) // 1,0,TM0,  0*8,48*8,  256*8,120*8,self.bg_transparent_color)
-                pyxel.bltm(-int(pyxel.frame_count % 256 * 6 - 160),0,TM0,  0*8,48*8,  256*8,120*8,self.bg_transparent_color)
-                # pyxel.frame_count
             
             graph.draw_background_object(self)               #背景オブジェクトの描画関数の呼び出し
+            
+            #建物の表示 奥ビル----------------------------------------------------------------------------
+            graph.draw_building_object(self,39)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,38)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,37)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,36)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,35)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,34)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,33)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,32)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,31)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,30)               #建物オブジェクトの描画関数の呼び出し
+            #建物の表示 中ビル------------------------------------------------------------------------------
+            graph.draw_building_object(self,29)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,28)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,27)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,26)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,25)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,24)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,23)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,22)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,21)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,20)               #建物オブジェクトの描画関数の呼び出し
+            #建物の表示 前ビル------------------------------------------------------------------------------
+            graph.draw_building_object(self,19)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,18)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,17)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,16)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,15)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,14)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,13)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,12)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,11)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,10)               #建物オブジェクトの描画関数の呼び出し
             
             graph.draw_enemy_shot(self,PRIORITY_BOSS_BACK)   #敵の弾を表示する関数を呼び出す(ボスキャラの真後ろ)---------------------------
             graph.draw_boss(self)                            #ボスを表示する関数を呼び出す
@@ -961,6 +995,7 @@ class App:
                 
             
             graph.draw_enemy_shot(self,PRIORITY_TOP)        #敵の弾を表示する関数を呼び出す (最前面)-------------------------------------
+        
         #自機、クロー、シールドの表示###############################################
         if     self.game_status == Scene.PLAY\
             or self.game_status == Scene.BOSS_APPEAR\
@@ -980,6 +1015,18 @@ class App:
             graph.draw_explosion(self,PRIORITY_FRONT)      #爆発パターン(前面)の表示
             graph.draw_explosion(self,PRIORITY_MORE_FRONT) #爆発パターン(さらに前面)の表示
             graph.draw_particle(self,PRIORITY_MORE_FRONT)  #パーティクルを表示する関数の呼び出し(パーティクルの中でも更に前面)
+            
+            #建物の表示 すべてのオブジェクトよりも前に表示される建物を表示----------------------------------------------------
+            graph.draw_building_object(self,9)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,8)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,7)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,6)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,5)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,4)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,3)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,2)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,1)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,0)               #建物オブジェクトの描画関数の呼び出し
         
         #フェードアウトスクリーンの表示###############################################
         if    self.game_status == Scene.GAME_OVER_FADE_OUT\
@@ -1034,11 +1081,11 @@ class App:
         # if self.game_status == Scene.TITLE_HIT_ANY_BTN:
         #     graph.draw_title_message(self)            #タイトルメッセージテキストの表示
         
-        #ゲームオーバー画像の表示##################################################
+        #ゲームオーバーダイアログの表示##################################################
         if     self.game_status == Scene.GAME_OVER\
             or self.game_status == Scene.GAME_OVER_FADE_OUT\
             or self.game_status == Scene.GAME_OVER_SHADOW_IN\
             or self.game_status == Scene.GAME_OVER_STOP\
             or self.game_status == Scene.RETURN_TITLE:
-            graph.draw_gameover_dialog(self)          #ゲームオーバー表示をする関数呼び出し
+            graph.draw_gameover_dialog(self)          #ゲームオーバーダイアログを表示をする関数呼び出し
 App()

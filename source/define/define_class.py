@@ -1431,6 +1431,62 @@ class Background_object:      #背景の物体(背景オブジェクト）クラ
         self.flag1,self.flag2,self.flag3    = flag1,flag2,flag3
         self.count1,self.count2,self.count3 = count1,count2,count3
         self.animation_number1,self.animation_number2,self.animation_number3 = animation_number1,animation_number2,animation_number3
+class Building_object:        #建物類(背景オブジェクト）クラスの設定 (ビルなどはスクロールスピードが違うオブジェクトを多重重ね合わせで立体感を出す)
+    def __init__(self):
+        self.building_type  = 0 #建物類の種類
+        self.posx,self.posy = 0,0 #x,y座標
+        self.size           = 0   #大きさ
+        self.ax,self.ay     = 0,0 #加速度
+        self.bx,self.by     = 0,0
+        self.cx,self.cy     = 0,0
+        self.dx,self.dy     = 0,0
+        self.vx,self.vy     = 0,0 #速度(ベクトル)
+        self.width          = 0   #横
+        self.height         = 0   #縦
+        self.tm             = 0   #タイルマップ番号の指定用
+        self.u,self.v       = 0,0 #タイルマップパターンの置かれている位置(u,v)の指定用
+        self.life           = 0   #生存時間
+        self.wait           = 0   #停止時間
+        self.color          = 0   #色
+        self.speed          = 0   #速度(倍率)
+        self.direction      = 0   #方向
+        self.flag1,self.flag2,self.flag3    = 0,0,0 #フラグ1~3
+        self.count1,self.count2,self.count3 = 0,0,0 #カウント1~3
+        self.animation_number1,self.animation_number2,self.animation_number3 = 0,0,0 #アニメーション番号1~3
+        self.priority = 0       #重ね合わせ優先度
+    def update(self,building_type,
+            posx,posy,
+            size,
+            ax,ay, bx,by, cx,cy, dx,dy, vx,vy,
+            width,height,
+            tm,u,v,
+            life,wait,color,speed,direction,
+            flag1,flag2,flag3,
+            count1,count2,count3,
+            animation_number1,animation_number2,animation_number3,
+            priority
+            ):
+        self.background_object_type = building_type
+        self.posx,self.posy = posx,posy
+        self.size          = size
+        self.ax,self.ay    = ax,ay
+        self.bx,self.by    = bx,by
+        self.cx,self.cy    = cx,cy
+        self.dx,self.dy    = dx,dy
+        self.vx,self.vy    = vx,vy
+        self.width         = width
+        self.height        = height
+        self.tm            = tm
+        self.u,self.v      = u,v
+        self.life          = life
+        self.wait          = wait
+        self.color         = color
+        self.speed         = speed
+        self.direction     = direction
+        self.flag1,self.flag2,self.flag3    = flag1,flag2,flag3
+        self.count1,self.count2,self.count3 = count1,count2,count3
+        self.animation_number1,self.animation_number2,self.animation_number3 = animation_number1,animation_number2,animation_number3
+        self.priority      = priority
 class Window:                 #メッセージ表示ウィンドウのクラスの設定
     def __init__(self):
         self.window_id = 0          #それぞれのウィンドウに与えられるIDです
