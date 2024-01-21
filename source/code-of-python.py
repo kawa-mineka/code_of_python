@@ -202,7 +202,10 @@ class App:
         # pyxel.screen_mode(scr = 2) #将来的にはスクリーンフィルターエフェクト(ブラウン管再現フィルターとかドットスムースフィルター)が変えられるかもしれないので記述しておくです
         
         pygame.mixer.init()  #pygameミキサー関連の初期化 pyxel.initよりも先にpygameをinitしないと上手く動かないみたい・・・
+        
         pyxel.init(WINDOW_W,WINDOW_H,title="CODE OF PYTHON",fps = 60,quit_key=pyxel.KEY_NONE) #ゲームウィンドウのタイトルバーの表示とfpsの設定(60fpsにした),キーボード入力による強制終了は無しとする pyxel.init(caption=)がpyxel.init(title=)に変更されたっぽい？？？
+        # pyxel.init(640,400,title="CODE OF PYTHON",fps = 60,quit_key=pyxel.KEY_NONE)   #デバッグ確認用高解像度用イニシャライズ
+        
         self.ship_equip_slot_list = [[0] * 6 for i in range(LOOK_AT_LOGO)]  #(横6,縦LOOK_AT_LOGO(15))までint(0)が入ったリストを作製し初期化します
         
         self.temp_my_ship_medal = [0] * 6 #(横6個分 int(0)が入ったメダルID一時退避保存用リストを初期化作製する(リプレイ再生前と後で一時退避的に使われます)
@@ -534,7 +537,7 @@ class App:
             #イベントリスト関連の処理###############################################################################################################
             update_event.list_execution(self)             #イベントリスト解析による敵の発生関数を呼び出す
             update_event.enemy_born_map_scroll(self)      #マップスクロールによる敵の発生関数を呼び出す
-            update_event.building_born_map_scroll(self)   #マップスクロールによる建物の発生関数を呼び出す
+            update_event.building_born_timeline_map(self) #タイムラインマップによる建物の追加発生を行う
             update_event.append_request(self)             #アペンドイベントリクエストによる敵の追加発生関数を呼び出す（早回しなどの追加注文発生とかの処理）(イベント追加依頼）
             #敵関連の処理###############################################################################################################
             update_enemy.enemy(self)                      #敵の更新（移動とか）関数を呼び出す
@@ -542,7 +545,7 @@ class App:
             #ボス関連の処理#############################################################################################################
             update_boss.boss(self)                        #ボスの更新移動とかを行う関数を呼び出す
             if self.game_status == Scene.BOSS_APPEAR or self.game_status == Scene.BOSS_BATTLE:
-                self.boss_battle_time += 1                #状態遷移が「ボス出現中」と「ボスと戦闘中」の時だけボス戦闘時間をインクリメント
+                self.boss_battle_time += 1                #状態遷移が「ボス出現中」と「ボスと戦闘中」の時だけボス戦闘時間を1増加させていきます
             #パワーアップアイテム類の処理################################################################################################
             update_item.obtain_item(self)                    #パワーアップアイテム類の更新（移動とか）する関数を呼び出します
             update_collision.obtain_item_to_enemy_shot(self) #パワーアップアイテムと敵弾の当たり判定を行う関数を呼び出します
@@ -898,8 +901,6 @@ class App:
                 
                 #MAPチップx座標(0~19)と(236~255)は同じパターンのマップチップを敷き詰めて背景ループスクロール時不自然にならないようにしてください(横幅20キャラ縦幅15キャラ分)
                 pyxel.bltm(-int(pyxel.frame_count % (256*8 - 160)),0,TM0,  0*8,48*8,  256*8,120*8,self.bg_transparent_color)
-                
-            
             
             ####################背景表示
             ###################pyxel.bltm(-(pyxel.frame_count // 8),0,0,((pyxel.frame_count / 2) - 160) ,0,160,120,0)最初はこれで上手くいかなかった・・・・なぜ？

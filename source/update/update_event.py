@@ -279,24 +279,56 @@ class update_event:
                 new_enemy.update(EnemyName.ROLL_BLITZ,ID00,ENEMY_STATUS_MOVE_COORDINATE_INIT,ENEMY_ATTCK_ANY,    WINDOW_W,i * 8,0,0,     0,0,0,0,0,0,0,0,       0,0,0,0,0,0,0,0,0,0,    0,0,     0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0,    SIZE_8,SIZE_8,   0,1,   0,    HP01,  0,0,    E_SIZE_NORMAL,   0,0,0,    0,0,0,0,      E_NO_POW,   ID00    ,0,0,0,    0  ,0,0,0,    0,AERIAL_OBJ,  PT01,PT01,PT01,  PT01,PT01,PT01)
                 self.enemy.append(new_enemy)
                 func.delete_map_chip(self,self.bgx,i)#敵を出現させたら（「敵出現」情報）のキャラチップは不要なのでそこに（0=何もない空白）を書き込む
-
-    #マップスクロールによる建物の追加発生を行う
-    def building_born_map_scroll(self):
+    
+    #タイムラインマップによる建物の追加発生を行う
+    def building_born_timeline_map(self):
         """
-        マップスクロールによる建物の追加発生を行う
+        タイムラインマップによる建物の追加発生を行う
         """
         if self.bg_append_building_flag == BG_APPEND_BUILDING_FLAG_OFF: #建物の追加発注モードがoffだったら・・・
-            return              #何もせずに帰ります・・・・・
+            return                                                      #何もせずに帰ります・・・・・
         
-        #ビル1を発生させる
-        if(pyxel.frame_count % 200) == 0:
-            num = 0
-            update_obj.append_building(self,num)
-        
-        #ビル2を発生させる
-        if(pyxel.frame_count % 180) == 0:
-            num = 1
-            update_obj.append_building(self,num)
+        if self.stage_number == STAGE_NIGHT_SKYSCRAPER: #夜間高層ビルステージの時は
+            mapx = int(self.scroll_count // 8)          #スクロールカウントからスクロールしたキャラ単位のx座標を求める
+            mapx = mapx % 256                           #横座標は２５６で割った余りとして扱いループに対応させる
+            if self.timeline_old_mapx == mapx:          #タイムラインマップのx座標が前回の位置と同じなら何も更新しないでリターンする
+                return        #何も更新せずリターンする
+            
+            mapy = 64
+            for i in range (4):
+                chrcode = func.get_chrcode_tilemap(self,TM0,mapx,mapy + i)          #タイムラインマップのマップチップのＢＧナンバーをゲットする(夜間高層ビルステージのタイムラインマップ座標1レイヤー目は(mapx,64*8)となる)
+                
+                #タイムラインマップのx座標位置を更新する
+                self.timeline_old_mapx = mapx
+                spd = 1 + 0.01 + i
+                priority = 3 - i
+                if chrcode == self.bg_append_building_null_chr: #キャラチップがそのステージのnullチップならば
+                    continue                                    #次のループへコンティニューする
+                elif chrcode == (8 / 8) * 32 + ( 0 / 8):        #キャラチップ「0」だったなら(マップチップ x0y8 公式は(y/8)*32 + (x/8)となります) 
+                    print("timeline ", end="")
+                    print(mapx, end="")
+                    print(" ", end="")
+                    print(mapy, end="")
+                    print("  chip", end="")
+                    print(chrcode,end="")
+                    print("  priority", end="")
+                    print(priority)
+                    
+                    #ビル１を発生させる
+                    num = 0
+                    update_obj.append_building(self,num,spd,priority)
+                elif chrcode == (8 / 8) * 32 + ( 8 / 8):        #キャラチップ「1」だったなら マップチップ座標(1,1)
+                    print("timeline ", end="")
+                    print(mapx, end="")
+                    print(" ", end="")
+                    print(mapy, end="")
+                    print("  chip ", end="")
+                    print(chrcode,end="")
+                    print("  priority ", end="")
+                    print(priority)
+                    #ビル2を発生させる
+                    num = 1
+                    update_obj.append_building(self,num,spd,priority)
 
     #アペンドイベントリクエスト(イベント追加依頼）による敵の発生
     def append_request(self):

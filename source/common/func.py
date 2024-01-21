@@ -1437,6 +1437,7 @@ class func:
         self.height_screen_num            = self.stage_data_list[self.stage_number - 1][14] #縦の画面数をリストを参照して取得、変数に代入する(MOUNTAIN_REGIONみたいなフリースクロールステージなどはダミー値の9999が入る)
         self.bg_enemy_bone_type           = self.stage_data_list[self.stage_number - 1][15] #背景BGスクロールで敵をどのように出現させるかどうかのバリエーション
         self.bg_append_building_flag      = self.stage_data_list[self.stage_number - 1][16] #背景BGスクロールで建物を追加出現させるかどうかのフラグ
+        self.bg_append_building_null_chr  = self.stage_data_list[self.stage_number - 1][17] #背景BGスクロールで建物を追加するタイムラインマップのnullチップキャラコード
 
     #ランクダウンさせる関数
     def rank_down(self):

@@ -271,64 +271,71 @@ class update_obj:
                 del self.building_object[i] #描画範囲外になったのでインスタンスを破棄する
 
     #建物の追加(背景オブジェクト)
-    def append_building(self,num):
+    def append_building(self,num,spd,priority):
         """
         建物の追加(背景オブジェクト)
+        
+        num = 建物ナンバー
+        spd = 横方向のスピード倍率 1で等倍です
+        priority = 描画優先度です    0 = 最前面(自機や敵、敵弾、ボスよりも手前に描画されます)
+                                    1 = 建物の表示 前ビルディング
+                                    2 = 建物の表示 中ビルディング
+                                    3 = 建物の表示 奥ビルディング
         """
         if   num == 0: #ビルタイプ0ならば
             t = 0
             y = 6*9
             new_building_object = Building_object() #ビルディング0番  最前面に表示される
-            new_building_object.update(t, 180+7,y-7,  0,    1,0, 0,0, 0,0, 0,0,  -1.5 - 0.01*9 ,1,  4*8,9*8,   TM0,2*8,94*8,   0,0,0,0,0,   FLAG_OFF,FLAG_OFF,FLAG_OFF, 0,0,0,  0,0,0,  BUILDING_PRIORITY_10)
+            new_building_object.update(t, 180+7,y-3,  0,    1,0, 0,0, 0,0, 0,0,  (-1.5 - 0.01*9) * spd  ,1,  4*8,9*8,   TM0,2*8,94*8,   0,0,0,0,0,   FLAG_OFF,FLAG_OFF,FLAG_OFF, 0,0,0,  0,0,0,  BUILDING_PRIORITY_0 + priority * 10)
             self.building_object.append(new_building_object)
             
             new_building_object = Building_object()
-            new_building_object.update(t, 180+6,y-6,  0,    1,0, 0,0, 0,0, 0,0,   -1.5 - 0.01*8 ,1,  4*8,9*8,  TM0,10*8,94*8,   0,0,0,0,0,   FLAG_OFF,FLAG_OFF,FLAG_OFF, 0,0,0,  0,0,0,  BUILDING_PRIORITY_11)
+            new_building_object.update(t, 180+6,y-2,  0,    1,0, 0,0, 0,0, 0,0,   (-1.5 - 0.01*8) * spd  ,1,  4*8,9*8,  TM0,10*8,94*8,   0,0,0,0,0,   FLAG_OFF,FLAG_OFF,FLAG_OFF, 0,0,0,  0,0,0,  BUILDING_PRIORITY_1 + priority * 10)
             self.building_object.append(new_building_object)
             
             new_building_object = Building_object()
-            new_building_object.update(t, 180+5,y-5,  0,    1,0, 0,0, 0,0, 0,0,   -1.5 - 0.01*6 ,1,  4*8,9*8,   TM0,10*8,94*8,   0,0,0,0,0,   FLAG_OFF,FLAG_OFF,FLAG_OFF, 0,0,0,  0,0,0,  BUILDING_PRIORITY_12)
+            new_building_object.update(t, 180+5,y-1,  0,    1,0, 0,0, 0,0, 0,0,   (-1.5 - 0.01*6)  * spd ,1,  4*8,9*8,   TM0,10*8,94*8,   0,0,0,0,0,   FLAG_OFF,FLAG_OFF,FLAG_OFF, 0,0,0,  0,0,0,  BUILDING_PRIORITY_2 + priority * 10)
             self.building_object.append(new_building_object)
             
             new_building_object = Building_object()
-            new_building_object.update(t, 180+4,y-4,  0,    1,0, 0,0, 0,0, 0,0,   -1.5 - 0.01*4 ,1,  4*8,9*8,   TM0,10*8,94*8,   0,0,0,0,0,   FLAG_OFF,FLAG_OFF,FLAG_OFF, 0,0,0,  0,0,0,  BUILDING_PRIORITY_13)
+            new_building_object.update(t, 180+4,y,  0,    1,0, 0,0, 0,0, 0,0,   (-1.5 - 0.01*4 ) * spd ,1,  4*8,9*8,   TM0,10*8,94*8,   0,0,0,0,0,   FLAG_OFF,FLAG_OFF,FLAG_OFF, 0,0,0,  0,0,0,  BUILDING_PRIORITY_3 + priority * 10)
             self.building_object.append(new_building_object)
             
             new_building_object = Building_object()
-            new_building_object.update(t, 180+3,y-3,  0,    1,0, 0,0, 0,0, 0,0,     -1.5 - 0.01*3 ,1,  4*8,9*8,  TM0,10*8,94*8,   0,0,0,0,0,   FLAG_OFF,FLAG_OFF,FLAG_OFF, 0,0,0,  0,0,0,  BUILDING_PRIORITY_14)
+            new_building_object.update(t, 180+3,y+1,  0,    1,0, 0,0, 0,0, 0,0,   ( -1.5 - 0.01*3) * spd ,1,  4*8,9*8,  TM0,10*8,94*8,   0,0,0,0,0,   FLAG_OFF,FLAG_OFF,FLAG_OFF, 0,0,0,  0,0,0,  BUILDING_PRIORITY_4 + priority * 10)
             self.building_object.append(new_building_object)
             
             new_building_object = Building_object()
-            new_building_object.update(t, 180+2,y-2,  0,    1,0, 0,0, 0,0, 0,0,   -1.5 - 0.01*2 ,1,  4*8,9*8,    TM0,10*8,94*8,   0,0,0,0,0,   FLAG_OFF,FLAG_OFF,FLAG_OFF, 0,0,0,  0,0,0,  BUILDING_PRIORITY_15)
+            new_building_object.update(t, 180+2,y+1,  0,    1,0, 0,0, 0,0, 0,0,   (-1.5 - 0.01*2) * spd ,1,  4*8,9*8,    TM0,10*8,94*8,   0,0,0,0,0,   FLAG_OFF,FLAG_OFF,FLAG_OFF, 0,0,0,  0,0,0,  BUILDING_PRIORITY_5 + priority * 10)
             self.building_object.append(new_building_object)
             
             new_building_object = Building_object()
-            new_building_object.update(t, 180+1,y-1,  0,    1,0, 0,0, 0,0, 0,0,   -1.5 - 0.01*1 ,1,  4*8,9*8,    TM0,10*8,94*8,   0,0,0,0,0,   FLAG_OFF,FLAG_OFF,FLAG_OFF, 0,0,0,  0,0,0,  BUILDING_PRIORITY_16)
+            new_building_object.update(t, 180+1,y+2,  0,    1,0, 0,0, 0,0, 0,0,   (-1.5 - 0.01*1) * spd ,1,  4*8,9*8,    TM0,10*8,94*8,   0,0,0,0,0,   FLAG_OFF,FLAG_OFF,FLAG_OFF, 0,0,0,  0,0,0,  BUILDING_PRIORITY_6 + priority * 10)
             self.building_object.append(new_building_object)
             
             new_building_object = Building_object()
-            new_building_object.update(t, 180-0,y,  0,    1,0, 0,0, 0,0, 0,0,   -1.5 - 0     ,1,  4*8,9*8,       TM0,10*8,94*8,   0,0,0,0,0,   FLAG_OFF,FLAG_OFF,FLAG_OFF, 0,0,0,  0,0,0,  BUILDING_PRIORITY_17)
+            new_building_object.update(t, 180-0,y+4,  0,    1,0, 0,0, 0,0, 0,0,      (-1.5 - 0    ) * spd ,1,  4*8,9*8,       TM0,10*8,94*8,   0,0,0,0,0,   FLAG_OFF,FLAG_OFF,FLAG_OFF, 0,0,0,  0,0,0,  BUILDING_PRIORITY_7 + priority * 10)
             self.building_object.append(new_building_object)
-        elif num == 1: #ビルタイプ1ならば (最前面パイプ)
+        elif num == 1:#ビルタイプ1ならば (最前面パイプ)
             t = 0
             y = 0
             new_building_object = Building_object() #ビルディング1番パイプ  最前面に表示される
-            new_building_object.update(t, 180,y,  0,    1,0, 0,0, 0,0, 0,0,  -2.0 - 0        ,1,  1*8,16*8,   TM0,16*8,88*8,   0,0,0,0,0,   FLAG_OFF,FLAG_OFF,FLAG_OFF, 0,0,0,  0,0,0,  BUILDING_PRIORITY_0)
+            new_building_object.update(t, 180,y,  0,    1,0, 0,0, 0,0, 0,0,        (-2.0 - 0  ) * spd       ,1,  1*8,16*8,   TM0,16*8,88*8,   0,0,0,0,0,   FLAG_OFF,FLAG_OFF,FLAG_OFF, 0,0,0,  0,0,0,  BUILDING_PRIORITY_0 + priority * 10)
             self.building_object.append(new_building_object)
             new_building_object = Building_object() #ビルディング1番パイプ
-            new_building_object.update(t, 180-4,y,  0,    1,0, 0,0, 0,0, 0,0,  -2.0 + 0.08      ,1,  1*8,16*8,   TM0,16*8,88*8,   0,0,0,0,0,   FLAG_OFF,FLAG_OFF,FLAG_OFF, 0,0,0,  0,0,0,  BUILDING_PRIORITY_1)
+            new_building_object.update(t, 180-4,y,  0,    1,0, 0,0, 0,0, 0,0, ( -2.0 + 0.08   ) * spd    ,1,  1*8,16*8,   TM0,16*8,88*8,   0,0,0,0,0,   FLAG_OFF,FLAG_OFF,FLAG_OFF, 0,0,0,     0,0,0,  BUILDING_PRIORITY_1 + priority * 10)
             self.building_object.append(new_building_object)
             new_building_object = Building_object() #ビルディング1番パイプ
-            new_building_object.update(t, 180-8,y,  0,    1,0, 0,0, 0,0, 0,0,  -2.0 + 0.12      ,1,  1*8,16*8,   TM0,17*8,88*8,   0,0,0,0,0,   FLAG_OFF,FLAG_OFF,FLAG_OFF, 0,0,0,  0,0,0,  BUILDING_PRIORITY_2)
+            new_building_object.update(t, 180-8,y,  0,    1,0, 0,0, 0,0, 0,0,  (-2.0 + 0.12   ) * spd    ,1,  1*8,16*8,   TM0,17*8,88*8,   0,0,0,0,0,   FLAG_OFF,FLAG_OFF,FLAG_OFF, 0,0,0,     0,0,0,  BUILDING_PRIORITY_2 + priority * 10)
             self.building_object.append(new_building_object)
             new_building_object = Building_object() #ビルディング1番パイプ  最前面に表示される
-            new_building_object.update(t, 180-10,y,  0,    1,0, 0,0, 0,0, 0,0,  -2.0 + 0.16      ,1,  1*8,16*8,   TM0,17*8,88*8,   0,0,0,0,0,   FLAG_OFF,FLAG_OFF,FLAG_OFF, 0,0,0,  0,0,0,  BUILDING_PRIORITY_3)
+            new_building_object.update(t, 180-10,y,  0,    1,0, 0,0, 0,0, 0,0,  (-2.0 + 0.16  ) * spd     ,1,  1*8,16*8,   TM0,17*8,88*8,   0,0,0,0,0,   FLAG_OFF,FLAG_OFF,FLAG_OFF, 0,0,0,    0,0,0,  BUILDING_PRIORITY_3 + priority * 10)
             self.building_object.append(new_building_object)
             new_building_object = Building_object() #ビルディング1番パイプ  最前面に表示される
-            new_building_object.update(t, 180-12,y,  0,    1,0, 0,0, 0,0, 0,0,  -2.0 + 0.20      ,1,  1*8,16*8,   TM0,18*8,88*8,   0,0,0,0,0,   FLAG_OFF,FLAG_OFF,FLAG_OFF, 0,0,0,  0,0,0,  BUILDING_PRIORITY_4)
+            new_building_object.update(t, 180-12,y,  0,    1,0, 0,0, 0,0, 0,0,  (-2.0 + 0.20   ) * spd    ,1,  1*8,16*8,   TM0,18*8,88*8,   0,0,0,0,0,   FLAG_OFF,FLAG_OFF,FLAG_OFF, 0,0,0,    0,0,0,  BUILDING_PRIORITY_4 + priority * 10)
             self.building_object.append(new_building_object)
             new_building_object = Building_object() #ビルディング1番パイプ  最前面に表示される
-            new_building_object.update(t, 180-15,y,  0,    1,0, 0,0, 0,0, 0,0,  -2.0 + 0.24      ,1,  1*8,16*8,   TM0,19*8,88*8,   0,0,0,0,0,   FLAG_OFF,FLAG_OFF,FLAG_OFF, 0,0,0,  0,0,0,  BUILDING_PRIORITY_5)
+            new_building_object.update(t, 180-15,y,  0,    1,0, 0,0, 0,0, 0,0,  (-2.0 + 0.24   ) * spd    ,1,  1*8,16*8,   TM0,19*8,88*8,   0,0,0,0,0,   FLAG_OFF,FLAG_OFF,FLAG_OFF, 0,0,0,     0,0,0,  BUILDING_PRIORITY_5 + priority * 10)
             self.building_object.append(new_building_object)
 
     #タイマーフレアの更新(接触した物質の時間経過を遅くするフレアエフェクト)

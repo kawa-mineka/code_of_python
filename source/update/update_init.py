@@ -34,6 +34,9 @@ class update_init:
         
         self.camera_offset_y = 0   #縦自由スクロールステージにおけるカメラ位置のオフセットy座標(この数値が背景BGに対してのオフセット値となります・この数値の分だけy座標がずれた分の背景を描画するって訳です)
         
+        self.timeline_now_mapx,self.timeline_now_mapy = 0,0 #タイムライン制御として使用する現在のマップチップが格納されているマップ座標         (0~255)の任意座標を初期化
+        self.timeline_old_mapx,self.timeline_old_mapy = 0,0 #タイムライン制御として使用する過去のマップチップが格納されているひとつ前のマップ座標(0~255)の任意座標を初期化
+        
         self.appeared_shot_pow = 0  #現時点で出現したショットパワーカプセルの数
         self.inc_shot_exp_medal = 0 #事前にショットアイテムを入手するタイプのメダルの合計(この値の分だけショットアイテムを取った状態でゲームスタートする)
         
@@ -210,6 +213,9 @@ class update_init:
         self.vertical_scroll_speed_set_value = 0  #縦スクロールスピードの設定値(変化量の分だけ1フレームごと増加減させ、この設定値までもって行く)
         self.vertical_scroll_speed_variation = 0  #縦スクロールスピードを変化させる時の差分(変化量)
         
+        # self.draw_building_flag              = FLAG_OFF #NIGHT_SKYSCRAPER 夜間超高層ビル地帯で背景の立体感のある建物を表示したかどうかのフラグ
+        #                                                 #タイムラインマップを調べて建物を表示する命令マップチップがあったら表示し、このフラグをONにする
+        
         self.display_cloud_flag    = DISP_OFF    #背景の流れる雲を表示するかどうかのフラグ(DISP_OFF=表示しない DISP_ON=表示する)
         
         self.cloud_append_interval = 6    #雲を追加させる間隔
@@ -242,6 +248,7 @@ class update_init:
         self.current_formation_id = 1   #現在の敵編隊のＩＤナンバー（0は単独機で編隊群は1からの数字が割り当てられます）
                                         #編隊が1編隊出現するごとにこの数字が1増えていく
                                         #例 1→2→3→4→5→6→7→8→9→10みたいな感じで増えていく
+        
         self.fast_forward_destruction_num = 0       #早回しの条件を満たすのに必要な「破壊するべき編隊の総数」が入ります
         self.fast_forward_destruction_count = 0     #破壊するべき編隊の総数」が1以上ならば編隊を破壊すると次の編隊の出現カウントがこの数値だけ少なくなり出現が早まります
         self.add_appear_flag = FLAG_OFF             #早回しの条件をすべて満たしたときに建つフラグです、このフラグが立った時、イベントリストに「EVENT_ADD_APPEAR_ENEMY」があったらそこで敵編隊を追加発生させます

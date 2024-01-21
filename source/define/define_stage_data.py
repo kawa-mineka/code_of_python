@@ -56,11 +56,16 @@ class define_stage_data:
         # ラスタスクロールのon/off,
         # BG背景(手前)を表示するかどうかのフラグ,BG背景(中央)を表示するかどうかのフラグ,BG背景(奥)を表示するかどうかのフラグ
         # 大気圏突入時の火花を表示するかどうかのフラグ
+        #
         # 背景マップチップを消去するときに使うチップ番号(主にマップスクロールで出来を出現させた後、その敵がいたマップチップをnull(消去)するときに使われます)]
+        #
         # 背景の縦幅(通常ステージは120で2画面分自由スクロールするステージなどは240になったりする)
         # 縦方向の画面数(8方向スクロールのMOUNTAIN REGIONなどはSINGLE_SCREENにしておく,ADVACE_BASEなどは縦スクロールしないのでSINGLE_SCREEN,VOLCANIC_BELTは縦に2画面分スクロールするのでDUAL_SCREENが入る)
         # BGスクロールで敵を出現させるかどうかの有無 (BG_ENEMY_NONE=出現させない,BG_ENEMY_BONE1&BG_ENEMY_BONE2=何らかの形で出現させる)
+        #
         # BGスクロールで建物を追加発注するかどうかのフラグ(BG_APPEND_BUILDING_FLAG_OFF=建物の追加はしない,BG_APPEND_BUILDING_FLAG_ON=建物の追加を行う)
+        # BGスクロールで建物を追加するときに使用するタイムラインマップのnullキャラチップナンバー(使わないときは0にしておいてね)
+        #
         self.stage_data_list = [
             [STAGE_MOUNTAIN_REGION,
             24,50,
@@ -73,7 +78,9 @@ class define_stage_data:
             WINDOW_H,
             SINGLE_SCREEN,
             BG_ENEMY_NONE,
-            BG_APPEND_BUILDING_FLAG_OFF],
+            
+            BG_APPEND_BUILDING_FLAG_OFF,
+            0],
             
             [STAGE_ADVANCE_BASE,
             24,50,
@@ -86,7 +93,9 @@ class define_stage_data:
             WINDOW_H,
             SINGLE_SCREEN,
             BG_ENEMY_BONE1,
-            BG_APPEND_BUILDING_FLAG_OFF],
+            
+            BG_APPEND_BUILDING_FLAG_OFF,
+            0],
             
             [STAGE_VOLCANIC_BELT,
             24,80,
@@ -99,7 +108,8 @@ class define_stage_data:
             (WINDOW_H * 2) + 8 * 3,
             DUAL_SCREEN,
             BG_ENEMY_BONE1,
-            BG_APPEND_BUILDING_FLAG_OFF],
+            BG_APPEND_BUILDING_FLAG_OFF,
+            0],
             
             [STAGE_NIGHT_SKYSCRAPER,
             24,50,
@@ -112,7 +122,9 @@ class define_stage_data:
             WINDOW_H,
             SINGLE_SCREEN,
             BG_ENEMY_BONE2,
-            BG_APPEND_BUILDING_FLAG_ON],
+            
+            BG_APPEND_BUILDING_FLAG_ON,
+            31],
             
             ]
 
