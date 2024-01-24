@@ -684,7 +684,7 @@ class graph:
                 tm = self.building_object[i].tm
                 u,v = self.building_object[i].u,self.building_object[i].v
                 w,h = self.building_object[i].width,self.building_object[i].height
-                pyxel.bltm(self.building_object[i].posx,self.building_object[i].posy,    tm,    u,v,   w,h,   pyxel.COLOR_PEACH) #ビル表示
+                pyxel.bltm(self.building_object[i].posx,self.building_object[i].posy + (WINDOW_H * 1.9 - self.vertical_scroll_count),    tm,    u,v,   w,h,   pyxel.COLOR_PEACH) #ビル表示
 
     #ラスタースクロールの表示
     def draw_raster_scroll(self,priority):

@@ -900,7 +900,8 @@ class App:
                 # pyxel.bltm(-int(self.scroll_count %(256*8) -160) // 1,0,TM0,  0*8,48*8,  256*8,120*8,self.bg_transparent_color)
                 
                 #MAPチップx座標(0~19)と(236~255)は同じパターンのマップチップを敷き詰めて背景ループスクロール時不自然にならないようにしてください(横幅20キャラ縦幅15キャラ分)
-                pyxel.bltm(-int(pyxel.frame_count % (256*8 - 160)),-self.vertical_scroll_count,TM0,  0*8,20*8,  256*8,120*8,self.bg_transparent_color)
+                # pyxel.bltm(-int(pyxel.frame_count % (256*8 - 160)),-self.vertical_scroll_count,TM0,  0*8,20*8,  256*8,120*8,self.bg_transparent_color)
+                pyxel.bltm(-int(self.scroll_count % (256*8 - 160)),-self.vertical_scroll_count,TM0,  0*8,20*8,  256*8,120*8,self.bg_transparent_color)
             
             ####################背景表示
             ###################pyxel.bltm(-(pyxel.frame_count // 8),0,0,((pyxel.frame_count / 2) - 160) ,0,160,120,0)最初はこれで上手くいかなかった・・・・なぜ？

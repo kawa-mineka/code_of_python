@@ -260,7 +260,7 @@ class update_obj:
                 self.building_object[i].posx += self.building_object[i].vx
                 self.building_object[i].posy += self.building_object[i].vy
                 
-            self.building_object[i].vx = self.building_object[i].vx * self.building_object[i].ax #速度に加速度を掛けあわせて加速もしくは減速させていく
+            self.building_object[i].vx = (self.building_object[i].vx * self.building_object[i].ax)  * self.side_scroll_speed #速度に加速度を掛けあわせて加速もしくは減速させていく横方向のスクロールスピードの比率に対して掛け合わせていく
             self.building_object[i].vy = self.building_object[i].vy * self.building_object[i].ay
             
             #オブジェクトのクリッピング処理
