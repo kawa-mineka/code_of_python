@@ -482,8 +482,8 @@ class define_stage_data:
             
             [ 200,EVENT_ENEMY,EnemyName.CIR_COIN    ,160, 10   ,6],
             
-            [ 300,EVENT_SCROLL,SCROLL_NUM_SET,   2 ,-0.01,         0.05   ,-0.008],
-            [ 460,EVENT_SCROLL,SCROLL_NUM_SET,   2.5 ,-0.01,         0.03   ,-0.007],
+            [ 300,EVENT_SCROLL,SCROLL_NUM_SET,   2.0,-0.01,         0.05   ,-0.008],
+            [ 460,EVENT_SCROLL,SCROLL_NUM_SET,   1.5 ,-0.007,         0.03   ,-0.007],
             
             
             
@@ -492,7 +492,7 @@ class define_stage_data:
             
             [ 700,EVENT_ENEMY,EnemyName.CIR_COIN    ,160, 20   ,6],
             
-            [ 870,EVENT_SCROLL,SCROLL_NUM_SET,    1,-0.01,            0   ,-0.002],
+            [ 870,EVENT_SCROLL,SCROLL_NUM_SET,    1,-0.005,            0   ,-0.002],
             
             [ 900,EVENT_ENEMY,EnemyName.CIR_COIN    ,160, 80   ,6],
             

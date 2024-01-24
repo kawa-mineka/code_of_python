@@ -257,10 +257,10 @@ class update_obj:
         building_object_count = len(self.building_object)
         for i in reversed(range(building_object_count)):#建物オブジェクトのリストの要素数を数えてその数の分だけループ処理する（delしちゃう可能性があるのでreversedするよ）
             if 0 <= self.building_object[i].building_type <= 21: #0~21の場合
-                self.building_object[i].posx += self.building_object[i].vx
+                self.building_object[i].posx += self.building_object[i].vx * self.side_scroll_speed
                 self.building_object[i].posy += self.building_object[i].vy
                 
-            self.building_object[i].vx = (self.building_object[i].vx * self.building_object[i].ax)  * self.side_scroll_speed #速度に加速度を掛けあわせて加速もしくは減速させていく横方向のスクロールスピードの比率に対して掛け合わせていく
+            self.building_object[i].vx = self.building_object[i].vx * self.building_object[i].ax
             self.building_object[i].vy = self.building_object[i].vy * self.building_object[i].ay
             
             #オブジェクトのクリッピング処理

@@ -300,7 +300,7 @@ class update_event:
                 
                 #タイムラインマップのx座標位置を更新する
                 self.timeline_old_mapx = mapx
-                spd = 1 + 0.01 + i
+                spd = 1 + (0.3 * i)
                 priority = 3 - i
                 if chrcode == self.bg_append_building_null_chr: #キャラチップがそのステージのnullチップならば
                     continue                                    #次のループへコンティニューする
