@@ -629,7 +629,7 @@ class App:
         
         #######ゲームオーバー後の処理#############################################################
         if self.game_status == Scene.GAME_OVER:              #「GAME_OVER」の時は
-            self.game_over_timer += 1                         # game_overタイマーを加算していき
+            self.game_over_timer += 1                         # ゲームオーバータイマーを加算していき
             if self.game_over_timer >= GAME_OVER_TIMER_LIMIT: #リミット値まで行ったのなら
                 if self.replay_status == REPLAY_RECORD:      #リプレイデータを記録している場合(ゲームプレイ中)は・・・・
                     self.number_of_play += 1                      #1ゲームプレイしたので「プレイ回数」を1増やす
@@ -859,6 +859,11 @@ class App:
             
             #一番奥の背景の表示
             if   self.stage_number == STAGE_MOUNTAIN_REGION:
+                ####################背景表示
+                ###################pyxel.bltm(-(pyxel.frame_count // 8),0,0,((pyxel.frame_count / 2) - 160) ,0,160,120,0)最初はこれで上手くいかなかった・・・・なぜ？
+                ###################奥の背景表示
+                ###################pyxel.bltm(-(pyxel.frame_count // 4) + 400,0,0,0,16,256,120,0)
+                
                 #雲ウェーブラスタースクロールの表示
                 graph.draw_raster_scroll(self,PRIORITY_SEND_TO_BACK)  #ラスタースクロール描画関数呼び出し 山より奥で描画します
                 
@@ -903,10 +908,6 @@ class App:
                 # pyxel.bltm(-int(pyxel.frame_count % (256*8 - 160)),-self.vertical_scroll_count,TM0,  0*8,20*8,  256*8,120*8,self.bg_transparent_color)
                 pyxel.bltm(-int(self.scroll_count % (256*8 - 160)),-self.vertical_scroll_count,TM0,  0*8,20*8,  256*8,120*8,self.bg_transparent_color)
             
-            ####################背景表示
-            ###################pyxel.bltm(-(pyxel.frame_count // 8),0,0,((pyxel.frame_count / 2) - 160) ,0,160,120,0)最初はこれで上手くいかなかった・・・・なぜ？
-            ###################奥の背景表示
-            ###################pyxel.bltm(-(pyxel.frame_count // 4) + 400,0,0,0,16,256,120,0)
             
             if   self.stage_number == STAGE_ADVANCE_BASE:
                 # pyxel.bltm(-(self.scroll_count // 4) + 400,0,0,0,224,256,120,self.bg_transparent_color)
@@ -921,38 +922,11 @@ class App:
             graph.draw_background_object(self)               #背景オブジェクトの描画関数の呼び出し
             
             #建物の表示 奥ビル----------------------------------------------------------------------------
-            graph.draw_building_object(self,39)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,38)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,37)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,36)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,35)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,34)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,33)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,32)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,31)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,30)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object_individual(self,3)    #建物オブジェクトの描画関数の呼び出し   奥ビル
             #建物の表示 中ビル------------------------------------------------------------------------------
-            graph.draw_building_object(self,29)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,28)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,27)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,26)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,25)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,24)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,23)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,22)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,21)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,20)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object_individual(self,2)    #建物オブジェクトの描画関数の呼び出し   中ビル
             #建物の表示 前ビル------------------------------------------------------------------------------
-            graph.draw_building_object(self,19)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,18)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,17)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,16)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,15)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,14)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,13)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,12)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,11)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,10)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object_individual(self,1)    #建物オブジェクトの描画関数の呼び出し   前ビル
             
             graph.draw_enemy_shot(self,PRIORITY_BOSS_BACK)   #敵の弾を表示する関数を呼び出す(ボスキャラの真後ろ)---------------------------
             graph.draw_boss(self)                            #ボスを表示する関数を呼び出す
@@ -1013,22 +987,14 @@ class App:
             graph.draw_claw(self)        #クローの表示
             graph.draw_ls_shield(self)   #Ｌ'sシールドシステムの表示
         
+        #「ゲームプレイ中」フラグが立っている時は爆発パターンを表示する################################
         if self.game_playing_flag == FLAG_ON:              #「ゲームプレイ中」の時は爆発パターン表示
             graph.draw_explosion(self,PRIORITY_FRONT)      #爆発パターン(前面)の表示
             graph.draw_explosion(self,PRIORITY_MORE_FRONT) #爆発パターン(さらに前面)の表示
             graph.draw_particle(self,PRIORITY_MORE_FRONT)  #パーティクルを表示する関数の呼び出し(パーティクルの中でも更に前面)
             
             #建物の表示 すべてのオブジェクトよりも前に表示される建物を表示----------------------------------------------------
-            graph.draw_building_object(self,9)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,8)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,7)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,6)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,5)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,4)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,3)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,2)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,1)               #建物オブジェクトの描画関数の呼び出し
-            graph.draw_building_object(self,0)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object_individual(self,0)               #建物オブジェクトの描画関数の呼び出し  めっちゃ手前ビル
         
         #フェードアウトスクリーンの表示###############################################
         if    self.game_status == Scene.GAME_OVER_FADE_OUT\

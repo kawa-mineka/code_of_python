@@ -581,7 +581,7 @@ class update_obj:
             #最前面のＢＧ書き換えアニメーション----------------------------------------
             update_obj.front_bg_rewrite_animation(self)         #最前面のBG書き換えアニメーションを行う関数の呼び出し
             
-        elif self.stage_number == STAGE_VOLCANIC_BELT:          #3面 VOLCANIC BELT
+        elif self.stage_number == STAGE_VOLCANIC_BELT:          #3面 VOLCANIC_BELT
             #最前面のＢＧ書き換えアニメーション----------------------------------------
             update_obj.front_bg_rewrite_animation(self)           #最前面のBG書き換えアニメーションを行う関数の呼び出し
             
@@ -602,6 +602,13 @@ class update_obj:
             self.bgy = 240                                        #bgy座標は240から始まって1画面分下方向へ書き換える
             func.clip_bgx_bgy(self)                               #bgx,bgyを規格範囲内に修正する
             update_obj.middle_bg_rewrite_animation(self)          #中面その２(ゲートブリッジの誘導灯アニメ)のBG書き換えアニメーションを行う関数の呼び出し
+            
+        elif self.stage_number == STAGE_NIGHT_SKYSCRAPER:       #4面 NIGHT_SKYSCRAPER
+            #メインスクロール面のビル屋上ライトアニメーション-----------------------------------------
+            self.bgx = int(self.scroll_count  // 8 % (256 - 20))      #bgxにビル屋上ライトを表示した時のBGマップの1番左端のx座標(0~255)が入る
+            self.bgy = 48                                        #bgy座標は248から始まって1画面分下方向へ書き換える
+            func.clip_bgx_bgy(self)                               #bgx,bgyを規格範囲内に修正する
+            update_obj.middle_bg_rewrite_animation(self)          #中面その２(ビル屋上ライトアニメ)のBG書き換えアニメーションを行う関数の呼び出し
 
     #座標直接指定によるBGチップデータの書き換えアニメーション (ダミーでござる)
     def dummy_bg_animation(self):

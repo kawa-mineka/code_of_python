@@ -686,6 +686,62 @@ class graph:
                 w,h = self.building_object[i].width,self.building_object[i].height
                 pyxel.bltm(self.building_object[i].posx,self.building_object[i].posy + (WINDOW_H - self.vertical_scroll_count) + 108,    tm,    u,v,   w,h,   pyxel.COLOR_PEACH) #ビル表示
 
+    #建物オブジェクトの表示(個別タイプ)
+    def draw_building_object_individual(self,invi):
+        """
+        建物オブジェクトの表示(個別タイプ)
+        
+        invi(0~3の整数)0は自機や敵、敵弾よりも最前面に表示される建物となります
+        """
+        if invi == 0:
+            #建物の表示 すべてのオブジェクトよりも前に表示される建物を表示----------------------------------------------------
+            graph.draw_building_object(self,9)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,8)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,7)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,6)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,5)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,4)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,3)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,2)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,1)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,0)               #建物オブジェクトの描画関数の呼び出し
+        elif invi == 1:
+            #建物の表示 前ビル------------------------------------------------------------------------------
+            graph.draw_building_object(self,19)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,18)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,17)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,16)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,15)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,14)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,13)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,12)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,11)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,10)               #建物オブジェクトの描画関数の呼び出し
+        elif invi == 2:
+            #建物の表示 中ビル------------------------------------------------------------------------------
+            graph.draw_building_object(self,29)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,28)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,27)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,26)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,25)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,24)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,23)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,22)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,21)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,20)               #建物オブジェクトの描画関数の呼び出し
+        elif invi == 3:
+            #建物の表示 奥ビル----------------------------------------------------------------------------
+            graph.draw_building_object(self,39)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,38)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,37)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,36)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,35)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,34)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,33)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,32)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,31)               #建物オブジェクトの描画関数の呼び出し
+            graph.draw_building_object(self,30)               #建物オブジェクトの描画関数の呼び出し
+
     #ラスタースクロールの表示
     def draw_raster_scroll(self,priority):
         """

@@ -1558,7 +1558,8 @@ class func:
         pyxel.text(x-8*3+4,y,total_minutes, int(col))
         pyxel.text(x-8    ,y,total_seconds, int(col))
 
-    #矩形Aと矩形Bの当たり判定 矩形A(rect_ax,rect_ay,rect_aw,rect_ah)(xはx座標,yはy座標,wは横幅width,hは縦幅heightを意味します)矩形B(rect_bx,rect_by,rect_bw,rect_bh) 衝突していたらTrueをしていなかったらFalseを返します
+    #矩形Aと矩形Bの当たり判定 矩形A(rect_ax,rect_ay,rect_aw,rect_ah)(xはx座標,yはy座標,wは横幅width,hは縦幅heightを意味します)矩形B(rect_bx,rect_by,rect_bw,rect_bh)
+    #衝突していたらTrueをしていなかったらFalseを返します
     def collision_rect_rect(self,rect_ax,rect_ay,rect_aw,rect_ah,rect_bx,rect_by,rect_bw,rect_bh):
         """
         矩形Aと矩形Bの当たり判定

@@ -114,7 +114,7 @@ class define_stage_data:
             [STAGE_NIGHT_SKYSCRAPER,
             24,50,
             256 ,TM0,
-            SCROLL_TYPE_TRIPLE_SCROLL_AND_STAR    ,STAR_SCROLL_ON,
+            SCROLL_TYPE_8WAY_SCROLL_AND_RASTER    ,STAR_SCROLL_ON,
             RASTER_SCROLL_OFF,
             FRONT_BG_DISP_ON,CENTER_BG_DISP_ON,BACK_BG_DISP_ON,
             SPARK_OFF,
@@ -566,7 +566,12 @@ class define_stage_data:
                             
                             [128,168, 1,1,     16,  5],
                             ]
-        
+        self.bg_animation_list_night_skyscraper = [
+                            [40,144, 1,1,     1,   5],
+                            [144,120,1,1,     1,   5],
+                            [160,128,1,1,     1,   5],
+                            ]
+
         #ゲーム全体でのBGアニメーションマスターリスト
         #フォーマット(このリストの書き方）は
         #self.bg_animation_master_list[
@@ -582,7 +587,7 @@ class define_stage_data:
             self.bg_animation_list_mountain_region,
             self.bg_animation_list_advance_base,
             self.bg_animation_list_volcaninc_belt,
-            self.bg_animation_list_dummy,
+            self.bg_animation_list_night_skyscraper,
             self.bg_animation_list_dummy,
             self.bg_animation_list_dummy,
             self.bg_animation_list_dummy,
