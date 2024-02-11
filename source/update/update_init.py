@@ -93,7 +93,7 @@ class update_init:
         
         self.claw = []                  #クローのリスト初期化 クローのリストはステージスタート時に初期化してしまうと次のステージに進んだときクローが消滅してしまうのでgame_start_initで初期化します
         self.redraw_star_area = []      #ゲームスタート時には背景の星を再描画するべきウィンドウは存在してはいけないのでリストを初期化します
-        print("star_redraw_window_num = " + str(len(self.redraw_star_area)))
+        # print("star_redraw_window_num = " + str(len(self.redraw_star_area)))
         
         #難易度に応じた数値をリストから取得する
         func.get_difficulty_data(self) #難易度データリストから数値を取り出す関数の呼び出し
@@ -292,11 +292,13 @@ class update_init:
         self.boss                       = [] #ボスのリスト
         self.boss_bg_move_point         = [] #ボスのBGマップを移動させる時に使用する座標を記録したリスト
         self.boss_bg_move_control_point = [] #ボスのBGマップを移動させる時に使用する座標(スプライン曲線用の制御点)を記録したリスト
+        self.bg_animation_cordinate     = [] #BG書き換えでアニメーションをさせる時の座標やパターン数、現在のシートナンバーなどが入るリスト
         self.raster_scroll              = [] #ラスタースクロール用のリスト
         
-        define_stage_data.event_list(self)        #各ステージのイベントリストの定義関数の呼び出し
-        define_stage_data.game_event_list(self)   #ゲーム全体のイベントリストの定義関数の呼び出し
-        define_stage_data.bg_animation_list(self) #各ステージのBG書き換えによるアニメーションの為のデータリスト定義関数の呼び出し
+        define_stage_data.event_list(self)                    #各ステージのイベントリストの定義関数の呼び出し
+        define_stage_data.game_event_list(self)               #ゲーム全体のイベントリストの定義関数の呼び出し
+        define_stage_data.bg_animation_list(self)             #各ステージのBG書き換えによるアニメーションの為のデータリスト定義関数の呼び出し
+        define_stage_data.bg_animation_pre_define_list(self)  #各ステージのＢＧ書き換えによるアニメーション(事前に書き換え指定のマップチップを探して座標を登録記録していくタイプ)の為のデータリスト群の定義
         
         if self.boss_test_mode == MENU_BOSS_MODE_ON:
             self.event_list = self.event_list_boss_test_mode #ボステストモードが1の時はボスだけが出現するイベントリストを登録します
@@ -308,7 +310,7 @@ class update_init:
         
         
         self.bg_animation_list = self.bg_animation_master_list[self.stage_number - 1]
-        print(self.bg_animation_list)
+        # print(self.bg_animation_list)
         # self.bg_animation_list = self.bg_animation_list_mountain_region    #とりあえずBGアニメーションパターンリストはmountain_regionのものをコピーして使用します
         # print(self.bg_animation_list)
         
@@ -319,7 +321,11 @@ class update_init:
             self.claw_coordinates.append(new_traceclaw)
         
         func.create_raster_scroll_data(self) #ラスタースクロール用のデータの初期化＆育成関数の呼び出し
-        func.search_boss_bg_move_point(self) #背景タイルマップ(BG)に埋め込まれたボス用移動座標を調べてリストに登録していく関数の呼び出し
+        update_bg.search_boss_bg_move_point(self) #背景タイルマップ(BG)に埋め込まれたボス用移動座標を調べてリストに登録していく関数の呼び出し
         
-        print(self.boss_bg_move_point)          #ボス用移動座標リストをコンソールに表示(デバッグ用)
-        print(self.boss_bg_move_control_point)  #ボス用移動制御点座標リストをコンソールに表示(デバッグ用)
+        # print(self.boss_bg_move_point)          #ボス用移動座標リストをコンソールに表示(デバッグ用)
+        # print(self.boss_bg_move_control_point)  #ボス用移動制御点座標リストをコンソールに表示(デバッグ用)
+        
+        update_bg.search_bg_animation_cordinate(self) #BG書き換えを使用して背景アニメーションをさせる時の座標をタイルマップから調べてリストに登録していく関数の呼び出し
+        print ("BGアニメーションマーカー座標値")
+        print(self.bg_animation_cordinate)       #BG書き換えを使用して背景アニメーションをさせる時の座標リストをコンソールに表示(デバッグ用)

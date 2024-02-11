@@ -340,9 +340,9 @@ class update_visualscene:
         self.visualscene.append(new_visualscene)       #ビジュアルシーンを作製する
         
         #作製したビジュアルシーンのスクロールテキスト部分だけコンソールに表示(デバッグ用)
-        visualscene_count = len(self.visualscene)
-        for i in range(visualscene_count):
-            print(self.visualscene[i].scroll_text)
+        # visualscene_count = len(self.visualscene)
+        # for i in range(visualscene_count):
+        #     print(self.visualscene[i].scroll_text)
 
     #ストーリーボードの初期化
     def init_storyboard(self):

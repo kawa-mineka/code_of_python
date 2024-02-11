@@ -12,6 +12,7 @@ class func:
     def __init__(self):
         None
 
+    #!##########################################################################################フォント関連のメソッド
     #漢字フォントデータの読み込み
     def load_kanji_font_data(self):
         """
@@ -24,60 +25,60 @@ class func:
         
         for y in range(256):  #左端A列のk8x12s_jisx0208___001a.pngを読みだしてフォントデータリストに書き込んでいきます 書き込みオフセット値は(0,0)
             for x in range(256):
-                col = pyxel.image(0).pget(x,y)
+                col = pyxel.images[0].pget(x,y)
                 self.kanji_fonts[y+0][x+0] = col #ぐへぇ最初, self.kanji_fonts[x][y] = colってやってた・・リストの最初の[]はy軸になるんだよね・考えてみればそうだったｗ 嵌りどころだわ～～～～
         for y in range(256):  #左端A列のk8x12s_jisx0208___002a.pngを読みだしてフォントデータリストに書き込んでいきます 書き込みオフセット値は(0,256)
             for x in range(256):
-                col = pyxel.image(1).pget(x,y)
+                col = pyxel.images[1].pget(x,y)
                 self.kanji_fonts[y+256][x+0] = col
         for y in range(256):  #左端A列のk8x12s_jisx0208___003a.pngを読みだしてフォントデータリストに書き込んでいきます 書き込みオフセット値は(0,512)
             for x in range(256):
-                col = pyxel.image(2).pget(x,y)
+                col = pyxel.images[2].pget(x,y)
                 self.kanji_fonts[y+512][x+0] = col
         
         pyxel.load(os.path.abspath("./assets/fonts/misaki_font_k8x12s_002.pyxres")) #漢字フォントデータ(その2)を読み込みます
         # pyxel.load("./assets/fonts/misaki_font_k8x12s_002.pyxres") #漢字フォントデータ(その2)を読み込みます
         for y in range(256):  #左端A列の  k8x12s_jisx0208___004a.pngを読みだしてフォントデータリストに書き込んでいきます 書き込みオフセット値は(0,768)
             for x in range(256):
-                col = pyxel.image(0).pget(x,y)
+                col = pyxel.images[0].pget(x,y)
                 self.kanji_fonts[y+768][x+0] = col
         for y in range(256):  #真ん中B列のk8x12s_jisx0208___001b.pngを読みだしてフォントデータリストに書き込んでいきます 書き込みオフセット値は(256,0)
             for x in range(256):
-                col = pyxel.image(1).pget(x,y)
+                col = pyxel.images[1].pget(x,y)
                 self.kanji_fonts[y+0][x+256] = col
         for y in range(256):  #真ん中B列のk8x12s_jisx0208___002b.pngを読みだしてフォントデータリストに書き込んでいきます 書き込みオフセット値は(256,256)
             for x in range(256):
-                col = pyxel.image(2).pget(x,y)
+                col = pyxel.images[2].pget(x,y)
                 self.kanji_fonts[y+256][x+256] = col
         
         pyxel.load(os.path.abspath("./assets/fonts/misaki_font_k8x12s_003.pyxres")) #漢字フォントデータ(その3)を読み込みます
         # pyxel.load("./assets/fonts/misaki_font_k8x12s_003.pyxres") #漢字フォントデータ(その3)を読み込みます
         for y in range(256):  #真ん中B列のk8x12s_jisx0208___003b.pngを読みだしてフォントデータリストに書き込んでいきます 書き込みオフセット値は(256,512)
             for x in range(256):
-                col = pyxel.image(0).pget(x,y)
+                col = pyxel.images[0].pget(x,y)
                 self.kanji_fonts[y+512][x+256] = col
         for y in range(256):  #真ん中B列のk8x12s_jisx0208___004b.pngを読みだしてフォントデータリストに書き込んでいきます 書き込みオフセット値は(256,768)
             for x in range(256):
-                col = pyxel.image(1).pget(x,y)
+                col = pyxel.images[1].pget(x,y)
                 self.kanji_fonts[y+768][x+256] = col
         for y in range(256):  #右端C列の  k8x12s_jisx0208___001c.pngを読みだしてフォントデータリストに書き込んでいきます 書き込みオフセット値は(512,0)
             for x in range(752-512):
-                col = pyxel.image(2).pget(x,y)
+                col = pyxel.images[2].pget(x,y)
                 self.kanji_fonts[y+0][x+512] = col
         
         pyxel.load(os.path.abspath("./assets/fonts/misaki_font_k8x12s_004.pyxres")) #漢字フォントデータ(その4)を読み込みます
         # pyxel.load("./assets/fonts/misaki_font_k8x12s_004.pyxres") #漢字フォントデータ(その4)を読み込みます
         for y in range(256):  #真ん中B列のk8x12s_jisx0208___002c.pngを読みだしてフォントデータリストに書き込んでいきます 書き込みオフセット値は(512,256)
             for x in range(752-512):
-                col = pyxel.image(0).pget(x,y)
+                col = pyxel.images[0].pget(x,y)
                 self.kanji_fonts[y+256][x+512] = col
         for y in range(256):  #真ん中B列のk8x12s_jisx0208___003c.pngを読みだしてフォントデータリストに書き込んでいきます 書き込みオフセット値は(512,512)
             for x in range(752-512):
-                col = pyxel.image(1).pget(x,y)
+                col = pyxel.images[1].pget(x,y)
                 self.kanji_fonts[y+512][x+512] = col
         for y in range(256):  #右端C列の  k8x12s_jisx0208___004c.pngを読みだしてフォントデータリストに書き込んでいきます 書き込みオフセット値は(512,768)
             for x in range(752-512):
-                col = pyxel.image(2).pget(x,y)
+                col = pyxel.images[2].pget(x,y)
                 self.kanji_fonts[y+768][x+512] = col
 
     #漢字テキストの表示
@@ -229,35 +230,9 @@ class func:
             else:
                 self.attrib_line_col[i] = [right_col,left_col] #奇数ラインの場合
         
-        print(self.attrib_line_col) #デバッグ用にコンソール表示
+        # print(self.attrib_line_col) #デバッグ用にコンソール表示
 
-    #タイルマップの座標位置からキャラチップのアスキーコードを取得する
-    def get_chrcode_tilemap(self,tm,x,y):         #tmはtilemapの数値,x,yは読み出す座標位置
-        """
-        タイルマップの座標位置からキャラチップのアスキーコードを取得する
-        
-        tmはtilemapの数値\\
-        x,yは読み出す座標位置
-        """
-        global num   #なんやようわからんが・・・global命令で 「numはグローバル変数やで～」って宣言したら上手くいくようになった、なんでや・・・？？謎
-        num = 0
-        tile_x,tile_y = pyxel.tilemap(tm).pget(x,y) #タイルマップtm 座標(x,y)に格納されているマップチップを調べ、そのマップチップが格納されている座標を取得
-        num = tile_y * 32 + tile_x
-        return(num)
-
-    #タイルマップの座標位置へキャラチップのアスキーコードをタプル座標形式に変換したものをセットする(置く)
-    def set_chrcode_tilemap(self,tm,x,y,num):         #tmはtilemapの数値,x,yはセット（置く）座標位置
-        """
-        タイルマップの座標位置へキャラチップのアスキーコードをタプル座標形式に変換したものをセットする
-        
-        tmはtilemapの数値\\
-        x,yはセットする座標
-        """
-        tile_x = num % 32   #置く場所のx座標は 32で割った余り
-        tile_y = num // 32  #置く場所のy座標は 32での切り捨て除算
-        # pyxel.tilemap(tm).pset(x,y,(tile_x,tile_y)) pyxel 2.0.0以降はあんまり使わない方が良いらしい？
-        pyxel.tilemaps[tm].pset(x,y,(tile_x,tile_y)) #pyxel 2.0.0以降はこういう風にするべきッポイ？？？？
-
+    #!######################################################################################コントロールパッド関連のメソッド
     #パッドのボタンが押されたかどうか調べる関数定義 押されていたらTrue 押されていなかったFalseを返します
     def push_pad_btn(self,action_id):  #action_idはそれぞれのボタンアクションに割り当てられたIDです (例)ACT_SHOTは1,ACT_MISSILEは2,ACT_SHOT_AND_SUB_WEAPONは3などなど・・・
         """
@@ -395,6 +370,7 @@ class func:
                         return (False)
         return (False)
 
+    #!#########################################################################################自機＆自機弾関連のメソッド
     #自機との距離を求める関数定義
     def to_my_ship_distance(self,x,y):
         """
@@ -407,6 +383,35 @@ class func:
         distance = math.sqrt(dx * dx + dy * dy)
         return(distance)   #最初この行を return(self,distance)って記述しててエラーが出て、どうやったら良いのかわかんなかった・・・この場合はタプルになるらしい！？(良く判って無いｗ)
 
+    #自機ショットの経験値を調べ可能な場合レベルアップをさせる関数
+    def level_up_my_shot(self):
+        """
+        自機ショットの経験値を調べ可能な場合レベルアップをさせる
+        """
+        if self.shot_exp > SHOT_EXP_MAXIMUM:  #自機ショットの経験値は最大経験値を超えないように補正してやります
+            self.shot_exp = SHOT_EXP_MAXIMUM
+        if self.shot_exp < 0:              #自機ショットの経験値は0より小さくならないよう補正します
+            self.shot_exp = 0             #経験値がマイナスになることは無いと思うけどエナジードレインする敵攻撃とかあったらそうなりそう
+        
+        self.shot_level            = self.shot_table_list[self.shot_exp][0] #テーブルリストを参照して経験値に対応したショットレベルを代入する
+        self.shot_speed_magnification = self.shot_table_list[self.shot_exp][1] #テーブルリストを参照して経験値に対応したショットスピード倍率を代入する
+        self.shot_rapid_of_fire      = self.shot_table_list[self.shot_exp][2] #テーブルリストを参照して経験値に対応したショット連射数を代入する
+
+    #自機ミサイルの経験値を調べ可能な場合レベルアップをさせる関数
+    def level_up_my_missile(self):
+        """
+        自機ミサイルの経験値を調べ可能な場合レベルアップをさせる
+        """
+        if self.missile_exp > MISSILE_EXP_MAXIMUM:  #自機ミサイルの経験値は最大経験値を超えないように補正してやります
+            self.missile_exp = MISSILE_EXP_MAXIMUM
+        if self.missile_exp < 0:              #自機ミサイルの経験値は0より小さくならないよう補正します
+            self.missile_exp = 0             #経験値がマイナスになることは無いと思うけどエナジードレインする敵攻撃とかあったらそうなりそう
+        
+        self.missile_level            = self.missile_table_list[self.missile_exp][0] #テーブルリストを参照して経験値に対応したミサイルレベルを代入する
+        self.missile_speed_magnification = self.missile_table_list[self.missile_exp][1] #テーブルリストを参照して経験値に対応したミサイルスピード倍率を代入する
+        self.missile_rapid_of_fire      = self.missile_table_list[self.missile_exp][2] #テーブルリストを参照して経験値に対応したミサイル連射数を代入する
+
+    #!##################################################################################敵弾(エネミーショット)関連のメソッド
     #狙い撃ち弾を射出する関数定義 
     def enemy_aim_bullet(self,ex,ey,div_type,div_count,div_num,stop_count,accel):
         """
@@ -736,225 +741,6 @@ class func:
                 self.search_homing_missile_flag = 1 #狙い撃つ敵を発見したのでフラグを立てる
             
         return()
-
-    #背景(BGタイルマップのキャラチップ)を取得する
-    def get_bg_chip(self,x,y,bg_chip):
-        """
-        背景(BGタイルマップのキャラチップ)を取得する
-        
-        x,y=座標値(x=0~160)(y=0~120)\\
-        bg_chip=キャラチップのアスキーコード
-        """
-        self.bgx = (((self.scroll_count // 8) -256) // 2) + x // 8
-        #x座標を8で割った切り捨て値がBGマップでのx座標となる
-        #(self.scroll_count // 8) -256) // 2)      この数値がスクロールした分x座標オフセット値となる
-        
-        self.bgy = (y // 8)
-        #Y座標を8で割った切り捨て数値がBGマップでのy座標となる
-        #bgxがMAPの外に存在するときは強制的にbgxを0にしちゃう(マイナスの値や256以上だとエラーになるため)
-        if  0 > self.bgx:
-            self.bgx = 0
-        if self.bgx > 255:
-            self.bgx = 0
-        #bgyがMAPの外に存在するときは強制的にbgyを一番上の座標か一番下の座標にしちゃう(マイナスの値や15より大きいと（まぁ他の面のマップデータにアクセスするのでエラーにはなりませんが・・・）だとエラーになるため)
-        if self.bgy < 0:
-            self.bgy = 0
-        if self.bgy > 255:
-            self.bgy = 255
-        
-        if self.stage_loop == 2:
-            self.bgy += 16 * self.height_screen_num #縦1置画面分のbgy値は16なので周回数を考慮して縦画面数分掛けたものを代入する
-        elif self.stage_loop == 3:
-            self.bgy += 32 * self.height_screen_num #縦1置画面分のbgy値は16なので周回数を考慮して縦画面数分掛けたものを代入する
-        self.bg_chip = func.get_chrcode_tilemap(self,self.reference_tilemap,self.bgx,self.bgy)
-        return(self,x,y,bg_chip)
-
-    #背景(BGタイルマップのキャラチップ)を取得し、更に障害物かどうかを判別する
-    def check_bg_collision(self,x,y,bg_chip,collision_flag):
-        """
-        背景(BGタイルマップのキャラチップ)を取得し、更に障害物かどうかを判別する
-        
-        x,y=座標値(x=0~160)(y=0~120)\\
-        bg_chip=キャラチップのアスキーコード\\
-        collision_flag=コリジョンフラグ\\
-        
-        帰り値として
-        bg_chip=キャラチップのアスキーコード\\
-        collision_flag =(0=当たってない 1=接触しちゃった！)が戻ってくる
-        """
-        self.collision_flag = 0#コリジョンフラグ（障害物と接触したかどうかのフラグ）を初期化 (0=当たってない 1=接触しちゃった！)
-        
-        self.bgy = y // 8#bgy座標はy座標を8で割った切り捨て値としてその位置にあるＢＧ（バックグラウンド（背景チップ））をチェックする
-        self.bgx = (((self.scroll_count // 8) -256) // 2) + x // 8
-        #(self.scroll_count // 8) -256) // 2)=x=0      現在表示されている画面のＸ座標値0がＢＧマップのこの値と同じになる
-        #bgxがMAPの外に存在するときは強制的にbgxを0にしちゃう(マイナスの値や256以上だとエラーになるため)
-        if  0 > self.bgx:
-            self.bgx = 0
-        if self.bgx > 255:
-            self.bgx = 0
-        
-        #bgyがMAPの外に存在するときは強制的にbgyを一番上の座標か一番下の座標にしちゃう(マイナスの値や15より大きいと（まぁ他の面のマップデータにアクセスするのでエラーにはなりませんが・・・）だとエラーになるため)
-        if  0 > self.bgy:
-            self.bgy = 0
-        if self.bgy > 255:
-            self.bgy = 255
-        
-        if self.stage_loop == 2:
-            self.bgy += 16 * self.height_screen_num #縦1置画面分のbgy値は16なので周回数を考慮して縦画面数分掛けたものを代入する
-        elif self.stage_loop == 3:
-            self.bgy += 32 * self.height_screen_num #縦1置画面分のbgy値は16なので周回数を考慮して縦画面数分掛けたものを代入する
-        
-        self.bg_chip = func.get_chrcode_tilemap(self,self.reference_tilemap,self.bgx,self.bgy)
-        #bgx,bgyの座標のキャラチップナンバーをゲット！
-        
-        if (self.bg_chip // 4) >= self.bg_obstacle_y: #(bg_chip // 4)でキャラチップのＹ座標になるんです
-            self.collision_flag = 1             #y座標がbg_obstacle_yより大きかったら障害物に当たったとみなす
-        
-        return(self,x,y,bg_chip,collision_flag)
-
-    #背景マップチップに書き込む関数x,yはキャラ単位 x=(0~255) y=(0~255) n=(0~255)マップチップナンバー
-    def write_map_chip(self,x,y,n):
-        """
-        背景マップチップに書き込む関数
-        
-        x,yはキャラ単位 x=(0~255) y=(0~255)\\
-        n=(0~255)マップチップナンバー
-        """
-        func.set_chrcode_tilemap(self,self.reference_tilemap,x,y + ((self.stage_loop - 1)* 16 * self.height_screen_num),n)
-
-    #背景マップチップを消去する(NULLチップナンバーを書き込む) x,yはキャラ単位 x=(0~255) y=(0~15)
-    def delete_map_chip(self,x,y):
-        """
-        背景マップチップを消去する(NULLチップナンバーを書き込む)
-        
-        x,yはキャラ単位 x=(0~255) y=(0~15)
-        """
-        # func.set_chrcode_tilemap(self,self.reference_tilemap,x,y + (self.stage_loop - 1)* 16,0)#マップチップを消去する（0=何もない空白）を書き込む
-        func.set_chrcode_tilemap(self,self.reference_tilemap,x,y + (self.stage_loop - 1)* 16 * self.height_screen_num,self.null_bg_chip_num)
-
-    #背景(BGタイルマップのキャラチップ)を取得する (8方向フリースクロール専用)
-    def get_bg_chip_free_scroll(self,x,y,bg_chip):
-        """
-        背景(BGタイルマップのキャラチップ)を取得する (8方向フリースクロール専用)
-        
-        x,y=座標値(x=0~160)(y=0~120)\\
-        bg_chip=キャラチップのアスキーコード
-        """
-        #x座標を8で割った切り捨て値がBGマップでのx座標となる
-        self.bgx = int(self.scroll_count         // 8 % (256 -20)) + x // 8
-        
-        #Y座標を8で割った切り捨て値がBGマップでのy座標となる
-        self.bgy = int(self.vertical_scroll_count  // 8 % 256) + y // 8
-        
-        #bgx,bgyのクリッピング処理
-        #bgxがMAPの外に存在するときは強制的にbgxを0または255にしちゃう(マイナスの値や256以上だとエラーになるため)
-        if  self.bgx < 0:
-            self.bgx = 0
-        if self.bgx > 255:
-            self.bgx = 255
-        #bgyがMAPの外に存在するときは強制的にbgyを0または255にしちゃう(マイナスの値や256以上だとエラーになるため)
-        if self.bgy < 0:
-            self.bgy = 0
-        if self.bgy > 255:
-            self.bgy = 255
-        
-        self.bg_chip = func.get_chrcode_tilemap(self,self.reference_tilemap,self.bgx,self.bgy)
-        return(self,x,y,bg_chip)
-
-    #背景マップチップに書き込む関数(8方向フリースクロール専用)x,yはキャラ単位 x=(0~255) y=(0~255) n=(0~255)マップチップナンバー
-    def write_map_chip_free_scroll(self,x,y,n):
-        """
-        背景マップチップに書き込む関数(8方向フリースクロール専用)
-        
-        x,yはキャラ単位 x=(0~255) y=(0~255)\\
-        n=(0~255)マップチップナンバー
-        """
-        func.set_chrcode_tilemap(self,self.reference_tilemap,x,y,n)#マップチップナンバーnを座標x,yに書き込む
-
-    #背景マップ(BG)にアクセスする時に使用するself.bgx,self.bgyを0~255の間に収めるようにクリッピング処理する(-1とか256でタイルマップにアクセスするとエラーが出るため)
-    def clip_bgx_bgy(self):
-        """
-        背景マップ(BG)にアクセスする時に使用するself.bgx,self.bgyを0~255の間に収めるようにクリッピング処理する(-1とか256でタイルマップにアクセスするとエラーが出るため)
-        """
-        #bgx,bgyのクリッピング処理
-        #bgxがMAPの外に存在するときは強制的にbgxを0または255にしちゃう(マイナスの値や256以上だとエラーになるため)
-        if  self.bgx < 0:
-            self.bgx = 0
-        if self.bgx > 255:
-            self.bgx = 255
-        #bgyがMAPの外に存在するときは強制的にbgyを0または255にしちゃう(マイナスの値や256以上だとエラーになるため)
-        if self.bgy < 0:
-            self.bgy = 0
-        if self.bgy > 255:
-                self.bgy = 255  
-
-    #背景タイルマップ(BG)に埋め込まれたボス用移動座標を調べてリストに登録していく関数
-    def search_boss_bg_move_point(self):
-        """
-        背景タイルマップ(BG)に埋め込まれたボス用移動座標を調べてリストに登録していく
-        """
-        mpx,mpy     = 0,0 #サーチ用の座標を初期化
-        point_num   = 0   #移動ポイント数の初期化
-        control_num = 0   #制御点ポイント数の初期化
-        
-        if self.stage_loop == 2:
-            mpy += 16 * self.height_screen_num #縦1置画面分のbgy値は16なので周回数を考慮して縦画面数分掛けたものを代入する
-        elif self.stage_loop == 3:
-            mpy += 32 * self.height_screen_num #縦1置画面分のbgy値は16なので周回数を考慮して縦画面数分掛けたものを代入する
-        
-        for w in range(255): #x軸方向は0~255まで調べ上げていく
-            for h in range(WINDOW_H // 8 * self.height_screen_num): #y軸方向は15×縦スクロールする画面数ぶん調べ上げていく
-                chip_num = func.get_chrcode_tilemap(self,self.reference_tilemap,mpx + w,mpy + h) #BGキャラチップのナンバー取得
-                if chip_num == MOVE_POINT_BG_NUM: #もし移動点だったのなら
-                    func.delete_map_chip(self,mpx + w,mpy + h) #「移動点」マップチップを消去する
-                    
-                    #一つ右隣にあるチップナンバーが「移動点の連番」なので取得する
-                    serial_num = func.get_chrcode_tilemap(self,self.reference_tilemap,mpx + w + 1,mpy + h) #移動点の連番を取得
-                    serial_num -= ZERO_BG_CHR_NUM
-                    self.boss_bg_move_point.append([int(serial_num),w,h])
-                    point_num += 1 #移動ポイント数をインクリメント
-                    func.delete_map_chip(self,mpx + w + 1,mpy + h) #「移動点の連番」マップチップを消去する
-                    
-                elif chip_num == CONTROL_POINT_NUM: #もし制御点だったのなら
-                    func.delete_map_chip(self,mpx + w,mpy + h) #「制御点」マップチップを消去する
-                    
-                    #一つ右隣にあるチップナンバーが「制御点の連番」なので取得する
-                    serial_num = func.get_chrcode_tilemap(self,self.reference_tilemap,mpx + w + 1,mpy + h) #移動点の連番を取得
-                    serial_num -= ZERO_BG_CHR_NUM
-                    self.boss_bg_move_control_point.append([int(serial_num),w,h])
-                    control_num += 1 #制御ポイント数をインクリメント
-                    func.delete_map_chip(self,mpx + w + 1,mpy + h) #「制御点の連番」マップチップを消去する
-        
-        self.boss_bg_move_point.sort()         #「移動点の連番」を基準にソートする sort()はリスト型のメソッドだよん
-        self.boss_bg_move_control_point.sort() #「制御点の連番」を基準にソートする sort()はリスト型のメソッドだよん
-
-    #自機ショットの経験値を調べ可能な場合レベルアップをさせる関数
-    def level_up_my_shot(self):
-        """
-        自機ショットの経験値を調べ可能な場合レベルアップをさせる
-        """
-        if self.shot_exp > SHOT_EXP_MAXIMUM:  #自機ショットの経験値は最大経験値を超えないように補正してやります
-            self.shot_exp = SHOT_EXP_MAXIMUM
-        if self.shot_exp < 0:              #自機ショットの経験値は0より小さくならないよう補正します
-            self.shot_exp = 0             #経験値がマイナスになることは無いと思うけどエナジードレインする敵攻撃とかあったらそうなりそう
-        
-        self.shot_level            = self.shot_table_list[self.shot_exp][0] #テーブルリストを参照して経験値に対応したショットレベルを代入する
-        self.shot_speed_magnification = self.shot_table_list[self.shot_exp][1] #テーブルリストを参照して経験値に対応したショットスピード倍率を代入する
-        self.shot_rapid_of_fire      = self.shot_table_list[self.shot_exp][2] #テーブルリストを参照して経験値に対応したショット連射数を代入する
-
-    #自機ミサイルの経験値を調べ可能な場合レベルアップをさせる関数
-    def level_up_my_missile(self):
-        """
-        自機ミサイルの経験値を調べ可能な場合レベルアップをさせる
-        """
-        if self.missile_exp > MISSILE_EXP_MAXIMUM:  #自機ミサイルの経験値は最大経験値を超えないように補正してやります
-            self.missile_exp = MISSILE_EXP_MAXIMUM
-        if self.missile_exp < 0:              #自機ミサイルの経験値は0より小さくならないよう補正します
-            self.missile_exp = 0             #経験値がマイナスになることは無いと思うけどエナジードレインする敵攻撃とかあったらそうなりそう
-        
-        self.missile_level            = self.missile_table_list[self.missile_exp][0] #テーブルリストを参照して経験値に対応したミサイルレベルを代入する
-        self.missile_speed_magnification = self.missile_table_list[self.missile_exp][1] #テーブルリストを参照して経験値に対応したミサイルスピード倍率を代入する
-        self.missile_rapid_of_fire      = self.missile_table_list[self.missile_exp][2] #テーブルリストを参照して経験値に対応したミサイル連射数を代入する
 
     #敵編隊出現時、現在の編隊IDナンバーとIDナンバーに対応した編隊数、そして現在の生存編隊数をenemy_formationクラスに登録する関数
     def record_enemy_formation(self,num):
@@ -1314,14 +1100,24 @@ class func:
             else:
                 return(False)
 
-    #スコア加算処理
-    def add_score(self,point):
+    #スクロールスピードの調整(横スクロール＆縦スクロールのスピードを設定値まで段々と近づけていきます)
+    def adjust_scroll_speed(self):
         """
-        スコア加算処理
+        スクロールスピードを調整していきます
         
-        point=取得得点
+        横スクロール＆縦スクロールのスピードを設定値まで段々と近づけていきます
         """
-        self.score += int(point * self.score_magnification) #スコアをpoint*スコア倍率分加算する(整数値で)
+        #横スクロールのスピード調整
+        if self.side_scroll_speed != self.side_scroll_speed_set_value:         #現在の横スクロールスピードと設定値が違っていたのならば
+            self.side_scroll_speed += self.side_scroll_speed_variation #スピード変化量を加算減算してやって設定値まで近づけていきます
+            if  -0.01 <= self.side_scroll_speed - self.side_scroll_speed_set_value <= 0.01:
+                self.side_scroll_speed = self.side_scroll_speed_set_value #横スクロールスピードが設定値の近似値(誤差-0.01~0.01)なら強制的に現在スピードを設定値にしちゃうのだ！
+        
+        #縦スクロールのスピード調整
+        if self.vertical_scroll_speed != self.vertical_scroll_speed_set_value: #現在の縦スクロールスピードと設定値が違っていたのならば
+            self.vertical_scroll_speed += self.vertical_scroll_speed_variation #スピード変化量を加算減算してやって設定値まで近づけていきます
+            if  -0.01 <= self.vertical_scroll_speed - self.vertical_scroll_speed_set_value <= 0.01:
+                self.vertical_scroll_speed = self.vertical_scroll_speed_set_value #縦スクロールスピードが設定値の近似値(誤差-0.01~0.01)なら強制的に現在スピードを設定値にしちゃうのだ！
 
     #バックグラウンド(BG)を表示するときのカメラオフセット座標値を計算する
     def screen_camera_offset(self):
@@ -1378,6 +1174,7 @@ class func:
             if self.raster_scroll[i].scroll_id == id: #scroll_idと調べるidが一致したのなら
                 self.raster_scroll[i].display = flag #flag(0=表示しない 1=表示する)を書き込む
 
+    #!#######################################################################################数々のリスト群からデータを取り出し設定する(それぞれの変数に代入していく)メソッド
     #ランクに応じた数値をリストから取得する
     def get_rank_data(self):
         """
@@ -1438,6 +1235,31 @@ class func:
         self.bg_enemy_bone_type           = self.stage_data_list[self.stage_number - 1][15] #背景BGスクロールで敵をどのように出現させるかどうかのバリエーション
         self.bg_append_building_flag      = self.stage_data_list[self.stage_number - 1][16] #背景BGスクロールで建物を追加出現させるかどうかのフラグ
         self.bg_append_building_null_chr  = self.stage_data_list[self.stage_number - 1][17] #背景BGスクロールで建物を追加するタイムラインマップのnullチップキャラコード
+
+    #点滅系カラーコードの取得
+    def get_flashing_type_color_code(self,flash_type):
+        """
+        点滅系カラーコードの取得
+        
+        flash_type=フラッシュタイプのカラーコードを入れてください MES_****_FLASHなどの定数でお願いします
+        """
+        global col
+        if flash_type == MES_BLINKING_FLASH:                     #テキスト点滅の場合
+            col = self.blinking_color[pyxel.frame_count // 4 % 10]
+        elif flash_type == MES_YELLOW_FLASH:                     #テキスト黄色点滅の場合
+            col = self.yellow_flash_color[pyxel.frame_count // 4 % 10]
+        elif flash_type == MES_RED_FLASH:                        #テキスト赤い点滅の場合
+            col = self.red_flash_color[pyxel.frame_count // 4 % 10]
+        elif flash_type == MES_GREEN_FLASH:                      #テキスト緑で点滅の場合
+            col = self.green_flash_color[pyxel.frame_count // 4 % 10]
+        elif flash_type == MES_MONOCHROME_FLASH:                 #テキスト白黒で点滅の場合
+            col = self.monochrome_flash_color[pyxel.frame_count // 4 % 10]
+        elif flash_type == MES_RAINBOW_FLASH:                    #テキスト虹色に点滅の場合
+            col = self.rainbow_flash_color[pyxel.frame_count // 4 % 10]
+        else:                                                    #該当しない場合は白色(7)にする
+            col = 7
+        
+        return (col)
 
     #ランクダウンさせる関数
     def rank_down(self):
@@ -1502,31 +1324,6 @@ class func:
         num_0_00001 =  self.rnd0_9() / 100000  #小数点5桁目の乱数を取得(0~9)
         num = num_0_1 + num_0_01 + num_0_001 + num_0_0001 + num_0_00001 #全ての桁数を足し合わせると小数点5桁までの乱数となる(0.00000~0.99999)
         return (num)
-
-    #点滅系カラーコードの取得
-    def get_flashing_type_color_code(self,flash_type):
-        """
-        点滅系カラーコードの取得
-        
-        flash_type=フラッシュタイプのカラーコードを入れてください MES_****_FLASHなどの定数でお願いします
-        """
-        global col
-        if flash_type == MES_BLINKING_FLASH:                     #テキスト点滅の場合
-            col = self.blinking_color[pyxel.frame_count // 4 % 10]
-        elif flash_type == MES_YELLOW_FLASH:                     #テキスト黄色点滅の場合
-            col = self.yellow_flash_color[pyxel.frame_count // 4 % 10]
-        elif flash_type == MES_RED_FLASH:                        #テキスト赤い点滅の場合
-            col = self.red_flash_color[pyxel.frame_count // 4 % 10]
-        elif flash_type == MES_GREEN_FLASH:                      #テキスト緑で点滅の場合
-            col = self.green_flash_color[pyxel.frame_count // 4 % 10]
-        elif flash_type == MES_MONOCHROME_FLASH:                 #テキスト白黒で点滅の場合
-            col = self.monochrome_flash_color[pyxel.frame_count // 4 % 10]
-        elif flash_type == MES_RAINBOW_FLASH:                    #テキスト虹色に点滅の場合
-            col = self.rainbow_flash_color[pyxel.frame_count // 4 % 10]
-        else:                                                    #該当しない場合は白色(7)にする
-            col = 7
-        
-        return (col)
 
     #1プレイ時間の表示(秒まで表示します)
     def disp_one_game_playtime(self,x,y,col):
@@ -1670,6 +1467,7 @@ class func:
             medal_id = self.temp_my_ship_medal[i]
             self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT0 + i] = medal_id
 
+    #!#########################################################################################ウィンドウ＆カーソル関連のメソッド
     #スコアボードウィンドウ育成時に使用するランクインした機体が装備しているメダルのgraph_listを作製する
     def create_medal_graph_list_for_score_board(self,d,x,y,step_y): #d=difficult(難易度)x,y=メダルを表示し始める座標(1位のSLOT1のメダルから表示し始める),y軸のドット増分数
         """
@@ -1820,24 +1618,24 @@ class func:
         id=ウィンドウIDナンバー
         """
         #ウィンドウidナンバーを元にそのウィンドウで使用していたカーソルデータのインデックス値を探し出す
-        window_count = len(self.window)
-        print ("window count")
-        print(window_count)
+        # window_count = len(self.window)
+        # print ("window count")
+        # print(window_count)
         
-        cursor_stack_count = len(self.cursor)
-        print ("cursor stack count")
-        print(cursor_stack_count)
-        print (self.cursor)
+        # cursor_stack_count = len(self.cursor)
+        # print ("cursor stack count")
+        # print(cursor_stack_count)
+        # print (self.cursor)
         
-        print ("search window id")
-        print (id)
+        # print ("search window id")
+        # print (id)
         
         i = func.search_window_id(self,id)
         if i == -1:
             return  #もしもカーソルデータが無かったのならどうしようもないのでリターンする(1対1でカーソルとウィンドウデータを反映してるのでそれは無いと思うですけれども）
         
-        print ("active window index")
-        print (i)
+        # print ("active window index")
+        # print (i)
         
         self.cursor_type = self.cursor[i].cursor_type
         self.cursor_x,self.cursor_y = self.cursor[i].posx,self.cursor[i].posy
@@ -1850,34 +1648,7 @@ class func:
         del self.cursor[i] #カーソルデータをPOPし終わったのでインスタンスを削除する
         self.cursor_decision_item_y = UNSELECTED  #一番新しい層の選択アイテムを未選択にする
 
-    #スコアボードへの書き込み ランク外である11位にスコアを書き込む関数(スコアボードは10位までしか表示されないのでこの状態では表示されませんバブルソートしてね)
-    def recoard_score_board(self):
-        """
-        スコアボードへの書き込み ランク外である11位にスコアを書き込む関数(スコアボードは10位までしか表示されないのでこの状態では表示されませんバブルソートしてね)
-        """
-        self.score_board[self.game_difficulty][11-1][LIST_SCORE_BOARD_NAME]        = self.my_name
-        self.score_board[self.game_difficulty][11-1][LIST_SCORE_BOARD_SCORE]       = self.score
-        self.score_board[self.game_difficulty][11-1][LIST_SCORE_BOARD_LOOP]        = self.stage_loop
-        self.score_board[self.game_difficulty][11-1][LIST_SCORE_BOARD_CLEAR_STAGE] = self.stage_number
-        self.score_board[self.game_difficulty][11-1][LIST_SCORE_BOARD_SHIP_USED]   = self.my_ship_id
-        self.score_board[self.game_difficulty][11-1][LIST_SCORE_BOARD_SHIP_SLOT0]  = self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT0]
-        self.score_board[self.game_difficulty][11-1][LIST_SCORE_BOARD_SHIP_SLOT1]  = self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT1]
-        self.score_board[self.game_difficulty][11-1][LIST_SCORE_BOARD_SHIP_SLOT2]  = self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT2]
-        self.score_board[self.game_difficulty][11-1][LIST_SCORE_BOARD_SHIP_SLOT3]  = self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT3]
-        self.score_board[self.game_difficulty][11-1][LIST_SCORE_BOARD_SHIP_SLOT4]  = self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT4]
-        self.score_board[self.game_difficulty][11-1][LIST_SCORE_BOARD_SHIP_SLOT5]  = self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT5]
-
-    #スコアボードの点数によるバブルソート 11位に今プレイしたゲームの得点を書き込みその後この関数を呼び出し→順位の11がどの位置に移動したかチェック→その位置にカーソル移動させてネームエントリー→そしてリストに書き込む
-    def score_board_bubble_sort(self,diff): #diffは難易度です
-        """
-        スコアボードの点数によるバブルソート 11位に今プレイしたゲームの得点を書き込みその後この関数を呼び出し→順位の11がどの位置に移動したかチェック→その位置にカーソル移動させてネームエントリー→そしてリストに書き込む
-        """
-        for i in range(len(self.score_board[diff])): #ランキングデータは11位までなのでiは0~11まで変化する
-            for j in range(len(self.score_board[diff])-1,i,-1):
-                if self.score_board[diff][j][LIST_SCORE_BOARD_SCORE] > self.score_board[diff][j-1][LIST_SCORE_BOARD_SCORE]: #位置jの得点より前の位置j-1の得点が大きいのなら要素を入れ替える
-                    for k in range(LIST_SCORE_BOARD_SHIP_SLOT5): #難易度からスロット5に装備されたメダルIDまでの12種類の要素をループしてコピー
-                        self.score_board[diff][j][k],self.score_board[diff][j-1][k] = self.score_board[diff][j-1][k],self.score_board[diff][j][k]
-
+    #!##################################################################################メダルスロット関連のメソッド
     #プレイ中の自機リスト(playing_ship_list)を参照して自機にメダルをはめ込む（装着？）する関数 (num=メダルIDナンバー)
     def equip_medal_playing_ship(self,num):
         """

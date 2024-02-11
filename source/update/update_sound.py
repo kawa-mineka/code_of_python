@@ -44,10 +44,10 @@ class update_sound:
         """
         for i in range(62): #sndは(0~62)まであるので iを0~62まで増加させていく
             vol_list = ""   #ボリュームリストを初期化する
-            vol_len = len(pyxel.sound(i).volumes) #vol_lenにsnd(i)のVOL値が記録された全体の個数が入る
+            vol_len = len(pyxel.sounds[i].volumes) #vol_lenにsnd(i)のVOL値が記録された全体の個数が入る
             # print("SOUND " + str(i))
             for j in range(vol_len): #vol_lenの数だけ繰り返す
-                num = pyxel.sound(i).volumes[j] #VOLの数値を取り出す(型は整数で収まっている)
+                num = pyxel.sounds[i].volumes[j] #VOLの数値を取り出す(型は整数で収まっている)
                 # print(num,end = '') #改行無しで数値を表示
                 vol_list += str(num)#ボリュームリストに文字列化したボリューム値を右端に追加していく
             
@@ -99,5 +99,5 @@ class update_sound:
         #     return
         
         vol_str = self.adjustable_se_vol_list[num][vol] #VOL指定用の文字列群を取得する
-        pyxel.sound(num).set_volumes(vol_str)           #文字列でボリューム指定する
+        pyxel.sounds[num].set_volumes(vol_str)           #文字列でボリューム指定する
         pyxel.play(ch,num)                              #チャンネルchでサウンドナンバーnumを鳴らす

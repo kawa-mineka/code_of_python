@@ -25,12 +25,12 @@ class update_replay:
         # pyxel.load("./assets/replay/" + slot_num + "/replay_status.pyxres") #リプレイステータスファイルにアクセスするためにローディングだけしてやります(グラフイック関連のアセットをローディングしている時がほとんどなので)
         
         #各種設定値読み込み 数字の[0]はアスキーコード16番なので16引いて文字から数字としての0にしてやります
-        self.master_rnd_seed  = func.get_chrcode_tilemap(self,0,  0,0)       #乱数の種(ゲームスタート時)を読み込み(そのまま取得します)
-        self.game_difficulty  = func.get_chrcode_tilemap(self,0,  0,1) - 16  #難易度読み込み
-        self.stage_number     = func.get_chrcode_tilemap(self,0,  0,2) - 16  #ステージ数読み込み
-        self.stage_loop       = func.get_chrcode_tilemap(self,0,  0,3) - 16  #ループ数読み込み
-        self.replay_stage_num = func.get_chrcode_tilemap(self,0,  0,4) - 16  #リプレイファイルとして記録する総ステージ数を読み込み
-        self.boss_test_mode   = func.get_chrcode_tilemap(self,0,  0,5) - 16  ##ボステストモードのフラグを読み込み
+        self.master_rnd_seed  = update_bg.get_chrcode_tilemap(self,0,  0,0)       #乱数の種(ゲームスタート時)を読み込み(そのまま取得します)
+        self.game_difficulty  = update_bg.get_chrcode_tilemap(self,0,  0,1) - 16  #難易度読み込み
+        self.stage_number     = update_bg.get_chrcode_tilemap(self,0,  0,2) - 16  #ステージ数読み込み
+        self.stage_loop       = update_bg.get_chrcode_tilemap(self,0,  0,3) - 16  #ループ数読み込み
+        self.replay_stage_num = update_bg.get_chrcode_tilemap(self,0,  0,4) - 16  #リプレイファイルとして記録する総ステージ数を読み込み
+        self.boss_test_mode   = update_bg.get_chrcode_tilemap(self,0,  0,5) - 16  ##ボステストモードのフラグを読み込み
         
         #ステージ毎ごとの自機関連パラメーターのロード---------------------------------------------------------------------------
         for i in range(self.replay_stage_num + 1):
@@ -96,7 +96,7 @@ class update_replay:
                 x = int(i % 256)                      #x座標は現在のカウント値iを256で割った余り
                 y = int(i // 256) % 256               #y座標は現在のカウント値iを256で割った数(切り捨て)を更に256で割った余り
                 z = int(i // 65536)                   #z座標(この場合はタイルマップナンバーになります)は65536で割った数(切り捨て)
-                num = func.get_chrcode_tilemap(self,z, x,y)       #numにタイルマップ(z),座標(x,y)から読み取ったコントロールパッド入力データを代入
+                num = update_bg.get_chrcode_tilemap(self,z, x,y)       #numにタイルマップ(z),座標(x,y)から読み取ったコントロールパッド入力データを代入
                 self.replay_data[st].append(int(num))    #リストにパッド入力データ記録！getで読み取ったのは文字(str)なので数値(int)に変換してリストにアペンドします
 
     #リプレイデータ・ファイルセーブ
@@ -119,7 +119,7 @@ class update_replay:
                 for y in range(256):
                     for x in range(256):
                         # pyxel.tilemap(z).set(x,y,128-16+6-16)
-                        func.set_chrcode_tilemap(self,z,x,y,0)
+                        update_bg.set_chrcode_tilemap(self,z,x,y,0)
             
             #カウント65536でタイルマップを1枚埋め尽くす事になります
             #カウント65537だとタイルマップ1枚と次のタイルマップ1マス分必要となります
@@ -130,7 +130,7 @@ class update_replay:
                 x = int(i % 256)                   #x座標は現在のカウント値iを256で割った余り
                 y = int(i // 256) % 256            #y座標は現在のカウント値iを256で割った数(切り捨て)を更に256で割った余り
                 z = int(i // 65536)                #z座標(この場合はタイルマップナンバーになります)は65536で割った数(切り捨て)
-                func.set_chrcode_tilemap(self,z,x,y,num) #numをタイルマップ(z),座標(x,y)に書き込む
+                update_bg.set_chrcode_tilemap(self,z,x,y,num) #numをタイルマップ(z),座標(x,y)に書き込む
             
             pyxel.save(os.path.abspath(file_name)) #リプレイパッド入力データファイルをセーブ！
             # pyxel.save(file_name) #リプレイパッド入力データファイルをセーブ！
@@ -139,12 +139,12 @@ class update_replay:
         pyxel.load(os.path.abspath("./assets/replay/" + slot_num + "/replay_status.pyxres")) #リプレイステータスファイルにアクセスするためにローディングだけしてやります(グラフイック関連のアセットをローディングしている時がほとんどなので)
         # pyxel.load("./assets/replay/" + slot_num + "/replay_status.pyxres") #リプレイステータスファイルにアクセスするためにローディングだけしてやります(グラフイック関連のアセットをローディングしている時がほとんどなので)
         #各種設定値書き込み 数字の[0]はアスキーコード16番なので16足してアスキーコードとしての0にしてやります
-        func.set_chrcode_tilemap(self,0, 0,0,self.master_rnd_seed)          #乱数の種(ゲームスタート時)を書き込み(数文字には変換しない)
-        func.set_chrcode_tilemap(self,0, 0,1,self.game_difficulty + 16)     #難易度書き込み
-        func.set_chrcode_tilemap(self,0, 0,2,self.start_stage_number + 16)  #ゲーム開始時のステージ数書き込み
-        func.set_chrcode_tilemap(self,0, 0,3,self.start_stage_loop + 16)    #ゲーム開始時のループ数書き込み
-        func.set_chrcode_tilemap(self,0, 0,4,self.replay_stage_num + 16)    #リプレイファイルとして記録する総ステージ数を書き込み
-        func.set_chrcode_tilemap(self,0, 0,5,self.boss_test_mode   + 16)    #ボステストモードのフラグを書き込み
+        update_bg.set_chrcode_tilemap(self,0, 0,0,self.master_rnd_seed)          #乱数の種(ゲームスタート時)を書き込み(数文字には変換しない)
+        update_bg.set_chrcode_tilemap(self,0, 0,1,self.game_difficulty + 16)     #難易度書き込み
+        update_bg.set_chrcode_tilemap(self,0, 0,2,self.start_stage_number + 16)  #ゲーム開始時のステージ数書き込み
+        update_bg.set_chrcode_tilemap(self,0, 0,3,self.start_stage_loop + 16)    #ゲーム開始時のループ数書き込み
+        update_bg.set_chrcode_tilemap(self,0, 0,4,self.replay_stage_num + 16)    #リプレイファイルとして記録する総ステージ数を書き込み
+        update_bg.set_chrcode_tilemap(self,0, 0,5,self.boss_test_mode   + 16)    #ボステストモードのフラグを書き込み
         
         #ステージ毎ごとの自機関連パラメーターのセーブ--------------------------------------------------------------------------------
         for i in range(self.replay_stage_num + 1):

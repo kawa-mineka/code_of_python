@@ -571,7 +571,7 @@ class define_stage_data:
                             [144,120,1,1,     1,   5],
                             [160,128,1,1,     1,   5],
                             ]
-
+        
         #ゲーム全体でのBGアニメーションマスターリスト
         #フォーマット(このリストの書き方）は
         #self.bg_animation_master_list[
@@ -602,4 +602,52 @@ class define_stage_data:
             self.bg_animation_list_dummy,
             ]
 
+    def bg_animation_pre_define_list(self):   #各ステージのＢＧ書き換えによるアニメーション(事前に書き換え指定のマップチップを探して座標を登録記録していくタイプ)の為のデータリスト群の定義
+        """
+        各ステージのＢＧ書き換えによるアニメーション
+        (事前に書き換え指定のマップチップを探して座標を登録記録していくタイプ)
+        
+        データリスト群の定義
+        """
+        #フォーマットの説明
+        #[ステージ名,座補登録をしてBG書き換えアニメーションを行うかどうかのフラグ,BG書き換え指定値チップのキャラコード最小値,BG書き換え指定値チップのキャラコード最大値
+        #            
+        #            [BG書き換えアニメーションを行いたい矩形画像の左上の座標を示すマップチップIDナンバー,そのマップチップの実アスキーコード
+        #             描画枚数,スピード(1なら1フレームに1コマ),タイルマップ番号,BGパターンが収納されている座標u(横),BGパターンが収納されている座標v(縦),W(横幅),h(縦幅)]
+        #                            
+        
+        self.bg_animation_pre_define_list = [
+                                [
+                                STAGE_MOUNTAIN_REGION,PREDEF_BGANIME_OFF,(16 / 8) * 32 + (0 / 8),(16 / 8) * 32 + (72 / 8),
+                                [BG_OBJ_PREDEF_DUMMY,(0 / 8) * 32 + ( 0 / 8),
+                                ONE_SHEET,SPEED1,TM0,
+                                0,0,
+                                1*8,1*8],
+                                ],
+                                
+                                [
+                                STAGE_ADVANCE_BASE,PREDEF_BGANIME_OFF,(16 / 8) * 32 + (0 / 8),(16 / 8) * 32 + (72 / 8),
+                                [BG_OBJ_PREDEF_DUMMY,(0 / 8) * 32 + ( 0 / 8),
+                                ONE_SHEET,SPEED1,TM0,
+                                0,0,
+                                1*8,1*8],
+                                ],
+                                
+                                [
+                                STAGE_VOLCANIC_BELT,PREDEF_BGANIME_OFF,(16 / 8) * 32 + (0 / 8),(16 / 8) * 32 + (72 / 8),
+                                [BG_OBJ_PREDEF_DUMMY,(0 / 8) * 32 + ( 0 / 8),
+                                ONE_SHEET,SPEED1,TM0,
+                                0,0,
+                                1*8,1*8],
+                                ],
+                                
+                                [
+                                STAGE_NIGHT_SKYSCRAPER,PREDEF_BGANIME_ON,(16 / 8) * 32 + (0 / 8),(16 / 8) * 32 + (72 / 8),
+                                [BG_OBJ_PREDEF_ELEVATOR1,(16 / 8) * 32 + ( 8 / 8),
+                                172,SPEED1,TM0,
+                                0,128,
+                                1*8,8*8],
+                                ],
+                                
+                                ]
 

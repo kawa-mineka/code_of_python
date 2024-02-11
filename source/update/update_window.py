@@ -81,7 +81,7 @@ class update_window:
                         new_star_redraw = Redraw_star_area()
                         new_star_redraw.update(self.window[i].window_id,self.window[i].posx,self.window[i].posy,self.window[i].width,self.window[i].height,self.window[i].window_priority)
                         self.redraw_star_area.append(new_star_redraw) #「背景の星を再描画するエリアの範囲」を育成する
-                        print("star_redraw_window_num = " + str(len(self.redraw_star_area)))
+                        # print("star_redraw_window_num = " + str(len(self.redraw_star_area)))
                     
                     j = func.search_window_id_star_redraw(self,self.window[i].window_id) #jにwindow_idに対応したredraw_star_areaのインデックス値が入る
                     if j != -1: #存在する時だけ更新する
@@ -2365,7 +2365,7 @@ class update_window:
                 j = func.search_window_id_star_redraw(self,self.window[i].window_id) #jにwin_idに対応したredraw_star_areaのインデックス値が入る
                 if j != -1: # 存在するのならば・・・
                     del self.redraw_star_area[j] #「星を再描画するエリア情報」redraw_star_areaインスタンスも破棄する
-                    print("star_redraw_window_num = " + str(len(self.redraw_star_area)))
+                    # print("star_redraw_window_num = " + str(len(self.redraw_star_area)))
                 
                 del self.window[i] #ウィンドウが画面外に存在するとき(2つの矩形が衝突していないとき)はインスタンスを破棄する(ウィンドウ消滅)
 

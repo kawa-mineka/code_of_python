@@ -118,6 +118,7 @@ from update.update_pause       import * #Appクラスのupdate関数から呼び
 from update.update_score       import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み スコア加算やハイスコアのチェック、登録などの更新メソッド
 from update.update_sound       import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み BGNやSEの読み込み、再生など
 from update.update_status      import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にステータス表示ウィンドウで使われる項目を更新するメソッドです
+from update.update_bg          import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にBGアクセス(タイルマップにアクセスするときに使用,タイルマップ書き換えとか読み出しとか)更新メソッドです
 
 from update.update_system      import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にシステムデータのセーブロードを行う関数(メソッド？）です
 from update.update_window      import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にウィンドウやセレクトカーソルの更新を行う関数(メソッド？）です
@@ -218,7 +219,7 @@ class App:
         
         # print(self.attrib_chr_col)
         # print(self.attrib_screen_col)
-        print(self.attrib_line_col)
+        # print(self.attrib_line_col)
         
         #self.score_board = self.default_score_b11oard この方法でのリストコピーだとリストの「参照元id」がコピーされるだけなのでscore_boardリストの要素を変更するとdefault_score_boardリストの要素も変更されたように見えるので使えないので注意
         self.score_board = copy.deepcopy(self.default_score_board)  #ですのでdeepcopyを使います、そうすれば深い階層までコピーされ、コピー前後でidが変更されて全くの別リストになります 
@@ -386,28 +387,29 @@ class App:
         #近年のゲームエンジンはみんなこんな感じらしい？？？unityやUEもこんな感じなのかな？？使ったことないけど
         pyxel.run(self.update,self.draw)#この命令でこれ以降は１フレームごとに自動でupdate関数とdraw関数が交互に実行されることとなります
 
-    #########################################################################
-    #########################################################################
-    #########################################################################
-    #     ゲームで扱う情報を更新したり、キー入力（コントロ―ラー入力）を行う       # 
-    #                あっぷで～～と☆彡    KANSUU                             #
-    #########################################################################
-    #########################################################################
-    #          ウィンドウズアップデートはあってはならない文明                   #
-    #                      滅ぶべし・・・                                    #
-    #########################################################################
-    #パイソンはどうして関数を呼び出すだけなのにselfを付けないといけないのか       #
-    #謎である                                                                #
-    #良く判らないけどプログラムコードを分割して複数のファイルにして               #
-    #別のクラスとして管理し始めたんだけど・・・・・・・・・・・                   #
-    #  update_ipl.ipl()         →エラーになる                                 #
-    #  update_ipl.ipl(self)     →selfを付けて引数を1個多くすると何故かokになる  # 
-    #クラスのメソッド(そもそもメソッドというのが良く判らない。。。)呼び出す時も     #
-    #  func.score_board_bubble_sort(self.game_difficulty)      →エラーになる  #
-    #  func.score_board_bubble_sort(self,self.game_difficulty) →上手くいく    #
-    #良く判らない・・・・判らない・・・判らない・・・・・・・・                   #
-    #だからセルフってなんですのん？？？                                         #
-    ##########################################################################
+    ##############################################################################
+    ###############################################################################
+    ###############################################################################
+    #     ゲームで扱う情報を更新したり、キー入力（コントロ―ラー入力）を行う             # 
+    #                あっぷで～～と☆彡    KANSUU                                   #
+    ###############################################################################
+    ###############################################################################
+    #          ウィンドウズアップデートはあってはならない文明                         #
+    #                      滅ぶべし・・・                                           #
+    ################################################################################
+    #パイソンはどうして関数を呼び出すだけなのにselfを付けないといけないのか              #
+    #謎である                                                                        #
+    #良く判らないけどプログラムコードを分割して複数のファイルにして                      #
+    #別のクラスとして管理し始めたんだけど・・・・・・・・・・・                          #
+    #  update_ipl.ipl()         →エラーになる                                        #
+    #  update_ipl.ipl(self)     →selfを付けて引数を1個多くすると何故かokになる         # 
+    #クラスのメソッド(そもそもメソッドというのが良く判らない。。。)呼び出す時も           #
+    #  update_score.score_board_bubble_sort(self.game_difficulty)      →エラーになる #
+    #  updade_score.score_board_bubble_sort(self,self.game_difficulty) →上手くいく   #
+    #良く判らない・・・・判らない・・・判らない・・・・・・・・                          #
+    #だからセルフってなんですのん？？？                                                #
+    #それと関数とメソッドの違いってなんですのん？良く判らない、同じじゃないの？？          #
+    ##################################################################################
     def update(self):
         ################################起動処理中 IPL ###################################################################
         if self.game_status == Scene.IPL:         #ゲームステータスが「IPL」の場合IPLメッセージの更新を行う
@@ -525,20 +527,24 @@ class App:
             update_collision.claw_shot_to_enemy(self) #クローの弾と敵との当たり判定関数を呼び出す
             update_collision.claw_shot_to_boss(self)  #クローの弾とボスとの当たり判定関数を呼び出す
             update_collision.claw_shot_to_bg(self)    #クローの弾と背景との当たり判定関数を呼び出す
+            
             #敵の弾関連の処理 ###################################################################################
             ####################################################################################################
             update_enemy.shot(self)                       #敵の弾の更新（移動処理とか）＆自機と敵弾と自機との当たり判定の関数の呼び出し
             update_enemy.clip_shot(self)                  #敵の弾が画面からはみ出したら消去する関数の呼び出し
             update_collision.enemy_shot_to_bg(self)       #敵の弾と背景との当たり判定を行う関数の呼び出し
+            
             #クロー関連の処理###########################################################################################################
             update_btn.delete_claw_btn(self)              #クローを消滅させるキーが押されたか調べる関数の呼び出し
             update_btn.change_fix_claw_interval_btn(self) #フイックスクロー間隔変化ボタンが押されたか調べる関数を呼び出す
             update_btn.change_claw_style_btn(self)        #クロースタイル変更ボタンが押されたか調べる関数を呼び出す    
+            
             #イベントリスト関連の処理###############################################################################################################
             update_event.list_execution(self)             #イベントリスト解析による敵の発生関数を呼び出す
             update_event.enemy_born_map_scroll(self)      #マップスクロールによる敵の発生関数を呼び出す
             update_event.building_born_timeline_map(self) #タイムラインマップによる建物の追加発生を行う
             update_event.append_request(self)             #アペンドイベントリクエストによる敵の追加発生関数を呼び出す（早回しなどの追加注文発生とかの処理）(イベント追加依頼）
+            
             #敵関連の処理###############################################################################################################
             update_enemy.enemy(self)                      #敵の更新（移動とか）関数を呼び出す
             update_enemy.clip(self)                       #画面からはみ出た敵を消去する関数を呼び出し
@@ -546,6 +552,7 @@ class App:
             update_boss.boss(self)                        #ボスの更新移動とかを行う関数を呼び出す
             if self.game_status == Scene.BOSS_APPEAR or self.game_status == Scene.BOSS_BATTLE:
                 self.boss_battle_time += 1                #状態遷移が「ボス出現中」と「ボスと戦闘中」の時だけボス戦闘時間を1増加させていきます
+            
             #パワーアップアイテム類の処理################################################################################################
             update_item.obtain_item(self)                    #パワーアップアイテム類の更新（移動とか）する関数を呼び出します
             update_collision.obtain_item_to_enemy_shot(self) #パワーアップアイテムと敵弾の当たり判定を行う関数を呼び出します
@@ -558,17 +565,8 @@ class App:
                 self.scroll_count += self.side_scroll_speed              #スクロールカウント数をスクロールスピード分(通常は1)増加させていく
                 self.vertical_scroll_count += self.vertical_scroll_speed #縦スクロールカウント数を縦スクロールスピード分(大抵のステージは縦スクロールしないので0)増加させていく
             
-            #横スクロールのスピード調整##################################################################################################
-            if self.side_scroll_speed != self.side_scroll_speed_set_value:         #現在の横スクロールスピードと設定値が違っていたのならば
-                self.side_scroll_speed += self.side_scroll_speed_variation #スピード変化量を加算減算してやって設定値まで近づけていきます
-                if  -0.01 <= self.side_scroll_speed - self.side_scroll_speed_set_value <= 0.01:
-                    self.side_scroll_speed = self.side_scroll_speed_set_value #横スクロールスピードが設定値の近似値(誤差-0.01~0.01)なら強制的に現在スピードを設定値にしちゃうのだ！
-            
-            #縦スクロールのスピード調整###################################################################################################
-            if self.vertical_scroll_speed != self.vertical_scroll_speed_set_value: #現在の縦スクロールスピードと設定値が違っていたのならば
-                self.vertical_scroll_speed += self.vertical_scroll_speed_variation #スピード変化量を加算減算してやって設定値まで近づけていきます
-                if  -0.01 <= self.vertical_scroll_speed - self.vertical_scroll_speed_set_value <= 0.01:
-                    self.vertical_scroll_speed = self.vertical_scroll_speed_set_value #縦スクロールスピードが設定値の近似値(誤差-0.01~0.01)なら強制的に現在スピードを設定値にしちゃうのだ！
+            #縦横スクロールのスピード調整#################################################################################################
+            func.adjust_scroll_speed(self)           #縦横スクロールのスピードを設定値までに近づけていく関数を呼び出します
             
             #ラスタスクロールの更新#######################################################################################################
             update_obj.raster_scroll(self)            #ラスタースクロールの更新関数の呼び出し
@@ -688,10 +686,10 @@ class App:
                 self.select_cursor_flag = FLAG_OFF           #セレクトカーソルの移動更新は行わないのでフラグを降ろす
                 
                 if self.replay_status == REPLAY_RECORD:      #リプレイデータ記録中(ゲームプレイ)中の時は
-                    func.write_ship_equip_medal_data(self)                  #機体メダルスロット装備リストに現在プレイ中のシップリストのメダル情報を書き込む関数の呼び出し
-                    update_system.save_data(self)                           #システムデータをセーブする関数の呼び出し
-                    func.recoard_score_board(self)                          #スコアボードに点数書き込み
-                    func.score_board_bubble_sort(self,self.game_difficulty) #現在選択している難易度を引数として書き込んだスコアデータをソートする関数の呼び出し
+                    func.write_ship_equip_medal_data(self)                          #機体メダルスロット装備リストに現在プレイ中のシップリストのメダル情報を書き込む関数の呼び出し
+                    update_system.save_data(self)                                   #システムデータをセーブする関数の呼び出し
+                    update_score.recoard_score_board(self)                          #スコアボードに点数書き込み
+                    update_score.score_board_bubble_sort(self,self.game_difficulty) #現在選択している難易度を引数として書き込んだスコアデータをソートする関数の呼び出し
                 
                 self.game_over_bgm.fadeout(1200)                     #GAME OVER BGMフェードアウト開始
                 self.game_status = Scene.TITLE_INIT            #ゲームステータスを「SCENE_TITLE_INIT」にしてタイトルの初期化工程にする
@@ -719,10 +717,10 @@ class App:
                 self.game_playing_flag = FLAG_OFF                  #ゲームプレイ中のフラグを降ろす
                 self.select_cursor_flag = FLAG_OFF                 #セレクトカーソルの移動更新は行わないのでフラグを降ろす
                 
-                func.write_ship_equip_medal_data(self)           #機体メダルスロット装備リストに現在プレイ中のシップリストのメダル情報を書き込む関数の呼び出し
-                update_system.save_data(self)                    #システムデータをセーブする関数の呼び出し
-                func.recoard_score_board(self)                   #スコアボードに点数書き込み
-                func.score_board_bubble_sort(self,self.game_difficulty) #現在選択している難易度を引数として書き込んだスコアデータをソートする関数の呼び出し
+                func.write_ship_equip_medal_data(self)                          #機体メダルスロット装備リストに現在プレイ中のシップリストのメダル情報を書き込む関数の呼び出し
+                update_system.save_data(self)                                   #システムデータをセーブする関数の呼び出し
+                update_score.recoard_score_board(self)                          #スコアボードに点数書き込み
+                update_score.score_board_bubble_sort(self,self.game_difficulty) #現在選択している難易度を引数として書き込んだスコアデータをソートする関数の呼び出し
                 
                 update_replay.push_list_data(self)          #録画したリプレイデータを登録します
                 
@@ -908,14 +906,14 @@ class App:
                 # pyxel.bltm(-int(pyxel.frame_count % (256*8 - 160)),-self.vertical_scroll_count,TM0,  0*8,20*8,  256*8,120*8,self.bg_transparent_color)
                 pyxel.bltm(-int(self.scroll_count % (256*8 - 160)),-self.vertical_scroll_count,TM0,  0*8,20*8,  256*8,120*8,self.bg_transparent_color)
             
-            
-            if   self.stage_number == STAGE_ADVANCE_BASE:
+            #真ん中の背景の表示
+            if   self.stage_number == STAGE_MOUNTAIN_REGION:
+                if self.disp_flag_bg_front == DISP_ON:
+                    #pyxel.bltm(-int(self.scroll_count % (256*8 - 160)),     -self.vertical_scroll_count,  1,    0,0,    256,256,    self.bg_transparent_color)
+                    pyxel.bltm(-int(self.scroll_count % (256*8 - 160)),     -self.vertical_scroll_count,  TM1,    0*8,0*8,    256 * 8,256 * 8,    self.bg_transparent_color)
+            elif self.stage_number == STAGE_ADVANCE_BASE:
                 # pyxel.bltm(-(self.scroll_count // 4) + 400,0,0,0,224,256,120,self.bg_transparent_color)
                 pyxel.bltm(-(self.scroll_count // 4) + 400,0,TM0,   0*8,224*8, 256*8,120*8,self.bg_transparent_color)
-            elif self.stage_number == STAGE_MOUNTAIN_REGION:
-                    if self.disp_flag_bg_front == DISP_ON:
-                        #pyxel.bltm(-int(self.scroll_count % (256*8 - 160)),     -self.vertical_scroll_count,  1,    0,0,    256,256,    self.bg_transparent_color)
-                        pyxel.bltm(-int(self.scroll_count % (256*8 - 160)),     -self.vertical_scroll_count,  TM1,    0*8,0*8,    256 * 8,256 * 8,    self.bg_transparent_color)
             elif self.stage_number == STAGE_VOLCANIC_BELT:
                 pyxel.bltm(-(self.scroll_count // 4) + 400,-self.camera_offset_y // 4,TM2,   0*8, 76*8, 256*8,120*8,    self.bg_transparent_color)
             
@@ -946,9 +944,9 @@ class App:
             graph.draw_claw_shot(self)    #クローショットの表示
             
             #手前の背景表示
-            #結局なんでこれでキチンとスクロール表示されたのか謎・・・結局はじめは-1024ドットのx座標位置からスクロール開始していくことに・・
-            #pyxel.bltm(-(pyxel.frame_count // 2) + 1024,0,0,0,0,256,120,0)
             if   self.stage_number == STAGE_ADVANCE_BASE:
+                #結局なんでこれでキチンとスクロール表示されたのか謎・・・結局はじめは-1024ドットのx座標位置からスクロール開始していくことに・・
+                #pyxel.bltm(-(pyxel.frame_count // 2) + 1024,0,0,0,0,256,120,0)
                 if   self.stage_loop == 1:
                     # pyxel.bltm(-(self.scroll_count // 2) + 1024,0,  0,    0,0,    256,120,    self.bg_transparent_color) #1周目マップ
                     pyxel.bltm(-(self.scroll_count // 2) + 1024,0,  TM0,    0*8,0*8,    256*8,120*8,    self.bg_transparent_color) #1周目マップ
@@ -968,7 +966,6 @@ class App:
                     pyxel.bltm(-(self.scroll_count // 2) + 1024,0,  TM2,    0*8,32*8 + self.camera_offset_y,   256*8,120*8,    self.bg_transparent_color) #2周目マップ
                 elif self.stage_loop == 3:
                     pyxel.bltm(-(self.scroll_count // 2) + 1024,0,  TM2,    0*8,64*8 + self.camera_offset_y,   256*8,120*8,    self.bg_transparent_color) #3周目マップ
-                
             
             graph.draw_enemy_shot(self,PRIORITY_TOP)        #敵の弾を表示する関数を呼び出す (最前面)-------------------------------------
         

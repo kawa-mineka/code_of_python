@@ -110,7 +110,7 @@ class update_enemy:
                     
                     self.x = self.enemy[i].posx + 4
                     self.y = self.enemy[i].posy + 8
-                    func.check_bg_collision(self,self.x,self.y,0,0)#ホッパー君の足元が障害物かどうかチェック
+                    update_bg.check_bg_collision(self,self.x,self.y,0,0)#ホッパー君の足元が障害物かどうかチェック
                 
                 if self.collision_flag == 0:#足元に障害物が無かった時の処理→そのままで行く
                     
@@ -119,7 +119,7 @@ class update_enemy:
                 else:                    
                     self.x = self.enemy[i].posx + 4
                     self.y = self.enemy[i].posy - 8
-                    func.check_bg_collision(self,self.x,self.y,0,0)#ホッパー君の頭の上が障害物なのか（足元と頭上、障害物に挟まっているのか？）チェック
+                    update_bg.check_bg_collision(self,self.x,self.y,0,0)#ホッパー君の頭の上が障害物なのか（足元と頭上、障害物に挟まっているのか？）チェック
                     if self.collision_flag == 0:
                         #ホッパー君の足元は障害物、ホッパー君は障害物に今っていなかったので再ジャンプできるゾ！
                         self.enemy[i].enemy_count2 = -20#  F=-10   Fに-10を入れて再度ジャンプさせる
@@ -407,7 +407,7 @@ class update_enemy:
                 #enemy_count2は右に動く原本カウント enemy_flag2はその変数として使用します
                 if self.enemy[i].vy == 0: #地面を移動中の場合は(vy=0の時は横方向だけの移動)
                     if self.enemy[i].direction == -1: #左に移動
-                        func.check_bg_collision(self,self.enemy[i].posx - 8,self.enemy[i].posy,0,0) #左側が障害物かどうかチェックする
+                        update_bg.check_bg_collision(self,self.enemy[i].posx - 8,self.enemy[i].posy,0,0) #左側が障害物かどうかチェックする
                         if self.enemy[i].enemy_flag1 <= 0 or self.collision_flag == 1:#左移動のカウンタが0以下、又は左に障害物があったら
                             self.enemy[i].direction = 1                #方向転換して右移動にする
                             self.enemy[i].enemy_flag2 = self.enemy[i].enemy_count2 #右移動するカウントを原本からコピーしてやる
@@ -416,7 +416,7 @@ class update_enemy:
                             self.enemy[i].enemy_flag1 -= 1 #左移動のカウンタを1減らします
                             self.enemy[i].vx = -1             #x軸の移動ベクトルは左方向です
                     elif self.enemy[i].direction == 1: #右に移動
-                        func.check_bg_collision(self,self.enemy[i].posx + 8,self.enemy[i].posy,0,0) #右側が障害物かどうかチェックする
+                        update_bg.check_bg_collision(self,self.enemy[i].posx + 8,self.enemy[i].posy,0,0) #右側が障害物かどうかチェックする
                         if self.enemy[i].enemy_flag2 <= 0 or self.collision_flag == 1:#右移動のカウンタが0以下、又は右に障害物があったら
                             self.enemy[i].direction = -1               #方向転換して左移動にする
                             self.enemy[i].enemy_flag1 = self.enemy[i].enemy_count1 #左移動するカウントを原本からコピーしてやる
@@ -425,7 +425,7 @@ class update_enemy:
                             self.enemy[i].enemy_flag2 -= 1 #右移動のカウンタを1減らします
                             self.enemy[i].vx = 1             #x軸の移動ベクトルは右方向です
                 
-                func.check_bg_collision(self,self.enemy[i].posx + 4,self.enemy[i].posy + 8,0,0) #足元が障害物かどうかチェックする
+                update_bg.check_bg_collision(self,self.enemy[i].posx + 4,self.enemy[i].posy + 8,0,0) #足元が障害物かどうかチェックする
                 if self.collision_flag == 0:#もし足元に障害物が無かった時は
                     self.enemy[i].vy = 0.5  #y軸の移動ベクトルを1にして下方向(落下方向)にする
                     self.enemy[i].vx = self.enemy[i].vx * 0.8 #x軸方向の移動ベクトルもだんだんと小さくしていく

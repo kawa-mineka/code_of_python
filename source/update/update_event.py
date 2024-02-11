@@ -12,6 +12,7 @@ from const.const import * #定数定義モジュールの読み込み(公式で�
 from common.func  import * #汎用性のある関数群のモジュールの読み込み
 
 from update.update_boss import * #ボスを出現させる時に使用します
+from update.update_bg   import * #BGタイルマップの一部をイベント用タイムラインとして使用してるステージのためにBGアクセスモジュールをインポートしてます
 
 class update_event:
     def __init__(self):
@@ -163,122 +164,122 @@ class update_event:
         
         #今表示したマップに（「敵出現」情報）のキャラチップが含まれていたら敵を発生させる
         for i in range(self.bg_height // 8):     #BGの縦キャラチップ数だけy軸下方向に調べていく 通常スクロールなら15回 縦2画面スクロールステージなら30回ループする
-            func.get_bg_chip(self,WINDOW_W,i*8,0)#画面右端のマップチップのＢＧナンバーをゲットする(iの値・・・8で割ってまた8を掛けるのはスマートじゃないかも・・・)
+            update_bg.get_bg_chip(self,WINDOW_W,i*8,0)#画面右端のマップチップのＢＧナンバーをゲットする(iの値・・・8で割ってまた8を掛けるのはスマートじゃないかも・・・)
             if self.bg_chip == BG_HOUDA_UNDER:       #マップチップが地上固定砲台ホウダのとき
                 item_number = 0 #アイテムナンバー初期化
-                func.get_bg_chip(self,WINDOW_W+8,i*8,0)#画面右端のマップチップの更に一つ右のあるＢＧナンバーをゲットしパワーアップアイテム情報が書き込まれてるか調べる
+                update_bg.get_bg_chip(self,WINDOW_W+8,i*8,0)#画面右端のマップチップの更に一つ右のあるＢＧナンバーをゲットしパワーアップアイテム情報が書き込まれてるか調べる
                 if self.bg_chip == SHOT_POW_BG_NUM:      #ショットマップチップだったらショットアイテム情報を付加せよの命令のマップチップなので
                     item_number = E_SHOT_POW    #ショットアイテム
-                    func.delete_map_chip(self,self.bgx,i)#命令マップチップを消去する（0=何もない空白）を書き込む
+                    update_bg.delete_map_chip(self,self.bgx,i)#命令マップチップを消去する（0=何もない空白）を書き込む
                 elif self.bg_chip == MISSILE_POW_BG_NUM: #ミサイルマップチップだったらミサイルアイテム情報を付加せよの命令のマップチップなので
                     item_number = E_MISSILE_POW #ミサイルアイテム
-                    func.delete_map_chip(self,self.bgx,i)#命令マップチップを消去する（0=何もない空白）を書き込む
+                    update_bg.delete_map_chip(self,self.bgx,i)#命令マップチップを消去する（0=何もない空白）を書き込む
                 elif self.bg_chip == SHIELD_POW_BG_NUM:  #シールドマップチップだったらシールドアイテム情報を付加せよの命令のマップチップなので
                     item_number = E_SHIELD_POW  #シールドアイテム
-                    func.delete_map_chip(self,self.bgx,i)#命令マップチップを消去する（0=何もない空白）を書き込む
-                func.get_bg_chip(self,WINDOW_W,i*8,0)#bgxの値が変化したので再度bgチップナンバーを取得する関数を呼び出す
+                    update_bg.delete_map_chip(self,self.bgx,i)#命令マップチップを消去する（0=何もない空白）を書き込む
+                update_bg.get_bg_chip(self,WINDOW_W,i*8,0)#bgxの値が変化したので再度bgチップナンバーを取得する関数を呼び出す
                 new_enemy = Enemy()
                 new_enemy.update(EnemyName.HOUDA_UNDER,ID00,ENEMY_STATUS_NORMAL,ENEMY_ATTCK_ANY,   WINDOW_W,i * 8,0,0,     0,0,0,0,0,0,0,0,     0,0,0,0,0,0,0,0,0,0,   0,0,      0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0,    SIZE_8,SIZE_8,  1,0,    0, HP01 * self.enemy_hp_mag,   0,0,E_SIZE_NORMAL,0,0,0,     0,0,0,0,     item_number,ID00 ,0,0,0,    0  ,0,0,0,    0,GROUND_OBJ,  PT01,PT01,PT01,  PT01,PT01,PT01)
                 self.enemy.append(new_enemy)
-                func.delete_map_chip(self,self.bgx,i)#敵を出現させたら（「敵出現」情報）のキャラチップは不要なのでそこに（0=何もない空白）を書き込む                    
+                update_bg.delete_map_chip(self,self.bgx,i)#敵を出現させたら（「敵出現」情報）のキャラチップは不要なのでそこに（0=何もない空白）を書き込む                    
                 
             elif self.bg_chip == BG_HOUDA_UPPER:     #マップチップが天井固定砲台ホウダのとき
                 item_number = 0 #アイテムナンバー初期化
-                func.get_bg_chip(self,WINDOW_W+8,i*8,0)#画面右端のマップチップの更に一つ右のあるＢＧナンバーをゲットしパワーアップアイテム情報が書き込まれてるか調べる
+                update_bg.get_bg_chip(self,WINDOW_W+8,i*8,0)#画面右端のマップチップの更に一つ右のあるＢＧナンバーをゲットしパワーアップアイテム情報が書き込まれてるか調べる
                 if self.bg_chip == SHOT_POW_BG_NUM:      #ショットマップチップだったらショットアイテム情報を付加せよの命令のマップチップなので
                     item_number = E_SHOT_POW    #ショットアイテム
-                    func.delete_map_chip(self,self.bgx,i)#命令マップチップを消去する（0=何もない空白）を書き込む
+                    update_bg.delete_map_chip(self,self.bgx,i)#命令マップチップを消去する（0=何もない空白）を書き込む
                 elif self.bg_chip == MISSILE_POW_BG_NUM: #ミサイルマップチップだったらミサイルアイテム情報を付加せよの命令のマップチップなので
                     item_number = E_MISSILE_POW #ミサイルアイテム
-                    func.delete_map_chip(self,self.bgx,i)#命令マップチップを消去する（0=何もない空白）を書き込む
+                    update_bg.delete_map_chip(self,self.bgx,i)#命令マップチップを消去する（0=何もない空白）を書き込む
                 elif self.bg_chip == SHIELD_POW_BG_NUM:  #シールドマップチップだったらシールドアイテム情報を付加せよの命令のマップチップなので
                     item_number = E_SHIELD_POW  #シールドアイテム
-                    func.delete_map_chip(self,self.bgx,i)#命令マップチップを消去する（0=何もない空白）を書き込む
+                    update_bg.delete_map_chip(self,self.bgx,i)#命令マップチップを消去する（0=何もない空白）を書き込む
                 
-                func.get_bg_chip(self,WINDOW_W,i*8,0)#bgxの値が変化したので再度bgチップナンバーを取得する関数を呼び出す
+                update_bg.get_bg_chip(self,WINDOW_W,i*8,0)#bgxの値が変化したので再度bgチップナンバーを取得する関数を呼び出す
                 new_enemy = Enemy()
                 new_enemy.update(EnemyName.HOUDA_UPPER,ID00,ENEMY_STATUS_NORMAL,ENEMY_ATTCK_ANY,   WINDOW_W,i * 8,0,0,     0,0,0,0,0,0,0,0,    0,0,0,0,0,0,0,0,0,0,   0,0,     0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0,    SIZE_8,SIZE_8,  1,0,  0,  HP01 * self.enemy_hp_mag,    0,0,E_SIZE_NORMAL,0,0,0,    0,0,0,0,    item_number,ID00 ,0,0,0,    0  ,0,0,0,    0,GROUND_OBJ,  PT01,PT01,PT01,  PT01,PT01,PT01)
                 self.enemy.append(new_enemy)
-                func.delete_map_chip(self,self.bgx,i)#敵を出現させたら(「敵出現」情報)のキャラチップは不要なのでそこに（0=何もない空白）を書き込む
+                update_bg.delete_map_chip(self,self.bgx,i)#敵を出現させたら(「敵出現」情報)のキャラチップは不要なのでそこに（0=何もない空白）を書き込む
                 
             elif self.bg_chip == BG_HOPPER_CHAN2:    #マップチップがはねるホッパーちゃん２のとき
                 new_enemy = Enemy()
                 new_enemy.update(EnemyName.HOPPER_CHAN2,ID00,ENEMY_STATUS_NORMAL,ENEMY_ATTCK_ANY,   WINDOW_W,i * 8,0,0,     0,0,0,0,0,0,0,0,     0,0,0,0,0,0,0,0,0,0,    0.4,0,     0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0,     SIZE_8,SIZE_8,    0.2*self.enemy_speed_mag,0,  -1,    HP01 * self.enemy_hp_mag,   0,0,   E_SIZE_NORMAL,(i * 8),-20,1,     0,0,0,0,     E_NO_POW,ID00 ,0,0,0,    0  ,0,0,0,    0,MOVING_OBJ,  PT01,PT01,PT01,  PT01,PT01,PT01)
                 self.enemy.append(new_enemy)
-                func.delete_map_chip(self,self.bgx,i)#敵を出現させたら（「敵出現」情報）のキャラチップは不要なのでそこに（0=何もない空白）を書き込む
+                update_bg.delete_map_chip(self,self.bgx,i)#敵を出現させたら（「敵出現」情報）のキャラチップは不要なのでそこに（0=何もない空白）を書き込む
                 
             elif self.bg_chip == BG_SAISEE_RO:       #マップチップがサイシーロの時(サインカーブを描く敵）
                 new_enemy = Enemy()
                 new_enemy.update(EnemyName.SAISEE_RO,ID00,ENEMY_STATUS_NORMAL,ENEMY_ATTCK_ANY,   WINDOW_W,i * 8,0,0,      0,0,0,0,0,0,0,0,     0,0,0,0,0,0,0,0,0,0,   0,0,     0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0,     SIZE_8,SIZE_8,    1*self.enemy_speed_mag,0,   0,   HP01 * self.enemy_hp_mag,    0,0,   E_SIZE_NORMAL,   0.5,0.05,0,    0,0,0,0,     E_NO_POW,ID00 ,0,0,0,    0  ,0,0,0,    0,AERIAL_OBJ,  PT01,PT01,PT01,  PT01,PT01,PT01)
                 self.enemy.append(new_enemy)
-                func.delete_map_chip(self,self.bgx,i)#敵を出現させたら（「敵出現」情報）のキャラチップは不要なのでそこに（0=何もない空白）を書き込む
+                update_bg.delete_map_chip(self,self.bgx,i)#敵を出現させたら（「敵出現」情報）のキャラチップは不要なのでそこに（0=何もない空白）を書き込む
                 
             elif self.bg_chip == BG_KURANBURU_UNDER: #マップチップが地上スクランブルハッチのとき
                 new_enemy = Enemy()
                 new_enemy.update(EnemyName.KURANBURU_UNDER,ID00,ENEMY_STATUS_NORMAL,ENEMY_ATTCK_ANY,   WINDOW_W,i * 8,0,0,      0,0,0,0,0,0,0,0,      0,0,0,0,0,0,0,0,0,0,    0,0,     0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0,    SIZE_24,SIZE_16,   0.5,0,   0,    HP10 * self.enemy_hp_mag,   0,0,   E_SIZE_MIDDLE32,  (func.s_rndint(self,0,130) + 10),  6, 20,     0,0,0,0,     E_NO_POW,ID00 ,0,0,0,    0  ,0,0,0,    0,GROUND_OBJ,  PT01,PT01,PT01,  PT01,PT10,PT01)
                 self.enemy.append(new_enemy)
-                func.delete_map_chip(self,self.bgx,i)#敵を出現させたら（「敵出現」情報）のキャラチップは不要なのでそこに（0=何もない空白）を書き込む
+                update_bg.delete_map_chip(self,self.bgx,i)#敵を出現させたら（「敵出現」情報）のキャラチップは不要なのでそこに（0=何もない空白）を書き込む
                 
             elif self.bg_chip == BG_KURANBURU_UPPER: #マップチップが天井スクランブルハッチのとき
                 new_enemy = Enemy()
                 new_enemy.update(EnemyName.KURANBURU_UPPER,ID00,ENEMY_STATUS_NORMAL,ENEMY_ATTCK_ANY,   WINDOW_W,i * 8,0,0,     0,0,0,0,0,0,0,0,      0,0,0,0,0,0,0,0,0,0,    0,0,    0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0,     SIZE_24,SIZE_16,   0.5,0,   0,    HP10 * self.enemy_hp_mag,   0,0,   E_SIZE_MIDDLE32_Y_REV,  (func.s_rndint(self,0,130) + 10),  6, 20,     0,0,0,0,     E_NO_POW,ID00 ,0,0,0,    0  ,0,0,0,    0,GROUND_OBJ,  PT01,PT01,PT01,  PT01,PT10,PT01)
                 self.enemy.append(new_enemy)
-                func.delete_map_chip(self,self.bgx,i)#敵を出現させたら（「敵出現」情報）のキャラチップは不要なのでそこに（0=何もない空白）を書き込む
+                update_bg.delete_map_chip(self,self.bgx,i)#敵を出現させたら（「敵出現」情報）のキャラチップは不要なのでそこに（0=何もない空白）を書き込む
                 
             elif self.bg_chip == BG_TEMI:            #マップチップが赤いアイテムキャリアーテミーのとき
                 item_number = 0 #アイテムナンバー初期化
-                func.get_bg_chip(self,WINDOW_W+8,i*8,0)#画面右端のマップチップの更に一つ右のあるＢＧナンバーをゲットしパワーアップアイテム情報が書き込まれてるか調べる
+                update_bg.get_bg_chip(self,WINDOW_W+8,i*8,0)#画面右端のマップチップの更に一つ右のあるＢＧナンバーをゲットしパワーアップアイテム情報が書き込まれてるか調べる
                 if self.bg_chip == CLAW_POW_BG_NUM: #クローマップチップだったらクローアイテム情報を付加せよの命令のマップチップなので
                     item_number = E_CLAW_POW    #クローアイテム
-                    func.delete_map_chip(self,self.bgx,i)#命令マップチップを消去する（0=何もない空白）を書き込む
+                    update_bg.delete_map_chip(self,self.bgx,i)#命令マップチップを消去する（0=何もない空白）を書き込む
                     
                 elif self.bg_chip == TAIL_SHOT_BG_NUM: #テイルショットマップチップだったらテイルショットアイテム情報を付加せよの命令のマップチップなので
                     item_number = E_TAIL_SHOT_POW  #テイルショットアイテム
-                    func.delete_map_chip(self,self.bgx,i)#命令マップチップを消去する（0=何もない空白）を書き込む
+                    update_bg.delete_map_chip(self,self.bgx,i)#命令マップチップを消去する（0=何もない空白）を書き込む
                     
                 elif self.bg_chip == PENETRATE_ROCKET_BG_NUM: #ペネトレートロケットマップチップだったらペネトレートロケットアイテム情報を付加せよの命令のマップチップなので
                     item_number = E_PENETRATE_ROCKET_POW  #ペネトレートロケットアイテム
-                    func.delete_map_chip(self,self.bgx,i)#命令マップチップを消去する（0=何もない空白）を書き込む
+                    update_bg.delete_map_chip(self,self.bgx,i)#命令マップチップを消去する（0=何もない空白）を書き込む
                     
                 elif self.bg_chip == SEARCH_LASER_BG_NUM: #サーチレーザーマップチップだったらサーチレーザーアイテム情報を付加せよの命令のマップチップなので
                     item_number = E_SEARCH_LASER_POW #サーチレーザーアイテムアイテム
-                    func.delete_map_chip(self,self.bgx,i)#命令マップチップを消去する（0=何もない空白）を書き込む
+                    update_bg.delete_map_chip(self,self.bgx,i)#命令マップチップを消去する（0=何もない空白）を書き込む
                     
                 elif self.bg_chip == HOMING_MISSILE_BG_NUM: #ホーミングミサイルマップチップだったらホーミングミサイルアイテム情報を付加せよの命令のマップチップなので
                     item_number = E_HOMING_MISSILE_POW  #ホーミングミサイルアイテム
-                    func.delete_map_chip(self,self.bgx,i)#命令マップチップを消去する（0=何もない空白）を書き込む
+                    update_bg.delete_map_chip(self,self.bgx,i)#命令マップチップを消去する（0=何もない空白）を書き込む
                     
                 elif self.bg_chip == SHOCK_BUMPER_BG_NUM: #ショックバンパーマップチップだったらショックバンパーアイテム情報を付加せよの命令のマップチップなので
                     item_number = E_SHOCK_BUMPER_POW #ショックバンパーアイテム
-                    func.delete_map_chip(self,self.bgx,i)#命令マップチップを消去する（0=何もない空白）を書き込む
+                    update_bg.delete_map_chip(self,self.bgx,i)#命令マップチップを消去する（0=何もない空白）を書き込む
                     
                 elif self.bg_chip == TRIANGLE_POW_BG_NUM: #トライアングルアイテムマップチップだったらトライアイングルアイテム情報を付加せよの命令のマップチップなので
                     item_number = E_TRIANGLE_POW #トライアングルアイテム
-                    func.delete_map_chip(self,self.bgx,i)#命令マップチップを消去する（0=何もない空白）を書き込む
+                    update_bg.delete_map_chip(self,self.bgx,i)#命令マップチップを消去する（0=何もない空白）を書き込む
                 
-                func.get_bg_chip(self,WINDOW_W,i*8,0)#bgxの値が変化したので再度bgチップナンバーを取得する関数を呼び出す
+                update_bg.get_bg_chip(self,WINDOW_W,i*8,0)#bgxの値が変化したので再度bgチップナンバーを取得する関数を呼び出す
                 new_enemy = Enemy()
                 new_enemy.update(EnemyName.TEMI,ID00,ENEMY_STATUS_NORMAL,ENEMY_ATTCK_ANY,   WINDOW_W,i * 8,0,0,     0,0,0,0,0,0,0,0,       0,0,0,0,0,0,0,0,0,0,    -0.44,0,     0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0,    SIZE_24,SIZE_8,   0,0,   0,    HP10,   0,0,   E_SIZE_NORMAL,  0,0,0,   0,0,0,0,     item_number,ID00 ,0,0,0,    0  ,0,0,0,    0,AERIAL_OBJ,  PT01,PT01,PT01,  PT01,PT01,PT01)
                 self.enemy.append(new_enemy)
-                func.delete_map_chip(self,self.bgx,i)#敵を出現させたら（「敵出現」情報）のキャラチップは不要なのでそこに（0=何もない空白）を書き込む 
+                update_bg.delete_map_chip(self,self.bgx,i)#敵を出現させたら（「敵出現」情報）のキャラチップは不要なのでそこに（0=何もない空白）を書き込む 
                 
             elif self.bg_chip == BG_RAY_BLASTER:     #マップチップがレイブラスターのとき(直進して画面前方のどこかで停止→レーザービーム射出→急いで後退)
                 new_enemy = Enemy()
                 new_enemy.update(EnemyName.RAY_BLASTER,ID00,ENEMY_STATUS_NORMAL,ENEMY_ATTCK_ANY,   WINDOW_W + 8,i * 8,0,0,      0,0,0,0,0,0,0,0,       0,0,0,0,0,0,0,0,0,0,    -2,(func.s_rndint(self,0,1)-0.5),     0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0,     SIZE_8,SIZE_8,   0.98,0,    0,    HP01 * self.enemy_hp_mag,  0,0,    E_SIZE_NORMAL,   80 + func.s_rndint(self,0,40),0,0,     0,0,0,0,     E_NO_POW,ID00 ,0,0,0,    0  ,0,0,0,    0,AERIAL_OBJ,  PT01,PT01,PT01,  PT01,PT01,PT01)
                 self.enemy.append(new_enemy)
-                func.delete_map_chip(self,self.bgx,i)#敵を出現させたら（「敵出現」情報）のキャラチップは不要なのでそこに（0=何もない空白）を書き込む
+                update_bg.delete_map_chip(self,self.bgx,i)#敵を出現させたら（「敵出現」情報）のキャラチップは不要なのでそこに（0=何もない空白）を書き込む
                 
             elif self.bg_chip == BG_MUU_ROBO:        #マップチップがムーロボのとき(地面を左右に動きながらチョット進んできて弾を撃つ移動砲台,何故か宇宙なのに重力の影響を受けて下に落ちたりもします)
                 new_enemy = Enemy()
                 new_enemy.update(EnemyName.MUU_ROBO,ID00,ENEMY_STATUS_NORMAL,ENEMY_ATTCK_ANY,   WINDOW_W,i * 8,0,0,       0,0,0,0,0,0,0,0,       0,0,0,0,0,0,0,0,0,0,    0,0,     0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0,     SIZE_8,SIZE_8,   0.8*self.enemy_speed_mag,0,    -1,    HP01 * self.enemy_hp_mag,  70,80,    E_SIZE_NORMAL,   70,80,0,     0,0,0,0,       E_NO_POW,ID00 ,0,0,0,    0  ,0,0,0,    0,MOVING_OBJ,  PT01,PT01,PT01,  PT01,PT01,PT01)
                 self.enemy.append(new_enemy)
-                func.delete_map_chip(self,self.bgx,i)#敵を出現させたら（「敵出現」情報）のキャラチップは不要なのでそこに（0=何もない空白）を書き込む
+                update_bg.delete_map_chip(self,self.bgx,i)#敵を出現させたら（「敵出現」情報）のキャラチップは不要なのでそこに（0=何もない空白）を書き込む
                 
             elif self.bg_chip == BG_ROLL_BLITZ:      #マップチップがロールブリッツのとき(画面内のあらかじめ決められた場所へスプライン曲線で移動)
                 new_enemy = Enemy()
                 new_enemy.update(EnemyName.ROLL_BLITZ,ID00,ENEMY_STATUS_MOVE_COORDINATE_INIT,ENEMY_ATTCK_ANY,    WINDOW_W,i * 8,0,0,     0,0,0,0,0,0,0,0,       0,0,0,0,0,0,0,0,0,0,    0,0,     0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0,    SIZE_8,SIZE_8,   0,1,   0,    HP01,  0,0,    E_SIZE_NORMAL,   0,0,0,    0,0,0,0,      E_NO_POW,   ID00    ,0,0,0,    0  ,0,0,0,    0,AERIAL_OBJ,  PT01,PT01,PT01,  PT01,PT01,PT01)
                 self.enemy.append(new_enemy)
-                func.delete_map_chip(self,self.bgx,i)#敵を出現させたら（「敵出現」情報）のキャラチップは不要なのでそこに（0=何もない空白）を書き込む
+                update_bg.delete_map_chip(self,self.bgx,i)#敵を出現させたら（「敵出現」情報）のキャラチップは不要なのでそこに（0=何もない空白）を書き込む
     
     #タイムラインマップによる建物の追加発生を行う
     def building_born_timeline_map(self):
@@ -294,9 +295,9 @@ class update_event:
             if self.timeline_old_mapx == mapx:          #タイムラインマップのx座標が前回の位置と同じなら何も更新しないでリターンする
                 return        #何も更新せずリターンする
             
-            mapy = 64
+            mapy = 64 #夜間高層ビルステージのタイムラインマップ座標1レイヤー目のy座標値
             for i in range (4):
-                chrcode = func.get_chrcode_tilemap(self,TM0,mapx,mapy + i)          #タイムラインマップのマップチップのＢＧナンバーをゲットする(夜間高層ビルステージのタイムラインマップ座標1レイヤー目は(mapx,64*8)となる)
+                chrcode = update_bg.get_chrcode_tilemap(self,TM0,mapx,mapy + i)          #タイムラインマップのマップチップのＢＧナンバーをゲットする(夜間高層ビルステージのタイムラインマップ座標1レイヤー目は(mapx,64)となる)
                 
                 #タイムラインマップのx座標位置を更新する
                 self.timeline_old_mapx = mapx
@@ -305,30 +306,48 @@ class update_event:
                 if chrcode == self.bg_append_building_null_chr: #キャラチップがそのステージのnullチップならば
                     continue                                    #次のループへコンティニューする
                 elif chrcode == (8 / 8) * 32 + ( 0 / 8):        #キャラチップ「0」だったなら(マップチップ x0y8 公式は(y/8)*32 + (x/8)となります) 
-                    print("timeline ", end="")
-                    print(mapx, end="")
-                    print(" ", end="")
-                    print(mapy, end="")
-                    print("  chip", end="")
-                    print(chrcode,end="")
-                    print("  priority", end="")
-                    print(priority)
+                    # print("timeline ", end="")
+                    # print(mapx, end="")
+                    # print(" ", end="")
+                    # print(mapy, end="")
+                    # print("  chip", end="")
+                    # print(chrcode,end="")
+                    # print("  priority", end="")
+                    # print(priority)
                     
                     #ビル１を発生させる
                     num = 0
                     update_obj.append_building(self,num,spd,priority)
                 elif chrcode == (8 / 8) * 32 + ( 8 / 8):        #キャラチップ「1」だったなら マップチップ座標(1,1)
-                    print("timeline ", end="")
-                    print(mapx, end="")
-                    print(" ", end="")
-                    print(mapy, end="")
-                    print("  chip ", end="")
-                    print(chrcode,end="")
-                    print("  priority ", end="")
-                    print(priority)
+                    # print("timeline ", end="")
+                    # print(mapx, end="")
+                    # print(" ", end="")
+                    # print(mapy, end="")
+                    # print("  chip ", end="")
+                    # print(chrcode,end="")
+                    # print("  priority ", end="")
+                    # print(priority)
                     #ビル2を発生させる
                     num = 1
                     update_obj.append_building(self,num,spd,priority)
+                elif chrcode == (8 / 8) * 32 + (16 / 8):        #キャラチップ「2」だったなら マップチップ座標(2,1)ビルの上昇エレベーター表示
+                    #タイムラインマップの4キャラ下方向にY軸のオフセット値を書き込んであるので取得する
+                    offset_y = update_bg.get_chrcode_tilemap(self,TM0,mapx,mapy + 4 +i)     
+                    # print("timeline ", end="")
+                    # print(mapx, end="")
+                    # print(" ", end="")
+                    # print(mapy, end="")
+                    # print("  chip ", end="")
+                    # print(chrcode,end="")
+                    # print("  offset_y ", end="")
+                    # print(offset_y,end="")
+                    # print("  ビルの上昇エレベーター表示 ")
+                    
+                    #ビル上昇エレベーターを育成する
+                    y = offset_y
+                    new_background_object = Background_object()
+                    new_background_object.update(BG_OBJ_ELEVATOR1, 120,10,  0,    1,1,0,0,0,0,0,0,   -1,1,  0,0,   0,0,0,0,0,   0,0,0, 0,0,0,  0,0,0)
+                    self.background_object.append(new_background_object)
 
     #アペンドイベントリクエスト(イベント追加依頼）による敵の発生
     def append_request(self):

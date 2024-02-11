@@ -30,11 +30,11 @@ class update_btn_assign:
         btn_id    = ボタンID     = 機能を割り当てるボタンのIDナンバー
         action_id = アクションID = 割り当てる機能(アクション)のIDナンバー
         """
-        print("ボタンID "     + str(btn_id))
-        print("アクションID " + str(action_id))
-        print("")
-        print("同じアクションを持つボタンID は " + str(update_btn_assign.check_action_id(self,action_id)))
-        print("")
+        # print("ボタンID "     + str(btn_id))
+        # print("アクションID " + str(action_id))
+        # print("")
+        # print("同じアクションを持つボタンID は " + str(update_btn_assign.check_action_id(self,action_id)))
+        # print("")
         btn_id1 = btn_id
         btn_id2 = update_btn_assign.check_action_id(self,action_id) #同じアクションを持つボタンIDを調べそのボタンIDをbtn_id2に入れる
         if btn_id2 == -1: #同じアクションIDを持つボタンが存在しない場合は

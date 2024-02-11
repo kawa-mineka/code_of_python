@@ -15,8 +15,9 @@ import pyxel        #グラフイックキャラやバックグラウンドグ�
 from const.const import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
 from common.func  import * #汎用性のある関数群のモジュールの読み込み
 
-from update.update_obj  import * #背景オブジェクト更新関数モジュール読み込み(パーティクルで使用)
-from update.update_ship import * #自機関連の更新関数モジュールの読み込み、クローを取った後の「クローの発生関数の呼び出し」,「自機のダメージ追加」で使用します
+from update.update_obj   import * #背景オブジェクト更新関数モジュール読み込み(パーティクルで使用)
+from update.update_ship  import * #自機関連の更新関数モジュールの読み込み、クローを取った後の「クローの発生関数の呼び出し」,「自機のダメージ追加」で使用します
+from update.update_score import * #スコア関連の更新モジュールの読み込み
 
 class update_collision:
     def __init__(self):
@@ -127,7 +128,7 @@ class update_collision:
             return                        #衝突判定はせずそのまま帰っちゃう
         if self.invincible_counter > 0: #無敵時間が残っていた場合は・・・
             return                 #衝突判定はせずそのまま帰っちゃう・・・無敵最高！
-        func.check_bg_collision(self,self.my_x + 6,self.my_y + 4,0,0)
+        update_bg.check_bg_collision(self,self.my_x + 6,self.my_y + 4,0,0)
         if self.collision_flag == 1: #コリジョンフラグが建っていたのなら
             update_ship.damage(self,1) #障害物に当たったので自機のシールド値を減らす
 
@@ -220,13 +221,13 @@ class update_collision:
                     if  self.score_star_magnification >= self.max_score_star_magnification and self.replay_status != REPLAY_PLAY: #スコアスター取得点数の倍率が最大倍率以上＆リプレイ再生では無いの場合は・・・
                             self.max_score_star_magnification = self.score_star_magnification  #最大倍率を更新する
                     
-                    func.add_score(self,20 * self.score_star_magnification)    #スコアスター得点上昇！
+                    update_score.add_score(self,20 * self.score_star_magnification)    #スコアスター得点上昇！
                     update_sound.se(self,0,SE_POWUP_GET,self.master_se_vol) #パワーアップアイテムゲットの音を鳴らすのだ
-                    print(" ")
-                    print("MAG")
-                    print(self.score_star_magnification)
-                    print("MAX")
-                    print(self.max_score_star_magnification)
+                    # print(" ")
+                    # print("MAG")
+                    # print(self.score_star_magnification)
+                    # print("MAX")
+                    # print(self.max_score_star_magnification)
                     if self.damaged_flag == FLAG_OFF: #前回スタースコア取得時からダメージを受けたフラグが立っていないのならばノーダメージということなので・・・
                         self.score_star_magnification += 1 #スコアスター取得点数の倍率を1増やす(最大5倍まで)
                         
@@ -272,7 +273,7 @@ class update_collision:
                             point = self.enemy[e].score_berserk
                         else:                                     #ステータスが以上に当てはまらないときはscore_normalとする
                             point = self.enemy[e].score_normal
-                        func.add_score(self,point) #スコアを加算する関数の呼び出し
+                        update_score.add_score(self,point) #スコアを加算する関数の呼び出し
                         del self.enemy[e] #敵リストから破壊した敵をdel消去破壊するっ！
                         
                     self.shots[h].shot_hp = 0#自機弾のＨＰをゼロにして自機弾移動時にチェックしリストから消去させるため
@@ -557,7 +558,7 @@ class update_collision:
         if  0 <= self.shot_level <= 6:#ウェーブカッターの場合は背景は貫通する
             shot_count = len(self.shots)
             for i in reversed(range(shot_count)):
-                func.check_bg_collision(self,self.shots[i].posx,self.shots[i].posy + 4,0,0)
+                update_bg.check_bg_collision(self,self.shots[i].posx,self.shots[i].posy + 4,0,0)
                 if self.collision_flag == 1:
                     update_obj.append_particle(self,PARTICLE_LINE,PRIORITY_FRONT,self.shots[i].posx,self.shots[i].posy,0,0, 0,0,0)
                     del self.shots[i]    
@@ -1057,7 +1058,7 @@ class update_collision:
         """
         claw_shot_count = len(self.claw_shot)
         for i in reversed(range(claw_shot_count)):
-            func.check_bg_collision(self,self.claw_shot[i].posx,(self.claw_shot[i].posy) + 4,0,0)
+            update_bg.check_bg_collision(self,self.claw_shot[i].posx,(self.claw_shot[i].posy) + 4,0,0)
             if self.collision_flag == 1:#背景と衝突したのならクローショットを消滅させる
                 del self.claw_shot[i]        
 
@@ -1073,9 +1074,9 @@ class update_collision:
                 or self.enemy_shot[i].enemy_shot_type == EnemyShot.VECTOR_LASER:    #ウェーブ、ベクトルレーザーは当たり判定無し
                 continue #当たり判定はしないで次のループ回へ突入！
             elif self.enemy_shot[i].enemy_shot_type == EnemyShot.LASER: #レーザービームの場合は障害物にギリギリまで当たり食い込みたいのでx座標を右に1ブロック分(8ドット)だけ補正を入れてやる
-                func.check_bg_collision(self,self.enemy_shot[i].posx + 6 + 8,self.enemy_shot[i].posy + 4,0,0)
+                update_bg.check_bg_collision(self,self.enemy_shot[i].posx + 6 + 8,self.enemy_shot[i].posy + 4,0,0)
             else:
-                func.check_bg_collision(self,self.enemy_shot[i].posx + 6   ,self.enemy_shot[i].posy + 4,0,0)
+                update_bg.check_bg_collision(self,self.enemy_shot[i].posx + 6   ,self.enemy_shot[i].posy + 4,0,0)
                 
             if self.collision_flag == 1: #衝突フラグが立っていたらを敵弾を消滅させる
                 del self.enemy_shot[i]        

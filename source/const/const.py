@@ -720,6 +720,25 @@ BG_OBJ_CLOUD19,BG_OBJ_CLOUD20,BG_OBJ_CLOUD21                                 = 1
 
 BG_OBJ_CLOUD22                                                               = 21              #雲特大22
 
+BG_OBJ_ELEVATOR1                                                             = 22            #4面高層ビル用エレベーター1
+
+#BG書き換えアニメ(事前に書き換え指定のマップチップを探して座標を登録記録していくタイプ)を行うかどうかのフラグ
+PREDEF_BGANIME_OFF = 0
+PREDEF_BGANIME_ON  = 1
+#BG書き換え用オブジェクト(事前に書き換え指定のマップチップを探して座標を登録記録していくタイプ)のマップチップ関連の定数定義
+BG_OBJ_PREDEF_DUMMY               = 0 #登録用ダミーデータ
+BG_OBJ_PREDEF_ELEVATOR1           = 1 #4面高層ビル用エレベーターその1  アスキーコードは(16 / 8) * 32 + ( 8 / 8)  #マップチップ x8y16 ショットアイテム 公式は(y/8)*32 + (x/8)となります
+
+#BG書き換えアニメーション描画枚数の指定
+ONE_SHEET    = 1 #1枚
+TWO_SHEET    = 2
+THREE_SHEET  = 3
+FOUR_SHEET   = 4
+FIVE_SHEET   = 5
+SIX_SHEET    = 6
+SEVEN_SHEET  = 7
+EIGHT_SHEET  = 8
+
 #背景建物の表示プライオリティ(優先度) 数値が小さいものほど前面に表示されます
 BUILDING_PRIORITY_0          = 0 #最前面
 BUILDING_PRIORITY_1          = 1 

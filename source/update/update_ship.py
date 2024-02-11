@@ -225,7 +225,7 @@ class update_ship:
             if 0 <= self.missile[i].missile_type <= 3:#通常ミサイルの処理
                 self.missile[i].vy = self.missile[i].y_reverse * 0.7#ミサイルの落下スピードを標準の0.7にしておく（ｙ軸反転を掛けて反転もさせる）
                 #ミサイルの真下（もしくは真上）が地形かどうか？チェック
-                func.check_bg_collision(self,self.missile[i].posx,(((self.missile[i].posy ) // 8) * 8) + self.missile[i].y_reverse + 8,  0,0)#これで上手くいった・・なんでや・・どうしてや？
+                update_bg.check_bg_collision(self,self.missile[i].posx,(((self.missile[i].posy ) // 8) * 8) + self.missile[i].y_reverse + 8,  0,0)#これで上手くいった・・なんでや・・どうしてや？
                 
                 if self.collision_flag == 1:#障害物に当たった時の処理
                     self.missile[i].missile_flag1 = 1#もしミサイルの真下(y_reverseが-1なら真上）が障害物ならmissile_flag1を１にして
@@ -234,7 +234,7 @@ class update_ship:
                         self.missile[i].vx = -1
                 
                 #ミサイルの進行先が地形かどうか？チェック
-                func.check_bg_collision(self,self.missile[i].posx + (self.missile[i].x_reverse * 8),self.missile[i].posy + 4,0,0)
+                update_bg.check_bg_collision(self,self.missile[i].posx + (self.missile[i].x_reverse * 8),self.missile[i].posy + 4,0,0)
                 
                 if self.missile[i].missile_hp == 0:
                     del self.missile[i]#ミサイルのＨＰが0だったらインスタンスを破棄する(ミサイル消滅)
@@ -260,7 +260,7 @@ class update_ship:
                 
             elif    self.missile[i].missile_type == 4:#テイルショットの処理        
                 #テイルショットの位置が地形かどうか？チェック
-                func.check_bg_collision(self,self.missile[i].posx,self.missile[i].posy,0,0)
+                update_bg.check_bg_collision(self,self.missile[i].posx,self.missile[i].posy,0,0)
                 if self.collision_flag == 1 or self.missile[i].missile_hp == 0:
                     del self.missile[i]#テイルショットの位置が障害物かもしくはテイルショットのＨＰが0だったらインスタンスを破棄する（テイルショット消滅） 
                 else:
@@ -276,7 +276,7 @@ class update_ship:
                 self.missile[i].posy += self.missile[i].vy * self.missile[i].y_reverse #ペネトレートロケットのx,y座標をvx,vyと足し合わせて更新(y_reverseが-1ならy軸の補正が逆となる)           
             elif    self.missile[i].missile_type == 6:#サーチレーザーの処理        
                 #サーチレーザーの位置が地形かどうか？チェック
-                func.check_bg_collision(self,self.missile[i].posx,self.missile[i].posy,0,0)
+                update_bg.check_bg_collision(self,self.missile[i].posx,self.missile[i].posy,0,0)
                 if self.collision_flag == 1 or self.missile[i].missile_hp == 0:
                     del self.missile[i]#サーチレーザーの位置が障害物かもしくはサーチレーザーのＨＰが0だったらインスタンスを破棄する（サーチレーザー消滅） 
                 else:

@@ -12,6 +12,8 @@ from const.const_window      import * #主にウィンドウクラスで使用�
 from const.const_visualscene import * #主にビジュアルシーンクラスで使用する定数定義
 from common.func              import * #汎用性のある関数群のモジュールの読み込み
 
+from update.update_bg        import * #デバッグモードでの当たり判定で背景チップを確認したいときにBGにアクセスしないといけないのでBGアクセス関連のモジュールをインポート
+
 class graph:
     #IPLメッセージの表示#######################################
     def draw_ipl(self): 
@@ -672,6 +674,10 @@ class graph:
                 pyxel.blt(self.background_object[i].posx +9*8,self.background_object[i].posy +2*8,  IMG1, 160,232,    16,24,    pyxel.COLOR_NAVY) #雲大21の右先端描画
                 pyxel.blt(self.background_object[i].posx +3*8,self.background_object[i].posy +3*8,  IMG1, 112,240,    64,16,    pyxel.COLOR_NAVY) #雲大21の下部右描画
                 pyxel.blt(self.background_object[i].posx     ,self.background_object[i].posy +2*8,  IMG1,  96,232,    24,16,    pyxel.COLOR_NAVY) #雲大21の左のしっぽ描画
+            
+            elif self.background_object[i].background_object_type == BG_OBJ_ELEVATOR1: #4面,夜間高層ビルステージの高層ビルエレベーター1
+
+                pyxel.blt(self.background_object[i].posx,self.background_object[i].posy,    IMG0,    72,176,    8, 8,    pyxel.COLOR_BLACK) #高層ビルエレベーター1を表示
 
     #建物オブジェクトの表示
     def draw_building_object(self,priority):
@@ -1039,7 +1045,7 @@ class graph:
         if self.bgx > 255:
             self.bgx = 0
         
-        self.bg_chip = func.get_chrcode_tilemap(self,0, self.bgx,self.bgy)
+        self.bg_chip = update_bg.get_chrcode_tilemap(self,0, self.bgx,self.bgy)
         pyxel.text(70,WINDOW_H - 6,str(self.bgx),pyxel.COLOR_WHITE)
         pyxel.text(85,WINDOW_H - 6,str(self.bgy),pyxel.COLOR_WHITE)
         
@@ -1949,7 +1955,7 @@ class graph:
                         else:
                             dis_offset_x = 0
                         
-                        print(subtitle_text)
+                        # print(subtitle_text)
                         func.drop_shadow_kanji_text(self,dis_x + dis_offset_x ,dis_y,subtitle_text,7) #日本語字幕の表示
                     
                 elif self.visualscene[i].scroll_text  != "" and self.language == LANGUAGE_JPN: #スクロールテキストリストが空でない&選択言語が日本語ならば表示を始める
