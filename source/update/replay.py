@@ -1,5 +1,5 @@
 ###########################################################
-#  update_replayクラス                                    #      
+#  replayクラス                                            #      
 ###########################################################
 #  Appクラスのupdate関数から呼び出される関数群               #
 #  主にリプレイ記録に関する更新を行う関数(メソッド？）ですよ～♪#
@@ -10,9 +10,9 @@
 import pyxel        #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
 from const.const import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
 from common.func  import * #汎用性のある関数群のモジュールの読み込み
-from update.update_system import * #リプレイファイルの読み書きで使用します
+from update.system import * #リプレイファイルの読み書きで使用します
 
-class update_replay:
+class replay:
     #リプレイデータ・ファイルロード
     def data_file_load(self):
         """
@@ -25,63 +25,63 @@ class update_replay:
         # pyxel.load("./assets/replay/" + slot_num + "/replay_status.pyxres") #リプレイステータスファイルにアクセスするためにローディングだけしてやります(グラフイック関連のアセットをローディングしている時がほとんどなので)
         
         #各種設定値読み込み 数字の[0]はアスキーコード16番なので16引いて文字から数字としての0にしてやります
-        self.master_rnd_seed  = update_bg.get_chrcode_tilemap(self,0,  0,0)       #乱数の種(ゲームスタート時)を読み込み(そのまま取得します)
-        self.game_difficulty  = update_bg.get_chrcode_tilemap(self,0,  0,1) - 16  #難易度読み込み
-        self.stage_number     = update_bg.get_chrcode_tilemap(self,0,  0,2) - 16  #ステージ数読み込み
-        self.stage_loop       = update_bg.get_chrcode_tilemap(self,0,  0,3) - 16  #ループ数読み込み
-        self.replay_stage_num = update_bg.get_chrcode_tilemap(self,0,  0,4) - 16  #リプレイファイルとして記録する総ステージ数を読み込み
-        self.boss_test_mode   = update_bg.get_chrcode_tilemap(self,0,  0,5) - 16  ##ボステストモードのフラグを読み込み
+        self.master_rnd_seed  = bg.get_chrcode_tilemap(self,0,  0,0)       #乱数の種(ゲームスタート時)を読み込み(そのまま取得します)
+        self.game_difficulty  = bg.get_chrcode_tilemap(self,0,  0,1) - 16  #難易度読み込み
+        self.stage_number     = bg.get_chrcode_tilemap(self,0,  0,2) - 16  #ステージ数読み込み
+        self.stage_loop       = bg.get_chrcode_tilemap(self,0,  0,3) - 16  #ループ数読み込み
+        self.replay_stage_num = bg.get_chrcode_tilemap(self,0,  0,4) - 16  #リプレイファイルとして記録する総ステージ数を読み込み
+        self.boss_test_mode   = bg.get_chrcode_tilemap(self,0,  0,5) - 16  ##ボステストモードのフラグを読み込み
         
         #ステージ毎ごとの自機関連パラメーターのロード---------------------------------------------------------------------------
         for i in range(self.replay_stage_num + 1):
-            self.replay_mode_stage_data[i][ST_SCORE]           = update_system.read_data_num(self,5   -1+10,10+i,0, 10)        #座標(5,10+i)から10ケタのスコア(整数)を読み込みます
-            self.replay_mode_stage_data[i][ST_MY_SHIELD]       = update_system.read_data_num(self,16  -1 +5,10+i,0,  5)        #座標(16,10+i)から5ケタのシールド値を読み込みます
-            self.replay_mode_stage_data[i][ST_MY_SPEED]        = update_system.read_data_num(self,22  -1 +3,10+i,0,  3) // 100 #座標(22,10+i)から3ケタの自機スピード(0.75とか1.25とか小数点第2位まで行くので100でわった値を読み込みます)
+            self.replay_mode_stage_data[i][ST_SCORE]           = system.read_data_num(self,5   -1+10,10+i,0, 10)        #座標(5,10+i)から10ケタのスコア(整数)を読み込みます
+            self.replay_mode_stage_data[i][ST_MY_SHIELD]       = system.read_data_num(self,16  -1 +5,10+i,0,  5)        #座標(16,10+i)から5ケタのシールド値を読み込みます
+            self.replay_mode_stage_data[i][ST_MY_SPEED]        = system.read_data_num(self,22  -1 +3,10+i,0,  3) // 100 #座標(22,10+i)から3ケタの自機スピード(0.75とか1.25とか小数点第2位まで行くので100でわった値を読み込みます)
             
-            self.replay_mode_stage_data[i][ST_SELECT_SHOT_ID]  = update_system.read_data_num(self,27  -1 +2,10+i,0,  2)    #座標(27,10+i)から2ケタのショットIDを読み込みます
+            self.replay_mode_stage_data[i][ST_SELECT_SHOT_ID]  = system.read_data_num(self,27  -1 +2,10+i,0,  2)    #座標(27,10+i)から2ケタのショットIDを読み込みます
             
-            self.replay_mode_stage_data[i][ST_SHOT_EXP]                 = update_system.read_data_num(self,31  -1 +4,10+i,0,  4)         #座標(31,10+i)から4ケタのショットの経験値を読み込みます
-            self.replay_mode_stage_data[i][ST_SHOT_LEVEL]               = update_system.read_data_num(self,36  -1 +2,10+i,0,  2)         #座標(36,10+i)から2ケタのショットのレベルを読み込みます
-            self.replay_mode_stage_data[i][ST_SHOT_SPEED_MAGNIFICATION] = update_system.read_data_num(self,39  -1 +5,10+i,0,  5) // 1000 #座標(39,10+i)から5ケタのショットのスピードに掛ける倍率を読み込みます(小数点第3位まで行くので1000で割った値を読み込みます)
-            self.replay_mode_stage_data[i][ST_SHOT_RAPID_OF_FIRE]       = update_system.read_data_num(self,45  -1 +2,10+i,0,  2)         #座標(45,10+i)から2ケタのショットの連射数を読み込みます
+            self.replay_mode_stage_data[i][ST_SHOT_EXP]                 = system.read_data_num(self,31  -1 +4,10+i,0,  4)         #座標(31,10+i)から4ケタのショットの経験値を読み込みます
+            self.replay_mode_stage_data[i][ST_SHOT_LEVEL]               = system.read_data_num(self,36  -1 +2,10+i,0,  2)         #座標(36,10+i)から2ケタのショットのレベルを読み込みます
+            self.replay_mode_stage_data[i][ST_SHOT_SPEED_MAGNIFICATION] = system.read_data_num(self,39  -1 +5,10+i,0,  5) // 1000 #座標(39,10+i)から5ケタのショットのスピードに掛ける倍率を読み込みます(小数点第3位まで行くので1000で割った値を読み込みます)
+            self.replay_mode_stage_data[i][ST_SHOT_RAPID_OF_FIRE]       = system.read_data_num(self,45  -1 +2,10+i,0,  2)         #座標(45,10+i)から2ケタのショットの連射数を読み込みます
             
-            self.replay_mode_stage_data[i][ST_MISSILE_EXP]                 = update_system.read_data_num(self,49  -1 +4,10+i,0,  4)         #座標(49,10+i)から4ケタのミサイルの経験値を読み込みます
-            self.replay_mode_stage_data[i][ST_MISSILE_LEVEL]               = update_system.read_data_num(self,54  -1 +2,10+i,0,  2)         #座標(54,10+i)から2ケタのミサイルのレベルを読み込みます
-            self.replay_mode_stage_data[i][ST_MISSILE_SPEED_MAGNIFICATION] = update_system.read_data_num(self,57  -1 +5,10+i,0,  5) // 1000 #座標(57,10+i)から5ケタのミサイルのスピードに掛ける倍率を読み込みます(小数点第3位まで行くので1000で割った値を読み込みます)
-            self.replay_mode_stage_data[i][ST_MISSILE_RAPID_OF_FIRE]       = update_system.read_data_num(self,63  -1 +2,10+i,0,  2)         #座標(63,10+i)から2ケタのミサイルの連射数を読み込みます
+            self.replay_mode_stage_data[i][ST_MISSILE_EXP]                 = system.read_data_num(self,49  -1 +4,10+i,0,  4)         #座標(49,10+i)から4ケタのミサイルの経験値を読み込みます
+            self.replay_mode_stage_data[i][ST_MISSILE_LEVEL]               = system.read_data_num(self,54  -1 +2,10+i,0,  2)         #座標(54,10+i)から2ケタのミサイルのレベルを読み込みます
+            self.replay_mode_stage_data[i][ST_MISSILE_SPEED_MAGNIFICATION] = system.read_data_num(self,57  -1 +5,10+i,0,  5) // 1000 #座標(57,10+i)から5ケタのミサイルのスピードに掛ける倍率を読み込みます(小数点第3位まで行くので1000で割った値を読み込みます)
+            self.replay_mode_stage_data[i][ST_MISSILE_RAPID_OF_FIRE]       = system.read_data_num(self,63  -1 +2,10+i,0,  2)         #座標(63,10+i)から2ケタのミサイルの連射数を読み込みます
             
-            self.replay_mode_stage_data[i][ST_SELECT_SUB_WEAPON_ID] = update_system.read_data_num(self,68  -1 +2,10+i,0,  2)   #座標(68,10+i)から2ケタの現在使用しているサブウェポンのIDナンバーを読み込みます
+            self.replay_mode_stage_data[i][ST_SELECT_SUB_WEAPON_ID] = system.read_data_num(self,68  -1 +2,10+i,0,  2)   #座標(68,10+i)から2ケタの現在使用しているサブウェポンのIDナンバーを読み込みます
             
-            self.replay_mode_stage_data[i][ST_CLAW_NUMBER]          = update_system.read_data_num(self,74  -1 +2,10+i,0,  2)   #座標(74,10+i)から2ケタのクローの装備数を読み込みます
-            self.replay_mode_stage_data[i][ST_CLAW_TYPE]            = update_system.read_data_num(self,71  -1 +2,10+i,0,  2)   #座標(71,10+i)から2ケタのクローのタイプを読み込みます
-            self.replay_mode_stage_data[i][ST_CLAW_DIFFERENCE]      = update_system.read_data_num(self,77  -1 +4,10+i,0,  4)   #座標(77,10+i)から4ケタのクロ―同士の角度間隔を読み込みます
+            self.replay_mode_stage_data[i][ST_CLAW_NUMBER]          = system.read_data_num(self,74  -1 +2,10+i,0,  2)   #座標(74,10+i)から2ケタのクローの装備数を読み込みます
+            self.replay_mode_stage_data[i][ST_CLAW_TYPE]            = system.read_data_num(self,71  -1 +2,10+i,0,  2)   #座標(71,10+i)から2ケタのクローのタイプを読み込みます
+            self.replay_mode_stage_data[i][ST_CLAW_DIFFERENCE]      = system.read_data_num(self,77  -1 +4,10+i,0,  4)   #座標(77,10+i)から4ケタのクロ―同士の角度間隔を読み込みます
             
-            self.replay_mode_stage_data[i][ST_TRACE_CLAW_INDEX]        = update_system.read_data_num(self,82  -1 +2,10+i,0,  2)          #座標(82,10+i)から2ケタのトレースクロー（オプション）時のトレース用配列のインデックス値を読み込みます
-            self.replay_mode_stage_data[i][ST_TRACE_CLAW_DISTANCE]     = update_system.read_data_num(self,85  -1 +5,10+i,0,  5) // 1000  #座標(85,10+i)から5ケタのトレースクロー同士の間隔を読み込みます(小数点第3位まで行くので1000で割った値を読み込みます)
+            self.replay_mode_stage_data[i][ST_TRACE_CLAW_INDEX]        = system.read_data_num(self,82  -1 +2,10+i,0,  2)          #座標(82,10+i)から2ケタのトレースクロー（オプション）時のトレース用配列のインデックス値を読み込みます
+            self.replay_mode_stage_data[i][ST_TRACE_CLAW_DISTANCE]     = system.read_data_num(self,85  -1 +5,10+i,0,  5) // 1000  #座標(85,10+i)から5ケタのトレースクロー同士の間隔を読み込みます(小数点第3位まで行くので1000で割った値を読み込みます)
             
-            self.replay_mode_stage_data[i][ST_FIX_CLAW_MAGNIFICATION]  =  update_system.read_data_num(self,91  -1 +5,10+i,0,  5) // 1000 #座標(91,10+i)から5ケタのフイックスクロー同士の間隔の倍率を読み込みます(小数点第3位まで行くので1000で割った値を読み込みます)
+            self.replay_mode_stage_data[i][ST_FIX_CLAW_MAGNIFICATION]  =  system.read_data_num(self,91  -1 +5,10+i,0,  5) // 1000 #座標(91,10+i)から5ケタのフイックスクロー同士の間隔の倍率を読み込みます(小数点第3位まで行くので1000で割った値を読み込みます)
             
-            self.replay_mode_stage_data[i][ST_REVERSE_CLAW_SVX]        = update_system.read_data_num(self,97  -1 +5,10+i,0,  5) // 1000  #座標(97,10+i)から5ケタのリバースクロー用の攻撃方向ベクトル(x軸)を読み込みます(小数点第3位まで行くので1000で割った値を読み込みます)
-            self.replay_mode_stage_data[i][ST_REVERSE_CLAW_SVY]        = update_system.read_data_num(self,103 -1 +5,10+i,0,  5) // 1000  #座標(103,10+i)から5ケタのリバースクロー用の攻撃方向ベクトル(y軸)を読み込みます(小数点第3位まで行くので1000で割った値を読み込みます)
+            self.replay_mode_stage_data[i][ST_REVERSE_CLAW_SVX]        = system.read_data_num(self,97  -1 +5,10+i,0,  5) // 1000  #座標(97,10+i)から5ケタのリバースクロー用の攻撃方向ベクトル(x軸)を読み込みます(小数点第3位まで行くので1000で割った値を読み込みます)
+            self.replay_mode_stage_data[i][ST_REVERSE_CLAW_SVY]        = system.read_data_num(self,103 -1 +5,10+i,0,  5) // 1000  #座標(103,10+i)から5ケタのリバースクロー用の攻撃方向ベクトル(y軸)を読み込みます(小数点第3位まで行くので1000で割った値を読み込みます)
             
-            self.replay_mode_stage_data[i][ST_CLAW_SHOT_SPEED]         = update_system.read_data_num(self,109 -1 +5,10+i,0,  5) // 1000  #座標(109,10+i)から5ケタのクローショットのスピードを読み込みます(小数点第3位まで行くので1000で割った値を読み込みます)
-            self.replay_mode_stage_data[i][ST_LS_SHIELD_HP]            = update_system.read_data_num(self,115 -1 +4,10+i,0,  4)          #座標(115,10+i)から4ケタのL'sシールドの耐久力を読み込みます
+            self.replay_mode_stage_data[i][ST_CLAW_SHOT_SPEED]         = system.read_data_num(self,109 -1 +5,10+i,0,  5) // 1000  #座標(109,10+i)から5ケタのクローショットのスピードを読み込みます(小数点第3位まで行くので1000で割った値を読み込みます)
+            self.replay_mode_stage_data[i][ST_LS_SHIELD_HP]            = system.read_data_num(self,115 -1 +4,10+i,0,  4)          #座標(115,10+i)から4ケタのL'sシールドの耐久力を読み込みます
             
-            self.replay_mode_stage_data[i][ST_SHIP_ID]                 = update_system.read_data_num(self,144 -1 +3,10+i,0,  3)          #座標(144,10+i)から3ケタの使用している機体のIDナンバーを読み込みます
-            self.replay_mode_stage_data[i][ST_SHIP_LEVEL]              = update_system.read_data_num(self,148 -1 +3,10+i,0,  3)          #座標(148,10+i)から3ケタの使用している機体のレベルを読み込みます
-            self.replay_mode_stage_data[i][ST_SHIP_EXP]                = update_system.read_data_num(self,152 -1 +4,10+i,0,  4)          #座標(152,10+i)から4ケタの使用している機体の経験値を読み込みます
+            self.replay_mode_stage_data[i][ST_SHIP_ID]                 = system.read_data_num(self,144 -1 +3,10+i,0,  3)          #座標(144,10+i)から3ケタの使用している機体のIDナンバーを読み込みます
+            self.replay_mode_stage_data[i][ST_SHIP_LEVEL]              = system.read_data_num(self,148 -1 +3,10+i,0,  3)          #座標(148,10+i)から3ケタの使用している機体のレベルを読み込みます
+            self.replay_mode_stage_data[i][ST_SHIP_EXP]                = system.read_data_num(self,152 -1 +4,10+i,0,  4)          #座標(152,10+i)から4ケタの使用している機体の経験値を読み込みます
             
-            self.replay_mode_stage_data[i][ST_SLOT1]                   = update_system.read_data_num(self,160 -1 +2,10+i,0,  2) #座標(160,10+i)から2ケタの使用している機体のメダルスロット1のメダルIDを読み込みます
-            self.replay_mode_stage_data[i][ST_SLOT2]                   = update_system.read_data_num(self,162 -1 +2,10+i,0,  2) #座標(162,10+i)から2ケタの使用している機体のメダルスロット2のメダルIDを読み込みます
-            self.replay_mode_stage_data[i][ST_SLOT3]                   = update_system.read_data_num(self,164 -1 +2,10+i,0,  2) #座標(164,10+i)から2ケタの使用している機体のメダルスロット3のメダルIDを読み込みます
-            self.replay_mode_stage_data[i][ST_SLOT4]                   = update_system.read_data_num(self,166 -1 +2,10+i,0,  2) #座標(166,10+i)から2ケタの使用している機体のメダルスロット4のメダルIDを読み込みます
-            self.replay_mode_stage_data[i][ST_SLOT5]                   = update_system.read_data_num(self,168 -1 +2,10+i,0,  2) #座標(168,10+i)から2ケタの使用している機体のメダルスロット5のメダルIDを読み込みます
-            self.replay_mode_stage_data[i][ST_SLOT6]                   = update_system.read_data_num(self,170 -1 +2,10+i,0,  2) #座標(170,10+i)から2ケタの使用している機体のメダルスロット6のメダルIDを読み込みます
-            self.replay_mode_stage_data[i][ST_SLOT7]                   = update_system.read_data_num(self,172 -1 +2,10+i,0,  2) #座標(172,10+i)から2ケタの使用している機体のメダルスロット7のメダルIDを読み込みます
+            self.replay_mode_stage_data[i][ST_SLOT1]                   = system.read_data_num(self,160 -1 +2,10+i,0,  2) #座標(160,10+i)から2ケタの使用している機体のメダルスロット1のメダルIDを読み込みます
+            self.replay_mode_stage_data[i][ST_SLOT2]                   = system.read_data_num(self,162 -1 +2,10+i,0,  2) #座標(162,10+i)から2ケタの使用している機体のメダルスロット2のメダルIDを読み込みます
+            self.replay_mode_stage_data[i][ST_SLOT3]                   = system.read_data_num(self,164 -1 +2,10+i,0,  2) #座標(164,10+i)から2ケタの使用している機体のメダルスロット3のメダルIDを読み込みます
+            self.replay_mode_stage_data[i][ST_SLOT4]                   = system.read_data_num(self,166 -1 +2,10+i,0,  2) #座標(166,10+i)から2ケタの使用している機体のメダルスロット4のメダルIDを読み込みます
+            self.replay_mode_stage_data[i][ST_SLOT5]                   = system.read_data_num(self,168 -1 +2,10+i,0,  2) #座標(168,10+i)から2ケタの使用している機体のメダルスロット5のメダルIDを読み込みます
+            self.replay_mode_stage_data[i][ST_SLOT6]                   = system.read_data_num(self,170 -1 +2,10+i,0,  2) #座標(170,10+i)から2ケタの使用している機体のメダルスロット6のメダルIDを読み込みます
+            self.replay_mode_stage_data[i][ST_SLOT7]                   = system.read_data_num(self,172 -1 +2,10+i,0,  2) #座標(172,10+i)から2ケタの使用している機体のメダルスロット7のメダルIDを読み込みます
             
-            self.replay_mode_stage_data[i][ST_SCORE_STAR_MAG]          = update_system.read_data_num(self,176 -1 +3,10+i,0,  3) #座標(176,10+i)から3ケタのスコアスター得点倍率を読み込みます
+            self.replay_mode_stage_data[i][ST_SCORE_STAR_MAG]          = system.read_data_num(self,176 -1 +3,10+i,0,  3) #座標(176,10+i)から3ケタのスコアスター得点倍率を読み込みます
             
-            pad_data_size = update_system.read_data_num(self,128 -1 +8,10+i,0,  8) #座標(128,10+i)からの8ケタのコントロールパッド入力データが記録されたファイルのデータサイズを読み込みます
+            pad_data_size = system.read_data_num(self,128 -1 +8,10+i,0,  8) #座標(128,10+i)からの8ケタのコントロールパッド入力データが記録されたファイルのデータサイズを読み込みます
             self.replay_control_data_size.append(pad_data_size)           #コントロールデータのファイルサイズリストにサイズを追加していきます
         
         #各ステージのパッド入力データのロード---------------------------------------------------------------------------------------
@@ -96,7 +96,7 @@ class update_replay:
                 x = int(i % 256)                      #x座標は現在のカウント値iを256で割った余り
                 y = int(i // 256) % 256               #y座標は現在のカウント値iを256で割った数(切り捨て)を更に256で割った余り
                 z = int(i // 65536)                   #z座標(この場合はタイルマップナンバーになります)は65536で割った数(切り捨て)
-                num = update_bg.get_chrcode_tilemap(self,z, x,y)       #numにタイルマップ(z),座標(x,y)から読み取ったコントロールパッド入力データを代入
+                num = bg.get_chrcode_tilemap(self,z, x,y)       #numにタイルマップ(z),座標(x,y)から読み取ったコントロールパッド入力データを代入
                 self.replay_data[st].append(int(num))    #リストにパッド入力データ記録！getで読み取ったのは文字(str)なので数値(int)に変換してリストにアペンドします
 
     #リプレイデータ・ファイルセーブ
@@ -119,7 +119,7 @@ class update_replay:
                 for y in range(256):
                     for x in range(256):
                         # pyxel.tilemap(z).set(x,y,128-16+6-16)
-                        update_bg.set_chrcode_tilemap(self,z,x,y,0)
+                        bg.set_chrcode_tilemap(self,z,x,y,0)
             
             #カウント65536でタイルマップを1枚埋め尽くす事になります
             #カウント65537だとタイルマップ1枚と次のタイルマップ1マス分必要となります
@@ -130,7 +130,7 @@ class update_replay:
                 x = int(i % 256)                   #x座標は現在のカウント値iを256で割った余り
                 y = int(i // 256) % 256            #y座標は現在のカウント値iを256で割った数(切り捨て)を更に256で割った余り
                 z = int(i // 65536)                #z座標(この場合はタイルマップナンバーになります)は65536で割った数(切り捨て)
-                update_bg.set_chrcode_tilemap(self,z,x,y,num) #numをタイルマップ(z),座標(x,y)に書き込む
+                bg.set_chrcode_tilemap(self,z,x,y,num) #numをタイルマップ(z),座標(x,y)に書き込む
             
             pyxel.save(os.path.abspath(file_name)) #リプレイパッド入力データファイルをセーブ！
             # pyxel.save(file_name) #リプレイパッド入力データファイルをセーブ！
@@ -139,63 +139,63 @@ class update_replay:
         pyxel.load(os.path.abspath("./assets/replay/" + slot_num + "/replay_status.pyxres")) #リプレイステータスファイルにアクセスするためにローディングだけしてやります(グラフイック関連のアセットをローディングしている時がほとんどなので)
         # pyxel.load("./assets/replay/" + slot_num + "/replay_status.pyxres") #リプレイステータスファイルにアクセスするためにローディングだけしてやります(グラフイック関連のアセットをローディングしている時がほとんどなので)
         #各種設定値書き込み 数字の[0]はアスキーコード16番なので16足してアスキーコードとしての0にしてやります
-        update_bg.set_chrcode_tilemap(self,0, 0,0,self.master_rnd_seed)          #乱数の種(ゲームスタート時)を書き込み(数文字には変換しない)
-        update_bg.set_chrcode_tilemap(self,0, 0,1,self.game_difficulty + 16)     #難易度書き込み
-        update_bg.set_chrcode_tilemap(self,0, 0,2,self.start_stage_number + 16)  #ゲーム開始時のステージ数書き込み
-        update_bg.set_chrcode_tilemap(self,0, 0,3,self.start_stage_loop + 16)    #ゲーム開始時のループ数書き込み
-        update_bg.set_chrcode_tilemap(self,0, 0,4,self.replay_stage_num + 16)    #リプレイファイルとして記録する総ステージ数を書き込み
-        update_bg.set_chrcode_tilemap(self,0, 0,5,self.boss_test_mode   + 16)    #ボステストモードのフラグを書き込み
+        bg.set_chrcode_tilemap(self,0, 0,0,self.master_rnd_seed)          #乱数の種(ゲームスタート時)を書き込み(数文字には変換しない)
+        bg.set_chrcode_tilemap(self,0, 0,1,self.game_difficulty + 16)     #難易度書き込み
+        bg.set_chrcode_tilemap(self,0, 0,2,self.start_stage_number + 16)  #ゲーム開始時のステージ数書き込み
+        bg.set_chrcode_tilemap(self,0, 0,3,self.start_stage_loop + 16)    #ゲーム開始時のループ数書き込み
+        bg.set_chrcode_tilemap(self,0, 0,4,self.replay_stage_num + 16)    #リプレイファイルとして記録する総ステージ数を書き込み
+        bg.set_chrcode_tilemap(self,0, 0,5,self.boss_test_mode   + 16)    #ボステストモードのフラグを書き込み
         
         #ステージ毎ごとの自機関連パラメーターのセーブ--------------------------------------------------------------------------------
         for i in range(self.replay_stage_num + 1):
-            update_system.write_data_num(self,5   -1+10,10+i,0, 10,int(self.replay_mode_stage_data[i][ST_SCORE]))           #座標(5,10+i)に10ケタのスコア(整数)を書き込みます
-            update_system.write_data_num(self,16  -1 +5,10+i,0,  5,int(self.replay_mode_stage_data[i][ST_MY_SHIELD]))       #座標(16,10+i)に5ケタのシールド値を書き込みます
-            update_system.write_data_num(self,22  -1 +3,10+i,0,  3,int(self.replay_mode_stage_data[i][ST_MY_SPEED]*100))    #座標(22,10+i)に3ケタの自機スピード(0.75とか1.25とか小数点第2位まで行くので100倍した値を書き込みます)
+            system.write_data_num(self,5   -1+10,10+i,0, 10,int(self.replay_mode_stage_data[i][ST_SCORE]))           #座標(5,10+i)に10ケタのスコア(整数)を書き込みます
+            system.write_data_num(self,16  -1 +5,10+i,0,  5,int(self.replay_mode_stage_data[i][ST_MY_SHIELD]))       #座標(16,10+i)に5ケタのシールド値を書き込みます
+            system.write_data_num(self,22  -1 +3,10+i,0,  3,int(self.replay_mode_stage_data[i][ST_MY_SPEED]*100))    #座標(22,10+i)に3ケタの自機スピード(0.75とか1.25とか小数点第2位まで行くので100倍した値を書き込みます)
             
-            update_system.write_data_num(self,27  -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_SELECT_SHOT_ID]))  #座標(27,10+i)に2ケタのショットIDを書き込みます
+            system.write_data_num(self,27  -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_SELECT_SHOT_ID]))  #座標(27,10+i)に2ケタのショットIDを書き込みます
             
-            update_system.write_data_num(self,31  -1 +4,10+i,0,  4,int(self.replay_mode_stage_data[i][ST_SHOT_EXP]))              #座標(31,10+i)に4ケタのショットの経験値を書き込みます
-            update_system.write_data_num(self,36  -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_SHOT_LEVEL]))            #座標(36,10+i)に2ケタのショットのレベルを書き込みます
-            update_system.write_data_num(self,39  -1 +5,10+i,0,  5,int(self.replay_mode_stage_data[i][ST_SHOT_SPEED_MAGNIFICATION] * 1000)) #座標(39,10+i)に5ケタのショットのスピードに掛ける倍率を書き込みます(小数点第3位まで行くので1000倍した値を書き込みます)
-            update_system.write_data_num(self,45  -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_SHOT_RAPID_OF_FIRE]))    #座標(45,10+i)に2ケタのショットの連射数を書き込みます
+            system.write_data_num(self,31  -1 +4,10+i,0,  4,int(self.replay_mode_stage_data[i][ST_SHOT_EXP]))              #座標(31,10+i)に4ケタのショットの経験値を書き込みます
+            system.write_data_num(self,36  -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_SHOT_LEVEL]))            #座標(36,10+i)に2ケタのショットのレベルを書き込みます
+            system.write_data_num(self,39  -1 +5,10+i,0,  5,int(self.replay_mode_stage_data[i][ST_SHOT_SPEED_MAGNIFICATION] * 1000)) #座標(39,10+i)に5ケタのショットのスピードに掛ける倍率を書き込みます(小数点第3位まで行くので1000倍した値を書き込みます)
+            system.write_data_num(self,45  -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_SHOT_RAPID_OF_FIRE]))    #座標(45,10+i)に2ケタのショットの連射数を書き込みます
             
-            update_system.write_data_num(self,49  -1 +4,10+i,0,  4,int(self.replay_mode_stage_data[i][ST_MISSILE_EXP]))                  #座標(49,10+i)に4ケタのミサイルの経験値を書き込みます
-            update_system.write_data_num(self,54  -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_MISSILE_LEVEL]))                #座標(54,10+i)に2ケタのミサイルのレベルを書き込みます
-            update_system.write_data_num(self,57  -1 +5,10+i,0,  5,int(self.replay_mode_stage_data[i][ST_MISSILE_SPEED_MAGNIFICATION]* 1000))  #座標(57,10+i)に5ケタのミサイルのスピードに掛ける倍率を書き込みます(小数点第3位まで行くので1000倍した値を書き込みます)
-            update_system.write_data_num(self,63  -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_MISSILE_RAPID_OF_FIRE]))        #座標(63,10+i)に2ケタのミサイルの連射数を書き込みます
+            system.write_data_num(self,49  -1 +4,10+i,0,  4,int(self.replay_mode_stage_data[i][ST_MISSILE_EXP]))                  #座標(49,10+i)に4ケタのミサイルの経験値を書き込みます
+            system.write_data_num(self,54  -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_MISSILE_LEVEL]))                #座標(54,10+i)に2ケタのミサイルのレベルを書き込みます
+            system.write_data_num(self,57  -1 +5,10+i,0,  5,int(self.replay_mode_stage_data[i][ST_MISSILE_SPEED_MAGNIFICATION]* 1000))  #座標(57,10+i)に5ケタのミサイルのスピードに掛ける倍率を書き込みます(小数点第3位まで行くので1000倍した値を書き込みます)
+            system.write_data_num(self,63  -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_MISSILE_RAPID_OF_FIRE]))        #座標(63,10+i)に2ケタのミサイルの連射数を書き込みます
             
-            update_system.write_data_num(self,68  -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_SELECT_SUB_WEAPON_ID]))   #座標(68,10+i)に2ケタの現在使用しているサブウェポンのIDナンバーを書き込みます
+            system.write_data_num(self,68  -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_SELECT_SUB_WEAPON_ID]))   #座標(68,10+i)に2ケタの現在使用しているサブウェポンのIDナンバーを書き込みます
             
-            update_system.write_data_num(self,74  -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_CLAW_NUMBER]))            #座標(74,10+i)に2ケタのクローの装備数を書き込みます
-            update_system.write_data_num(self,71  -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_CLAW_TYPE]))              #座標(71,10+i)に2ケタのクローのタイプを書き込みます
-            update_system.write_data_num(self,77  -1 +4,10+i,0,  4,int(self.replay_mode_stage_data[i][ST_CLAW_DIFFERENCE]))        #座標(77,10+i)に4ケタのクロ―同士の角度間隔を書き込みます
+            system.write_data_num(self,74  -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_CLAW_NUMBER]))            #座標(74,10+i)に2ケタのクローの装備数を書き込みます
+            system.write_data_num(self,71  -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_CLAW_TYPE]))              #座標(71,10+i)に2ケタのクローのタイプを書き込みます
+            system.write_data_num(self,77  -1 +4,10+i,0,  4,int(self.replay_mode_stage_data[i][ST_CLAW_DIFFERENCE]))        #座標(77,10+i)に4ケタのクロ―同士の角度間隔を書き込みます
             
-            update_system.write_data_num(self,82  -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_TRACE_CLAW_INDEX]))       #座標(82,10+i)に2ケタのトレースクロー（オプション）時のトレース用配列のインデックス値を書き込みます
-            update_system.write_data_num(self,85  -1 +5,10+i,0,  5,int(self.replay_mode_stage_data[i][ST_TRACE_CLAW_DISTANCE] * 1000))    #座標(85,10+i)に5ケタのトレースクロー同士の間隔を書き込みます(小数点第3位まで行くので1000倍した値を書き込みます)
+            system.write_data_num(self,82  -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_TRACE_CLAW_INDEX]))       #座標(82,10+i)に2ケタのトレースクロー（オプション）時のトレース用配列のインデックス値を書き込みます
+            system.write_data_num(self,85  -1 +5,10+i,0,  5,int(self.replay_mode_stage_data[i][ST_TRACE_CLAW_DISTANCE] * 1000))    #座標(85,10+i)に5ケタのトレースクロー同士の間隔を書き込みます(小数点第3位まで行くので1000倍した値を書き込みます)
             
-            update_system.write_data_num(self,91  -1 +5,10+i,0,  5,int(self.replay_mode_stage_data[i][ST_FIX_CLAW_MAGNIFICATION] * 1000)) #座標(91,10+i)に5ケタのフイックスクロー同士の間隔の倍率を書き込みます(小数点第3位まで行くので1000倍した値を書き込みます)
+            system.write_data_num(self,91  -1 +5,10+i,0,  5,int(self.replay_mode_stage_data[i][ST_FIX_CLAW_MAGNIFICATION] * 1000)) #座標(91,10+i)に5ケタのフイックスクロー同士の間隔の倍率を書き込みます(小数点第3位まで行くので1000倍した値を書き込みます)
             
-            update_system.write_data_num(self,97  -1 +5,10+i,0,  5,int(self.replay_mode_stage_data[i][ST_REVERSE_CLAW_SVX] * 1000))       #座標(97,10+i)に5ケタのリバースクロー用の攻撃方向ベクトル(x軸)を書き込みます(小数点第3位まで行くので1000倍した値を書き込みます)
-            update_system.write_data_num(self,103 -1 +5,10+i,0,  5,int(self.replay_mode_stage_data[i][ST_REVERSE_CLAW_SVY] * 1000))       #座標(103,10+i)に5ケタのリバースクロー用の攻撃方向ベクトル(y軸)を書き込みます(小数点第3位まで行くので1000倍した値を書き込みます)
+            system.write_data_num(self,97  -1 +5,10+i,0,  5,int(self.replay_mode_stage_data[i][ST_REVERSE_CLAW_SVX] * 1000))       #座標(97,10+i)に5ケタのリバースクロー用の攻撃方向ベクトル(x軸)を書き込みます(小数点第3位まで行くので1000倍した値を書き込みます)
+            system.write_data_num(self,103 -1 +5,10+i,0,  5,int(self.replay_mode_stage_data[i][ST_REVERSE_CLAW_SVY] * 1000))       #座標(103,10+i)に5ケタのリバースクロー用の攻撃方向ベクトル(y軸)を書き込みます(小数点第3位まで行くので1000倍した値を書き込みます)
             
-            update_system.write_data_num(self,109 -1 +5,10+i,0,  5,int(self.replay_mode_stage_data[i][ST_CLAW_SHOT_SPEED] * 1000))        #座標(109,10+i)に5ケタのクローショットのスピードを書き込みます(小数点第3位まで行くので1000倍した値を書き込みます)
-            update_system.write_data_num(self,115 -1 +4,10+i,0,  4,int(self.replay_mode_stage_data[i][ST_LS_SHIELD_HP]))           #座標(115,10+i)に4ケタのL'sシールドの耐久力を書き込みます
+            system.write_data_num(self,109 -1 +5,10+i,0,  5,int(self.replay_mode_stage_data[i][ST_CLAW_SHOT_SPEED] * 1000))        #座標(109,10+i)に5ケタのクローショットのスピードを書き込みます(小数点第3位まで行くので1000倍した値を書き込みます)
+            system.write_data_num(self,115 -1 +4,10+i,0,  4,int(self.replay_mode_stage_data[i][ST_LS_SHIELD_HP]))           #座標(115,10+i)に4ケタのL'sシールドの耐久力を書き込みます
             
-            update_system.write_data_num(self,144 -1 +3,10+i,0,  3,int(self.replay_mode_stage_data[i][ST_SHIP_ID]   ))          #座標(144,10+i)から3ケタの使用している機体のIDナンバーを書き込みます
-            update_system.write_data_num(self,148 -1 +3,10+i,0,  3,int(self.replay_mode_stage_data[i][ST_SHIP_LEVEL]))          #座標(148,10+i)から3ケタの使用している機体のレベルを書き込みます
-            update_system.write_data_num(self,152 -1 +4,10+i,0,  4,int(self.replay_mode_stage_data[i][ST_SHIP_EXP]  ))          #座標(152,10+i)から4ケタの使用している機体の経験値を書き込みます
+            system.write_data_num(self,144 -1 +3,10+i,0,  3,int(self.replay_mode_stage_data[i][ST_SHIP_ID]   ))          #座標(144,10+i)から3ケタの使用している機体のIDナンバーを書き込みます
+            system.write_data_num(self,148 -1 +3,10+i,0,  3,int(self.replay_mode_stage_data[i][ST_SHIP_LEVEL]))          #座標(148,10+i)から3ケタの使用している機体のレベルを書き込みます
+            system.write_data_num(self,152 -1 +4,10+i,0,  4,int(self.replay_mode_stage_data[i][ST_SHIP_EXP]  ))          #座標(152,10+i)から4ケタの使用している機体の経験値を書き込みます
             
-            update_system.write_data_num(self,160 -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_SLOT1])) #座標(160,10+i)から2ケタの使用している機体のメダルスロット1のメダルIDを書き込みます
-            update_system.write_data_num(self,162 -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_SLOT2])) #座標(162,10+i)から2ケタの使用している機体のメダルスロット2のメダルIDを書き込みます
-            update_system.write_data_num(self,164 -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_SLOT3])) #座標(164,10+i)から2ケタの使用している機体のメダルスロット3のメダルIDを書き込みます
-            update_system.write_data_num(self,166 -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_SLOT4])) #座標(166,10+i)から2ケタの使用している機体のメダルスロット4のメダルIDを書き込みます
-            update_system.write_data_num(self,168 -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_SLOT5])) #座標(168,10+i)から2ケタの使用している機体のメダルスロット5のメダルIDを書き込みます
-            update_system.write_data_num(self,170 -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_SLOT6])) #座標(170,10+i)から2ケタの使用している機体のメダルスロット6のメダルIDを書き込みます
-            update_system.write_data_num(self,172 -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_SLOT7])) #座標(172,10+i)から2ケタの使用している機体のメダルスロット7のメダルIDを書き込みます
+            system.write_data_num(self,160 -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_SLOT1])) #座標(160,10+i)から2ケタの使用している機体のメダルスロット1のメダルIDを書き込みます
+            system.write_data_num(self,162 -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_SLOT2])) #座標(162,10+i)から2ケタの使用している機体のメダルスロット2のメダルIDを書き込みます
+            system.write_data_num(self,164 -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_SLOT3])) #座標(164,10+i)から2ケタの使用している機体のメダルスロット3のメダルIDを書き込みます
+            system.write_data_num(self,166 -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_SLOT4])) #座標(166,10+i)から2ケタの使用している機体のメダルスロット4のメダルIDを書き込みます
+            system.write_data_num(self,168 -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_SLOT5])) #座標(168,10+i)から2ケタの使用している機体のメダルスロット5のメダルIDを書き込みます
+            system.write_data_num(self,170 -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_SLOT6])) #座標(170,10+i)から2ケタの使用している機体のメダルスロット6のメダルIDを書き込みます
+            system.write_data_num(self,172 -1 +2,10+i,0,  2,int(self.replay_mode_stage_data[i][ST_SLOT7])) #座標(172,10+i)から2ケタの使用している機体のメダルスロット7のメダルIDを書き込みます
             
-            update_system.write_data_num(self,176 -1 +3,10+i,0,  3,int(self.replay_mode_stage_data[i][ST_SCORE_STAR_MAG]))  #座標(176,10+i)から3ケタのスコアスター得点倍率を書き込み
+            system.write_data_num(self,176 -1 +3,10+i,0,  3,int(self.replay_mode_stage_data[i][ST_SCORE_STAR_MAG]))  #座標(176,10+i)から3ケタのスコアスター得点倍率を書き込み
             
-            update_system.write_data_num(self,128 -1 +8,10+i,0,  8,int(self.replay_control_data_size[i])) #座標(128,10+i)に8ケタのコントロールパッド入力データが記録されたファイルのデータサイズを書き込みます
+            system.write_data_num(self,128 -1 +8,10+i,0,  8,int(self.replay_control_data_size[i])) #座標(128,10+i)に8ケタのコントロールパッド入力データが記録されたファイルのデータサイズを書き込みます
         pyxel.save(os.path.abspath("./assets/replay/" + slot_num + "/replay_status.pyxres")) #リプレイステータスファイルをセーブ！
         # pyxel.save("./assets/replay/" + slot_num + "/replay_status.pyxres") #リプレイステータスファイルをセーブ！
 

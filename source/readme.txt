@@ -1,89 +1,116 @@
 =============================================================================================
-プログラムファイルの詳細な説明です    2023 01/15更新
+プログラムファイルの詳細な説明です    2024 02/18更新
 =============================================================================================
-code-of-python.py       メインプログラムです、このパイソンプログラムを実行してね
-
-code-of-python.spec     pyinstaller用specファイルです
-
-const.py                定数定義です ほとんどのプログラムで使われてるのでimportしないと動かないよ
-const_window            ウィンドウクラスで主に使用する定数定義です
-const_visualscene       ビジュアルシーンで主に使用する定数定義です
-
-define_boss_data.py     ボス関連のデータ
-define_class.py         各クラスのメンバ変数とか宣言してます、あとコンストラクタの処理とか
-define_data.py          色んなデータのリスト登録です
-define_enemy_data.py    敵データ関連のリスト登録
-define_ship_data.py     自機関連のデータリスト登録
-define_stage_data.py    各ステージのイベントデータとか、ゲーム全体のステージ配列などのリスト登録です
-
-func.py                 ある程度の汎用性のある関数群です update_* の各メソッドから呼ばれる場合が多いですねぇ
-graph.py                drawクラスから呼ばれるメソッドが詰まっております 座標が入ったメンバ変数の数値を読んでそれに従ってグラフイックを表示するだけの処理です
-
-readme.txt              このファイルだよ～☆彡
-
-update_boss.py          ボス関連の更新処理
-update_btn_assign.py    パッドコントロールボタン設定です,各ボタンにどの機能を割り当てるかの処理です
-update_btn.py           入力関連の更新処理(キーパッドが押されたとかボタンが押されたとか～そんなの)
-update_collision.py     当たり判定を行ってます     
-update_debug.py         デバッグモードで使用されるプログラムです、通常では使ったダメだよ☆彡
-update_enemy.py         敵関連の処理です
-update_event.py         ステージのイベントデータリストを解析して敵を出すしょりです、あとBGマップのチップデータをみて敵の地上砲台を出現させたりも
-update_init.py          ゲーム開始直後の初期処理やステージ開始直後の初期化処理を行います
-update_ipl.py           ゲーム起動直後に出るIPLメッセージの表示とか
-update_item.py          アイテム関連の更新
-update_obj.py           背景に表示される色んなオブジェクト(雲とかスパークとかパーティクルとか)の更新処理です
-update_pause.py         ゲーム中ポーズを掛けたときの処理         
-update_replay.py        リプレイ関連の更新です
-update_score.py         スコア加算の計算とかです
-update_sound.py         サウンドエフェクト(効果音)関連の処理を行います
-update_ship.py          自機関連の更新、自機が出すショット、ミサイル、クロー関連も更新しております
-update_status.py        メニューから表示される「STATUS」関連の計算を行います
-update_system.py        システムデータのセーブ＆ロードの処理
-update_title.py         タイトルメニューでの選択メニューをすべて行ってます
-update_visualscene      ビジュアルシーンの作製や更新を行います
-update_window.py        メインメニューなどで表示されるウィンドウの更新処理です セレクトカーソルの更新も行います
-
-=============================================================================================
-This is a detailed description of the program file 2023 Updated 01/15
-=============================================================================================
-code-of-python.py       The main program, run this python program
-
-code-of-python.spec     Spec file for pyinstaller
-
-const.py                Constants definitions, used by most programs, so import them or they won't work!
-const_window.py         Constant definitions mainly used in the window class.
-const_visualscene.py    Constant definitions mainly used in visual scenes.
-
-define_boss_data.py     Boss related data
-define_class.py         Declaration of member variables of each class, and constructor processing.
-define_data.py          List of various data
-define_enemy_data.py    Enemy data related list
-define_ship_data.py     Register the list of ship data.
-define_stage_data.py    Register a list of event data for each stage and the stage array for the whole game.
-
-func.py                 A group of functions with a certain degree of versatility, often called from update_* methods.
-graph.py                This is a collection of methods called from the draw class. It is just a process to read the numerical value of a member variable containing coordinates and display a graphical representation accordingly.
-
-readme.txt              This is the file.
-
-update_boss.py          update boss-related processes
-update_btn_assign.py    Pad control button settings, process which function to assign to each button
-update_btn.py           Input related update process (keypad pressed, button pressed - that kind of thing)
-update_collision.py     Performs collision detection     
-update_debug.py         This program is used in debug mode.
-update_enemy.py         Enemy-related processing
-update_event.py         Analyzes the event data list of the stage and creates enemies.
-update_init.py          Performs initialization processing immediately after the game starts and immediately after the stage starts.
-update_ipl.py           Display IPL messages immediately after game startup
-update_item.py          Updates item-related information.
-update_obj.py           Updates various objects displayed in the background (clouds, sparks, particles, etc.)
-update_pause.py         Processes when the game is paused         
-update_replay.py        Replay related updates
-update_score.py         Calculation of score addition
-update_sound.py            Processing of sound effects
-update_ship.py          Updates to the ship's engine, shots, missiles, and claws.
-update_status.py        Performs calculations related to the "STATUS" displayed from the menu
-update_system.py        Handling of system data save and load
-update_title.py         All menu selections in the title menu
-update_visualscene      Create and update visual scenes.
-update_window.py        Updates the window displayed in the main menu, etc. It also updates the select cursor
+│  code-of-python.py                   メインプログラムです、このパイソンプログラムを実行してね
+│  code-of-python.spec                 pyinstaller用specファイルです
+│  readme.txt                          このファイルだよ～☆彡
+│  
+├─assets
+│  │  readme.txt                       assetsフォルダーの説明テキストです
+│  │
+│  ├─fonts                             日本語用ドットフォントが入っているフォルダーです
+│  │      k8x12.txt
+│  │      k8x12S_jisx0208.png          美咲フォントpng画像ファイルです
+│  │      k8x12s_jisx0208___001a.png
+│  │      k8x12s_jisx0208___001b.png
+│  │      k8x12s_jisx0208___001c.png
+│  │      k8x12s_jisx0208___002a.png
+│  │      k8x12s_jisx0208___002b.png
+│  │      k8x12s_jisx0208___002c.png
+│  │      k8x12s_jisx0208___003a.png
+│  │      k8x12s_jisx0208___003b.png
+│  │      k8x12s_jisx0208___003c.png
+│  │      k8x12s_jisx0208___004a.png
+│  │      k8x12s_jisx0208___004b.png
+│  │      k8x12s_jisx0208___004c.png
+│  │      misaki_font_k8x12s_001.pyxres  美咲フォントをpyxeresファイルに変換したものです
+│  │      misaki_font_k8x12s_002.pyxres
+│  │      misaki_font_k8x12s_003.pyxres
+│  │      misaki_font_k8x12s_004.pyxres
+│  │      misaki_font_triming_cutter.py  美咲フォントのpngファイルをpyxresファイルに変換するプログラムです
+│  │      p8font.png
+│  │      readme.txt
+│  │      フォントデータ編集001.bat       フォントデータ編集用のバッチファイルです
+│  │      フォントデータ編集002.bat
+│  │      フォントデータ編集003.bat
+│  │      フォントデータ編集004.bat
+│  │
+│  ├─graphic
+│  │      canvas.jpg
+│  │      face.pyxres
+│  │      face2.pyxres
+│  │      face_graphic.bat
+│  │      face_graphic2.bat
+│  │      min-sht2.pyxres                                       1面2面のリソースファイルです
+│  │      min-sht3.pyxres                                       3面4面のリソースファイルです
+│  │      tes.png
+│  │      test_grp.bat
+│  │      test_grp.pyxres
+│  │      test_miku.jpg
+│  │      ステージ1ステージ2グラフイックリソースデータ編集.bat      各ステージリソースデータ編集用のバッチファイルです
+│  │      ステージ4ステージ5グラフイックリソースデータ編集.bat
+│  │
+│  ├─music
+│  │       各面のBGMファイルです
+│  │      
+│  ├─replay               リプレイデータが入っている各フォルダーです
+│  │  ├─slot_0
+│  │  ├─slot_1
+│  │  ├─slot_2
+│  │  ├─slot_3
+│  │  ├─slot_4
+│  │  ├─slot_5
+│  │  ├─slot_6
+│  │  ├─slot_7
+│  │  ├─slot_8
+│  │  ├─slot_9
+│  │  └─slot_master       リプレイデータのコピー元となるマスターデータです
+│  │
+│  ├─sound                サウンドファイル置き場です(未使用)
+│  └─system
+│          master-system-data.pyxres   システムデータの原本です
+│          システムデータ原本編集.bat    システムデータの原本編集用のバッチファイルです
+│
+├─common
+│  └─ func.py                          ある程度の汎用性のある関数群です update_* の各メソッドから呼ばれる場合が多いですねぇ
+│
+├─const
+│  └─ const.py                         定数定義です ほとんどのプログラムで使われてるのでimportしないと動かないよ
+│     const_visualscene.py             ビジュアルシーンで主に使用する定数定義です
+│     const_window.py                  ウィンドウクラスで主に使用する定数定義です
+│
+├─define
+│  └─ boss_data.py    ボス関連のデータ
+│     class_data.py   各クラスのメンバ変数とか宣言してます、あとコンストラクタの処理とか
+│     data.py         色んなデータのリスト登録です
+│     enemy_data.py   敵データ関連のリスト登録
+│     ship_data.py    自機関連のデータリスト登録
+│     stage_data.py   各ステージのイベントデータとか、ゲーム全体のステージ配列などのリスト登録です
+│  
+├─draw
+│  └─ graph.py        drawクラスから呼ばれるメソッドが詰まっております 座標が入ったメンバ変数の数値を読んでそれに従ってグラフイックを表示するだけの処理です
+│
+├─update
+│  └─ bg.py
+│     boss.py          ボス関連の更新処理
+│     btn.py           入力関連の更新処理(キーパッドが押されたとかボタンが押されたとか～そんなの)
+│     btn_assign.py    パッドコントロールボタン設定です,各ボタンにどの機能を割り当てるかの処理です
+│     collision.py     当たり判定を行ってます  
+│     debug.py         デバッグモードで使用されるプログラムです、通常では使ったダメだよ☆彡
+│     enemy.py         敵関連の処理です
+│     event.py         ステージのイベントデータリストを解析して敵を出す処理です、あとBGマップのチップデータをみて敵の地上砲台を出現させたりも
+│     init.py          ゲーム開始直後の初期処理やステージ開始直後の初期化処理を行います
+│     ipl.py           ゲーム起動直後に出るIPLメッセージの表示とか
+│     item.py          アイテム関連の更新
+│     medal.py         主にメダルスロット関連の処理を行います
+│     obj.py           背景に表示される色んなオブジェクト(雲とかスパークとかパーティクルとか)の更新処理です
+│     pause.py         ゲーム中ポーズを掛けたときの処理
+│     replay.py        リプレイ関連の更新です
+│     score.py         スコア加算の計算とかです
+│     ship.py          自機関連の更新、自機が出すショット、ミサイル、クロー関連も更新しております
+│     sound.py         サウンドエフェクト(効果音)関連の処理を行います
+│     status.py        メニューから表示される「STATUS」関連の計算を行います
+│     system.py        システムデータのセーブ＆ロードの処理
+│     title.py         タイトルメニューでの選択メニューをすべて行ってます
+│     visualscene.py   ビジュアルシーンの作製や更新を行います
+│     window.py        メインメニューなどで表示されるウィンドウの更新処理です セレクトカーソルの更新も行います

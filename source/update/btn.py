@@ -1,5 +1,5 @@
 ###########################################################
-#  update_btnクラス                                       #      
+#  btnクラス                                               #      
 ###########################################################
 #  Appクラスのupdate関数から呼び出される関数群               #
 #  主にキー入力(パッドの入力)の更新を行うメソッド             #
@@ -13,11 +13,11 @@ from random import random    #random.random() と呼ぶと、0から1の範囲(1
 import pyxel        #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
 from const.const import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
 
-from update.update_obj    import *   #背景オブジェクト更新関数モジュール読み込み(パーティクルで使用)
-from update.update_ship   import *   #自機関連更新関数モジュール読み込み
+from update.obj    import *   #背景オブジェクト更新関数モジュール読み込み(パーティクルで使用)
+from update.ship          import *   #自機関連更新関数モジュール読み込み
 # from update.update_window import *   #ポーズウィンドウ作成時に使用するのでインポート
 
-class update_btn:
+class btn:
     #キーボードの上かカーソルとジョイパッドの上方向ボタンが押されたかどうかを調べる(キーリピート付き)                  KEY UP PAD UP
     #返り値は上ボタンが押された時=True 上ボタンは押されていなかった時=Falseを返します
     def keypad_up(self):
@@ -27,7 +27,7 @@ class update_btn:
         返り値は上ボタンが押された時=True 上ボタンは押されていなかった時=Falseを返します
         """
         if pyxel.btnp(pyxel.KEY_UP,10,self.keypad_repeat_num) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_UP,10,self.keypad_repeat_num) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_DPAD_UP,10,self.keypad_repeat_num): #上ボタンが押されているかチェック
-            update_btn.reduce_repeat_time_count(self)
+            btn.reduce_repeat_time_count(self)
             # print (self.cursor_repeat_time_count)
             return(True)
         else:
@@ -50,7 +50,7 @@ class update_btn:
         返り値は下ボタンが押された時=True 下ボタンは押されていなかった時=Falseを返します
         """
         if pyxel.btnp(pyxel.KEY_DOWN,10,self.keypad_repeat_num) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_DOWN,10,self.keypad_repeat_num) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_DPAD_DOWN,10,self.keypad_repeat_num): #下ボタンが押されているかチェック
-            update_btn.reduce_repeat_time_count(self)
+            btn.reduce_repeat_time_count(self)
             # print (self.cursor_repeat_time_count)
             return(True)
         else:
@@ -73,7 +73,7 @@ class update_btn:
         返り値は左ボタンが押された時=True 左ボタンは押されていなかった時=Falseを返します
         """
         if pyxel.btnp(pyxel.KEY_LEFT,10,self.keypad_repeat_num) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT,10,self.keypad_repeat_num) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_DPAD_LEFT,10,self.keypad_repeat_num): #左ボタンが押されているかチェック
-            update_btn.reduce_repeat_time_count(self)
+            btn.reduce_repeat_time_count(self)
             # print (self.cursor_repeat_time_count)
             return(True)
         else:
@@ -96,7 +96,7 @@ class update_btn:
         返り値は右ボタンが押された時=True 右ボタンは押されていなかった時=Falseを返します
         """
         if pyxel.btnp(pyxel.KEY_RIGHT,10,self.keypad_repeat_num) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_RIGHT,10,self.keypad_repeat_num) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_DPAD_RIGHT,10,self.keypad_repeat_num): #右ボタンが押されているかチェック
-            update_btn.reduce_repeat_time_count(self)
+            btn.reduce_repeat_time_count(self)
             # print (self.cursor_repeat_time_count)
             return(True)
         else:
@@ -136,11 +136,11 @@ class update_btn:
         """
         if self.replay_status == REPLAY_PLAY: #リプレイステータスが「再生中」の場合は
             if self.replay_data[self.replay_stage_num][self.replay_frame_index + 1 ] & 0b00010000 == 0b00010000: #LowByte リプレイデータを調べてPAD Aが押された記録だったのなら...
-                update_ship.fire_shot(self) #ショット発射関数呼び出し！
+                ship.fire_shot(self)        #ショット発射関数呼び出し！
         elif self.move_mode == MOVE_MANUAL: #手動移動モードの場合は
             if pyxel.btn(pyxel.KEY_SPACE) or func.push_pad_btn(self,ACT_SHOT_AND_SUB_WEAPON) or func.push_pad_btn(self,ACT_SHOT): #パッドのショット発射ボタン又はスペースキーが押されたか？
                 self.pad_data_l += PAD_A #コントロールパッド入力記録にAボタンを押した情報ビットを立てて記録する
-                update_ship.fire_shot(self) #ショット発射関数呼び出し！
+                ship.fire_shot(self)     #ショット発射関数呼び出し！
 
     #スペースキーかゲームバットのミサイルボタンが押さたかどうか？もしくはリプレイモードでミサイル発射したのか調べる    KEY SPACE GAMEPAD-MISSILE
     def missile_btn(self):
@@ -151,11 +151,11 @@ class update_btn:
         """
         if self.replay_status == REPLAY_PLAY: #リプレイステータスが「再生中」の場合は
             if self.replay_data[self.replay_stage_num][self.replay_frame_index + 1] & 0b00100000 == 0b00100000: #LowByte リプレイデータを調べてPAD Bが押された記録だったのなら...
-                update_ship.fire_missile(self) #ミサイル発射関数呼び出し！
+                ship.fire_missile(self)     #ミサイル発射関数呼び出し！
         elif self.move_mode == MOVE_MANUAL: #手動移動モードの場合は
             if pyxel.btn(pyxel.KEY_SPACE) or func.push_pad_btn(self,ACT_MISSILE): #パッドのミサイル発射ボタン又はスペースキーが押されたか？
                 self.pad_data_l += PAD_B #コントロールパッド入力記録にBボタンを押した情報ビットを立てて記録する
-                update_ship.fire_missile(self) #ミサイル発射関数呼び出し！
+                ship.fire_missile(self)  #ミサイル発射関数呼び出し！
 
     #サブウェポン切り替えボタンが押された＆サブウェポンを一つでも所維持しているのか？チェックする                      GAMEPAD-SUB_WEAPON_CHANGE
     def change_sub_weapon_btn(self):
@@ -164,11 +164,11 @@ class update_btn:
         """
         if self.replay_status == REPLAY_PLAY: #リプレイステータスが「再生中」の場合は
             if self.replay_data[self.replay_stage_num][self.replay_frame_index + 1] & 0b10000000 == 0b10000000: #LowByte リプレイデータを調べてPAD Yが押された記録だったのなら...
-                update_ship.change_sub_weapon(self) #サブウェポン切り替え関数呼び出し！
+                ship.change_sub_weapon(self) #サブウェポン切り替え関数呼び出し！
         elif self.move_mode == MOVE_MANUAL: #手動移動モードの場合は
             if func.push_pad_btnp(self,ACT_SUB_WEAPON_CHANGE) and self.select_sub_weapon_id != -1:#サブウェポン切り替えボタンが押された＆サブウェポンを一つでも所維持しているのか？
                 self.pad_data_l += PAD_Y #コントロールパッド入力記録にYボタンを押した情報ビットを立てて記録する
-                update_ship.change_sub_weapon(self) #サブウェポン切り替え関数呼び出し！
+                ship.change_sub_weapon(self) #サブウェポン切り替え関数呼び出し！
 
     #クローが弾を発射するのか調べる関数                                                                               KEY SPACE GAMEPAD-SHOT GAEPAD-SHOT&SUB_WEAPON
     def claw_shot_btn(self):
@@ -177,10 +177,10 @@ class update_btn:
         """
         if self.replay_status == REPLAY_PLAY: #リプレイステータスが「再生中」の場合は
             if self.replay_data[self.replay_stage_num][self.replay_frame_index + 1] & 0b00010000 == 0b00010000: #LowByte リプレイデータを調べてPAD Aが押された記録だったのなら...
-                update_ship.fire_claw_shot(self) #クローショット発射関数呼び出し！
+                ship.fire_claw_shot(self) #クローショット発射関数呼び出し！
         elif self.move_mode == MOVE_MANUAL: #手動移動モードの場合は
             if pyxel.btn(pyxel.KEY_SPACE) or func.push_pad_btn(self,ACT_SHOT_AND_SUB_WEAPON) or func.push_pad_btn(self,ACT_SHOT):  #パッドのショット発射ボタン又はスペースキーが押されたか？
-                update_ship.fire_claw_shot(self) #クローショット発射関数呼び出し！
+                ship.fire_claw_shot(self) #クローショット発射関数呼び出し！
 
     #クローを消滅させるボタンが押されたかどうかを調べる関数                                                           KEY W
     def delete_claw_btn(self):
@@ -202,11 +202,11 @@ class update_btn:
         """
         if self.replay_status == REPLAY_PLAY: #リプレイステータスが「再生中」の場合は
             if self.replay_data[self.replay_stage_num][self.replay_frame_index] & 0b00001000 == 0b00001000: #HighByte リプレイデータを調べてPAD_RIGHT_Sが押された記録だったのなら...
-                update_ship.change_fix_claw_interval(self) #フイックスクローの間隔変化関数呼び出し！
+                ship.change_fix_claw_interval(self) #フイックスクローの間隔変化関数呼び出し！
         elif self.move_mode == MOVE_MANUAL: #手動移動モードの場合は
             if pyxel.btn(pyxel.KEY_N) or func.push_pad_btn(self,ACT_CHANGE_CLAW_INTERVAL):#NキーかCHANGE_CLAW_INTERVALが押されたらフックスクローの間隔を変化させる
                 self.pad_data_h += PAD_RIGHT_S #パッド入力データのRIGHT_SHOULDERボタンの情報ビットを立てる
-                update_ship.change_fix_claw_interval(self) #フイックスクローの間隔変化関数呼び出し！
+                ship.change_fix_claw_interval(self) #フイックスクローの間隔変化関数呼び出し！
 
     #クロースタイル変更ボタンが押されたかチェックする                                                                 KEY M  GAMEPAD LEFT_SHOULDER
     def change_claw_style_btn(self):
@@ -215,11 +215,11 @@ class update_btn:
         """
         if self.replay_status == REPLAY_PLAY: #リプレイステータスが「再生中」の場合は
             if self.replay_data[self.replay_stage_num][self.replay_frame_index] & 0b00000100 == 0b00000100: #HighByte リプレイデータを調べてPAD_LEFT_Sが押された記録だったのなら...
-                update_ship.change_claw_style(self) #クロースタイル変更関数呼び出し！
+                ship.change_claw_style(self) #クロースタイル変更関数呼び出し！
         elif self.move_mode == MOVE_MANUAL: #手動移動モードの場合は
             if pyxel.btnp(pyxel.KEY_M) or func.push_pad_btnp(self,ACT_CHANGE_CLAW_STYLE):#MキーかCHANGE_CLAW_STYLEが押されたらクローの種類を変更する
                 self.pad_data_h += PAD_LEFT_S #パッド入力データのLEFT_SHOULDERボタンの情報ビットを立てる
-                update_ship.change_claw_style(self) #クロースタイル変更関数呼び出し！
+                ship.change_claw_style(self) #クロースタイル変更関数呼び出し！
 
     #キーボードの1が推されたらショット経験値を増やしていく                                                           KEY 1
     def powerup_shot(self):
@@ -250,11 +250,11 @@ class update_btn:
         """
         if self.replay_status == REPLAY_PLAY: #リプレイステータスが「再生中」の場合は
             if self.replay_data[self.replay_stage_num][self.replay_frame_index] & 0b00000001 == 0b00000001: #HighByte リプレイデータを調べてPAD SELECTが押された記録だったのなら...
-                update_ship.change_ship_speed(self) #スピードチェンジ関数呼び出し！
+                ship.change_ship_speed(self) #スピードチェンジ関数呼び出し！
         elif self.move_mode == MOVE_MANUAL: #手動移動モードの場合は
             if pyxel.btnp(pyxel.KEY_3) or func.push_pad_btnp(self,BTN_BACK):
                 self.pad_data_h += PAD_SELECT #パッド入力データのSELECTボタンの情報ビットを立てる(GUIDE)
-                update_ship.change_ship_speed(self) #スピードチェンジ関数呼び出し！
+                ship.change_ship_speed(self) #スピードチェンジ関数呼び出し！
 
     #ポーズボタンが押されたか調べる 「START」ボタン                                                                  KEY TAB    GAMEPAD START
     def pause_btn(self):

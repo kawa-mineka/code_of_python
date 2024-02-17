@@ -1,5 +1,5 @@
 ###########################################################
-#  update_btn_assignクラス                                 #      
+#  btn_assignクラス                                        #      
 ###########################################################
 #  Appクラスのupdate関数から呼び出される関数群               #
 #  パッド割り当ての更新を行うメソッド                        #
@@ -14,10 +14,10 @@ import pyxel        #グラフイックキャラやバックグラウンドグ�
 from const.const import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
 from common.func  import * #汎用性のある関数群のモジュールの読み込み
 
-from update.update_obj  import * #背景オブジェクト更新関数モジュール読み込み(パーティクルで使用)
-from update.update_ship import * #自機関連更新関数モジュール読み込み
+from update.obj  import * #背景オブジェクト更新関数モジュール読み込み(パーティクルで使用)
+from update.ship        import * #自機関連更新関数モジュール読み込み
 
-class update_btn_assign:
+class btn_assign:
     def __init__(self):
         None
 
@@ -33,10 +33,10 @@ class update_btn_assign:
         # print("ボタンID "     + str(btn_id))
         # print("アクションID " + str(action_id))
         # print("")
-        # print("同じアクションを持つボタンID は " + str(update_btn_assign.check_action_id(self,action_id)))
+        # print("同じアクションを持つボタンID は " + str(btn_assign.check_action_id(self,action_id)))
         # print("")
         btn_id1 = btn_id
-        btn_id2 = update_btn_assign.check_action_id(self,action_id) #同じアクションを持つボタンIDを調べそのボタンIDをbtn_id2に入れる
+        btn_id2 = btn_assign.check_action_id(self,action_id) #同じアクションを持つボタンIDを調べそのボタンIDをbtn_id2に入れる
         if btn_id2 == -1: #同じアクションIDを持つボタンが存在しない場合は
             #そのまま登録する
             self.pad_assign_list[btn_id] = action_id #ボタンIDの所にアクションIDを書き込む

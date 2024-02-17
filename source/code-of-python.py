@@ -99,42 +99,44 @@ from const.const              import * #定数定義モジュールの読み込�
 from const.const_window       import * #主にウィンドウクラスで使用する定数定義の読み込み
 from const.const_visualscene  import * #主にビジュアルシーンで使用する定数定義の読み込み
 
-from define.define_class       import * #クラス宣言モジュールの読み込み やっぱりimport *は不味いのかなぁ・・・よくわかんない
-from define.define_data        import * #初期データリスト登録モジュールの読み込み
-from define.define_ship_data   import * #各種機体(シップ)データ関連の登録モジュールの読み込み
-from define.define_enemy_data  import * #敵のデータ関連の登録モジュールの読み込み
-from define.define_boss_data   import * #ボスのデータ関連の登録モジュールの読み込み
-from define.define_stage_data  import * #各ステージのイベントリスト登録モジュールの読み込み
+from define.class_data         import * #クラス宣言モジュールの読み込み やっぱりimport *は不味いのかなぁ・・・よくわかんない
+from define.data               import * #初期データリスト登録モジュールの読み込み
+from define.ship_data          import * #各種機体(シップ)データ関連の登録モジュールの読み込み
+from define.enemy_data         import * #敵のデータ関連の登録モジュールの読み込み
+from define.boss_data          import * #ボスのデータ関連の登録モジュールの読み込み
+from define.stage_data         import * #各ステージのイベントリスト登録モジュールの読み込み
+
 from common.func               import * #汎用性のある関数群のモジュールの読み込み
 
 from draw.graph                import * #Appクラスのdraw関数から呼び出される関数群のモジュールの読み込み 基本的に画像表示だけを行う関数(メソッド)群です
 
-from update.update_obj         import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主に背景オブジェクトの更新を行う関数(メソッド？）です
+from update.obj                import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主に背景オブジェクトの更新を行う関数(メソッド？）です
 
-from update.update_ipl         import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にIPL表示関連の更新を行う関数(メソッド？）です
-from update.update_init        import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にゲームスタート時の初期化,ステージスタート時の初期化の更新を行うメソッドです  
-from update.update_title       import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にタイトルメニューの更新を行う関数(メソッド？）です
-from update.update_pause       import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み ゲーム中のポーズ更新のメソッド群です
-from update.update_score       import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み スコア加算やハイスコアのチェック、登録などの更新メソッド
-from update.update_sound       import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み BGNやSEの読み込み、再生など
-from update.update_status      import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にステータス表示ウィンドウで使われる項目を更新するメソッドです
-from update.update_bg          import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にBGアクセス(タイルマップにアクセスするときに使用,タイルマップ書き換えとか読み出しとか)更新メソッドです
+from update.ipl                import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にIPL表示関連の更新を行う関数(メソッド？）です
+from update.init               import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にゲームスタート時の初期化,ステージスタート時の初期化の更新を行うメソッドです  
+from update.title              import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にタイトルメニューの更新を行う関数(メソッド？）です
+from update.pause              import * #Appクラスのupdate関数からn8u9呼び出される関数群のモジュールの読み込み ゲーム中のポーズ更新のメソッド群です
+from update.score              import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み スコア加算やハイスコアのチェック、登録などの更新メソッド
+from update.sound              import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み BGNやSEの読み込み、再生など
+from update.status             import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にステータス表示ウィンドウで使われる項目を更新するメソッドです
+from update.bg                 import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にBGアクセス(タイルマップにアクセスするときに使用,タイルマップ書き換えとか読み出しとか)更新メソッドです
+from update.medal              import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主に自機のメダル装備関連の更新を行うメソッドです
 
-from update.update_system      import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にシステムデータのセーブロードを行う関数(メソッド？）です
-from update.update_window      import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にウィンドウやセレクトカーソルの更新を行う関数(メソッド？）です
-from update.update_visualscene import * #ppクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にビジュアルシーンの作製や更新を行うのです
-from update.update_replay      import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み リプレイ記録再生の更新を行う関数(メソッド？）です
-from update.update_debug       import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み デバッグ用パラメーターの更新やキー入力による直接デバッグを行うメソッドです
-from update.update_btn         import * #Appクラスのupdate関数から呼び出されるモジュール 主にショット＆ミサイル関連のボタンが押されたかを調べるメソッドです
-from update.update_btn_assign  import * #Appクラスのupdate関数から呼び出されるモジュール パッドのボタンの機能変更（ボタンアサインコンフィグ)メソッドです
+from update.system             import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にシステムデータのセーブロードを行う関数(メソッド？）です
+from update.window             import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にウィンドウやセレクトカーソルの更新を行う関数(メソッド？）です
+from update.visualscene        import * #ppクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にビジュアルシーンの作製や更新を行うのです
+from update.replay             import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み リプレイ記録再生の更新を行う関数(メソッド？）です
+from update.debug              import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み デバッグ用パラメーターの更新やキー入力による直接デバッグを行うメソッドです
+from update.btn                import * #Appクラスのupdate関数から呼び出されるモジュール 主にショット＆ミサイル関連のボタンが押されたかを調べるメソッドです
+from update.btn_assign         import * #Appクラスのupdate関数から呼び出されるモジュール パッドのボタンの機能変更（ボタンアサインコンフィグ)メソッドです
 
-from update.update_ship        import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主に自機関連のメソッドです
-from update.update_enemy       import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主に敵の更新や敵弾の更新を行います
-from update.update_boss        import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み ボスの更新を行います
-from update.update_collision   import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主に衝突当たり判定を行います
-from update.update_item        import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にパワーアップアイテム関連の更新を行います
+from update.ship               import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主に自機関連のメソッドです
+from update.enemy              import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主に敵の更新や敵弾の更新を行います
+from update.boss               import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み ボスの更新を行います
+from update.collision          import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主に衝突当たり判定を行います
+from update.item               import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にパワーアップアイテム関連の更新を行います
 
-from update.update_event       import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にイベントリストでの敵発生やマップスクロール時に敵を出す処理を行います
+from update.event              import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み 主にイベントリストでの敵発生やマップスクロール時に敵を出す処理を行います
 
 class App:
     ##########################################################################################################################################
@@ -177,7 +179,7 @@ class App:
             print("AppData/Local/code_of_pythonフォルダーを作製しました")
             print(" ")
             
-        update_system.check_exist_sysytem_file(self) #ユーザープロファイルのcode-of-pythonフォルダにシステムファイルがあるかどうか調べなかったらデフォルトのシステムデータをコピーする
+        system.check_exist_sysytem_file(self) #ユーザープロファイルのcode-of-pythonフォルダにシステムファイルがあるかどうか調べなかったらデフォルトのシステムデータをコピーする
         
         print(" ")
         # print("PYXEL VERSION " + pyxel.PYXEL_VERSION)         #pyxel 1.8.15まで使えていたけどpyxel 1.9.10以降は使えなくなった模様
@@ -200,7 +202,7 @@ class App:
         print("TILEMAP_SIZE "   + str(pyxel.TILEMAP_SIZE))
         print("TILE_SIZE "      + str(pyxel.TILE_SIZE))
         
-        # pyxel.screen_mode(scr = 2) #将来的にはスクリーンフィルターエフェクト(ブラウン管再現フィルターとかドットスムースフィルター)が変えられるかもしれないので記述しておくです
+        # pyxel.screen_mode(0) #将来的にはスクリーンフィルターエフェクト(ブラウン管再現フィルターとかドットスムースフィルター)が変えられるかもしれないので記述しておくです
         
         pygame.mixer.init()  #pygameミキサー関連の初期化 pyxel.initよりも先にpygameをinitしないと上手く動かないみたい・・・
         
@@ -211,7 +213,7 @@ class App:
         
         self.temp_my_ship_medal = [0] * 6 #(横6個分 int(0)が入ったメダルID一時退避保存用リストを初期化作製する(リプレイ再生前と後で一時退避的に使われます)
         
-        define_data.default_score_board(self) #スコアボードの初期データ(デフォルトデータ)を登録する関数の呼び出し        
+        data.default_score_board(self) #スコアボードの初期データ(デフォルトデータ)を登録する関数の呼び出し        
         
         self.attrib_chr_col    = [[0] * int(WINDOW_W // 8)  for i in range (int(WINDOW_H // 8)) ] #キャラ表示単位でのアトリビュートリスト(色情報)初期化
         self.attrib_screen_col = [[0] * WINDOW_W for i in range (WINDOW_H) ]                      #ドット表示単位でのアトリビュートリスト(色情報)初期化
@@ -253,7 +255,7 @@ class App:
                                         
                                         ACT_NO_ASSIGN,ACT_NO_ASSIGN]
         
-        define_data.default_achievement_list(self) #実績のIDナンバーとそれに対するグラフイックチップの位置や英語コメント、日本語コメントのデータリストの定義関数の呼び出し
+        data.default_achievement_list(self) #実績のIDナンバーとそれに対するグラフイックチップの位置や英語コメント、日本語コメントのデータリストの定義関数の呼び出し
         
         self.default_boss_number_of_defeat = [0] * 50                                  #ボス撃破数デフォルトリストを作製します
         
@@ -276,13 +278,13 @@ class App:
         
         self.storyboard_index                = 0 #ストーリーボードのインデックス値を初期化
         
-        update_system.load_data(self)        #システムデータをロードする関数の呼び出し
+        system.load_data(self)        #システムデータをロードする関数の呼び出し
         if self.fullscreen_mode == FLAG_ON:  #フルスクリーン起動モードフラグが立っていたのなら
             #pyxel.init(WINDOW_W,WINDOW_H,title="CODE OF PYTHON",fps = 60,fullscreen = True,quit_key=pyxel.KEY_NONE) #フルスクリーンでpyxelを再起動する ver1.5以降からfullscreen = Trueは使えなくなったらしいです
             pyxel.fullscreen(True)           #pyxel Ver1.5からfullscreen命令が追加されたらしい 裏技ッポイけど！？使っても良いのん？？
         pyxel.mouse(False)                   #マウスカーソルを非表示にする
         
-        update_window.refresh_pad_assign_graph_list(self)#パッドアサイングラフイックリストを新規に作成する(self.pad_assign_listに依存しているためself.pad_assign_listを作製した直後この場所で作製するべし！)
+        window.refresh_pad_assign_graph_list(self)#パッドアサイングラフイックリストを新規に作成する(self.pad_assign_listに依存しているためself.pad_assign_listを作製した直後この場所で作製するべし！)
         
         self.bg_cls_color         = pyxel.COLOR_BLACK  #BGをCLS(クリアスクリーン)するときの色の指定(通常は0=pyxel.COLOR_BLACK=黒色です)
         self.bg_transparent_color = pyxel.COLOR_BLACK  #BGタイルマップを敷き詰めるときに指定する透明色です
@@ -299,29 +301,29 @@ class App:
         
         self.replay_slot_num    = 0  #リプレイファイルをセーブしたりロードするスロットナンバーが入ります(0~9)
         
-        define_data.stage_asset_list(self)             #ステージごとのアセットファイル名(pyxresファイル)が登録されたリストを作成する関数の呼び出し
-        define_data.medal_graph_and_comment_list(self) #メダルのIDナンバーとそれに対するグラフイックチップの位置や英語コメントなどの定義関数の呼び出し
+        data.stage_asset_list(self)             #ステージごとのアセットファイル名(pyxresファイル)が登録されたリストを作成する関数の呼び出し
+        data.medal_graph_and_comment_list(self) #メダルのIDナンバーとそれに対するグラフイックチップの位置や英語コメントなどの定義関数の呼び出し
         
         #ゲーム中で絶対に変化することのないリスト群はここで作成します#######################################
-        define_data.ipl_mes(self)               #IPLメッセージテキストの定義関数の呼び出し
-        define_data.flash_color_list(self)      #点滅用カラーリスト群の定義 サブウェポンセレクターカーソルなどで使用する点滅用カラーリスト群(pyxelのカラーナンバーだよ)
-        define_data.expansion_shrink(self)      #サブウェポンアイテムの外を回っている四角形描画用のデータリスト定義関数の呼び出し
-        define_data.font_code_table(self)       #美咲フォントコードテーブルの定義関数の呼び出し
-        define_data.game_difficulty_list(self)  #難易度ごとの各種設定数値のリストの定義関数の呼び出し
-        define_data.game_rank_data_list(self)   #ランク値による各種設定数値のリストの定義関数の呼び出し
-        define_data.storyboard(self)            #タイトルデモ、ミドルデモなどのビジュアルシーンの絵コンテ(ストーリーボード）の定義関数の呼び出し
+        data.ipl_mes(self)               #IPLメッセージテキストの定義関数の呼び出し
+        data.flash_color_list(self)      #点滅用カラーリスト群の定義 サブウェポンセレクターカーソルなどで使用する点滅用カラーリスト群(pyxelのカラーナンバーだよ)
+        data.expansion_shrink(self)      #サブウェポンアイテムの外を回っている四角形描画用のデータリスト定義関数の呼び出し
+        data.font_code_table(self)       #美咲フォントコードテーブルの定義関数の呼び出し
+        data.game_difficulty_list(self)  #難易度ごとの各種設定数値のリストの定義関数の呼び出し
+        data.game_rank_data_list(self)   #ランク値による各種設定数値のリストの定義関数の呼び出し
+        data.storyboard(self)            #タイトルデモ、ミドルデモなどのビジュアルシーンの絵コンテ(ストーリーボード）の定義関数の呼び出し
         
-        define_enemy_data.anime_ptn(self)       #敵キャラのアニメパターンのキャラチップ番号の定義関数の呼び出し
-        define_enemy_data.move_data(self)       #敵の移動データリストの定義関数の呼び出し
+        enemy_data.anime_ptn(self)       #敵キャラのアニメパターンのキャラチップ番号の定義関数の呼び出し
+        enemy_data.move_data(self)       #敵の移動データリストの定義関数の呼び出し
         
-        define_boss_data.move_data(self)        #ボスの移動データリストの定義関数の呼び出し
+        boss_data.move_data(self)        #ボスの移動データリストの定義関数の呼び出し
         
-        define_stage_data.stage_data_list(self) #ステージデータリストの定数定義関数の呼び出し
+        stage_data.stage_data_list(self) #ステージデータリストの定数定義関数の呼び出し
         
-        define_ship_data.default_ship_list(self)          #各機体リスト(初期状態)の定義関数の呼び出し
-        define_ship_data.sub_weapon_level_data_list(self) #サブウェポンのレベルデータリストの定義関数の呼び出し
-        define_ship_data.shot_table_list(self)            #ショットパワーアップテーブルリストの定義関数の呼び出し
-        define_ship_data.missile_table_list(self)         #ミサイルパワーアップテーブルリストの定義関数の呼び出し
+        ship_data.default_ship_list(self)          #各機体リスト(初期状態)の定義関数の呼び出し
+        ship_data.sub_weapon_level_data_list(self) #サブウェポンのレベルデータリストの定義関数の呼び出し
+        ship_data.shot_table_list(self)            #ショットパワーアップテーブルリストの定義関数の呼び出し
+        ship_data.missile_table_list(self)         #ミサイルパワーアップテーブルリストの定義関数の呼び出し
         
         self.game_status = Scene.IPL                #ゲームステータスを「IPL表示」にする
         #self.game_status = Scene.GAME_START_INIT   #ゲームの状況ステータスを表してます（ゲームそのもの自体の状態遷移フラグとして使用します）
@@ -378,10 +380,10 @@ class App:
         self.my_ship_level = 1                 #レベルや経験値システムもまだ未実装なので初期化だけしておきます
         self.my_ship_exp = 0
         
-        func.read_ship_equip_medal_data(self)  #プレイ中の自機リスト群にメダルスロット装備関連のデータを読み込んで行く関数の呼び出し
-        func.medal_effect_plus_medallion(self) #装備されたメダルを調べ、メダルスロットを増やすメダルがはめ込まれていたらスロット数を増やす関数の呼び出し
+        medal.read_ship_equip_medal_data(self)  #プレイ中の自機リスト群にメダルスロット装備関連のデータを読み込んで行く関数の呼び出し
+        medal.medal_effect_plus_medallion(self) #装備されたメダルを調べ、メダルスロットを増やすメダルがはめ込まれていたらスロット数を増やす関数の呼び出し
         
-        update_sound.pre_load_bgm(self)           #事前にバッファーに読み込むタイプのBGMファイルをローディングする
+        sound.pre_load_bgm(self)           #事前にバッファーに読み込むタイプのBGMファイルをローディングする
         
         #毎フレームごとにupdateとdrawを呼び出す
         #近年のゲームエンジンはみんなこんな感じらしい？？？unityやUEもこんな感じなのかな？？使ったことないけど
@@ -404,8 +406,8 @@ class App:
     #  update_ipl.ipl()         →エラーになる                                        #
     #  update_ipl.ipl(self)     →selfを付けて引数を1個多くすると何故かokになる         # 
     #クラスのメソッド(そもそもメソッドというのが良く判らない。。。)呼び出す時も           #
-    #  update_score.score_board_bubble_sort(self.game_difficulty)      →エラーになる #
-    #  updade_score.score_board_bubble_sort(self,self.game_difficulty) →上手くいく   #
+    #  score.score_board_bubble_sort(self.game_difficulty)      →エラーになる        #
+    #  score.score_board_bubble_sort(self,self.game_difficulty) →上手くいく          #
     #良く判らない・・・・判らない・・・判らない・・・・・・・・                          #
     #だからセルフってなんですのん？？？                                                #
     #それと関数とメソッドの違いってなんですのん？良く判らない、同じじゃないの？？          #
@@ -413,58 +415,58 @@ class App:
     def update(self):
         ################################起動処理中 IPL ###################################################################
         if self.game_status == Scene.IPL:         #ゲームステータスが「IPL」の場合IPLメッセージの更新を行う
-            update_ipl.ipl(self)                  #IPLの更新
+            ipl.ipl(self)                         #IPLの更新
         
         ################################ タイトル関連の変数を初期化 ###################################################################
-        if self.game_status == Scene.TITLE_INIT:  #ゲームステータスが「TITLE_INIT」の場合タイトル関連の変数を初期化する関数を呼び出す
-            update_title.title_init(self)         #タイトル関連の変数の初期化関数を呼び出す
+        if self.game_status == Scene.TITLE_INIT:        #ゲームステータスが「TITLE_INIT」の場合タイトル関連の変数を初期化する関数を呼び出す
+            title.title_init(self)                      #タイトル関連の変数の初期化関数を呼び出す
         
         ################################ タイトルロゴの初回表示 ###################################################################
         if self.game_status == Scene.TITLE_FIRST:       #ゲームステータスが「TITLE_FIRST」の場合タイトルの更新を行う
-            update_title.title(self)                    #タイトルの更新
-            update_obj.append_star(self)                #背景の星の追加＆発生育成関数呼び出し
-            update_obj.star(self)                       #背景の星の更新（移動）関数呼び出し
-            update_window.window(self)                  #ウィンドウの更新（ウィンドウの開き閉じ画面外に消え去っていくとか）関数を呼び出し
-            update_window.clip_window(self)             #画面外にはみ出たウィンドウを消去する関数の呼び出し
-            update_window.active_window(self)           #現在アクティブ(最前面)になっているウィンドウのインデックス値(i)を求める関数の呼び出し
-            update_visualscene.visualscene(self)        #ビジュアルシーンの更新関数の呼び出し
+            title.title(self)                           #タイトルの更新
+            obj.append_star(self)                       #背景の星の追加＆発生育成関数呼び出し
+            obj.star(self)                              #背景の星の更新（移動）関数呼び出し
+            window.window(self)                         #ウィンドウの更新（ウィンドウの開き閉じ画面外に消え去っていくとか）関数を呼び出し
+            window.clip_window(self)                    #画面外にはみ出たウィンドウを消去する関数の呼び出し
+            window.active_window(self)                  #現在アクティブ(最前面)になっているウィンドウのインデックス値(i)を求める関数の呼び出し
+            visualscene.visualscene(self)               #ビジュアルシーンの更新関数の呼び出し
         ################################ タイトルでのボタン入力待ち###################################################################
         if self.game_status == Scene.TITLE_HIT_ANY_BTN: #ゲームステータスが「TITLE_HIT_ANY_BTN」場合は何かしらのボタン入力待ちをする
-            update_title.title_hit_any_btn(self)        #タイトルメニューを表示した後,何かしらのボタンの入力待ち状態
-            update_obj.append_star(self)                #背景の星の追加＆発生育成関数呼び出し
-            update_obj.star(self)                       #背景の星の更新（移動）関数呼び出し
-            update_window.window(self)                  #ウィンドウの更新（ウィンドウの開き閉じ画面外に消え去っていくとか）関数を呼び出し
-            update_window.clip_window(self)             #画面外にはみ出たウィンドウを消去する関数の呼び出し
-            update_window.active_window(self)           #現在アクティブ(最前面)になっているウィンドウのインデックス値(i)を求める関数の呼び出し
-            update_visualscene.visualscene(self)        #ビジュアルシーンの更新関数の呼び出し
+            title.title_hit_any_btn(self)               #タイトルメニューを表示した後,何かしらのボタンの入力待ち状態
+            obj.append_star(self)                       #背景の星の追加＆発生育成関数呼び出し
+            obj.star(self)                              #背景の星の更新（移動）関数呼び出し
+            window.window(self)                         #ウィンドウの更新（ウィンドウの開き閉じ画面外に消え去っていくとか）関数を呼び出し
+            window.clip_window(self)                    #画面外にはみ出たウィンドウを消去する関数の呼び出し
+            window.active_window(self)                  #現在アクティブ(最前面)になっているウィンドウのインデックス値(i)を求める関数の呼び出し
+            visualscene.visualscene(self)               #ビジュアルシーンの更新関数の呼び出し
         ################################ タイトルロゴの2回目以降の表示 ###################################################################
-        if self.game_status == Scene.TITLE_SECOND: #ゲームステータスが「TITLE_SECOND」の場合タイトルの更新を行う
-            update_title.title(self)               #タイトルの更新
-            update_obj.append_star(self)           #背景の星の追加＆発生育成関数呼び出し
-            update_obj.star(self)                  #背景の星の更新（移動）関数呼び出し
-            update_window.window(self)             #ウィンドウの更新（ウィンドウの開き閉じ画面外に消え去っていくとか）関数を呼び出し
-            update_window.clip_window(self)        #画面外にはみ出たウィンドウを消去する関数の呼び出し
-            update_window.active_window(self)      #現在アクティブ(最前面)になっているウィンドウのインデックス値(i)を求める関数の呼び出し
+        if self.game_status == Scene.TITLE_SECOND:     #ゲームステータスが「TITLE_SECOND」の場合タイトルの更新を行う
+            title.title(self)                          #タイトルの更新
+            obj.append_star(self)                      #背景の星の追加＆発生育成関数呼び出し
+            obj.star(self)                             #背景の星の更新（移動）関数呼び出し
+            window.window(self)                        #ウィンドウの更新（ウィンドウの開き閉じ画面外に消え去っていくとか）関数を呼び出し
+            window.clip_window(self)                   #画面外にはみ出たウィンドウを消去する関数の呼び出し
+            window.active_window(self)                 #現在アクティブ(最前面)になっているウィンドウのインデックス値(i)を求める関数の呼び出し
         
         ################################ タイトルでメニュー選択中 ###################################################################
         if self.game_status == Scene.TITLE_MENU_SELECT:
-            update_title.title_menu_select(self)        #タイトルでのメニュー選択処理をする関数の呼び出し
-            update_obj.append_star(self)                #背景の星の追加＆発生育成関数呼び出し
-            update_obj.star(self)                       #背景の星の更新（移動）関数呼び出し
-            update_window.window(self)                  #ウィンドウの更新（ウィンドウの開き閉じ画面外に消え去っていくとか）関数を呼び出し
-            update_window.clip_window(self)             #画面外にはみ出たウィンドウを消去する関数の呼び出し
-            update_window.active_window(self)           #現在アクティブ(最前面)になっているウィンドウのインデックス値(i)を求める関数の呼び出し
-            update_window.select_cursor(self)           #セレクトカーソルでメニューを選択する関数を呼び出す
-            update_window.judge_medal_acquisition(self) #メダルの取得判定を行う関数を呼び出す
+            title.title_menu_select(self)               #タイトルでのメニュー選択処理をする関数の呼び出し
+            obj.append_star(self)                       #背景の星の追加＆発生育成関数呼び出し
+            obj.star(self)                              #背景の星の更新（移動）関数呼び出し
+            window.window(self)                         #ウィンドウの更新（ウィンドウの開き閉じ画面外に消え去っていくとか）関数を呼び出し
+            window.clip_window(self)                    #画面外にはみ出たウィンドウを消去する関数の呼び出し
+            window.active_window(self)                  #現在アクティブ(最前面)になっているウィンドウのインデックス値(i)を求める関数の呼び出し
+            window.select_cursor(self)                  #セレクトカーソルでメニューを選択する関数を呼び出す
+            window.judge_medal_acquisition(self)        #メダルの取得判定を行う関数を呼び出す
         
         ############################### ロード用リプレイデータスロットの選択中 #######################################################
         if self.game_status == Scene.SELECT_LOAD_SLOT:#「SELECT_LOAD_SLOT」の時は
-            update_obj.append_star(self)                #背景の星の追加＆発生育成関数呼び出し
-            update_obj.star(self)                       #背景の星の更新（移動）関数呼び出し
-            update_window.window(self)                  #ウィンドウの更新（ウィンドウの開き閉じ画面外に消え去っていくとか）関数を呼び出し
-            update_window.clip_window(self)             #画面外にはみ出たウィンドウを消去する関数の呼び出し
-            update_window.active_window(self)           #現在アクティブ(最前面)になっているウィンドウのインデックス値(i)を求める関数の呼び出し
-            update_window.select_cursor(self)           #セレクトカーソルでメニューを選択する関数を呼び出す
+            obj.append_star(self)                     #背景の星の追加＆発生育成関数呼び出し
+            obj.star(self)                            #背景の星の更新（移動）関数呼び出し
+            window.window(self)                       #ウィンドウの更新（ウィンドウの開き閉じ画面外に消え去っていくとか）関数を呼び出し
+            window.clip_window(self)                  #画面外にはみ出たウィンドウを消去する関数の呼び出し
+            window.active_window(self)                #現在アクティブ(最前面)になっているウィンドウのインデックス値(i)を求める関数の呼び出し
+            window.select_cursor(self)                #セレクトカーソルでメニューを選択する関数を呼び出す
             if self.cursor_decision_item_y != UNSELECTED:#決定ボタンが押されてアイテムが決まったのなら
                 self.replay_slot_num = self.cursor_decision_item_y #リプレイ番号は決定ボタンを押した時点での決定アイテムのy座標数とする
                 self.cursor_type = CURSOR_TYPE_NO_DISP        #セレクトカーソルの表示をoffにする
@@ -472,20 +474,20 @@ class App:
                 self.replay_status = REPLAY_PLAY              #リプレイ機能の状態を「再生中」にします
                 self.replay_stage_num = 0                     #リプレイデータを最初のステージから再生できるように0初期化
                 func.backup_status_data_for_replay_mode(self) #リプレイ再生前に現在のステータスを一時保存する関数の呼び出し
-                update_replay.data_file_load(self)            #リプレイデータファイルのロードを行います
-                update_replay.load_stage_data(self)           #リプレイ再生時は,ステージスタート時のパラメーターをロードする関数を呼び出します
+                replay.data_file_load(self)            #リプレイデータファイルのロードを行います
+                replay.load_stage_data(self)           #リプレイ再生時は,ステージスタート時のパラメーターをロードする関数を呼び出します
                 self.active_window_id = WINDOW_ID_MAIN_MENU   #メインメニューウィンドウIDを最前列でアクティブなものとする
                 self.game_status = Scene.GAME_START_INIT      #ゲームステータスを「SCENE_GAME_START_INIT」にしてゲームスタート時の初期化にする
         
         ################################ ゲームスタート時の初期化 #################################################################
         if self.game_status == Scene.GAME_START_INIT: #ゲームステータスが「START_INIT」の場合（ゲームスタート時の状態遷移）は以下を実行する
-            update_init.game_start(self)              #ゲーム開始前の初期化    スコアやシールド値、ショットレベルやミサイルレベルなどの初期化
-            update_replay.push_status_data(self)      #リプレイデータ(ステータス関連)をバックアップする(プッシュする感じみたいな？？？)関数の呼び出し
+            init.game_start(self)                     #ゲーム開始前の初期化    スコアやシールド値、ショットレベルやミサイルレベルなどの初期化
+            replay.push_status_data(self)      #リプレイデータ(ステータス関連)をバックアップする(プッシュする感じみたいな？？？)関数の呼び出し
             self.game_status = Scene.STAGE_START_INIT #ゲームステータスを「STAGE_START_INIT」にする
         
         ################################ステージスタート時の初期化 #################################################################
         if self.game_status == Scene.STAGE_START_INIT: #ゲームステータスが「START_INIT」の場合（ゲームスタート時の状態遷移）は以下を実行する
-            update_init.stage_start(self)              #ステージ開始前の初期化   自機の座標や各リストの初期化、カウンター類の初期化
+            init.stage_start(self)                     #ステージ開始前の初期化   自機の座標や各リストの初期化、カウンター類の初期化
             self.game_status = Scene.PLAY              #ゲームステータスを「STAGE_START_INIT」にする
         
         ################################ ゲームプレイ中！！！！！！ ###############################################################
@@ -502,64 +504,64 @@ class App:
             or self.game_status == Scene.STAGE_CLEAR_FADE_OUT:
             #自機関連の処理######################################################################################
             # ##################################################################################################
-            update_ship.ship(self)                 #自機の更新処理（移動処理）関数を呼び出す
-            update_ship.record_coordinate(self)    #自機の座標を過去履歴リストに書き込んでいく関数（トレースクローの座標として使用します）を呼び出す
-            update_ship.clip(self)                 #自機をはみ出さないようにする関数を呼び出す
+            ship.ship(self)                           #自機の更新処理（移動処理）関数を呼び出す
+            ship.record_coordinate(self)              #自機の座標を過去履歴リストに書き込んでいく関数（トレースクローの座標として使用します）を呼び出す
+            ship.clip(self)                           #自機をはみ出さないようにする関数を呼び出す
             #パワーアップ関連の処理################################################
-            update_btn.powerup_shot(self)          #ショットのパワーアップ処理関数を呼び出し
-            update_btn.powerup_missile(self)       #ミサイルのパワーアップ処理関数の呼び出し
+            btn.powerup_shot(self)                    #ショットのパワーアップ処理関数を呼び出し
+            btn.powerup_missile(self)                 #ミサイルのパワーアップ処理関数の呼び出し
             #自機スピードチェンジ###################################################
-            update_btn.change_speed(self)          #自機スピードチェンジボタンが押されたか調べる関数呼び出し
+            btn.change_speed(self)                    #自機スピードチェンジボタンが押されたか調べる関数呼び出し
             #自機ショット関連の処理#################################################
-            update_ship.shot(self)                  #自機弾の更新関数を呼び出す
-            update_ship.clip_shot(self)             #自機弾をはみ出さないようにする関数を呼び出す
-            update_collision.my_shot_to_bg(self)    #自機弾と背景との当たり判定を行う関数を呼び出す
-            update_collision.my_shot_to_enemy(self) #自機弾と敵の当たり判定を行う関数を呼び出す
-            update_collision.my_shot_to_boss(self)  #自機弾とボスの当たり判定を行う関数を呼び出す
+            ship.shot(self)                           #自機弾の更新関数を呼び出す
+            ship.clip_shot(self)                      #自機弾をはみ出さないようにする関数を呼び出す
+            collision.my_shot_to_bg(self)             #自機弾と背景との当たり判定を行う関数を呼び出す
+            collision.my_shot_to_enemy(self)          #自機弾と敵の当たり判定を行う関数を呼び出す
+            collision.my_shot_to_boss(self)           #自機弾とボスの当たり判定を行う関数を呼び出す
             #ミサイル関連の処理###################################################################
-            update_ship.missile(self)               #自機ミサイルの更新（移動処理）関数を呼び出す
-            update_ship.clip_missile(self)          #自機ミサイルをはみ出さないようにする関数を呼び出す
-            update_collision.missile_to_enemy(self) #自機ミサイルと敵との当たり判定を行う関数の呼び出す
-            update_collision.missile_to_boss(self)  #自機ミサイルとボスとの当たり判定を行う関数を呼び出す
+            ship.missile(self)                        #自機ミサイルの更新（移動処理）関数を呼び出す
+            ship.clip_missile(self)                   #自機ミサイルをはみ出さないようにする関数を呼び出す
+            collision.missile_to_enemy(self)          #自機ミサイルと敵との当たり判定を行う関数の呼び出す
+            collision.missile_to_boss(self)           #自機ミサイルとボスとの当たり判定を行う関数を呼び出す
             #クロー関連の処理 ####################################################################
-            update_ship.claw(self)                    #クローの更新（移動処理）関数を呼び出す
-            update_ship.claw_shot(self)               #クローの弾の更新（移動処理）を呼び出す
-            update_collision.claw_shot_to_enemy(self) #クローの弾と敵との当たり判定関数を呼び出す
-            update_collision.claw_shot_to_boss(self)  #クローの弾とボスとの当たり判定関数を呼び出す
-            update_collision.claw_shot_to_bg(self)    #クローの弾と背景との当たり判定関数を呼び出す
+            ship.claw(self)                           #クローの更新（移動処理）関数を呼び出す
+            ship.claw_shot(self)                      #クローの弾の更新（移動処理）を呼び出す
+            collision.claw_shot_to_enemy(self)        #クローの弾と敵との当たり判定関数を呼び出す
+            collision.claw_shot_to_boss(self)         #クローの弾とボスとの当たり判定関数を呼び出す
+            collision.claw_shot_to_bg(self)           #クローの弾と背景との当たり判定関数を呼び出す
             
             #敵の弾関連の処理 ###################################################################################
             ####################################################################################################
-            update_enemy.shot(self)                       #敵の弾の更新（移動処理とか）＆自機と敵弾と自機との当たり判定の関数の呼び出し
-            update_enemy.clip_shot(self)                  #敵の弾が画面からはみ出したら消去する関数の呼び出し
-            update_collision.enemy_shot_to_bg(self)       #敵の弾と背景との当たり判定を行う関数の呼び出し
+            enemy.shot(self)                       #敵の弾の更新（移動処理とか）＆自機と敵弾と自機との当たり判定の関数の呼び出し
+            enemy.clip_shot(self)                  #敵の弾が画面からはみ出したら消去する関数の呼び出し
+            collision.enemy_shot_to_bg(self)       #敵の弾と背景との当たり判定を行う関数の呼び出し
             
             #クロー関連の処理###########################################################################################################
-            update_btn.delete_claw_btn(self)              #クローを消滅させるキーが押されたか調べる関数の呼び出し
-            update_btn.change_fix_claw_interval_btn(self) #フイックスクロー間隔変化ボタンが押されたか調べる関数を呼び出す
-            update_btn.change_claw_style_btn(self)        #クロースタイル変更ボタンが押されたか調べる関数を呼び出す    
+            btn.delete_claw_btn(self)              #クローを消滅させるキーが押されたか調べる関数の呼び出し
+            btn.change_fix_claw_interval_btn(self) #フイックスクロー間隔変化ボタンが押されたか調べる関数を呼び出す
+            btn.change_claw_style_btn(self)        #クロースタイル変更ボタンが押されたか調べる関数を呼び出す    
             
             #イベントリスト関連の処理###############################################################################################################
-            update_event.list_execution(self)             #イベントリスト解析による敵の発生関数を呼び出す
-            update_event.enemy_born_map_scroll(self)      #マップスクロールによる敵の発生関数を呼び出す
-            update_event.building_born_timeline_map(self) #タイムラインマップによる建物の追加発生を行う
-            update_event.append_request(self)             #アペンドイベントリクエストによる敵の追加発生関数を呼び出す（早回しなどの追加注文発生とかの処理）(イベント追加依頼）
+            event.list_execution(self)             #イベントリスト解析による敵の発生関数を呼び出す
+            event.enemy_born_map_scroll(self)      #マップスクロールによる敵の発生関数を呼び出す
+            event.building_born_timeline_map(self) #タイムラインマップによる建物の追加発生を行う
+            event.append_request(self)             #アペンドイベントリクエストによる敵の追加発生関数を呼び出す（早回しなどの追加注文発生とかの処理）(イベント追加依頼）
             
             #敵関連の処理###############################################################################################################
-            update_enemy.enemy(self)                      #敵の更新（移動とか）関数を呼び出す
-            update_enemy.clip(self)                       #画面からはみ出た敵を消去する関数を呼び出し
+            enemy.enemy(self)                      #敵の更新（移動とか）関数を呼び出す
+            enemy.clip(self)                       #画面からはみ出た敵を消去する関数を呼び出し
             #ボス関連の処理#############################################################################################################
-            update_boss.boss(self)                        #ボスの更新移動とかを行う関数を呼び出す
+            boss.boss(self)                        #ボスの更新移動とかを行う関数を呼び出す
             if self.game_status == Scene.BOSS_APPEAR or self.game_status == Scene.BOSS_BATTLE:
                 self.boss_battle_time += 1                #状態遷移が「ボス出現中」と「ボスと戦闘中」の時だけボス戦闘時間を1増加させていきます
             
             #パワーアップアイテム類の処理################################################################################################
-            update_item.obtain_item(self)                    #パワーアップアイテム類の更新（移動とか）する関数を呼び出します
-            update_collision.obtain_item_to_enemy_shot(self) #パワーアップアイテムと敵弾の当たり判定を行う関数を呼び出します
-            update_item.clip_obtain_item(self)               #画面からはみ出したパワーアップアイテム類を消去する関数を呼び出します
-            self.stage_count += 1                            #ステージ開始から経過したフレームカウント数を1増加させる
+            item.obtain_item(self)                    #パワーアップアイテム類の更新（移動とか）する関数を呼び出します
+            collision.obtain_item_to_enemy_shot(self) #パワーアップアイテムと敵弾の当たり判定を行う関数を呼び出します
+            item.clip_obtain_item(self)               #画面からはみ出したパワーアップアイテム類を消去する関数を呼び出します
+            self.stage_count += 1                     #ステージ開始から経過したフレームカウント数を1増加させる
             #ランクアップ処理#############################################################################################################
-            update_status.rank_up_look_at_playtime(self)   #時間経過によるランクアップ関数を呼び出します
+            status.rank_up_look_at_playtime(self)     #時間経過によるランクアップ関数を呼び出します
             #スクロール関連の処理#########################################################################################################
             if self.boss_test_mode == MENU_BOSS_MODE_OFF:                #ボス戦テストモードオフの時だけ
                 self.scroll_count += self.side_scroll_speed              #スクロールカウント数をスクロールスピード分(通常は1)増加させていく
@@ -569,61 +571,61 @@ class App:
             func.adjust_scroll_speed(self)           #縦横スクロールのスピードを設定値までに近づけていく関数を呼び出します
             
             #ラスタスクロールの更新#######################################################################################################
-            update_obj.raster_scroll(self)            #ラスタースクロールの更新関数の呼び出し
+            obj.raster_scroll(self)            #ラスタースクロールの更新関数の呼び出し
             #マップチップナンバー書き換えによるアニメーション関連の更新######################################################################
-            update_obj.bg_rewrite_animation(self)     #BG書き換えによるアニメーション関数の呼び出し
-            # update_obj.dummy_bg_animation(self)     #BG 座標直接指定による書き換えダミーテスト
+            obj.bg_rewrite_animation(self)     #BG書き換えによるアニメーション関数の呼び出し
+            # obj.dummy_bg_animation(self)     #BG 座標直接指定による書き換えダミーテスト
             #リプレイデータの記録と再生###################################################################################################
-            update_replay.record_data(self)           #パッド＆キーボード入力によるリプレイデータの記録を行う関数を呼び出します
-            update_replay.increace_frame_index(self)  #リプレイ用のフレームインデックス値を1進めていく関数を呼びますぅ
+            replay.record_data(self)           #パッド＆キーボード入力によるリプレイデータの記録を行う関数を呼び出します
+            replay.increace_frame_index(self)  #リプレイ用のフレームインデックス値を1進めていく関数を呼びますぅ
             #乱数ルーレットの更新########################################################################################################
-            update_status.rnd0_9(self)                    #乱数ルーレット( 0~9)の更新
-            update_status.rnd0_99(self)                   #乱数ルーレット(0~99)の更新
+            status.rnd0_9(self)                    #乱数ルーレット( 0~9)の更新
+            status.rnd0_99(self)                   #乱数ルーレット(0~99)の更新
             #実績(アチーブメント)の取得判定###############################################################################################
             if self.replay_status == REPLAY_RECORD:               #リプレイデータを保存している時(ゲームプレイ中)だけは実績取得の判定を行う(リプレイ再生時に実績取得すると不味いからね～～♪)
-                update_window.judge_achievement_acquisition(self) #実績(アチーブメント)を取得したかどうかを調べる関数の呼び出し
+                window.judge_achievement_acquisition(self) #実績(アチーブメント)を取得したかどうかを調べる関数の呼び出し
         
         if     self.game_status == Scene.PLAY\
             or self.game_status == Scene.BOSS_APPEAR\
             or self.game_status == Scene.BOSS_BATTLE\
             or self.game_status == Scene.BOSS_EXPLOSION :#「プレイ中」とボス関連の時だけ自機の当たり判定関連とシールド値のチェック&ボタンを押したら何かをする処理を実行する
             #自機と色んなオブジェクトとの当たり判定処理#############################
-            update_collision.ship_to_enemy(self)       #自機と敵との当たり判定関数を呼び出す             
-            update_collision.ship_to_bg(self)          #自機と背景障害物との当たり判定関数を呼び出す
-            update_collision.ship_to_obtain_item(self) #自機とパワーアップアイテム類の当たり判定（パワーアップゲットしたかな？どうかな？）
-            update_collision.ship_to_boss(self)        #自機とボスとの当たり判定を行う関数を呼び出す
+            collision.ship_to_enemy(self)              #自機と敵との当たり判定関数を呼び出す             
+            collision.ship_to_bg(self)                 #自機と背景障害物との当たり判定関数を呼び出す
+            collision.ship_to_obtain_item(self)        #自機とパワーアップアイテム類の当たり判定（パワーアップゲットしたかな？どうかな？）
+            collision.ship_to_boss(self)               #自機とボスとの当たり判定を行う関数を呼び出す
             #自機シールドのチェック###############################################
-            update_ship.check_shield(self)             #自機のシールドが残っているのかチェックする関数を呼び出す
+            ship.check_shield(self)                    #自機のシールドが残っているのかチェックする関数を呼び出す
             #武器発射関連の処理###################################################
-            update_btn.shot_btn(self)                  #ショット発射ボタンが押されたかどうか？を調べる関数を呼び出す
-            update_btn.missile_btn(self)               #ミサイル発射ボタンが押されたかどうか？を調べる関数を呼び出す
-            update_btn.claw_shot_btn(self)             #クローが弾を発射するボタンが押された？かどうかを調べる関数を呼び出す
-            update_btn.change_sub_weapon_btn(self)     #サブウェポンの切り替えボタンが押されたか？どうかを調べる関数を呼び出す
+            btn.shot_btn(self)                         #ショット発射ボタンが押されたかどうか？を調べる関数を呼び出す
+            btn.missile_btn(self)                      #ミサイル発射ボタンが押されたかどうか？を調べる関数を呼び出す
+            btn.claw_shot_btn(self)                    #クローが弾を発射するボタンが押された？かどうかを調べる関数を呼び出す
+            btn.change_sub_weapon_btn(self)            #サブウェポンの切り替えボタンが押されたか？どうかを調べる関数を呼び出す
             #デバッグモードによる敵や敵弾の追加発生（ボタンを押したら敵が出てくる！？）###################################################
-            update_debug.enemy_append(self)          #デバッグモードによる敵＆敵弾追加発生
+            debug.enemy_append(self)                   #デバッグモードによる敵＆敵弾追加発生
             #プレイ時間の計算#####################################################
-            update_status.calc_playtime(self)          #プレイ時間を計算する関数を呼び出す
+            status.calc_playtime(self)          #プレイ時間を計算する関数を呼び出す
             #バックグラウンド(BG)を表示するときのカメラオフセット座標値を計算する#####
             func.screen_camera_offset(self)            #カメラオフセット座標値を計算する関数を呼び出す
             #ハイスコアの更新チェック##############################################
-            update_score.check_hi_score(self)          #ハイスコアが更新されているか調べる関数を呼び出す
+            score.check_hi_score(self)          #ハイスコアが更新されているか調べる関数を呼び出す
             #タイマーフレア放出###################################################
-            update_obj.timer_flare(self)               #タイマーフレア放出の更新処理関数を呼び出す
+            obj.timer_flare(self)               #タイマーフレア放出の更新処理関数を呼び出す
             #大気圏突入時の火花の発生##########################################################
-            update_obj.atmospheric_entry_spark(self)   #大気圏突入時の火花を発せさせる関数の呼び出し
+            obj.atmospheric_entry_spark(self)   #大気圏突入時の火花を発せさせる関数の呼び出し
         
         if self.game_status == Scene.BOSS_EXPLOSION:         #「BOSS_EXPLOSION」の時は
-            update_item.present_repair_item(self)            #リペアアイテムを出現させる関数の呼び出し
+            item.present_repair_item(self)                   #リペアアイテムを出現させる関数の呼び出し
         
         if self.game_status == Scene.EXPLOSION:              #「EXPLOSION」の時は
             self.my_ship_explosion_timer += 1                # my_ship_explosionタイマーを加算していき
             if self.my_ship_explosion_timer >= SHIP_EXPLOSION_TIMER_LIMIT:#リミット値まで行ったのなら
-                self.game_status = Scene.GAME_OVER         #「GAME_OVER」にする
-                pygame.mixer.music.fadeout(6000)           #BGMフェードアウト開始
+                self.game_status = Scene.GAME_OVER           #「GAME_OVER」にする
+                pygame.mixer.music.fadeout(6000)             #BGMフェードアウト開始
         
         ############################### ゲーム一時中断中(PAUSE) ###################################################################
         if self.game_status == Scene.PAUSE:                  #「PAUSE」の時は
-            update_pause.pause_menu(self)                    #ポーズ時のメニューセレクト処理を行う関数を呼び出す
+            pause.pause_menu(self)                           #ポーズ時のメニューセレクト処理を行う関数を呼び出す
         
         #######ゲームオーバー後の処理#############################################################
         if self.game_status == Scene.GAME_OVER:              #「GAME_OVER」の時は
@@ -655,7 +657,7 @@ class App:
         
         if self.game_status == Scene.GAME_OVER_STOP:         #「GAME_OVER_STOP」の時は
             if self.replay_status == REPLAY_RECORD: #リプレイ録画中の時のリターンタイトルウィンドウ表示
-                update_window.create(self,WINDOW_ID_GAME_OVER_RETURN,43,68)    #RETRN? SAVE&RETURNウィンドウの作成
+                window.create(self,WINDOW_ID_GAME_OVER_RETURN,43,68)    #RETRN? SAVE&RETURNウィンドウの作成
                 self.cursor_type = CURSOR_TYPE_NORMAL             #選択カーソル表示をonにする
                 self.select_cursor_flag = FLAG_ON                 #セレクトカーソルの移動更新フラグをオン
                 self.cursor_move_direction = CURSOR_MOVE_UD       #カーソルは上下移動のみ
@@ -667,7 +669,7 @@ class App:
                 self.active_window_id = WINDOW_ID_GAME_OVER_RETURN#このウィンドウIDを最前列でアクティブなものとする
                 self.game_status = Scene.RETURN_TITLE             #ゲームステータスを「RETURN_TITLE」にする
             elif self.replay_status == REPLAY_PLAY: #リプレイ再生中の時のリターンタイトルウィンドウ表示(SAVE&RETURN項目は表示しない)  
-                update_window.create(self,WINDOW_ID_GAME_OVER_RETURN_NO_SAVE,43,68)     #RETRN?ウィンドウの作成
+                window.create(self,WINDOW_ID_GAME_OVER_RETURN_NO_SAVE,43,68)     #RETRN?ウィンドウの作成
                 func.restore_status_data_for_replay_mode(self)             #リプレイ再生が終了したので記録しておいたステータスを復帰させる
                 self.cursor_type = CURSOR_TYPE_NORMAL                      #選択カーソル表示をonにする
                 self.select_cursor_flag = FLAG_ON                          #セレクトカーソルの移動更新フラグをオン
@@ -686,16 +688,16 @@ class App:
                 self.select_cursor_flag = FLAG_OFF           #セレクトカーソルの移動更新は行わないのでフラグを降ろす
                 
                 if self.replay_status == REPLAY_RECORD:      #リプレイデータ記録中(ゲームプレイ)中の時は
-                    func.write_ship_equip_medal_data(self)                          #機体メダルスロット装備リストに現在プレイ中のシップリストのメダル情報を書き込む関数の呼び出し
-                    update_system.save_data(self)                                   #システムデータをセーブする関数の呼び出し
-                    update_score.recoard_score_board(self)                          #スコアボードに点数書き込み
-                    update_score.score_board_bubble_sort(self,self.game_difficulty) #現在選択している難易度を引数として書き込んだスコアデータをソートする関数の呼び出し
+                    medal.write_ship_equip_medal_data(self)                         #機体メダルスロット装備リストに現在プレイ中のシップリストのメダル情報を書き込む関数の呼び出し
+                    system.save_data(self)                                   #システムデータをセーブする関数の呼び出し
+                    score.recoard_score_board(self)                          #スコアボードに点数書き込み
+                    score.score_board_bubble_sort(self,self.game_difficulty) #現在選択している難易度を引数として書き込んだスコアデータをソートする関数の呼び出し
                 
                 self.game_over_bgm.fadeout(1200)                     #GAME OVER BGMフェードアウト開始
                 self.game_status = Scene.TITLE_INIT            #ゲームステータスを「SCENE_TITLE_INIT」にしてタイトルの初期化工程にする
                 
             elif self.cursor_decision_item_y == 1:             #メニューでアイテムナンバー1の「SAVE & RETURN」が押されたら
-                update_window.create_replay_data_slot_select(self)           #リプレイデータファイルスロット選択ウィンドウの表示
+                window.create_replay_data_slot_select(self)           #リプレイデータファイルスロット選択ウィンドウの表示
                 self.cursor_type = CURSOR_TYPE_NORMAL               #選択カーソル表示をonにする
                 self.cursor_move_direction = CURSOR_MOVE_UD         #カーソルは上下移動のみ
                 self.cursor_x = 67                                  #セレクトカーソルの座標を設定します
@@ -717,14 +719,14 @@ class App:
                 self.game_playing_flag = FLAG_OFF                  #ゲームプレイ中のフラグを降ろす
                 self.select_cursor_flag = FLAG_OFF                 #セレクトカーソルの移動更新は行わないのでフラグを降ろす
                 
-                func.write_ship_equip_medal_data(self)                          #機体メダルスロット装備リストに現在プレイ中のシップリストのメダル情報を書き込む関数の呼び出し
-                update_system.save_data(self)                                   #システムデータをセーブする関数の呼び出し
-                update_score.recoard_score_board(self)                          #スコアボードに点数書き込み
-                update_score.score_board_bubble_sort(self,self.game_difficulty) #現在選択している難易度を引数として書き込んだスコアデータをソートする関数の呼び出し
+                medal.write_ship_equip_medal_data(self)                         #機体メダルスロット装備リストに現在プレイ中のシップリストのメダル情報を書き込む関数の呼び出し
+                system.save_data(self)                                   #システムデータをセーブする関数の呼び出し
+                score.recoard_score_board(self)                          #スコアボードに点数書き込み
+                score.score_board_bubble_sort(self,self.game_difficulty) #現在選択している難易度を引数として書き込んだスコアデータをソートする関数の呼び出し
                 
-                update_replay.push_list_data(self)          #録画したリプレイデータを登録します
+                replay.push_list_data(self)          #録画したリプレイデータを登録します
                 
-                update_replay.data_file_save(self)          #リプレイデータファイルのセーブ
+                replay.data_file_save(self)          #リプレイデータファイルのセーブ
                 
                 self.replay_recording_data = []            #録画したリプレイデータは登録したので元のデータは消去します
                 self.replay_mode_stage_data_backup = self.replay_mode_stage_data #各ステージ開始時のデータ履歴をバックアップ
@@ -767,38 +769,38 @@ class App:
                 self.game_status = Scene.GAME_QUIT       #「GAME QUIT」にする
             
         elif self.game_status == Scene.GAME_QUIT:        #「GAME QUIT」の時は
-            func.write_ship_equip_medal_data(self)       #機体メダルスロット装備リストに現在プレイ中のシップリストのメダル情報を書き込む関数の呼び出し
-            update_system.save_data(self)                #システムデータをセーブします
+            medal.write_ship_equip_medal_data(self)      #機体メダルスロット装備リストに現在プレイ中のシップリストのメダル情報を書き込む関数の呼び出し
+            system.save_data(self)                #システムデータをセーブします
             pyxel.quit()                                 #ゲーム終了！！！！！！！！！！！！！！！！！！！！！！！！！！
         
         ################################ ゲーム終了工程時の処理 ###################################################################
         if self.game_status == Scene.GAME_QUIT_START or self.game_status == Scene.GAME_QUIT_WAIT:
-            update_obj.append_star(self)      #背景の星の追加＆発生育成関数呼び出し
-            update_obj.star(self)             #背景の星の更新（移動）関数呼び出し
-            update_window.window(self)        #ウィンドウの更新（ウィンドウの開き閉じ画面外に消え去っていくとか）関数を呼び出し
-            update_window.clip_window(self)   #画面外にはみ出たウィンドウを消去する関数の呼び出し
-            update_window.active_window(self) #現在アクティブ(最前面)になっているウィンドウのインデックス値(i)を求める関数の呼び出し
+            obj.append_star(self)      #背景の星の追加＆発生育成関数呼び出し
+            obj.star(self)             #背景の星の更新（移動）関数呼び出し
+            window.window(self)        #ウィンドウの更新（ウィンドウの開き閉じ画面外に消え去っていくとか）関数を呼び出し
+            window.clip_window(self)   #画面外にはみ出たウィンドウを消去する関数の呼び出し
+            window.active_window(self) #現在アクティブ(最前面)になっているウィンドウのインデックス値(i)を求める関数の呼び出し
         
         ####################ゲームプレイ中のフラグが立っていたのなら以下の処理を行う(主にゲーム進行に関与しない映像処理関連)################
         if self.game_playing_flag  == FLAG_ON: #ゲームプレイ中のフラグが立っていたのならば
-            update_debug.debug_status(self)    #デバッグステータス表示＆非表示の切り替え
+            debug.debug_status(self)           #デバッグステータス表示＆非表示の切り替え
             #映像オブジェクト関連の処理################################################################################################
-            update_obj.append_star(self)       #背景の星の追加＆発生育成関数呼び出し
-            update_obj.append_cloud(self)      #背景の雲の追加＆発生育成関数呼び出し
-            update_obj.star(self)              #背景の星の更新（移動）関数呼び出し
-            update_obj.particle(self)          #パーティクルの更新関数呼び出し
-            update_obj.background_object(self) #背景オブジェクトの更新関数の呼び出し
-            update_obj.building_object(self)   #建物オブジェクトの更新関数の呼び出し
-            update_obj.explosion(self)         #爆発パターンの更新関数呼び出し 
+            obj.append_star(self)       #背景の星の追加＆発生育成関数呼び出し
+            obj.append_cloud(self)      #背景の雲の追加＆発生育成関数呼び出し
+            obj.star(self)              #背景の星の更新（移動）関数呼び出し
+            obj.particle(self)          #パーティクルの更新関数呼び出し
+            obj.background_object(self) #背景オブジェクトの更新関数の呼び出し
+            obj.building_object(self)   #建物オブジェクトの更新関数の呼び出し
+            obj.explosion(self)         #爆発パターンの更新関数呼び出し 
             #一時停止(pause)の処理###################################################################################################
-            update_btn.pause_btn(self)         #ポーズボタンが押されたらポーズをかける関数を呼び出し
+            btn.pause_btn(self)         #ポーズボタンが押されたらポーズをかける関数を呼び出し
             #ウィンドウ＆メニューカーソル関連の処理###############################################################################################
-            update_window.window(self)        #ウィンドウの更新（ウィンドウの開き閉じ画面外に消え去っていくとか）関数を呼び出し
-            update_window.clip_window(self)   #画面外にはみ出たウィンドウを消去する関数の呼び出し
-            update_window.active_window(self) #現在アクティブ(最前面)になっているウィンドウのインデックス値(i)を求める関数の呼び出し
+            window.window(self)        #ウィンドウの更新（ウィンドウの開き閉じ画面外に消え去っていくとか）関数を呼び出し
+            window.clip_window(self)   #画面外にはみ出たウィンドウを消去する関数の呼び出し
+            window.active_window(self) #現在アクティブ(最前面)になっているウィンドウのインデックス値(i)を求める関数の呼び出し
         
         if self.select_cursor_flag == FLAG_ON: #セレクトカーソルを動かすフラグが立っているのならカーソルの移動更新を行う
-            update_window.select_cursor(self)  #セレクトカーソルでメニューを選択する関数を呼び出す
+            window.select_cursor(self)  #セレクトカーソルでメニューを選択する関数を呼び出す
 
     ###########################################################
     ###########################################################

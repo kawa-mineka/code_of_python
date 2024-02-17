@@ -1,5 +1,5 @@
 ###########################################################
-#  update_debugクラス                                      #      
+#  debugクラス                                            #      
 ###########################################################
 #  Appクラスのupdate関数から呼び出される関数群               #
 #  主にデバッグモードの更新を行います                        #
@@ -14,10 +14,10 @@ import pyxel        #グラフイックキャラやバックグラウンドグ�
 from const.const import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
 from common.func  import * #汎用性のある関数群のモジュールの読み込み
 
-from update.update_ship import * #主に自機関連のメソッドです(クローの追加で仕様)
-from update.update_obj  import * #背景オブジェクト更新関数モジュール読み込み(パーティクルの追加で使用)
+from update.ship import * #主に自機関連のメソッドです(クローの追加で仕様)
+from update.obj  import * #背景オブジェクト更新関数モジュール読み込み(パーティクルの追加で使用)
 
-class update_debug:
+class debug:
     def __init__(self):
         None
 
@@ -320,12 +320,12 @@ class update_debug:
                 dx,dy = -0.3 - random() * 2,-0.3 - random()
                 life = 1000
                 color = 0
-                update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,PRIORITY_MORE_FRONT,x,y,  dx,dy,life,0,color)
-                # update_obj.append_particle(self,PARTICLE_LINE,PRIORITY_FRONT,x,y,  0,0,0,0,0)
+                obj.append_particle(self,PARTICLE_BOSS_DEBRIS1,PRIORITY_MORE_FRONT,x,y,  dx,dy,life,0,color)
+                # obj.append_particle(self,PARTICLE_LINE,PRIORITY_FRONT,x,y,  0,0,0,0,0)
                 
                 particle_number = func.s_rndint(self,0,10) + 50
                 for number in range(particle_number):
-                    update_obj.append_particle(self,PARTICLE_DOT,PRIORITY_FRONT,x,y,-0.5,-0.5, 0,0,0)
+                    obj.append_particle(self,PARTICLE_DOT,PRIORITY_FRONT,x,y,-0.5,-0.5, 0,0,0)
         
         #背景オブジェクト雲１を発生させる                        KEY E
         if(pyxel.frame_count % 6) == 0:
@@ -341,10 +341,12 @@ class update_debug:
         if(pyxel.frame_count % 6) == 0:
             if pyxel.btn(pyxel.KEY_N):
                 num = 0
-                update_obj.append_building(self,num)
+                spd = 1
+                priority = 1
+                obj.append_building(self,num,spd,priority)
                 
                 num = 1
-                update_obj.append_building(self,num)
+                obj.append_building(self,num,spd,priority)
         
         #パワーアップアイテム類を発生させる                       KEY U I O
         if(pyxel.frame_count % 8) == 0:
@@ -366,7 +368,7 @@ class update_debug:
         
         #自機クローを追加する                                KEY V
         if pyxel.btnp(pyxel.KEY_V):
-            update_ship.append_claw(self)
+            ship.append_claw(self)
         
         #キーボード入力によるイベントアペンドリスト書き込み  サーコイン10機編隊   KEY 0
         if (pyxel.frame_count % 8) == 0:

@@ -1,7 +1,7 @@
 import pyxel        #カラーコードだけ使用したいのでインポート
 from const.const import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
 
-class define_stage_data:
+class stage_data:
     def __init__(self):
         None
 

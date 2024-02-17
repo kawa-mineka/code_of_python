@@ -1,6 +1,6 @@
 from const.const import *         #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
 
-class define_ship_data:
+class ship_data:
     def __init__(self):
         None
 

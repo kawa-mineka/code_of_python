@@ -4,9 +4,10 @@ from random import random  # random.random() と呼ぶと、0から1の範囲(1�
 
 # import pygame.mixer  # MP3再生するためだけに使用する予定・・・予定は未定・・・そして未定は確定に！やったあぁ！ BGMだけで使用しているサブゲームエンジン
 import pyxel  # グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
-from const.const import *  # 定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
+from const.const        import *  # 定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
 from const.const_window import * #主にウィンドウクラスで使用する定数定義
-from define.define_class import * # クラス宣言モジュールの読み込み やっぱりimport *は不味いのかなぁ・・・よくわかんない
+from define.class_data  import * # クラス宣言モジュールの読み込み やっぱりimport *は不味いのかなぁ・・・よくわかんない
+from define.data        import * #ランクダウンメソッドで使用するのでモジュール読み込み
 
 class func:
     def __init__(self):
@@ -1174,93 +1175,6 @@ class func:
             if self.raster_scroll[i].scroll_id == id: #scroll_idと調べるidが一致したのなら
                 self.raster_scroll[i].display = flag #flag(0=表示しない 1=表示する)を書き込む
 
-    #!#######################################################################################数々のリスト群からデータを取り出し設定する(それぞれの変数に代入していく)メソッド
-    #ランクに応じた数値をリストから取得する
-    def get_rank_data(self):
-        """
-        ランクに応じた数値をリストから取得する
-        """
-        self.enemy_speed_mag           = self.game_rank_data_list[self.rank][LIST_RANK_E_SPEED_MAG]            #敵スピード倍率をリストを参照してランク数で取得、変数に代入する
-        self.enemy_bullet_speed_mag    = self.game_rank_data_list[self.rank][LIST_RANK_BULLET_SPEED_MAG]        #敵狙い撃ち弾スピード倍率をリストを参照してランク数で取得、変数に代入する
-        self.return_bullet_probability = self.game_rank_data_list[self.rank][LIST_RANK_RETURN_BULLET_PROBABILITY] #敵撃ち返し弾発射確率をリストを参照してランク数で取得、変数に代入する
-        self.enemy_hp_mag              = self.game_rank_data_list[self.rank][LIST_RANK_E_HP_MAG]               #敵耐久力倍率をリストを参照してランク数で取得、変数に代入する
-        self.enemy_bullet_append       = self.game_rank_data_list[self.rank][LIST_RANK_E_BULLET_APPEND]         #弾追加数をリストを参照してランク数で取得、変数に代入する
-        self.enemy_bullet_interval     = self.game_rank_data_list[self.rank][LIST_RANK_E_BULLET_INTERVAL]        #弾発射間隔減少パーセントをリストを参照してランク数で取得、変数に代入する
-        self.enemy_nway_level          = self.game_rank_data_list[self.rank][LIST_RANK_NWAY_LEVEL]             #nWAY弾のレベルをリストを参照してランク数で取得、変数に代入する
-
-    #難易度に応じた数値をリストから取得する
-    def get_difficulty_data(self):
-        """
-        難易度に応じた数値をリストから取得する
-        """
-        self.start_bonus_shot         = self.game_difficulty_list[self.game_difficulty][LIST_START_BONUS_SHOT]           #初期ショットボーナスをリストを参照し難易度に合わせて取得、変数に代入する
-        self.start_bonus_missile      = self.game_difficulty_list[self.game_difficulty][LIST_START_BONUS_MISSILE]        #初期ミサイルボーナスをリストを参照し難易度に合わせて取得、変数に代入する
-        self.start_bonus_shield       = self.game_difficulty_list[self.game_difficulty][LIST_START_BONUS_SHIELD]         #初期シールドボーナスをリストを参照し難易度に合わせて取得、変数に代入する
-        self.start_claw               = self.game_difficulty_list[self.game_difficulty][LIST_START_CLAW]                #初期クローボーナスをリストを参照し難易度に合わせて取得、変数に代入する
-        self.repair_shield            = self.game_difficulty_list[self.game_difficulty][LIST_REPAIR_SHIELD]             #ステージクリア後に回復するシールド値をリストを参照し難易度に合わせて取得、変数に代入する
-        self.return_bullet            = self.game_difficulty_list[self.game_difficulty][LIST_RETURN_BULLET]             #撃ち返し弾の有無とありの時の種類をリストを参照し難易度に合わせて取得、変数に代入する
-        self.score_magnification      = self.game_difficulty_list[self.game_difficulty][LIST_SCORE_MAGNIFICATION]        #スコア倍率をリストを参照し難易度に合わせて取得、変数に代入する
-        self.rank_up_frame            = self.game_difficulty_list[self.game_difficulty][LIST_RANK_UP_FRAME]             #ランク上昇フレーム数をリストを参照し難易度に合わせて取得、変数に代入する
-        self.rank                     = self.game_difficulty_list[self.game_difficulty][LIST_START_RANK]                #ゲームスタート時のランク数をリストを参照し難易度に合わせて取得、変数に代入する
-        self.invincible_time          = self.game_difficulty_list[self.game_difficulty][LIST_DAMAGE_AFTER_INVINCIBLE_TIME] #被弾後の無敵時間をリストを参照し難易度に合わせて取得、変数に代入する
-        self.get_item_invincible_time = self.game_difficulty_list[self.game_difficulty][LIST_GET_ITEM_INVINCIBLE_TIME]    #アイテム取得後の無敵時間をリストを参照し難易度に合わせて取得、変数に代入する
-        self.item_erace_bullet_flag   = self.game_difficulty_list[self.game_difficulty][LIST_ITEM_ERACE_BULLET]          #パワーアップアイテムが敵弾を消去するかどうか？のフラグをリストを参照し難易度に合わせて取得、変数に代入する
-        self.rank_limit               = self.game_difficulty_list[self.game_difficulty][LIST_RANK_LIMIT]                #ランク数の上限値をリストを参照し難易度に合わせて取得、変数に代入する
-        self.return_bullet_start_loop = self.game_difficulty_list[self.game_difficulty][LIST_RETURN_BULLET_START_LOOP]    #撃ち返しを始めてくるループ数をリストを参照し難易度に合わせて取得、変数に代入する
-        self.return_bullet_start_stage= self.game_difficulty_list[self.game_difficulty][LIST_RETURN_BULLET_START_STAGE]    #撃ち返しを始めてくるステージ数をリストを参照し難易度に合わせて取得、変数に代入する
-        self.rank_down_need_damage    = self.game_difficulty_list[self.game_difficulty][LIST_RANK_DOWN_NEED_DAMAGE]       #1ランクダウンに必要なダメージ数をリストを参照し難易度に合わせて取得、変数に代入する
-        self.loop_power_control       = self.game_difficulty_list[self.game_difficulty][LIST_LOOP_POWER_CONTROL]         #次のループに移る時のパワーアップ調整関連の動作の仕方をリストを参照し難易度に合わせて取得、変数に代入する
-        self.item_range_of_attraction = self.game_difficulty_list[self.game_difficulty][LIST_ITEM_RANGE_OF_ATTRACTION]    #アイテムを引き寄せる範囲をリストを参照し難易度に合わせて取得、変数に代入する
-        self.pow_item_bounce_num      = self.game_difficulty_list[self.game_difficulty][LIST_ITEM_BOUNCE_NUM]            #アイテムの跳ね返り回数をリストを参照し難易度に合わせて取得、変数に代入する
-
-    #ステージデータリストから各ステージの設定データを取り出す
-    def get_stage_data(self):
-        """
-        ステージデータリストから各ステージの設定データを取り出す
-        """
-        self.start_my_x                   = self.stage_data_list[self.stage_number - 1][ 1] #ステージスタート時の自機の座標(自由に縦スクロールできるステージは背景BGマップ左上を原点としての座標位置となります)
-        self.start_my_y                   = self.stage_data_list[self.stage_number - 1][ 2]
-        self.bg_obstacle_y                = self.stage_data_list[self.stage_number - 1][ 3] #BG障害物とみなすＹ座標位置をリストを参照して取得、変数に代入する
-        self.reference_tilemap            = self.stage_data_list[self.stage_number - 1][ 4] #BGにアクセスするときどのタイルマップを使用するかの数値をリストを参照して取得、変数に代入する
-        self.scroll_type                  = self.stage_data_list[self.stage_number - 1][ 5] #スクロールの種類をリストを参照して取得、変数に代入する
-        self.star_scroll_flag             = self.stage_data_list[self.stage_number - 1][ 6] #背景のスクロールする星々を表示するかのフラグをリストを参照して取得、変数に代入する
-        self.raster_scroll_flag           = self.stage_data_list[self.stage_number - 1][ 7] #背景のラスタースクロールを表示するかのフラグをリストを参照して取得、変数に代入する
-        self.disp_flag_bg_front           = self.stage_data_list[self.stage_number - 1][ 8] #BG背景(手前)を表示するかどうかのフラグをリストを参照して取得、変数に代入する
-        self.disp_flag_bg_middle          = self.stage_data_list[self.stage_number - 1][ 9] #BG背景(中間)を表示するかどうかのフラグをリストを参照して取得、変数に代入する
-        self.disp_flag_bg_back            = self.stage_data_list[self.stage_number - 1][10] #BG背景(奥)を表示するかどうかのフラグをリストを参照して取得、変数に代入する
-        self.atmospheric_entry_spark_flag = self.stage_data_list[self.stage_number - 1][11] #大気圏突入時の火花を発生させるかどうかのフラグをリストを参照して取得、変数に代入する
-        self.null_bg_chip_num             = self.stage_data_list[self.stage_number - 1][12] #背景マップチップを消去するときに使うチップ番号をリストを参照して取得、変数に代入する
-        self.bg_height                    = self.stage_data_list[self.stage_number - 1][13] #縦自由スクロールステージにおける背景の縦の高さ(BackGroundHeight)(自機はこのドット分だけBGマップを縦方向に自由に移動できると考えてくださいですの)をリストを参照して取得、変数に代入する
-        self.height_screen_num            = self.stage_data_list[self.stage_number - 1][14] #縦の画面数をリストを参照して取得、変数に代入する(MOUNTAIN_REGIONみたいなフリースクロールステージなどはダミー値の9999が入る)
-        self.bg_enemy_bone_type           = self.stage_data_list[self.stage_number - 1][15] #背景BGスクロールで敵をどのように出現させるかどうかのバリエーション
-        self.bg_append_building_flag      = self.stage_data_list[self.stage_number - 1][16] #背景BGスクロールで建物を追加出現させるかどうかのフラグ
-        self.bg_append_building_null_chr  = self.stage_data_list[self.stage_number - 1][17] #背景BGスクロールで建物を追加するタイムラインマップのnullチップキャラコード
-
-    #点滅系カラーコードの取得
-    def get_flashing_type_color_code(self,flash_type):
-        """
-        点滅系カラーコードの取得
-        
-        flash_type=フラッシュタイプのカラーコードを入れてください MES_****_FLASHなどの定数でお願いします
-        """
-        global col
-        if flash_type == MES_BLINKING_FLASH:                     #テキスト点滅の場合
-            col = self.blinking_color[pyxel.frame_count // 4 % 10]
-        elif flash_type == MES_YELLOW_FLASH:                     #テキスト黄色点滅の場合
-            col = self.yellow_flash_color[pyxel.frame_count // 4 % 10]
-        elif flash_type == MES_RED_FLASH:                        #テキスト赤い点滅の場合
-            col = self.red_flash_color[pyxel.frame_count // 4 % 10]
-        elif flash_type == MES_GREEN_FLASH:                      #テキスト緑で点滅の場合
-            col = self.green_flash_color[pyxel.frame_count // 4 % 10]
-        elif flash_type == MES_MONOCHROME_FLASH:                 #テキスト白黒で点滅の場合
-            col = self.monochrome_flash_color[pyxel.frame_count // 4 % 10]
-        elif flash_type == MES_RAINBOW_FLASH:                    #テキスト虹色に点滅の場合
-            col = self.rainbow_flash_color[pyxel.frame_count // 4 % 10]
-        else:                                                    #該当しない場合は白色(7)にする
-            col = 7
-        
-        return (col)
-
     #ランクダウンさせる関数
     def rank_down(self):
         """
@@ -1268,7 +1182,7 @@ class func:
         """
         if self.rank > 0: #ランク数が0より大きいのならば
             self.rank -= 1      #ランク数をデクリメント
-            func.get_rank_data(self) #ランク数が変化したのでランク数をもとにしたデータをリストから各変数に代入する関数の呼び出し
+            data.get_rank_data(self) #ランク数が変化したのでランク数をもとにしたデータをリストから各変数に代入する関数の呼び出し
 
     #0~9の範囲の乱数関数
     def rnd0_9(self):
@@ -1647,116 +1561,6 @@ class func:
         self.cursor_color,self.cursor_menu_layer,self.cursor_move_direction =  self.cursor[i].color,self.cursor[i].menu_layer,self.cursor[i].move_direction
         del self.cursor[i] #カーソルデータをPOPし終わったのでインスタンスを削除する
         self.cursor_decision_item_y = UNSELECTED  #一番新しい層の選択アイテムを未選択にする
-
-    #!##################################################################################メダルスロット関連のメソッド
-    #プレイ中の自機リスト(playing_ship_list)を参照して自機にメダルをはめ込む（装着？）する関数 (num=メダルIDナンバー)
-    def equip_medal_playing_ship(self,num):
-        """
-        プレイ中の自機リスト(playing_ship_list)を参照して自機にメダルをはめ込む（装着？）する
-        
-        num=メダルIDナンバー
-        """
-        for i in range(self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT_NUM]): #既にスロットに同じメダルがはめ込まれていないか調べ上げる
-            if self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT0 + i] == num: #これからはめ込むメダルがすでにはめ込まれていたら・・・
-                pyxel.play(0,20)#カーソル衝突を鳴らしてはめ込まずそのままリターンする
-                return          #リターンする
-        
-        for i in range(self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT_NUM]): #空きスロットを探す
-            if self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT0 + i] == MEDAL_NO_SLOT: #スロットを小さいナンバーの方から調べていって空スロットがあったのなら
-                self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT0 + i] = num #空きスロットにメダルIDナンバーを書き込みしてはめ込む！
-                pyxel.play(0,17)#カーソルOK音を鳴らす
-                return
-        
-        pyxel.play(0,20)#カーソル衝突音を鳴らす
-        return
-
-    #プレイ中の自機リスト(playing_ship_list)を参照して自機からメダルを外す(パージ)する関数(slot_num=自機のスロットナンバー)
-    def purge_medal_playing_ship(self,slot_num):
-        """
-        プレイ中の自機リスト(playing_ship_list)を参照して自機からメダルを外す(パージ)する
-        
-        slot_num=自機のスロットナンバー
-        """
-        self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT0 + slot_num] = MEDAL_NO_SLOT #決定ボタンが押された位置のスロットナンバーを空にする
-        pyxel.play(0,18)#カーソルキャンセル音を鳴らす
-
-    #自機に装備され,はめ込まれたメダルを左詰めにする関数(空きスロットの隙間を詰めて、空きスロットがどれだけあるのか見やすくする関数)
-    def playing_ship_medal_left_justified(self):
-        """
-        自機に装備され,はめ込まれたメダルを左詰めにする(空きスロットの隙間を詰めて、空きスロットがどれだけあるのか見やすくする)
-        """
-        # start_slot = 0
-        for i in range(self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT_NUM]): #iは0から所持スロットの最大値まで変化していきます
-            if self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT0 + i] == MEDAL_NO_SLOT: #これからはめ込む場所が空スロットの場合は・・・一つ右のスロットのメダルと現在のメダルスロットに移動させていく
-                for j in range(self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT_NUM] - i): #jは0から(スロット最大値-i)まで変化していく
-                    self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT0 + i + j] = self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT0 + i + j + 1] #現在のスロットに一つ右横のスロットのメダルIDをコピーしていく
-
-    #今現在プレイしているシップリスト(playing_ship_list)に機体メダルスロット装備リスト(ship_equip_slot_list)を参照しながら装備メダルの情報を読み込んでいく関数
-    def read_ship_equip_medal_data(self):
-        """
-        今現在プレイしているシップリスト(playing_ship_list)に機体メダルスロット装備リスト(ship_equip_slot_list)を参照しながら装備メダルの情報を読み込んでいく
-        """
-        for i in range(LOOK_AT_LOGO):#iは0=J_pythonからLOOK_AT_LOGOまで変化
-            for j in range(6):       #jはスロット0からスロット6まで変化
-                self.playing_ship_list[i][LIST_SHIP_SLOT0 + j] = self.ship_equip_slot_list[i][j]
-
-    #機体メダルスロット装備リスト(ship_equip_slot_list)に今現在プレイしているシップリスト(playing_ship_list)を参照しながら装備メダルの情報を書き込んでいく関数
-    def write_ship_equip_medal_data(self):
-        """
-        機体メダルスロット装備リスト(ship_equip_slot_list)に今現在プレイしているシップリスト(playing_ship_list)を参照しながら装備メダルの情報を書き込んでいく
-        """
-        for i in range(LOOK_AT_LOGO):#iは0=J_pythonからLOOK_AT_LOGOまで変化
-            for j in range(6):       #jはスロット0からスロット6まで変化
-                self.ship_equip_slot_list[i][j] = self.playing_ship_list[i][LIST_SHIP_SLOT0 + j]
-
-    #装備されたメダルを調べ、事前にショットアイテム入手するタイプのメダルが装備されていたらショット経験値を加算する関数
-    def add_medal_effect_shot_bonus(self):
-        """
-        装備されたメダルを調べ、事前にショットアイテム入手するタイプのメダルが装備されていたらショット経験値を加算する
-        """
-        for i in range(6): #iは0から6(SLOT6)まで変化する
-            if  self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT0 + i] == MEDAL_BEFOREHAND_1SHOT_ITEM: #事前ショット1アイテムゲットメダルならば
-                self.inc_shot_exp_medal += 1                                                                 #ショット経験値を増やす数値を+1する
-            elif self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT0 + i] == MEDAL_BEFOREHAND_2SHOT_ITEM:
-                self.inc_shot_exp_medal += 2
-            elif self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT0 + i] == MEDAL_BEFOREHAND_3SHOT_ITEM:
-                self.inc_shot_exp_medal += 3
-            elif self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT0 + i] == MEDAL_BEFOREHAND_4SHOT_ITEM:
-                self.inc_shot_exp_medal += 4
-        
-        self.shot_exp += self.inc_shot_exp_medal #ショット経験値をメダルの効果のぶん加算する
-
-    #装備されたメダルを調べ、L’ｓシールド装備メダルを作動させる関数
-    def medal_effect_ls_shield(self):
-        """
-        装備されたメダルを調べ、L’ｓシールド装備メダルを作動させる
-        """
-        for i in range(6): #iは0(SLOT0)から6(SLOT6)まで変化する
-            if  self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT0 + i] == MEDAL_EQUIPMENT_LS_SHIELD: #L’ｓシールド装備メダルならば
-                self.ls_shield_hp = 10                                                                     #L'sシールドの耐久力を10にする
-
-    #装備されたメダルを調べ、スロット数を拡張するメダルがあればスロット数を増やし、何も無ければスロット数を初期状態にする関数
-    def medal_effect_plus_medallion(self):
-        """
-        装備されたメダルを調べ、スロット数を拡張するメダルがあればスロット数を増やし、何も無ければスロット数を初期状態にする
-        """
-        for i in range(6): #iは0(SLOT0)から6(SLOT6)まで変化する
-            if self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT0 + i] == MEDAL_PLUS_MEDALLION: #スロット増加メダルならば・・・
-                self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT_NUM] = self.playing_ship_list[self.my_ship_id][LIST_SHIP_INIT_SLOT_NUM] + 2                     #空きスロット増加メダルは初期総スロット数＋2つ分空きスロットに増やす
-                return
-            else:
-                self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT_NUM] = self.playing_ship_list[self.my_ship_id][LIST_SHIP_INIT_SLOT_NUM] #現在の総スロット数は初期スロット数とする
-
-    #現在の総メダルスロット以上のスロット部分をゼロクリアしてメダルなし状態にする関数
-    #例 LIST_SHIP_SLOT_NUMの数値である「総スロット数」が2だったらSLOT0からSLOT1までは使用するのでそのままにして,SLOT2からSLOT6までゼロクリアする
-    #現時点での確保しているスロット数は7
-    def zero_clear_out_of_range_slot(self):
-        """
-        現在の総メダルスロット以上のスロット部分をゼロクリアしてメダルなし状態にする
-        """
-        st = self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT_NUM]
-        for i in range(7 - self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT_NUM]):
-            self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT0 + i + st] = MEDAL_NO_SLOT
 
     #!###############################################################ボツ関数群・・・・・・(涙)##########################################################
     #外積を計算する関数 self.cpに結果が入る(バグありなので使えないっぽい・・・この関数)

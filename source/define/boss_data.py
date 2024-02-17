@@ -1,6 +1,6 @@
 from const.const import *         #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
 
-class define_boss_data:
+class boss_data:
     def move_data(self):     #ボスの移動データリスト
         """
         ボスの移動データリストを定義します

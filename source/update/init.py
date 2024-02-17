@@ -1,5 +1,5 @@
 ################################################################
-#  update_initクラス                                            #      
+#  initクラス                                                   #      
 ################################################################
 #  Appクラスのupdate関数から呼び出される関数群                    #
 #  主にゲームスタート時の初期化                                  #
@@ -10,11 +10,13 @@ import pyxel        #グラフイックキャラやバックグラウンドグ�
 from const.const import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
 from common.func  import * #汎用性のある関数群のモジュールの読み込み
 
-from define.define_stage_data import * #各ステージのイベントリスト登録モジュールの読み込み
-from update.update_replay     import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み リプレイ記録再生の更新を行う関数(メソッド？）です
-from update.update_ship       import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み ゲーム開始時のイージーやベリーイージーでのクローの追加に使用する
+from define.stage_data        import * #各ステージのイベントリスト登録モジュールの読み込み
+from define.data              import * #データ関連登録モジュールの読み込み
+from update.replay            import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み リプレイ記録再生の更新を行う関数(メソッド？）です
+from update.ship              import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み ゲーム開始時のイージーやベリーイージーでのクローの追加に使用する
+from update.medal             import * #Appクラスのupdate関数から呼び出される関数群のモジュールの読み込み  メダルの装備関連の更新で使用します
 
-class update_init:
+class init:
     def __init__(self):
         None
 
@@ -96,9 +98,9 @@ class update_init:
         # print("star_redraw_window_num = " + str(len(self.redraw_star_area)))
         
         #難易度に応じた数値をリストから取得する
-        func.get_difficulty_data(self) #難易度データリストから数値を取り出す関数の呼び出し
+        data.get_difficulty_data(self) #難易度データリストから数値を取り出す関数の呼び出し
         #ランクに応じた数値をリストから取得する
-        func.get_rank_data(self) #ランクデータリストから数値を取り出す関数の呼び出し
+        data.get_rank_data(self) #ランクデータリストから数値を取り出す関数の呼び出し
         
         self.shot_table_list = self.j_python_shot_table_list       #とりあえずショットテーブルリストは初期機体のj_pythonのものをコピーして使用します
                                                         #将来的には選択した機体で色々な機体のリストがコピーされるはず
@@ -109,25 +111,25 @@ class update_init:
         self.shot_exp    += self.start_bonus_shot
         self.missile_exp += self.start_bonus_missile
         self.my_shield   += self.start_bonus_shield
-        func.add_medal_effect_shot_bonus(self) #装備されたメダルを調べ、事前にショットアイテム入手するタイプのメダルが装備されていたらショット経験値を加算する関数の呼び出し
-        func.medal_effect_ls_shield(self)      #装備されたメダルを調べ、L’ｓシールド装備メダルを作動させる関数を呼び出す
-        func.medal_effect_plus_medallion(self) #装備されたメダルを調べ、メダルスロットを増やすメダルがはめ込まれていたらスロット数を増やす関数の呼び出し
+        medal.add_medal_effect_shot_bonus(self) #装備されたメダルを調べ、事前にショットアイテム入手するタイプのメダルが装備されていたらショット経験値を加算する関数の呼び出し
+        medal.medal_effect_ls_shield(self)      #装備されたメダルを調べ、L’ｓシールド装備メダルを作動させる関数を呼び出す
+        medal.medal_effect_plus_medallion(self) #装備されたメダルを調べ、メダルスロットを増やすメダルがはめ込まれていたらスロット数を増やす関数の呼び出し
         
-        func.level_up_my_shot(self)            #自機ショットの経験値を調べ可能な場合レベルアップをさせる関数を呼び出す
-        func.level_up_my_missile(self)         #自機ミサイルの経験値を調べ可能な場合レベルアップをさせる関数を呼び出す
+        func.level_up_my_shot(self)             #自機ショットの経験値を調べ可能な場合レベルアップをさせる関数を呼び出す
+        func.level_up_my_missile(self)          #自機ミサイルの経験値を調べ可能な場合レベルアップをさせる関数を呼び出す
         
         self.damaged_flag                  = FLAG_OFF       #自機がダメージを受けたかどうかのフラグをOFFにします(スコアスターの連続取得時の倍率上昇で使用するフラグです)
         self.score_star_magnification      = 1              #ゲームスタート時のスコアスター取得得点倍率は1
         
         if self.start_claw == ONE_CLAW:    #ゲーム開始時クローの数が1の時は
-            update_ship.append_claw(self)  #クロー追加ボーナスの数値の回数分、追加関数を呼び出す
+            ship.append_claw(self)  #クロー追加ボーナスの数値の回数分、追加関数を呼び出す
         elif self.start_claw == TWO_CLAW:  #ゲーム開始時クローの数が2の時は
-            update_ship.append_claw(self)  #2回呼び出し
-            update_ship.append_claw(self)
+            ship.append_claw(self)  #2回呼び出し
+            ship.append_claw(self)
         elif self.start_claw == THREE_CLAW:#ゲーム開始時クローの数が3の時は
-            update_ship.append_claw(self)  #3回呼び出し
-            update_ship.append_claw(self)
-            update_ship.append_claw(self)
+            ship.append_claw(self)  #3回呼び出し
+            ship.append_claw(self)
+            ship.append_claw(self)
 
     #!ステージスタート時にグラフイック系のアセットを読み込む##############
     def stage_start_load_asset(self,st_num): #st_num = ステージ数
@@ -146,19 +148,19 @@ class update_init:
         各ステージを開始するために必要な初期化です
         """
         #画像リソースファイルを読み込みます
-        update_init.stage_start_load_asset(self,self.stage_number - 1)
+        init.stage_start_load_asset(self,self.stage_number - 1)
         # pyxel.load(os.path.abspath("./assets/graphic/min-sht2.pyxres"))
         # pyxel.load("./assets/graphic/min-sht2.pyxres")
         pygame.mixer.init(frequency = 44100)    #pygameミキサー関連の初期化
         pygame.mixer.music.set_volume(0.7)      #音量設定(0~1の範囲内)
-        update_sound.load_stage_bgm(self)          #BGMファイルの読み込み
+        sound.load_stage_bgm(self)              #BGMファイルの読み込み
         pygame.mixer.music.play(-1)             #BGMループ再生
         if self.replay_status == REPLAY_RECORD:
-            update_replay.save_stage_data(self)    #リプレイ保存時は,ステージスタート時のパラメーターをセーブする関数を呼び出します(リプレイ再生で使用)
+            replay.save_stage_data(self)    #リプレイ保存時は,ステージスタート時のパラメーターをセーブする関数を呼び出します(リプレイ再生で使用)
             
         elif self.replay_status == REPLAY_PLAY:
             
-            update_replay.load_stage_data(self)    #リプレイ再生時は,ステージスタート時のパラメーターをロードする関数を呼び出します
+            replay.load_stage_data(self)    #リプレイ再生時は,ステージスタート時のパラメーターをロードする関数を呼び出します
         
         self.pad_data_h = 0b00000000#パッド入力用ビットパターンデータを初期化します
         self.pad_data_l = 0b00000000#各ビットの詳細
@@ -168,7 +170,7 @@ class update_init:
         self.replay_frame_index = 0 #リプレイ時のフレームインデックス値を初期化
         
         #各ステージに応じた数値をリストから取得する
-        func.get_stage_data(self)             #ステージデータリストからステージごとに設定された数値を取り出す関数の呼び出し
+        data.get_stage_data(self)             #ステージデータリストからステージごとに設定された数値を取り出す関数の呼び出し
         self.my_x,self.my_y = self.start_my_x,self.start_my_y    #自機のx座標の初期値を各ステージデータから転送する
         self.my_vx = 1    #自機のx方向の移動量
         self.my_vy = 0    #自機のy方向の移動量
@@ -295,10 +297,10 @@ class update_init:
         self.bg_animation_cordinate     = [] #BG書き換えでアニメーションをさせる時の座標やパターン数、現在のシートナンバーなどが入るリスト
         self.raster_scroll              = [] #ラスタースクロール用のリスト
         
-        define_stage_data.event_list(self)                    #各ステージのイベントリストの定義関数の呼び出し
-        define_stage_data.game_event_list(self)               #ゲーム全体のイベントリストの定義関数の呼び出し
-        define_stage_data.bg_animation_list(self)             #各ステージのBG書き換えによるアニメーションの為のデータリスト定義関数の呼び出し
-        define_stage_data.bg_animation_pre_define_list(self)  #各ステージのＢＧ書き換えによるアニメーション(事前に書き換え指定のマップチップを探して座標を登録記録していくタイプ)の為のデータリスト群の定義
+        stage_data.event_list(self)                    #各ステージのイベントリストの定義関数の呼び出し
+        stage_data.game_event_list(self)               #ゲーム全体のイベントリストの定義関数の呼び出し
+        stage_data.bg_animation_list(self)             #各ステージのBG書き換えによるアニメーションの為のデータリスト定義関数の呼び出し
+        stage_data.bg_animation_pre_define_list(self)  #各ステージのＢＧ書き換えによるアニメーション(事前に書き換え指定のマップチップを探して座標を登録記録していくタイプ)の為のデータリスト群の定義
         
         if self.boss_test_mode == MENU_BOSS_MODE_ON:
             self.event_list = self.event_list_boss_test_mode #ボステストモードが1の時はボスだけが出現するイベントリストを登録します
@@ -321,11 +323,11 @@ class update_init:
             self.claw_coordinates.append(new_traceclaw)
         
         func.create_raster_scroll_data(self) #ラスタースクロール用のデータの初期化＆育成関数の呼び出し
-        update_bg.search_boss_bg_move_point(self) #背景タイルマップ(BG)に埋め込まれたボス用移動座標を調べてリストに登録していく関数の呼び出し
+        bg.search_boss_bg_move_point(self) #背景タイルマップ(BG)に埋め込まれたボス用移動座標を調べてリストに登録していく関数の呼び出し
         
         # print(self.boss_bg_move_point)          #ボス用移動座標リストをコンソールに表示(デバッグ用)
         # print(self.boss_bg_move_control_point)  #ボス用移動制御点座標リストをコンソールに表示(デバッグ用)
         
-        update_bg.search_bg_animation_cordinate(self) #BG書き換えを使用して背景アニメーションをさせる時の座標をタイルマップから調べてリストに登録していく関数の呼び出し
+        bg.search_bg_animation_cordinate(self) #BG書き換えを使用して背景アニメーションをさせる時の座標をタイルマップから調べてリストに登録していく関数の呼び出し
         print ("BGアニメーションマーカー座標値")
         print(self.bg_animation_cordinate)       #BG書き換えを使用して背景アニメーションをさせる時の座標リストをコンソールに表示(デバッグ用)

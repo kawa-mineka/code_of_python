@@ -1,6 +1,6 @@
 from const.const import *         #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
 
-class define_enemy_data:
+class enemy_data:
     def anime_ptn(self):     #敵のアニメーションパターンのキャラチップ番号を定義するメソッド
         """
         敵のアニメーションパターンのキャラチップ番号を定義するメソッド

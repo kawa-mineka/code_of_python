@@ -1,10 +1,10 @@
 ###########################################################
-#  update_bossクラス                                      #      
+#  bossクラス                                              #      
 ###########################################################
 # Appクラスのupdate関数から呼び出される関数群                #
 # 主にボスの更新を行うメソッド                               #
 # ボスの移動更新、ボスのクリッピング                         #
-# 当たり判定は別のクラス(update_collision)で行う             #
+# 当たり判定は別のクラス(collision)で行う                    #
 # 2022 04/06からファイル分割してモジュールとして運用開始      #
 ###########################################################
 import math         #三角関数などを使用したいのでインポートぉぉおお！
@@ -13,10 +13,10 @@ import pyxel        #グラフイックキャラやバックグラウンドグ�
 from const.const import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
 from common.func  import * #汎用性のある関数群のモジュールの読み込み
 
-from update.update_obj   import * #背景オブジェクト更新関数モジュール読み込み(パーティクルで使用)
-from update.update_sound import * #ボスが爆発中のSEを鳴らすためにインポート
+from update.obj   import * #背景オブジェクト更新関数モジュール読み込み(パーティクルで使用)
+from update.sound import * #ボスが爆発中のSEを鳴らすためにインポート
 
-class update_boss:
+class boss:
     def __init__(self):
         None
 
@@ -985,7 +985,7 @@ class update_boss:
                     
                 elif self.boss[i].status == BOSS_STATUS_EXPLOSION:             #ボスステータスが「爆発中」の処理
                     #爆発中サウンド再生
-                    update_sound.se(self,3,SE_BOSS_EXPLOSION,self.master_se_vol)
+                    sound.se(self,3,SE_BOSS_EXPLOSION,self.master_se_vol)
                     
                     new_explosion = Explosion()
                     new_explosion.update(EXPLOSION_NORMAL,PRIORITY_FRONT,self.boss[i].posx + self.boss[i].width / 2 + func.s_rndint(self,0,50) -25,self.boss[i].posy + self.boss[i].height / 2 + func.s_rndint(self,0,20) -15,0,0,10,RETURN_BULLET_NONE,0, 1,1)
@@ -1019,11 +1019,11 @@ class update_boss:
                     
                     #ボスの爆発破片3を育成 ホワイト系のスパーク
                     if self.boss[i].count2 % 3 == 0:
-                        update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS3,PRIORITY_FRONT,self.boss[i].posx + 30 + func.s_rndint(self,0,30) -15 ,self.boss[i].posy + 10,(random()- 0.5) /2,random() * 2,12,0,0)
+                        obj.append_particle(self,PARTICLE_BOSS_DEBRIS3,PRIORITY_FRONT,self.boss[i].posx + 30 + func.s_rndint(self,0,30) -15 ,self.boss[i].posy + 10,(random()- 0.5) /2,random() * 2,12,0,0)
                     
                     #ボスの爆発破片4を育成 橙色系の落下する火花
                     if self.boss[i].count2 % 1 == 0:
-                        update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS4,PRIORITY_FRONT,self.boss[i].posx + 30 + func.s_rndint(self,0,40) -20 ,self.boss[i].posy + 10,(random()- 0.5) /2,random() * 2,8,0,0)
+                        obj.append_particle(self,PARTICLE_BOSS_DEBRIS4,PRIORITY_FRONT,self.boss[i].posx + 30 + func.s_rndint(self,0,40) -20 ,self.boss[i].posy + 10,(random()- 0.5) /2,random() * 2,8,0,0)
                     
                     self.boss[i].posx += self.boss[i].vx / 1.5
                     self.boss[i].posy += self.boss[i].vy / 1.5
@@ -1136,7 +1136,7 @@ class update_boss:
                     
                 elif self.boss[i].status == BOSS_STATUS_EXPLOSION:           #ボスステータスが「爆発中」の処理
                     #爆発中サウンド再生
-                    update_sound.se(self,3,SE_BOSS_EXPLOSION,self.master_se_vol)
+                    sound.se(self,3,SE_BOSS_EXPLOSION,self.master_se_vol)
                     
                     new_explosion = Explosion()
                     new_explosion.update(EXPLOSION_NORMAL,PRIORITY_FRONT,self.boss[i].posx + self.boss[i].width / 2 + func.s_rndint(self,0,50) -25,self.boss[i].posy + self.boss[i].height / 2 + func.s_rndint(self,0,20) -15,0,0,10,RETURN_BULLET_NONE,0,  1,1)
@@ -1170,11 +1170,11 @@ class update_boss:
                     
                     #ボスの爆発破片3を育成 ホワイト系のスパーク
                     if self.boss[i].count2 % 3 == 0:
-                        update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS3,PRIORITY_FRONT,self.boss[i].posx + 30 + func.s_rndint(self,0,30) -15 ,self.boss[i].posy + 10,(random()- 0.5) /2,random() * 2,12,0,0)
+                        obj.append_particle(self,PARTICLE_BOSS_DEBRIS3,PRIORITY_FRONT,self.boss[i].posx + 30 + func.s_rndint(self,0,30) -15 ,self.boss[i].posy + 10,(random()- 0.5) /2,random() * 2,12,0,0)
                     
                     #ボスの爆発破片4を育成 橙色系の落下する火花
                     if self.boss[i].count2 % 1 == 0:
-                        update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS4,PRIORITY_FRONT,self.boss[i].posx + 30 + func.s_rndint(self,0,40) -20 ,self.boss[i].posy + 10,(random()- 0.5) /2,random() * 2,8,0,0)
+                        obj.append_particle(self,PARTICLE_BOSS_DEBRIS4,PRIORITY_FRONT,self.boss[i].posx + 30 + func.s_rndint(self,0,40) -20 ,self.boss[i].posy + 10,(random()- 0.5) /2,random() * 2,8,0,0)
                     
                     self.boss[i].posx += self.boss[i].vx / 1.5
                     self.boss[i].posy += self.boss[i].vy / 1.5
@@ -1382,7 +1382,7 @@ class update_boss:
                     
                 elif self.boss[i].status == BOSS_STATUS_EXPLOSION:             #ボスステータスが「爆発中」の処理
                     #爆発中サウンド再生
-                    update_sound.se(self,3,SE_BOSS_EXPLOSION,self.master_se_vol)
+                    sound.se(self,3,SE_BOSS_EXPLOSION,self.master_se_vol)
                     
                     new_explosion = Explosion()
                     new_explosion.update(EXPLOSION_NORMAL,PRIORITY_FRONT,self.boss[i].posx + self.boss[i].width / 2 + func.s_rndint(self,0,50) -25,self.boss[i].posy + self.boss[i].height / 2 + func.s_rndint(self,0,20) -15,0,0,10,RETURN_BULLET_NONE,0, 1,1)
@@ -1420,11 +1420,11 @@ class update_boss:
                     
                     #ボスの爆発破片3を育成 ホワイト系のスパーク
                     if self.boss[i].count2 % 3 == 0:
-                        update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS3,PRIORITY_FRONT,self.boss[i].posx + 30 + func.s_rndint(self,0,30) -15 ,self.boss[i].posy + 10,(random()- 0.5) /2,random() * 2,12,0,0)
+                        obj.append_particle(self,PARTICLE_BOSS_DEBRIS3,PRIORITY_FRONT,self.boss[i].posx + 30 + func.s_rndint(self,0,30) -15 ,self.boss[i].posy + 10,(random()- 0.5) /2,random() * 2,12,0,0)
                     
                     #ボスの爆発破片4を育成 橙色系の落下する火花
                     if self.boss[i].count2 % 1 == 0:
-                        update_obj.append_particle(self,PARTICLE_BOSS_DEBRIS4,PRIORITY_FRONT,self.boss[i].posx + 30 + func.s_rndint(self,0,40) -20 ,self.boss[i].posy + 10,(random()- 0.5) /2,random() * 2,8,0,0)
+                        obj.append_particle(self,PARTICLE_BOSS_DEBRIS4,PRIORITY_FRONT,self.boss[i].posx + 30 + func.s_rndint(self,0,40) -20 ,self.boss[i].posy + 10,(random()- 0.5) /2,random() * 2,8,0,0)
                     
                     self.boss[i].posx += self.boss[i].vx / 1.5
                     self.boss[i].posy += self.boss[i].vy / 1.5

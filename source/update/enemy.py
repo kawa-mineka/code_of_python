@@ -1,5 +1,5 @@
 ###########################################################
-#  update_enemyクラス                                     #
+#  enemyクラス                                             #
 ###########################################################
 # Appクラスのupdate関数から呼び出される関数群              #
 # 主に敵の更新を行うメソッド                               #
@@ -14,10 +14,10 @@ import pyxel        #グラフイックキャラやバックグラウンドグ�
 from const.const import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
 from common.func  import * #汎用性のある関数群のモジュールの読み込み
 
-from update.update_obj import * #背景オブジェクト更新関数モジュール読み込み(パーティクルで使用)
-from update.update_ship import * #自機関連の更新関数モジュールの読み込み、「自機のダメージ追加」で使用します
+from update.obj import * #背景オブジェクト更新関数モジュール読み込み(パーティクルで使用)
+from update.ship import * #自機関連の更新関数モジュールの読み込み、「自機のダメージ追加」で使用します
 
-class update_enemy:
+class enemy:
     def __init__(self):
         None
 
@@ -110,7 +110,7 @@ class update_enemy:
                     
                     self.x = self.enemy[i].posx + 4
                     self.y = self.enemy[i].posy + 8
-                    update_bg.check_bg_collision(self,self.x,self.y,0,0)#ホッパー君の足元が障害物かどうかチェック
+                    bg.check_bg_collision(self,self.x,self.y,0,0)#ホッパー君の足元が障害物かどうかチェック
                 
                 if self.collision_flag == 0:#足元に障害物が無かった時の処理→そのままで行く
                     
@@ -119,7 +119,7 @@ class update_enemy:
                 else:                    
                     self.x = self.enemy[i].posx + 4
                     self.y = self.enemy[i].posy - 8
-                    update_bg.check_bg_collision(self,self.x,self.y,0,0)#ホッパー君の頭の上が障害物なのか（足元と頭上、障害物に挟まっているのか？）チェック
+                    bg.check_bg_collision(self,self.x,self.y,0,0)#ホッパー君の頭の上が障害物なのか（足元と頭上、障害物に挟まっているのか？）チェック
                     if self.collision_flag == 0:
                         #ホッパー君の足元は障害物、ホッパー君は障害物に今っていなかったので再ジャンプできるゾ！
                         self.enemy[i].enemy_count2 = -20#  F=-10   Fに-10を入れて再度ジャンプさせる
@@ -407,7 +407,7 @@ class update_enemy:
                 #enemy_count2は右に動く原本カウント enemy_flag2はその変数として使用します
                 if self.enemy[i].vy == 0: #地面を移動中の場合は(vy=0の時は横方向だけの移動)
                     if self.enemy[i].direction == -1: #左に移動
-                        update_bg.check_bg_collision(self,self.enemy[i].posx - 8,self.enemy[i].posy,0,0) #左側が障害物かどうかチェックする
+                        bg.check_bg_collision(self,self.enemy[i].posx - 8,self.enemy[i].posy,0,0) #左側が障害物かどうかチェックする
                         if self.enemy[i].enemy_flag1 <= 0 or self.collision_flag == 1:#左移動のカウンタが0以下、又は左に障害物があったら
                             self.enemy[i].direction = 1                #方向転換して右移動にする
                             self.enemy[i].enemy_flag2 = self.enemy[i].enemy_count2 #右移動するカウントを原本からコピーしてやる
@@ -416,7 +416,7 @@ class update_enemy:
                             self.enemy[i].enemy_flag1 -= 1 #左移動のカウンタを1減らします
                             self.enemy[i].vx = -1             #x軸の移動ベクトルは左方向です
                     elif self.enemy[i].direction == 1: #右に移動
-                        update_bg.check_bg_collision(self,self.enemy[i].posx + 8,self.enemy[i].posy,0,0) #右側が障害物かどうかチェックする
+                        bg.check_bg_collision(self,self.enemy[i].posx + 8,self.enemy[i].posy,0,0) #右側が障害物かどうかチェックする
                         if self.enemy[i].enemy_flag2 <= 0 or self.collision_flag == 1:#右移動のカウンタが0以下、又は右に障害物があったら
                             self.enemy[i].direction = -1               #方向転換して左移動にする
                             self.enemy[i].enemy_flag1 = self.enemy[i].enemy_count1 #左移動するカウントを原本からコピーしてやる
@@ -425,7 +425,7 @@ class update_enemy:
                             self.enemy[i].enemy_flag2 -= 1 #右移動のカウンタを1減らします
                             self.enemy[i].vx = 1             #x軸の移動ベクトルは右方向です
                 
-                update_bg.check_bg_collision(self,self.enemy[i].posx + 4,self.enemy[i].posy + 8,0,0) #足元が障害物かどうかチェックする
+                bg.check_bg_collision(self,self.enemy[i].posx + 4,self.enemy[i].posy + 8,0,0) #足元が障害物かどうかチェックする
                 if self.collision_flag == 0:#もし足元に障害物が無かった時は
                     self.enemy[i].vy = 0.5  #y軸の移動ベクトルを1にして下方向(落下方向)にする
                     self.enemy[i].vx = self.enemy[i].vx * 0.8 #x軸方向の移動ベクトルもだんだんと小さくしていく
@@ -850,12 +850,12 @@ class update_enemy:
                 self.dy = (self.enemy_shot[i].posy + 4) - (self.my_y + 4)
                 self.distance = math.sqrt(self.dx * self.dx + self.dy * self.dy)
                 if self.distance < 3:
-                    update_ship.damage(self,1) #敵弾と自機の位置の距離が3以下なら衝突したと判定し自機のシールド値を１減らす
+                    ship.damage(self,1) #敵弾と自機の位置の距離が3以下なら衝突したと判定し自機のシールド値を１減らす
                 
             elif self.enemy_shot[i].collision_type == ESHOT_COL_BOX: #長方形での当たり判定の場合
                 if      0 <= (self.my_x+4) - (self.enemy_shot[i].posx+4) <= self.enemy_shot[i].width\
                     and 0 <= (self.my_y+4) - (self.enemy_shot[i].posy+4) <= self.enemy_shot[i].height:
-                    update_ship.damage(self,1) #自機が敵弾の長方形の当たり判定の中に居たのなら衝突したと判定し自機のシールド値を１減らす
+                    ship.damage(self,1) #自機が敵弾の長方形の当たり判定の中に居たのなら衝突したと判定し自機のシールド値を１減らす
 
     #敵の弾のはみだしチェック（はみ出していたら消去する）
     def clip_shot(self):

@@ -1,5 +1,5 @@
 ###########################################################
-#  update_statusクラス                                     #      
+#  statusクラス                                            #      
 ###########################################################
 #  Appクラスのupdate関数から呼び出される関数群               #
 #  主にメインメニューのステータスで表示される項目関連の        #
@@ -10,10 +10,11 @@
 import math         #三角関数などを使用したいのでインポートぉぉおお！
 from random import random    #random.random() と呼ぶと、0から1の範囲(1は含まない)のランダムな実数が返される(主にパーティクル系で使用します)
 import pyxel        #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
-from const.const import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
-from common.func  import * #汎用性のある関数群のモジュールの読み込み
+from const.const        import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
+from define.data        import * #ランクアップなどのメソッドで使用するのでインポ―ド
+from common.func        import * #汎用性のある関数群のモジュールの読み込み
 
-class update_status:
+class status:
     #プレイ時間の計算処理を行う
     def calc_playtime(self):
         """
@@ -34,7 +35,7 @@ class update_status:
         if (pyxel.frame_count % self.rank_up_frame) == 0:
             if self.rank < self.rank_limit: #ランク数がランク上限限界値より小さいのなら
                 self.rank += 1      #ランク数をインクリメント
-                func.get_rank_data(self) #ランク数が変化したのでランク数をもとにしたデータをリストから各変数に代入する関数の呼び出し
+                data.get_rank_data(self) #ランク数が変化したのでランク数をもとにしたデータをリストから各変数に代入する関数の呼び出し
 
     #乱数0_9関数(0~9)の更新
     def rnd0_9(self):

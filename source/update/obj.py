@@ -1,5 +1,5 @@
 ###########################################################
-#  update_objクラス                                       #      
+#  objクラス                                               #      
 ###########################################################
 #  Appクラスのupdate関数から呼び出される関数群               #
 #  主に背景オブジェクトの更新を行う関数(メソッド？）ですよ～♪  #
@@ -8,13 +8,13 @@
 import math               #三角関数などを使用したいのでインポートぉぉおお！
 from random import random #random.random() と呼ぶと、0から1の範囲(1は含まない)のランダムな実数が返される(主にパーティクル系で使用します)
 import pyxel              #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
-from const.const import *       #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
-from define.define_class import * #クラス宣言モジュールの読み込み やっぱりimport *は不味いのかなぁ・・・よくわかんない
+from const.const       import *       #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
+from define.class_data import * #クラス宣言モジュールの読み込み やっぱりimport *は不味いのかなぁ・・・よくわかんない
 
-from common.func      import *    #汎用性のある関数群のモジュールの読み込み
-from update.update_bg import *    #BGアクセスを行いたいのでモジュールの読み込みを行います(BGチップの書き換えで背景アニメーションを行う)
+from common.func       import *    #汎用性のある関数群のモジュールの読み込み
+from update.bg         import *    #BGアクセスを行いたいのでモジュールの読み込みを行います(BGチップの書き換えで背景アニメーションを行う)
 
-class update_obj:
+class obj:
     def __init__(self):
         None
 
@@ -189,7 +189,7 @@ class update_obj:
         for i in range(num):
             dx = -0.2 - random()
             dy = -0.2 - random() // 2
-            update_obj.append_particle(self,type,PRIORITY_MORE_FRONT,x,y,  dx,dy,life,0,0)
+            obj.append_particle(self,type,PRIORITY_MORE_FRONT,x,y,  dx,dy,life,0,0)
 
     #ボスのパーツ破壊後の吹っ飛んで行くパーツの育成
     def append_blow_away_boss_parts(self,x,y,life,width,height,imgb,u,v,offset_x,offset_y,count,animation,transparent_color):
@@ -208,7 +208,7 @@ class update_obj:
         """
         dx = -random() - 0.05
         dy = -0.1 - random()
-        update_obj.append_free_image_particle(self,PRIORITY_MORE_FRONT,x,y,dx,dy,life,0,width,height,imgb,u,v,offset_x,offset_y,count,animation,transparent_color)
+        obj.append_free_image_particle(self,PRIORITY_MORE_FRONT,x,y,dx,dy,life,0,width,height,imgb,u,v,offset_x,offset_y,count,animation,transparent_color)
 
     #背景オブジェクトの更新
     def background_object(self):
@@ -464,9 +464,9 @@ class update_obj:
                 bg_animation_count = len(self.bg_animation_list) #bg_animation_listのなかにどれだけのリストが入っているのか数える
                 for i in range(bg_animation_count): #リストの総数分ループする
                     if self.scroll_type    == SCROLL_TYPE_8WAY_SCROLL_AND_RASTER:  #8方向スクロール+ラスタースクロールの場合は
-                        update_bg.get_bg_chip_free_scroll(self,w * 8,h * 8    ,0)       #座標(w,h)のマップチップのBGナンバーを取得してself.bg_chipに代入する関数の呼び出し(8方向フリースクロール専用)
+                        bg.get_bg_chip_free_scroll(self,w * 8,h * 8    ,0)       #座標(w,h)のマップチップのBGナンバーを取得してself.bg_chipに代入する関数の呼び出し(8方向フリースクロール専用)
                     elif self.scroll_type  == SCROLL_TYPE_TRIPLE_SCROLL_AND_STAR:  #横3重スクロール+星スクロールの場合は
-                        update_bg.get_bg_chip(self,w * 8,h * 8 + self.camera_offset_y    ,0)  #座標(w,h + self.camera_offset_y)のマップチップのBGナンバーを取得してself.bg_chipに代入する関数の呼び出し(縦任意スクロールするステージ用にカメラy軸オフセット位置も加算したy座標にする)
+                        bg.get_bg_chip(self,w * 8,h * 8 + self.camera_offset_y    ,0)  #座標(w,h + self.camera_offset_y)のマップチップのBGナンバーを取得してself.bg_chipに代入する関数の呼び出し(縦任意スクロールするステージ用にカメラy軸オフセット位置も加算したy座標にする)
                     bg_ani_x     = self.bg_animation_list[i][0] #BGアニメーションを開始するチップのx座標を変数に代入
                     bg_ani_y     = self.bg_animation_list[i][1] #                               y座標を変数に代入
                     bg_ani_speed = self.bg_animation_list[i][4] #                               スピードを変数に代入
@@ -475,7 +475,7 @@ class update_obj:
                     bg_ani_max   = (bg_ani_y // 8) * 32 + (bg_ani_x // 8 + bg_ani_num)
                     if bg_ani_min <= self.bg_chip <= bg_ani_max: #マップチップナンバーがアニメパターンするべき最小値ナンバーから最大値ナンバーの範囲内に入っているのなら
                         #bg_ani_speed毎フレームに従ってbg_ani_numパターン数のアニメーションを行います
-                        update_bg.write_map_chip_free_scroll(self,self.bgx,self.bgy,bg_ani_min + pyxel.frame_count // bg_ani_speed % bg_ani_num)
+                        bg.write_map_chip_free_scroll(self,self.bgx,self.bgy,bg_ani_min + pyxel.frame_count // bg_ani_speed % bg_ani_num)
 
     #中面(MIDDLE)の1画面分だけのBGチップを調べて書き換える背景アニメーション(bg_rewrite_animation関数から呼び出されます)
     def middle_bg_rewrite_animation(self):
@@ -494,7 +494,7 @@ class update_obj:
                 for i in range(bg_animation_count): #リストの総数分ループする
                     bg_ani_speed = self.bg_animation_list[i][4] #アニメスピードを変数に代入
                     if pyxel.frame_count % bg_ani_speed == 0: #総フレームカウント数がbg_ani_speedで割り切れる時だけマップチップを書き換える
-                        self.bg_chip = update_bg.get_chrcode_tilemap(self,self.reference_tilemap,self.bgx + w,self.bgy + h) #座標(bgx+w,bgy+h)のマップチップのBGナンバーを取得する
+                        self.bg_chip = bg.get_chrcode_tilemap(self,self.reference_tilemap,self.bgx + w,self.bgy + h) #座標(bgx+w,bgy+h)のマップチップのBGナンバーを取得する
                         bg_ani_x     = self.bg_animation_list[i][0] #BGアニメーションを開始するチップのx座標を変数に代入
                         bg_ani_y     = self.bg_animation_list[i][1] #                               y座標を変数に代入
                         bg_ani_num   = self.bg_animation_list[i][5] #                               パターン数を変数に代入
@@ -507,7 +507,7 @@ class update_obj:
                             if self.bg_chip >= bg_ani_max: #チップナンバーの範囲を超えていたのなら
                                 self.bg_chip = bg_ani_min  #一番最初のアニメパターンBGにする 
                             
-                            update_bg.set_chrcode_tilemap(self,self.reference_tilemap,self.bgx + w,self.bgy + h,self.bg_chip) #座標(bgx+w,bgy+h)にBGナンバーbg_chipを書き込む
+                            bg.set_chrcode_tilemap(self,self.reference_tilemap,self.bgx + w,self.bgy + h,self.bg_chip) #座標(bgx+w,bgy+h)にBGナンバーbg_chipを書き込む
 
     #横1ラインだけのBGチップナンバー書き換えにより背景アニメーション(bg_rewrite_animation関数から呼び出されます)
     def one_line_bg_rewrite_animation(self):
@@ -519,7 +519,7 @@ class update_obj:
         for w in range (WINDOW_W // 8 + 1):# x座表は理論的には0~20で行けるはずなんだけど20の時書き換えると微妙に画面右端で書き換えていないのかバレるので +1してます、ハイ！
             bg_animation_count = len(self.bg_animation_list) #bg_animation_listのなかにどれだけのリストが入っているのか数える
             for i in range(bg_animation_count):
-                self.bg_chip = update_bg.get_chrcode_tilemap(self,self.reference_tilemap,self.bgx + w,self.bgy) #座標(bgx+w,bgy)のマップチップのBGナンバーを取得する
+                self.bg_chip = bg.get_chrcode_tilemap(self,self.reference_tilemap,self.bgx + w,self.bgy) #座標(bgx+w,bgy)のマップチップのBGナンバーを取得する
                 bg_ani_x     = self.bg_animation_list[i][0] #BGアニメーションを開始するチップのx座標を変数に代入
                 bg_ani_y     = self.bg_animation_list[i][1] #                         y座標を変数に代入
                 bg_ani_speed = self.bg_animation_list[i][4] #                        スピードを変数に代入
@@ -528,7 +528,7 @@ class update_obj:
                 bg_ani_max   = (bg_ani_y // 8) * 32 + (bg_ani_x // 8 + bg_ani_num)
                 if bg_ani_min <= self.bg_chip <= bg_ani_max: #マップチップナンバーがーアニメーションするべきチップナンバーの範囲内だったのなら
                     #bg_ani_speed毎フレームに従ってbg_ani_numパターン数のアニメーションを行い,該当するチップナンバーを書き込みます
-                    update_bg.set_chrcode_tilemap(self,self.reference_tilemap,self.bgx + w,self.bgy, bg_ani_min + pyxel.frame_count // bg_ani_speed % bg_ani_num)
+                    bg.set_chrcode_tilemap(self,self.reference_tilemap,self.bgx + w,self.bgy, bg_ani_min + pyxel.frame_count // bg_ani_speed % bg_ani_num)
 
     #横1ラインだけのBGチップナンバー書き換えにより背景アニメーション(bg_rewrite_animation関数から呼び出されます)(同タイミングで書き換えるのではなく1キャラナンバーづつ増加させていくタイプ)(非同期タイプ)
     def one_line_inc_bg_rewrite_animation(self): 
@@ -546,7 +546,7 @@ class update_obj:
             for i in range(bg_animation_count):
                 bg_ani_speed = self.bg_animation_list[i][4] #                               スピードを変数に代入
                 if pyxel.frame_count % bg_ani_speed == 0: #総フレームカウント数がbg_ani_speedで割り切れる時だけマップチップを書き換える
-                    self.bg_chip = update_bg.get_chrcode_tilemap(self,self.reference_tilemap,self.bgx + w,self.bgy) #座標(bgx+w,bgy)のマップチップのBGナンバーを取得する
+                    self.bg_chip = bg.get_chrcode_tilemap(self,self.reference_tilemap,self.bgx + w,self.bgy) #座標(bgx+w,bgy)のマップチップのBGナンバーを取得する
                     bg_ani_x     = self.bg_animation_list[i][0] #BGアニメーションを開始するチップのx座標を変数に代入
                     bg_ani_y     = self.bg_animation_list[i][1] #                         y座標を変数に代入
                     bg_ani_num   = self.bg_animation_list[i][5] #                        パターン数を変数に代入
@@ -559,7 +559,7 @@ class update_obj:
                         if self.bg_chip >= bg_ani_max: #チップナンバーの範囲を超えていたのなら
                             self.bg_chip = bg_ani_min  #一番最初のアニメパターンBGにする 
                         
-                        update_bg.set_chrcode_tilemap(self,self.reference_tilemap,self.bgx + w,self.bgy,self.bg_chip)
+                        bg.set_chrcode_tilemap(self,self.reference_tilemap,self.bgx + w,self.bgy,self.bg_chip)
 
     #BGマップチップデータ書き換えによる背景アニメーション
     def bg_rewrite_animation(self):
@@ -569,23 +569,23 @@ class update_obj:
         #今表示したマップに書き換え対象のキャラチップが含まれていたらＢＧデータナンバーを1増やしてアニメーションさせる
         if   self.stage_number == STAGE_MOUNTAIN_REGION:        #1面 MOUNTAIN REGION
             #最前面のＢＧ書き換えアニメーション----------------------------------------
-            update_obj.front_bg_rewrite_animation(self)         #最前面のBG書き換えアニメーションを行う関数の呼び出し
+            obj.front_bg_rewrite_animation(self)         #最前面のBG書き換えアニメーションを行う関数の呼び出し
             
             #中間の山脈の流れる滝のアニメーション---------------------------------------
             #マップ座標のY=250だけ山脈遠景滝BGアニメーションチップを置くルールにしているのでy座標250だけ目的のマップチップがあるかをサーチして書き換える
             #(参考)drawクラスでの山脈遠景表示のコード pyxel.bltm(-int(self.scroll_count  // 4  % (256*8 - 160)),-(self.vertical_scroll_count // 16) + 160,  1,    0,248,    256,5,    self.bg_transparent_color)
             self.bgx = int(self.scroll_count // 32 % (256 - 20)) #bgxに山脈遠景表示時のBGマップの1番左端のx座標(0~255)が入る
             self.bgy = 250                                       #bgyに入るy座標は250で固定
-            update_bg.clip_bgx_bgy(self)                              #bgx,bgyを規格範囲内に修正する
-            update_obj.one_line_bg_rewrite_animation(self)       #横1ラインだけのBG書き換えアニメーションを行う関数の呼び出し
+            bg.clip_bgx_bgy(self)                              #bgx,bgyを規格範囲内に修正する
+            obj.one_line_bg_rewrite_animation(self)       #横1ラインだけのBG書き換えアニメーションを行う関数の呼び出し
             
         elif self.stage_number == STAGE_ADVANCE_BASE:           #2面 ADVANCE_BASE
             #最前面のＢＧ書き換えアニメーション----------------------------------------
-            update_obj.front_bg_rewrite_animation(self)         #最前面のBG書き換えアニメーションを行う関数の呼び出し
+            obj.front_bg_rewrite_animation(self)         #最前面のBG書き換えアニメーションを行う関数の呼び出し
             
         elif self.stage_number == STAGE_VOLCANIC_BELT:          #3面 VOLCANIC_BELT
             #最前面のＢＧ書き換えアニメーション----------------------------------------
-            update_obj.front_bg_rewrite_animation(self)           #最前面のBG書き換えアニメーションを行う関数の呼び出し
+            obj.front_bg_rewrite_animation(self)           #最前面のBG書き換えアニメーションを行う関数の呼び出し
             
             #奥の火山の噴火アニメーション---------------------------------------------
             #奥の火山のスクロール面の表示はpyxel.bltm(-(self.scroll_count // 16) + 50,0,TM2,  0*8,216*8   ,  256*8, 15*8,0)
@@ -593,8 +593,8 @@ class update_obj:
             #(int(self.scroll_count // 16) + 50) // 8 でキャラ単位にしてやる
             self.bgx = (int(self.scroll_count // 16) - 50) // 8   #bgxに奥の火山の噴火部表示を表示した時、BGマップの1番左端のx座標(0~255)が入る
             self.bgy = 216                                        #bgy座標は216から始まって1画面分下方向へ書き換える
-            update_bg.clip_bgx_bgy(self)                               #bgx,bgyを規格範囲内に修正する(別に必要ないかも？おまじないとして修正しておくですの)
-            update_obj.middle_bg_rewrite_animation(self)          #中面その１(火山噴火アニメ)のBG書き換えアニメーションを行う関数の呼び出し
+            bg.clip_bgx_bgy(self)                               #bgx,bgyを規格範囲内に修正する(別に必要ないかも？おまじないとして修正しておくですの)
+            obj.middle_bg_rewrite_animation(self)          #中面その１(火山噴火アニメ)のBG書き換えアニメーションを行う関数の呼び出し
             
             #ゲートブリッジの誘導灯アニメーション-----------------------------------------
             #ゲートブリッジのスクロール面の表示はpyxel.bltm(-(self.scroll_count // 8) + 100,-self.camera_offset_y // 8,TM2,  0*8,239*8 -2,  256*8,120*8,0)
@@ -602,15 +602,15 @@ class update_obj:
             #(int(self.scroll_count // 8) + 100) // 8 でキャラ単位にしてやる
             self.bgx = (int(self.scroll_count // 8) - 100) // 8   #bgxにゲートブリッジを表示した時、BGマップの1番左端のx座標(0~255)が入る
             self.bgy = 240                                        #bgy座標は240から始まって1画面分下方向へ書き換える
-            update_bg.clip_bgx_bgy(self)                               #bgx,bgyを規格範囲内に修正する
-            update_obj.middle_bg_rewrite_animation(self)          #中面その２(ゲートブリッジの誘導灯アニメ)のBG書き換えアニメーションを行う関数の呼び出し
+            bg.clip_bgx_bgy(self)                               #bgx,bgyを規格範囲内に修正する
+            obj.middle_bg_rewrite_animation(self)          #中面その２(ゲートブリッジの誘導灯アニメ)のBG書き換えアニメーションを行う関数の呼び出し
             
         elif self.stage_number == STAGE_NIGHT_SKYSCRAPER:       #4面 NIGHT_SKYSCRAPER
             #メインスクロール面のビル屋上ライトアニメーション-----------------------------------------
             self.bgx = int(self.scroll_count  // 8 % (256 - 20))      #bgxにビル屋上ライトを表示した時のBGマップの1番左端のx座標(0~255)が入る
             self.bgy = 48                                        #bgy座標は248から始まって1画面分下方向へ書き換える
-            update_bg.clip_bgx_bgy(self)                               #bgx,bgyを規格範囲内に修正する
-            update_obj.middle_bg_rewrite_animation(self)          #中面その２(ビル屋上ライトアニメ)のBG書き換えアニメーションを行う関数の呼び出し
+            bg.clip_bgx_bgy(self)                               #bgx,bgyを規格範囲内に修正する
+            obj.middle_bg_rewrite_animation(self)          #中面その２(ビル屋上ライトアニメ)のBG書き換えアニメーションを行う関数の呼び出し
 
     #座標直接指定によるBGチップデータの書き換えアニメーション (ダミーでござる)
     def dummy_bg_animation(self):
@@ -620,4 +620,4 @@ class update_obj:
         (ダミーでござる)
         """
         for i in range(15):
-            update_bg.write_map_chip_free_scroll(self,95,184-i,(64 // 8) * 32 + (144 // 8) + pyxel.frame_count * 3 % 8)
+            bg.write_map_chip_free_scroll(self,95,184-i,(64 // 8) * 32 + (144 // 8) + pyxel.frame_count * 3 % 8)

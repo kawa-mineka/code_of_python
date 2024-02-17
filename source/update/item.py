@@ -1,11 +1,11 @@
 ###########################################################
-#  update_itemクラス                                      #      
+#  itemクラス                                             #      
 ###########################################################
 #  Appクラスのupdate関数から呼び出される関数群               #
 #  アイテム関連の更新を行うメソッド                          #
 #  ショット、ミサイル、シールド、サブウェポンアイテムの更新    #
 #  トライアングルアイテム、スコアスターの更新                 #
-# 当たり判定は別のクラス(update_collision)で行う             #
+# 当たり判定は別のクラス(collision)で行う                    #
 # 2022 04/07からファイル分割してモジュールとして運用開始      #
 ###########################################################
 import math         #三角関数などを使用したいのでインポートぉぉおお！
@@ -14,10 +14,10 @@ import pyxel        #グラフイックキャラやバックグラウンドグ�
 from const.const import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
 from common.func  import * #汎用性のある関数群のモジュールの読み込み
 
-from update.update_obj   import * #背景オブジェクト更新関数モジュール読み込み(パーティクルで使用)
-from update.update_sound import * #SE再生で使用するためにインポート
+from update.obj   import * #背景オブジェクト更新関数モジュール読み込み(パーティクルで使用)
+from update.sound import * #SE再生で使用するためにインポート
 
-class update_item:
+class item:
     def __init__(self):
         None
 
@@ -99,7 +99,7 @@ class update_item:
                         self.get_shield_pow_num  += self.obtain_item[i].shield  #シールドカプセル累計取得数をシールドパワーの増加量の分だけ増やす
                         self.get_triangle_pow_num += 1                          #トライアングルアイテム累計取得数を１増やす
                     
-                    update_sound.se(self,0,SE_POWUP_GET,self.master_se_vol) #パワーアップアイテムゲットの音を鳴らすのだ
+                    sound.se(self,0,SE_POWUP_GET,self.master_se_vol) #パワーアップアイテムゲットの音を鳴らすのだ
                     func.level_up_my_shot(self)    #自機ショットの経験値を調べ可能な場合レベルアップをさせる関数を呼び出す
                     func.level_up_my_missile(self) #自機ミサイルの経験値を調べ可能な場合レベルアップをさせる関数を呼び出す
                     

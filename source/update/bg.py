@@ -1,5 +1,5 @@
 ###########################################################
-#  update_bgクラス                                         #      
+#  bgクラス                                                #      
 ###########################################################
 #  Appクラスのupdate関数から呼び出される関数群               #
 #  BGアクセス関連の更新を行うメソッド                        #
@@ -11,7 +11,7 @@ from random import random    #random.random() と呼ぶと、0から1の範囲(1
 import pyxel        #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
 from const.const import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
 
-class update_bg:
+class bg:
     #タイルマップの座標位置からキャラチップのアスキーコードを取得する
     def get_chrcode_tilemap(self,tm,x,y):         #tmはtilemapの数値,x,yは読み出す座標位置
         """
@@ -69,7 +69,7 @@ class update_bg:
             self.bgy += 16 * self.height_screen_num #縦1置画面分のbgy値は16なので周回数を考慮して縦画面数分掛けたものを代入する
         elif self.stage_loop == 3:
             self.bgy += 32 * self.height_screen_num #縦1置画面分のbgy値は16なので周回数を考慮して縦画面数分掛けたものを代入する
-        self.bg_chip = update_bg.get_chrcode_tilemap(self,self.reference_tilemap,self.bgx,self.bgy)
+        self.bg_chip = bg.get_chrcode_tilemap(self,self.reference_tilemap,self.bgx,self.bgy)
         return(self,x,y,bg_chip)
 
     #背景(BGタイルマップのキャラチップ)を取得し、更に障害物かどうかを判別する
@@ -107,7 +107,7 @@ class update_bg:
         elif self.stage_loop == 3:
             self.bgy += 32 * self.height_screen_num #縦1置画面分のbgy値は16なので周回数を考慮して縦画面数分掛けたものを代入する
         
-        self.bg_chip = update_bg.get_chrcode_tilemap(self,self.reference_tilemap,self.bgx,self.bgy)
+        self.bg_chip = bg.get_chrcode_tilemap(self,self.reference_tilemap,self.bgx,self.bgy)
         #bgx,bgyの座標のキャラチップナンバーをゲット！
         
         if (self.bg_chip // 4) >= self.bg_obstacle_y: #(bg_chip // 4)でキャラチップのＹ座標になるんです
@@ -123,7 +123,7 @@ class update_bg:
         x,yはキャラ単位 x=(0~255) y=(0~255)\\
         n=(0~255)マップチップナンバー
         """
-        update_bg.set_chrcode_tilemap(self,self.reference_tilemap,x,y + ((self.stage_loop - 1)* 16 * self.height_screen_num),n)
+        bg.set_chrcode_tilemap(self,self.reference_tilemap,x,y + ((self.stage_loop - 1)* 16 * self.height_screen_num),n)
 
     #背景マップチップを消去する(NULLチップナンバーを書き込む) x,yはキャラ単位 x=(0~255) y=(0~15)
     def delete_map_chip(self,x,y):
@@ -132,8 +132,8 @@ class update_bg:
         
         x,yはキャラ単位 x=(0~255) y=(0~15)
         """
-        # update_bg.set_chrcode_tilemap(self,self.reference_tilemap,x,y + (self.stage_loop - 1)* 16,0)#マップチップを消去する（0=何もない空白）を書き込む
-        update_bg.set_chrcode_tilemap(self,self.reference_tilemap,x,y + (self.stage_loop - 1)* 16 * self.height_screen_num,self.null_bg_chip_num)
+        # bg.set_chrcode_tilemap(self,self.reference_tilemap,x,y + (self.stage_loop - 1)* 16,0)#マップチップを消去する（0=何もない空白）を書き込む
+        bg.set_chrcode_tilemap(self,self.reference_tilemap,x,y + (self.stage_loop - 1)* 16 * self.height_screen_num,self.null_bg_chip_num)
 
     #背景(BGタイルマップのキャラチップ)を取得する (8方向フリースクロール専用)
     def get_bg_chip_free_scroll(self,x,y,bg_chip):
@@ -161,7 +161,7 @@ class update_bg:
         if self.bgy > 255:
             self.bgy = 255
         
-        self.bg_chip = update_bg.get_chrcode_tilemap(self,self.reference_tilemap,self.bgx,self.bgy)
+        self.bg_chip = bg.get_chrcode_tilemap(self,self.reference_tilemap,self.bgx,self.bgy)
         return(self,x,y,bg_chip)
 
     #背景マップチップに書き込む関数(8方向フリースクロール専用)x,yはキャラ単位 x=(0~255) y=(0~255) n=(0~255)マップチップナンバー
@@ -172,7 +172,7 @@ class update_bg:
         x,yはキャラ単位 x=(0~255) y=(0~255)\\
         n=(0~255)マップチップナンバー
         """
-        update_bg.set_chrcode_tilemap(self,self.reference_tilemap,x,y,n)#マップチップナンバーnを座標x,yに書き込む
+        bg.set_chrcode_tilemap(self,self.reference_tilemap,x,y,n)#マップチップナンバーnを座標x,yに書き込む
 
     #背景マップ(BG)にアクセスする時に使用するself.bgx,self.bgyを0~255の間に収めるようにクリッピング処理する(-1とか256でタイルマップにアクセスするとエラーが出るため)
     def clip_bgx_bgy(self):
@@ -207,26 +207,26 @@ class update_bg:
         
         for w in range(255): #x軸方向は0~255まで調べ上げていく
             for h in range(WINDOW_H // 8 * self.height_screen_num): #y軸方向は15×縦スクロールする画面数ぶん調べ上げていく
-                chip_num = update_bg.get_chrcode_tilemap(self,self.reference_tilemap,mpx + w,mpy + h) #BGキャラチップのナンバー取得
+                chip_num = bg.get_chrcode_tilemap(self,self.reference_tilemap,mpx + w,mpy + h) #BGキャラチップのナンバー取得
                 if chip_num == MOVE_POINT_BG_NUM: #もし移動点だったのなら
-                    update_bg.delete_map_chip(self,mpx + w,mpy + h) #「移動点」マップチップを消去する
+                    bg.delete_map_chip(self,mpx + w,mpy + h) #「移動点」マップチップを消去する
                     
                     #一つ右隣にあるチップナンバーが「移動点の連番」なので取得する
-                    serial_num = update_bg.get_chrcode_tilemap(self,self.reference_tilemap,mpx + w + 1,mpy + h) #移動点の連番を取得
+                    serial_num = bg.get_chrcode_tilemap(self,self.reference_tilemap,mpx + w + 1,mpy + h) #移動点の連番を取得
                     serial_num -= ZERO_BG_CHR_NUM
                     self.boss_bg_move_point.append([int(serial_num),w,h])
                     point_num += 1 #移動ポイント数をインクリメント
-                    update_bg.delete_map_chip(self,mpx + w + 1,mpy + h) #「移動点の連番」マップチップを消去する
+                    bg.delete_map_chip(self,mpx + w + 1,mpy + h) #「移動点の連番」マップチップを消去する
                     
                 elif chip_num == CONTROL_POINT_NUM: #もし制御点だったのなら
-                    update_bg.delete_map_chip(self,mpx + w,mpy + h) #「制御点」マップチップを消去する
+                    bg.delete_map_chip(self,mpx + w,mpy + h) #「制御点」マップチップを消去する
                     
                     #一つ右隣にあるチップナンバーが「制御点の連番」なので取得する
-                    serial_num = update_bg.get_chrcode_tilemap(self,self.reference_tilemap,mpx + w + 1,mpy + h) #移動点の連番を取得
+                    serial_num = bg.get_chrcode_tilemap(self,self.reference_tilemap,mpx + w + 1,mpy + h) #移動点の連番を取得
                     serial_num -= ZERO_BG_CHR_NUM
                     self.boss_bg_move_control_point.append([int(serial_num),w,h])
                     control_num += 1 #制御ポイント数をインクリメント
-                    update_bg.delete_map_chip(self,mpx + w + 1,mpy + h) #「制御点の連番」マップチップを消去する
+                    bg.delete_map_chip(self,mpx + w + 1,mpy + h) #「制御点の連番」マップチップを消去する
         
         self.boss_bg_move_point.sort()         #「移動点の連番」を基準にソートする sort()はリスト型のメソッドだよん
         self.boss_bg_move_control_point.sort() #「制御点の連番」を基準にソートする sort()はリスト型のメソッドだよん
@@ -253,7 +253,7 @@ class update_bg:
         for i in range(int(mark_chip_num_max - mark_chip_num_min)):
             for w in range(255): #x軸方向は0~255まで調べ上げていく
                 for h in range(255): #y軸方向も0~255まで調べ上げていく
-                    chip = update_bg.get_chrcode_tilemap(self,self.reference_tilemap,mpx + w,mpy + h) #BGキャラチップのナンバー取得
+                    chip = bg.get_chrcode_tilemap(self,self.reference_tilemap,mpx + w,mpy + h) #BGキャラチップのナンバー取得
                     # print("chip")
                     # print(chip)
                     if   chip == marker + i: #タイルマップに書き込まれたキャラコードと調べ上げるマーカーが一致したのならば

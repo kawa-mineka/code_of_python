@@ -1,7 +1,10 @@
+import pyxel        #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
+
 from const.const import *             #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
 from const.const_visualscene import * #Visualsceneクラスで使用する定数定義のよみこみ
+from const.const_window      import * #点滅系カラーコードの取得で使用すためよみこみます
 
-class define_data:
+class data:
     def __init__(self):
         None
 
@@ -497,3 +500,90 @@ class define_data:
             [VS_ID_OPENING_STORY1,         100000,                         END_ACTION_DEL            ],
             [VS_ID_OPENING_STORY1,         100000,                         END_ACTION_LOOP            ],
             ]
+
+#!#######################################################################################数々のリスト群からデータを取り出し設定する
+    #ランクに応じた数値をリストから取得する
+    def get_rank_data(self):
+        """
+        ランクに応じた数値をリストから取得する
+        """
+        self.enemy_speed_mag           = self.game_rank_data_list[self.rank][LIST_RANK_E_SPEED_MAG]            #敵スピード倍率をリストを参照してランク数で取得、変数に代入する
+        self.enemy_bullet_speed_mag    = self.game_rank_data_list[self.rank][LIST_RANK_BULLET_SPEED_MAG]        #敵狙い撃ち弾スピード倍率をリストを参照してランク数で取得、変数に代入する
+        self.return_bullet_probability = self.game_rank_data_list[self.rank][LIST_RANK_RETURN_BULLET_PROBABILITY] #敵撃ち返し弾発射確率をリストを参照してランク数で取得、変数に代入する
+        self.enemy_hp_mag              = self.game_rank_data_list[self.rank][LIST_RANK_E_HP_MAG]               #敵耐久力倍率をリストを参照してランク数で取得、変数に代入する
+        self.enemy_bullet_append       = self.game_rank_data_list[self.rank][LIST_RANK_E_BULLET_APPEND]         #弾追加数をリストを参照してランク数で取得、変数に代入する
+        self.enemy_bullet_interval     = self.game_rank_data_list[self.rank][LIST_RANK_E_BULLET_INTERVAL]        #弾発射間隔減少パーセントをリストを参照してランク数で取得、変数に代入する
+        self.enemy_nway_level          = self.game_rank_data_list[self.rank][LIST_RANK_NWAY_LEVEL]             #nWAY弾のレベルをリストを参照してランク数で取得、変数に代入する
+
+    #難易度に応じた数値をリストから取得する
+    def get_difficulty_data(self):
+        """
+        難易度に応じた数値をリストから取得する
+        """
+        self.start_bonus_shot         = self.game_difficulty_list[self.game_difficulty][LIST_START_BONUS_SHOT]           #初期ショットボーナスをリストを参照し難易度に合わせて取得、変数に代入する
+        self.start_bonus_missile      = self.game_difficulty_list[self.game_difficulty][LIST_START_BONUS_MISSILE]        #初期ミサイルボーナスをリストを参照し難易度に合わせて取得、変数に代入する
+        self.start_bonus_shield       = self.game_difficulty_list[self.game_difficulty][LIST_START_BONUS_SHIELD]         #初期シールドボーナスをリストを参照し難易度に合わせて取得、変数に代入する
+        self.start_claw               = self.game_difficulty_list[self.game_difficulty][LIST_START_CLAW]                #初期クローボーナスをリストを参照し難易度に合わせて取得、変数に代入する
+        self.repair_shield            = self.game_difficulty_list[self.game_difficulty][LIST_REPAIR_SHIELD]             #ステージクリア後に回復するシールド値をリストを参照し難易度に合わせて取得、変数に代入する
+        self.return_bullet            = self.game_difficulty_list[self.game_difficulty][LIST_RETURN_BULLET]             #撃ち返し弾の有無とありの時の種類をリストを参照し難易度に合わせて取得、変数に代入する
+        self.score_magnification      = self.game_difficulty_list[self.game_difficulty][LIST_SCORE_MAGNIFICATION]        #スコア倍率をリストを参照し難易度に合わせて取得、変数に代入する
+        self.rank_up_frame            = self.game_difficulty_list[self.game_difficulty][LIST_RANK_UP_FRAME]             #ランク上昇フレーム数をリストを参照し難易度に合わせて取得、変数に代入する
+        self.rank                     = self.game_difficulty_list[self.game_difficulty][LIST_START_RANK]                #ゲームスタート時のランク数をリストを参照し難易度に合わせて取得、変数に代入する
+        self.invincible_time          = self.game_difficulty_list[self.game_difficulty][LIST_DAMAGE_AFTER_INVINCIBLE_TIME] #被弾後の無敵時間をリストを参照し難易度に合わせて取得、変数に代入する
+        self.get_item_invincible_time = self.game_difficulty_list[self.game_difficulty][LIST_GET_ITEM_INVINCIBLE_TIME]    #アイテム取得後の無敵時間をリストを参照し難易度に合わせて取得、変数に代入する
+        self.item_erace_bullet_flag   = self.game_difficulty_list[self.game_difficulty][LIST_ITEM_ERACE_BULLET]          #パワーアップアイテムが敵弾を消去するかどうか？のフラグをリストを参照し難易度に合わせて取得、変数に代入する
+        self.rank_limit               = self.game_difficulty_list[self.game_difficulty][LIST_RANK_LIMIT]                #ランク数の上限値をリストを参照し難易度に合わせて取得、変数に代入する
+        self.return_bullet_start_loop = self.game_difficulty_list[self.game_difficulty][LIST_RETURN_BULLET_START_LOOP]    #撃ち返しを始めてくるループ数をリストを参照し難易度に合わせて取得、変数に代入する
+        self.return_bullet_start_stage= self.game_difficulty_list[self.game_difficulty][LIST_RETURN_BULLET_START_STAGE]    #撃ち返しを始めてくるステージ数をリストを参照し難易度に合わせて取得、変数に代入する
+        self.rank_down_need_damage    = self.game_difficulty_list[self.game_difficulty][LIST_RANK_DOWN_NEED_DAMAGE]       #1ランクダウンに必要なダメージ数をリストを参照し難易度に合わせて取得、変数に代入する
+        self.loop_power_control       = self.game_difficulty_list[self.game_difficulty][LIST_LOOP_POWER_CONTROL]         #次のループに移る時のパワーアップ調整関連の動作の仕方をリストを参照し難易度に合わせて取得、変数に代入する
+        self.item_range_of_attraction = self.game_difficulty_list[self.game_difficulty][LIST_ITEM_RANGE_OF_ATTRACTION]    #アイテムを引き寄せる範囲をリストを参照し難易度に合わせて取得、変数に代入する
+        self.pow_item_bounce_num      = self.game_difficulty_list[self.game_difficulty][LIST_ITEM_BOUNCE_NUM]            #アイテムの跳ね返り回数をリストを参照し難易度に合わせて取得、変数に代入する
+
+    #ステージデータリストから各ステージの設定データを取り出す
+    def get_stage_data(self):
+        """
+        ステージデータリストから各ステージの設定データを取り出す
+        """
+        self.start_my_x                   = self.stage_data_list[self.stage_number - 1][ 1] #ステージスタート時の自機の座標(自由に縦スクロールできるステージは背景BGマップ左上を原点としての座標位置となります)
+        self.start_my_y                   = self.stage_data_list[self.stage_number - 1][ 2]
+        self.bg_obstacle_y                = self.stage_data_list[self.stage_number - 1][ 3] #BG障害物とみなすＹ座標位置をリストを参照して取得、変数に代入する
+        self.reference_tilemap            = self.stage_data_list[self.stage_number - 1][ 4] #BGにアクセスするときどのタイルマップを使用するかの数値をリストを参照して取得、変数に代入する
+        self.scroll_type                  = self.stage_data_list[self.stage_number - 1][ 5] #スクロールの種類をリストを参照して取得、変数に代入する
+        self.star_scroll_flag             = self.stage_data_list[self.stage_number - 1][ 6] #背景のスクロールする星々を表示するかのフラグをリストを参照して取得、変数に代入する
+        self.raster_scroll_flag           = self.stage_data_list[self.stage_number - 1][ 7] #背景のラスタースクロールを表示するかのフラグをリストを参照して取得、変数に代入する
+        self.disp_flag_bg_front           = self.stage_data_list[self.stage_number - 1][ 8] #BG背景(手前)を表示するかどうかのフラグをリストを参照して取得、変数に代入する
+        self.disp_flag_bg_middle          = self.stage_data_list[self.stage_number - 1][ 9] #BG背景(中間)を表示するかどうかのフラグをリストを参照して取得、変数に代入する
+        self.disp_flag_bg_back            = self.stage_data_list[self.stage_number - 1][10] #BG背景(奥)を表示するかどうかのフラグをリストを参照して取得、変数に代入する
+        self.atmospheric_entry_spark_flag = self.stage_data_list[self.stage_number - 1][11] #大気圏突入時の火花を発生させるかどうかのフラグをリストを参照して取得、変数に代入する
+        self.null_bg_chip_num             = self.stage_data_list[self.stage_number - 1][12] #背景マップチップを消去するときに使うチップ番号をリストを参照して取得、変数に代入する
+        self.bg_height                    = self.stage_data_list[self.stage_number - 1][13] #縦自由スクロールステージにおける背景の縦の高さ(BackGroundHeight)(自機はこのドット分だけBGマップを縦方向に自由に移動できると考えてくださいですの)をリストを参照して取得、変数に代入する
+        self.height_screen_num            = self.stage_data_list[self.stage_number - 1][14] #縦の画面数をリストを参照して取得、変数に代入する(MOUNTAIN_REGIONみたいなフリースクロールステージなどはダミー値の9999が入る)
+        self.bg_enemy_bone_type           = self.stage_data_list[self.stage_number - 1][15] #背景BGスクロールで敵をどのように出現させるかどうかのバリエーション
+        self.bg_append_building_flag      = self.stage_data_list[self.stage_number - 1][16] #背景BGスクロールで建物を追加出現させるかどうかのフラグ
+        self.bg_append_building_null_chr  = self.stage_data_list[self.stage_number - 1][17] #背景BGスクロールで建物を追加するタイムラインマップのnullチップキャラコード
+
+    #点滅系カラーコードの取得
+    def get_flashing_type_color_code(self,flash_type):
+        """
+        点滅系カラーコードの取得
+        
+        flash_type=フラッシュタイプのカラーコードを入れてください MES_****_FLASHなどの定数でお願いします
+        """
+        global col
+        if flash_type == MES_BLINKING_FLASH:                     #テキスト点滅の場合
+            col = self.blinking_color[pyxel.frame_count // 4 % 10]
+        elif flash_type == MES_YELLOW_FLASH:                     #テキスト黄色点滅の場合
+            col = self.yellow_flash_color[pyxel.frame_count // 4 % 10]
+        elif flash_type == MES_RED_FLASH:                        #テキスト赤い点滅の場合
+            col = self.red_flash_color[pyxel.frame_count // 4 % 10]
+        elif flash_type == MES_GREEN_FLASH:                      #テキスト緑で点滅の場合
+            col = self.green_flash_color[pyxel.frame_count // 4 % 10]
+        elif flash_type == MES_MONOCHROME_FLASH:                 #テキスト白黒で点滅の場合
+            col = self.monochrome_flash_color[pyxel.frame_count // 4 % 10]
+        elif flash_type == MES_RAINBOW_FLASH:                    #テキスト虹色に点滅の場合
+            col = self.rainbow_flash_color[pyxel.frame_count // 4 % 10]
+        else:                                                    #該当しない場合は白色(7)にする
+            col = 7
+        
+        return (col)

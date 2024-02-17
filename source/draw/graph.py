@@ -10,9 +10,10 @@ import pyxel                    #グラフイックキャラやバックグラ�
 from const.const             import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
 from const.const_window      import * #主にウィンドウクラスで使用する定数定義
 from const.const_visualscene import * #主にビジュアルシーンクラスで使用する定数定義
-from common.func              import * #汎用性のある関数群のモジュールの読み込み
+from common.func             import * #汎用性のある関数群のモジュールの読み込み
 
-from update.update_bg        import * #デバッグモードでの当たり判定で背景チップを確認したいときにBGにアクセスしないといけないのでBGアクセス関連のモジュールをインポート
+from update.bg               import * #デバッグモードでの当たり判定で背景チップを確認したいときにBGにアクセスしないといけないのでBGアクセス関連のモジュールをインポート
+from define.data             import * #各種データリストから必要なデータを取り出し登録していくのに必要なのでインポート
 
 class graph:
     #IPLメッセージの表示#######################################
@@ -1045,7 +1046,7 @@ class graph:
         if self.bgx > 255:
             self.bgx = 0
         
-        self.bg_chip = update_bg.get_chrcode_tilemap(self,0, self.bgx,self.bgy)
+        self.bg_chip = bg.get_chrcode_tilemap(self,0, self.bgx,self.bgy)
         pyxel.text(70,WINDOW_H - 6,str(self.bgx),pyxel.COLOR_WHITE)
         pyxel.text(85,WINDOW_H - 6,str(self.bgy),pyxel.COLOR_WHITE)
         
@@ -1489,7 +1490,7 @@ class graph:
                     col = self.window[i].title_text[LIST_WINDOW_TEXT_COLOR]
                 else:                                                                           #テキスト点滅系の場合
                     flash_type = self.window[i].title_text[LIST_WINDOW_TEXT_FLASH]              #flash_typeを元にカラーコードを取得
-                    col = func.get_flashing_type_color_code(self,flash_type)
+                    col = data.get_flashing_type_color_code(self,flash_type)
                 
                 if self.window[i].window_type == WINDOW_TYPE_BANNER:
                     text_len = len(self.window[i].title_text[LIST_WINDOW_TEXT]) #テキストの文字数を取得
@@ -1511,7 +1512,7 @@ class graph:
                                 col = self.window[i].item_text[j][LIST_WINDOW_TEXT_COLOR]
                             else:                                                                         #テキスト点滅系の場合
                                 flash_type = self.window[i].item_text[j][LIST_WINDOW_TEXT_FLASH]              #flash_typeを元にカラーコードを取得
-                                col = func.get_flashing_type_color_code(self,flash_type)
+                                col = data.get_flashing_type_color_code(self,flash_type)
                             
                             if self.window[i].item_text[j][LIST_WINDOW_TEXT_ALIGN] == DISP_CENTER:
                                 func.drop_shadow_text(self,self.window[i].posx + self.window[i].item_text[j][LIST_WINDOW_TEXT_OX] + 5 + self.window[i].width // 2 - len(self.window[i].item_text[j][LIST_WINDOW_TEXT]) * 2,self.window[i].posy + 5 + (j+1) * self.window[i].between_line,str(self.window[i].item_text[j][LIST_WINDOW_TEXT]),col)
@@ -1570,7 +1571,7 @@ class graph:
                                 col = self.window[i].item_kanji_text[j][LIST_WINDOW_TEXT_COLOR]
                             else:                                                                         #テキスト点滅系の場合
                                 flash_type = self.window[i].item_kanji_text[j][LIST_WINDOW_TEXT_FLASH]              #flash_typeを元にカラーコードを取得
-                                col = func.get_flashing_type_color_code(self,flash_type)
+                                col = data.get_flashing_type_color_code(self,flash_type)
                             
                             if self.window[i].item_kanji_text[j][LIST_WINDOW_TEXT_ALIGN] == DISP_CENTER:
                                 func.drop_shadow_kanji_text(self,self.window[i].posx + self.window[i].item_kanji_text[j][LIST_WINDOW_TEXT_OX] + self.window[i].width // 2 - len(self.window[i].item_kanji_text[j][LIST_WINDOW_TEXT]) * 4,self.window[i].posy + (j+1) * self.window[i].between_line,str(self.window[i].item_kanji_text[j][LIST_WINDOW_TEXT]),col)
@@ -1584,7 +1585,7 @@ class graph:
                             col = self.window[i].edit_text[LIST_WINDOW_TEXT_COLOR]
                         else:                                                                          #テキスト点滅系の場合
                             flash_type = self.window[i].edit_text[LIST_WINDOW_TEXT_FLASH]              #flash_typeを元にカラーコードを取得
-                            col = func.get_flashing_type_color_code(self,flash_type)
+                            col = data.get_flashing_type_color_code(self,flash_type)
                         
                         if self.window[i].edit_text[LIST_WINDOW_TEXT_ALIGN] == DISP_CENTER:
                             func.drop_shadow_text(self,self.window[i].posx + self.window[i].edit_text[LIST_WINDOW_TEXT_OX]     + self.window[i].width // 2 - len(self.window[i].edit_text[LIST_WINDOW_TEXT]) * 2,self.window[i].posy + self.window[i].edit_text[LIST_WINDOW_TEXT_OY]   ,str(self.window[i].edit_text[LIST_WINDOW_TEXT]),col)
