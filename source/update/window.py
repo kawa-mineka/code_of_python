@@ -2634,7 +2634,7 @@ class window:
                         or self.window[self.active_window_index].item_text[self.cursor_item_y][LIST_WINDOW_TEXT_OPE_OBJ] == LIST_WINDOW_FLAG_SE_VOL:
                         func.restore_master_flag_list(self)
                         pygame.mixer.music.set_volume(self.master_bgm_vol / 100)
-                        sound.se(self,2,SE_WAVE_CUTTER,self.master_se_vol)
+                        sound.se(self,CH2,SE_WAVE_CUTTER,self.master_se_vol)
                 
             elif self.cursor_move_direction == CURSOR_MOVE_UD:
                 if self.cursor_repeat_time_count <= 8: #パッドを押し続けてリピートタイムが8以下になったら
@@ -2724,7 +2724,7 @@ class window:
                         or self.window[self.active_window_index].item_text[self.cursor_item_y][LIST_WINDOW_TEXT_OPE_OBJ] == LIST_WINDOW_FLAG_SE_VOL:
                         func.restore_master_flag_list(self)
                         pygame.mixer.music.set_volume(self.master_bgm_vol / 100)
-                        sound.se(self,2,SE_WAVE_CUTTER,self.master_se_vol)
+                        sound.se(self,CH2,SE_WAVE_CUTTER,self.master_se_vol)
                 
             elif self.cursor_move_direction == CURSOR_MOVE_UD:
                 if self.cursor_repeat_time_count <= 8: #パッドを押し続けてリピートタイムが8以下になったら

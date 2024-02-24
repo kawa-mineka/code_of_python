@@ -99,7 +99,7 @@ class item:
                         self.get_shield_pow_num  += self.obtain_item[i].shield  #シールドカプセル累計取得数をシールドパワーの増加量の分だけ増やす
                         self.get_triangle_pow_num += 1                          #トライアングルアイテム累計取得数を１増やす
                     
-                    sound.se(self,0,SE_POWUP_GET,self.master_se_vol) #パワーアップアイテムゲットの音を鳴らすのだ
+                    sound.se(self,CH0,SE_POWUP_GET,self.master_se_vol) #パワーアップアイテムゲットの音を鳴らすのだ
                     func.level_up_my_shot(self)    #自機ショットの経験値を調べ可能な場合レベルアップをさせる関数を呼び出す
                     func.level_up_my_missile(self) #自機ミサイルの経験値を調べ可能な場合レベルアップをさせる関数を呼び出す
                     

@@ -328,6 +328,11 @@ class init:
         # print(self.boss_bg_move_point)          #ボス用移動座標リストをコンソールに表示(デバッグ用)
         # print(self.boss_bg_move_control_point)  #ボス用移動制御点座標リストをコンソールに表示(デバッグ用)
         
-        bg.search_bg_animation_cordinate(self) #BG書き換えを使用して背景アニメーションをさせる時の座標をタイルマップから調べてリストに登録していく関数の呼び出し
-        print ("BGアニメーションマーカー座標値")
-        print(self.bg_animation_cordinate)       #BG書き換えを使用して背景アニメーションをさせる時の座標リストをコンソールに表示(デバッグ用)
+        bg.search_bg_animation_marker_cordinate(self) #BG書き換えを使用して背景アニメーションをさせる時の座標をタイルマップから調べてリストに登録していく関数の呼び出し
+        
+        #ここからデバッグ用データをコンソール表示するコードです-------------------------------------------------
+        print ("BGアニメーションマーカー座標値リスト")
+        print(self.bg_animation_cordinate)       #BG書き換えを使用して背景アニメーションをさせる時のマーカー座標リストをコンソールに表示(デバッグ用)
+        marker_num = len(self.bg_animation_cordinate) #BG書き換えを使用して背景アニメーションをさせる時のマーカー座標リストの総数を取得する
+        print("mark_num = ",end="")
+        print(marker_num)

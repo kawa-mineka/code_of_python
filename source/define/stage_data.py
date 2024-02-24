@@ -602,7 +602,7 @@ class stage_data:
             self.bg_animation_list_dummy,
             ]
 
-    def bg_animation_pre_define_list(self):   #各ステージのＢＧ書き換えによるアニメーション(事前に書き換え指定のマップチップを探して座標を登録記録していくタイプ)の為のデータリスト群の定義
+    def bg_animation_pre_define_list(self):   #各ステージのＢＧ書き換えによるアニメーション(書き換えるマップチップ指定しBGマップの任意の範囲を調査し座標を登録記録していくタイプ)の為のデータリスト群の定義
         """
         各ステージのＢＧ書き換えによるアニメーション
         (事前に書き換え指定のマップチップを探して座標を登録記録していくタイプ)
@@ -610,44 +610,96 @@ class stage_data:
         データリスト群の定義
         """
         #フォーマットの説明
-        #[ステージ名,座補登録をしてBG書き換えアニメーションを行うかどうかのフラグ,BG書き換え指定値チップのキャラコード最小値,BG書き換え指定値チップのキャラコード最大値
+        #[ステージ名,座補登録をしてBG書き換えアニメーションを行うかどうかのフラグ,
+        #             BG書き換え指定値チップのキャラコード最小値,BG書き換え指定値チップのキャラコード最大値,
+        #             全BGに対してどの部分を調査していくかの四角形の左上のx座標,y座標,
+        #             調査範囲である矩形横幅,調査範囲である矩形縦幅,
+        #  
+        #            [
+        #            [BG書き換えアニメーションを行いたい矩形画像の左上の座標を示すマップチップアスキーコード,
+        #             描画枚数,スピード(1なら1フレームに1コマ),タイルマップ番号,BGパターンが収納されている座標u(横),BGパターンが収納されている座標v(縦),W(キャラクター単位横幅),h(キャラクター単位縦幅)],
         #            
-        #            [BG書き換えアニメーションを行いたい矩形画像の左上の座標を示すマップチップIDナンバー,そのマップチップの実アスキーコード
-        #             描画枚数,スピード(1なら1フレームに1コマ),タイルマップ番号,BGパターンが収納されている座標u(横),BGパターンが収納されている座標v(縦),W(横幅),h(縦幅)]
-        #                            
-        
+        #            [BG書き換えアニメーションを行いたい矩形画像の左上の座標を示すマップチップアスキーコード+1
+        #             描画枚数,スピード(1なら1フレームに1コマ),タイルマップ番号,BGパターンが収納されている座標u(横),BGパターンが収納されている座標v(縦),W(横幅kキャラクター単位),h(縦幅キャラクター単位)],
+        #             
+        #            [BG書き換えアニメーションを行いたい矩形画像の左上の座標を示すマップチップアスキーコード+2
+        #             描画枚数,スピード(1なら1フレームに1コマ),タイルマップ番号,BGパターンが収納されている座標u(横),BGパターンが収納されている座標v(縦),W(横幅キャラクター単位),h(縦幅キャラクター単位)],
+        #            
+        #            [BG書き換えアニメーションを行いたい矩形画像の左上の座標を示すマップチップアスキーコード最大値
+        #             描画枚数,スピード(1なら1フレームに1コマ),タイルマップ番号,BGパターンが収納されている座標u(横),BGパターンが収納されている座標v(縦),W(キャラクター単位横幅),h(キャラクター単位縦幅)],             
+        #            ],
+        #             ]
+        #
         self.bg_animation_pre_define_list = [
                                 [
-                                STAGE_MOUNTAIN_REGION,PREDEF_BGANIME_OFF,(16 / 8) * 32 + (0 / 8),(16 / 8) * 32 + (72 / 8),
-                                [BG_OBJ_PREDEF_DUMMY,(0 / 8) * 32 + ( 0 / 8),
+                                STAGE_MOUNTAIN_REGION,PREDEF_BGANIME_OFF,BG_OBJ_PREDEF_MASTER,BG_OBJ_PREDEF_MASTER + 9,
+                                0,32,
+                                256,64-32,
+                                
+                                [[BG_OBJ_PREDEF_DUMMY,
                                 ONE_SHEET,SPEED1,TM0,
                                 0,0,
-                                1*8,1*8],
+                                1*8,1*8]],
                                 ],
                                 
                                 [
-                                STAGE_ADVANCE_BASE,PREDEF_BGANIME_OFF,(16 / 8) * 32 + (0 / 8),(16 / 8) * 32 + (72 / 8),
-                                [BG_OBJ_PREDEF_DUMMY,(0 / 8) * 32 + ( 0 / 8),
+                                STAGE_ADVANCE_BASE,PREDEF_BGANIME_OFF,BG_OBJ_PREDEF_MASTER,BG_OBJ_PREDEF_MASTER + 9,
+                                0,32,
+                                256,64-32,
+                                
+                                [[BG_OBJ_PREDEF_DUMMY,
                                 ONE_SHEET,SPEED1,TM0,
                                 0,0,
-                                1*8,1*8],
+                                1*8,1*8]],
                                 ],
                                 
                                 [
-                                STAGE_VOLCANIC_BELT,PREDEF_BGANIME_OFF,(16 / 8) * 32 + (0 / 8),(16 / 8) * 32 + (72 / 8),
-                                [BG_OBJ_PREDEF_DUMMY,(0 / 8) * 32 + ( 0 / 8),
+                                STAGE_VOLCANIC_BELT,PREDEF_BGANIME_OFF,BG_OBJ_PREDEF_MASTER,BG_OBJ_PREDEF_MASTER + 9,
+                                0,32,
+                                256,64-32,
+                                
+                                [[BG_OBJ_PREDEF_DUMMY,
                                 ONE_SHEET,SPEED1,TM0,
                                 0,0,
-                                1*8,1*8],
+                                1*8,1*8]],
                                 ],
                                 
                                 [
-                                STAGE_NIGHT_SKYSCRAPER,PREDEF_BGANIME_ON,(16 / 8) * 32 + (0 / 8),(16 / 8) * 32 + (72 / 8),
-                                [BG_OBJ_PREDEF_ELEVATOR1,(16 / 8) * 32 + ( 8 / 8),
+                                STAGE_NIGHT_SKYSCRAPER,PREDEF_BGANIME_ON,BG_OBJ_PREDEF_MASTER,BG_OBJ_PREDEF_MASTER + 9,
+                                0,0,
+                                256,64,
+                                
+                                [[BG_OBJ_PREDEF_MASTER,
                                 172,SPEED1,TM0,
-                                0,128,
-                                1*8,8*8],
-                                ],
+                                0,128,    1,8],
+                                [BG_OBJ_PREDEF_ELEVATOR1,
+                                172,2,  TM0,    0,128,    1,8],
+                                
+                                [BG_OBJ_PREDEF_MASTER+2,
+                                172,SPEED1,TM0,
+                                0,128,    1,8],
+                                [BG_OBJ_PREDEF_MASTER+3,
+                                172,SPEED1,TM0,
+                                0,128,    1,8],
+                                [BG_OBJ_PREDEF_MASTER+4,
+                                172,SPEED1,TM0,
+                                0,128,    1,8],
+                                [BG_OBJ_PREDEF_MASTER+5,
+                                172,SPEED1,TM0,
+                                0,128,    1,8],
+                                [BG_OBJ_PREDEF_MASTER+6,
+                                172,SPEED1,TM0,
+                                0,128,    1,8],
+                                [BG_OBJ_PREDEF_MASTER+7,
+                                172,SPEED1,TM0,
+                                0,128,    1,8],
+                                [BG_OBJ_PREDEF_MASTER+8,
+                                172,SPEED1,TM0,
+                                0,128,    1,8],
+                                [BG_OBJ_PREDEF_MASTER+9,
+                                172,SPEED1,TM0,
+                                0,128,    1,8],
+                                ]],
                                 
                                 ]
 

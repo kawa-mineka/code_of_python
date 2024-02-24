@@ -403,8 +403,8 @@ class App:
     #謎である                                                                        #
     #良く判らないけどプログラムコードを分割して複数のファイルにして                      #
     #別のクラスとして管理し始めたんだけど・・・・・・・・・・・                          #
-    #  update_ipl.ipl()         →エラーになる                                        #
-    #  update_ipl.ipl(self)     →selfを付けて引数を1個多くすると何故かokになる         # 
+    #  ipl.ipl()         →エラーになる                                               #
+    #  ipl.ipl(self)     →selfを付けて引数を1個多くすると何故かokになる                # 
     #クラスのメソッド(そもそもメソッドというのが良く判らない。。。)呼び出す時も           #
     #  score.score_board_bubble_sort(self.game_difficulty)      →エラーになる        #
     #  score.score_board_bubble_sort(self,self.game_difficulty) →上手くいく          #
@@ -574,6 +574,7 @@ class App:
             obj.raster_scroll(self)            #ラスタースクロールの更新関数の呼び出し
             #マップチップナンバー書き換えによるアニメーション関連の更新######################################################################
             obj.bg_rewrite_animation(self)     #BG書き換えによるアニメーション関数の呼び出し
+            obj.bg_rewrite_box_animation(self) #BGマップチップを矩形で書き換えて背景アニメーション行う関数の呼び出し
             # obj.dummy_bg_animation(self)     #BG 座標直接指定による書き換えダミーテスト
             #リプレイデータの記録と再生###################################################################################################
             replay.record_data(self)           #パッド＆キーボード入力によるリプレイデータの記録を行う関数を呼び出します
@@ -785,13 +786,13 @@ class App:
         if self.game_playing_flag  == FLAG_ON: #ゲームプレイ中のフラグが立っていたのならば
             debug.debug_status(self)           #デバッグステータス表示＆非表示の切り替え
             #映像オブジェクト関連の処理################################################################################################
-            obj.append_star(self)       #背景の星の追加＆発生育成関数呼び出し
-            obj.append_cloud(self)      #背景の雲の追加＆発生育成関数呼び出し
-            obj.star(self)              #背景の星の更新（移動）関数呼び出し
-            obj.particle(self)          #パーティクルの更新関数呼び出し
-            obj.background_object(self) #背景オブジェクトの更新関数の呼び出し
-            obj.building_object(self)   #建物オブジェクトの更新関数の呼び出し
-            obj.explosion(self)         #爆発パターンの更新関数呼び出し 
+            obj.append_star(self)              #背景の星の追加＆発生育成関数呼び出し
+            obj.append_cloud(self)             #背景の雲の追加＆発生育成関数呼び出し
+            obj.star(self)                     #背景の星の更新（移動）関数呼び出し
+            obj.particle(self)                 #パーティクルの更新関数呼び出し
+            obj.background_object(self)        #背景オブジェクトの更新関数の呼び出し
+            obj.building_object(self)          #建物オブジェクトの更新関数の呼び出し
+            obj.explosion(self)                #爆発パターンの更新関数呼び出し 
             #一時停止(pause)の処理###################################################################################################
             btn.pause_btn(self)         #ポーズボタンが押されたらポーズをかける関数を呼び出し
             #ウィンドウ＆メニューカーソル関連の処理###############################################################################################

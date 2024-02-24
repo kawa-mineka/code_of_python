@@ -985,7 +985,7 @@ class boss:
                     
                 elif self.boss[i].status == BOSS_STATUS_EXPLOSION:             #ボスステータスが「爆発中」の処理
                     #爆発中サウンド再生
-                    sound.se(self,3,SE_BOSS_EXPLOSION,self.master_se_vol)
+                    sound.se(self,CH3,SE_BOSS_EXPLOSION,self.master_se_vol)
                     
                     new_explosion = Explosion()
                     new_explosion.update(EXPLOSION_NORMAL,PRIORITY_FRONT,self.boss[i].posx + self.boss[i].width / 2 + func.s_rndint(self,0,50) -25,self.boss[i].posy + self.boss[i].height / 2 + func.s_rndint(self,0,20) -15,0,0,10,RETURN_BULLET_NONE,0, 1,1)
@@ -1136,7 +1136,7 @@ class boss:
                     
                 elif self.boss[i].status == BOSS_STATUS_EXPLOSION:           #ボスステータスが「爆発中」の処理
                     #爆発中サウンド再生
-                    sound.se(self,3,SE_BOSS_EXPLOSION,self.master_se_vol)
+                    sound.se(self,CH3,SE_BOSS_EXPLOSION,self.master_se_vol)
                     
                     new_explosion = Explosion()
                     new_explosion.update(EXPLOSION_NORMAL,PRIORITY_FRONT,self.boss[i].posx + self.boss[i].width / 2 + func.s_rndint(self,0,50) -25,self.boss[i].posy + self.boss[i].height / 2 + func.s_rndint(self,0,20) -15,0,0,10,RETURN_BULLET_NONE,0,  1,1)
@@ -1382,7 +1382,7 @@ class boss:
                     
                 elif self.boss[i].status == BOSS_STATUS_EXPLOSION:             #ボスステータスが「爆発中」の処理
                     #爆発中サウンド再生
-                    sound.se(self,3,SE_BOSS_EXPLOSION,self.master_se_vol)
+                    sound.se(self,CH3,SE_BOSS_EXPLOSION,self.master_se_vol)
                     
                     new_explosion = Explosion()
                     new_explosion.update(EXPLOSION_NORMAL,PRIORITY_FRONT,self.boss[i].posx + self.boss[i].width / 2 + func.s_rndint(self,0,50) -25,self.boss[i].posy + self.boss[i].height / 2 + func.s_rndint(self,0,20) -15,0,0,10,RETURN_BULLET_NONE,0, 1,1)

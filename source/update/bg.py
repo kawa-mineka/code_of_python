@@ -231,15 +231,39 @@ class bg:
         self.boss_bg_move_point.sort()         #「移動点の連番」を基準にソートする sort()はリスト型のメソッドだよん
         self.boss_bg_move_control_point.sort() #「制御点の連番」を基準にソートする sort()はリスト型のメソッドだよん
 
-    #BG書き換えを使用して背景アニメーションをさせるマーカーチップの座標をタイルマップから調べてリストに登録していく
-    def search_bg_animation_cordinate(self):
+    #BG書き換えを使用して背景アニメーションをさせるアニメーションマーカーの座標をタイルマップから調べてリストに登録していく
+    #self.bg_animation_cordinateのフォーマット
+    #[[マーカーのアスキーコード0,bgx,bgy,anime_ptn_num,speed,tmap,u,v,w,h],
+    # [マーカーのアスキーコード1,bgx,bgy,anime_ptn_num,speed,tmap,u,v,w,h],
+    # [マーカーのアスキーコード2,bgx,bgy,anime_ptn_num,speed,tmap,u,v,w,h],
+    # ]
+    #
+    #マーカーのアスキーコードは連番となっています
+    #bgx,bgy = マーカーがタイルマップでどこにあるかの座標値(x,yともに0~255の整数値)
+    #anime_ptn_num = アニメーション枚数
+    #speed         = アニメーションスピード 1で毎フレーム書き換え
+    #tmap          = タイルマップ値
+    #u,v           = BGパターンが収納されている座標u(横),v(縦)
+    #w,h           = BGパターンの横幅w、縦幅h
+    #
+    #
+    #
+    def search_bg_animation_marker_cordinate(self):
         """
         BG書き換えを使用して背景アニメーションをさせる時の座標をタイルマップから調べてリストに登録していく
         """
-        mpx,mpy     = 0,0 #サーチ用の座標を初期化
-        mark_chip_num_min = int(self.bg_animation_pre_define_list[self.stage_number - 1][2])
-        mark_chip_num_max = int(self.bg_animation_pre_define_list[self.stage_number - 1][3])
+        if self.bg_animation_pre_define_list[self.stage_number - 1][1] == PREDEF_BGANIME_OFF: #BGアニメーションチップを調べないステージならば直ぐに帰ります
+            return
+        
+        mark_chip_num_min = int(self.bg_animation_pre_define_list[self.stage_number - 1][2]) #調査していく最小のキャラチップナンバーをリストから取り出します
+        mark_chip_num_max = int(self.bg_animation_pre_define_list[self.stage_number - 1][3]) #調査していく最大のキャラチップナンバーをリストから取り出します
+        search_x          = int(self.bg_animation_pre_define_list[self.stage_number - 1][4]) #調べていく範囲(矩形）のx座標
+        search_y          = int(self.bg_animation_pre_define_list[self.stage_number - 1][5]) #                     y座標
+        search_width      = int(self.bg_animation_pre_define_list[self.stage_number - 1][6]) #                   範囲横幅w
+        search_height     = int(self.bg_animation_pre_define_list[self.stage_number - 1][7]) #                       縦幅h
         marker = mark_chip_num_min
+        
+        mpx,mpy     = 0,0 #サーチ用の座標を初期化
         
         print("chip min ",end="")
         print(mark_chip_num_min)
@@ -250,13 +274,65 @@ class bg:
         print("loop_num ",end="")
         print(mark_chip_num_max - mark_chip_num_min)
         
+        print("search x,y =  ",end="")
+        print(search_x,search_y)
+        print("width,height = ",end="")
+        print(search_width,search_height)
+        
         for i in range(int(mark_chip_num_max - mark_chip_num_min)):
-            for w in range(255): #x軸方向は0~255まで調べ上げていく
-                for h in range(255): #y軸方向も0~255まで調べ上げていく
-                    chip = bg.get_chrcode_tilemap(self,self.reference_tilemap,mpx + w,mpy + h) #BGキャラチップのナンバー取得
+            for search_x in range(search_width): #x軸方向はsearch_xからsearch_width個分調べていく
+                for search_y in range(search_height): #y軸方向はsearch_yからsearch_height個分調べ上げていく
+                    chip = bg.get_chrcode_tilemap(self,self.reference_tilemap,search_x,search_y) #BGキャラチップのナンバー取得
                     # print("chip")
                     # print(chip)
-                    if   chip == marker + i: #タイルマップに書き込まれたキャラコードと調べ上げるマーカーが一致したのならば
-                        self.bg_animation_cordinate.append([marker + i,w,h])
-                        
+                    if   chip == marker + i: #タイルマップに書き込まれたキャラコードと調べ上げるマーカーキャラコードが一致したのならば
+                        anime_ptn_num = int(self.bg_animation_pre_define_list[self.stage_number - 1][8][i][1]) # アニメーション枚数取得
+                        speed         = int(self.bg_animation_pre_define_list[self.stage_number - 1][8][i][2]) # アニメーションスピード取得
+                        tmap          = int(self.bg_animation_pre_define_list[self.stage_number - 1][8][i][3]) # タイルマップナンバー取得
+                        u             = int(self.bg_animation_pre_define_list[self.stage_number - 1][8][i][4]) # BGパターンが収納されている座標u(横)
+                        v             = int(self.bg_animation_pre_define_list[self.stage_number - 1][8][i][5]) # BGパターンが収納されている座標v(縦)
+                        w             = int(self.bg_animation_pre_define_list[self.stage_number - 1][8][i][6]) # W(横幅)
+                        h             = int(self.bg_animation_pre_define_list[self.stage_number - 1][8][i][7]) # h(縦幅)
+                        self.bg_animation_cordinate.append([marker + i,search_x,search_y,anime_ptn_num,speed,tmap,u,v,w,h])
+        
+        # for i in range(int(mark_chip_num_max - mark_chip_num_min)):
+        #     for w in range(255): #x軸方向は0~255まで調べ上げていく
+        #         for h in range(255): #y軸方向も0~255まで調べ上げていく
+        #             chip = bg.get_chrcode_tilemap(self,self.reference_tilemap,mpx + w,mpy + h) #BGキャラチップのナンバー取得
+        #             # print("chip")
+        #             # print(chip)
+        #             if   chip == marker + i: #タイルマップに書き込まれたキャラコードと調べ上げるマーカーが一致したのならば
+        #                 self.bg_animation_cordinate.append([marker + i,w,h])
+
+    #アニメーションマーカーの座標が今現在表示されている背景BG内かどうか調べる
+    def check_bg_anime_maraker(self,x,y):
+        """
+        アニメーションマーカーの座標が今現在表示されている背景BG内に存在するかどうか調べる
+        
+        x,y=アニメーションマーカーの座標値(0~255)
+        
+        存在するのならTrue,存在しないのならFalseを返します
+        """
+        if   self.stage_number == STAGE_MOUNTAIN_REGION:        #1面 MOUNTAIN REGION
+            return False
+        elif self.stage_number == STAGE_ADVANCE_BASE:           #2面 ADVANCE_BASE
+            return False
+        elif self.stage_number == STAGE_VOLCANIC_BELT:          #3面 VOLCANIC_BELT
+            return False
+        elif self.stage_number == STAGE_NIGHT_SKYSCRAPER:       #4面 NIGHT_SKYSCRAPER
+            #メインスクロール面----------------------------------------------------------------------------
+            self.bgx = int(self.scroll_count  // 8 % (256 -20)) #bgxに現在のメインスクロール面の1番左端のx座標(0~255)が入る
+            self.bgy = 48                                       #bgy座標は48から始まって1画面分下方向を調べ上げる
+            bg.clip_bgx_bgy(self)                               #bgx,bgyを規格範囲内に修正する
+            if  self.bgx <= x <= self.bgx + 20:                 #もしx座標が現在のメインスクロール面の1番左端のx座標から20キャラ分(横１画面分)に入っているのならば
+                return True
+            else:
+                return False
+        else:
+            return False
+        
+        # bg_x = (((self.scroll_count // 8) -256) // 2)
+        # bg_y = 
+
+
 
