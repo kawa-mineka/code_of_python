@@ -85,8 +85,6 @@ abs_path = os.path.abspath(__file__) #絶対パスを取得
 print ("現在の実行ファイル")
 print(abs_path) #このプログラム自体がどのフォルダーで起動してるのかコンソールに表示
 
-
-
 # from random import randint   #random.randint(n,m) と呼ぶと、nからm(m自身を含む)までの間の整数が 等しい確率で、ランダムに返される
 from random import random    #random.random() と呼ぶと、0から1の範囲(1は含まない)のランダムな実数が返される(主にパーティクル系で使用します)
 import math #三角関数などを使用したいのでインポートぉぉおお！
@@ -207,7 +205,9 @@ class App:
         pygame.mixer.init()  #pygameミキサー関連の初期化 pyxel.initよりも先にpygameをinitしないと上手く動かないみたい・・・
         
         pyxel.init(WINDOW_W,WINDOW_H,title="CODE OF PYTHON",fps = 60,quit_key=pyxel.KEY_NONE) #ゲームウィンドウのタイトルバーの表示とfpsの設定(60fpsにした),キーボード入力による強制終了は無しとする pyxel.init(caption=)がpyxel.init(title=)に変更されたっぽい？？？
+        
         # pyxel.init(640,400,title="CODE OF PYTHON",fps = 60,quit_key=pyxel.KEY_NONE)   #デバッグ確認用高解像度用イニシャライズ
+        # pyxel.camera(-160,-40)                                                        #デバッグ用に画面の後方が見えるようカメラオフセット値を設定
         
         self.ship_equip_slot_list = [[0] * 6 for i in range(LOOK_AT_LOGO)]  #(横6,縦LOOK_AT_LOGO(15))までint(0)が入ったリストを作製し初期化します
         
@@ -232,9 +232,9 @@ class App:
                                                                                     #0=未入手 1=入手 メダルのIDナンバーがリストのインデックス値となります
         
         #パッドボタン割り当て初期データのリスト [Aボタン,Bボタン,
-        #                                     Xボタン,Yボタン,
-        #                                     BACKボタン,GUIDEボタン,STARTボタン
-        #                                     LEFTSHOULDERボタン,RIGHTSHOULDERボタン]
+        #                                       Xボタン,Yボタン,
+        #                                       BACKボタン,GUIDEボタン,STARTボタン
+        #                                       LEFTSHOULDERボタン,RIGHTSHOULDERボタン]
         # self.default_pad_assign_list = [ACT_SHOT_AND_SUB_WEAPON,ACT_MISSILE,
         #                                 ACT_MAIN_WEAPON_CHANGE,ACT_SUB_WEAPON_CHANGE,
                                         
@@ -449,7 +449,7 @@ class App:
             window.active_window(self)                 #現在アクティブ(最前面)になっているウィンドウのインデックス値(i)を求める関数の呼び出し
         
         ################################ タイトルでメニュー選択中 ###################################################################
-        if self.game_status == Scene.TITLE_MENU_SELECT:
+        if self.game_status == Scene.TITLE_MENU_SELECT: #「TITLE_MENU_SELECT」の時は以下を実行する
             title.title_menu_select(self)               #タイトルでのメニュー選択処理をする関数の呼び出し
             obj.append_star(self)                       #背景の星の追加＆発生育成関数呼び出し
             obj.star(self)                              #背景の星の更新（移動）関数呼び出し
@@ -502,55 +502,55 @@ class App:
             or self.game_status == Scene.STAGE_CLEAR_MOVE_MY_SHIP\
             or self.game_status == Scene.STAGE_CLEAR_MY_SHIP_BOOST\
             or self.game_status == Scene.STAGE_CLEAR_FADE_OUT:
-            #自機関連の処理######################################################################################
+            #!自機関連の処理######################################################################################
             # ##################################################################################################
-            ship.ship(self)                           #自機の更新処理（移動処理）関数を呼び出す
-            ship.record_coordinate(self)              #自機の座標を過去履歴リストに書き込んでいく関数（トレースクローの座標として使用します）を呼び出す
-            ship.clip(self)                           #自機をはみ出さないようにする関数を呼び出す
+            ship.ship(self)                        #自機の更新処理（移動処理）関数を呼び出す
+            ship.record_coordinate(self)           #自機の座標を過去履歴リストに書き込んでいく関数（トレースクローの座標として使用します）を呼び出す
+            ship.clip(self)                        #自機をはみ出さないようにする関数を呼び出す
             #パワーアップ関連の処理################################################
-            btn.powerup_shot(self)                    #ショットのパワーアップ処理関数を呼び出し
-            btn.powerup_missile(self)                 #ミサイルのパワーアップ処理関数の呼び出し
+            btn.powerup_shot(self)                 #ショットのパワーアップ処理関数を呼び出し
+            btn.powerup_missile(self)              #ミサイルのパワーアップ処理関数の呼び出し
             #自機スピードチェンジ###################################################
-            btn.change_speed(self)                    #自機スピードチェンジボタンが押されたか調べる関数呼び出し
+            btn.change_speed(self)                 #自機スピードチェンジボタンが押されたか調べる関数呼び出し
             #自機ショット関連の処理#################################################
-            ship.shot(self)                           #自機弾の更新関数を呼び出す
-            ship.clip_shot(self)                      #自機弾をはみ出さないようにする関数を呼び出す
-            collision.my_shot_to_bg(self)             #自機弾と背景との当たり判定を行う関数を呼び出す
-            collision.my_shot_to_enemy(self)          #自機弾と敵の当たり判定を行う関数を呼び出す
-            collision.my_shot_to_boss(self)           #自機弾とボスの当たり判定を行う関数を呼び出す
+            ship.shot(self)                        #自機弾の更新関数を呼び出す
+            ship.clip_shot(self)                   #自機弾をはみ出さないようにする関数を呼び出す
+            collision.my_shot_to_bg(self)          #自機弾と背景との当たり判定を行う関数を呼び出す
+            collision.my_shot_to_enemy(self)       #自機弾と敵の当たり判定を行う関数を呼び出す
+            collision.my_shot_to_boss(self)        #自機弾とボスの当たり判定を行う関数を呼び出す
             #ミサイル関連の処理###################################################################
-            ship.missile(self)                        #自機ミサイルの更新（移動処理）関数を呼び出す
-            ship.clip_missile(self)                   #自機ミサイルをはみ出さないようにする関数を呼び出す
-            collision.missile_to_enemy(self)          #自機ミサイルと敵との当たり判定を行う関数の呼び出す
-            collision.missile_to_boss(self)           #自機ミサイルとボスとの当たり判定を行う関数を呼び出す
+            ship.missile(self)                     #自機ミサイルの更新（移動処理）関数を呼び出す
+            ship.clip_missile(self)                #自機ミサイルをはみ出さないようにする関数を呼び出す
+            collision.missile_to_enemy(self)       #自機ミサイルと敵との当たり判定を行う関数の呼び出す
+            collision.missile_to_boss(self)        #自機ミサイルとボスとの当たり判定を行う関数を呼び出す
             #クロー関連の処理 ####################################################################
-            ship.claw(self)                           #クローの更新（移動処理）関数を呼び出す
-            ship.claw_shot(self)                      #クローの弾の更新（移動処理）を呼び出す
-            collision.claw_shot_to_enemy(self)        #クローの弾と敵との当たり判定関数を呼び出す
-            collision.claw_shot_to_boss(self)         #クローの弾とボスとの当たり判定関数を呼び出す
-            collision.claw_shot_to_bg(self)           #クローの弾と背景との当たり判定関数を呼び出す
+            ship.claw(self)                        #クローの更新（移動処理）関数を呼び出す
+            ship.claw_shot(self)                   #クローの弾の更新（移動処理）を呼び出す
+            collision.claw_shot_to_enemy(self)     #クローの弾と敵との当たり判定関数を呼び出す
+            collision.claw_shot_to_boss(self)      #クローの弾とボスとの当たり判定関数を呼び出す
+            collision.claw_shot_to_bg(self)        #クローの弾と背景との当たり判定関数を呼び出す
             
-            #敵の弾関連の処理 ###################################################################################
+            #!敵の弾関連の処理 ###################################################################################
             ####################################################################################################
             enemy.shot(self)                       #敵の弾の更新（移動処理とか）＆自機と敵弾と自機との当たり判定の関数の呼び出し
             enemy.clip_shot(self)                  #敵の弾が画面からはみ出したら消去する関数の呼び出し
             collision.enemy_shot_to_bg(self)       #敵の弾と背景との当たり判定を行う関数の呼び出し
             
-            #クロー関連の処理###########################################################################################################
+            #!クロー関連の処理###########################################################################################################
             btn.delete_claw_btn(self)              #クローを消滅させるキーが押されたか調べる関数の呼び出し
             btn.change_fix_claw_interval_btn(self) #フイックスクロー間隔変化ボタンが押されたか調べる関数を呼び出す
             btn.change_claw_style_btn(self)        #クロースタイル変更ボタンが押されたか調べる関数を呼び出す    
             
-            #イベントリスト関連の処理###############################################################################################################
+            #!イベントリスト関連の処理###############################################################################################################
             event.list_execution(self)             #イベントリスト解析による敵の発生関数を呼び出す
             event.enemy_born_map_scroll(self)      #マップスクロールによる敵の発生関数を呼び出す
             event.building_born_timeline_map(self) #タイムラインマップによる建物の追加発生を行う
             event.append_request(self)             #アペンドイベントリクエストによる敵の追加発生関数を呼び出す（早回しなどの追加注文発生とかの処理）(イベント追加依頼）
             
-            #敵関連の処理###############################################################################################################
+            #!敵関連の処理###############################################################################################################
             enemy.enemy(self)                      #敵の更新（移動とか）関数を呼び出す
             enemy.clip(self)                       #画面からはみ出た敵を消去する関数を呼び出し
-            #ボス関連の処理#############################################################################################################
+            #!ボス関連の処理#############################################################################################################
             boss.boss(self)                        #ボスの更新移動とかを行う関数を呼び出す
             if self.game_status == Scene.BOSS_APPEAR or self.game_status == Scene.BOSS_BATTLE:
                 self.boss_battle_time += 1                #状態遷移が「ボス出現中」と「ボスと戦闘中」の時だけボス戦闘時間を1増加させていきます
@@ -568,30 +568,30 @@ class App:
                 self.vertical_scroll_count += self.vertical_scroll_speed #縦スクロールカウント数を縦スクロールスピード分(大抵のステージは縦スクロールしないので0)増加させていく
             
             #縦横スクロールのスピード調整#################################################################################################
-            func.adjust_scroll_speed(self)           #縦横スクロールのスピードを設定値までに近づけていく関数を呼び出します
+            func.adjust_scroll_speed(self)                 #縦横スクロールのスピードを設定値までに近づけていく関数を呼び出します
             
             #ラスタスクロールの更新#######################################################################################################
-            obj.raster_scroll(self)            #ラスタースクロールの更新関数の呼び出し
+            obj.raster_scroll(self)                        #ラスタースクロールの更新関数の呼び出し
             #マップチップナンバー書き換えによるアニメーション関連の更新######################################################################
-            obj.bg_rewrite_animation(self)     #BG書き換えによるアニメーション関数の呼び出し
-            obj.bg_rewrite_box_animation(self) #BGマップチップを矩形で書き換えて背景アニメーション行う関数の呼び出し
-            # obj.dummy_bg_animation(self)     #BG 座標直接指定による書き換えダミーテスト
+            obj.bg_rewrite_animation(self)                 #BG書き換えによるアニメーション関数の呼び出し
+            obj.bg_rewrite_box_animation(self)             #BGマップチップを矩形で書き換えて背景アニメーション行う関数の呼び出し
+            # obj.dummy_bg_animation(self)                 #BG 座標直接指定による書き換えダミーテスト
             #リプレイデータの記録と再生###################################################################################################
-            replay.record_data(self)           #パッド＆キーボード入力によるリプレイデータの記録を行う関数を呼び出します
-            replay.increace_frame_index(self)  #リプレイ用のフレームインデックス値を1進めていく関数を呼びますぅ
+            replay.record_data(self)                       #パッド＆キーボード入力によるリプレイデータの記録を行う関数を呼び出します
+            replay.increace_frame_index(self)              #リプレイ用のフレームインデックス値を1進めていく関数を呼びますぅ
             #乱数ルーレットの更新########################################################################################################
-            status.rnd0_9(self)                    #乱数ルーレット( 0~9)の更新
-            status.rnd0_99(self)                   #乱数ルーレット(0~99)の更新
+            status.rnd0_9(self)                            #乱数ルーレット( 0~9)の更新
+            status.rnd0_99(self)                           #乱数ルーレット(0~99)の更新
             #実績(アチーブメント)の取得判定###############################################################################################
-            if self.replay_status == REPLAY_RECORD:               #リプレイデータを保存している時(ゲームプレイ中)だけは実績取得の判定を行う(リプレイ再生時に実績取得すると不味いからね～～♪)
+            if self.replay_status == REPLAY_RECORD:        #リプレイデータを保存している時(ゲームプレイ中)だけは実績取得の判定を行う(リプレイ再生時に実績取得すると不味いからね～～♪)
                 window.judge_achievement_acquisition(self) #実績(アチーブメント)を取得したかどうかを調べる関数の呼び出し
         
         if     self.game_status == Scene.PLAY\
             or self.game_status == Scene.BOSS_APPEAR\
             or self.game_status == Scene.BOSS_BATTLE\
-            or self.game_status == Scene.BOSS_EXPLOSION :#「プレイ中」とボス関連の時だけ自機の当たり判定関連とシールド値のチェック&ボタンを押したら何かをする処理を実行する
+            or self.game_status == Scene.BOSS_EXPLOSION:#「プレイ中」とボス関連の時だけ自機の当たり判定関連とシールド値のチェック&ボタンを押したら何かをする処理を実行する
             #自機と色んなオブジェクトとの当たり判定処理#############################
-            collision.ship_to_enemy(self)              #自機と敵との当たり判定関数を呼び出す             
+            collision.ship_to_enemy(self)              #自機と敵との当たり判定関数を呼び出す       
             collision.ship_to_bg(self)                 #自機と背景障害物との当たり判定関数を呼び出す
             collision.ship_to_obtain_item(self)        #自機とパワーアップアイテム類の当たり判定（パワーアップゲットしたかな？どうかな？）
             collision.ship_to_boss(self)               #自機とボスとの当たり判定を行う関数を呼び出す
@@ -605,15 +605,15 @@ class App:
             #デバッグモードによる敵や敵弾の追加発生（ボタンを押したら敵が出てくる！？）###################################################
             debug.enemy_append(self)                   #デバッグモードによる敵＆敵弾追加発生
             #プレイ時間の計算#####################################################
-            status.calc_playtime(self)          #プレイ時間を計算する関数を呼び出す
+            status.calc_playtime(self)                 #プレイ時間を計算する関数を呼び出す
             #バックグラウンド(BG)を表示するときのカメラオフセット座標値を計算する#####
             func.screen_camera_offset(self)            #カメラオフセット座標値を計算する関数を呼び出す
             #ハイスコアの更新チェック##############################################
-            score.check_hi_score(self)          #ハイスコアが更新されているか調べる関数を呼び出す
+            score.check_hi_score(self)                 #ハイスコアが更新されているか調べる関数を呼び出す
             #タイマーフレア放出###################################################
-            obj.timer_flare(self)               #タイマーフレア放出の更新処理関数を呼び出す
+            obj.timer_flare(self)                      #タイマーフレア放出の更新処理関数を呼び出す
             #大気圏突入時の火花の発生##########################################################
-            obj.atmospheric_entry_spark(self)   #大気圏突入時の火花を発せさせる関数の呼び出し
+            obj.atmospheric_entry_spark(self)          #大気圏突入時の火花を発せさせる関数の呼び出し
         
         if self.game_status == Scene.BOSS_EXPLOSION:         #「BOSS_EXPLOSION」の時は
             item.present_repair_item(self)                   #リペアアイテムを出現させる関数の呼び出し
@@ -714,7 +714,7 @@ class App:
                 
                 self.game_over_bgm.fadeout(3000)                    #GAME OVER BGMフェードアウト開始
         
-        if self.game_status == Scene.SELECT_SAVE_SLOT:       #「SCENE_SELECT_SAVE_SLOT」の時
+        if self.game_status == Scene.SELECT_SAVE_SLOT:       #「SELECT_SAVE_SLOT」の時
             if self.cursor_decision_item_y != UNSELECTED:          #決定ボタンが押されたら
                 self.replay_slot_num = self.cursor_decision_item_y #スロット番号は決定ボタンを押した時点でのアイテムy座標値とする
                 self.game_playing_flag = FLAG_OFF                  #ゲームプレイ中のフラグを降ろす
@@ -734,7 +734,7 @@ class App:
                 self.game_status = Scene.TITLE_INIT        #ゲームステータスを「SCENE_TITLE_INIT」にしてタイトルの初期化工程にする
         
         #########ステージクリア後の処理#############################################################
-        if self.game_status == Scene.STAGE_CLEAR_FADE_OUT:   #「SCENE_STAGE_CLEAR_FADE_OUT」の時は
+        if self.game_status == Scene.STAGE_CLEAR_FADE_OUT:   #「STAGE_CLEAR_FADE_OUT」の時は
             if self.fade_complete_flag == FLAG_ON:           #フェードアウト完了のフラグが建ったのなら
                 self.stage_number += 1    #ステージ数を1増やす
                 self.replay_stage_num += 1#リプレイ再生記録用のステージ数も1増やします
@@ -751,7 +751,7 @@ class App:
                 self.game_status = Scene.STAGE_START_INIT    #ゲームステータスを「STAGE_START_INIT」にして次のステージへ・・・・
         
         #########ゲーム終了工程開始#################################################################
-        if self.game_status == Scene.GAME_QUIT_START:    #「GAME QUIT START」の時は
+        if self.game_status == Scene.GAME_QUIT_START:        #「GAME QUIT START」の時は
             self.star_scroll_speed = 1                   #星のスクロールスピードを倍率1に戻す
             self.select_cursor_flag = FLAG_OFF           #セレクトカーソル移動フラグを降ろす
             self.cursor_type = CURSOR_TYPE_NO_DISP       #セレクトカーソルの表示をoffにする
@@ -760,7 +760,7 @@ class App:
             self.game_quit_timer = 420                   #終了タイマーセット(420フレーム=7秒)
             self.game_status = Scene.GAME_QUIT_WAIT
             
-        elif self.game_status == Scene.GAME_QUIT_WAIT:   #「GAME QUIT WAIT」の時は
+        elif self.game_status == Scene.GAME_QUIT_WAIT:       #「GAME QUIT WAIT」の時は
             self.star_scroll_speed -= 0.003              #ゲーム終了時は星のスクロールスピードの倍率を毎フレームごと0.003減らしていく
             if self.star_scroll_speed < 0:
                 self.star_scroll_speed = 0               #0以下になったら強制的に0を代入
@@ -769,7 +769,7 @@ class App:
             if self.game_quit_timer <=0:                 #タイマーが0以下になったら
                 self.game_status = Scene.GAME_QUIT       #「GAME QUIT」にする
             
-        elif self.game_status == Scene.GAME_QUIT:        #「GAME QUIT」の時は
+        elif self.game_status == Scene.GAME_QUIT:            #「GAME QUIT」の時は
             medal.write_ship_equip_medal_data(self)      #機体メダルスロット装備リストに現在プレイ中のシップリストのメダル情報を書き込む関数の呼び出し
             system.save_data(self)                #システムデータをセーブします
             pyxel.quit()                                 #ゲーム終了！！！！！！！！！！！！！！！！！！！！！！！！！！
@@ -903,6 +903,15 @@ class App:
                 pyxel.bltm(-((self.scroll_count // 2) % 256),2  ,TM2,  0*8,208*8   + self.camera_offset_y // 3,  256*8, 1*8 + 3 ,pyxel.COLOR_BLACK)
                 pyxel.bltm(-((self.scroll_count )     % 256),0  ,TM2,  0*8,208*8   + self.camera_offset_y // 2,  256*8, 1*8     ,pyxel.COLOR_BLACK) #下の方
             elif self.stage_number == STAGE_NIGHT_SKYSCRAPER:
+                #################################################################################最奥山脈表示
+                pyxel.bltm(-int(self.scroll_count % (256 * 8 * 10)) // 10,-self.vertical_scroll_count * 2 +  65*8,TM0,  0*8,253*8, 256*8,3*8,self.bg_transparent_color)
+                #################################################################################中間山脈表示
+                pyxel.bltm(-int(self.scroll_count % (256 * 8 * 6)) //  6,-self.vertical_scroll_count * 3 +  95*8,TM0,  0*8,246*8, 256*8,3*8,self.bg_transparent_color)
+                #################################################################################前中間山脈表示
+                pyxel.bltm(-int(self.scroll_count % (256 * 8 * 6)) //  4,-self.vertical_scroll_count * 4 + 125*8,TM0,  0*8,246*8, 256*8,3*8,self.bg_transparent_color)
+                #################################################################################手前山脈表示
+                pyxel.bltm(-int(self.scroll_count % (256 * 8 * 2)) //  2,-self.vertical_scroll_count * 5 + 155*8,TM0,  0*8,246*8, 256*8,3*8,self.bg_transparent_color)
+                
                 # pyxel.bltm(-int(self.scroll_count %(256*8) -160) // 1,0,TM0,  0*8,48*8,  256*8,120*8,self.bg_transparent_color)
                 
                 #MAPチップx座標(0~19)と(236~255)は同じパターンのマップチップを敷き詰めて背景ループスクロール時不自然にならないようにしてください(横幅20キャラ縦幅15キャラ分)
@@ -913,7 +922,7 @@ class App:
             if   self.stage_number == STAGE_MOUNTAIN_REGION:
                 if self.disp_flag_bg_front == DISP_ON:
                     #pyxel.bltm(-int(self.scroll_count % (256*8 - 160)),     -self.vertical_scroll_count,  1,    0,0,    256,256,    self.bg_transparent_color)
-                    pyxel.bltm(-int(self.scroll_count % (256*8 - 160)),     -self.vertical_scroll_count,  TM1,    0*8,0*8,    256 * 8,256 * 8,    self.bg_transparent_color)
+                    pyxel.bltm(-int((self.scroll_count % (256*8 - 160))),     -self.vertical_scroll_count,  TM1,    0*8,0*8,    256 * 8,256 * 8,    self.bg_transparent_color)
             elif self.stage_number == STAGE_ADVANCE_BASE:
                 # pyxel.bltm(-(self.scroll_count // 4) + 400,0,0,0,224,256,120,self.bg_transparent_color)
                 pyxel.bltm(-(self.scroll_count // 4) + 400,0,TM0,   0*8,224*8, 256*8,120*8,self.bg_transparent_color)

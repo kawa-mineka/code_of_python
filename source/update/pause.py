@@ -37,7 +37,7 @@ class pause:
                     self.window[i].window_status = WINDOW_CLOSE
                     self.select_cursor_flag = FLAG_OFF         #セレクトカーソル移動フラグを降ろす
                     
-                    pyxel.play(0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
                 
             elif self.cursor_decision_item_y == 1:    #選択したアイテムが「RETURN TITLE」ならば
                 if func.search_window_id(self,WINDOW_ID_RETURN_TITLE) == -1: #リターンタイトルウィンドウが存在しないのなら・・
@@ -49,7 +49,7 @@ class pause:
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は2項目なので 2-1=1を代入,メニューの階層が増えたのでMENU_LAYER0からMENU_LAYER1にします
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,66,69+10,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,2-1,0,MENU_LAYER1)
                     self.active_window_id = WINDOW_ID_RETURN_TITLE    #このウィンドウIDを最前列でアクティブなものとする
-                    pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
                 
             elif self.cursor_decision_item_y == 3:    #選択したアイテムが「EXIT GAME」ならば
                 if func.search_window_id(self,WINDOW_ID_EXIT) == -1: #ゲーム終了(退出)ウィンドウが存在しないのなら・・
@@ -61,7 +61,7 @@ class pause:
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は2項目なので 2-1=1を代入,メニューの階層が増えたのでMENU_LAYER0からMENU_LAYER1にします
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,66,69+10,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,2-1,0,MENU_LAYER1)
                     self.active_window_id = WINDOW_ID_EXIT    #このウィンドウIDを最前列でアクティブなものとする
-                    pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
             
         elif self.cursor_menu_layer == MENU_LAYER1: #メニューが1階層目の選択分岐
             if     self.cursor_pre_decision_item_y == 1 and self.cursor_decision_item_y == 0: #「RETURN TITLE」→「NO」
@@ -75,7 +75,7 @@ class pause:
                 self.window[i].comment_flag = COMMENT_FLAG_OFF
                 func.pop_cursor_data(self,WINDOW_ID_PAUSE_MENU)          #ポーズメニューのカーソルデータをPOP
                 self.cursor_pre_decision_item_y = UNSELECTED
-                pyxel.play(0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
+                pyxel.play(CH0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
                 self.active_window_id = WINDOW_ID_PAUSE_MENU        #1階層前ポーズメニューウィンドウIDを最前列でアクティブなものとする
             elif   self.cursor_pre_decision_item_y == 1 and self.cursor_decision_item_y == 1: #「RETURN TITLE」→「YES」
                 self.game_status = Scene.TITLE_INIT         #ステータスを「TITLE INIT」にする
@@ -106,7 +106,7 @@ class pause:
                 
                 medal.write_ship_equip_medal_data(self)           #機体メダルスロット装備リストに現在プレイ中のシップリストのメダル情報を書き込む関数の呼び出し
                 system.save_data(self)                    #システムデータをセーブします
-                pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
+                pyxel.play(CH0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
                 
             elif   self.cursor_pre_decision_item_y == 3 and self.cursor_decision_item_y == 0: #「EXIT GAME」→「NO」
                 window.move_up_pause_menu(self) #ポーズメニューウィンドウを上にずらす関数の呼び出し
@@ -119,7 +119,7 @@ class pause:
                 self.window[i].comment_flag = COMMENT_FLAG_OFF
                 func.pop_cursor_data(self,WINDOW_ID_PAUSE_MENU)          #ポーズメニューのカーソルデータをPOP
                 self.cursor_pre_decision_item_y = UNSELECTED
-                pyxel.play(0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
+                pyxel.play(CH0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
                 self.active_window_id = WINDOW_ID_PAUSE_MENU        #1階層前ポーズメニューウィンドウIDを最前列でアクティブなものとする
             elif   self.cursor_pre_decision_item_y == 3 and self.cursor_decision_item_y == 1: #「EXIT GAME」→「YES」
                 if func.search_window_id(self,WINDOW_ID_EXIT) != -1: #ゲーム終了ウィンドウが存在するのならば・・

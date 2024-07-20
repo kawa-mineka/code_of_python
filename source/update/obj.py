@@ -576,8 +576,8 @@ class obj:
             #(参考)drawクラスでの山脈遠景表示のコード pyxel.bltm(-int(self.scroll_count  // 4  % (256*8 - 160)),-(self.vertical_scroll_count // 16) + 160,  1,    0,248,    256,5,    self.bg_transparent_color)
             self.bgx = int(self.scroll_count // 32 % (256 - 20)) #bgxに山脈遠景表示時のBGマップの1番左端のx座標(0~255)が入る
             self.bgy = 250                                       #bgyに入るy座標は250で固定
-            bg.clip_bgx_bgy(self)                              #bgx,bgyを規格範囲内に修正する
-            obj.one_line_bg_rewrite_animation(self)       #横1ラインだけのBG書き換えアニメーションを行う関数の呼び出し
+            bg.clip_bgx_bgy(self)                                #bgx,bgyを規格範囲内に修正する
+            obj.one_line_bg_rewrite_animation(self)              #横1ラインだけのBG書き換えアニメーションを行う関数の呼び出し
             
         elif self.stage_number == STAGE_ADVANCE_BASE:           #2面 ADVANCE_BASE
             #最前面のＢＧ書き換えアニメーション----------------------------------------
@@ -607,10 +607,10 @@ class obj:
             
         elif self.stage_number == STAGE_NIGHT_SKYSCRAPER:       #4面 NIGHT_SKYSCRAPER
             #メインスクロール面のビル屋上ライトアニメーション-----------------------------------------
-            self.bgx = int(self.scroll_count  // 8 % (256 - 20))      #bgxにビル屋上ライトを表示した時のBGマップの1番左端のx座標(0~255)が入る
+            self.bgx = int(self.scroll_count  // 8 % (256 - 20)) #bgxにビル屋上ライトを表示した時のBGマップの1番左端のx座標(0~255)が入る
             self.bgy = 48                                        #bgy座標は48から始まって1画面分下方向へ書き換える
-            bg.clip_bgx_bgy(self)                               #bgx,bgyを規格範囲内に修正する
-            obj.middle_bg_rewrite_animation(self)          #中面その２(ビル屋上ライトアニメ)のBG書き換えアニメーションを行う関数の呼び出し
+            bg.clip_bgx_bgy(self)                                #bgx,bgyを規格範囲内に修正する
+            obj.middle_bg_rewrite_animation(self)                #中面その２(ビル屋上ライトアニメ)のBG書き換えアニメーションを行う関数の呼び出し
 
     #BGマップチップを矩形で書き換えて背景アニメーション行う
     #矩形は左上部分に埋め込まれたマーカーチップの位置を基準とする
@@ -624,11 +624,12 @@ class obj:
         for i in range(marker_num):
             now_chip_num = self.bg_animation_cordinate[i][0]
             if now_chip_num !=  old_chip_num: #今回と前回のマーカーのアスキーコードと違いがあれば各種データを取り出す
-                anime_ptn_num = self.bg_animation_cordinate[i][3]
-                speed         = self.bg_animation_cordinate[i][4]
-                tmap          = self.bg_animation_cordinate[i][5]
-                u,v           = self.bg_animation_cordinate[i][6],self.bg_animation_cordinate[i][7]
-                w,h           = self.bg_animation_cordinate[i][8],self.bg_animation_cordinate[i][9]
+                anime_ptn_num        = self.bg_animation_cordinate[i][3]
+                anime_ptn_num_offset = self.bg_animation_cordinate[i][4]
+                speed                = self.bg_animation_cordinate[i][5]
+                tmap                 = self.bg_animation_cordinate[i][6]
+                u,v                  = self.bg_animation_cordinate[i][7],self.bg_animation_cordinate[i][8]
+                w,h                  = self.bg_animation_cordinate[i][9],self.bg_animation_cordinate[i][10]
             
             sx,sy = self.bg_animation_cordinate[i][1],self.bg_animation_cordinate[i][2] #矩形書き換え対象となる四角形の左上の座標sx(StartXという意味です)
             
@@ -637,11 +638,9 @@ class obj:
                 # if self.scroll_count % speed == 0: #sppedが1なら毎フレームごと,sppedが2なら2フレームごとの実行となります
                     for oy in range(h):       #縦オフセット値oy(offsety)は0からhまで増えていく
                         for ox in range(w):   #横オフセット値ox(offsetx)は0からwまで増えていく
-                            chip  = bg.get_chrcode_tilemap(self,tmap, u + ox + ((pyxel.frame_count  // speed ) % anime_ptn_num), v + oy) #元のBGアスキーコード取得
+                            chip  = bg.get_chrcode_tilemap(self,tmap, u + ox + ((pyxel.frame_count  + anime_ptn_num_offset) /  speed  % anime_ptn_num), v + oy) #元のBGアスキーコード取得
                             bg.set_chrcode_tilemap(self,tmap,sx + ox,sy + oy,chip)
-                            
-
-
+        
 
     #座標直接指定によるBGチップデータの書き換えアニメーション (ダミーでござる)
     def dummy_bg_animation(self):

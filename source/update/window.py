@@ -1899,39 +1899,39 @@ class window:
         #プレイ時間で判定するメダルタイプ
         if self.total_game_playtime_seconds >= 10 * 60 and self.medal_list[MEDAL_BEFOREHAND_1SHOT_ITEM - 1] == MEDAL_NO_SLOT: #総プレイタイム10分以上なら「事前1ショット」を取得
             self.medal_list[MEDAL_BEFOREHAND_1SHOT_ITEM - 1] = MEDAL_GET
-            pyxel.play(0,25) #メダルゲットアラーム音を鳴らす
+            pyxel.play(CH0,25) #メダルゲットアラーム音を鳴らす
             window.create_medal_acquisition_report_window(self,20,90,MEDAL_BEFOREHAND_1SHOT_ITEM,wait)  #メダル取得報告ウィンドウを育成
         elif self.total_game_playtime_seconds >= 180 * 60 and self.medal_list[MEDAL_BEFOREHAND_4SHOT_ITEM - 1] == MEDAL_NO_SLOT: #総プレイタイム180分以上なら「事前4ショット」を取得
             self.medal_list[MEDAL_BEFOREHAND_4SHOT_ITEM - 1] = MEDAL_GET
-            pyxel.play(0,25) #メダルゲットアラーム音を鳴らす
+            pyxel.play(CH0,25) #メダルゲットアラーム音を鳴らす
             window.create_medal_acquisition_report_window(self,20,90,MEDAL_BEFOREHAND_4SHOT_ITEM,wait)  #メダル取得報告ウィンドウを育成
         
         #トータルスコアで判定するタイプ
         elif self.total_score >= 2000 and self.medal_list[MEDAL_BEFOREHAND_3SHOT_ITEM - 1] == MEDAL_NO_SLOT: #トータルスコア2000点以上なら「事前3ショット」を取得
             self.medal_list[MEDAL_BEFOREHAND_3SHOT_ITEM - 1] = MEDAL_GET
-            pyxel.play(0,25) #メダルゲットアラーム音を鳴らす
+            pyxel.play(CH0,25) #メダルゲットアラーム音を鳴らす
             window.create_medal_acquisition_report_window(self,20,90,MEDAL_BEFOREHAND_3SHOT_ITEM,wait)  #メダル取得報告ウィンドウを育成
         elif self.total_score >= 10000 and self.medal_list[MEDAL_BEFOREHAND_4SHOT_ITEM - 1] == MEDAL_NO_SLOT: #トータルスコア10000点以上なら「事前4ショット」を取得
             self.medal_list[MEDAL_BEFOREHAND_4SHOT_ITEM - 1] = MEDAL_GET
-            pyxel.play(0,25) #メダルゲットアラーム音を鳴らす
+            pyxel.play(CH0,25) #メダルゲットアラーム音を鳴らす
             window.create_medal_acquisition_report_window(self,20,90,MEDAL_BEFOREHAND_4SHOT_ITEM,wait)  #メダル取得報告ウィンドウを育成
         
         #ボスを倒した回数で判定するタイプ
         elif self.boss_number_of_defeat[STAGE_MOUNTAIN_REGION] >= 1 and self.medal_list[MEDAL_BEFOREHAND_2SHOT_ITEM - 1] == MEDAL_NO_SLOT: #1面ボスを1回以上破壊で「事前2ショット」を取得
             self.medal_list[MEDAL_BEFOREHAND_2SHOT_ITEM - 1] = MEDAL_GET
-            pyxel.play(0,25) #メダルゲットアラーム音を鳴らす
+            pyxel.play(CH0,25) #メダルゲットアラーム音を鳴らす
             window.create_medal_acquisition_report_window(self,20,90,MEDAL_BEFOREHAND_2SHOT_ITEM,wait)  #メダル取得報告ウィンドウを育成
         
         #プレイ回数で判定するタイプ
         elif self.number_of_play >= 20 and self.medal_list[MEDAL_FRAME_RESIST - 1] == MEDAL_NO_SLOT: #トータルゲームプレイ回数が20以上なら「炎耐性」を取得
             self.medal_list[MEDAL_FRAME_RESIST - 1] = MEDAL_GET
-            pyxel.play(0,25) #メダルゲットアラーム音を鳴らす
+            pyxel.play(CH0,25) #メダルゲットアラーム音を鳴らす
             window.create_medal_acquisition_report_window(self,20,90,MEDAL_FRAME_RESIST,wait)  #メダル取得報告ウィンドウを育成
         
         #スコアスターの最大得点倍率で判定するタイプ
         elif self.max_score_star_magnification >= 7 and self.medal_list[MEDAL_PLUS_MEDALLION - 1] == MEDAL_NO_SLOT: #スコアスター最大得点倍率が7以上なら「メダル枠２増設」をゲット！
             self.medal_list[MEDAL_PLUS_MEDALLION - 1] = MEDAL_GET
-            pyxel.play(0,25) #メダルゲットアラーム音を鳴らす
+            pyxel.play(CH0,25) #メダルゲットアラーム音を鳴らす
             window.create_medal_acquisition_report_window(self,20,90,MEDAL_PLUS_MEDALLION,wait)  #メダル取得報告ウィンドウを育成
 
     #実績(アチーブメント)の取得判定をする関数
@@ -1946,7 +1946,7 @@ class window:
         #出撃回数(遊んだ回数)で判別するタイプ
         if self.number_of_play == 0 and self.achievement_list[ACHIEVEMENT_FIRST_CAMPAIGN][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED: #プレイ回数が0で出撃したのならFIRST CAMPAIGN「初陣」実績取得
             self.achievement_list[ACHIEVEMENT_FIRST_CAMPAIGN][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_FIRST_CAMPAIGN,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         
@@ -1954,55 +1954,55 @@ class window:
         #1面ボスを1回以上破壊で「1面ボス撃破」実績取得
         if self.boss_number_of_defeat[STAGE_MOUNTAIN_REGION] >= 1 and self.achievement_list[ACHIEVEMENT_DESTROY_STAGE01_BOSS][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_DESTROY_STAGE01_BOSS][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_DESTROY_STAGE01_BOSS,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #2面ボスを1回以上破壊で「2面ボス撃破」実績取得
         elif self.boss_number_of_defeat[STAGE_ADVANCE_BASE] >= 1 and self.achievement_list[ACHIEVEMENT_DESTROY_STAGE02_BOSS][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_DESTROY_STAGE02_BOSS][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_DESTROY_STAGE02_BOSS,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #3面ボスを1回以上破壊で「3面ボス撃破」実績取得
         elif self.boss_number_of_defeat[STAGE_VOLCANIC_BELT] >= 1 and self.achievement_list[ACHIEVEMENT_DESTROY_STAGE03_BOSS][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_DESTROY_STAGE03_BOSS][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_DESTROY_STAGE03_BOSS,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #4面ボスを1回以上破壊で「4面ボス撃破」実績取得
         elif self.boss_number_of_defeat[STAGE_NIGHT_SKYSCRAPER] >= 1 and self.achievement_list[ACHIEVEMENT_DESTROY_STAGE04_BOSS][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_DESTROY_STAGE04_BOSS][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_DESTROY_STAGE04_BOSS,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #5面ボスを1回以上破壊で「5面ボス撃破」実績取得
         elif self.boss_number_of_defeat[STAGE_AMPHIBIOUS_ASSAULT_SHIP] >= 1 and self.achievement_list[ACHIEVEMENT_DESTROY_STAGE05_BOSS][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_DESTROY_STAGE05_BOSS][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_DESTROY_STAGE05_BOSS,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #6面ボスを1回以上破壊で「6面ボス撃破」実績取得
         elif self.boss_number_of_defeat[STAGE_DEEP_SEA_TRENCH] >= 1 and self.achievement_list[ACHIEVEMENT_DESTROY_STAGE06_BOSS][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_DESTROY_STAGE06_BOSS][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_DESTROY_STAGE06_BOSS,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #7面ボスを1回以上破壊で「7面ボス撃破」実績取得
         elif self.boss_number_of_defeat[STAGE_INTERMEDIATE_FORTRESS] >= 1 and self.achievement_list[ACHIEVEMENT_DESTROY_STAGE07_BOSS][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_DESTROY_STAGE07_BOSS][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_DESTROY_STAGE07_BOSS,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #8面ボスを1回以上破壊で「8面ボス撃破」実績取得
         elif self.boss_number_of_defeat[STAGE_ESCAPE_FORTRESS] >= 1 and self.achievement_list[ACHIEVEMENT_DESTROY_STAGE08_BOSS][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_DESTROY_STAGE08_BOSS][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_DESTROY_STAGE08_BOSS,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #9面ボスを1回以上破壊で「9面ボス撃破」実績取得
         elif self.boss_number_of_defeat[STAGE_BOSS_RUSH] >= 1 and self.achievement_list[ACHIEVEMENT_DESTROY_STAGE09_BOSS][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_DESTROY_STAGE09_BOSS][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_DESTROY_STAGE09_BOSS,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         
@@ -2011,7 +2011,7 @@ class window:
         #ボス累計10体撃破！
         if func.total_defeat_boss_num(self) >= 10 and self.achievement_list[ACHIEVEMENT_DESTROY_BOSS_10TIME][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_DESTROY_BOSS_10TIME][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_DESTROY_BOSS_10TIME,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         
@@ -2021,166 +2021,166 @@ class window:
         wait = 360
         if self.get_shot_pow_num >= 10 and self.achievement_list[ACHIEVEMENT_10_SHOT_POW][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_10_SHOT_POW][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_10_SHOT_POW,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #ショットカプセル50個取得
         elif self.get_shot_pow_num >= 50 and self.achievement_list[ACHIEVEMENT_50_SHOT_POW][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_50_SHOT_POW][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_50_SHOT_POW,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #ショットカプセル100個取得
         elif self.get_shot_pow_num >= 100 and self.achievement_list[ACHIEVEMENT_100_SHOT_POW][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_100_SHOT_POW][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_100_SHOT_POW,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #ショットカプセル200個取得
         elif self.get_shot_pow_num >= 200 and self.achievement_list[ACHIEVEMENT_200_SHOT_POW][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_200_SHOT_POW][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_200_SHOT_POW,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #ショットカプセル500個取得
         elif self.get_shot_pow_num >= 500 and self.achievement_list[ACHIEVEMENT_500_SHOT_POW][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_500_SHOT_POW][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_500_SHOT_POW,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #ショットカプセル1000個取得
         elif self.get_shot_pow_num >= 1000 and self.achievement_list[ACHIEVEMENT_1000_SHOT_POW][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_1000_SHOT_POW][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_1000_SHOT_POW,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #ショットカプセル2000個取得
         elif self.get_shot_pow_num >= 2000 and self.achievement_list[ACHIEVEMENT_2000_SHOT_POW][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_2000_SHOT_POW][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_2000_SHOT_POW,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #ショットカプセル2465個取得
         elif self.get_shot_pow_num >= 2465 and self.achievement_list[ACHIEVEMENT_2465_SHOT_POW][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_2465_SHOT_POW][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_2465_SHOT_POW,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
             
         #ミサイルカプセル10個取得
         elif self.get_missile_pow_num >= 10 and self.achievement_list[ACHIEVEMENT_10_MISSILE_POW][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_10_MISSILE_POW][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_10_MISSILE_POW,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #ミサイルカプセル50個取得
         elif self.get_missile_pow_num >= 50 and self.achievement_list[ACHIEVEMENT_50_MISSILE_POW][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_50_MISSILE_POW][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_50_MISSILE_POW,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #ミサイルカプセル100個取得
         elif self.get_missile_pow_num >= 100 and self.achievement_list[ACHIEVEMENT_100_MISSILE_POW][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_100_MISSILE_POW][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_100_MISSILE_POW,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #ミサイルカプセル200個取得
         elif self.get_missile_pow_num >= 200 and self.achievement_list[ACHIEVEMENT_200_MISSILE_POW][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_200_MISSILE_POW][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_200_MISSILE_POW,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #ミサイルカプセル400個取得
         elif self.get_missile_pow_num >= 400 and self.achievement_list[ACHIEVEMENT_400_MISSILE_POW][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_400_MISSILE_POW][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_400_MISSILE_POW,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #ミサイルカプセル765個取得
         elif self.get_missile_pow_num >= 765 and self.achievement_list[ACHIEVEMENT_765_MISSILE_POW][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_765_MISSILE_POW][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_765_MISSILE_POW,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #ミサイルカプセル1000個取得
         elif self.get_missile_pow_num >= 1000 and self.achievement_list[ACHIEVEMENT_1000_MISSILE_POW][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_1000_MISSILE_POW][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_1000_MISSILE_POW,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #ミサイルカプセル2465個取得
         elif self.get_missile_pow_num >= 2465 and self.achievement_list[ACHIEVEMENT_2465_MISSILE_POW][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_2465_MISSILE_POW][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_2465_MISSILE_POW,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
             
         #シールドカプセル10個取得
         elif self.get_shield_pow_num >= 10 and self.achievement_list[ACHIEVEMENT_10_SHIELD_POW][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_10_SHIELD_POW][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_10_SHIELD_POW,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #シールドカプセル50個取得
         elif self.get_shield_pow_num >= 50 and self.achievement_list[ACHIEVEMENT_50_SHIELD_POW][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_50_SHIELD_POW][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_50_SHIELD_POW,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #シールドカプセル100個取得
         elif self.get_shield_pow_num >= 100 and self.achievement_list[ACHIEVEMENT_100_SHIELD_POW][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_100_SHIELD_POW][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_100_SHIELD_POW,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #シールドカプセル200個取得
         elif self.get_shield_pow_num >= 200 and self.achievement_list[ACHIEVEMENT_200_SHIELD_POW][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_200_SHIELD_POW][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_200_SHIELD_POW,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #シールドカプセル400個取得
         elif self.get_shield_pow_num >= 400 and self.achievement_list[ACHIEVEMENT_400_SHIELD_POW][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_400_SHIELD_POW][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_400_SHIELD_POW,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #シールドカプセル530個取得
         elif self.get_shield_pow_num >= 530 and self.achievement_list[ACHIEVEMENT_530_SHIELD_POW][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_530_SHIELD_POW][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_530_SHIELD_POW,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
             
         #初めてクローゲットで「はじめてのクロー」実績取得
         elif self.get_claw_num >= 1 and self.achievement_list[ACHIEVEMENT_FIRST_CLAW][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_FIRST_CLAW][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_FIRST_CLAW,WINDOW_PRIORITY_NORMAL,360)  #実績取得報告ウィンドウを育成
             return
         #クローカプセル10個取得
         elif self.get_claw_num >= 10 and self.achievement_list[ACHIEVEMENT_10_CLAW_POW][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_10_CLAW_POW][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_10_CLAW_POW,WINDOW_PRIORITY_NORMAL,360)  #実績取得報告ウィンドウを育成
             return
         #クローカプセル20個取得
         elif self.get_claw_num >= 20 and self.achievement_list[ACHIEVEMENT_20_CLAW_POW][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_20_CLAW_POW][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_20_CLAW_POW,WINDOW_PRIORITY_NORMAL,360)  #実績取得報告ウィンドウを育成
             return
         #クローカプセル50個取得
         elif self.get_claw_num >= 50 and self.achievement_list[ACHIEVEMENT_50_CLAW_POW][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_50_CLAW_POW][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_50_CLAW_POW,WINDOW_PRIORITY_NORMAL,360)  #実績取得報告ウィンドウを育成
             return
         #クローカプセル100個取得
         elif self.get_claw_num >= 100 and self.achievement_list[ACHIEVEMENT_100_CLAW_POW][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_100_CLAW_POW][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_100_CLAW_POW,WINDOW_PRIORITY_NORMAL,360)  #実績取得報告ウィンドウを育成
             return
         
@@ -2190,37 +2190,37 @@ class window:
         wait = 360
         if self.shot_level == SHOT_LV3_5WAY_VULCAN_SHOT and self.achievement_list[ACHIEVEMENT_FIRST_5WAY_SHOT][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_FIRST_5WAY_SHOT][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_FIRST_5WAY_SHOT,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #初めてレーザーを体験
         elif self.shot_level == SHOT_LV4_LASER and self.achievement_list[ACHIEVEMENT_FIRST_LASER][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_FIRST_LASER][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_FIRST_LASER,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #初めてツインレーザーを体験
         elif self.shot_level == SHOT_LV5_TWIN_LASER and self.achievement_list[ACHIEVEMENT_FIRST_TWIN_LASER][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_FIRST_TWIN_LASER][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_FIRST_TWIN_LASER,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #初めてシャワーレーザーを体験
         elif self.shot_level == SHOT_LV6_3WAY_LASER and self.achievement_list[ACHIEVEMENT_FIRST_SHOWER_LASER][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_FIRST_SHOWER_LASER][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_FIRST_SHOWER_LASER,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #初めてウェーブカッターを体験
         elif self.shot_level == SHOT_LV7_WAVE_CUTTER_LV1 and self.achievement_list[ACHIEVEMENT_FIRST_WAVE][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_FIRST_WAVE][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_FIRST_WAVE,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         #初めて最大ウェーブカッターを体験
         elif self.shot_level == SHOT_LV10_WAVE_CUTTER_LV4 and self.achievement_list[ACHIEVEMENT_FIRST_MAX_WAVE][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_FIRST_MAX_WAVE][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_FIRST_MAX_WAVE,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
             return
         
@@ -2230,14 +2230,14 @@ class window:
         if self.achievement_list[ACHIEVEMENT_FIRST_POW_UP][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             if self.get_shot_pow_num >= 1 or self.get_missile_pow_num >= 1 or self.get_shield_pow_num >= 1:
                 self.achievement_list[ACHIEVEMENT_FIRST_POW_UP][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-                pyxel.play(0,26) #実績取得音を鳴らす
+                pyxel.play(CH0,26) #実績取得音を鳴らす
                 window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_FIRST_POW_UP,WINDOW_PRIORITY_NORMAL,wait)  #実績取得報告ウィンドウを育成
                 return
         
         #初めてトライアングルアイテム取得で「初めてトライアングルアイテム」実績取得
         if self.get_triangle_pow_num >= 1 and self.achievement_list[ACHIEVEMENT_FIRST_GET_TRIANGLE_ITEM][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_FIRST_GET_TRIANGLE_ITEM][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_FIRST_GET_TRIANGLE_ITEM,WINDOW_PRIORITY_NORMAL,360)  #実績取得報告ウィンドウを育成
             return
         
@@ -2245,63 +2245,63 @@ class window:
         #初めての早回し体験
         if self.fast_forward_flag == FLAG_ON and self.fast_forward_num == 1-1 and self.achievement_list[ACHIEVEMENT_FIRST_FAST_FORWARD][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_FIRST_FAST_FORWARD][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_FIRST_FAST_FORWARD,WINDOW_PRIORITY_NORMAL,360)  #実績取得報告ウィンドウを育成
             self.fast_forward_flag == FLAG_OFF #早回実績取得用フラグを降ろす
             return
         #早回し8回目
         elif self.fast_forward_flag == FLAG_ON and self.fast_forward_num >= 8-1 and self.achievement_list[ACHIEVEMENT_8_FAST_FORWARD][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_8_FAST_FORWARD][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_8_FAST_FORWARD,WINDOW_PRIORITY_NORMAL,360)  #実績取得報告ウィンドウを育成
             self.fast_forward_flag == FLAG_OFF #早回実績取得用フラグを降ろす
             return
         #早回し16回目
         elif self.fast_forward_flag == FLAG_ON and self.fast_forward_num >= 16-1 and self.achievement_list[ACHIEVEMENT_16_FAST_FORWARD][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_16_FAST_FORWARD][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_16_FAST_FORWARD,WINDOW_PRIORITY_NORMAL,360)  #実績取得報告ウィンドウを育成
             self.fast_forward_flag == FLAG_OFF #早回実績取得用フラグを降ろす
             return
         #早回し32回目
         elif self.fast_forward_flag == FLAG_ON and self.fast_forward_num >= 32-1 and self.achievement_list[ACHIEVEMENT_32_FAST_FORWARD][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_32_FAST_FORWARD][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_32_FAST_FORWARD,WINDOW_PRIORITY_NORMAL,360)  #実績取得報告ウィンドウを育成
             self.fast_forward_flag == FLAG_OFF #早回実績取得用フラグを降ろす
             return
         #早回し64回目
         elif self.fast_forward_flag == FLAG_ON and self.fast_forward_num >= 64-1 and self.achievement_list[ACHIEVEMENT_64_FAST_FORWARD][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_64_FAST_FORWARD][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_64_FAST_FORWARD,WINDOW_PRIORITY_NORMAL,360)  #実績取得報告ウィンドウを育成
             self.fast_forward_flag == FLAG_OFF #早回実績取得用フラグを降ろす
             return
         #早回し128回目
         elif self.fast_forward_flag == FLAG_ON and self.fast_forward_num >= 128-1 and self.achievement_list[ACHIEVEMENT_128_FAST_FORWARD][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_128_FAST_FORWARD][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_128_FAST_FORWARD,WINDOW_PRIORITY_NORMAL,360)  #実績取得報告ウィンドウを育成
             self.fast_forward_flag == FLAG_OFF #早回実績取得用フラグを降ろす
             return
         #早回し256回目
         elif self.fast_forward_flag == FLAG_ON and self.fast_forward_num >= 256-1 and self.achievement_list[ACHIEVEMENT_256_FAST_FORWARD][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_256_FAST_FORWARD][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_256_FAST_FORWARD,WINDOW_PRIORITY_NORMAL,360)  #実績取得報告ウィンドウを育成
             self.fast_forward_flag == FLAG_OFF #早回実績取得用フラグを降ろす
             return
         #早回し512回目
         elif self.fast_forward_flag == FLAG_ON and self.fast_forward_num >= 512-1 and self.achievement_list[ACHIEVEMENT_512_FAST_FORWARD][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_512_FAST_FORWARD][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_512_FAST_FORWARD,WINDOW_PRIORITY_NORMAL,360)  #実績取得報告ウィンドウを育成
             self.fast_forward_flag == FLAG_OFF #早回実績取得用フラグを降ろす
             return
         #早回し1024回目
         elif self.fast_forward_flag == FLAG_ON and self.fast_forward_num >= 1024-1 and self.achievement_list[ACHIEVEMENT_1024_FAST_FORWARD][LIST_ACHIEVE_FLAG] == RESULTS_NOT_OBTAINED:
             self.achievement_list[ACHIEVEMENT_1024_FAST_FORWARD][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0,ACHIEVEMENT_1024_FAST_FORWARD,WINDOW_PRIORITY_NORMAL,360)  #実績取得報告ウィンドウを育成
             self.fast_forward_flag == FLAG_OFF #早回実績取得用フラグを降ろす
             return
@@ -2310,7 +2310,7 @@ class window:
         up_shift_line = 0 #上にシフトしていく行数を初期化
         #「ステージ中ノーダメージでクリア」フラグオンで実績取得
         if  self.no_damage_stage_clear_flag == FLAG_ON:
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0 - up_shift_line * 6,ACHIEVEMENT_NO_DAMAGE_STAGE_CLEAR ,WINDOW_PRIORITY_TOP + up_shift_line,630 - up_shift_line * 60) #実績取得報告ウィンドウを育成
             self.achievement_list[ACHIEVEMENT_NO_DAMAGE_STAGE_CLEAR][LIST_ACHIEVE_FLAG]  = RESULTS_ACQUISITION
             self.no_damage_stage_clear_flag = FLAG_OFF  #ノーダメージでボスステージクリアフラグを下げる
@@ -2318,28 +2318,28 @@ class window:
         #「ノーダメージでボス破壊」フラグオンで実績取得
         if self.no_damage_destroy_boss_flag == FLAG_ON:
             self.achievement_list[ACHIEVEMENT_NO_DAMAGE_DESTROY_BOSS][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0 - up_shift_line * 6,ACHIEVEMENT_NO_DAMAGE_DESTROY_BOSS,WINDOW_PRIORITY_TOP + up_shift_line,630 - up_shift_line * 60)  #実績取得報告ウィンドウを育成
             self.no_damage_destroy_boss_flag = FLAG_OFF #ノーダメージでボス破壊フラグを下げる
             up_shift_line += 1
         #残りシールド１でギリギリクリアフラグオンで実績取得
         if self.endurance_one_cleared_flag == FLAG_ON:
             self.achievement_list[ACHIEVEMENT_ENDURANCE_ONE_CLEARED][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0 - up_shift_line * 6,ACHIEVEMENT_ENDURANCE_ONE_CLEARED,WINDOW_PRIORITY_TOP + up_shift_line,630 - up_shift_line * 60)  #実績取得報告ウィンドウを育成
             self.endurance_one_cleared_flag = FLAG_OFF #残りシールド１でギリギリクリアフラグを下げる
             up_shift_line += 1
         #ボスを瞬殺したフラグオンで実績取得
         if self.boss_instank_kill_flag == FLAG_ON:
             self.achievement_list[ACHIEVEMENT_BOSS_INSTANK_KILL][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0 - up_shift_line * 6,ACHIEVEMENT_BOSS_INSTANK_KILL,WINDOW_PRIORITY_TOP + up_shift_line,630 - up_shift_line * 60)  #実績取得報告ウィンドウを育成
             self.boss_instank_kill_flag = FLAG_OFF #ボスを瞬殺したフラグを下げる
             up_shift_line += 1
         #ボスのパーツをすべて破壊したフラグオンで実績取得
         if self.destroy_all_boss_parts_flag == FLAG_ON:
             self.achievement_list[ACHIEVEMENT_DESTROYED_ALL_BOSS_PARTS][LIST_ACHIEVE_FLAG] = RESULTS_ACQUISITION
-            pyxel.play(0,26) #実績取得音を鳴らす
+            pyxel.play(CH0,26) #実績取得音を鳴らす
             window.create_achievement_acquisition_report_window(self,0,0 - up_shift_line * 6,ACHIEVEMENT_DESTROYED_ALL_BOSS_PARTS,WINDOW_PRIORITY_TOP + up_shift_line,630 - up_shift_line * 60)  #実績取得報告ウィンドウを育成
             self.destroy_all_boss_parts_flag = FLAG_OFF #ボスのパーツをすべて破壊したフラグを下げる
             up_shift_line += 1
@@ -2414,7 +2414,7 @@ class window:
                 or self.cursor_move_direction == CURSOR_MOVE_UD_SLIDER\
                 or self.cursor_move_direction == CURSOR_MOVE_UD_SLIDER_BUTTON:
                 if self.cursor_item_y != 0: #指し示しているアイテムナンバーが一番上の項目の0以外なら上方向にカーソルは移動できるので・・・
-                    pyxel.play(0,self.window[self.active_window_index].cursor_move_se)#カーソル移動音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_move_se)#カーソル移動音を鳴らす
                     
                     for ty in range(len(self.window[self.active_window_index].item_text)): #item_textの長さの分ループ処理する
                         if self.window[self.active_window_index].item_text[self.cursor_item_y-1][LIST_WINDOW_TEXT] == "": #カーソル移動先にテキストが存在しない場合は・・
@@ -2431,26 +2431,26 @@ class window:
                     self.keypad_repeat_num = 40
                     self.cursor_y = self.cursor_y + self.cursor_step_y * self.cursor_max_item_y         #カーソルのy座標最下段項目の座標にする
                     self.cursor_item_y = self.cursor_max_item_y                         #カーソルアイテムyをy軸最大項目にしてカーソル位置を最下段にワープさせる
-                    pyxel.play(0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
                 
             elif self.cursor_move_direction == CURSOR_MOVE_4WAY:
                 if self.cursor_item_y != 0: #指し示しているアイテムナンバーが一番上の項目の0以外なら上方向にカーソルは移動できるので・・・
                     for ty in range(self.cursor_item_y): #現在のカーソルy座標の数だけループ処理する
                         if self.window[self.active_window_index].comment_disp_flag[self.cursor_item_y-(ty+1)][self.cursor_item_x] == SKIP_CURSOR_AREA: #カーソルの移動先がスキップエリアだったのなら・・・
                             if self.cursor_item_y-(ty+1) < 0:
-                                pyxel.play(0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
+                                pyxel.play(CH0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
                                 break #上方向がスキップエリアで尚且つ調べる対象のitem_yが0より小さかったらカーソルは全く動かすことはできないので座標はそのままにループから脱出する
                             else:
-                                pyxel.play(0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
+                                pyxel.play(CH0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
                                 continue #カーソルの移動先はまだ見つかっていないのでまだループは継続する
                         else:
                             #カーソル移動先が見つかったぞ！
                             self.cursor_y -= self.cursor_step_y * (ty+1) #y座標をcursor_step_y*(ty+1)減算してカーソルを上に移動させる
                             self.cursor_item_y -= (ty+1) #現在指し示しているアイテムナンバーをty+1減らす
-                            pyxel.play(0,self.window[self.active_window_index].cursor_move_se)#カーソル移動音を鳴らす
+                            pyxel.play(CH0,self.window[self.active_window_index].cursor_move_se)#カーソル移動音を鳴らす
                             break #カーソルの移動先が見つかったのでループから脱出
                 else: #上方向の限界位置で上入力された時の処理の開始---------------------------------------------------------------
-                    pyxel.play(0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
                 
                 #comment_disp_flagを調べてカーソルサイズを変更する
                 if   self.window[self.active_window_index].comment_disp_flag[self.cursor_item_y][self.cursor_item_x] == SIZE3_BUTTON_1:
@@ -2464,7 +2464,7 @@ class window:
             
             elif self.cursor_move_direction == CURSOR_MOVE_LR_SLIDER:
                 if self.cursor_item_x != self.cursor_max_item_x: #指し示しているアイテムナンバーx軸方向が最大項目数の場合はOKアイコンなので何もしない(それ以外の時は処理をする)
-                    pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルプッシュを鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_push_se)#カーソルプッシュを鳴らす
                     
                     if self.window[self.active_window_index].edit_text[LIST_WINDOW_TEXT] != "": #テキストリストに何かしらの文字列が入っている時のみ処理をする
                         text = self.window[self.active_window_index].edit_text[LIST_WINDOW_TEXT]
@@ -2479,7 +2479,7 @@ class window:
                         self.window[self.active_window_index].edit_text[LIST_WINDOW_TEXT] = new_text
                     
                 else: #上方向の限界位置で上入力された時の処理の開始---------------------------------------------------------------
-                    pyxel.play(0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
         
         # 下入力されたら  y座標を  +7する(1キャラ分)
         # if pyxel.btnp(pyxel.KEY_DOWN) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_DOWN) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_DPAD_DOWN):
@@ -2489,7 +2489,7 @@ class window:
                 or self.cursor_move_direction == CURSOR_MOVE_UD_SLIDER\
                 or self.cursor_move_direction == CURSOR_MOVE_UD_SLIDER_BUTTON:
                 if self.cursor_item_y != self.cursor_max_item_y: #指し示しているアイテムナンバーが最大項目数でないのなら下方向にカーソルは移動できるので・・
-                    pyxel.play(0,self.window[self.active_window_index].cursor_move_se)#カーソル移動音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_move_se)#カーソル移動音を鳴らす
                     
                     for ty in range(len(self.window[self.active_window_index].item_text)): #item_textの長さの分ループ処理する
                         if self.window[self.active_window_index].item_text[self.cursor_item_y+1][LIST_WINDOW_TEXT] == "": #カーソル移動先にテキストが存在しない場合は・・
@@ -2506,11 +2506,11 @@ class window:
                     self.keypad_repeat_num = 40
                     self.cursor_y = self.cursor_y - self.cursor_step_y * self.cursor_max_item_y #カーソルのy座標最上段項目の座標にする
                     self.cursor_item_y = 0                                                      #カーソルアイテムyを0にしてカーソル位置を最上段にワープさせる
-                    pyxel.play(0,self.window[self.active_window_index].cursor_bounce_se)        #カーソル跳ね返り音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_bounce_se)        #カーソル跳ね返り音を鳴らす
                 
             elif self.cursor_move_direction == CURSOR_MOVE_4WAY:
                 if self.cursor_item_y != self.cursor_max_item_y: #指し示しているアイテムナンバーが最大項目数でないのなら下方向にカーソルは移動できるので・・
-                    pyxel.play(0,self.window[self.active_window_index].cursor_move_se)#カーソル移動音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_move_se)#カーソル移動音を鳴らす
                     
                     for ty in range(self.cursor_max_item_y - self.cursor_item_y): #(y軸アイテム最大値-現在のカーソルy座標)の数だけループ処理する
                         if self.window[self.active_window_index].comment_disp_flag[self.cursor_item_y+(ty+1)][self.cursor_item_x] == SKIP_CURSOR_AREA: #カーソルの移動先がスキップエリアだったのなら・・・
@@ -2523,7 +2523,7 @@ class window:
                             self.cursor_item_y += (ty+1) #現在指し示しているアイテムナンバーをty+1増やす
                             break #カーソルの移動先が見つかったのでループから脱出
                 else: #下方向の限界位置で下入力された時の処理の開始---------------------------------------------------------------
-                    pyxel.play(0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
                 
                 #comment_disp_flagを調べてカーソルサイズを変更する
                 if   self.window[self.active_window_index].comment_disp_flag[self.cursor_item_y][self.cursor_item_x] == SIZE3_BUTTON_1:
@@ -2537,7 +2537,7 @@ class window:
                 
             elif self.cursor_move_direction == CURSOR_MOVE_LR_SLIDER:
                 if self.cursor_item_x != self.cursor_max_item_x: #指し示しているアイテムナンバーx軸方向が最大項目数の場合はOKアイコンなので何もしない(それ以外の時は処理をする)
-                    pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルプッシュ音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_push_se)#カーソルプッシュ音を鳴らす
                     
                     if self.window[self.active_window_index].edit_text[LIST_WINDOW_TEXT] != "": #テキストリストに何かしらの文字列が入っている時のみ処理をする
                         text = self.window[self.active_window_index].edit_text[LIST_WINDOW_TEXT]
@@ -2552,7 +2552,7 @@ class window:
                         self.window[self.active_window_index].edit_text[LIST_WINDOW_TEXT] = new_text
                     
                 else: #下方向の限界位置で下入力された時の処理の開始---------------------------------------------------------------
-                    pyxel.play(0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
         
         #右入力されたらcursor_pageを +1する
         # if pyxel.btnp(pyxel.KEY_RIGHT) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_RIGHT) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_DPAD_RIGHT) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_RIGHTSHOULDER) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_RIGHTSHOULDER):
@@ -2560,24 +2560,24 @@ class window:
             self.cursor_move_data = PAD_RIGHT
             if   self.cursor_move_direction == CURSOR_MOVE_SHOW_PAGE:
                 self.cursor_page += 1 #ページ数インクリメント
-                pyxel.play(0,self.window[self.active_window_index].cursor_move_se)#カーソル移動音を鳴らす
+                pyxel.play(CH0,self.window[self.active_window_index].cursor_move_se)#カーソル移動音を鳴らす
                 if self.cursor_page > self.cursor_page_max: #カーソルページ数が最大ページ数を超えたのなら
                     self.cursor_page = 0                    #ページ数は0にする
                 
             elif self.cursor_move_direction == CURSOR_MOVE_LR_SLIDER:
                 if self.cursor_item_x != self.cursor_max_item_x: #指し示しているアイテムナンバーx軸方向が最大項目数でないのなら右方向にカーソルは移動できるので・・
                     if self.window[self.active_window_index].item_text[self.cursor_item_y][LIST_WINDOW_TEXT_CLICK_SE_FLAG] == CLICK_SOUND_ON: #カーソル移動ボタン音がONならば
-                        pyxel.play(0,self.window[self.active_window_index].cursor_move_se)#カーソル移動音を鳴らす
+                        pyxel.play(CH0,self.window[self.active_window_index].cursor_move_se)#カーソル移動音を鳴らす
                     
                     self.cursor_x += self.cursor_step_x #x座標をcursor_step_x（初期値は1文字分4ドット）加算してカーソルを右に移動させる
                     self.cursor_item_x += 1 #現在指示しているアイテムナンバーを1増やす
                 else:
                     if self.window[self.active_window_index].item_text[self.cursor_item_y][LIST_WINDOW_TEXT_CLICK_SE_FLAG] == CLICK_SOUND_ON: #カーソル移動ボタン音がONならば
-                        pyxel.play(0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
+                        pyxel.play(CH0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
                 
             elif self.cursor_move_direction == CURSOR_MOVE_4WAY:
                 if self.cursor_item_x != self.cursor_max_item_x: #指し示しているアイテムナンバーが最大項目数でないのなら右方向にカーソルは移動できるので・・
-                    pyxel.play(0,self.window[self.active_window_index].cursor_move_se)#カーソル移動音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_move_se)#カーソル移動音を鳴らす
                     
                     for tx in range(self.cursor_max_item_x - self.cursor_item_x): #(x軸アイテム最大値-現在のカーソルx座標)の数だけループ処理する
                         if self.window[self.active_window_index].comment_disp_flag[self.cursor_item_y][self.cursor_item_x+(tx+1)] == SKIP_CURSOR_AREA: #カーソルの移動先がスキップエリアだったのなら・・・
@@ -2590,7 +2590,7 @@ class window:
                             self.cursor_item_x += (tx+1) #現在指し示しているアイテムナンバーをtx+1増やす
                             break #カーソルの移動先が見つかったのでループから脱出
                 else:
-                    pyxel.play(0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
                 
                 #comment_disp_flagを調べてカーソルサイズを変更する
                 if   self.window[self.active_window_index].comment_disp_flag[self.cursor_item_y][self.cursor_item_x] == SIZE3_BUTTON_1:
@@ -2609,10 +2609,10 @@ class window:
                     if k < self.window[self.active_window_index].item_text[self.cursor_item_y][LIST_WINDOW_TEXT_OPE_OBJ_MAX_NUM]: #kがLIST_WINDOW_TEXT_OPE_OBJ_MAX_NUMより小さい時は
                         k += 1 #オブジェクトの数値をインクリメント
                         if self.window[self.active_window_index].item_text[self.cursor_item_y][LIST_WINDOW_TEXT_CLICK_SE_FLAG] == CLICK_SOUND_ON: #カーソル移動ボタン音がONならば
-                            pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルプッシュ音を鳴らす
+                            pyxel.play(CH0,self.window[self.active_window_index].cursor_push_se)#カーソルプッシュ音を鳴らす
                     else:
                         if self.window[self.active_window_index].item_text[self.cursor_item_y][LIST_WINDOW_TEXT_CLICK_SE_FLAG] == CLICK_SOUND_ON: #カーソル移動ボタン音がONならば
-                            pyxel.play(0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
+                            pyxel.play(CH0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
                     
                     if  k == self.window[self.active_window_index].item_text[self.cursor_item_y][LIST_WINDOW_TEXT_OPE_OBJ_MAX_NUM]:  #kが最大値の場合は
                         rd = DISP_OFF #右矢印(数値を増加できるかどうかを指し示す矢印）表示フラグoff
@@ -2640,7 +2640,7 @@ class window:
                 if self.cursor_repeat_time_count <= 8: #パッドを押し続けてリピートタイムが8以下になったら
                     self.cursor_y = self.cursor_y + self.cursor_step_y * (self.cursor_max_item_y -  self.cursor_item_y)    #カーソルのy座標最下段項目の座標にする
                     self.cursor_item_y = self.cursor_max_item_y                                                            #カーソルアイテムyをy軸最大項目にしてカーソル位置を最下段にワープさせる
-                    pyxel.play(0,self.window[self.active_window_index].cursor_bounce_se)                                   #カーソル跳ね返り音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_bounce_se)                                   #カーソル跳ね返り音を鳴らす
         
         #左入力されたらcursor_pageを -1する
         # if pyxel.btnp(pyxel.KEY_LEFT) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_DPAD_LEFT) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_LEFTSHOULDER) or pyxel.btnp(pyxel.GAMEPAD2_BUTTON_LEFTSHOULDER):
@@ -2648,39 +2648,39 @@ class window:
             self.cursor_move_data = PAD_LEFT
             if   self.cursor_move_direction == CURSOR_MOVE_SHOW_PAGE:
                 self.cursor_page -= 1 #ページ数デクリメント
-                pyxel.play(0,self.window[self.active_window_index].cursor_move_se)#カーソル移動音を鳴らす
+                pyxel.play(CH0,self.window[self.active_window_index].cursor_move_se)#カーソル移動音を鳴らす
                 if self.cursor_page < 0:                    #カーソルページ数が0より小さくなったのなら
                     self.cursor_page = self.cursor_page_max                    #ページ数はmaxにする
                 
             elif self.cursor_move_direction == CURSOR_MOVE_LR_SLIDER:
                 if self.cursor_item_x != 0: #指し示しているアイテムナンバーx軸方向が0以外ならでないのなら左方向にカーソルは移動できるので・・
                     if self.window[self.active_window_index].item_text[self.cursor_item_y][LIST_WINDOW_TEXT_CLICK_SE_FLAG] == CLICK_SOUND_ON: #カーソル移動ボタン音がONならば
-                        pyxel.play(0,self.window[self.active_window_index].cursor_move_se)#カーソル移動音を鳴らす
+                        pyxel.play(CH0,self.window[self.active_window_index].cursor_move_se)#カーソル移動音を鳴らす
                     
                     self.cursor_x -= self.cursor_step_x #x座標をcursor_step_x（初期値は1文字分4ドット）減算してカーソルを左に移動させる
                     self.cursor_item_x -= 1#現在指示しているアイテムナンバーを1減らす
                 else:
                     if self.window[self.active_window_index].item_text[self.cursor_item_y][LIST_WINDOW_TEXT_CLICK_SE_FLAG] == CLICK_SOUND_ON: #カーソル移動ボタン音がONならば
-                        pyxel.play(0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
+                        pyxel.play(CH0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
                 
             elif self.cursor_move_direction == CURSOR_MOVE_4WAY:
                 if self.cursor_item_x != 0: #指し示しているアイテムナンバーが一番左の項目の0以外なら左方向にカーソルは移動できるので・・・
                     for tx in range(self.cursor_item_x): #現在のカーソルx座標の数だけループ処理する
                         if self.window[self.active_window_index].comment_disp_flag[self.cursor_item_y][self.cursor_item_x-(tx+1)] == SKIP_CURSOR_AREA: #カーソルの移動先がスキップエリアだったのなら・・・
                             if self.cursor_item_x-(tx+1) < 0:
-                                pyxel.play(0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
+                                pyxel.play(CH0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
                                 break #左方向がスキップエリアで尚且つ調べる対象のitem_xが0より小さかったらカーソルは全く動かすことはできないので座標はそのままにループから脱出する
                             else:
-                                pyxel.play(0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
+                                pyxel.play(CH0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
                                 continue #カーソルの移動先はまだ見つかっていないのでまだループは継続する
                         else:
                             #カーソル移動先が見つかったぞ！
                             self.cursor_x -= self.cursor_step_x * (tx+1) #x座標をcursor_step_x*(tx+1)減算してカーソルを左に移動させる
                             self.cursor_item_x -= (tx+1) #現在指し示しているアイテムナンバーをtx+1減らす
-                            pyxel.play(0,self.window[self.active_window_index].cursor_move_se)#カーソル移動音を鳴らす
+                            pyxel.play(CH0,self.window[self.active_window_index].cursor_move_se)#カーソル移動音を鳴らす
                             break #カーソルの移動先が見つかったのでループから脱出
                 else:
-                    pyxel.play(0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
                 
                 #comment_disp_flagを調べてカーソルサイズを変更する
                 if   self.window[self.active_window_index].comment_disp_flag[self.cursor_item_y][self.cursor_item_x] == SIZE3_BUTTON_1:
@@ -2699,10 +2699,10 @@ class window:
                     if k > self.window[self.active_window_index].item_text[self.cursor_item_y][LIST_WINDOW_TEXT_OPE_OBJ_MIN_NUM]: #kがLIST_WINDOW_TEXT_OPE_OBJ_MIN_NUMより大きい時は
                         k -= 1 #オブジェクトの数値をデクリメント
                         if self.window[self.active_window_index].item_text[self.cursor_item_y][LIST_WINDOW_TEXT_CLICK_SE_FLAG] == CLICK_SOUND_ON: #カーソル移動ボタン音がONならば
-                            pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルプッシュ音を鳴らす
+                            pyxel.play(CH0,self.window[self.active_window_index].cursor_push_se)#カーソルプッシュ音を鳴らす
                     else:
                         if self.window[self.active_window_index].item_text[self.cursor_item_y][LIST_WINDOW_TEXT_CLICK_SE_FLAG] == CLICK_SOUND_ON: #カーソル移動ボタン音がONならば
-                            pyxel.play(0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
+                            pyxel.play(CH0,self.window[self.active_window_index].cursor_bounce_se)#カーソル跳ね返り音を鳴らす
                     
                     if  k == self.window[self.active_window_index].item_text[self.cursor_item_y][LIST_WINDOW_TEXT_OPE_OBJ_MAX_NUM]:  #kが最大値の場合は
                         rd = DISP_OFF #右矢印(数値を増加できるかどうかを指し示す矢印）表示フラグoff
@@ -2730,7 +2730,7 @@ class window:
                 if self.cursor_repeat_time_count <= 8: #パッドを押し続けてリピートタイムが8以下になったら
                     self.cursor_y = self.cursor_y - self.cursor_step_y * self.cursor_item_y   #カーソルのy座標最上段項目の座標にする
                     self.cursor_item_y = 0                                                    #カーソルアイテムyをy軸最小項目にしてカーソル位置を最上段にワープさせる
-                    pyxel.play(0,self.window[self.active_window_index].cursor_bounce_se)      #カーソル跳ね返り音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_bounce_se)      #カーソル跳ね返り音を鳴らす
         
         #ABXY,BACK,START,スペースキーが押された場合の処理
         self.cursor_button_data = BTN_NONE
@@ -2784,7 +2784,7 @@ class window:
                     k = 0
                 
                 self.window[self.active_window_index].flag_list[flag_index] = k #フラグ＆数値リストを更新する
-                pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルok音を鳴らす
+                pyxel.play(CH0,self.window[self.active_window_index].cursor_ok_se)#カーソルok音を鳴らす
 
     #パッドアサイングラフイックリストをリフレッシュ！する！
     def refresh_pad_assign_graph_list(self):

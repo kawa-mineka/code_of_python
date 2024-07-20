@@ -169,7 +169,7 @@ class title:
         # print (self.push_any_btn_flag)
         # print(self.release_the_btn_flag)
         if self.push_any_btn_flag == FLAG_ON and self.release_the_btn_flag == FLAG_ON:
-            pyxel.play(0,CURSOR_OK_SE_NORMAL)                   #カーソルOK音を鳴らす
+            pyxel.play(CH0,CURSOR_OK_SE_NORMAL)                   #カーソルOK音を鳴らす
             i = func.search_window_id(self,WINDOW_ID_TITLE_TEXT)
             self.window[i].vy = 0.3                             #WINDOW_ID_TITLE_TEXTウィンドウを下にフッ飛ばしていく
             self.window[i].vy_accel = 1.2
@@ -230,7 +230,7 @@ class title:
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は4項目なので 4-1=3を代入,メニューの階層が増えたのでMENU_LAYER0からMENU_LAYER1にします
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,92,71,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,4-1,0,MENU_LAYER1)
                     self.active_window_id = WINDOW_ID_SELECT_STAGE_MENU #このウィンドウIDを最前列アクティブなものとする
-                    pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
                 
             elif self.cursor_decision_item_y == MENU_SELECT_LOOP:       #SELECT LOOPが押されて
                 if func.search_window_id(self,WINDOW_ID_SELECT_LOOP_MENU) == -1: #SELECT_LOOP_MENUウィンドウが存在しないのなら・・
@@ -242,7 +242,7 @@ class title:
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は3項目なので 3-1=2を代入,メニューの階層が増えたのでMENU_LAYER0からMENU_LAYER1にします
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,90+24,72+5,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,3-1,0,MENU_LAYER1)
                     self.active_window_id = WINDOW_ID_SELECT_LOOP_MENU  #このウィンドウIDを最前列でアクティブなものとする
-                    pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
                 
             elif self.cursor_decision_item_y == MENU_BOSS_MODE:         #BOSS MODEが押されて
                 if func.search_window_id(self,WINDOW_ID_BOSS_MODE_MENU) == -1: #BOSS MODEウィンドウが存在しないのなら・・
@@ -254,7 +254,7 @@ class title:
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は2項目なので 2-1=1を代入,メニューの階層が増えたのでMENU_LAYER0からMENU_LAYER1にします
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,96+5,69+self.boss_test_mode * STEP7,STEP4,STEP7,0,0,0,self.boss_test_mode,UNSELECTED,UNSELECTED,0,2-1,0,MENU_LAYER1)
                     self.active_window_id = WINDOW_ID_BOSS_MODE_MENU    #このウィンドウIDを最前列でアクティブなものとする
-                    pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
                 
             elif self.cursor_decision_item_y == MENU_HITBOX:            #HITBOXが押されて....
                 if func.search_window_id(self,WINDOW_ID_HITBOX_MENU) == -1: #HITBOXウィンドウが存在しないのなら・・
@@ -266,7 +266,7 @@ class title:
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は2項目なので 2-1=1を代入,メニューの階層が増えたのでMENU_LAYER0からMENU_LAYER1にします
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,96+5,69+self.boss_collision_rect_display_flag * STEP7,STEP4,STEP7,0,0,0,self.boss_collision_rect_display_flag,UNSELECTED,UNSELECTED,0,2-1,0,MENU_LAYER1)
                     self.active_window_id = WINDOW_ID_HITBOX_MENU       #このウィンドウIDを最前列でアクティブなものとする
-                    pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
                 
             elif self.cursor_decision_item_y == MENU_DIFFICULTY:        #DIFFICULTYが押されて
                 if func.search_window_id(self,WINDOW_ID_SELECT_DIFFICULTY) == -1: #SELECT_DIFFICULTYウィンドウが存在しないのなら・・
@@ -278,7 +278,7 @@ class title:
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は6項目なので 6-1=5を代入,メニューの階層が増えたのでMENU_LAYER0からMENU_LAYER1にします
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,96,63 + self.game_difficulty * STEP7,STEP4,STEP7,0,0,0,self.game_difficulty,UNSELECTED,UNSELECTED,0,6-1,0,MENU_LAYER1)
                     self.active_window_id = WINDOW_ID_SELECT_DIFFICULTY #このウィンドウIDを最前列でアクティブなものとする
-                    pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
                 
             elif self.cursor_decision_item_y == MENU_SELECT_SHIP:       #SELECT SHIPが押されて・・・
                 if func.search_window_id(self,WINDOW_ID_SELECT_SHIP) == -1: #SELECT_SHIPウィンドウが存在しないのなら・・
@@ -291,7 +291,7 @@ class title:
                     self.active_window_id = WINDOW_ID_SELECT_SHIP #このウィンドウIDを最前列でアクティブなものとする
                     #!check##############################################################################################
                     window.change_window_priority_top(self,WINDOW_ID_SELECT_SHIP) #ウィンドウ「SELECT SHIP」のプライオリティを最前面にする
-                    pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
                 
             elif self.cursor_decision_item_y == MENU_SCORE_BOARD:       #SCORE BOARDが押されて...
                 if func.search_window_id(self,WINDOW_ID_SCORE_BOARD) == -1: #SCORE_BOARDウィンドウが存在しないのなら・・
@@ -302,7 +302,7 @@ class title:
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は1項目なので 1-1=0を代入,いま指し示しているページナンバー 0=very easy,#最大ページ数 難易度は0~5の範囲 なのでMAX5,メニューの階層が増えたのでMENU_LAYER0からMENU_LAYER1にします
                     func.set_cursor_data(self,CURSOR_TYPE_NO_DISP,CURSOR_MOVE_SHOW_PAGE,92,71,STEP4,STEP7,0,5,0,0,UNSELECTED,UNSELECTED,0,0,0,MENU_LAYER1)
                     self.active_window_id = WINDOW_ID_SCORE_BOARD       #このウィンドウIDを最前列でアクティブなものとする
-                    pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
                 
             elif self.cursor_decision_item_y == MENU_NAME_ENTRY:        #NAME ENTRYが押されて...
                 if func.search_window_id(self,WINDOW_ID_INPUT_YOUR_NAME) == -1: #INPUT_YOUR_NAMEウィンドウが存在しないのなら・・
@@ -315,7 +315,7 @@ class title:
                     #まだボタンも押されておらず未決定状態なのでdecision_item_x,decision_item_yはUNSELECTED,最大項目数x軸方向は(8文字+OKボタンなので)合計9項目 9-1=8を代入,最大項目数y軸方向は0,メニューの階層が増えたのでMENU_LAYER0からMENU_LAYER1にします
                     func.set_cursor_data(self,CURSOR_TYPE_UNDER_BAR,CURSOR_MOVE_LR_SLIDER,100,66,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,9-1,0,0,MENU_LAYER1)
                     self.active_window_id = WINDOW_ID_INPUT_YOUR_NAME   #このウィンドウIDを最前列でアクティブなものとする
-                    pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
                 
             elif self.cursor_decision_item_y == MENU_CONFIG:            #CONFIGが押されて
                 if func.search_window_id(self,WINDOW_ID_CONFIG) == -1: #SELECT_CONFIGウィンドウが存在しないのなら・・
@@ -327,7 +327,7 @@ class title:
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD_SLIDER,10,16,STEP4,STEP8,0,0,0,0,UNSELECTED,UNSELECTED,0,12-1,0,MENU_LAYER1)
                     self.active_window_id = WINDOW_ID_CONFIG #このウィンドウIDを最前列でアクティブなものとする
                     window.change_window_priority_top(self,WINDOW_ID_CONFIG) #ウィンドウ「CONFIG」のプライオリティを最前面にする
-                    pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
                 
             elif self.cursor_decision_item_y == MENU_REPLAY:            #REPLAYが押されたら
                 self.game_status = Scene.SELECT_LOAD_SLOT           #ゲームステータスを「SCENE_SELECT_LOAD_SLOT」にしてロードデータスロットの選択に移る
@@ -336,7 +336,7 @@ class title:
                 #まだボタンも押されておらず未決定状態なのでdecision_item_yは-1最大項目数は「1」「2」「3」「4」「5」「6」「7」の7項目なので 7-1=6を代入,メニューの階層が増えたので,MENU_LAYER0からMENU_LAYER1にします
                 func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,67,55,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,6,0,MENU_LAYER1)
                 self.active_window_id = WINDOW_ID_SELECT_FILE_SLOT  #このウィンドウIDを最前列でアクティブなものとする
-                pyxel.play(0,self.window[self.active_window_index].cursor_push_se) #カーソルボタンプッシュ音を鳴らす
+                pyxel.play(CH0,self.window[self.active_window_index].cursor_push_se) #カーソルボタンプッシュ音を鳴らす
                 
             elif self.cursor_decision_item_y == MENU_MEDAL:             #MEDALが押されて
                 if func.search_window_id(self,WINDOW_ID_MEDAL_LIST) == -1 and func.search_window_id(self,WINDOW_ID_EQUIPMENT) == -1: #MEDAL_LISTウィンドウとEQUIPMENTウィンドウが同時に存在しないのなら・・
@@ -352,7 +352,7 @@ class title:
                     
                     self.active_window_id = WINDOW_ID_MEDAL_LIST #MEDAL_LISTウィンドウを最前列でアクティブなものとする
                     func.make_medal_list_window_comment_disp_flag_table(self) #メダルリストウィンドウで「存在するアイテム」を調べ上げコメント表示フラグテーブルを作製する関数の呼び出す
-                    pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
                 
             elif self.cursor_decision_item_y == MENU_STATUS:            #STATUSが押されたら・・・
                 if func.search_window_id(self,WINDOW_ID_STATUS) == -1: #STATUSウィンドウが存在しないのなら・・
@@ -363,7 +363,7 @@ class title:
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は11項目なので 13-1=12を代入,メニューの階層が増えたのでMENU_LAYER0からMENU_LAYER1にします
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,9,10,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,13-1,0,MENU_LAYER1)
                     self.active_window_id = WINDOW_ID_STATUS       #このウィンドウIDを最前列でアクティブなものとする
-                    pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
                 
             elif self.cursor_decision_item_y == MENU_EXIT:              #EXITが押されたら・・・
                 if func.search_window_id(self,WINDOW_ID_EXIT) == -1: #ゲーム終了(退出)ウィンドウが存在しないのなら・・
@@ -374,7 +374,7 @@ class title:
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は2項目なので 2-1=1を代入,メニューの階層が増えたのでMENU_LAYER0からMENU_LAYER1にします
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,66,69,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,2-1,0,MENU_LAYER1)
                     self.active_window_id = WINDOW_ID_EXIT    #このウィンドウIDを最前列でアクティブなものとする
-                    pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
             
         elif self.cursor_menu_layer == MENU_LAYER1: #メニューが1階層目の選択分岐
             if  self.cursor_pre_decision_item_y  == MENU_SELECT_STAGE:
@@ -492,7 +492,7 @@ class title:
                     self.window[i].flag_list = self.master_flag_list #ボステストフラグを更新→マスターフラグデータリスト更新→ウィンドウのフラグリストに書き込んで更新します
                     func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
                     self.cursor_pre_decision_item_y = UNSELECTED
-                    pyxel.play(0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
                     self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
                 elif self.cursor_decision_item_y == MENU_BOSS_MODE_ON:
                     #「BOSS MODE」→「ON」
@@ -509,7 +509,7 @@ class title:
                     self.window[i].flag_list = self.master_flag_list #ボステストフラグを更新→マスターフラグデータリスト更新→ウィンドウのフラグリストに書き込んで更新します
                     func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
                     self.cursor_pre_decision_item_y = UNSELECTED
-                    pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                     self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
                 
             elif self.cursor_pre_decision_item_y == MENU_HITBOX:
@@ -526,7 +526,7 @@ class title:
                     self.window[i].flag_list = self.master_flag_list #ボステストフラグを更新→マスターフラグデータリスト更新→ウィンドウのフラグリストに書き込んで更新します
                     func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
                     self.cursor_pre_decision_item_y = UNSELECTED
-                    pyxel.play(0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
                     self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
                 elif self.cursor_decision_item_y == MENU_HITBOX_ON:
                     #「HITBOX」→「ON」
@@ -543,7 +543,7 @@ class title:
                     self.window[i].flag_list = self.master_flag_list   #ボステストフラグを更新→マスターフラグデータリスト更新→ウィンドウのフラグリストに書き込んで更新します
                     func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
                     self.cursor_pre_decision_item_y = UNSELECTED
-                    pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                     self.active_window_id = WINDOW_ID_MAIN_MENU                     #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
                 
             elif self.cursor_pre_decision_item_y == MENU_DIFFICULTY:
@@ -562,7 +562,7 @@ class title:
                     self.window[i].flag_list = self.master_flag_list #ボステストフラグを更新→マスターフラグデータリスト更新→ウィンドウのフラグリストに書き込んで更新します
                     func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
                     self.cursor_pre_decision_item_y = UNSELECTED
-                    pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                     self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
                 elif self.cursor_decision_item_y == GAME_EASY:
                     #「DIFFICULTY」→「EASY」
@@ -579,7 +579,7 @@ class title:
                     self.window[i].flag_list = self.master_flag_list #ボステストフラグを更新→マスターフラグデータリスト更新→ウィンドウのフラグリストに書き込んで更新します
                     func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
                     self.cursor_pre_decision_item_y = UNSELECTED
-                    pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                     self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
                 elif self.cursor_decision_item_y == GAME_NORMAL:
                     #「DIFFICULTY」→「NORMAL」
@@ -594,7 +594,7 @@ class title:
                     self.window[i].flag_list = self.master_flag_list #ボステストフラグを更新→マスターフラグデータリスト更新→ウィンドウのフラグリストに書き込んで更新します
                     func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
                     self.cursor_pre_decision_item_y = UNSELECTED
-                    pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                     self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
                 elif self.cursor_decision_item_y == GAME_HARD:
                     #「DIFFICULTY」→「HARD」
@@ -611,7 +611,7 @@ class title:
                     self.window[i].flag_list = self.master_flag_list #ボステストフラグを更新→マスターフラグデータリスト更新→ウィンドウのフラグリストに書き込んで更新します
                     func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
                     self.cursor_pre_decision_item_y = UNSELECTED
-                    pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                     self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
                 elif self.cursor_decision_item_y == GAME_VERY_HARD:
                     #「DIFFICULTY」→「VERY_HARD」
@@ -628,7 +628,7 @@ class title:
                     self.window[i].flag_list = self.master_flag_list #ボステストフラグを更新→マスターフラグデータリスト更新→ウィンドウのフラグリストに書き込んで更新します
                     func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
                     self.cursor_pre_decision_item_y = UNSELECTED
-                    pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                     self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
                 elif self.cursor_decision_item_y == GAME_INSAME:
                     #「DIFFICULTY」→「INSAME」
@@ -645,7 +645,7 @@ class title:
                     self.window[i].flag_list = self.master_flag_list #ボステストフラグを更新→マスターフラグデータリスト更新→ウィンドウのフラグリストに書き込んで更新します
                     func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
                     self.cursor_pre_decision_item_y = UNSELECTED
-                    pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                     self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
                 
             elif self.cursor_pre_decision_item_y == MENU_SCORE_BOARD:
@@ -703,7 +703,7 @@ class title:
                     func.all_move_window(self,WINDOW_ID_SCORE_BOARD,0,0.3,0,1.2) #すべてのSCORE_BOARDウィンドウを下方向にフッ飛ばしていく
                     func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)               #メインメニューのカーソルデータをPOP
                     self.cursor_pre_decision_item_y = UNSELECTED                    #前回選択したアイテムも未決定に
-                    pyxel.play(0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
                     self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
                 
             elif self.cursor_pre_decision_item_y == MENU_NAME_ENTRY and self.cursor_decision_item_x == MENU_NAME_ENTRY_OK:
@@ -714,7 +714,7 @@ class title:
                 func.all_move_window(self,WINDOW_ID_INPUT_YOUR_NAME,0.2,0.3,1.2,1.2) #すべてのINPUT_YOUR_NAMEウィンドウを右下方向にフッ飛ばしていく
                 func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
                 self.cursor_pre_decision_item_y = UNSELECTED
-                pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                pyxel.play(CH0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                 self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
                 
             elif self.cursor_pre_decision_item_y == MENU_CONFIG:
@@ -736,7 +736,7 @@ class title:
                         #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は13項目なので 13-1=12を代入,メニューの階層が増えたのでMENU_LAYER1からMENU_LAYER2にします
                         func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,7,10,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,13-1,0,MENU_LAYER2)
                         self.active_window_id = WINDOW_ID_JOYPAD_ASSIGN #このウィンドウIDを最前列でアクティブなものとする
-                        pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
+                        pyxel.play(CH0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
                         self.cursor_pad_assign_mode = FLAG_ON                             #カーソル移動を「パッドボタン割り当てモードON」にします(BACK,STARTボタンも使用したい為です)
                 elif self.cursor_decision_item_y == MENU_CONFIG_INITIALIZE:
                     window.change_window_priority_normal(self,WINDOW_ID_CONFIG) #CONFIGウィンドウの表示優先度を「normal」にする
@@ -750,7 +750,7 @@ class title:
                         #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は7項目なので 7-1=6を代入,メニューの階層が増えたのでMENU_LAYER1からMENU_LAYER2にします
                         func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,ox + 3,oy + 11,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,7-1,0,MENU_LAYER2)
                         self.active_window_id = WINDOW_ID_INITIALIZE #このウィンドウIDを最前列でアクティブなものとする
-                        pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
+                        pyxel.play(CH0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
                 elif self.cursor_decision_item_y == MENU_CONFIG_RETURN:
                     func.restore_master_flag_list(self) #フラグ＆データ関連のマスターリストを参照して個別のフラグ変数へリストアする
                     window.change_window_priority_normal(self,WINDOW_ID_CONFIG) #CONFIGウィンドウの表示優先度を「normal」にする
@@ -769,7 +769,7 @@ class title:
                     # pyxel.load("./assets/graphic/min-sht2.pyxres") #タイトル＆ステージ1＆2のリソースファイルを読み込む
                     
                     self.cursor_pre_decision_item_y = UNSELECTED
-                    pyxel.play(0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
                     self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
                 
             elif self.cursor_pre_decision_item_y == MENU_MEDAL:
@@ -794,7 +794,7 @@ class title:
                     
                     func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
                     self.cursor_pre_decision_item_y = UNSELECTED
-                    pyxel.play(0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
                     self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
                     self.cursor_size = CURSOR_SIZE_NORMAL       #矩形囲みタイプのセレクトカーソルのサイズを通常サイズに戻す
                 elif 2 <= self.cursor_decision_item_y <= 4:                                    #所持メダルリスト欄内でボタンが押されたときの処理
@@ -836,7 +836,7 @@ class title:
                 func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
                 self.cursor_pre_decision_item_x = UNSELECTED
                 self.cursor_pre_decision_item_y = UNSELECTED
-                pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                pyxel.play(CH0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                 self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
                 
             elif self.cursor_pre_decision_item_y == MENU_SELECT_SHIP and self.cursor_decision_item_y == 12:
@@ -852,7 +852,7 @@ class title:
                 func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
                 self.cursor_pre_decision_item_x = UNSELECTED
                 self.cursor_pre_decision_item_y = UNSELECTED
-                pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                pyxel.play(CH0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                 self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
                 
             elif self.cursor_pre_decision_item_y == MENU_EXIT:
@@ -866,7 +866,7 @@ class title:
                     self.window[i].comment_flag = COMMENT_FLAG_OFF
                     func.pop_cursor_data(self,WINDOW_ID_MAIN_MENU)          #メインメニューのカーソルデータをPOP
                     self.cursor_pre_decision_item_y = UNSELECTED
-                    pyxel.play(0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
                     self.active_window_id = WINDOW_ID_MAIN_MENU #1階層前メインメニューウィンドウIDを最前列でアクティブなものとする
                 elif self.cursor_decision_item_y == MENU_EXIT_YES:
                     self.star_scroll_flag  = 1
@@ -904,7 +904,7 @@ class title:
                     func.pop_cursor_data(self,WINDOW_ID_CONFIG)                          #「CONFIG」ウィンドウのカーソルデータをPOP
                     self.cursor_pre_pre_decision_item_y = UNSELECTED                #前々回選択されたアイテムは未選択にして初期化
                     self.cursor_pre_decision_item_y = MENU_CONFIG                   #前回選択されたアイテムを「CONFIG」にする 
-                    pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                     self.active_window_id = WINDOW_ID_CONFIG                        #1階層前の「CONFIG」ウィンドウIDを最前列でアクティブなものとする
                     window.change_window_priority_top(self,WINDOW_ID_CONFIG) #CONFIGウィンドウの表示優先度を「TOP」にする
                 elif self.cursor_pre_decision_item_y == MENU_CONFIG_INITIALIZE and self.cursor_decision_item_y == MENU_CONFIG_INITIALIZE_SCORE:
@@ -920,7 +920,7 @@ class title:
                         func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,38,35,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,2-1,0,MENU_LAYER3)
                         
                         self.active_window_id = WINDOW_ID_SELECT_YES_NO #SELECT_YES_NOウィンドウを最前列でアクティブなものとする
-                        pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
+                        pyxel.play(CH0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
                 elif self.cursor_pre_decision_item_y == MENU_CONFIG_INITIALIZE and self.cursor_decision_item_y == MENU_CONFIG_INITIALIZE_NAME:
                     if func.search_window_id(self,WINDOW_ID_PRINT_INIT_NAME) == -1 and func.search_window_id(self,WINDOW_ID_SELECT_YES_NO) == -1: #PRINT_INIT_NAMEウィンドウとSELECT_YES_NOウィンドウが同時に存在しないのなら・・
                         self.cursor_pre_pre_pre_decision_item_y = self.cursor_pre_pre_decision_item_y #2回前に選択されたアイテムを3回前に選択されたアイテムにコピー 
@@ -934,7 +934,7 @@ class title:
                         func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,38,35,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,2-1,0,MENU_LAYER3)
                         
                         self.active_window_id = WINDOW_ID_SELECT_YES_NO #SELECT_YES_NOウィンドウを最前列でアクティブなものとする
-                        pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
+                        pyxel.play(CH0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
                 elif self.cursor_pre_decision_item_y == MENU_CONFIG_INITIALIZE and self.cursor_decision_item_y == MENU_CONFIG_INITIALIZE_ALL:
                     if func.search_window_id(self,WINDOW_ID_PRINT_INIT_ALL) == -1 and func.search_window_id(self,WINDOW_ID_SELECT_YES_NO) == -1: #PRINT_INIT_ALLウィンドウとSELECT_YES_NOウィンドウが同時に存在しないのなら・・
                         self.cursor_pre_pre_pre_decision_item_y = self.cursor_pre_pre_decision_item_y #2回前に選択されたアイテムを3回前に選択されたアイテムにコピー 
@@ -948,7 +948,7 @@ class title:
                         func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,38,35,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,2-1,0,MENU_LAYER3)
                         
                         self.active_window_id = WINDOW_ID_SELECT_YES_NO #SELECT_YES_NOウィンドウを最前列でアクティブなものとする
-                        pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
+                        pyxel.play(CH0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
                     
                 elif self.cursor_pre_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN and self.cursor_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN_FIRE_AND_SUBWEAPON:
                     if self.cursor_button_data != BTN_KEYBOARD_SPACE: #スペースキーで決定の場合は何もしない
@@ -956,7 +956,7 @@ class title:
                         #! self.pad_assign_list[self.cursor_button_data] = ACT_SHOT_AND_SUB_WEAPON
                         btn_assign.list(self,self.cursor_button_data,ACT_SHOT_AND_SUB_WEAPON)
                         
-                        pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)  #カーソルOK音を鳴らす
+                        pyxel.play(CH0,self.window[self.active_window_index].cursor_ok_se)  #カーソルOK音を鳴らす
                         i = func.search_window_id(self,WINDOW_ID_JOYPAD_ASSIGN)           #ジョイパッドボタン割り当て設定ウィンドウのインデックス値を取得
                         self.window[i].pad_assign_list = self.pad_assign_list             #ウィンドウクラスのパッドアサインリストも更新してやります
                         window.refresh_pad_assign_graph_list(self)                 #パッドアサイングラフイックリストを更新して新しいものにします(self.pad_assign_listに依存しているため)
@@ -970,7 +970,7 @@ class title:
                         #! self.pad_assign_list[self.cursor_button_data] = ACT_MISSILE
                         btn_assign.list(self,self.cursor_button_data,ACT_MISSILE)
                         
-                        pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                        pyxel.play(CH0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                         # self.cursor_button_data = BTN_NONE #押されたボタンIDを初期化
                         i = func.search_window_id(self,WINDOW_ID_JOYPAD_ASSIGN)  #ジョイパッドボタン割り当て設定ウィンドウのインデックス値を取得
                         self.window[i].pad_assign_list = self.pad_assign_list    #ウィンドウクラスのパッドアサインリストも更新してやります
@@ -985,7 +985,7 @@ class title:
                         #! self.pad_assign_list[self.cursor_button_data] = ACT_MAIN_WEAPON_CHANGE
                         btn_assign.list(self,self.cursor_button_data,ACT_MAIN_WEAPON_CHANGE)
                         
-                        pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                        pyxel.play(CH0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                         # self.cursor_button_data = BTN_NONE #押されたボタンIDを初期化
                         i = func.search_window_id(self,WINDOW_ID_JOYPAD_ASSIGN)  #ジョイパッドボタン割り当て設定ウィンドウのインデックス値を取得
                         self.window[i].pad_assign_list = self.pad_assign_list    #ウィンドウクラスのパッドアサインリストも更新してやります
@@ -1000,7 +1000,7 @@ class title:
                         #! self.pad_assign_list[self.cursor_button_data] = ACT_SUB_WEAPON_CHANGE
                         btn_assign.list(self,self.cursor_button_data,ACT_SUB_WEAPON_CHANGE)
                         
-                        pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                        pyxel.play(CH0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                         # self.cursor_button_data = BTN_NONE #押されたボタンIDを初期化
                         i = func.search_window_id(self,WINDOW_ID_JOYPAD_ASSIGN)  #ジョイパッドボタン割り当て設定ウィンドウのインデックス値を取得
                         self.window[i].pad_assign_list = self.pad_assign_list    #ウィンドウクラスのパッドアサインリストも更新してやります
@@ -1015,7 +1015,7 @@ class title:
                         #!self.pad_assign_list[self.cursor_button_data] = ACT_SPEED_CHANGE
                         btn_assign.list(self,self.cursor_button_data,ACT_SPEED_CHANGE)
                         
-                        pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                        pyxel.play(CH0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                         # self.cursor_button_data = BTN_NONE #押されたボタンIDを初期化
                         i = func.search_window_id(self,WINDOW_ID_JOYPAD_ASSIGN)  #ジョイパッドボタン割り当て設定ウィンドウのインデックス値を取得
                         self.window[i].pad_assign_list = self.pad_assign_list    #ウィンドウクラスのパッドアサインリストも更新してやります
@@ -1030,7 +1030,7 @@ class title:
                         #!self.pad_assign_list[self.cursor_button_data] = ACT_PAUSE
                         btn_assign.list(self,self.cursor_button_data,ACT_PAUSE)
                         
-                        pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                        pyxel.play(CH0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                         # self.cursor_button_data = BTN_NONE #押されたボタンIDを初期化
                         i = func.search_window_id(self,WINDOW_ID_JOYPAD_ASSIGN)  #ジョイパッドボタン割り当て設定ウィンドウのインデックス値を取得
                         self.window[i].pad_assign_list = self.pad_assign_list    #ウィンドウクラスのパッドアサインリストも更新してやります
@@ -1045,7 +1045,7 @@ class title:
                         #!self.pad_assign_list[self.cursor_button_data] = ACT_CHANGE_CLAW_STYLE
                         btn_assign.list(self,self.cursor_button_data,ACT_CHANGE_CLAW_STYLE)
                         
-                        pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                        pyxel.play(CH0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                         # self.cursor_button_data = BTN_NONE #押されたボタンIDを初期化
                         i = func.search_window_id(self,WINDOW_ID_JOYPAD_ASSIGN)  #ジョイパッドボタン割り当て設定ウィンドウのインデックス値を取得
                         self.window[i].pad_assign_list = self.pad_assign_list    #ウィンドウクラスのパッドアサインリストも更新してやります
@@ -1060,7 +1060,7 @@ class title:
                         #!self.pad_assign_list[self.cursor_button_data] = ACT_CHANGE_CLAW_INTERVAL
                         btn_assign.list(self,self.cursor_button_data,ACT_CHANGE_CLAW_INTERVAL)
                         
-                        pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                        pyxel.play(CH0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                         # self.cursor_button_data = BTN_NONE #押されたボタンIDを初期化
                         i = func.search_window_id(self,WINDOW_ID_JOYPAD_ASSIGN)  #ジョイパッドボタン割り当て設定ウィンドウのインデックス値を取得
                         self.window[i].pad_assign_list = self.pad_assign_list    #ウィンドウクラスのパッドアサインリストも更新してやります
@@ -1071,7 +1071,7 @@ class title:
                         self.cursor_decision_item_y = UNSELECTED          #選択アイテムをすべて「未選択」にします
                     
                 elif self.cursor_pre_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN and self.cursor_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN_DEFAULT:
-                    pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)   #カーソルOK音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_ok_se)   #カーソルOK音を鳴らす
                     
                     self.pad_assign_list = copy.deepcopy(self.default_pad_assign_list) #パッド割り当て情報の初期データを深い階層でコピーする
                     i = func.search_window_id(self,WINDOW_ID_JOYPAD_ASSIGN)            #ジョイパッドボタン割り当て設定ウィンドウのインデックス値を取得
@@ -1083,7 +1083,7 @@ class title:
                     self.cursor_decision_item_y = UNSELECTED                           #選択アイテムをすべて「未選択」にします
                     
                 elif self.cursor_pre_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN and self.cursor_decision_item_y == MENU_CONFIG_JOYPAD_ASSIGN_CLEAR:
-                    pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)   #カーソルOK音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_ok_se)   #カーソルOK音を鳴らす
                     
                     self.pad_assign_list = copy.deepcopy(self.empty_pad_assign_list)   #パッド割り当て情報の空データを深い階層でコピーする
                     i = func.search_window_id(self,WINDOW_ID_JOYPAD_ASSIGN)            #ジョイパッドボタン割り当て設定ウィンドウのインデックス値を取得
@@ -1108,7 +1108,7 @@ class title:
                     func.pop_cursor_data(self,WINDOW_ID_CONFIG)                     #「CONFIG」ウィンドウのカーソルデータをPOP
                     self.cursor_pre_pre_decision_item_y = UNSELECTED                #前々回選択されたアイテムは未選択にして初期化
                     self.cursor_pre_decision_item_y = MENU_CONFIG                   #前回選択されたアイテムを「CONFIG」にする 
-                    pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                     self.active_window_id = WINDOW_ID_CONFIG                        #1階層前の「CONFIG」ウィンドウIDを最前列でアクティブなものとする
                     window.change_window_priority_top(self,WINDOW_ID_CONFIG) #CONFIGウィンドウの表示優先度を「TOP」にする
                     self.cursor_pad_assign_mode = FLAG_OFF                          #カーソル移動を「パッドボタン割り当てモードOFF」にします(パッドアサインは終了したのでBACK,STARTボタンは「決定」ボタンとして使用できないようにしたい為です)
@@ -1135,7 +1135,7 @@ class title:
                 self.cursor_pre_pre_decision_item_y = self.cursor_pre_pre_pre_decision_item_y #pre_preにMENU_CONFIGが入る
                 self.cursor_decision_item_y = UNSELECTED                                      #選択アイテムは強制的に未選択にする
                 self.active_window_id = WINDOW_ID_INITIALIZE #1階層前のイニシャライズウィンドウIDを最前列でアクティブなものとする
-                pyxel.play(0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
+                pyxel.play(CH0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
             elif self.cursor_pre_pre_pre_decision_item_y == MENU_CONFIG and self.cursor_pre_pre_decision_item_y == MENU_CONFIG_INITIALIZE and self.cursor_pre_decision_item_y == MENU_CONFIG_INITIALIZE_SCORE and self.cursor_decision_item_y == 1:
                 #CONFIG→INITIALIZE→SCORE→YES
                 i = func.search_window_id(self,WINDOW_ID_PRINT_INIT_SCORE)
@@ -1157,7 +1157,7 @@ class title:
                 self.cursor_pre_pre_decision_item_y = self.cursor_pre_pre_pre_decision_item_y #pre_preにMENU_CONFIGが入る
                 self.cursor_decision_item_y = UNSELECTED                                      #選択アイテムは強制的に未選択にする
                 self.active_window_id = WINDOW_ID_INITIALIZE                    #1階層前のイニシャライズウィンドウIDを最前列でアクティブなものとする
-                pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                pyxel.play(CH0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                 self.score_board = copy.deepcopy(self.default_score_board)      #現在のスコアボードをデフォルトの物からコピーして初期化する
                 system.save_data(self)                                         #システムデータをセーブします
                 pyxel.load(os.path.abspath("./assets/graphic/min-sht2.pyxres"))                   #タイトル＆ステージ1＆2のリソースファイルを読みます
@@ -1183,7 +1183,7 @@ class title:
                 self.cursor_pre_pre_decision_item_y = self.cursor_pre_pre_pre_decision_item_y #pre_preにMENU_CONFIGが入る
                 self.cursor_decision_item_y = UNSELECTED                                      #選択アイテムは強制的に未選択にする
                 self.active_window_id = WINDOW_ID_INITIALIZE #1階層前のイニシャライズウィンドウIDを最前列でアクティブなものとする
-                pyxel.play(0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
+                pyxel.play(CH0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
             elif self.cursor_pre_pre_pre_decision_item_y == MENU_CONFIG and self.cursor_pre_pre_decision_item_y == MENU_CONFIG_INITIALIZE and self.cursor_pre_decision_item_y == MENU_CONFIG_INITIALIZE_NAME and self.cursor_decision_item_y == 1:
                 #CONFIG→INITIALIZE→NAME→YES
                 i = func.search_window_id(self,WINDOW_ID_PRINT_INIT_NAME)
@@ -1205,7 +1205,7 @@ class title:
                 self.cursor_pre_pre_decision_item_y = self.cursor_pre_pre_pre_decision_item_y #pre_preにMENU_CONFIGが入る
                 self.cursor_decision_item_y = UNSELECTED                                      #選択アイテムは強制的に未選択にする
                 self.active_window_id = WINDOW_ID_INITIALIZE                    #1階層前のイニシャライズウィンドウIDを最前列でアクティブなものとする
-                pyxel.play(0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
+                pyxel.play(CH0,self.window[self.active_window_index].cursor_ok_se)#カーソルOK音を鳴らす
                 self.my_name = copy.deepcopy(self.default_my_name)              #現在のマイネームリストをデフォルトの物からディープコピーして初期化する
                 system.save_data(self)                                         #システムデータをセーブします
                 pyxel.load(os.path.abspath("./assets/graphic/min-sht2.pyxres"))                   #タイトル＆ステージ1＆2のリソースファイルを読みます
@@ -1231,7 +1231,7 @@ class title:
                 self.cursor_pre_pre_decision_item_y = self.cursor_pre_pre_pre_decision_item_y #pre_preにMENU_CONFIGが入る
                 self.cursor_decision_item_y = UNSELECTED                                      #選択アイテムは強制的に未選択にする
                 self.active_window_id = WINDOW_ID_INITIALIZE #1階層前のイニシャライズウィンドウIDを最前列でアクティブなものとする
-                pyxel.play(0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
+                pyxel.play(CH0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
             elif self.cursor_pre_pre_pre_decision_item_y == MENU_CONFIG and self.cursor_pre_pre_decision_item_y == MENU_CONFIG_INITIALIZE and self.cursor_pre_decision_item_y == MENU_CONFIG_INITIALIZE_ALL and self.cursor_decision_item_y == 1:
                 #CONFIG→INITIALIZE→ALL→YES
                 i = func.search_window_id(self,WINDOW_ID_PRINT_INIT_ALL)

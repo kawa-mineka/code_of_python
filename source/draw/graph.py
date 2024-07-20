@@ -1067,7 +1067,17 @@ class graph:
         pyxel.text(WINDOW_W - 12,WINDOW_H - 28,str(self.type_check_quantity),pyxel.COLOR_GREEN)
         
         #ゲームステータス（ゲームの状態）の表示
-        pyxel.text(0,8,str(self.game_status),pyxel.COLOR_LIGHT_BLUE)
+        status_str = str(self.game_status)           #クラス名を取り除いた文字列にしたいので元となる文字列self.game_statusをコピー
+        length = int(len(status_str))                #文字列の長さを計算 
+        rindex = status_str.rfind(".")               #ピリオド"."をrfind命令で右側(文字列の後ろ)から何文字目のあるのか調べる 見つからなかったら-1が戻ってくる rは右側rightのr
+        # index = length - rindex                      #文字列の先頭からのインデックス値に変換
+        new_status_str = status_str[rindex + 1:]     #スライス構文で新しいステータス文字列を作製
+        pyxel.text(0,8,str(new_status_str),pyxel.COLOR_LIGHT_BLUE) #ゲームステータステキスト表示します
+        # pyxel.text(0,8,length,pyxel.COLOR_LIGHT_BLUE) #テキスト表示します
+        # print(length)
+        # print(status_str)
+        # print(new_status_str)
+        # print(index,length)
         
         #イベントインデックス値の表示
         pyxel.text(10,8,str(self.event_index),pyxel.COLOR_YELLOW)
@@ -1085,22 +1095,22 @@ class graph:
             pyxel.text(22,14,str(self.enemy_formation[0].formation_number),pyxel.COLOR_BROWN)
             pyxel.text(30,14,str(self.enemy_formation[0].on_screen_formation_number),pyxel.COLOR_RED)
             pyxel.text(38,14,str(self.enemy_formation[0].shoot_down_number),pyxel.COLOR_RED)    
-        if  len(self.enemy_formation) >= 2:
+        if len(self.enemy_formation) >= 2:
             pyxel.text(14,20,str(self.enemy_formation[1].formation_id),pyxel.COLOR_WHITE)
             pyxel.text(22,20,str(self.enemy_formation[1].formation_number),pyxel.COLOR_BROWN)
             pyxel.text(30,20,str(self.enemy_formation[1].on_screen_formation_number),pyxel.COLOR_RED)
             pyxel.text(38,20,str(self.enemy_formation[1].shoot_down_number),pyxel.COLOR_RED)
-        if  len(self.enemy_formation) >= 3:
+        if len(self.enemy_formation) >= 3:
             pyxel.text(14,26,str(self.enemy_formation[2].formation_id),pyxel.COLOR_WHITE)
             pyxel.text(22,26,str(self.enemy_formation[2].formation_number),pyxel.COLOR_BROWN)
             pyxel.text(30,26,str(self.enemy_formation[2].on_screen_formation_number),pyxel.COLOR_RED)
             pyxel.text(38,26,str(self.enemy_formation[2].shoot_down_number),pyxel.COLOR_RED)
-        if  len(self.enemy_formation) >= 4:
+        if len(self.enemy_formation) >= 4:
             pyxel.text(14,32,str(self.enemy_formation[3].formation_id),pyxel.COLOR_WHITE)
             pyxel.text(22,32,str(self.enemy_formation[3].formation_number),pyxel.COLOR_BROWN)
             pyxel.text(30,32,str(self.enemy_formation[3].on_screen_formation_number),pyxel.COLOR_RED)
             pyxel.text(38,32,str(self.enemy_formation[3].shoot_down_number),pyxel.COLOR_RED)
-        if  len(self.enemy_formation) >= 5:
+        if len(self.enemy_formation) >= 5:
             pyxel.text(14,38,str(self.enemy_formation[4].formation_id),pyxel.COLOR_WHITE)
             pyxel.text(22,38,str(self.enemy_formation[4].formation_number),pyxel.COLOR_BROWN)
             pyxel.text(30,38,str(self.enemy_formation[4].on_screen_formation_number),pyxel.COLOR_RED)

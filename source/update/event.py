@@ -42,11 +42,11 @@ class event:
                     new_enemy = Enemy()
                     new_enemy.update(EnemyName.SAISEE_RO,ID00,ENEMY_STATUS_NORMAL,ENEMY_ATTCK_ANY,   self.event_list[self.event_index][3],self.event_list[self.event_index][4],0,0,     0,0,0,0,0,0,0,0,    0,0,0,0,0,0,0,0,0,0,  0,0,       0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0,    SIZE_8,SIZE_8,   1*self.enemy_speed_mag,0,  0,  HP01 * self.enemy_hp_mag,   0,0,  E_SIZE_NORMAL,0.5,0.05,0,     0,0,0,0,    E_NO_POW,ID00 ,0,0,0,              0  ,0,0,0,    0,AERIAL_OBJ,  PT01,PT01,PT01,  PT01,PT01,PT01)
                     self.enemy.append(new_enemy)    
-                elif self.event_list[self.event_index][2] == EnemyName.GREEN_LANCER:   #グリーンランサー 3way弾を出してくる緑の戦闘機(サインカーブを描く敵)
+                elif self.event_list[self.event_index][2] == EnemyName.GREEN_LANCER:  #グリーンランサー 3way弾を出してくる緑の戦闘機(サインカーブを描く敵)
                     new_enemy = Enemy()
                     new_enemy.update(EnemyName.GREEN_LANCER,ID00,ENEMY_STATUS_NORMAL,ENEMY_ATTCK_ANY,   self.event_list[self.event_index][3],self.event_list[self.event_index][4],0,0,    0,0,0,0,0,0,0,0,    0,0,0,0,0,0,0,0,0,0,   0,0,       0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0,    SIZE_8,SIZE_8,   0.1*self.enemy_speed_mag,0,  0,  HP05 * self.enemy_hp_mag,   0,0,  E_SIZE_NORMAL,0.5,0.01,0,     0,0,0,0,    E_MISSILE_POW,ID00 ,0,0,0,    0  ,0,0,0,    0,AERIAL_OBJ,  PT01,PT01,PT01,  PT01,PT01,PT01)
                     self.enemy.append(new_enemy)
-                elif self.event_list[self.event_index][2] == EnemyName.RAY_BLASTER:    #レイブラスター 直進して画面前方のどこかで停止→レーザービーム射出→急いで後退するレーザー系
+                elif self.event_list[self.event_index][2] == EnemyName.RAY_BLASTER:   #レイブラスター 直進して画面前方のどこかで停止→レーザービーム射出→急いで後退するレーザー系
                     new_enemy = Enemy()
                     new_enemy.update(EnemyName.RAY_BLASTER,ID00,ENEMY_STATUS_NORMAL,ENEMY_ATTCK_ANY,   self.event_list[self.event_index][3],self.event_list[self.event_index][4],0,0,     0,0,0,0,0,0,0,0,    0,0,0,0,0,0,0,0,0,0,    -2,(func.s_rndint(self,0,1)-0.5),       0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0, 0,0,0,0,0,0,0,    SIZE_8,SIZE_8,   0.98,0,  0,  HP02 * self.enemy_hp_mag,   0,0,  E_SIZE_NORMAL,80 + func.s_rndint(self,0,40),0,0,     0,0,0,0,     E_NO_POW,ID00 ,0,0,0,     0  ,0,0,0,    0,AERIAL_OBJ,  PT01,PT01,PT01,  PT01,PT01,PT01)
                     self.enemy.append(new_enemy)
@@ -73,8 +73,8 @@ class event:
                 
                 self.fast_forward_destruction_num = 0       #「敵編隊殲滅必要数」を初期化
                 self.fast_forward_destruction_count = 0     #「早回しで破壊した時にどれだけ出現時間が速くなるカウント」を初期化
-                self.fast_forward_num += 1          #累計早回し発生数をインクリメント
-                self.add_appear_flag = FLAG_OFF     #早回し関連のパラメーター数値、フラグは全てリセットします
+                self.fast_forward_num += 1                  #累計早回し発生数をインクリメント
+                self.add_appear_flag = FLAG_OFF             #早回し関連のパラメーター数値、フラグは全てリセットします
             elif self.event_list[self.event_index][1] == EVENT_SCROLL:            #イベント「スクロール」の場合
                 #スクロールスタート
                 if   self.event_list[self.event_index][2] == SCROLL_START:
@@ -305,7 +305,7 @@ class event:
                 priority = 3 - i
                 if chrcode == self.bg_append_building_null_chr: #キャラチップがそのステージのnullチップならば
                     continue                                    #次のループへコンティニューする
-                elif chrcode == (8 / 8) * 32 + ( 0 / 8):        #キャラチップ「0」だったなら(マップチップ x0y8 公式は(y/8)*32 + (x/8)となります) 
+                elif chrcode == (8 // 8) * 32 + ( 0 // 8):        #キャラチップ「0」だったなら(マップチップ x0y8 公式は(y/8)*32 + (x/8)となります) 
                     # print("timeline ", end="")
                     # print(mapx, end="")
                     # print(" ", end="")
@@ -318,7 +318,7 @@ class event:
                     #ビル１を発生させる
                     num = 0
                     obj.append_building(self,num,spd,priority)
-                elif chrcode == (8 / 8) * 32 + ( 8 / 8):        #キャラチップ「1」だったなら マップチップ座標(1,1)
+                elif chrcode == (8 // 8) * 32 + ( 8 // 8):        #キャラチップ「1」だったなら マップチップ座標(1,1)
                     # print("timeline ", end="")
                     # print(mapx, end="")
                     # print(" ", end="")
@@ -330,7 +330,7 @@ class event:
                     #ビル2を発生させる
                     num = 1
                     obj.append_building(self,num,spd,priority)
-                elif chrcode == (8 / 8) * 32 + (16 / 8):        #キャラチップ「2」だったなら マップチップ座標(2,1)ビルの上昇エレベーター表示
+                elif chrcode == (8 // 8) * 32 + (16 // 8):        #キャラチップ「2」だったなら マップチップ座標(2,1)ビルの上昇エレベーター表示
                     #タイムラインマップの4キャラ下方向にY軸のオフセット値を書き込んであるので取得する
                     offset_y = bg.get_chrcode_tilemap(self,TM0,mapx,mapy + 4 +i)     
                     # print("timeline ", end="")

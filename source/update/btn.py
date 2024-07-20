@@ -325,7 +325,7 @@ class btn:
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,46,73,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,4-1,0,MENU_LAYER0)
                     self.active_window_id = WINDOW_ID_PAUSE_MENU    #このウィンドウIDを最前列でアクティブなものとする
                     self.select_cursor_flag = 1            #セレクトカーソル移動フラグを建てる
-                    pyxel.play(0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
                 
                 self.cursor_button_data = BTN_NONE          #押されたボタンIDを初期化
                 self.cursor_decision_item_y = UNSELECTED
@@ -343,7 +343,7 @@ class btn:
                     self.window[i].window_status = WINDOW_CLOSE
                     self.select_cursor_flag = 0         #セレクトカーソル移動フラグを降ろす
                     
-                    pyxel.play(0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
+                    pyxel.play(CH0,self.window[self.active_window_index].cursor_cancel_se)#カーソルキャンセル音を鳴らす
                 
             else:
                 self.cursor_button_data = BTN_NONE          #押されたボタンIDを初期化

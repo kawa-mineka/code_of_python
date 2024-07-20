@@ -362,7 +362,8 @@ class data:
         """
         self.expansion_shrink_number = [1,1,1,2,2,2,3,3,3,4,   4,5,5,6,6,7,8,9,10,9,   8,7,6,6,5,5,4,4,3,3,   3,2,2,2,1,1,1,1,1,1,1,1]
 
-    def game_difficulty_list(self):         #難易度ごとの各種設定数値のリストの定義
+    def game_difficulty_list(self): #難易度名,   説明文,sショットb,sミサイルb,sシールドb,クロー初期値,ステージ後に回復するシールド値,撃ち返し弾の有無,      スコア倍率, ランク上昇frame,sランク数,被弾後無敵時間,アイテム取得後無敵時間,アイテム敵弾消去,ランク限界,撃ち返し開始loop,撃ち返し開始stage,1ランクダウンに必要なダメージ数,ループ時の動作,        アイテムが接近開始してくる距離, アイテムバウンド数]
+        #難易度ごとの各種設定数値のリストの定義
         """
         難易度ごとの各種設定数値のリストの定義
         """
@@ -371,15 +372,16 @@ class data:
         #難易度名,   説明文,sショットb,sミサイルb,sシールドb,クロー初期値,ステージ後に回復するシールド値,撃ち返し弾の有無,      スコア倍率, ランク上昇frame,sランク数,被弾後無敵時間,アイテム取得後無敵時間,アイテム敵弾消去,ランク限界,撃ち返し開始loop,撃ち返し開始stage,1ランクダウンに必要なダメージ数,ループ時の動作,        アイテムが接近開始してくる距離, アイテムバウンド数]
         #]
         self.game_difficulty_list = [
-            [GAME_VERY_EASY,"VERY EASY" ,2,2,2,             TWO_CLAW,   REPAIR_SHIELD3,           RETURN_BULLET_NONE,         1.0,        1500,           0,     60,           10,                  1,              50,       2,              7,               1,                         LOOP_POWER_CONTINUE,     1600,                       8], 
-            [GAME_EASY     ,"EASY"      ,1,1,1,             ONE_CLAW,   REPAIR_SHIELD2,           RETURN_BULLET_NONE,         1.0,        1300,           5,     45,            5,                  1,              60,       2,              5,               1,                         LOOP_ONE_LEVEL_DOWN,      900,                       7],
-            [GAME_NORMAL   ,"NORMAL"    ,0,0,0,             NO_CLAW,    REPAIR_SHIELD2,           RETURN_BULLET_AIM,          1.0,        1200,          10,     30,            3,                  0,              70,       2,              3,               2,                         LOOP_TWO_LEVEL_DOWN,      800,                       6],
-            [GAME_HARD     ,"HARD"      ,0,0,0,             NO_CLAW,    REPAIR_SHIELD1,           RETURN_BULLET_AIM,          2.0,        1000,          20,     29,            2,                  0,              80,       1,             10,               2,                         LOOP_THREE_LEVEL_DOWN,    700,                       5],
-            [GAME_VERY_HARD,"VERY HARD" ,0,0,0,             NO_CLAW,    REPAIR_SHIELD1,           RETURN_BULLET_DELAY_AIM,    3.0,         800,          40,     26,            0,                  0,              85,       1,              8,               3,                         LOOP_FIVE_LEVEL_DOWN,     600,                       4],
-            [GAME_INSAME   ,"INSAME"    ,0,0,0,             NO_CLAW,    REPAIR_SHIELD0,           RETURN_BULLET_DELAY_AIM,    4.0,         600,          60,     23,            0,                  0,              99,       1,              5,               3,                         LOOP_ALL_RESET,           500,                       3],
-            ]
+                                    [GAME_VERY_EASY,"VERY EASY" ,2,2,2,             TWO_CLAW,   REPAIR_SHIELD3,           RETURN_BULLET_NONE,         1.0,        1500,           0,     60,           10,                  1,              50,       2,              7,               1,                         LOOP_POWER_CONTINUE,     1600,                       8], 
+                                    [GAME_EASY     ,"EASY"      ,1,1,1,             ONE_CLAW,   REPAIR_SHIELD2,           RETURN_BULLET_NONE,         1.0,        1300,           5,     45,            5,                  1,              60,       2,              5,               1,                         LOOP_ONE_LEVEL_DOWN,      900,                       7],
+                                    [GAME_NORMAL   ,"NORMAL"    ,0,0,0,             NO_CLAW,    REPAIR_SHIELD2,           RETURN_BULLET_AIM,          1.0,        1200,          10,     30,            3,                  0,              70,       2,              3,               2,                         LOOP_TWO_LEVEL_DOWN,      800,                       6],
+                                    [GAME_HARD     ,"HARD"      ,0,0,0,             NO_CLAW,    REPAIR_SHIELD1,           RETURN_BULLET_AIM,          2.0,        1000,          20,     29,            2,                  0,              80,       1,             10,               2,                         LOOP_THREE_LEVEL_DOWN,    700,                       5],
+                                    [GAME_VERY_HARD,"VERY HARD" ,0,0,0,             NO_CLAW,    REPAIR_SHIELD1,           RETURN_BULLET_DELAY_AIM,    3.0,         800,          40,     26,            0,                  0,              85,       1,              8,               3,                         LOOP_FIVE_LEVEL_DOWN,     600,                       4],
+                                    [GAME_INSAME   ,"INSAME"    ,0,0,0,             NO_CLAW,    REPAIR_SHIELD0,           RETURN_BULLET_DELAY_AIM,    4.0,         600,          60,     23,            0,                  0,              99,       1,              5,               3,                         LOOP_ALL_RESET,           500,                       3],
+                                    ]
 
-    def game_rank_data_list(self):          #ランク値による各種設定数値のリストの定義
+    def game_rank_data_list(self):# [ランク, 敵スピード倍率, 敵弾スピード倍率, 撃ち返し弾確率%, 敵耐久力倍率, 弾追加数, 弾発射間隔%, nWAY弾レベル]
+        #ランク値による各種設定数値のリストの定義
         """
         ランク値による各種設定数値のリストの定義
         """
@@ -387,108 +389,108 @@ class data:
         #敵スピード倍率は3.9までにしておいてください、追尾戦闘機のスピードが速すぎると一瞬で画面外に飛んでいくみたいで・・
         # [ランク, 敵スピード倍率, 敵弾スピード倍率, 撃ち返し弾確率%, 敵耐久力倍率, 弾追加数, 弾発射間隔%, nWAY弾レベル]
         self.game_rank_data_list = [
-            [ 0,    1.0,         1.0,             0,               1.0,        0,       100,          0],
-            [ 1,    1.0,         1.0,             0,               1.0,        0,       100,          0],
-            [ 2,    1.1,         1.0,             1,               1.0,        0,        99,          0],
-            [ 3,    1.1,         1.0,             1,               1.0,        0,        99,          0],
-            [ 4,    1.2,         1.0,             1,               1.0,        0,        99,          0],
-            [ 5,    1.2,         1.1,             1,               1.0,        0,        99,          0],
-            [ 6,    1.2,         1.1,             2,               1.0,        0,        98,          0],
-            [ 7,    1.2,         1.1,             2,               1.0,        0,        98,          0],
-            [ 8,    1.2,         1.1,             2,               1.0,        0,        98,          0],
-            [ 9,    1.2,         1.1,             2,               1.0,        0,        98,          0],
-            [10,    1.3,         1.1,             3,               1.0,        1,        98,          0],
-            [11,    1.3,         1.1,             3,               1.0,        1,        97,          0],
-            [12,    1.3,         1.2,             3,               1.0,        1,        97,          0],
-            [13,    1.3,         1.2,             4,               1.0,        1,        97,          0],
-            [14,    1.3,         1.2,             4,               1.0,        1,        96,          0],
-            [15,    1.3,         1.3,             4,               1.0,        1,        96,          0],
-            [16,    1.3,         1.3,             5,               1.0,        1,        96,          0],
-            [17,    1.3,         1.3,             5,               1.0,        1,        95,          0],
-            [18,    1.3,         1.3,             5,               1.0,        1,        95,          0],
-            [19,    1.3,         1.3,             5,               1.0,        1,        95,          0],
-            [20,    1.3,         1.4,             6,               1.0,        2,        94,          0],
-            [21,    1.3,         1.4,             6,               1.0,        2,        94,          0],
-            [22,    1.3,         1.4,             6,               1.0,        2,        93,          0],
-            [23,    1.3,         1.4,             6,               1.0,        2,        93,          1],
-            [24,    1.3,         1.4,             6,               1.0,        2,        93,          1],
-            [25,    1.3,         1.5,             6,               1.0,        2,        92,          1],
-            [26,    1.3,         1.5,             6,               1.0,        2,        92,          1],
-            [27,    1.3,         1.5,             7,               1.1,        2,        92,          1],
-            [28,    1.3,         1.5,             7,               1.1,        2,        91,          1],
-            [29,    1.3,         1.5,             7,               1.1,        2,        91,          1],
-            [30,    1.3,         1.5,             7,               1.1,        3,        91,          1],
-            [31,    1.4,         1.5,             7,               1.1,        3,        91,          1],
-            [32,    1.4,         1.5,             7,               1.1,        3,        91,          1],
-            [33,    1.4,         1.5,             7,               1.1,        3,        91,          1],        
-            [34,    1.4,         1.5,             8,               1.1,        3,        90,          1],
-            [35,    1.4,         1.5,             8,               1.2,        3,        90,          1],
-            [36,    1.4,         1.5,             8,               1.2,        3,        89,          1],
-            [37,    1.4,         1.5,             8,               1.2,        3,        89,          1],
-            [38,    1.4,         1.5,             9,               1.2,        3,        89,          1],
-            [39,    1.4,         1.5,             9,               1.2,        3,        88,          1],
-            [40,    1.4,         1.5,             9,               1.2,        3,        88,          2],
-            [41,    1.5,         1.5,            10,               1.2,        3,        87,          2],
-            [42,    1.5,         1.5,            10,               1.2,        3,        87,          2],
-            [43,    1.5,         1.5,            11,               1.2,        3,        87,          2],
-            [44,    1.5,         1.5,            11,               1.2,        3,        86,          2],
-            [45,    1.5,         1.5,            12,               1.3,        3,        86,          2],
-            [46,    1.5,         1.6,            12,               1.3,        3,        86,          2],
-            [47,    1.5,         1.6,            12,               1.3,        3,        85,          2],
-            [48,    1.5,         1.6,            12,               1.3,        3,        85,          2],
-            [49,    1.5,         1.6,            12,               1.3,        3,        84,          2],
-            [50,    1.5,         1.6,            12,               1.3,        4,        84,          2],
-            
-            [51,    1.5,         1.6,            12,               1.3,        4,        83,          2],
-            [52,    1.5,         1.6,            13,               1.3,        4,        83,          2],
-            [53,    1.5,         1.6,            13,               1.3,        4,        83,          2],
-            [54,    1.5,         1.6,            13,               1.3,        4,        82,          2],
-            [55,    1.5,         1.6,            13,               1.3,        4,        82,          2],
-            [56,    1.5,         1.6,            13,               1.3,        4,        82,          2],
-            [57,    1.5,         1.6,            13,               1.3,        4,        81,          2],
-            [58,    1.5,         1.6,            13,               1.3,        4,        81,          2],
-            [59,    1.6,         1.6,            13,               1.3,        4,        81,          2],
-            [60,    1.6,         1.7,            14,               1.3,        4,        81,          2],
-            [61,    1.6,         1.7,            14,               1.4,        4,        80,          2],
-            [62,    1.6,         1.7,            14,               1.4,        4,        80,          2],
-            [63,    1.6,         1.7,            14,               1.4,        4,        80,          2],
-            [64,    1.6,         1.7,            14,               1.4,        5,        80,          2],
-            [65,    1.6,         1.7,            14,               1.4,        5,        79,          2],
-            [66,    1.6,         1.7,            14,               1.4,        5,        79,          2],
-            [67,    1.6,         1.7,            15,               1.4,        5,        79,          2],
-            [68,    1.6,         1.7,            15,               1.4,        5,        78,          2],
-            [69,    1.6,         1.7,            15,               1.4,        5,        78,          2],
-            [70,    1.6,         1.7,            15,               1.4,        5,        77,          3],
-            [71,    1.6,         1.7,            15,               1.4,        5,        77,          3],
-            [72,    1.6,         1.7,            15,               1.4,        5,        76,          3],
-            [73,    1.6,         1.7,            16,               1.4,        5,        75,          3],
-            [74,    1.6,         1.7,            16,               1.4,        5,        74,          3],
-            [75,    1.6,         1.8,            16,               1.4,        5,        73,          3],
-            [76,    1.6,         1.8,            16,               1.4,        5,        72,          3],
-            [77,    1.6,         1.8,            16,               1.4,        5,        72,          3],
-            [78,    1.6,         1.8,            16,               1.4,        5,        72,          3],
-            [79,    1.6,         1.8,            16,               1.4,        5,        71,          3],
-            [80,    1.6,         1.8,            16,               1.4,        5,        71,          3],
-            [81,    1.6,         1.8,            17,               1.4,        5,        70,          3],
-            [82,    1.6,         1.8,            17,               1.4,        5,        70,          3],
-            [83,    1.6,         1.8,            17,               1.4,        5,        69,          3],
-            [84,    1.6,         1.8,            17,               1.4,        5,        69,          3],
-            [85,    1.6,         1.8,            17,               1.5,        5,        69,          3],
-            [86,    1.6,         1.9,            17,               1.5,        5,        68,          3],
-            [87,    1.6,         1.9,            17,               1.5,        6,        68,          3],
-            [88,    1.6,         1.9,            17,               1.5,        6,        67,          3],
-            [89,    1.6,         1.9,            17,               1.5,        6,        66,          3],
-            [90,    1.6,         1.9,            17,               1.5,        6,        66,          4],
-            [91,    1.6,         1.9,            17,               1.5,        6,        65,          4],
-            [92,    1.6,         1.9,            17,               1.5,        6,        64,          4],
-            [93,    1.6,         1.9,            17,               1.5,        6,        63,          4],
-            [94,    1.6,         1.9,            18,               1.5,        6,        62,          4],
-            [95,    1.6,         1.9,            18,               1.6,        6,        61,          4],
-            [96,    1.6,         2.0,            18,               1.6,        7,        60,          4],
-            [97,    1.7,         2.0,            18,               1.6,        7,        59,          4],
-            [98,    1.7,         2.0,            19,               1.6,        7,        58,          4],
-            [99,    1.7,         2.0,            20,               1.6,        7,        57,          4],
-            ]
+                                    [ 0,    1.0,         1.0,             0,               1.0,        0,       100,          0],
+                                    [ 1,    1.0,         1.0,             0,               1.0,        0,       100,          0],
+                                    [ 2,    1.1,         1.0,             1,               1.0,        0,        99,          0],
+                                    [ 3,    1.1,         1.0,             1,               1.0,        0,        99,          0],
+                                    [ 4,    1.2,         1.0,             1,               1.0,        0,        99,          0],
+                                    [ 5,    1.2,         1.1,             1,               1.0,        0,        99,          0],
+                                    [ 6,    1.2,         1.1,             2,               1.0,        0,        98,          0],
+                                    [ 7,    1.2,         1.1,             2,               1.0,        0,        98,          0],
+                                    [ 8,    1.2,         1.1,             2,               1.0,        0,        98,          0],
+                                    [ 9,    1.2,         1.1,             2,               1.0,        0,        98,          0],
+                                    [10,    1.3,         1.1,             3,               1.0,        1,        98,          0],
+                                    [11,    1.3,         1.1,             3,               1.0,        1,        97,          0],
+                                    [12,    1.3,         1.2,             3,               1.0,        1,        97,          0],
+                                    [13,    1.3,         1.2,             4,               1.0,        1,        97,          0],
+                                    [14,    1.3,         1.2,             4,               1.0,        1,        96,          0],
+                                    [15,    1.3,         1.3,             4,               1.0,        1,        96,          0],
+                                    [16,    1.3,         1.3,             5,               1.0,        1,        96,          0],
+                                    [17,    1.3,         1.3,             5,               1.0,        1,        95,          0],
+                                    [18,    1.3,         1.3,             5,               1.0,        1,        95,          0],
+                                    [19,    1.3,         1.3,             5,               1.0,        1,        95,          0],
+                                    [20,    1.3,         1.4,             6,               1.0,        2,        94,          0],
+                                    [21,    1.3,         1.4,             6,               1.0,        2,        94,          0],
+                                    [22,    1.3,         1.4,             6,               1.0,        2,        93,          0],
+                                    [23,    1.3,         1.4,             6,               1.0,        2,        93,          1],
+                                    [24,    1.3,         1.4,             6,               1.0,        2,        93,          1],
+                                    [25,    1.3,         1.5,             6,               1.0,        2,        92,          1],
+                                    [26,    1.3,         1.5,             6,               1.0,        2,        92,          1],
+                                    [27,    1.3,         1.5,             7,               1.1,        2,        92,          1],
+                                    [28,    1.3,         1.5,             7,               1.1,        2,        91,          1],
+                                    [29,    1.3,         1.5,             7,               1.1,        2,        91,          1],
+                                    [30,    1.3,         1.5,             7,               1.1,        3,        91,          1],
+                                    [31,    1.4,         1.5,             7,               1.1,        3,        91,          1],
+                                    [32,    1.4,         1.5,             7,               1.1,        3,        91,          1],
+                                    [33,    1.4,         1.5,             7,               1.1,        3,        91,          1],        
+                                    [34,    1.4,         1.5,             8,               1.1,        3,        90,          1],
+                                    [35,    1.4,         1.5,             8,               1.2,        3,        90,          1],
+                                    [36,    1.4,         1.5,             8,               1.2,        3,        89,          1],
+                                    [37,    1.4,         1.5,             8,               1.2,        3,        89,          1],
+                                    [38,    1.4,         1.5,             9,               1.2,        3,        89,          1],
+                                    [39,    1.4,         1.5,             9,               1.2,        3,        88,          1],
+                                    [40,    1.4,         1.5,             9,               1.2,        3,        88,          2],
+                                    [41,    1.5,         1.5,            10,               1.2,        3,        87,          2],
+                                    [42,    1.5,         1.5,            10,               1.2,        3,        87,          2],
+                                    [43,    1.5,         1.5,            11,               1.2,        3,        87,          2],
+                                    [44,    1.5,         1.5,            11,               1.2,        3,        86,          2],
+                                    [45,    1.5,         1.5,            12,               1.3,        3,        86,          2],
+                                    [46,    1.5,         1.6,            12,               1.3,        3,        86,          2],
+                                    [47,    1.5,         1.6,            12,               1.3,        3,        85,          2],
+                                    [48,    1.5,         1.6,            12,               1.3,        3,        85,          2],
+                                    [49,    1.5,         1.6,            12,               1.3,        3,        84,          2],
+                                    [50,    1.5,         1.6,            12,               1.3,        4,        84,          2],
+                                    
+                                    [51,    1.5,         1.6,            12,               1.3,        4,        83,          2],
+                                    [52,    1.5,         1.6,            13,               1.3,        4,        83,          2],
+                                    [53,    1.5,         1.6,            13,               1.3,        4,        83,          2],
+                                    [54,    1.5,         1.6,            13,               1.3,        4,        82,          2],
+                                    [55,    1.5,         1.6,            13,               1.3,        4,        82,          2],
+                                    [56,    1.5,         1.6,            13,               1.3,        4,        82,          2],
+                                    [57,    1.5,         1.6,            13,               1.3,        4,        81,          2],
+                                    [58,    1.5,         1.6,            13,               1.3,        4,        81,          2],
+                                    [59,    1.6,         1.6,            13,               1.3,        4,        81,          2],
+                                    [60,    1.6,         1.7,            14,               1.3,        4,        81,          2],
+                                    [61,    1.6,         1.7,            14,               1.4,        4,        80,          2],
+                                    [62,    1.6,         1.7,            14,               1.4,        4,        80,          2],
+                                    [63,    1.6,         1.7,            14,               1.4,        4,        80,          2],
+                                    [64,    1.6,         1.7,            14,               1.4,        5,        80,          2],
+                                    [65,    1.6,         1.7,            14,               1.4,        5,        79,          2],
+                                    [66,    1.6,         1.7,            14,               1.4,        5,        79,          2],
+                                    [67,    1.6,         1.7,            15,               1.4,        5,        79,          2],
+                                    [68,    1.6,         1.7,            15,               1.4,        5,        78,          2],
+                                    [69,    1.6,         1.7,            15,               1.4,        5,        78,          2],
+                                    [70,    1.6,         1.7,            15,               1.4,        5,        77,          3],
+                                    [71,    1.6,         1.7,            15,               1.4,        5,        77,          3],
+                                    [72,    1.6,         1.7,            15,               1.4,        5,        76,          3],
+                                    [73,    1.6,         1.7,            16,               1.4,        5,        75,          3],
+                                    [74,    1.6,         1.7,            16,               1.4,        5,        74,          3],
+                                    [75,    1.6,         1.8,            16,               1.4,        5,        73,          3],
+                                    [76,    1.6,         1.8,            16,               1.4,        5,        72,          3],
+                                    [77,    1.6,         1.8,            16,               1.4,        5,        72,          3],
+                                    [78,    1.6,         1.8,            16,               1.4,        5,        72,          3],
+                                    [79,    1.6,         1.8,            16,               1.4,        5,        71,          3],
+                                    [80,    1.6,         1.8,            16,               1.4,        5,        71,          3],
+                                    [81,    1.6,         1.8,            17,               1.4,        5,        70,          3],
+                                    [82,    1.6,         1.8,            17,               1.4,        5,        70,          3],
+                                    [83,    1.6,         1.8,            17,               1.4,        5,        69,          3],
+                                    [84,    1.6,         1.8,            17,               1.4,        5,        69,          3],
+                                    [85,    1.6,         1.8,            17,               1.5,        5,        69,          3],
+                                    [86,    1.6,         1.9,            17,               1.5,        5,        68,          3],
+                                    [87,    1.6,         1.9,            17,               1.5,        6,        68,          3],
+                                    [88,    1.6,         1.9,            17,               1.5,        6,        67,          3],
+                                    [89,    1.6,         1.9,            17,               1.5,        6,        66,          3],
+                                    [90,    1.6,         1.9,            17,               1.5,        6,        66,          4],
+                                    [91,    1.6,         1.9,            17,               1.5,        6,        65,          4],
+                                    [92,    1.6,         1.9,            17,               1.5,        6,        64,          4],
+                                    [93,    1.6,         1.9,            17,               1.5,        6,        63,          4],
+                                    [94,    1.6,         1.9,            18,               1.5,        6,        62,          4],
+                                    [95,    1.6,         1.9,            18,               1.6,        6,        61,          4],
+                                    [96,    1.6,         2.0,            18,               1.6,        7,        60,          4],
+                                    [97,    1.7,         2.0,            18,               1.6,        7,        59,          4],
+                                    [98,    1.7,         2.0,            19,               1.6,        7,        58,          4],
+                                    [99,    1.7,         2.0,            20,               1.6,        7,        57,          4],
+                                    ]
 
     def storyboard(self):                  #タイトルデモ、ミドルデモなどのビジュアルシーンの絵コンテ(ストーリーボード）の定義とか
         """
@@ -507,38 +509,38 @@ class data:
         """
         ランクに応じた数値をリストから取得する
         """
-        self.enemy_speed_mag           = self.game_rank_data_list[self.rank][LIST_RANK_E_SPEED_MAG]            #敵スピード倍率をリストを参照してランク数で取得、変数に代入する
-        self.enemy_bullet_speed_mag    = self.game_rank_data_list[self.rank][LIST_RANK_BULLET_SPEED_MAG]        #敵狙い撃ち弾スピード倍率をリストを参照してランク数で取得、変数に代入する
+        self.enemy_speed_mag           = self.game_rank_data_list[self.rank][LIST_RANK_E_SPEED_MAG]               #敵スピード倍率をリストを参照してランク数で取得、変数に代入する
+        self.enemy_bullet_speed_mag    = self.game_rank_data_list[self.rank][LIST_RANK_BULLET_SPEED_MAG]          #敵狙い撃ち弾スピード倍率をリストを参照してランク数で取得、変数に代入する
         self.return_bullet_probability = self.game_rank_data_list[self.rank][LIST_RANK_RETURN_BULLET_PROBABILITY] #敵撃ち返し弾発射確率をリストを参照してランク数で取得、変数に代入する
-        self.enemy_hp_mag              = self.game_rank_data_list[self.rank][LIST_RANK_E_HP_MAG]               #敵耐久力倍率をリストを参照してランク数で取得、変数に代入する
-        self.enemy_bullet_append       = self.game_rank_data_list[self.rank][LIST_RANK_E_BULLET_APPEND]         #弾追加数をリストを参照してランク数で取得、変数に代入する
-        self.enemy_bullet_interval     = self.game_rank_data_list[self.rank][LIST_RANK_E_BULLET_INTERVAL]        #弾発射間隔減少パーセントをリストを参照してランク数で取得、変数に代入する
-        self.enemy_nway_level          = self.game_rank_data_list[self.rank][LIST_RANK_NWAY_LEVEL]             #nWAY弾のレベルをリストを参照してランク数で取得、変数に代入する
+        self.enemy_hp_mag              = self.game_rank_data_list[self.rank][LIST_RANK_E_HP_MAG]                  #敵耐久力倍率をリストを参照してランク数で取得、変数に代入する
+        self.enemy_bullet_append       = self.game_rank_data_list[self.rank][LIST_RANK_E_BULLET_APPEND]           #弾追加数をリストを参照してランク数で取得、変数に代入する
+        self.enemy_bullet_interval     = self.game_rank_data_list[self.rank][LIST_RANK_E_BULLET_INTERVAL]         #弾発射間隔減少パーセントをリストを参照してランク数で取得、変数に代入する
+        self.enemy_nway_level          = self.game_rank_data_list[self.rank][LIST_RANK_NWAY_LEVEL]                #nWAY弾のレベルをリストを参照してランク数で取得、変数に代入する
 
     #難易度に応じた数値をリストから取得する
     def get_difficulty_data(self):
         """
         難易度に応じた数値をリストから取得する
         """
-        self.start_bonus_shot         = self.game_difficulty_list[self.game_difficulty][LIST_START_BONUS_SHOT]           #初期ショットボーナスをリストを参照し難易度に合わせて取得、変数に代入する
-        self.start_bonus_missile      = self.game_difficulty_list[self.game_difficulty][LIST_START_BONUS_MISSILE]        #初期ミサイルボーナスをリストを参照し難易度に合わせて取得、変数に代入する
-        self.start_bonus_shield       = self.game_difficulty_list[self.game_difficulty][LIST_START_BONUS_SHIELD]         #初期シールドボーナスをリストを参照し難易度に合わせて取得、変数に代入する
-        self.start_claw               = self.game_difficulty_list[self.game_difficulty][LIST_START_CLAW]                #初期クローボーナスをリストを参照し難易度に合わせて取得、変数に代入する
-        self.repair_shield            = self.game_difficulty_list[self.game_difficulty][LIST_REPAIR_SHIELD]             #ステージクリア後に回復するシールド値をリストを参照し難易度に合わせて取得、変数に代入する
-        self.return_bullet            = self.game_difficulty_list[self.game_difficulty][LIST_RETURN_BULLET]             #撃ち返し弾の有無とありの時の種類をリストを参照し難易度に合わせて取得、変数に代入する
-        self.score_magnification      = self.game_difficulty_list[self.game_difficulty][LIST_SCORE_MAGNIFICATION]        #スコア倍率をリストを参照し難易度に合わせて取得、変数に代入する
-        self.rank_up_frame            = self.game_difficulty_list[self.game_difficulty][LIST_RANK_UP_FRAME]             #ランク上昇フレーム数をリストを参照し難易度に合わせて取得、変数に代入する
-        self.rank                     = self.game_difficulty_list[self.game_difficulty][LIST_START_RANK]                #ゲームスタート時のランク数をリストを参照し難易度に合わせて取得、変数に代入する
+        self.start_bonus_shot         = self.game_difficulty_list[self.game_difficulty][LIST_START_BONUS_SHOT]             #初期ショットボーナスをリストを参照し難易度に合わせて取得、変数に代入する
+        self.start_bonus_missile      = self.game_difficulty_list[self.game_difficulty][LIST_START_BONUS_MISSILE]          #初期ミサイルボーナスをリストを参照し難易度に合わせて取得、変数に代入する
+        self.start_bonus_shield       = self.game_difficulty_list[self.game_difficulty][LIST_START_BONUS_SHIELD]           #初期シールドボーナスをリストを参照し難易度に合わせて取得、変数に代入する
+        self.start_claw               = self.game_difficulty_list[self.game_difficulty][LIST_START_CLAW]                   #初期クローボーナスをリストを参照し難易度に合わせて取得、変数に代入する
+        self.repair_shield            = self.game_difficulty_list[self.game_difficulty][LIST_REPAIR_SHIELD]                #ステージクリア後に回復するシールド値をリストを参照し難易度に合わせて取得、変数に代入する
+        self.return_bullet            = self.game_difficulty_list[self.game_difficulty][LIST_RETURN_BULLET]                #撃ち返し弾の有無とありの時の種類をリストを参照し難易度に合わせて取得、変数に代入する
+        self.score_magnification      = self.game_difficulty_list[self.game_difficulty][LIST_SCORE_MAGNIFICATION]          #スコア倍率をリストを参照し難易度に合わせて取得、変数に代入する
+        self.rank_up_frame            = self.game_difficulty_list[self.game_difficulty][LIST_RANK_UP_FRAME]                #ランク上昇フレーム数をリストを参照し難易度に合わせて取得、変数に代入する
+        self.rank                     = self.game_difficulty_list[self.game_difficulty][LIST_START_RANK]                   #ゲームスタート時のランク数をリストを参照し難易度に合わせて取得、変数に代入する
         self.invincible_time          = self.game_difficulty_list[self.game_difficulty][LIST_DAMAGE_AFTER_INVINCIBLE_TIME] #被弾後の無敵時間をリストを参照し難易度に合わせて取得、変数に代入する
-        self.get_item_invincible_time = self.game_difficulty_list[self.game_difficulty][LIST_GET_ITEM_INVINCIBLE_TIME]    #アイテム取得後の無敵時間をリストを参照し難易度に合わせて取得、変数に代入する
-        self.item_erace_bullet_flag   = self.game_difficulty_list[self.game_difficulty][LIST_ITEM_ERACE_BULLET]          #パワーアップアイテムが敵弾を消去するかどうか？のフラグをリストを参照し難易度に合わせて取得、変数に代入する
-        self.rank_limit               = self.game_difficulty_list[self.game_difficulty][LIST_RANK_LIMIT]                #ランク数の上限値をリストを参照し難易度に合わせて取得、変数に代入する
-        self.return_bullet_start_loop = self.game_difficulty_list[self.game_difficulty][LIST_RETURN_BULLET_START_LOOP]    #撃ち返しを始めてくるループ数をリストを参照し難易度に合わせて取得、変数に代入する
+        self.get_item_invincible_time = self.game_difficulty_list[self.game_difficulty][LIST_GET_ITEM_INVINCIBLE_TIME]     #アイテム取得後の無敵時間をリストを参照し難易度に合わせて取得、変数に代入する
+        self.item_erace_bullet_flag   = self.game_difficulty_list[self.game_difficulty][LIST_ITEM_ERACE_BULLET]            #パワーアップアイテムが敵弾を消去するかどうか？のフラグをリストを参照し難易度に合わせて取得、変数に代入する
+        self.rank_limit               = self.game_difficulty_list[self.game_difficulty][LIST_RANK_LIMIT]                   #ランク数の上限値をリストを参照し難易度に合わせて取得、変数に代入する
+        self.return_bullet_start_loop = self.game_difficulty_list[self.game_difficulty][LIST_RETURN_BULLET_START_LOOP]     #撃ち返しを始めてくるループ数をリストを参照し難易度に合わせて取得、変数に代入する
         self.return_bullet_start_stage= self.game_difficulty_list[self.game_difficulty][LIST_RETURN_BULLET_START_STAGE]    #撃ち返しを始めてくるステージ数をリストを参照し難易度に合わせて取得、変数に代入する
-        self.rank_down_need_damage    = self.game_difficulty_list[self.game_difficulty][LIST_RANK_DOWN_NEED_DAMAGE]       #1ランクダウンに必要なダメージ数をリストを参照し難易度に合わせて取得、変数に代入する
-        self.loop_power_control       = self.game_difficulty_list[self.game_difficulty][LIST_LOOP_POWER_CONTROL]         #次のループに移る時のパワーアップ調整関連の動作の仕方をリストを参照し難易度に合わせて取得、変数に代入する
-        self.item_range_of_attraction = self.game_difficulty_list[self.game_difficulty][LIST_ITEM_RANGE_OF_ATTRACTION]    #アイテムを引き寄せる範囲をリストを参照し難易度に合わせて取得、変数に代入する
-        self.pow_item_bounce_num      = self.game_difficulty_list[self.game_difficulty][LIST_ITEM_BOUNCE_NUM]            #アイテムの跳ね返り回数をリストを参照し難易度に合わせて取得、変数に代入する
+        self.rank_down_need_damage    = self.game_difficulty_list[self.game_difficulty][LIST_RANK_DOWN_NEED_DAMAGE]        #1ランクダウンに必要なダメージ数をリストを参照し難易度に合わせて取得、変数に代入する
+        self.loop_power_control       = self.game_difficulty_list[self.game_difficulty][LIST_LOOP_POWER_CONTROL]           #次のループに移る時のパワーアップ調整関連の動作の仕方をリストを参照し難易度に合わせて取得、変数に代入する
+        self.item_range_of_attraction = self.game_difficulty_list[self.game_difficulty][LIST_ITEM_RANGE_OF_ATTRACTION]     #アイテムを引き寄せる範囲をリストを参照し難易度に合わせて取得、変数に代入する
+        self.pow_item_bounce_num      = self.game_difficulty_list[self.game_difficulty][LIST_ITEM_BOUNCE_NUM]              #アイテムの跳ね返り回数をリストを参照し難易度に合わせて取得、変数に代入する
 
     #ステージデータリストから各ステージの設定データを取り出す
     def get_stage_data(self):

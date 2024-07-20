@@ -233,18 +233,19 @@ class bg:
 
     #BG書き換えを使用して背景アニメーションをさせるアニメーションマーカーの座標をタイルマップから調べてリストに登録していく
     #self.bg_animation_cordinateのフォーマット
-    #[[マーカーのアスキーコード0,bgx,bgy,anime_ptn_num,speed,tmap,u,v,w,h],
-    # [マーカーのアスキーコード1,bgx,bgy,anime_ptn_num,speed,tmap,u,v,w,h],
-    # [マーカーのアスキーコード2,bgx,bgy,anime_ptn_num,speed,tmap,u,v,w,h],
+    #[[マーカーのアスキーコード0,bgx,bgy,anime_ptn_num,anime_ptn_num_offset,speed,tmap,u,v,w,h],
+    # [マーカーのアスキーコード1,bgx,bgy,anime_ptn_num,anime_ptn_num_offset,speed,tmap,u,v,w,h],
+    # [マーカーのアスキーコード2,bgx,bgy,anime_ptn_num,anime_ptn_num_offset,speed,tmap,u,v,w,h],
     # ]
     #
     #マーカーのアスキーコードは連番となっています
-    #bgx,bgy = マーカーがタイルマップでどこにあるかの座標値(x,yともに0~255の整数値)
-    #anime_ptn_num = アニメーション枚数
-    #speed         = アニメーションスピード 1で毎フレーム書き換え
-    #tmap          = タイルマップ値
-    #u,v           = BGパターンが収納されている座標u(横),v(縦)
-    #w,h           = BGパターンの横幅w、縦幅h
+    #bgx,bgy              = マーカーがタイルマップでどこにあるかの座標値(x,yともに0~255の整数値)
+    #anime_ptn_num        = アニメーション枚数
+    #anime_ptn_num_offset = アニメーション枚数のオフセット値(どれだけの枚数がずれたところから始まるのかの指定)
+    #speed                = アニメーションスピード 1で毎フレーム書き換え
+    #tmap                 = タイルマップ値
+    #u,v                  = BGパターンが収納されている座標u(横),v(縦)
+    #w,h                  = BGパターンの横幅w、縦幅h
     #
     #
     #
@@ -286,14 +287,15 @@ class bg:
                     # print("chip")
                     # print(chip)
                     if   chip == marker + i: #タイルマップに書き込まれたキャラコードと調べ上げるマーカーキャラコードが一致したのならば
-                        anime_ptn_num = int(self.bg_animation_pre_define_list[self.stage_number - 1][8][i][1]) # アニメーション枚数取得
-                        speed         = int(self.bg_animation_pre_define_list[self.stage_number - 1][8][i][2]) # アニメーションスピード取得
-                        tmap          = int(self.bg_animation_pre_define_list[self.stage_number - 1][8][i][3]) # タイルマップナンバー取得
-                        u             = int(self.bg_animation_pre_define_list[self.stage_number - 1][8][i][4]) # BGパターンが収納されている座標u(横)
-                        v             = int(self.bg_animation_pre_define_list[self.stage_number - 1][8][i][5]) # BGパターンが収納されている座標v(縦)
-                        w             = int(self.bg_animation_pre_define_list[self.stage_number - 1][8][i][6]) # W(横幅)
-                        h             = int(self.bg_animation_pre_define_list[self.stage_number - 1][8][i][7]) # h(縦幅)
-                        self.bg_animation_cordinate.append([marker + i,search_x,search_y,anime_ptn_num,speed,tmap,u,v,w,h])
+                        anime_ptn_num        = int(self.bg_animation_pre_define_list[self.stage_number - 1][8][i][1]) # アニメーション枚数取得
+                        anime_ptn_num_offset = int(self.bg_animation_pre_define_list[self.stage_number - 1][8][i][2]) # アニメーション枚数オフセット値取得
+                        speed                = int(self.bg_animation_pre_define_list[self.stage_number - 1][8][i][3]) # アニメーションスピード取得
+                        tmap                 = int(self.bg_animation_pre_define_list[self.stage_number - 1][8][i][4]) # タイルマップナンバー取得
+                        u                    = int(self.bg_animation_pre_define_list[self.stage_number - 1][8][i][5]) # BGパターンが収納されている座標u(横)
+                        v                    = int(self.bg_animation_pre_define_list[self.stage_number - 1][8][i][6]) # BGパターンが収納されている座標v(縦)
+                        w                    = int(self.bg_animation_pre_define_list[self.stage_number - 1][8][i][7]) # W(横幅)
+                        h                    = int(self.bg_animation_pre_define_list[self.stage_number - 1][8][i][8]) # h(縦幅)
+                        self.bg_animation_cordinate.append([marker + i,search_x,search_y,anime_ptn_num,anime_ptn_num_offset,speed,tmap,u,v,w,h])
         
         # for i in range(int(mark_chip_num_max - mark_chip_num_min)):
         #     for w in range(255): #x軸方向は0~255まで調べ上げていく

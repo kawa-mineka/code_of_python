@@ -21,16 +21,16 @@ class medal:
         """
         for i in range(self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT_NUM]): #既にスロットに同じメダルがはめ込まれていないか調べ上げる
             if self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT0 + i] == num: #これからはめ込むメダルがすでにはめ込まれていたら・・・
-                pyxel.play(0,20)#カーソル衝突を鳴らしてはめ込まずそのままリターンする
+                pyxel.play(CH0,20)#カーソル衝突を鳴らしてはめ込まずそのままリターンする
                 return          #リターンする
         
         for i in range(self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT_NUM]): #空きスロットを探す
             if self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT0 + i] == MEDAL_NO_SLOT: #スロットを小さいナンバーの方から調べていって空スロットがあったのなら
                 self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT0 + i] = num #空きスロットにメダルIDナンバーを書き込みしてはめ込む！
-                pyxel.play(0,17)#カーソルOK音を鳴らす
+                pyxel.play(CH0,17)#カーソルOK音を鳴らす
                 return
         
-        pyxel.play(0,20)#カーソル衝突音を鳴らす
+        pyxel.play(CH0,20)#カーソル衝突音を鳴らす
         return
 
     #プレイ中の自機リスト(playing_ship_list)を参照して自機からメダルを外す(パージ)する関数(slot_num=自機のスロットナンバー)
@@ -41,7 +41,7 @@ class medal:
         slot_num=自機のスロットナンバー
         """
         self.playing_ship_list[self.my_ship_id][LIST_SHIP_SLOT0 + slot_num] = MEDAL_NO_SLOT #決定ボタンが押された位置のスロットナンバーを空にする
-        pyxel.play(0,18)#カーソルキャンセル音を鳴らす
+        pyxel.play(CH0,18)#カーソルキャンセル音を鳴らす
 
     #自機に装備され,はめ込まれたメダルを左詰めにする関数(空きスロットの隙間を詰めて、空きスロットがどれだけあるのか見やすくする関数)
     def playing_ship_medal_left_justified(self):
