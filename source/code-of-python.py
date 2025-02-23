@@ -86,8 +86,9 @@ print ("現在の実行ファイル")
 print(abs_path) #このプログラム自体がどのフォルダーで起動してるのかコンソールに表示
 
 # from random import randint   #random.randint(n,m) と呼ぶと、nからm(m自身を含む)までの間の整数が 等しい確率で、ランダムに返される
-from random import random    #random.random() と呼ぶと、0から1の範囲(1は含まない)のランダムな実数が返される(主にパーティクル系で使用します)
-import math #三角関数などを使用したいのでインポートぉぉおお！
+# from random import random    #random.random() と呼ぶと、0から1の範囲(1は含まない)のランダムな実数が返される(主にパーティクル系で使用します)
+# import math #三角関数などを使用したいのでインポートぉぉおお！
+
 import copy #スコアボードでデフォルトスコアボードを深い階層までのコピーを使いたいのでインポートします
 
 import pyxel        #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
@@ -183,12 +184,14 @@ class App:
         # print("PYXEL VERSION " + pyxel.PYXEL_VERSION)         #pyxel 1.8.15まで使えていたけどpyxel 1.9.10以降は使えなくなった模様
         # print("PYXEL WORKING DIR " + pyxel.PYXEL_WORKING_DIR) #pyxel 1.8.15まで使えていたけどpyxel 1.9.10以降は使えなくなった模様
         
-        print("PYXEL VERSION "             + pyxel.VERSION)         #pyxel 1.9.10以降はこれでいける模様
-        print("PYXEL WORKING DIR "         + pyxel.WORKING_DIR)     #pyxel 1.9.10以降はこれでいける模様
+        print("PYXEL VERSION "              + pyxel.VERSION)         #pyxel 1.9.10以降はこれでいける模様
+        #print("PYXEL WORKING DIR "         + pyxel.WORKING_DIR)     #pyxel 1.9.10以降はこれでいける模様 → pyxel 2.3.6では動かなくなってる模様
+        print("PYXEL BASE DIR "             + pyxel.BASE_DIR)        #pyxel 2.3.6ではBASE_DIRになってるみたい？？？
         
         print("APP FILE EXTENSION "        + pyxel.APP_FILE_EXTENSION)
         print("APP STARTUP SCRIPT FILE "   + pyxel.APP_STARTUP_SCRIPT_FILE)
         print("RESOURCE_FILE_EXTENSION "   + pyxel.RESOURCE_FILE_EXTENSION)
+
         
         # print("RESOURCE_ARCHIVE_DIRNAME "  + pyxel.RESOURCE_ARCHIVE_DIRNAME) pyxel 2.0.0だとサポートされていないのでコメントアウト
         
@@ -200,11 +203,12 @@ class App:
         print("TILEMAP_SIZE "   + str(pyxel.TILEMAP_SIZE))
         print("TILE_SIZE "      + str(pyxel.TILE_SIZE))
         
-        # pyxel.screen_mode(0) #将来的にはスクリーンフィルターエフェクト(ブラウン管再現フィルターとかドットスムースフィルター)が変えられるかもしれないので記述しておくです
         
         pygame.mixer.init()  #pygameミキサー関連の初期化 pyxel.initよりも先にpygameをinitしないと上手く動かないみたい・・・
         
         pyxel.init(WINDOW_W,WINDOW_H,title="CODE OF PYTHON",fps = 60,quit_key=pyxel.KEY_NONE) #ゲームウィンドウのタイトルバーの表示とfpsの設定(60fpsにした),キーボード入力による強制終了は無しとする pyxel.init(caption=)がpyxel.init(title=)に変更されたっぽい？？？
+        
+        # pyxel.screen_mode(scr = 2) #将来的にはスクリーンフィルターエフェクト(ブラウン管再現フィルターとかドットスムースフィルター)が変えられるかもしれないので記述しておくです
         
         # pyxel.init(640,400,title="CODE OF PYTHON",fps = 60,quit_key=pyxel.KEY_NONE)   #デバッグ確認用高解像度用イニシャライズ
         # pyxel.camera(-160,-40)                                                        #デバッグ用に画面の後方が見えるようカメラオフセット値を設定
@@ -383,7 +387,7 @@ class App:
         medal.read_ship_equip_medal_data(self)  #プレイ中の自機リスト群にメダルスロット装備関連のデータを読み込んで行く関数の呼び出し
         medal.medal_effect_plus_medallion(self) #装備されたメダルを調べ、メダルスロットを増やすメダルがはめ込まれていたらスロット数を増やす関数の呼び出し
         
-        sound.pre_load_bgm(self)           #事前にバッファーに読み込むタイプのBGMファイルをローディングする
+        sound.pre_load_bgm(self)                #事前にバッファーに読み込むタイプのBGMファイルをローディングする
         
         #毎フレームごとにupdateとdrawを呼び出す
         #近年のゲームエンジンはみんなこんな感じらしい？？？unityやUEもこんな感じなのかな？？使ったことないけど
@@ -474,9 +478,9 @@ class App:
                 self.replay_status = REPLAY_PLAY              #リプレイ機能の状態を「再生中」にします
                 self.replay_stage_num = 0                     #リプレイデータを最初のステージから再生できるように0初期化
                 func.backup_status_data_for_replay_mode(self) #リプレイ再生前に現在のステータスを一時保存する関数の呼び出し
-                replay.data_file_load(self)            #リプレイデータファイルのロードを行います
-                replay.load_stage_data(self)           #リプレイ再生時は,ステージスタート時のパラメーターをロードする関数を呼び出します
-                self.active_window_id = WINDOW_ID_MAIN_MENU   #メインメニューウィンドウIDを最前列でアクティブなものとする
+                replay.data_file_load(self)                   #リプレイデータファイルのロードを行います
+                replay.load_stage_data(self)                  #リプレイ再生時は,ステージスタート時のパラメーターをロードする関数を呼び出します
+                self.active_window_id = Window_id.MAIN_MENU   #メインメニューウィンドウIDを最前列でアクティブなものとする
                 self.game_status = Scene.GAME_START_INIT      #ゲームステータスを「SCENE_GAME_START_INIT」にしてゲームスタート時の初期化にする
         
         ################################ ゲームスタート時の初期化 #################################################################
@@ -658,7 +662,7 @@ class App:
         
         if self.game_status == Scene.GAME_OVER_STOP:         #「GAME_OVER_STOP」の時は
             if self.replay_status == REPLAY_RECORD: #リプレイ録画中の時のリターンタイトルウィンドウ表示
-                window.create(self,WINDOW_ID_GAME_OVER_RETURN,43,68)    #RETRN? SAVE&RETURNウィンドウの作成
+                window.create(self,Window_id.GAME_OVER_RETURN,43,68)    #RETRN? SAVE&RETURNウィンドウの作成
                 self.cursor_type = CURSOR_TYPE_NORMAL             #選択カーソル表示をonにする
                 self.select_cursor_flag = FLAG_ON                 #セレクトカーソルの移動更新フラグをオン
                 self.cursor_move_direction = CURSOR_MOVE_UD       #カーソルは上下移動のみ
@@ -667,10 +671,10 @@ class App:
                 self.cursor_item_y = 0                            #いま指示しているアイテムナンバーは0の「RETURN」
                 self.cursor_decision_item_y = UNSELECTED          #まだボタンも押されておらず未決定状態なのでdecision_item_yは-1
                 self.cursor_max_item_y = 1                        #最大項目数は「RETURN」「SAVE & RETURN」の2項目なので 2-1=1を代入
-                self.active_window_id = WINDOW_ID_GAME_OVER_RETURN#このウィンドウIDを最前列でアクティブなものとする
+                self.active_window_id = Window_id.GAME_OVER_RETURN#このウィンドウIDを最前列でアクティブなものとする
                 self.game_status = Scene.RETURN_TITLE             #ゲームステータスを「RETURN_TITLE」にする
             elif self.replay_status == REPLAY_PLAY: #リプレイ再生中の時のリターンタイトルウィンドウ表示(SAVE&RETURN項目は表示しない)  
-                window.create(self,WINDOW_ID_GAME_OVER_RETURN_NO_SAVE,43,68)     #RETRN?ウィンドウの作成
+                window.create(self,Window_id.GAME_OVER_RETURN_NO_SAVE,43,68)     #RETRN?ウィンドウの作成
                 func.restore_status_data_for_replay_mode(self)             #リプレイ再生が終了したので記録しておいたステータスを復帰させる
                 self.cursor_type = CURSOR_TYPE_NORMAL                      #選択カーソル表示をonにする
                 self.select_cursor_flag = FLAG_ON                          #セレクトカーソルの移動更新フラグをオン
@@ -680,7 +684,7 @@ class App:
                 self.cursor_item_y = 0                                     #いま指示しているアイテムナンバーは0の「RETURN」
                 self.cursor_decision_item_y = UNSELECTED                   #まだボタンも押されておらず未決定状態なのでdecision_item_yは-1
                 self.cursor_max_item_y = 0                                 #最大項目数は「RETURN」の1項目なので 1-1=0を代入
-                self.active_window_id = WINDOW_ID_GAME_OVER_RETURN_NO_SAVE #このウィンドウIDを最前列でアクティブなものとする
+                self.active_window_id = Window_id.GAME_OVER_RETURN_NO_SAVE #このウィンドウIDを最前列でアクティブなものとする
                 self.game_status = Scene.RETURN_TITLE                      #ゲームステータスを「RETURN_TITLE」にする
         
         if self.game_status == Scene.RETURN_TITLE:           #「RETURN_TITLE」の時は        
@@ -709,7 +713,7 @@ class App:
                 self.cursor_decision_item_y = UNSELECTED            #まだボタンも押されておらず未決定状態なのでdecision_item_yは-1
                 self.cursor_max_item_y = 6                          #最大項目数は「1」「2」「3」「4」「5」「6」「7」の7項目なので 7-1=6を代入
                 self.cursor_menu_layer = 0                          #メニューの階層は最初は0にします
-                self.active_window_id = WINDOW_ID_SELECT_FILE_SLOT  #このウィンドウIDを最前列でアクティブなものとする
+                self.active_window_id = Window_id.SELECT_FILE_SLOT  #このウィンドウIDを最前列でアクティブなものとする
                 self.game_status = Scene.SELECT_SAVE_SLOT    #ゲームステータスを「SCENE_SELECT_SAVE_SLOT」にしてセーブスロット選択にする
                 
                 self.game_over_bgm.fadeout(3000)                    #GAME OVER BGMフェードアウト開始
@@ -720,7 +724,7 @@ class App:
                 self.game_playing_flag = FLAG_OFF                  #ゲームプレイ中のフラグを降ろす
                 self.select_cursor_flag = FLAG_OFF                 #セレクトカーソルの移動更新は行わないのでフラグを降ろす
                 
-                medal.write_ship_equip_medal_data(self)                         #機体メダルスロット装備リストに現在プレイ中のシップリストのメダル情報を書き込む関数の呼び出し
+                medal.write_ship_equip_medal_data(self)                  #機体メダルスロット装備リストに現在プレイ中のシップリストのメダル情報を書き込む関数の呼び出し
                 system.save_data(self)                                   #システムデータをセーブする関数の呼び出し
                 score.recoard_score_board(self)                          #スコアボードに点数書き込み
                 score.score_board_bubble_sort(self,self.game_difficulty) #現在選択している難易度を引数として書き込んだスコアデータをソートする関数の呼び出し
@@ -751,7 +755,7 @@ class App:
                 self.game_status = Scene.STAGE_START_INIT    #ゲームステータスを「STAGE_START_INIT」にして次のステージへ・・・・
         
         #########ゲーム終了工程開始#################################################################
-        if self.game_status == Scene.GAME_QUIT_START:        #「GAME QUIT START」の時は
+        if self.game_status == Scene.GAME_QUIT_START:    #「GAME QUIT START」の時は
             self.star_scroll_speed = 1                   #星のスクロールスピードを倍率1に戻す
             self.select_cursor_flag = FLAG_OFF           #セレクトカーソル移動フラグを降ろす
             self.cursor_type = CURSOR_TYPE_NO_DISP       #セレクトカーソルの表示をoffにする
@@ -760,7 +764,7 @@ class App:
             self.game_quit_timer = 420                   #終了タイマーセット(420フレーム=7秒)
             self.game_status = Scene.GAME_QUIT_WAIT
             
-        elif self.game_status == Scene.GAME_QUIT_WAIT:       #「GAME QUIT WAIT」の時は
+        elif self.game_status == Scene.GAME_QUIT_WAIT:   #「GAME QUIT WAIT」の時は
             self.star_scroll_speed -= 0.003              #ゲーム終了時は星のスクロールスピードの倍率を毎フレームごと0.003減らしていく
             if self.star_scroll_speed < 0:
                 self.star_scroll_speed = 0               #0以下になったら強制的に0を代入
@@ -769,9 +773,9 @@ class App:
             if self.game_quit_timer <=0:                 #タイマーが0以下になったら
                 self.game_status = Scene.GAME_QUIT       #「GAME QUIT」にする
             
-        elif self.game_status == Scene.GAME_QUIT:            #「GAME QUIT」の時は
+        elif self.game_status == Scene.GAME_QUIT:        #「GAME QUIT」の時は
             medal.write_ship_equip_medal_data(self)      #機体メダルスロット装備リストに現在プレイ中のシップリストのメダル情報を書き込む関数の呼び出し
-            system.save_data(self)                #システムデータをセーブします
+            system.save_data(self)                       #システムデータをセーブします
             pyxel.quit()                                 #ゲーム終了！！！！！！！！！！！！！！！！！！！！！！！！！！
         
         ################################ ゲーム終了工程時の処理 ###################################################################
@@ -951,9 +955,9 @@ class App:
             
             graph.draw_particle(self,PRIORITY_FRONT)         #パーティクルを表示する関数の呼び出し(前面)
             
-            graph.draw_my_shot(self)      #自機弾の表示
-            graph.draw_missile(self)      #ミサイルの表示
-            graph.draw_claw_shot(self)    #クローショットの表示
+            graph.draw_my_shot(self)                         #自機弾の表示
+            graph.draw_missile(self)                         #ミサイルの表示
+            graph.draw_claw_shot(self)                       #クローショットの表示
             
             #手前の背景表示
             if   self.stage_number == STAGE_ADVANCE_BASE:
@@ -1003,7 +1007,7 @@ class App:
             graph.draw_particle(self,PRIORITY_MORE_FRONT)  #パーティクルを表示する関数の呼び出し(パーティクルの中でも更に前面)
             
             #建物の表示 すべてのオブジェクトよりも前に表示される建物を表示----------------------------------------------------
-            graph.draw_building_object_individual(self,0)               #建物オブジェクトの描画関数の呼び出し  めっちゃ手前ビル
+            graph.draw_building_object_individual(self,0)  #建物オブジェクトの描画関数の呼び出し  めっちゃ手前ビル
         
         #フェードアウトスクリーンの表示###############################################
         if    self.game_status == Scene.GAME_OVER_FADE_OUT\

@@ -41,59 +41,59 @@ SUB_WEAPON_LEVEL_MAXIMUM = 10 #自機サブウェポンのレベルの最大値
                     #これより大きい数値にしちゃうとindex out of range erroerになっちゃうからね
 
 # ゲームステータス関連の定数定義 game_statusに代入されます 20231217より列挙型でautoを使用して自動で定数定義するようにしました(中に入る数字はどんな数値でも良い為です)
-SCENE_IPL               =  0    #IPL(Initial Program Load)
-SCENE_SPLASH_LOGO       =  1    #起動処理中（スプラッシュロゴ表示）
+# SCENE_IPL               =  0    #IPL(Initial Program Load)
+# SCENE_SPLASH_LOGO       =  1    #起動処理中（スプラッシュロゴ表示）
 
-SCENE_TITLE_INIT        = 10    #タイトル表示に必要な初期化をする
-SCENE_TITLE_FIRST       = 11    #タイトルロゴグラフイックをアニメーションさせて表示中(初回起動)
-SCENE_TITLE_HIT_ANY_BTN = 12    #タイトルを表示した後、何かしらのボタンの入力待ち状態
+# SCENE_TITLE_INIT        = 10    #タイトル表示に必要な初期化をする
+# SCENE_TITLE_FIRST       = 11    #タイトルロゴグラフイックをアニメーションさせて表示中(初回起動)
+# SCENE_TITLE_HIT_ANY_BTN = 12    #タイトルを表示した後、何かしらのボタンの入力待ち状態
 
-SCENE_TITLE_SECOND      = 13    #タイトルロゴグラフイックをアニメーションさせて表示中(2回目以降)
-SCENE_TITLE_MENU_SELECT = 14    #タイトルメニュー選択中
-SCENE_SELECT_LOAD_SLOT  = 15    #リプレイ再生に必要なリプレイファイルをどのスロットからロードするのか？選択待ち
-SCENE_CREDIT            = 16    #クレジットタイトル表示中
+# SCENE_TITLE_SECOND      = 13    #タイトルロゴグラフイックをアニメーションさせて表示中(2回目以降)
+# SCENE_TITLE_MENU_SELECT = 14    #タイトルメニュー選択中
+# SCENE_SELECT_LOAD_SLOT  = 15    #リプレイ再生に必要なリプレイファイルをどのスロットからロードするのか？選択待ち
+# SCENE_CREDIT            = 16    #クレジットタイトル表示中
 
-SCENE_CONFIG            = 20    #設定メニュー表示中
+# SCENE_CONFIG            = 20    #設定メニュー表示中
 
-SCENE_DEBUG_CONGIG      = 30    #デバッグモード設定メニュー表示中
+# SCENE_DEBUG_CONGIG      = 30    #デバッグモード設定メニュー表示中
 
-SCENE_TITLE_DEMO        = 40    #タイトルデモ表示中（ストーリーとかのビジュアルシーン）
-SCENE_ADVERTISE_DEMO    = 41    #アドバタイズデモ（コンピュータによるゲームの宣伝の為のリプレイ再生）
-SCENE_MIDDLE_DEMO       = 42    #中間デモ中
+# SCENE_TITLE_DEMO        = 40    #タイトルデモ表示中（ストーリーとかのビジュアルシーン）
+# SCENE_ADVERTISE_DEMO    = 41    #アドバタイズデモ（コンピュータによるゲームの宣伝の為のリプレイ再生）
+# SCENE_MIDDLE_DEMO       = 42    #中間デモ中
 
-SCENE_GAME_START_INIT   = 50    #ゲーム開始前の初期化    スコアやシールド値、ショットレベルやミサイルレベルなどの初期化
-SCENE_STAGE_START_INIT  = 51    #ステージ開始前の初期化   自機の座標や各リストの初期化、カウンター類の初期化
-SCENE_START             = 52    #ゲーム開始(スタートダイアログを出したり、自機の出現アニメーションとか)
-SCENE_PLAY              = 53    #ゲームプレイ中
-SCENE_BOSS_APPEAR       = 54    #ボスキャラ現れる！
-SCENE_BOSS_BATTLE       = 55    #ボスキャラと戦闘中
-SCENE_BOSS_EXPLOSION    = 56    #ボスキャラ爆発中！
-SCENE_PAUSE             = 57    #一時中断中
-SCENE_EXPLOSION         = 58    #被弾して爆発中（ゲーム自体はまだ進行している）
-SCENE_RESTORATION       = 59    #復活中(自機は点滅状態で無敵状態だよ)
+# SCENE_GAME_START_INIT   = 50    #ゲーム開始前の初期化    スコアやシールド値、ショットレベルやミサイルレベルなどの初期化
+# SCENE_STAGE_START_INIT  = 51    #ステージ開始前の初期化   自機の座標や各リストの初期化、カウンター類の初期化
+# SCENE_START             = 52    #ゲーム開始(スタートダイアログを出したり、自機の出現アニメーションとか)
+# SCENE_PLAY              = 53    #ゲームプレイ中
+# SCENE_BOSS_APPEAR       = 54    #ボスキャラ現れる！
+# SCENE_BOSS_BATTLE       = 55    #ボスキャラと戦闘中
+# SCENE_BOSS_EXPLOSION    = 56    #ボスキャラ爆発中！
+# SCENE_PAUSE             = 57    #一時中断中
+# SCENE_EXPLOSION         = 58    #被弾して爆発中（ゲーム自体はまだ進行している）
+# SCENE_RESTORATION       = 59    #復活中(自機は点滅状態で無敵状態だよ)
 
-SCENE_GAME_OVER           = 60 #ゲームオーバーメッセージ表示中（ゲームはまだ進行している）
-SCENE_GAME_OVER_FADE_OUT  = 61 #ゲームオーバーメッセージ表示中（ゲーム自体は停止、画面をフェードアウトさせていく）
-SCENE_GAME_OVER_SHADOW_IN = 62 #ゲームオーバーメッセージ表示中（ゲーム自体は停止、画面をシャドウインさせていく）
-SCENE_GAME_OVER_STOP      = 63 #ゲームオーバーメッセージ表示中（ゲーム自体は停止している）
-SCENE_RETURN_TITLE        = 64 #ゲームオーバーになりタイトルに戻るかどうかカーソルを出して選択待ち
-SCENE_SELECT_SAVE_SLOT    = 65 #タイトルに戻る前にリプレイファイルどのスロットにセーブするのか選択待ち
+# SCENE_GAME_OVER           = 60 #ゲームオーバーメッセージ表示中（ゲームはまだ進行している）
+# SCENE_GAME_OVER_FADE_OUT  = 61 #ゲームオーバーメッセージ表示中（ゲーム自体は停止、画面をフェードアウトさせていく）
+# SCENE_GAME_OVER_SHADOW_IN = 62 #ゲームオーバーメッセージ表示中（ゲーム自体は停止、画面をシャドウインさせていく）
+# SCENE_GAME_OVER_STOP      = 63 #ゲームオーバーメッセージ表示中（ゲーム自体は停止している）
+# SCENE_RETURN_TITLE        = 64 #ゲームオーバーになりタイトルに戻るかどうかカーソルを出して選択待ち
+# SCENE_SELECT_SAVE_SLOT    = 65 #タイトルに戻る前にリプレイファイルどのスロットにセーブするのか選択待ち
 
-SCENE_STAGE_CLEAR               = 70 #ステージクリア
-SCENE_STAGE_CLEAR_MOVE_MY_SHIP  = 71 #ステージクリア後、自機がステージクリア画像左上まで自動に動いていくシーン
-SCENE_STAGE_CLEAR_MY_SHIP_BOOST = 72 #ステージクリア後、自機がブーストして右へ過ぎ去っていくシーン
-SCENE_STAGE_CLEAR_FADE_OUT      = 73 #ステージクリア後のフェードアウト
+# SCENE_STAGE_CLEAR               = 70 #ステージクリア
+# SCENE_STAGE_CLEAR_MOVE_MY_SHIP  = 71 #ステージクリア後、自機がステージクリア画像左上まで自動に動いていくシーン
+# SCENE_STAGE_CLEAR_MY_SHIP_BOOST = 72 #ステージクリア後、自機がブーストして右へ過ぎ去っていくシーン
+# SCENE_STAGE_CLEAR_FADE_OUT      = 73 #ステージクリア後のフェードアウト
 
-SCENE_CONTINUE    = 80   #コンティニューメッセージ表示中
+# SCENE_CONTINUE    = 80   #コンティニューメッセージ表示中
 
-SCENE_ENDING      = 90   #エンディング表示中
+# SCENE_ENDING      = 90   #エンディング表示中
 
-SCENE_STAFF_ROLL  = 100  #スタッフロール表示中
+# SCENE_STAFF_ROLL  = 100  #スタッフロール表示中
 
-SCENE_GAME_QUIT_START              = 900 #ゲーム終了工程開始
-SCENE_GAME_QUIT_WAIT               = 901 #ゲーム終了工程待ち(終了サウンドが再生完了するのを待ちますです)
+# SCENE_GAME_QUIT_START              = 900 #ゲーム終了工程開始
+# SCENE_GAME_QUIT_WAIT               = 901 #ゲーム終了工程待ち(終了サウンドが再生完了するのを待ちますです)
 
-SCENE_GAME_QUIT                    = 999 #ゲーム終了(スリーナインで終了 汽車は～♪闇を抜けて～～光の海へ～～～☆彡)
+# SCENE_GAME_QUIT                    = 999 #ゲーム終了(スリーナインで終了 汽車は～♪闇を抜けて～～光の海へ～～～☆彡)
 
 #!ゲームステータス関連の定数定義 game_statusに代入されます#######################################################################
 #2023 12/17より別クラスにて列挙型を使用し自動で任意の数値を定義するようにしました

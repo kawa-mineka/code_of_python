@@ -332,7 +332,7 @@ class init:
         
         #ここからデバッグ用データをコンソール表示するコードです-------------------------------------------------
         print ("BGアニメーションマーカー座標値リスト")
-        print(self.bg_animation_cordinate)       #BG書き換えを使用して背景アニメーションをさせる時のマーカー座標リストをコンソールに表示(デバッグ用)
+        print(self.bg_animation_cordinate)            #BG書き換えを使用して背景アニメーションをさせる時のマーカー座標リストをコンソールに表示(デバッグ用)
         marker_num = len(self.bg_animation_cordinate) #BG書き換えを使用して背景アニメーションをさせる時のマーカー座標リストの総数を取得する
         print("mark_num = ",end="")
         print(marker_num)

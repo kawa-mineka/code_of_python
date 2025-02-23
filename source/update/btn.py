@@ -8,8 +8,8 @@
 #                                                         #
 # 2022 04/06からファイル分割してモジュールとして運用開始      #
 ###########################################################
-import math         #三角関数などを使用したいのでインポートぉぉおお！
-from random import random    #random.random() と呼ぶと、0から1の範囲(1は含まない)のランダムな実数が返される(主にパーティクル系で使用します)
+# import math         #三角関数などを使用したいのでインポートぉぉおお！
+# from random import random    #random.random() と呼ぶと、0から1の範囲(1は含まない)のランダムな実数が返される(主にパーティクル系で使用します)
 import pyxel        #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
 from const.const import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
 
@@ -270,13 +270,13 @@ class btn:
                 
                 self.record_games_status = self.game_status #ステータスを一時記憶しておく
                 self.game_status = Scene.PAUSE              #ステータスを「PAUSE」にする
-                if func.search_window_id(self,WINDOW_ID_PAUSE_MENU) == -1: #ポーズメニューウィンドウが存在しないのなら・・
-                    # update_window.create(self,WINDOW_ID_PAUSE_MENU,30,70)          #ポーズメニューウィンドウウィンドウの作製 なんかどうもimportの循環エラー出るのでここで直接ポーズメニューウィンドウを育成しちゃう 後日どうしたら良いのか考えよう・・・多分忘れてると思うけど
+                if func.search_window_id(self,Window_id.PAUSE_MENU) == -1: #ポーズメニューウィンドウが存在しないのなら・・
+                    # update_window.create(self,window_id.PAUSE_MENU,30,70)          #ポーズメニューウィンドウウィンドウの作製 なんかどうもimportの循環エラー出るのでここで直接ポーズメニューウィンドウを育成しちゃう 後日どうしたら良いのか考えよう・・・多分忘れてると思うけど
                     func.create_master_flag_list(self) #まず先にフラグ＆データ関連のマスターリスト作成関数を呼び出す
                     new_window = Window()
                     new_window.update(\
-                    WINDOW_ID_PAUSE_MENU,\
-                    WINDOW_ID_SUB_NORMAL_MENU,\
+                    Window_id.PAUSE_MENU,\
+                    Window_id.SUB_NORMAL_MENU,\
                     WINDOW_TYPE_NORMAL,\
                     WINDOW_FRAME_NORMAL,\
                     WINDOW_BG_BLUE_BACK,\
@@ -323,7 +323,7 @@ class btn:
                     #選択カーソル表示をon,カーソルは上下移動のみ,,カーソル移動ステップはx4,y7,いま指示しているアイテムナンバーは0の「BACK TO GAMES」
                     #まだボタンも押されておらず未決定状態なのでdecision_item_yはUNSELECTED,y最大項目数は3項目なので 4-1=3を代入,メニューの階層は一番低いMENU_LAYER0にします
                     func.set_cursor_data(self,CURSOR_TYPE_NORMAL,CURSOR_MOVE_UD,46,73,STEP4,STEP7,0,0,0,0,UNSELECTED,UNSELECTED,0,4-1,0,MENU_LAYER0)
-                    self.active_window_id = WINDOW_ID_PAUSE_MENU    #このウィンドウIDを最前列でアクティブなものとする
+                    self.active_window_id = Window_id.PAUSE_MENU    #このウィンドウIDを最前列でアクティブなものとする
                     self.select_cursor_flag = 1            #セレクトカーソル移動フラグを建てる
                     pyxel.play(CH0,self.window[self.active_window_index].cursor_push_se)#カーソルボタンプッシュ音を鳴らす
                 
@@ -334,9 +334,9 @@ class btn:
                 self.game_status = self.record_games_status #一時記憶しておいたゲームステータスを元に戻してあげます
                 self.star_scroll_speed = 1                  #星のスクロールスピードを倍率1に戻す
                 self.cursor_type = CURSOR_TYPE_NO_DISP      #セレクトカーソルの表示をoffにする
-                if func.search_window_id(self,WINDOW_ID_PAUSE_MENU) != -1: #ポーズメニューウィンドウが存在するのならば・・
-                    i = func.search_window_id(self,WINDOW_ID_PAUSE_MENU)
-                    self.window[i].vy = -0.3            #WINDOW_ID_PAUSE_MENUウィンドウを右上にフッ飛ばしていく
+                if func.search_window_id(self,Window_id.PAUSE_MENU) != -1: #ポーズメニューウィンドウが存在するのならば・・
+                    i = func.search_window_id(self,Window_id.PAUSE_MENU)
+                    self.window[i].vy = -0.3            #PAUSE_MENUウィンドウを右上にフッ飛ばしていく
                     self.window[i].vy_accel = 1.2
                     self.window[i].vx = 0.1
                     self.window[i].vx_accel = 1.2

@@ -1529,8 +1529,8 @@ class graph:
                             elif self.window[i].item_text[j][LIST_WINDOW_TEXT_ALIGN] == DISP_LEFT_ALIGN:
                                 func.drop_shadow_text(self,self.window[i].posx + self.window[i].item_text[j][LIST_WINDOW_TEXT_OX] + 5  ,self.window[i].posy + 5 + (j+1) * self.window[i].between_line,str(self.window[i].item_text[j][LIST_WINDOW_TEXT]),col)
                         
-                        if     self.window[i].window_id_sub == WINDOW_ID_SUB_ON_OFF_MENU\
-                            or self.window[i].window_id_sub == WINDOW_ID_SUB_MULTI_SELECT_MENU: #「ON」「OFF」のトグルスイッチ式メニュー,ハイライト付きマルチメニューの場合はオブジェクト表示
+                        if     self.window[i].window_id_sub == Window_id.SUB_ON_OFF_MENU\
+                            or self.window[i].window_id_sub == Window_id.SUB_MULTI_SELECT_MENU: #「ON」「OFF」のトグルスイッチ式メニュー,ハイライト付きマルチメニューの場合はオブジェクト表示
                             
                             flag_index = self.window[i].item_text[j][LIST_WINDOW_TEXT_OPE_OBJ] #flag_indexに編集対象となるオブジェクトが入ったリストインデックス値が入ります
                             if self.window[i].flag_list[flag_index] == self.window[i].item_text[j][LIST_WINDOW_TEXT_OPE_OBJ_COMPARE]: #フラグの数値とリストに登録されているパラメーター数値を比較して・・・
@@ -1542,7 +1542,7 @@ class graph:
                                 func.drop_shadow_text(self,self.window[i].posx + self.window[i].item_text[j][LIST_WINDOW_TEXT_OPE_OBJ_TEXT_OX] + 5 + self.window[i].width // 2 - len(self.window[i].item_text[j][LIST_WINDOW_TEXT_OPE_OBJ_TEXT]) * 2,self.window[i].posy + 5 + (j+1) * self.window[i].between_line,str(self.window[i].item_text[j][LIST_WINDOW_TEXT_OPE_OBJ_TEXT]),col)
                             elif self.window[i].item_text[j][LIST_WINDOW_TEXT_OPE_OBJ_TEXT_ALIGN] == DISP_LEFT_ALIGN:
                                 func.drop_shadow_text(self,self.window[i].posx + self.window[i].item_text[j][LIST_WINDOW_TEXT_OPE_OBJ_TEXT_OX] + 5  ,self.window[i].posy + 5 + (j+1) * self.window[i].between_line,str(self.window[i].item_text[j][LIST_WINDOW_TEXT_OPE_OBJ_TEXT]),col)
-                        elif self.window[i].window_id_sub == WINDOW_ID_SUB_SWITCH_TEXT_MENU: #上下操作でカーソルが上下し左右でそれぞれの項目に対応したテキストが切り替わり表示されるメニュータイプの場合
+                        elif self.window[i].window_id_sub == Window_id.SUB_SWITCH_TEXT_MENU: #上下操作でカーソルが上下し左右でそれぞれの項目に対応したテキストが切り替わり表示されるメニュータイプの場合
                             flag_index = self.window[i].item_text[j][LIST_WINDOW_TEXT_OPE_OBJ] #flag_indexに編集対象となるオブジェクトが入ったリストインデックス値が入ります
                             k = self.window[i].flag_list[flag_index]
                             if self.window[i].item_text[j][LIST_WINDOW_TEXT_OPE_OBJ_TYPE] == OPE_OBJ_TYPE_ON_OFF: #「ON」「OFF」の二つから選ぶシンプルなタイプ

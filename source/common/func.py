@@ -1456,7 +1456,7 @@ class func:
         """
         メダルリストウィンドウで「存在するアイテム」を調べ上げコメント表示フラグテーブルを作製する
         """
-        i = func.search_window_id(self,WINDOW_ID_MEDAL_LIST) #メダルリストウィンドウをIDを元にインデックス番号を調べる
+        i = func.search_window_id(self,Window_id.MEDAL_LIST) #メダルリストウィンドウをIDを元にインデックス番号を調べる
         if i != -1: #メダルリストが存在するときは「存在するアイテム」を調べ上げて、テーブルを作製開始する
             for j in range(len(self.window[i].medal_graph_list)): #medal_graph_listの長さの分ループ処理する
                 item_x = self.window[i].medal_graph_list[j][LIST_WINDOW_GRAPH_ITEM_X] #アイテムのx座標取得

@@ -6,8 +6,8 @@
 #  あとウィンドウシステムで使用するセレクトカーソルとかも      #
 # 2022 04/05からファイル分割してモジュールとして運用開始      #
 ###########################################################
-import math               #三角関数などを使用したいのでインポートぉぉおお！
-from random import random #random.random() と呼ぶと、0から1の範囲(1は含まない)のランダムな実数が返される(主にパーティクル系で使用します)
+# import math               #三角関数などを使用したいのでインポートぉぉおお！
+# from random import random #random.random() と呼ぶと、0から1の範囲(1は含まない)のランダムな実数が返される(主にパーティクル系で使用します)
 import pyxel              #グラフイックキャラやバックグラウンドグラフイック(背景(BG))の表示効果音、キーボードパッド入力などで使用 メインコアゲームエンジン
 
 from const.const       import * #定数定義モジュールの読み込み(公式ではワイルドカードインポート(import *)は推奨されていないんだけど・・・定数定義くらいはいいんじゃないかな？の精神！？
@@ -107,10 +107,10 @@ class window:
         """
         func.create_master_flag_list(self) #まず先にフラグ＆データ関連のマスターリスト作成関数を呼び出す
         new_window = Window()
-        if   id == WINDOW_ID_MAIN_MENU:                 #メインメニューウィンドウ
+        if   id == Window_id.MAIN_MENU:                 #メインメニューウィンドウ
             new_window.update(\
-            WINDOW_ID_MAIN_MENU,\
-            WINDOW_ID_SUB_NORMAL_MENU,\
+            Window_id.MAIN_MENU,\
+            Window_id.SUB_NORMAL_MENU,\
             WINDOW_TYPE_NORMAL,\
             WINDOW_FRAME_NORMAL,\
             WINDOW_BG_LOW_TRANSLUCENT,\
@@ -165,10 +165,10 @@ class window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_SELECT_STAGE_MENU:         #ステージセレクトウィンドウ
+        elif id == Window_id.SELECT_STAGE_MENU:         #ステージセレクトウィンドウ
             new_window.update(\
-            WINDOW_ID_SELECT_STAGE_MENU,\
-            WINDOW_ID_SUB_NORMAL_MENU,\
+            Window_id.SELECT_STAGE_MENU,\
+            Window_id.SUB_NORMAL_MENU,\
             WINDOW_TYPE_NORMAL,\
             WINDOW_FRAME_NORMAL,\
             WINDOW_BG_BLUE_BACK,\
@@ -216,10 +216,10 @@ class window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_SELECT_LOOP_MENU:          #周回数セレクトウィンドウ
+        elif id == Window_id.SELECT_LOOP_MENU:          #周回数セレクトウィンドウ
             new_window.update(\
-            WINDOW_ID_SELECT_LOOP_MENU,\
-            WINDOW_ID_SUB_NORMAL_MENU,\
+            Window_id.SELECT_LOOP_MENU,\
+            Window_id.SUB_NORMAL_MENU,\
             WINDOW_TYPE_NORMAL,\
             WINDOW_FRAME_NORMAL,\
             WINDOW_BG_TRANSLUCENT,\
@@ -260,10 +260,10 @@ class window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_BOSS_MODE_MENU:            #ボスモードON/OFFウィンドウ
+        elif id == Window_id.BOSS_MODE_MENU:            #ボスモードON/OFFウィンドウ
             new_window.update(\
-            WINDOW_ID_BOSS_MODE_MENU,\
-            WINDOW_ID_SUB_ON_OFF_MENU,\
+            Window_id.BOSS_MODE_MENU,\
+            Window_id.SUB_ON_OFF_MENU,\
             WINDOW_TYPE_NORMAL,\
             WINDOW_FRAME_NORMAL,\
             WINDOW_BG_TRANSLUCENT,\
@@ -303,10 +303,10 @@ class window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_HITBOX_MENU:               #当たり判定表示ON/OFFウィンドウ
+        elif id == Window_id.HITBOX_MENU:               #当たり判定表示ON/OFFウィンドウ
             new_window.update(\
-            WINDOW_ID_HITBOX_MENU,\
-            WINDOW_ID_SUB_ON_OFF_MENU,\
+            Window_id.HITBOX_MENU,\
+            Window_id.SUB_ON_OFF_MENU,\
             WINDOW_TYPE_NORMAL,\
             WINDOW_FRAME_NORMAL,\
             WINDOW_BG_TRANSLUCENT,\
@@ -346,10 +346,10 @@ class window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_SELECT_DIFFICULTY:         #難易度選択ウィンドウ
+        elif id == Window_id.SELECT_DIFFICULTY:         #難易度選択ウィンドウ
             new_window.update(\
-            WINDOW_ID_SELECT_DIFFICULTY,\
-            WINDOW_ID_SUB_MULTI_SELECT_MENU,\
+            Window_id.SELECT_DIFFICULTY,\
+            Window_id.SUB_MULTI_SELECT_MENU,\
             WINDOW_TYPE_NORMAL,\
             WINDOW_FRAME_NORMAL,\
             WINDOW_BG_BLUE_BACK,\
@@ -393,10 +393,10 @@ class window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_GAME_OVER_RETURN:          #ゲームオーバー後タイトルへ戻るウィンドウ
+        elif id == Window_id.GAME_OVER_RETURN:          #ゲームオーバー後タイトルへ戻るウィンドウ
             new_window.update(\
-            WINDOW_ID_GAME_OVER_RETURN,\
-            WINDOW_ID_SUB_NORMAL_MENU,\
+            Window_id.GAME_OVER_RETURN,\
+            Window_id.SUB_NORMAL_MENU,\
             WINDOW_TYPE_NORMAL,\
             WINDOW_FRAME_NORMAL,\
             WINDOW_BG_LOW_TRANSLUCENT,\
@@ -436,10 +436,10 @@ class window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_GAME_OVER_RETURN_NO_SAVE:  #ゲームオーバー後タイトルへ戻るウィンドウ(リプレイ保存付き)
+        elif id == Window_id.GAME_OVER_RETURN_NO_SAVE:  #ゲームオーバー後タイトルへ戻るウィンドウ(リプレイ保存付き)
             new_window.update(\
-            WINDOW_ID_GAME_OVER_RETURN_NO_SAVE,\
-            WINDOW_ID_SUB_NORMAL_MENU,\
+            Window_id.GAME_OVER_RETURN_NO_SAVE,\
+            Window_id.SUB_NORMAL_MENU,\
             WINDOW_TYPE_NORMAL,\
             WINDOW_FRAME_NORMAL,\
             WINDOW_BG_LOW_TRANSLUCENT,\
@@ -478,10 +478,10 @@ class window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_INPUT_YOUR_NAME:           #名前入力ウィンドウ
+        elif id == Window_id.INPUT_YOUR_NAME:           #名前入力ウィンドウ
             new_window.update(\
-            WINDOW_ID_INPUT_YOUR_NAME,\
-            WINDOW_ID_SUB_NORMAL_MENU,\
+            Window_id.INPUT_YOUR_NAME,\
+            Window_id.SUB_NORMAL_MENU,\
             WINDOW_TYPE_EDIT_TEXT,\
             WINDOW_FRAME_NORMAL,\
             WINDOW_BG_BLUE_BACK,\
@@ -520,10 +520,10 @@ class window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_CONFIG:                    #コンフィグウィンドウ
+        elif id == Window_id.CONFIG:                    #コンフィグウィンドウ
             new_window.update(\
-            WINDOW_ID_CONFIG,\
-            WINDOW_ID_SUB_SWITCH_TEXT_MENU,\
+            Window_id.CONFIG,\
+            Window_id.SUB_SWITCH_TEXT_MENU,\
             WINDOW_TYPE_NORMAL,\
             WINDOW_FRAME_NORMAL,\
             WINDOW_BG_TRANSLUCENT,\
@@ -573,10 +573,10 @@ class window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_INITIALIZE:                #初期化ウィンドウ
+        elif id == Window_id.INITIALIZE:                #初期化ウィンドウ
             new_window.update(\
-            WINDOW_ID_INITIALIZE,\
-            WINDOW_ID_SUB_NORMAL_MENU,\
+            Window_id.INITIALIZE,\
+            Window_id.SUB_NORMAL_MENU,\
             WINDOW_TYPE_NORMAL,\
             WINDOW_FRAME_NORMAL,\
             WINDOW_BG_BLUE_BACK,\
@@ -621,10 +621,10 @@ class window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_CONFIG_GRAPHICS:           #グラフイックス設定ウィンドウ(現時点では未使用)
+        elif id == Window_id.CONFIG_GRAPHICS:           #グラフイックス設定ウィンドウ(現時点では未使用)
             new_window.update(\
-            WINDOW_ID_CONFIG_GRAPHICS,\
-            WINDOW_ID_SUB_NORMAL_MENU,\
+            Window_id.CONFIG_GRAPHICS,\
+            Window_id.SUB_NORMAL_MENU,\
             WINDOW_TYPE_NORMAL,\
             WINDOW_FRAME_NORMAL,\
             WINDOW_BG_LOW_TRANSLUCENT,\
@@ -672,10 +672,10 @@ class window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_MEDAL_LIST:                #メダルリストウィンドウ
+        elif id == Window_id.MEDAL_LIST:                #メダルリストウィンドウ
             new_window.update(\
-            WINDOW_ID_MEDAL_LIST,\
-            WINDOW_ID_SUB_NORMAL_MENU,\
+            Window_id.MEDAL_LIST,\
+            Window_id.SUB_NORMAL_MENU,\
             WINDOW_TYPE_NORMAL,\
             WINDOW_FRAME_NORMAL,\
             WINDOW_BG_BLUE_BACK,\
@@ -757,10 +757,10 @@ class window:
             [ MEDAL_BEFOREHAND_1SHOT_ITEM,MEDAL_BEFOREHAND_2SHOT_ITEM,MEDAL_BEFOREHAND_3SHOT_ITEM,MEDAL_BEFOREHAND_4SHOT_ITEM,0,0,0,0,0,0],\
             [ MEDAL_EQUIPMENT_LS_SHIELD,  MEDAL_PLUS_MEDALLION,       MEDAL_CONCENTRATION,         0,                         0,0,0,0,0,0],\
             [ MEDAL_FRAME_RESIST,         MEDAL_RECOVERY_OVER_TIME,   MEDAL_TWINKLE,               0,                         0,0,0,0,0,0]])
-        elif id == WINDOW_ID_EXIT:                      #退出終了ウィンドウ
+        elif id == Window_id.EXIT:                      #退出終了ウィンドウ
             new_window.update(\
-            WINDOW_ID_EXIT,\
-            WINDOW_ID_SUB_NORMAL_MENU,\
+            Window_id.EXIT,\
+            Window_id.SUB_NORMAL_MENU,\
             WINDOW_TYPE_NORMAL,\
             WINDOW_FRAME_NORMAL,\
             WINDOW_BG_BLUE_BACK,\
@@ -800,10 +800,10 @@ class window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_PAUSE_MENU:                #ポーズメニューウィンドウ
+        elif id == Window_id.PAUSE_MENU:                #ポーズメニューウィンドウ
             new_window.update(\
-            WINDOW_ID_PAUSE_MENU,\
-            WINDOW_ID_SUB_NORMAL_MENU,\
+            Window_id.PAUSE_MENU,\
+            Window_id.SUB_NORMAL_MENU,\
             WINDOW_TYPE_NORMAL,\
             WINDOW_FRAME_NORMAL,\
             WINDOW_BG_BLUE_BACK,\
@@ -845,10 +845,10 @@ class window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_RETURN_TITLE:              #タイトルへ戻るウィンドウ
+        elif id == Window_id.RETURN_TITLE:              #タイトルへ戻るウィンドウ
             new_window.update(\
-            WINDOW_ID_EXIT,\
-            WINDOW_ID_SUB_NORMAL_MENU,\
+            Window_id.EXIT,\
+            Window_id.SUB_NORMAL_MENU,\
             WINDOW_TYPE_NORMAL,\
             WINDOW_FRAME_NORMAL,\
             WINDOW_BG_BLUE_BACK,\
@@ -888,11 +888,11 @@ class window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_EQUIPMENT:                 #装備ウィンドウ
+        elif id == Window_id.EQUIPMENT:                 #装備ウィンドウ
             shiplist = self.playing_ship_list
             new_window.update(\
-            WINDOW_ID_EQUIPMENT,\
-            WINDOW_ID_SUB_NORMAL_MENU,\
+            Window_id.EQUIPMENT,\
+            Window_id.SUB_NORMAL_MENU,\
             WINDOW_TYPE_NORMAL,\
             WINDOW_FRAME_NORMAL,\
             WINDOW_BG_BLUE_BACK,\
@@ -931,10 +931,10 @@ class window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_STATUS:                    #ステータス表示ウィンドウ
+        elif id == Window_id.STATUS:                    #ステータス表示ウィンドウ
             new_window.update(\
-            WINDOW_ID_STATUS,\
-            WINDOW_ID_SUB_NORMAL_MENU,\
+            Window_id.STATUS,\
+            Window_id.SUB_NORMAL_MENU,\
             WINDOW_TYPE_NORMAL,\
             WINDOW_FRAME_NORMAL,\
             WINDOW_BG_BLUE_BACK,\
@@ -1042,10 +1042,10 @@ class window:
             [0,0,0,0,0,0,0,0,0,0],\
             [0,0,0,0,0,0,0,0,0,0]],\
             )
-        elif id == WINDOW_ID_SELECT_SHIP:               #自機選択ウィンドウ
+        elif id == Window_id.SELECT_SHIP:               #自機選択ウィンドウ
             new_window.update(\
-            WINDOW_ID_SELECT_SHIP,\
-            WINDOW_ID_SUB_NORMAL_MENU,\
+            Window_id.SELECT_SHIP,\
+            Window_id.SUB_NORMAL_MENU,\
             WINDOW_TYPE_NORMAL,\
             WINDOW_FRAME_NORMAL,\
             WINDOW_BG_TRANSLUCENT,\
@@ -1148,10 +1148,10 @@ class window:
             [0,0,0,0,0,0,0,0,0,0],\
             [0,0,0,0,0,0,0,0,0,0]],\
             )
-        elif id == WINDOW_ID_SELECT_YES_NO:             #はい/いいえ選択ウィンドウ
+        elif id == Window_id.SELECT_YES_NO:             #はい/いいえ選択ウィンドウ
             new_window.update(\
-            WINDOW_ID_SELECT_YES_NO,\
-            WINDOW_ID_SUB_YES_NO_MENU,\
+            Window_id.SELECT_YES_NO,\
+            Window_id.SUB_YES_NO_MENU,\
             WINDOW_TYPE_NORMAL,\
             WINDOW_FRAME_NORMAL,\
             WINDOW_BG_BLUE_BACK,\
@@ -1191,10 +1191,10 @@ class window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_PRINT_INIT_SCORE:          #スコア初期化ウィンドウ
+        elif id == Window_id.PRINT_INIT_SCORE:          #スコア初期化ウィンドウ
             new_window.update(\
-            WINDOW_ID_PRINT_INIT_SCORE,\
-            WINDOW_ID_SUB_NORMAL_MENU,\
+            Window_id.PRINT_INIT_SCORE,\
+            Window_id.SUB_NORMAL_MENU,\
             WINDOW_TYPE_PRINT_TEXT,\
             WINDOW_FRAME_NORMAL,\
             WINDOW_BG_BLUE_BACK,\
@@ -1233,10 +1233,10 @@ class window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_PRINT_INIT_NAME:           #名前初期化ウィンドウ
+        elif id == Window_id.PRINT_INIT_NAME:           #名前初期化ウィンドウ
             new_window.update(\
-            WINDOW_ID_PRINT_INIT_NAME,\
-            WINDOW_ID_SUB_NORMAL_MENU,\
+            Window_id.PRINT_INIT_NAME,\
+            Window_id.SUB_NORMAL_MENU,\
             WINDOW_TYPE_PRINT_TEXT,\
             WINDOW_FRAME_NORMAL,\
             WINDOW_BG_BLUE_BACK,\
@@ -1275,10 +1275,10 @@ class window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_PRINT_INIT_ALL:            #全てを初期化ウィンドウ
+        elif id == Window_id.PRINT_INIT_ALL:            #全てを初期化ウィンドウ
             new_window.update(\
-            WINDOW_ID_PRINT_INIT_ALL,\
-            WINDOW_ID_SUB_NORMAL_MENU,\
+            Window_id.PRINT_INIT_ALL,\
+            Window_id.SUB_NORMAL_MENU,\
             WINDOW_TYPE_PRINT_TEXT,\
             WINDOW_FRAME_NORMAL,\
             WINDOW_BG_BLUE_BACK,\
@@ -1317,10 +1317,10 @@ class window:
             NO_COMMENT_LIST_ENG,NO_COMMENT_LIST_JPN,\
             NO_ITEM_ID,\
             )
-        elif id == WINDOW_ID_JOYPAD_ASSIGN:             #ジョイパッドボタン割り当て設定ウィンドウ
+        elif id == Window_id.JOYPAD_ASSIGN:             #ジョイパッドボタン割り当て設定ウィンドウ
             new_window.update(\
-            WINDOW_ID_MAIN_MENU,\
-            WINDOW_ID_SUB_NORMAL_MENU,\
+            Window_id.MAIN_MENU,\
+            Window_id.SUB_NORMAL_MENU,\
             WINDOW_TYPE_NORMAL,\
             WINDOW_FRAME_NORMAL,\
             WINDOW_BG_BLUE_BACK,\
@@ -1526,10 +1526,10 @@ class window:
             [0,0,0,0,0,0,0,0,0,0],\
             [0,0,0,0,0,0,0,0,0,0]],\
             )
-        elif id == WINDOW_ID_TITLE_TEXT:                #タイトルで表示されるテキスト群
+        elif id == Window_id.TITLE_TEXT:                #タイトルで表示されるテキスト群
             new_window.update(\
-            WINDOW_ID_TITLE_TEXT,\
-            WINDOW_ID_SUB_NORMAL_MENU,\
+            Window_id.TITLE_TEXT,\
+            Window_id.SUB_NORMAL_MENU,\
             WINDOW_TYPE_NORMAL,\
             WINDOW_FRAME_NONE,\
             WINDOW_BG_NONE,\
@@ -1585,8 +1585,8 @@ class window:
         func.create_medal_graph_list_for_score_board(self,d,121,12,STEP8) #次にスコアボードに記録された機体群の装備メダルリストを一時的なグラフイックリストとして作製するtemp_graph_listにリストが作成される
         new_window = Window()
         new_window.update(\
-        WINDOW_ID_SCORE_BOARD,\
-        WINDOW_ID_SUB_RIGHT_LEFT_PAGE_MENU,\
+        Window_id.SCORE_BOARD,\
+        Window_id.SUB_RIGHT_LEFT_PAGE_MENU,\
         WINDOW_TYPE_NORMAL,\
         WINDOW_FRAME_NORMAL,\
         WINDOW_BG_BLUE_BACK,\
@@ -1645,8 +1645,8 @@ class window:
         func.create_master_flag_list(self) #まず先にフラグ＆データ関連のマスターリスト作成関数を呼び出す
         new_window = Window()
         new_window.update(\
-        WINDOW_ID_SELECT_FILE_SLOT,\
-        WINDOW_ID_SUB_NORMAL_MENU,\
+        Window_id.SELECT_FILE_SLOT,\
+        Window_id.SUB_NORMAL_MENU,\
         WINDOW_TYPE_NORMAL,\
         WINDOW_FRAME_NORMAL,\
         WINDOW_BG_BLUE_BACK,\
@@ -1734,8 +1734,8 @@ class window:
             
         new_window = Window()
         new_window.update(\
-        WINDOW_ID_MEDAL_ACQUISITION_REPORT,\
-        WINDOW_ID_SUB_NORMAL_MENU,\
+        Window_id.MEDAL_ACQUISITION_REPORT,\
+        Window_id.SUB_NORMAL_MENU,\
         WINDOW_TYPE_NORMAL,\
         WINDOW_FRAME_NORMAL,\
         WINDOW_BG_BLUE_BACK,\
@@ -1801,8 +1801,8 @@ class window:
         
         new_window = Window()
         new_window.update(\
-        WINDOW_ID_ACHIEVEMENT_ACQUISITION_REPORT,\
-        WINDOW_ID_SUB_NORMAL_MENU,\
+        Window_id.ACHIEVEMENT_ACQUISITION_REPORT,\
+        Window_id.SUB_NORMAL_MENU,\
         WINDOW_TYPE_BANNER,\
         WINDOW_FRAME_NONE,\
         WINDOW_BG_BLUE_BACK,\
@@ -1848,7 +1848,7 @@ class window:
         """
         メインメニューウィンドウを左にずらす
         """
-        i = func.search_window_id(self,WINDOW_ID_MAIN_MENU)
+        i = func.search_window_id(self,Window_id.MAIN_MENU)
         self.window[i].window_status = WINDOW_MOVE
         self.window[i].dx = 44 - 30
         self.window[i].vx = -4            #メインメニューウィンドウを左にずらしてやる
@@ -1859,7 +1859,7 @@ class window:
         """
         メインメニューウィンドウを右にずらす
         """
-        i = func.search_window_id(self,WINDOW_ID_MAIN_MENU)
+        i = func.search_window_id(self,Window_id.MAIN_MENU)
         self.window[i].window_status = WINDOW_MOVE
         self.window[i].dx = 44
         self.window[i].vx = 3.9            #メインメニューウィンドウを右にずらしてやる
@@ -1870,7 +1870,7 @@ class window:
         """
         ポーズメニューウィンドウを下にずらす
         """
-        i = func.search_window_id(self,WINDOW_ID_PAUSE_MENU)
+        i = func.search_window_id(self,Window_id.PAUSE_MENU)
         self.window[i].window_status = WINDOW_MOVE
         self.window[i].dy = 109
         self.window[i].vy = 9           #ポーズメニューウィンドウを下にずらしてやる
@@ -1881,7 +1881,7 @@ class window:
         """
         ポーズメニューウィンドウを上にずらす
         """
-        i = func.search_window_id(self,WINDOW_ID_PAUSE_MENU)
+        i = func.search_window_id(self,Window_id.PAUSE_MENU)
         self.window[i].window_status = WINDOW_MOVE
         self.window[i].dy = 70
         self.window[i].vy = -9            #ポーズメニューウィンドウを上にずらしてやる
@@ -1892,7 +1892,7 @@ class window:
         """
         メダルの取得判定をする関数
         """
-        if func.search_window_id(self,WINDOW_ID_MEDAL_ACQUISITION_REPORT) != -1: #メダル取得報告ウィンドウがまだ画面に存在するときはそのままリターンする
+        if func.search_window_id(self,Window_id.MEDAL_ACQUISITION_REPORT) != -1: #メダル取得報告ウィンドウがまだ画面に存在するときはそのままリターンする
             return
         
         wait = 180
@@ -1939,7 +1939,7 @@ class window:
         """
         実績(アチーブメント)の取得判定をする関数
         """
-        if func.search_window_id(self,WINDOW_ID_ACHIEVEMENT_ACQUISITION_REPORT) != -1: #実績取得報告ウィンドウがまだ画面に存在するときはそのままリターンする
+        if func.search_window_id(self,Window_id.ACHIEVEMENT_ACQUISITION_REPORT) != -1: #実績取得報告ウィンドウがまだ画面に存在するときはそのままリターンする
             return
         
         wait = 360
