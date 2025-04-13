@@ -526,7 +526,7 @@ class stage_data:
             [1604,EVENT_ENEMY,EnemyName.TWIN_ARROW,160, 60-20],
             
             [2000,EVENT_WARNING,500,120,240],
-            [22300,EVENT_BOSS],
+            [2300,EVENT_BOSS],
             [99999999],]
 
     def bg_animation_list(self):   #各ステージのＢＧ書き換えによるアニメーションの為のデータリスト群の定義

@@ -373,16 +373,16 @@ class App:
         self.game_playing_flag  = FLAG_OFF     #ゲーム中なのか？それ以外の状態なのか？を示すフラグです 0=プレイ以外 1=プレイ中
         self.star_scroll_flag   = FLAG_OFF     #背景のスクロールする星々を表示するかのフラグを初期化
         self.raster_scroll_flag = FLAG_OFF     #背景ラスタスクロールを表示するかのフラグを初期化
-        self.reference_tilemap  = 0            #BGタイルマップを調べたり書き換えたりする時、どのタイルマップナンバーを使用するのかの変数の初期化です
+        self.reference_tilemap  = TM0          #BGタイルマップを調べたり書き換えたりする時、どのタイルマップナンバーを使用するのかの変数の初期化です
         
         func.load_kanji_font_data(self)        #漢字フォントデータをロードする関数の呼び出し
         self.select_cursor_flag = FLAG_OFF     #セレクトカーソルを動かすかどうかのフラグはOFFにして初期化しておく
         
         self.playing_ship_list = copy.deepcopy(self.default_ship_list) #シップ関連のリストはシステムデータロード関連はまだ未実装なのでとりあえずデフォルトのリストをコピーして仮状態でいきますっ！(システムデータリセットの事も考えてディープコピーします)
         
-        self.my_ship_id = J_PYTHON             #自機選択のシステムデータロード関連はまだ未実装なのでとりあえずJ_PYTHONにしておきます
-        self.my_ship_level = 1                 #レベルや経験値システムもまだ未実装なので初期化だけしておきます
-        self.my_ship_exp = 0
+        self.my_ship_id    = J_PYTHON           #自機選択のシステムデータロード関連はまだ未実装なのでとりあえずJ_PYTHONにしておきます
+        self.my_ship_level = LEVEL0             #レベルや経験値システムもまだ未実装なので初期化だけしておきます
+        self.my_ship_exp   = EXP0
         
         medal.read_ship_equip_medal_data(self)  #プレイ中の自機リスト群にメダルスロット装備関連のデータを読み込んで行く関数の呼び出し
         medal.medal_effect_plus_medallion(self) #装備されたメダルを調べ、メダルスロットを増やすメダルがはめ込まれていたらスロット数を増やす関数の呼び出し

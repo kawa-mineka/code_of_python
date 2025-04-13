@@ -1299,8 +1299,11 @@ BOSS_MAD_CLUBUNGER     = 2 #VOLCANIC_BELTのボス  「マッドクラブンガ�
 BOSS_STATUS_MOVE_COORDINATE_INIT  =  0  #ボス用のステータス定数定義 移動用座標設定初期化
 BOSS_STATUS_MOVE_BEZIER_CURVE     = 10  #ボス用のステータス定数定義 ベジェ曲線で移動
 BOSS_STATUS_MOVE_LEMNISCATE_CURVE = 11  #ボス用のステータス定数定義 レムニスケート曲線で移動
-BOSS_STATUS_MOVE_2POINT_INIT      = 12  #ボス用のステータス定数定義 移動元と移動先の2点間を移動するための座標位置設定初期化
-BOSS_STATUS_MOVE_2POINT           = 13  #ボス用のステータス定数定義 2点間の移動にする
+BOSS_STATUS_MOVE_2POINT_INIT      = 12  #ボス用のステータス定数定義 移動元と移動先の2点間を移動していく為の座標位置設定初期化
+BOSS_STATUS_MOVE_2POINT           = 13  #ボス用のステータス定数定義 2点間を移動中
+
+BOSS_STATUS_TURN_RIGHT_TO_LEFT      = 14 #ボス用のステータス定数定義 右向きから左向きへ反転中
+BOSS_STATUS_TURN_LEFT_TO_RIGHT      = 15 #ボス用のステータス定数定義 左向きから右向きへ反転中
 
 BOSS_STATUS_EXPLOSION_START    = 80  #ボス撃破！爆発開始！
 BOSS_STATUS_EXPLOSION          = 81  #ボス爆発中！
