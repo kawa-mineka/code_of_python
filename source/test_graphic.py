@@ -23,16 +23,29 @@ class App:
         pyxel.init(256,256,title="test graphic",fps = 60,quit_key=pyxel.KEY_NONE)
         pyxel.load(dire + "/source/assets/graphic/min-sht2.pyxres")
         
+        self.image_bank = IMG0
+        
         pyxel.run(self.update, self.draw)
+        
     
     def update(self):
         if pyxel.btnp(pyxel.KEY_Q):
             pyxel.quit()
+        elif pyxel.btnp(pyxel.KEY_UP):
+            self.image_bank = self.image_bank + 1
+            if self.image_bank >= IMG2:
+                self.image_bank = IMG2
+            
+        elif pyxel.btnp(pyxel.KEY_DOWN):
+            self.image_bank = self.image_bank - 1
+            if self.image_bank < IMG0:
+                self.image_bank = IMG0
+    
     
     def draw(self):
         pyxel.cls(0)
         # Draw sky
-        pyxel.blt(0, 0, 0, 0, 0, 256, 256)
+        pyxel.blt(0, 0, self.image_bank, 0, 0, 256, 256)
 App()
 
 

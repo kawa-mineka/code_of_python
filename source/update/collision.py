@@ -261,17 +261,17 @@ class collision:
                         #スコア加算
                         if   self.enemy[e].status == ENEMY_STATUS_NORMAL:   #ステータスが「通常」ならscore_normalをpointとしてスコアを加算する
                             point = self.enemy[e].score_normal
-                        elif self.enemy[e].status == ENEMY_STATUS_ATTACK: #ステータスが「攻撃中」ならscore_attackをpointとしてスコアを加算する
+                        elif self.enemy[e].status == ENEMY_STATUS_ATTACK:   #ステータスが「攻撃中」ならscore_attackをpointとしてスコアを加算する
                             point = self.enemy[e].score_attack
-                        elif self.enemy[e].status == ENEMY_STATUS_ESCAPE: #ステータスが「撤退中」ならscore_escapeをpointとしてスコアを加算する
+                        elif self.enemy[e].status == ENEMY_STATUS_ESCAPE:   #ステータスが「撤退中」ならscore_escapeをpointとしてスコアを加算する
                             point = self.enemy[e].score_escape
                         elif self.enemy[e].status == ENEMY_STATUS_AWAITING: #ステータスが「待機中」ならscore_awaitingをpointとしてスコアを加算する
                             point = self.enemy[e].score_awaiting
-                        elif self.enemy[e].status == ENEMY_STATUS_DEFENSE: #ステータスが「防御中」ならscore_defenseをpointとしてスコアを加算する
+                        elif self.enemy[e].status == ENEMY_STATUS_DEFENSE:  #ステータスが「防御中」ならscore_defenseをpointとしてスコアを加算する
                             point = self.enemy[e].score_defense
-                        elif self.enemy[e].status == ENEMY_STATUS_BERSERK: #ステータスが「怒り状態」ならscore_berserkをpointとしてスコアを加算する
+                        elif self.enemy[e].status == ENEMY_STATUS_BERSERK:  #ステータスが「怒り状態」ならscore_berserkをpointとしてスコアを加算する
                             point = self.enemy[e].score_berserk
-                        else:                                     #ステータスが以上に当てはまらないときはscore_normalとする
+                        else:                                               #ステータスが以上に当てはまらないときはscore_normalとする
                             point = self.enemy[e].score_normal
                         score.add_score(self,point) #スコアを加算する関数の呼び出し
                         del self.enemy[e] #敵リストから破壊した敵をdel消去破壊するっ！

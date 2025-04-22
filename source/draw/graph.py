@@ -191,6 +191,19 @@ class graph:
         if self.ls_shield_hp > 0:
             pyxel.blt(self.my_x + 8,self.my_y - 8 - self.camera_offset_y,IMG2,208 + (self.stage_count // 3) % 6 * 8,64,8,24,pyxel.COLOR_GRAY)
 
+    #封印範囲円の表示(この円の範囲中にいる敵を倒しても撃ち返し弾は発生しない)
+    def draw_seal_bullet_circle(self):
+        """
+        敵弾封印範囲円を表示する
+        """
+        if     self.game_status == Scene.GAME_OVER\
+            or self.game_status == Scene.GAME_OVER_FADE_OUT\
+            or self.game_status == Scene.EXPLOSION:
+            
+            return
+        else:
+            pyxel.circb(self.my_x + 4   ,self.my_y - self.camera_offset_y + 4, self.enemy_bullet_seal_distance, self.enemy_bullet_seal_col)
+
     #敵の表示
     def draw_enemy(self):
         """

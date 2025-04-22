@@ -802,7 +802,15 @@ class func:
         #自機ショットや自機ミサイル、クローショットが敵に当たり敵の耐久力が0以下になったらその座標に爆発を生成する
         if   self.enemy[e].enemy_size == E_SIZE_NORMAL:         #標準的な大きさの敵8x8ドットの敵を倒したとき
             new_explosion = Explosion()
-            new_explosion.update(EXPLOSION_NORMAL,PRIORITY_FRONT,self.enemy[e].posx,self.enemy[e].posy,0,0,10,self.return_bullet,0,  1,1)
+            distance = func.to_my_ship_distance(self,self.enemy[e].posx,self.enemy[e].posy) #敵座標と自機座標の距離を求める
+            
+            if distance >= self.enemy_bullet_seal_distance: #その「距離」と「封印システムが有効になる敵と自機の距離」を比較する
+                #比較して封印範囲外なら撃ち返し弾ありの爆発を育成する
+                new_explosion.update(EXPLOSION_NORMAL,PRIORITY_FRONT,self.enemy[e].posx,self.enemy[e].posy,0,0,10,self.return_bullet,0,  1,1)
+            else:
+                #比較して封印範囲内の場合は撃ち返し弾無しの爆発を育成する
+                new_explosion.update(EXPLOSION_NORMAL,PRIORITY_FRONT,self.enemy[e].posx,self.enemy[e].posy,0,0,10,RETURN_BULLET_NONE,0,  1,1)
+            
             self.explosions.append(new_explosion)      
         elif self.enemy[e].enemy_size == E_SIZE_MIDDLE32:       #スクランブルハッチを倒したとき
             new_explosion = Explosion()
@@ -841,7 +849,7 @@ class func:
                 self.fast_forward_flag = FLAG_ON #早回し実績取得用にフラグを立てる
         
         #アイテム育成############################################################
-        if   (self.enemy[e].formation_id   == 0 and self.enemy[e].item == E_SHOT_POW) or (self.enemy_extermination_flag == FLAG_ON and self.enemy[e].item == E_SHOT_POW):
+        if   (self.enemy[e].formation_id == 0 and self.enemy[e].item == E_SHOT_POW)             or (self.enemy_extermination_flag == FLAG_ON and self.enemy[e].item == E_SHOT_POW):
             #ショットパワーアップアイテムを持っているのならアイテムを育成する
             new_obtain_item = Obtain_item()
             if self.appeared_shot_pow < self.inc_shot_exp_medal: #現時点で出現したショットパワーカプセルの数(appeared_shot_pow)が事前にゲット出来るショットアイテム数(inc_shot_exp_medal)より小さい場合は・・・
@@ -851,27 +859,27 @@ class func:
             new_obtain_item.update(born_item,self.enemy[e].posx,self.enemy[e].posy, 0.5,0,   8,8,   1,   0.9,  0.3,   0,0,  0.05,0,0,0,0,   1,0,0,  0,0,0, self.pow_item_bounce_num,0)
             self.obtain_item.append(new_obtain_item)
             self.appeared_shot_pow += 1 #得点アイテムでもショットパワーカプセルでもカプセルを出したことには変わりないので「出現したショットカプセル数」を1インクリメントする
-        elif (self.enemy[e].formation_id == 0 and self.enemy[e].item == E_MISSILE_POW) or (self.enemy_extermination_flag == FLAG_ON and self.enemy[e].item == E_MISSILE_POW):
+        elif (self.enemy[e].formation_id == 0 and self.enemy[e].item == E_MISSILE_POW)          or (self.enemy_extermination_flag == FLAG_ON and self.enemy[e].item == E_MISSILE_POW):
             #ミサイルパワーアップアイテムを持っているのならアイテムを育成する
             new_obtain_item = Obtain_item()
             new_obtain_item.update(ITEM_MISSILE_POWER_UP,self.enemy[e].posx,self.enemy[e].posy, 0.5,0,   8,8,   1,   0.9,  0.3,   0,0,  0.05,0,0,0,0,   0,1,0,  0,0,0, self.pow_item_bounce_num,0)
             self.obtain_item.append(new_obtain_item)
-        elif (self.enemy[e].formation_id == 0 and self.enemy[e].item == E_SHIELD_POW) or (self.enemy_extermination_flag == FLAG_ON and self.enemy[e].item == E_SHIELD_POW):
+        elif (self.enemy[e].formation_id == 0 and self.enemy[e].item == E_SHIELD_POW)           or (self.enemy_extermination_flag == FLAG_ON and self.enemy[e].item == E_SHIELD_POW):
             #シールドパワーアップアイテムを持っているのならアイテムを育成する
             new_obtain_item = Obtain_item()
             new_obtain_item.update(ITEM_SHIELD_POWER_UP,self.enemy[e].posx,self.enemy[e].posy, 0.5,0,   8,8,   1,   0.9,  0.3,   0,0,  0.05,0,0,0,0,   0,0,1,  0,0,0, self.pow_item_bounce_num,0)
             self.obtain_item.append(new_obtain_item)
-        elif (self.enemy[e].formation_id == 0 and self.enemy[e].item == E_CLAW_POW) or (self.enemy_extermination_flag == FLAG_ON and self.enemy[e].item == E_CLAW_POW):
+        elif (self.enemy[e].formation_id == 0 and self.enemy[e].item == E_CLAW_POW)             or (self.enemy_extermination_flag == FLAG_ON and self.enemy[e].item == E_CLAW_POW):
             #クローアイテムを持っているのならアイテムを育成する
             new_obtain_item = Obtain_item()
             new_obtain_item.update(ITEM_CLAW_POWER_UP,self.enemy[e].posx,self.enemy[e].posy, 0.5,0,   8,8,   1,   0.9,  0.3,   0,0,  0.05,0,0,0,0,   0,0,0,  0,0,0, self.pow_item_bounce_num,0)
             self.obtain_item.append(new_obtain_item)
-        elif (self.enemy[e].formation_id == 0 and self.enemy[e].item == E_TRIANGLE_POW) or (self.enemy_extermination_flag == FLAG_ON and self.enemy[e].item == E_TRIANGLE_POW):
+        elif (self.enemy[e].formation_id == 0 and self.enemy[e].item == E_TRIANGLE_POW)         or (self.enemy_extermination_flag == FLAG_ON and self.enemy[e].item == E_TRIANGLE_POW):
             #トライアングルアイテムを持っているのならアイテムを育成する
             new_obtain_item = Obtain_item()
             new_obtain_item.update(ITEM_TRIANGLE_POWER_UP,self.enemy[e].posx,self.enemy[e].posy, 0.3,0,   8,8,   1,   0.9,  0.3,   0,0,  0.5,0,15, 0,0,   1,1,1,  0,0,2 * 60, self.pow_item_bounce_num,0)
             self.obtain_item.append(new_obtain_item)
-        elif (self.enemy[e].formation_id == 0 and self.enemy[e].item == E_TAIL_SHOT_POW) or (self.enemy_extermination_flag == FLAG_ON and self.enemy[e].item == E_TAIL_SHOT_POW):
+        elif (self.enemy[e].formation_id == 0 and self.enemy[e].item == E_TAIL_SHOT_POW)        or (self.enemy_extermination_flag == FLAG_ON and self.enemy[e].item == E_TAIL_SHOT_POW):
             #テイルショットアイテムを持っているのならアイテムを育成する
             new_obtain_item = Obtain_item()
             new_obtain_item.update(ITEM_TAIL_SHOT_POWER_UP,self.enemy[e].posx,self.enemy[e].posy, 0.5,0,   8,8,   1,   0.9,  0.3,   0,0,  0.05,10,10,0,0,   0,0,0,  0,0,0, self.pow_item_bounce_num,0)
@@ -881,17 +889,17 @@ class func:
             new_obtain_item = Obtain_item()
             new_obtain_item.update(ITEM_PENETRATE_ROCKET_POWER_UP,self.enemy[e].posx,self.enemy[e].posy, 0.5,0,   8,8,   1,   0.9,  0.3,   0,0,  0.05,10,10,0,0,   0,0,0,  0,0,0, self.pow_item_bounce_num,0)
             self.obtain_item.append(new_obtain_item)
-        elif (self.enemy[e].formation_id == 0 and self.enemy[e].item == E_SEARCH_LASER_POW) or (self.enemy_extermination_flag == FLAG_ON and self.enemy[e].item == E_SEARCH_LASER_POW):
+        elif (self.enemy[e].formation_id == 0 and self.enemy[e].item == E_SEARCH_LASER_POW)     or (self.enemy_extermination_flag == FLAG_ON and self.enemy[e].item == E_SEARCH_LASER_POW):
             #サーチレーザーアイテムを持っているのならアイテムを育成する
             new_obtain_item = Obtain_item()
             new_obtain_item.update(ITEM_SEARCH_LASER_POWER_UP,self.enemy[e].posx,self.enemy[e].posy, 0.5,0,   8,8,   1,   0.9,  0.3,   0,0,  0.05,10,10,0,0,   0,0,0,  0,0,0, self.pow_item_bounce_num,0)
             self.obtain_item.append(new_obtain_item)
-        elif (self.enemy[e].formation_id == 0 and self.enemy[e].item == E_HOMING_MISSILE_POW) or (self.enemy_extermination_flag == FLAG_ON and self.enemy[e].item == E_HOMING_MISSILE_POW):
+        elif (self.enemy[e].formation_id == 0 and self.enemy[e].item == E_HOMING_MISSILE_POW)   or (self.enemy_extermination_flag == FLAG_ON and self.enemy[e].item == E_HOMING_MISSILE_POW):
             #ホーミングミサイルアイテムを持っているのならアイテムを育成する
             new_obtain_item = Obtain_item()
             new_obtain_item.update(ITEM_HOMING_MISSILE_POWER_UP,self.enemy[e].posx,self.enemy[e].posy, 0.5,0,   8,8,   1,   0.9,  0.3,   0,0,  0.05,10,10,0,0,   0,0,0,  0,0,0, self.pow_item_bounce_num,0)
             self.obtain_item.append(new_obtain_item)
-        elif (self.enemy[e].formation_id == 0 and self.enemy[e].item == E_SHOCK_BUMPER_POW) or (self.enemy_extermination_flag == FLAG_ON and self.enemy[e].item == E_SHOCK_BUMPER_POW):
+        elif (self.enemy[e].formation_id == 0 and self.enemy[e].item == E_SHOCK_BUMPER_POW)     or (self.enemy_extermination_flag == FLAG_ON and self.enemy[e].item == E_SHOCK_BUMPER_POW):
             #ショックバンパーアイテムを持っているのならアイテムを育成する
             new_obtain_item = Obtain_item()
             new_obtain_item.update(ITEM_SHOCK_BUMPER_POWER_UP,self.enemy[e].posx,self.enemy[e].posy, 0.5,0,   8,8,   1,   0.9,  0.3,   0,0,  0.05,10,10,0,0,   0,0,0,  0,0,0, self.pow_item_bounce_num,0)

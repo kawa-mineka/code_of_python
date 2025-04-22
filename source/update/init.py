@@ -68,6 +68,10 @@ class init:
         #self.pow_item_bounce_num = 6       #パワーアップアイテムが画面の左端で跳ね返って戻ってくる回数
                                             #初期値は6でアップグレードすると増えていくです
         
+        self.enemy_bullet_seal_flag = FLAG_ON #敵の間近に接近した時に敵が弾を出すのを封じ込める封印システムのオンオフフラグ
+        self.enemy_bullet_seal_distance = 30  #封印システムが有効になる敵と自機の距離(距離がこの数値以下になると敵の発弾を封じ込める)
+        self.enemy_bullet_seal_col     = pyxel.COLOR_NAVY #封印範囲を示す円を描画するときの描画色
+        
         self.playtime_frame_counter    = 0 #プレイ時間(フレームのカウンター) 60フレームで＝1秒        
         self.one_game_playtime_seconds = 0 #1プレイでのゲームプレイ時間(秒単位)
         

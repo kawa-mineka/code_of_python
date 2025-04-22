@@ -44,6 +44,8 @@
 #todo40 敵のロックオンレーザーの実装（実際にロックオンされて当たる訳ではないので注意）
 #todo42 大き目の爆発パターンは放物線上に破片を撒き散らすようにする
 
+#todo43 自機と敵の距離が近距離の時は敵が弾を撃たない仕様の実装(封印システム)
+
 #todo50 NIGHT_SKYSCRAPER 夜間超高層ビル地帯の背景グラフイックとスクロールシステムの構築(縦2画面任意スクロール＋左右マップリピートによる3重スクロール)
 #todo51 NIGHT_SKYSCRAPER 中ボスの実装
 #todo52 NIGHT_SKYSCRAPER ボスの実装
@@ -191,7 +193,7 @@ class App:
         print("APP FILE EXTENSION "        + pyxel.APP_FILE_EXTENSION)
         print("APP STARTUP SCRIPT FILE "   + pyxel.APP_STARTUP_SCRIPT_FILE)
         print("RESOURCE_FILE_EXTENSION "   + pyxel.RESOURCE_FILE_EXTENSION)
-
+        
         
         # print("RESOURCE_ARCHIVE_DIRNAME "  + pyxel.RESOURCE_ARCHIVE_DIRNAME) pyxel 2.0.0だとサポートされていないのでコメントアウト
         
@@ -941,6 +943,8 @@ class App:
             graph.draw_building_object_individual(self,2)    #建物オブジェクトの描画関数の呼び出し   中ビル
             #建物の表示 前ビル------------------------------------------------------------------------------
             graph.draw_building_object_individual(self,1)    #建物オブジェクトの描画関数の呼び出し   前ビル
+            
+            graph.draw_seal_bullet_circle(self)              #封印範囲円を表示する関数の呼び出し(この円の範囲中にいる敵を倒しても撃ち返し弾は発生しない)
             
             graph.draw_enemy_shot(self,PRIORITY_BOSS_BACK)   #敵の弾を表示する関数を呼び出す(ボスキャラの真後ろ)---------------------------
             graph.draw_boss(self)                            #ボスを表示する関数を呼び出す
